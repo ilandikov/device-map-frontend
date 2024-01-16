@@ -3,6 +3,6 @@ import './header.scss'
 
 export default function header() {
   return (
-	 <div>Ilyas</div>
+    <></>
   )
 }
