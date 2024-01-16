@@ -10,6 +10,14 @@ export default function Phone() {
                 <p className='header'>Исслейдуте</p>
                 <p className='description'>Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
             </div>
+            <div>
+                <p className='header'>Отмечайте</p>
+                <p className='description'>Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
+            </div>
+            <div>
+                <p className='header'>Зарабатывай баллы</p>
+                <p className='description'>Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
+            </div>
             <StaticImage src="./Phone.png" alt="map" />
         </div>
     );

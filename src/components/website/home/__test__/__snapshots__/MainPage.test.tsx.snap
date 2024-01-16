@@ -26,6 +26,30 @@ exports[`MainPage component should match the snapshot 1`] = `
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
     </div>
+    <div>
+      <p
+        className="header"
+      >
+        Отмечайте
+      </p>
+      <p
+        className="description"
+      >
+        Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+      </p>
+    </div>
+    <div>
+      <p
+        className="header"
+      >
+        Зарабатывай баллы
+      </p>
+      <p
+        className="description"
+      >
+        Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+      </p>
+    </div>
   </div>
 </div>
 `;
