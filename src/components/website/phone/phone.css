@@ -27,3 +27,8 @@
 .phone-text-blocks {
     padding: 0 0 0 120px;
 }
+
+.phone-header-and-description {
+    width: 400px;
+    height: 140px;
+}

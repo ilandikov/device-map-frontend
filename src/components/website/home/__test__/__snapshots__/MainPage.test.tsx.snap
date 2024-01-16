@@ -16,7 +16,9 @@ exports[`MainPage component should match the snapshot 1`] = `
   <div
     className="phone-background phone-text-blocks"
   >
-    <div>
+    <div
+      className="phone-header-and-description"
+    >
       <p
         className="header"
       >
@@ -28,7 +30,9 @@ exports[`MainPage component should match the snapshot 1`] = `
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
     </div>
-    <div>
+    <div
+      className="phone-header-and-description"
+    >
       <p
         className="header"
       >
@@ -40,7 +44,9 @@ exports[`MainPage component should match the snapshot 1`] = `
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
     </div>
-    <div>
+    <div
+      className="phone-header-and-description"
+    >
       <p
         className="header"
       >
