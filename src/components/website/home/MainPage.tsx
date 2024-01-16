@@ -9,8 +9,9 @@ import Phone from '../phone/Phone';
 
 export default function MainPage() {
   const siteContainer: CSSProperties = {
-    maxWidth: '1440px',
+    width: '1440px',
     margin: '0 auto',
+    overflow: 'scroll'
   }
   return (
     <div style={siteContainer}>

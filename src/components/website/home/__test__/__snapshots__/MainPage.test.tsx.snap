@@ -5,7 +5,8 @@ exports[`MainPage component should match the snapshot 1`] = `
   style={
     {
       "margin": "0 auto",
-      "maxWidth": "1440px",
+      "overflow": "scroll",
+      "width": "1440px",
     }
   }
 >
