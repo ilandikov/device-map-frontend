@@ -5,7 +5,7 @@ import './phone.css';
 
 export default function Phone() {
     return (
-        <div className="phone-background">
+        <div className="phone-background phone-text-blocks">
             <div>
                 <p className='header'>Исслейдуте</p>
                 <p className='description'>Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
