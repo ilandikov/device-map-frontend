@@ -9,5 +9,23 @@ exports[`MainPage component should match the snapshot 1`] = `
     }
   }
 >
+  <div
+    className="logo-container"
+  />
+  <div />
+  <div>
+    <div>
+      <p
+        className="header"
+      >
+        Исслейдуте
+      </p>
+      <p
+        className="description"
+      >
+        Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+      </p>
+    </div>
+  </div>
 </div>
 `;
