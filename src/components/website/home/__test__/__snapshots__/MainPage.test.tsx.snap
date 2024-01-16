@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainPage component should match the snapshot 1`] = `null`;
+exports[`MainPage component should match the snapshot 1`] = `
+<div
+  style={
+    {
+      "margin": "0 auto",
+      "maxWidth": "1200px",
+    }
+  }
+>
+</div>
+`;
