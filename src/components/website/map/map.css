@@ -6,3 +6,18 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.frame-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px
+}
+
+.frame-text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff;
+}

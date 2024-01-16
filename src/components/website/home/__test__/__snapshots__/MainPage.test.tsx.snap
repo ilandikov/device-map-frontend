@@ -15,7 +15,17 @@ exports[`MainPage component should match the snapshot 1`] = `
   />
   <div
     className="map-background"
-  />
+  >
+    <div
+      className="frame-column"
+    >
+      <p
+        className="frame-text"
+      >
+        Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+      </p>
+    </div>
+  </div>
   <div
     className="phone-background phone-text-blocks"
   >
