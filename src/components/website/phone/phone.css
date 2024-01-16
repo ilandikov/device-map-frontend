@@ -14,3 +14,11 @@
     text-align: left;
     color: rgba(255, 255, 255, 0.6);
 }
+
+.phone-background {
+    width: 100%;
+    background-image: url(./Phone.png);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+}

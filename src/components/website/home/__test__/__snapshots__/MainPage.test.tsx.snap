@@ -13,7 +13,9 @@ exports[`MainPage component should match the snapshot 1`] = `
     className="logo-container"
   />
   <div />
-  <div>
+  <div
+    className="phone-background"
+  >
     <div>
       <p
         className="header"
