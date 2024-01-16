@@ -17,6 +17,7 @@
 }
 
 .phone-background {
+    margin-top: -240px;
     width: 1342px;
     height: 1327px;
     background-image: url(./Phone.png);
