@@ -1,11 +1,11 @@
 /* External dependencies */
 import React, { CSSProperties } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
+
+/* Local dependencies */
+import './map.css';
 
 export default function Map() {
     return (
-        <div>
-            <StaticImage src="./Map.png" alt="map" />
-        </div>
+        <div className="map-background"></div>
     );
 }
