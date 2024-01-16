@@ -16,7 +16,8 @@
 }
 
 .phone-background {
-    width: 100%;
+    width: 1342px;
+    height: 1327px;
     background-image: url(./Phone.png);
     background-size: contain;
     background-position: right;
