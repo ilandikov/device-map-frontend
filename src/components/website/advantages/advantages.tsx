@@ -104,8 +104,8 @@ function AdvantageMapBlock() {
     return(
         <div className='advantage-block advantages-block-with-background' style={textContainerCSS}>
             <div className='advantage-text' style={textBlockCSS}>
-                <p className='advantage-text-header'>Отмечай.</p>
-                <p>Мы поставим терминал</p>
+                <p className='advantage-text-header'>Изучай.</p>
+                <p>Уникальная карта</p>
             </div>
         </div>
     )
