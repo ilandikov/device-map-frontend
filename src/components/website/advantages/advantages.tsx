@@ -86,8 +86,27 @@ function TerminalImage() {
 }
 
 function AdvantageMapBlock() {
+    const textContainerCSS: React.CSSProperties = {
+        color: '#ffffff',
+        textAlign: 'center',
+
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',  
+    };
+
+    const textBlockCSS: React.CSSProperties = {
+        color: '#ffffff',
+        textAlign: 'center',        
+    };
+
     return(
-        <div className='advantage-block advantages-block-with-background'>
+        <div className='advantage-block advantages-block-with-background' style={textContainerCSS}>
+            <div className='advantage-text' style={textBlockCSS}>
+                <p className='advantage-text-header'>Отмечай.</p>
+                <p>Мы поставим терминал</p>
+            </div>
         </div>
     )
 }

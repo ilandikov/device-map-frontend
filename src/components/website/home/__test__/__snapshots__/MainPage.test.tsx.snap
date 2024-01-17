@@ -236,7 +236,36 @@ exports[`MainPage component should match the snapshot 1`] = `
     </div>
     <div
       className="advantage-block advantages-block-with-background"
-    />
+      style={
+        {
+          "alignItems": "center",
+          "color": "#ffffff",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "textAlign": "center",
+        }
+      }
+    >
+      <div
+        className="advantage-text"
+        style={
+          {
+            "color": "#ffffff",
+            "textAlign": "center",
+          }
+        }
+      >
+        <p
+          className="advantage-text-header"
+        >
+          Отмечай.
+        </p>
+        <p>
+          Мы поставим терминал
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 `;
