@@ -49,3 +49,7 @@
 .advantage-text-header {
     opacity: 0.5;
 }
+
+.advantages-block-with-background {
+    background-image: url("./Bridge.png");
+}

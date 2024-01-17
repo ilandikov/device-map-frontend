@@ -234,6 +234,9 @@ exports[`MainPage component should match the snapshot 1`] = `
         </div>
       </div>
     </div>
+    <div
+      className="advantage-block advantages-block-with-background"
+    />
   </div>
 </div>
 `;

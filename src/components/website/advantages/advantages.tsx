@@ -85,6 +85,13 @@ function TerminalImage() {
     )
 }
 
+function AdvantageMapBlock() {
+    return(
+        <div className='advantage-block advantages-block-with-background'>
+        </div>
+    )
+}
+
 export default function Advantages() {
     return (
         <div className='advantages-container'>
@@ -93,6 +100,7 @@ export default function Advantages() {
             {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="./MacBook Pro 16.png" alt="advantage" />)}
             {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
             {AdvantageLocationBlock()}
+            {AdvantageMapBlock()}
         </div>
       );
 }
