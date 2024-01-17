@@ -28,11 +28,15 @@ function AdvantageHalfBlock() {
 
     return(
         <div className='advantage-block'>
-            <div className='advantage-block-text advantage-block-radius' style={textBlockCSS}>
-                <p className='advantage-block-text-header'>Обменивай.</p>
-                <p>Получай подарки</p>
+            <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
+                <div className='advantage-block-text'>
+                    <p className='advantage-block-text-header'>Обменивай.</p>
+                    <p>Получай подарки</p>
+                </div>
             </div>
-            <StaticImage src="./Gift.png" alt="advantage" />
+            <div className='advantage-half-block'>
+                <StaticImage src="./Gift.png" alt="advantage" />
+            </div>
         </div>
     );
 }

@@ -11,6 +11,11 @@
     display: flex;
 }
 
+.advantage-half-block {
+    width: 50%;
+    height: 100%;
+}
+
 .advantage-half-block-text {
     display: flex;
     flex-direction: column;
@@ -24,6 +29,11 @@
     line-height: 77px;
     letter-spacing: 0em;
     text-align: center;
+}
+
+.advantage-half-block-text-container {
+    width: 386px;
+    height: 230px;
 }
 
 .advantage-half-block-image {
