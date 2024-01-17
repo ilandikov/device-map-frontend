@@ -80,6 +80,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       style={
         {
           "backgroundColor": "#CBEA5E",
+          "color": "#000000",
         }
       }
     >

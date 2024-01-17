@@ -3,13 +3,14 @@ import React, { CSSProperties, ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 
-function AdvantageFullBlock(header: string, description: string, backgroundColor: string, image: ReactElement) {
-    const backgroundColorCSS = {
-        backgroundColor,
+function AdvantageFullBlock(header: string, description: string, textColor: string, backgroundColor: string, image: ReactElement) {
+    const blockCSS = {
+        backgroundColor: backgroundColor,
+        color: textColor,
     };
 
     return(
-        <div className='advantage-block-full' style={backgroundColorCSS}>
+        <div className='advantage-block-full' style={blockCSS}>
             {image}
             <div className='advantage-block-text'>
                 <p className='advantage-block-text-header'>{header}.</p>
@@ -21,7 +22,7 @@ function AdvantageFullBlock(header: string, description: string, backgroundColor
 export default function Advantages() {
     return (
         <div className='advantages-container'>
-            {AdvantageFullBlock('Играй','Увлекательная игра', '#CBEA5E', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
+            {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
         </div>
       );
 }
