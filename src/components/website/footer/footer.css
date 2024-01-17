@@ -2,6 +2,10 @@
     width: 100%;
     height: auto;
     margin: 32px 120px 120px 32px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .footer-brand {
@@ -39,4 +43,13 @@ div .footer-links {
 
 .footer-first-link {
     opacity: 0.5;
+}
+
+.footer-contacts {
+    height: 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
 }

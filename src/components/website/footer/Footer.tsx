@@ -25,6 +25,12 @@ export default function Footer() {
             <p>Документы</p>
           </div>
           <div className='footer-contacts'>
+            <StaticImage src="./SocialFacebook.png" alt="logo" />
+            <StaticImage src="./SocialTwitter.png" alt="logo" />
+            <StaticImage src="./SocialInstagram.png" alt="logo" />
+            <StaticImage src="./SocialLinkedIn.png" alt="logo" />
+            <StaticImage src="./SocialYouTube.png" alt="logo" />
+            <StaticImage src="./SocialTelegram.png" alt="logo" />
           </div>
         </div>
       );
