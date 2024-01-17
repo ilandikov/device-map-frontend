@@ -6,10 +6,14 @@ import React from 'react';
 import './footer.css';
 
 export default function Footer() {
+    const LogoWithBrandCSS = {
+      maxWidth: '105px',
+    }
+    
     return (
         <div className='footer-container'>
           <div className='footer-brand'>
-            <StaticImage src="./LogoWithBrand.png" alt="logo" />
+            <StaticImage src="./LogoWithBrand.png" alt="logo" style={LogoWithBrandCSS} />
             <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
             <p className='footer-brand-smaller-text'>©2022 Averspay Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
           </div>
