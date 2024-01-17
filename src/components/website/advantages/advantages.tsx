@@ -21,8 +21,18 @@ function AdvantageFullBlock(header: string, description: string, textColor: stri
 }
 
 function AdvantageHalfBlock() {
+    const textBlockCSS = {
+        color: '#000000',
+        backgroundColor: '#FFFFFF',
+    };
+
     return(
         <div className='advantage-block'>
+            <div className='advantage-block-text advantage-block-radius' style={textBlockCSS}>
+                <p className='advantage-block-text-header'>Обменивай.</p>
+                <p>Получай подарки</p>
+            </div>
+            <StaticImage src="./Gift.png" alt="advantage" />
         </div>
     );
 }

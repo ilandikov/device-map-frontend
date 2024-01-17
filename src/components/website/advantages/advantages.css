@@ -11,6 +11,26 @@
     display: flex;
 }
 
+.advantage-half-block-text {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.advantage-half-block-text p {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 77px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.advantage-half-block-image {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .advantage-block-radius {
     border-radius: 50px;
 }

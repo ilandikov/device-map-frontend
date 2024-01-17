@@ -100,7 +100,26 @@ exports[`MainPage component should match the snapshot 1`] = `
     </div>
     <div
       className="advantage-block"
-    />
+    >
+      <div
+        className="advantage-block-text advantage-block-radius"
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "color": "#000000",
+          }
+        }
+      >
+        <p
+          className="advantage-block-text-header"
+        >
+          Обменивай.
+        </p>
+        <p>
+          Получай подарки
+        </p>
+      </div>
+    </div>
     <div
       className="advantage-block advantage-block-radius"
       style={
