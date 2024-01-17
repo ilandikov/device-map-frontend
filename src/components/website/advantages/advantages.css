@@ -9,4 +9,26 @@
     width: 1200px;
     background-color: #CBEA5E;
     border-radius: 50px;
+
+    display: flex;
+}
+
+.advantage-block-text p {
+    color: #000;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 77px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.advantage-block-text {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.advantage-block-text-header {
+    opacity: 0.5;
 }
