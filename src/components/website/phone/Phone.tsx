@@ -2,6 +2,7 @@
 import React, { CSSProperties } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './phone.css';
+import header from '../../header/header';
 
 function textBlock(header: string) {
     return (
@@ -12,11 +13,19 @@ function textBlock(header: string) {
     );
 }
 export default function Phone() {
+    const headers = [
+        "Исследуйте",
+        "Отмечайте",
+        "Зарабатывай баллы",
+    ];
+
+    const textBlocks = headers.map((header) => {
+        return textBlock(header);
+    })
+
     return (
         <div className="phone-background phone-text-blocks">
-            {textBlock("Исследуйте")}
-            {textBlock("Отмечайте")}
-            {textBlock("Зарабатывай баллы")}
+            {textBlocks}
         </div>
     );
 }
