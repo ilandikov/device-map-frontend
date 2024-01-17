@@ -107,6 +107,8 @@ function AdvantageMapBlock() {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+
+        position: 'absolute',
     }
 
     return(
