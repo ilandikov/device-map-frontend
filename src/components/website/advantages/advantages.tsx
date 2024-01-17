@@ -6,6 +6,9 @@ import './advantages.css';
 export default function Advantages() {
     return (
         <div className='advantages-container'>
+            <div className='advantage-block-full'>
+                
+            </div>
         </div>
       );
 }
