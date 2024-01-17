@@ -72,5 +72,8 @@ exports[`MainPage component should match the snapshot 1`] = `
       </p>
     </div>
   </div>
+  <div
+    className="advantages-container"
+  />
 </div>
 `;
