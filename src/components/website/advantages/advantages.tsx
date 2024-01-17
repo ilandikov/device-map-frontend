@@ -8,7 +8,7 @@ function AdvantageFullBlock(image: ReactElement, header: string, description: st
         <div className='advantage-block-full'>
             {image}
             <div className='advantage-block-text'>
-                <p className='advantage-block-text-header'>{header}</p>
+                <p className='advantage-block-text-header'>{header}.</p>
                 <p>{description}</p>
             </div>
         </div>
@@ -17,7 +17,7 @@ function AdvantageFullBlock(image: ReactElement, header: string, description: st
 export default function Advantages() {
     return (
         <div className='advantages-container'>
-            {AdvantageFullBlock(<StaticImage src="./iPhone 14.png" alt="advantage" />, 'Играй.','Увлекательная игра')}
+            {AdvantageFullBlock(<StaticImage src="./iPhone 14.png" alt="advantage" />, 'Играй','Увлекательная игра')}
         </div>
       );
 }
