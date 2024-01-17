@@ -103,7 +103,7 @@ function AdvantageMapBlock() {
 
     const shadowsCSS: React.CSSProperties = {
         marginTop: '50px',
-        width: '100%',
+        width: '1200px',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
