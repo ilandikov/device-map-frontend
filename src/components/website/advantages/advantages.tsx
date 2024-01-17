@@ -15,7 +15,7 @@ function AdvantageFullBlock(header: string, description: string, textColor: stri
                 {image}
             </div>
             <div className='advantage-half-block'>
-                <div className='advantage-text'>
+                <div className='advantage-text-container advantage-text advantage-text'>
                     <p className='advantage-text-header'>{header}.</p>
                     <p>{description}</p>
                 </div>
@@ -33,7 +33,7 @@ function AdvantageGiftBlock() {
     return(
         <div className='advantage-block'>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
-                <div className='advantage-text advantage-half-block-text'>
+                <div className='advantage-text-container advantage-text advantage-half-block-text'>
                     <p className='advantage-text-header'>Обменивай.</p>
                     <p>Получай подарки</p>
                 </div>
@@ -61,7 +61,7 @@ function AdvantageLocationBlock() {
                 <StaticImage src="./Location.png" alt="advantage" style={imageCSS}/>
             </div>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
-                <div className='advantage-text advantage-half-block-text'>
+                <div className='advantage-text-container advantage-text advantage-half-block-text'>
                     <p className='advantage-text-header'>Отмечай.</p>
                     <p>Мы поставим терминал</p>
                 </div>

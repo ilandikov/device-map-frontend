@@ -28,7 +28,7 @@
 }
 
 /* Style for the <div> to have the 2 <p> inside */
-.advantage-text {
+.advantage-text-containter {
     display: flex;
     flex-direction: column;
     align-items: left;

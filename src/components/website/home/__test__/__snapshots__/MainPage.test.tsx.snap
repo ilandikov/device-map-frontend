@@ -91,7 +91,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          className="advantage-text"
+          className="advantage-text-container advantage-text advantage-text"
         >
           <p
             className="advantage-text-header"
@@ -118,7 +118,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         }
       >
         <div
-          className="advantage-text advantage-half-block-text"
+          className="advantage-text-container advantage-text advantage-half-block-text"
         >
           <p
             className="advantage-text-header"
@@ -150,7 +150,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          className="advantage-text"
+          className="advantage-text-container advantage-text advantage-text"
         >
           <p
             className="advantage-text-header"
@@ -191,7 +191,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          className="advantage-text"
+          className="advantage-text-container advantage-text advantage-text"
         >
           <p
             className="advantage-text-header"
@@ -221,7 +221,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         }
       >
         <div
-          className="advantage-text advantage-half-block-text"
+          className="advantage-text-container advantage-text advantage-half-block-text"
         >
           <p
             className="advantage-text-header"
