@@ -6,7 +6,7 @@ import './advantages.css';
 function AdvantageFullBlock() {
     return(
         <div className='advantage-block-full'>
-            <StaticImage src="./iPhone 14.png" alt="logo" />
+            <StaticImage src="./iPhone 14.png" alt="advantage" />
             <div className='advantage-block-text'>
                 <p className='advantage-block-text-header'>Играй.</p>
                 <p>Увлекательная игра</p>
