@@ -11,6 +11,7 @@ export default function Map() {
             <div className="frame-column">
                 <StaticImage src="./Frame.png" alt="frame" />
                 <p className="frame-text">Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
+                <StaticImage src="./Links.png" alt="links" />
             </div>
         </div>
     );
