@@ -42,7 +42,8 @@
     letter-spacing: 0em;
 }
 
-.advantage-text-align-center {
+.advantage-half-block-text {
+    max-width: 386px;
     text-align: center;
 }
 
