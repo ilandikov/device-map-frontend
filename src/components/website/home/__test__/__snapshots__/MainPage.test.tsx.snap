@@ -118,7 +118,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         }
       >
         <div
-          className="advantage-half-block-text"
+          className="advantage-text advantage-align-text-center  "
         >
           <p
             className="advantage-text-header"

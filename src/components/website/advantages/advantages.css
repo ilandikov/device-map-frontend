@@ -40,15 +40,9 @@
     font-weight: 700;
     line-height: 77px;
     letter-spacing: 0em;
-    text-align: left;
 }
 
-/* The text in the split blocks shall be centered */
-.advantage-half-block-text p {
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 77px;
-    letter-spacing: 0em;
+.advantage-align-text-center {
     text-align: center;
 }
 
