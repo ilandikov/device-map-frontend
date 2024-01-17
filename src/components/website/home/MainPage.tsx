@@ -7,6 +7,7 @@ import Map from '../map/Map';
 import Logo from '../logo/Logo';
 import Phone from '../phone/Phone';
 import Advantages from '../advantages/advantages';
+import Footer from '../footer/Footer';
 
 export default function MainPage() {
   const siteContainer: CSSProperties = {
@@ -21,6 +22,7 @@ export default function MainPage() {
       <Map />
       <Phone />
       <Advantages />
+      <Footer />
     </div>
   );
 }
