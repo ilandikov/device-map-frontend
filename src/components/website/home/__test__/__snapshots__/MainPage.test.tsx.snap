@@ -76,7 +76,7 @@ exports[`MainPage component should match the snapshot 1`] = `
     className="advantages-container"
   >
     <div
-      className="advantage-block-full advantage-block-radius"
+      className="advantage-block advantage-block-radius"
       style={
         {
           "backgroundColor": "#CBEA5E",
@@ -102,7 +102,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       className="advantage-block-half"
     />
     <div
-      className="advantage-block-full advantage-block-radius"
+      className="advantage-block advantage-block-radius"
       style={
         {
           "backgroundColor": "#0066FF",
@@ -125,7 +125,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      className="advantage-block-full advantage-block-radius"
+      className="advantage-block advantage-block-radius"
       style={
         {
           "backgroundColor": "#FFFFFF",

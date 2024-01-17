@@ -4,13 +4,13 @@ import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 
 function AdvantageFullBlock(header: string, description: string, textColor: string, backgroundColor: string, image: ReactElement) {
-    const blockCSS = {
+    const textBlockCSS = {
         backgroundColor: backgroundColor,
         color: textColor,
     };
 
     return(
-        <div className='advantage-block-full advantage-block-radius' style={blockCSS}>
+        <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
             {image}
             <div className='advantage-block-text'>
                 <p className='advantage-block-text-header'>{header}.</p>
@@ -23,7 +23,7 @@ function AdvantageFullBlock(header: string, description: string, textColor: stri
 function AdvantageHalfBlock() {
     return(
         <div className='advantage-block-half'>
-        </div>
+                        </div>
     );
 }
 export default function Advantages() {
