@@ -28,16 +28,6 @@
     text-align: center;
 }
 
-.advantage-half-block-text-container {
-    width: 386px;
-    height: 230px;
-}
-
-.advantage-half-block-image {
-    display: flex;
-    justify-content: flex-end;
-}
-
 .advantage-block-radius {
     border-radius: 50px;
 }
