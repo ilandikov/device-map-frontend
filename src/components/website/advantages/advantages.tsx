@@ -45,6 +45,31 @@ function AdvantageGiftBlock() {
     );
 }
 
+function AdvantageLocationBlock() {
+    const textBlockCSS = {
+        color: '#000000',
+        backgroundColor: '#FFFFFF',
+    };
+    
+    const imageCSS = {
+        width: 'auto',
+    }
+
+    return(
+        <div className='advantage-block'>
+            <div className='advantage-half-block'>
+                <StaticImage src="./Location.png" alt="advantage" style={imageCSS}/>
+            </div>
+            <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
+                <div className='advantage-text advantage-half-block-text'>
+                    <p className='advantage-text-header'>Отмечай.</p>
+                    <p>Мы поставим терминал</p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function TerminalImage() {
     const terminalImageContainerCSS: React.CSSProperties = {
         height: '100%',
@@ -67,6 +92,7 @@ export default function Advantages() {
             {AdvantageGiftBlock()}
             {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="./MacBook Pro 16.png" alt="advantage" />)}
             {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
+            {AdvantageLocationBlock()}
         </div>
       );
 }
