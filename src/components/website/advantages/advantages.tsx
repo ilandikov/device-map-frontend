@@ -44,13 +44,29 @@ function AdvantageHalfBlock() {
         </div>
     );
 }
+
+function TerminalImage() {
+    const terminalImageContainerCSS: React.CSSProperties = {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+    };
+    
+    return(
+        <div style={terminalImageContainerCSS}>
+            <StaticImage src="./Terminal.png" alt="advantage" />
+        </div>
+    )
+}
+
 export default function Advantages() {
     return (
         <div className='advantages-container'>
             {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
             {AdvantageHalfBlock()}
             {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="./MacBook Pro 16.png" alt="advantage" />)}
-            {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', <StaticImage src="./Terminal.png" alt="advantage" />)}
+            {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
         </div>
       );
 }
