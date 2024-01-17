@@ -11,10 +11,14 @@ function AdvantageFullBlock(header: string, description: string, textColor: stri
 
     return(
         <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
-            {image}
-            <div className='advantage-block-text'>
-                <p className='advantage-block-text-header'>{header}.</p>
-                <p>{description}</p>
+            <div className='advantage-half-block'>
+                {image}
+            </div>
+            <div className='advantage-half-block'>
+                <div className='advantage-block-text'>
+                    <p className='advantage-block-text-header'>{header}.</p>
+                    <p>{description}</p>
+                </div>
             </div>
         </div>
     );

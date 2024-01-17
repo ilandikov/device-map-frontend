@@ -85,17 +85,24 @@ exports[`MainPage component should match the snapshot 1`] = `
       }
     >
       <div
-        className="advantage-block-text"
+        className="advantage-half-block"
+      />
+      <div
+        className="advantage-half-block"
       >
-        <p
-          className="advantage-block-text-header"
+        <div
+          className="advantage-block-text"
         >
-          Играй
-          .
-        </p>
-        <p>
-          Увлекательная игра
-        </p>
+          <p
+            className="advantage-block-text-header"
+          >
+            Играй
+            .
+          </p>
+          <p>
+            Увлекательная игра
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -137,17 +144,24 @@ exports[`MainPage component should match the snapshot 1`] = `
       }
     >
       <div
-        className="advantage-block-text"
+        className="advantage-half-block"
+      />
+      <div
+        className="advantage-half-block"
       >
-        <p
-          className="advantage-block-text-header"
+        <div
+          className="advantage-block-text"
         >
-          Везде
-          .
-        </p>
-        <p>
-          На всех платформах
-        </p>
+          <p
+            className="advantage-block-text-header"
+          >
+            Везде
+            .
+          </p>
+          <p>
+            На всех платформах
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -160,17 +174,24 @@ exports[`MainPage component should match the snapshot 1`] = `
       }
     >
       <div
-        className="advantage-block-text"
+        className="advantage-half-block"
+      />
+      <div
+        className="advantage-half-block"
       >
-        <p
-          className="advantage-block-text-header"
+        <div
+          className="advantage-block-text"
         >
-          Оглянись
-          .
-        </p>
-        <p>
-          Терминалы везде
-        </p>
+          <p
+            className="advantage-block-text-header"
+          >
+            Оглянись
+            .
+          </p>
+          <p>
+            Терминалы везде
+          </p>
+        </div>
       </div>
     </div>
   </div>
