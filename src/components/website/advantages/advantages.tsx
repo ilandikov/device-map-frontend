@@ -15,8 +15,8 @@ function AdvantageFullBlock(header: string, description: string, textColor: stri
                 {image}
             </div>
             <div className='advantage-half-block'>
-                <div className='advantage-block-text'>
-                    <p className='advantage-block-text-header'>{header}.</p>
+                <div className='advantage-text'>
+                    <p className='advantage-text-header'>{header}.</p>
                     <p>{description}</p>
                 </div>
             </div>
@@ -34,7 +34,7 @@ function AdvantageHalfBlock() {
         <div className='advantage-block'>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
                 <div className='advantage-half-block-text'>
-                    <p className='advantage-block-text-header'>Обменивай.</p>
+                    <p className='advantage-text-header'>Обменивай.</p>
                     <p>Получай подарки</p>
                 </div>
             </div>

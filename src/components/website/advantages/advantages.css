@@ -28,14 +28,14 @@
 }
 
 /* Style for the <div> to have the 2 <p> inside */
-.advantage-block-text {
+.advantage-text {
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: center;
 }
 
-.advantage-block-text p {
+.advantage-text p {
     font-size: 64px;
     font-weight: 700;
     line-height: 77px;
@@ -52,6 +52,6 @@
     text-align: center;
 }
 
-.advantage-block-text-header {
+.advantage-text-header {
     opacity: 0.5;
 }

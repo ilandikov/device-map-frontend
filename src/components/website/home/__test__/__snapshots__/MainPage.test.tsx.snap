@@ -91,10 +91,10 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          className="advantage-block-text"
+          className="advantage-text"
         >
           <p
-            className="advantage-block-text-header"
+            className="advantage-text-header"
           >
             Играй
             .
@@ -121,7 +121,7 @@ exports[`MainPage component should match the snapshot 1`] = `
           className="advantage-half-block-text"
         >
           <p
-            className="advantage-block-text-header"
+            className="advantage-text-header"
           >
             Обменивай.
           </p>
@@ -150,10 +150,10 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          className="advantage-block-text"
+          className="advantage-text"
         >
           <p
-            className="advantage-block-text-header"
+            className="advantage-text-header"
           >
             Везде
             .
@@ -180,10 +180,10 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          className="advantage-block-text"
+          className="advantage-text"
         >
           <p
-            className="advantage-block-text-header"
+            className="advantage-text-header"
           >
             Оглянись
             .
