@@ -265,6 +265,17 @@ exports[`MainPage component should match the snapshot 1`] = `
           Уникальная карта
         </p>
       </div>
+      <div
+        style={
+          {
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginTop": "50px",
+            "width": "100%",
+          }
+        }
+      />
     </div>
   </div>
   <div

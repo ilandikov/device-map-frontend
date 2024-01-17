@@ -101,11 +101,23 @@ function AdvantageMapBlock() {
         textAlign: 'center',        
     };
 
+    const shadowsCSS: React.CSSProperties = {
+        marginTop: '50px',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    }
+
     return(
         <div className='advantage-block advantages-block-with-background' style={textContainerCSS}>
             <div className='advantage-text' style={textBlockCSS}>
                 <p className='advantage-text-header'>Изучай.</p>
                 <p>Уникальная карта</p>
+            </div>
+            <div style={shadowsCSS}>
+                <StaticImage src="./ShadowMapLeft.png" alt="advantage" />
+                <StaticImage src="./ShadowMapRight.png" alt="advantage" />
             </div>
         </div>
     )
