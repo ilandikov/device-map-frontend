@@ -29,7 +29,7 @@ function AdvantageHalfBlock() {
     return(
         <div className='advantage-block'>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
-                <div className='advantage-block-text'>
+                <div className='advantage-half-block-text'>
                     <p className='advantage-block-text-header'>Обменивай.</p>
                     <p>Получай подарки</p>
                 </div>
