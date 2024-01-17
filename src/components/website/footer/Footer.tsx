@@ -13,13 +13,13 @@ export default function Footer() {
             <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
             <p className='footer-brand-smaller-text'>©2022 Averspay Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
           </div>
-          <div className='footer-products footer-links'>
+          <div className='footer-links'>
             <p className='footer-first-link'>Продукты</p>
             <p>Кошелек</p>
             <p>Терминалы</p>
             <p>Эквайринг</p>
           </div>
-          <div className='footer-about footer-links'>
+          <div className='footer-links'>
             <p className='footer-first-link'>О нас</p>
             <p>Компания</p>
             <p>Документы</p>

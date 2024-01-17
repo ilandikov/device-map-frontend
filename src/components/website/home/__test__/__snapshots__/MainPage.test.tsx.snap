@@ -296,7 +296,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       </p>
     </div>
     <div
-      className="footer-products footer-links"
+      className="footer-links"
     >
       <p
         className="footer-first-link"
@@ -314,7 +314,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       </p>
     </div>
     <div
-      className="footer-about footer-links"
+      className="footer-links"
     >
       <p
         className="footer-first-link"
