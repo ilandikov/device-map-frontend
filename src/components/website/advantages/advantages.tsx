@@ -3,7 +3,7 @@ import React, { CSSProperties, ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 
-function AdvantageFullBlock(image: ReactElement, header: string, description: string) {
+function AdvantageFullBlock(header: string, description: string, image: ReactElement) {
     return(
         <div className='advantage-block-full'>
             {image}
@@ -17,7 +17,7 @@ function AdvantageFullBlock(image: ReactElement, header: string, description: st
 export default function Advantages() {
     return (
         <div className='advantages-container'>
-            {AdvantageFullBlock(<StaticImage src="./iPhone 14.png" alt="advantage" />, 'Играй','Увлекательная игра')}
+            {AdvantageFullBlock('Играй','Увлекательная игра', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
         </div>
       );
 }
