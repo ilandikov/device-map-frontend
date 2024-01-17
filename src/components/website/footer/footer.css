@@ -34,6 +34,13 @@
     opacity: 0.5;
 }
 
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
 .footer-links p {
     font-size: 14px;
     font-weight: 700;
