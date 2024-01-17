@@ -22,8 +22,8 @@ function AdvantageFullBlock(header: string, description: string, textColor: stri
 
 function AdvantageHalfBlock() {
     return(
-        <div className='advantage-block-half'>
-                        </div>
+        <div className='advantage-block'>
+        </div>
     );
 }
 export default function Advantages() {

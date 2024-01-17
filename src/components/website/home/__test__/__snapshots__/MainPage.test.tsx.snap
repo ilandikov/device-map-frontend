@@ -99,7 +99,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      className="advantage-block-half"
+      className="advantage-block"
     />
     <div
       className="advantage-block advantage-block-radius"
