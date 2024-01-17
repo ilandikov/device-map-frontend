@@ -7,9 +7,12 @@
 .advantage-block-full {
     height: 410px;
     width: 1200px;
-    border-radius: 50px;
 
     display: flex;
+}
+
+.advantage-block-radius {
+    border-radius: 50px;
 }
 
 .advantage-block-text p {
