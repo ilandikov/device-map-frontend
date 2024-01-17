@@ -3,9 +3,9 @@ import React, { CSSProperties, ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 
-function AdvantageFullBlock(header: string, description: string, image: ReactElement) {
+function AdvantageFullBlock(header: string, description: string, backgroundColor: string, image: ReactElement) {
     const backgroundColorCSS = {
-        backgroundColor: '#CBEA5E',
+        backgroundColor,
     };
 
     return(
@@ -21,7 +21,7 @@ function AdvantageFullBlock(header: string, description: string, image: ReactEle
 export default function Advantages() {
     return (
         <div className='advantages-container'>
-            {AdvantageFullBlock('Играй','Увлекательная игра', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
+            {AdvantageFullBlock('Играй','Увлекательная игра', '#CBEA5E', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
         </div>
       );
 }
