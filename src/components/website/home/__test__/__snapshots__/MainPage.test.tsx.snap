@@ -269,6 +269,30 @@ exports[`MainPage component should match the snapshot 1`] = `
   </div>
   <div
     className="footer-container"
-  />
+  >
+    <div
+      className="footer-brand"
+    >
+      <p
+        className="footer-brand-bigger-text"
+      >
+        Удобное и надежное отечественное приложение для оплаты в Кыргызстане
+      </p>
+      <p
+        className="footer-brand-smaller-text"
+      >
+        ©2022 Averspay Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
+      </p>
+    </div>
+    <div
+      className="footer-products"
+    />
+    <div
+      className="footer-about"
+    />
+    <div
+      className="footer-contacts"
+    />
+  </div>
 </div>
 `;

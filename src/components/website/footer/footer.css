@@ -1,4 +1,31 @@
 .footer-container {
     width: 100%;
     height: auto;
+    margin: 32px 120px 120px 32px;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.footer-brand-bigger-text {
+    font-family: 'Neue Machina';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 23px;
+
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.footer-brand-smaller-text {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+
+    color: #FFFFFF;
+    opacity: 0.5;
 }
