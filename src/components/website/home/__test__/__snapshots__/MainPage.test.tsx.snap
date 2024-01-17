@@ -77,6 +77,11 @@ exports[`MainPage component should match the snapshot 1`] = `
   >
     <div
       className="advantage-block-full"
+      style={
+        {
+          "backgroundColor": "#CBEA5E",
+        }
+      }
     >
       <div
         className="advantage-block-text"

@@ -4,8 +4,12 @@ import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 
 function AdvantageFullBlock(header: string, description: string, image: ReactElement) {
+    const backgroundColorCSS = {
+        backgroundColor: '#CBEA5E',
+    };
+
     return(
-        <div className='advantage-block-full'>
+        <div className='advantage-block-full' style={backgroundColorCSS}>
             {image}
             <div className='advantage-block-text'>
                 <p className='advantage-block-text-header'>{header}.</p>
