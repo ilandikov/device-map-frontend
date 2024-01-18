@@ -19,7 +19,7 @@ exports[`MainPage component should match the snapshot 1`] = `
     className="map-background"
   >
     <div
-      className="frame-column"
+      className="map-content-container"
     >
       <div
         className="map-brand"
@@ -31,7 +31,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         </p>
       </div>
       <p
-        className="frame-text"
+        className="map-text"
       >
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
