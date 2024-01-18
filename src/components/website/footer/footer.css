@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+
 .footer-outer-container {
     width: 100%;
     height: auto;
@@ -25,7 +27,7 @@
 }
 
 .footer-brand-bigger-text {
-    font-family: 'Neue Machina';
+    font-family: 'Tektur';
     font-size: 16px;
     font-weight: 700;
     line-height: 23px;
