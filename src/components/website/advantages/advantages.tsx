@@ -39,7 +39,7 @@ function AdvantageGiftBlock() {
                 </div>
             </div>
             <div className='advantage-half-block'>
-                <StaticImage src="./Gift.png" alt="advantage" />
+                <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />
             </div>
         </div>
     );
@@ -58,7 +58,7 @@ function AdvantageLocationBlock() {
     return(
         <div className='advantage-block'>
             <div className='advantage-half-block'>
-                <StaticImage src="./Location.png" alt="advantage" style={imageCSS}/>
+                <StaticImage src="../../../assets/images/Location.png" alt="advantage" style={imageCSS}/>
             </div>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
                 <div className='advantage-text-container advantage-text advantage-half-block-text'>
@@ -80,7 +80,7 @@ function TerminalImage() {
     
     return(
         <div style={terminalImageContainerCSS}>
-            <StaticImage src="./Terminal.png" alt="advantage" />
+            <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />
         </div>
     )
 }
@@ -118,8 +118,8 @@ function AdvantageMapBlock() {
                 <p>Уникальная карта</p>
             </div>
             <div style={shadowsCSS}>
-                <StaticImage src="./ShadowMapLeft.png" alt="advantage" />
-                <StaticImage src="./ShadowMapRight.png" alt="advantage" />
+                <StaticImage src="../../../assets/images/ShadowMapLeft.png" alt="advantage" />
+                <StaticImage src="../../../assets/images/ShadowMapRight.png" alt="advantage" />
             </div>
         </div>
     )
@@ -128,9 +128,9 @@ function AdvantageMapBlock() {
 export default function Advantages() {
     return (
         <div className='advantages-container'>
-            {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="./iPhone 14.png" alt="advantage" />)}
+            {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />)}
             {AdvantageGiftBlock()}
-            {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="./MacBook Pro 16.png" alt="advantage" />)}
+            {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />)}
             {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
             {AdvantageLocationBlock()}
             {AdvantageMapBlock()}

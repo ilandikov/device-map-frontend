@@ -14,7 +14,7 @@ export default function Footer() {
         <div className='footer-outer-container'>
           <div className='footer-inner-container'>
             <div className='footer-brand'>
-              <StaticImage src="./LogoWithBrand.png" alt="logo" style={LogoWithBrandCSS} />
+              <StaticImage src="../../../assets/images/LogoWithBrand.png" alt="logo" style={LogoWithBrandCSS} />
               <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
               <p className='footer-brand-smaller-text'>©2022 Averspay Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
             </div>
@@ -30,12 +30,12 @@ export default function Footer() {
               <p>Документы</p>
             </div>
             <div className='footer-contacts'>
-              <StaticImage src="./SocialFacebook.png" alt="logo" />
-              <StaticImage src="./SocialTwitter.png" alt="logo" />
-              <StaticImage src="./SocialInstagram.png" alt="logo" />
-              <StaticImage src="./SocialLinkedIn.png" alt="logo" />
-              <StaticImage src="./SocialYouTube.png" alt="logo" />
-              <StaticImage src="./SocialTelegram.png" alt="logo" />
+              <StaticImage src="../../../assets/images/SocialFacebook.png" alt="logo" />
+              <StaticImage src="../../../assets/images/SocialTwitter.png" alt="logo" />
+              <StaticImage src="../../../assets/images/SocialInstagram.png" alt="logo" />
+              <StaticImage src="../../../assets/images/SocialLinkedIn.png" alt="logo" />
+              <StaticImage src="../../../assets/images/SocialYouTube.png" alt="logo" />
+              <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
             </div>
           </div>
         </div>
