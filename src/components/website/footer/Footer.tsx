@@ -5,17 +5,13 @@ import React from 'react';
 /* Local dependencies */
 import './footer.css';
 
-export default function Footer() {
-    const LogoWithBrandCSS = {
-      maxWidth: '105px',
-    }
-    
+export default function Footer() {    
     return (
         <section className='footer-outer-container'>
           <div className='footer-inner-container'>
             <div className='footer-brand'>
               <div className='footer-brand-logo'>
-                <StaticImage src="../../../assets/images/Logo.svg" alt="logo" style={LogoWithBrandCSS} />
+                <StaticImage src="../../../assets/images/Logo.svg" alt="logo" />
                 <p className='footer-brand-name'>Finik</p>
               </div>
               <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
