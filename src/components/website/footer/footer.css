@@ -26,6 +26,23 @@
     gap: 16px;
 }
 
+.footer-brand-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-brand-name {
+    font-family: 'Tektur';
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 23px;
+
+    color: #FFFFFF;
+}
+
 .footer-brand-bigger-text {
     font-family: 'Tektur';
     font-size: 16px;

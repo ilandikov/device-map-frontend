@@ -14,7 +14,10 @@ export default function Footer() {
         <div className='footer-outer-container'>
           <div className='footer-inner-container'>
             <div className='footer-brand'>
-              <StaticImage src="../../../assets/images/LogoWithBrand.png" alt="logo" style={LogoWithBrandCSS} />
+              <div className='footer-brand-logo'>
+                <StaticImage src="../../../assets/images/Logo.svg" alt="logo" style={LogoWithBrandCSS} />
+                <p className='footer-brand-name'>Finik</p>
+              </div>
               <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
               <div>
                 <p className='footer-brand-smaller-text'>©2022 Averspay</p>

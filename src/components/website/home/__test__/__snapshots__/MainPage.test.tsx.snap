@@ -297,6 +297,15 @@ exports[`MainPage component should match the snapshot 1`] = `
       <div
         className="footer-brand"
       >
+        <div
+          className="footer-brand-logo"
+        >
+          <p
+            className="footer-brand-name"
+          >
+            Finik
+          </p>
+        </div>
         <p
           className="footer-brand-bigger-text"
         >
