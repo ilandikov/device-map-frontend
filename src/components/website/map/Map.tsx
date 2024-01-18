@@ -14,7 +14,11 @@ export default function Map() {
                     <p className='map-brand-text'>Карта</p>
                 </div>
                 <p className="map-text">Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
-                <StaticImage src="../../../assets/images/Links.png" alt="links" />
+                <div className='map-links'>
+                    <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />
+                    <StaticImage src="../../../assets/images/GooglePlay.svg" alt="map-links" />
+                    <StaticImage src="../../../assets/images/AppStore.svg" alt="map-links" />
+                </div>
             </div>
         </section>
     );
