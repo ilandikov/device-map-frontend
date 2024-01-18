@@ -10,10 +10,12 @@ exports[`MainPage component should match the snapshot 1`] = `
     }
   }
 >
-  <div
-    className="logo-container"
-  />
-  <div
+  <section>
+    <div
+      className="logo-container"
+    />
+  </section>
+  <section
     className="map-background"
   >
     <div
@@ -34,8 +36,8 @@ exports[`MainPage component should match the snapshot 1`] = `
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
     </div>
-  </div>
-  <div
+  </section>
+  <section
     className="phone-background phone-text-blocks"
   >
     <div
@@ -80,8 +82,8 @@ exports[`MainPage component should match the snapshot 1`] = `
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
     </div>
-  </div>
-  <div
+  </section>
+  <section
     className="advantages-container"
   >
     <div
@@ -287,8 +289,8 @@ exports[`MainPage component should match the snapshot 1`] = `
         }
       />
     </div>
-  </div>
-  <div
+  </section>
+  <section
     className="footer-outer-container"
   >
     <div
@@ -361,6 +363,6 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="footer-contacts"
       />
     </div>
-  </div>
+  </section>
 </div>
 `;

@@ -11,7 +11,7 @@ export default function Footer() {
     }
     
     return (
-        <div className='footer-outer-container'>
+        <section className='footer-outer-container'>
           <div className='footer-inner-container'>
             <div className='footer-brand'>
               <div className='footer-brand-logo'>
@@ -44,6 +44,6 @@ export default function Footer() {
               <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
             </div>
           </div>
-        </div>
+        </section>
       );
 }

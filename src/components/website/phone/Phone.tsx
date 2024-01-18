@@ -22,8 +22,8 @@ export default function Phone() {
     })
 
     return (
-        <div className="phone-background phone-text-blocks">
+        <section className="phone-background phone-text-blocks">
             {textBlocks}
-        </div>
+        </section>
     );
 }

@@ -7,7 +7,7 @@ import './map.css';
 
 export default function Map() {
     return (
-        <div className="map-background">
+        <section className="map-background">
             <div className="frame-column">
                 <div className='map-brand'>
                     <StaticImage src="../../../assets/images/Logo.svg" alt="logo-with-brand" />
@@ -16,6 +16,6 @@ export default function Map() {
                 <p className="frame-text">Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
                 <StaticImage src="../../../assets/images/Links.png" alt="links" />
             </div>
-        </div>
+        </section>
     );
 }

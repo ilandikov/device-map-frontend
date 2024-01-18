@@ -127,13 +127,13 @@ function AdvantageMapBlock() {
 
 export default function Advantages() {
     return (
-        <div className='advantages-container'>
+        <section className='advantages-container'>
             {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />)}
             {AdvantageGiftBlock()}
             {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />)}
             {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
             {AdvantageLocationBlock()}
             {AdvantageMapBlock()}
-        </div>
+        </section>
       );
 }
