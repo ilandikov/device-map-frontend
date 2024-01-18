@@ -9,15 +9,19 @@ export default function Phone() {
         "Зарабатывай баллы",
     ];
 
-    const textBlocks = headers.map((header) => {
-        return textBlock(header);
-    })
+    const textBlocks = TextBlocks(headers);
 
     return (
         <section className="phone-background phone-text-blocks">
             {textBlocks}
         </section>
     );
+}
+
+function TextBlocks(headers) {
+    return headers.map((header) => {
+        return textBlock(header);
+    });
 }
 
 function textBlock(header: string) {
