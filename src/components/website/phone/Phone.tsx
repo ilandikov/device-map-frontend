@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react';
 import './phone.css';
 
 export default function Phone() {
-    const headers = [
+    const headers: string[] = [
         "Исследуйте",
         "Отмечайте",
         "Зарабатывай баллы",
@@ -18,7 +18,7 @@ export default function Phone() {
     );
 }
 
-function TextBlocks(headers) {
+function TextBlocks(headers: string[]) {
     return headers.map((header) => {
         return textBlock(header);
     });
