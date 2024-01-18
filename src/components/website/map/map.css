@@ -11,6 +11,20 @@
     justify-content: center;
 }
 
+.map-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.map-brand-text {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 77px;
+    color: #ffffff;
+}
+
 .frame-column {
     display: flex;
     flex-direction: column;

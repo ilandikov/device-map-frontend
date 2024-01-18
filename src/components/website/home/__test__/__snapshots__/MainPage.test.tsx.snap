@@ -19,6 +19,15 @@ exports[`MainPage component should match the snapshot 1`] = `
     <div
       className="frame-column"
     >
+      <div
+        className="map-brand"
+      >
+        <p
+          className="map-brand-text"
+        >
+          Карта
+        </p>
+      </div>
       <p
         className="frame-text"
       >
