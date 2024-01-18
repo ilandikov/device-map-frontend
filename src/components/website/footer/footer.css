@@ -2,7 +2,9 @@
     width: 1400px;
     height: auto;
     margin: 32px 120px 120px 32px;
+}
 
+.footer-inner-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
