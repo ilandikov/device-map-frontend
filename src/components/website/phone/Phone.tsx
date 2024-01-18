@@ -18,11 +18,11 @@ export default function Phone() {
 
 function TextBlocks({ headers }:{ headers:string[] }) {
     return headers.map((header) => {
-        return textBlock(header);
+        return <TextBlock header={ header }/>;
     });
 }
 
-function textBlock(header: string) {
+function TextBlock({ header }:{ header:string }) {
     return (
         <div className="phone-header-and-description">
             <p className='header'>{header}</p>
