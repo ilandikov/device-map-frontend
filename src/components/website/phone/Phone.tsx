@@ -1,8 +1,6 @@
 /* External dependencies */
 import React, { CSSProperties } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 import './phone.css';
-import header from '../../header/header';
 
 function textBlock(header: string) {
     return (
