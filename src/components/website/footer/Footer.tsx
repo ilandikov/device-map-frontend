@@ -11,7 +11,7 @@ export default function Footer() {
     }
     
     return (
-        <div className='footer-container'>
+        <div className='footer-outer-container'>
           <div className='footer-brand'>
             <StaticImage src="./LogoWithBrand.png" alt="logo" style={LogoWithBrandCSS} />
             <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
