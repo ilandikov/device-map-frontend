@@ -4,7 +4,6 @@ import Header from '../../header/header';
 
 /* Local dependencies */
 import Map from '../map/Map';
-import Logo from '../logo/Logo';
 import Phone from '../phone/Phone';
 import Advantages from '../advantages/advantages';
 import Footer from '../footer/Footer';
@@ -18,7 +17,6 @@ export default function MainPage() {
   return (
     <div style={siteContainer}>
       <Header />
-      <Logo />
       <Map />
       <Phone />
       <Advantages />
