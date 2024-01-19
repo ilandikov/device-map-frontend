@@ -15,6 +15,13 @@
     align-items: center;
 }
 
+.login-pin-container {
+    width: 1440px;
+    height: 1024px;
+
+    position: absolute;
+}
+
 .login-window {
     max-width: 690px;
     max-height: 516px;
