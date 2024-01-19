@@ -6,13 +6,11 @@ import './login.css';
 import { StaticImage } from "gatsby-plugin-image";
 
 export default function Login() {
-  const pinLocation = {
-    top: '230px',
-    left: '649px',
-  };
-
   const pinPositions = [
-    pinLocation,
+    {
+      top: '230px',
+      left: '649px',
+    },
   ];
 
   const pins = pinPositions.map((pinPosition) => {
