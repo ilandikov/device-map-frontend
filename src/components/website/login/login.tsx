@@ -25,6 +25,14 @@ export default function Login() {
                 <p className='login-window-brand'>Финик Карта</p>
                 <p className='login-window-description'>Отмечай места на карте где нет нашего терминала, мы поставим его, а тебе пришлем бонусы которые ты сможешь обменять на реальные призы</p>
               </div>
+              <div className='login-window-bottom-container'>
+                <div className='login-window-button login-window-button-signin'>
+                  <p>Войти в аккаунт</p>
+                </div>
+                <div className='login-window-button login-window-button-register'>
+                  <p>Регистрация</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
