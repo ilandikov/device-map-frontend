@@ -6,11 +6,16 @@ import './login.css';
 import { StaticImage } from "gatsby-plugin-image";
 
 export default function Login() {
-  const pinCSS = {
-    position: 'absolute',
+  const pinLocation = {
     top: '230px',
     left: '649px',
   };
+
+  const absolutePostion = {
+    position: 'absolute',
+  };
+
+  const pinCSS = { ...absolutePostion, ...pinLocation };
 
   const pin = <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
 
