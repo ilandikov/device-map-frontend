@@ -15,12 +15,8 @@ export default function Login() {
     pinLocation,
   ];
 
-  const absolutePostion = {
-    position: 'absolute',
-  };
-
   const pins = pinPositions.map((pinPosition) => {
-    const pinCSS = { ...absolutePostion, ...pinPosition };
+    const pinCSS = { ...{ position: 'absolute' }, ...pinPosition };
     return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
   });
 
