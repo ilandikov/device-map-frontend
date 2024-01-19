@@ -11,6 +11,38 @@ export default function Login() {
       top: '230px',
       left: '649px',
     },
+    {
+      top: '188px',
+      left: '751px',
+    },
+    {
+      top: '481px',
+      left: '1089px',
+    },
+    {
+      top: '564px',
+      left: '1172px',
+    },
+    {
+      top: '769px',
+      left: '1014px',
+    },
+    {
+      top: '774px',
+      left: '1069px',
+    },
+    {
+      top: '781px',
+      left: '1180px',
+    },
+    {
+      top: '857px',
+      left: '1115px',
+    },
+    {
+      top: '881px',
+      left: '1022px',
+    },
   ];
 
   const pins = pinPositions.map((pinPosition) => {
