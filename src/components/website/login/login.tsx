@@ -1,12 +1,12 @@
 /* External dependencies */
-import React from "react";
+import React, { CSSProperties } from "react";
 
 /* Local dependencies */
 import './login.css';
 import { StaticImage } from "gatsby-plugin-image";
 
 export default function Login() {
-  const pinPositions = [
+  const pinPositions: CSSProperties[] = [
     {
       top: '230px',
       left: '649px',
@@ -46,7 +46,7 @@ export default function Login() {
   ];
 
   const pins = pinPositions.map((pinPosition) => {
-    const pinCSS = { ...{ position: 'absolute' }, ...pinPosition };
+    const pinCSS: CSSProperties = { ...{ position: 'absolute' }, ...pinPosition };
     return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
   });
 
