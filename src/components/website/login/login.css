@@ -1,0 +1,12 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-background {
+    background-image: url(../../../assets/images/GoogleMaps.png);
+
+    width: 1440px;
+    height: 1024px;
+}
