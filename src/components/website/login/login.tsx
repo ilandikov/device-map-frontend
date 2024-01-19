@@ -3,6 +3,7 @@ import React from "react";
 
 /* Local dependencies */
 import './login.css';
+import { StaticImage } from "gatsby-plugin-image";
 
 export default function Login() {
     return (
@@ -18,6 +19,11 @@ export default function Login() {
                   <div className='login-ellipse login-ellipse-blue'>
                   </div>
                 </div>
+              </div>
+              <div className='login-window-top-container'>
+                <StaticImage className='login-window-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
+                <p className='login-window-brand'>Финик Карта</p>
+                <p className='login-window-description'>Отмечай места на карте где нет нашего терминала, мы поставим его, а тебе пришлем бонусы которые ты сможешь обменять на реальные призы</p>
               </div>
             </div>
           </div>
