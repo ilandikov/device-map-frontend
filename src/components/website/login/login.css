@@ -76,6 +76,16 @@
     background: #26FFF2;
 }
 
+.login-window-content-container {
+    height: 100%;
+    padding: 46px 0 32px 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .login-window-top-container {
     max-width: 340px;
     width: 100%;
