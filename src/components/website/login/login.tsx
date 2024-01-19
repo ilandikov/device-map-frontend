@@ -11,19 +11,24 @@ export default function Login() {
     left: '649px',
   };
 
+  const pinPositions = [
+    pinLocation,
+  ];
+
   const absolutePostion = {
     position: 'absolute',
   };
 
-  const pinCSS = { ...absolutePostion, ...pinLocation };
-
-  const pin = <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
+  const pins = pinPositions.map((pinPosition) => {
+    const pinCSS = { ...absolutePostion, ...pinPosition };
+    return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
+  });
 
     return (
         <div className='login-container'>
           <div className='login-background'>
             <div className= 'login-pin-container'>
-              {pin}
+              {pins}
             </div>
             <div className='login-window'>
               <div className='login-ellipses-container'>
