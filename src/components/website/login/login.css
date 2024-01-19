@@ -26,6 +26,8 @@
     border: 1px solid #454545;
     background: linear-gradient(0deg, rgba(30, 30, 30, 0.90) 0%, rgba(46, 46, 46, 0.90) 100%);
     backdrop-filter: blur(10px);
+
+    text-align: center;
 }
 
 .login-ellipses-container {
