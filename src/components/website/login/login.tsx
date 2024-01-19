@@ -12,11 +12,13 @@ export default function Login() {
     left: '649px',
   };
 
+  const pin = <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
+
     return (
         <div className='login-container'>
           <div className='login-background'>
             <div className= 'login-pin-container'>
-              <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
+              {pin}
             </div>
             <div className='login-window'>
               <div className='login-ellipses-container'>
