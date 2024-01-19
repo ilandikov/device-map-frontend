@@ -37,7 +37,11 @@ exports[`MainPage component should match the snapshot 1`] = `
       </p>
       <div
         className="map-links"
-      />
+      >
+        <a
+          href="/webapp"
+        />
+      </div>
     </div>
   </section>
   <section

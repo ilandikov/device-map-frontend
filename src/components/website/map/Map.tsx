@@ -1,6 +1,7 @@
 /* External dependencies */
 import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
 
 /* Local dependencies */
 import './map.css';
@@ -15,7 +16,9 @@ export default function Map() {
                 </div>
                 <p className="map-text">Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
                 <div className='map-links'>
-                    <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />
+                    <Link to="/webapp">
+                        <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />
+                    </Link>
                     <StaticImage src="../../../assets/images/GooglePlay.svg" alt="map-links" />
                     <StaticImage src="../../../assets/images/AppStore.svg" alt="map-links" />
                 </div>
