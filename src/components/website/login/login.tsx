@@ -6,6 +6,20 @@ import './login.css';
 import { StaticImage } from "gatsby-plugin-image";
 
 export default function Login() {
+  return (
+      <div className='login-container'>
+        <Pins />
+        <div className='login-window'>
+            <Ellipses />
+            <div className='login-window-content-container'>
+              <LoginWelcome />
+            </div>
+          </div>
+      </div>
+    );
+}
+
+function Pins() {
   const pinPositions: CSSProperties[] = [
     {
       top: '230px',
@@ -49,20 +63,12 @@ export default function Login() {
     const pinCSS: CSSProperties = { ...{ position: 'absolute' }, ...pinPosition };
     return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
   });
-
+  
   return (
-      <div className='login-container'>
-        <div className= 'login-pin-container'>
-            {pins}
-        </div>
-        <div className='login-window'>
-            <Ellipses />
-            <div className='login-window-content-container'>
-              <LoginWelcome />
-            </div>
-          </div>
-      </div>
-    );
+    <div className= 'login-pin-container'>
+        {pins}
+    </div>
+  );
 }
 
 function Ellipses() {
