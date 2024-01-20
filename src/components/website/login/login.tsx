@@ -52,17 +52,15 @@ export default function Login() {
 
   return (
       <div className='login-container'>
-        <div className='login-background'>
-          <div className= 'login-pin-container'>
+        <div className= 'login-pin-container'>
             {pins}
-          </div>
-          <div className='login-window'>
+        </div>
+        <div className='login-window'>
             <Ellipses />
             <div className='login-window-content-container'>
               <LoginWelcome />
             </div>
           </div>
-        </div>
       </div>
     );
 }
