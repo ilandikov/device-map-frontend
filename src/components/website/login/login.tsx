@@ -9,6 +9,12 @@ export default function Login() {
   return (
       <div className='login-container'>
         <Pins />
+        <div className='login-header'>
+          <div className='login-header-block'>
+              <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
+              <p className='login-header-brand-text'>Карта</p>
+          </div>
+        </div>
         <div className='login-window'>
             <Ellipses />
             <div className='login-window-content-container'>
@@ -63,7 +69,7 @@ function Pins() {
     const pinCSS: CSSProperties = { ...{ position: 'absolute' }, ...pinPosition };
     return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
   });
-  
+
   return (
     <div className= 'login-pin-container'>
         {pins}

@@ -17,6 +17,50 @@
     position: absolute;
 }
 
+.login-header {
+    max-height: 46px;
+
+    width: 100%;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    margin: 20px 20px 0 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.login-header-block {
+    background-color: #000000;
+    
+    padding: 13px 20px;
+
+    border: 1px solid #454545;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.login-header-brand-logo {
+    height: 20px;
+    width: 20px;
+}
+
+.login-header-brand-text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
 .login-window {
     max-width: 690px;
     max-height: 516px;
