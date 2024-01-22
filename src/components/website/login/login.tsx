@@ -9,7 +9,6 @@ export default function Login() {
   return (
       <>
         <div className='login-container login-background'>
-          <Pins />
           <div className='login-container login-header'>
             <div className='login-header-block'>
                 <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
@@ -33,61 +32,6 @@ export default function Login() {
               </div>
             </div>
         </div>
-      </>
-    );
-}
-
-function Pins() {
-  const pinPositions: CSSProperties[] = [
-    {
-      top: '230px',
-      left: '649px',
-    },
-    {
-      top: '188px',
-      left: '751px',
-    },
-    {
-      top: '481px',
-      left: '1089px',
-    },
-    {
-      top: '564px',
-      left: '1172px',
-    },
-    {
-      top: '769px',
-      left: '1014px',
-    },
-    {
-      top: '774px',
-      left: '1069px',
-    },
-    {
-      top: '781px',
-      left: '1180px',
-    },
-    {
-      top: '857px',
-      left: '1115px',
-    },
-    {
-      top: '881px',
-      left: '1022px',
-    },
-  ];
-
-  const pins = pinPositions.map((pinPosition) => {
-    const pinCSS: CSSProperties = {
-      ...{ position: 'absolute', width: '24px' },
-      ...pinPosition,
-    };
-    return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
-  });
-
-  return (
-    <>
-      {pins}
     </>
   );
 }
