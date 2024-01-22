@@ -15,7 +15,11 @@ export default function Login() {
               <p className='login-header-brand-text'>Карта</p>
           </div>
           <div className='login-header-block'>
-            <div className='login-header-apps'>
+            <div className='login-header-inner-block'>
+              <StaticImage className='login-header-account-image' src="../../../assets/images/Account.svg" alt="login-header-account" />
+              <p className='login-header-account-text'>Войти</p>
+            </div>
+            <div className='login-header-inner-block'>
               <StaticImage className='login-header-apps-google-play' src="../../../assets/images/GooglePlay.svg" alt="login-header-apps-google-play" />
               <StaticImage className='login-header-apps-app-store'src="../../../assets/images/AppStore.svg" alt="login-header-apps-app-store" />
             </div>
