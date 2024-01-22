@@ -1,20 +1,13 @@
 .login-container {
     width: 1440px;
-    height: 1024px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
 }
 
-.login-pin-container {
+.login-background {
     background-image: url(../../../assets/images/GoogleMaps.png);
 
-    width: 1440px;
-    height: 1024px;
-
-    position: absolute;
+    height: 100vw;
 }
 
 .login-header {
