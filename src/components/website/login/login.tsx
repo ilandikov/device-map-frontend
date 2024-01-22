@@ -14,6 +14,12 @@ export default function Login() {
               <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
               <p className='login-header-brand-text'>Карта</p>
           </div>
+          <div className='login-header-block'>
+            <div className='login-header-apps'>
+              <StaticImage className='login-header-apps-google-play' src="../../../assets/images/GooglePlay.svg" alt="map-links" />
+              <StaticImage className='login-header-apps-app-store'src="../../../assets/images/AppStore.svg" alt="map-links" />
+            </div>
+          </div>
         </div>
         <div className='login-window'>
             <Ellipses />
