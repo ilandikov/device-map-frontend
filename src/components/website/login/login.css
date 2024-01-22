@@ -1,6 +1,8 @@
-.login-container {
+.login-background {
     background-image: url(../../../assets/images/GoogleMaps.png);
+}
 
+.login-container {
     width: 1440px;
     height: 1024px;
 
@@ -36,7 +38,7 @@
 
 .login-header-block {
     background-color: #000000;
-    
+
     padding: 13px 20px;
 
     border: 1px solid #454545;
