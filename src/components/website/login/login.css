@@ -1,7 +1,3 @@
-.login-background {
-    background-image: url(../../../assets/images/GoogleMaps.png);
-}
-
 .login-container {
     width: 1440px;
     height: 1024px;
@@ -13,6 +9,8 @@
 }
 
 .login-pin-container {
+    background-image: url(../../../assets/images/GoogleMaps.png);
+
     width: 1440px;
     height: 1024px;
 

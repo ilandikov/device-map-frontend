@@ -81,7 +81,7 @@ function Pins() {
   });
 
   return (
-    <div className= 'login-pin-container login-background'>
+    <div className= 'login-pin-container'>
         {pins}
     </div>
   );
