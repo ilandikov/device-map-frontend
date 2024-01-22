@@ -9,7 +9,9 @@ export default function Login() {
   return (
       <>
         <div className='login-container'>
-          <Pins />
+          <div className= 'login-background'>
+            <Pins />
+          </div>
           <div className='login-container login-header'>
             <div className='login-header-block'>
                 <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
@@ -83,9 +85,9 @@ function Pins() {
   });
 
   return (
-    <div className= 'login-background'>
-        {pins}
-    </div>
+    <>
+      {pins}
+    </>
   );
 }
 
