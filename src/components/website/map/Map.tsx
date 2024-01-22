@@ -19,8 +19,8 @@ export default function Map() {
                     <Link to="/webapp">
                         <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />
                     </Link>
-                    <StaticImage src="../../../assets/images/GooglePlay.svg" alt="map-links" />
-                    <StaticImage src="../../../assets/images/AppStore.svg" alt="map-links" />
+                    <StaticImage src="../../../assets/images/GooglePlayOpaque.svg" alt="map-links" />
+                    <StaticImage src="../../../assets/images/AppStoreOpaque.svg" alt="map-links" />
                 </div>
             </div>
         </section>
