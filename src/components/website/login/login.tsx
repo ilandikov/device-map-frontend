@@ -8,10 +8,8 @@ import { StaticImage } from "gatsby-plugin-image";
 export default function Login() {
   return (
       <>
-        <div className='login-container'>
-          <div className= 'login-background'>
-            <Pins />
-          </div>
+        <div className='login-container login-background'>
+          <Pins />
           <div className='login-container login-header'>
             <div className='login-header-block'>
                 <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
