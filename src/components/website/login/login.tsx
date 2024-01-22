@@ -25,15 +25,17 @@ export default function Login() {
               </div>
             </div>
           </div>
-          <div className='login-window'>
+          <div className='login-window-container'>
+            <div className='login-window'>
               <Ellipses />
               <div className='login-window-content-container'>
-                <LoginWelcome />
+                <LoginWelcome />  
               </div>
             </div>
+          </div>
         </div>
-    </>
-  );
+      </>
+    );
 }
 
 function Ellipses() {
