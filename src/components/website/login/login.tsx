@@ -78,7 +78,10 @@ function Pins() {
   ];
 
   const pins = pinPositions.map((pinPosition) => {
-    const pinCSS: CSSProperties = { ...{ position: 'absolute' }, ...pinPosition };
+    const pinCSS: CSSProperties = {
+      ...{ position: 'absolute', width: '24px' },
+      ...pinPosition,
+    };
     return <StaticImage style={pinCSS} src='../../../assets/images/BlackPin.svg' alt='location-pin' />
   });
 
