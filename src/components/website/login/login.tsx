@@ -10,7 +10,7 @@ export default function Login() {
       <>
         <div className='login-container'>
           <Pins />
-          <div className='login-header'>
+          <div className='login-container login-header'>
             <div className='login-header-block'>
                 <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
                 <p className='login-header-brand-text'>Карта</p>
