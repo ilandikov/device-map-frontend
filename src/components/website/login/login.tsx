@@ -4,15 +4,17 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 /* Local dependencies */
 import './login.css';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 export default function Login() {
+  const { t } = useI18next();
   return (
       <>
         <div className='login-container login-background'>
           <div className='login-container login-header'>
             <div className='login-header-block'>
                 <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
-                <p className='login-header-brand-text'>Карта</p>
+                <p className='login-header-brand-text'>{ t('map') }</p>
             </div>
             <div className='login-header-block'>
               <div className='login-header-inner-block'>
