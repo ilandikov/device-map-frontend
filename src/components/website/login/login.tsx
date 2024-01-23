@@ -1,9 +1,9 @@
 /* External dependencies */
-import React, { CSSProperties } from "react";
+import React from 'react';
+import { StaticImage } from 'gatsby-plugin-image';
 
 /* Local dependencies */
 import './login.css';
-import { StaticImage } from "gatsby-plugin-image";
 
 export default function Login() {
   return (
