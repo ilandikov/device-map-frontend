@@ -23,7 +23,7 @@ export default function Login() {
               </div>
               <div className='login-header-inner-block'>
                 <StaticImage className='login-header-apps-google-play' src="../../../assets/images/GooglePlay.svg" alt="login-header-apps-google-play" />
-                <StaticImage className='login-header-apps-app-store'src="../../../assets/images/AppStore.svg" alt="login-header-apps-app-store" />
+                <StaticImage className='login-header-apps-app-store' src="../../../assets/images/AppStore.svg" alt="login-header-apps-app-store" />
               </div>
             </div>
           </header>
