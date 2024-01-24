@@ -8,20 +8,18 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 
 export default function Login() {
   return (
-      <>
-        <div className='login-container login-background'>
-          <LoginHeader />
-          <div className='login-window-container'>
-            <div className='login-window'>
-              <Ellipses />
-              <div className='login-window-content-container'>
-                <LoginWelcome />
-              </div>
-            </div>
+    <div className='login-container login-background'>
+      <LoginHeader />
+      <div className='login-window-container'>
+        <div className='login-window'>
+          <Ellipses />
+          <div className='login-window-content-container'>
+            <LoginWelcome />
           </div>
         </div>
-      </>
-    );
+      </div>
+    </div>
+  );
 }
 
 function LoginHeader() {
