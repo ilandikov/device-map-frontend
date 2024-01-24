@@ -1,3 +1,8 @@
 {
+  "accountLogin": "Account login",
+  "accountRegister": "Register an account",
+  "brand": "Finik",
+  "login": "Login",
+  "loginCallToAction": "Use the map to mark places where a terminal is absent, we will install one and you will receive a bonus to exchange for prizes",
   "map": "Map"
 }

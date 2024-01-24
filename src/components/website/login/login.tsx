@@ -19,7 +19,7 @@ export default function Login() {
             <div className='login-header-block'>
               <div className='login-header-inner-block'>
                 <StaticImage className='login-header-account-image' src="../../../assets/images/Account.svg" alt="login-header-account" />
-                <p className='login-header-account-text'>Войти</p>
+                <p className='login-header-account-text'>{ t('login') }</p>
               </div>
               <div className='login-header-inner-block'>
                 <StaticImage className='login-header-apps-google-play' src="../../../assets/images/GooglePlay.svg" alt="login-header-apps-google-play" />
@@ -56,19 +56,20 @@ function Ellipses() {
 }
 
 function LoginWelcome() {
+  const { t } = useI18next();
   return(
     <>
       <div className='login-window-top-container'>
         <StaticImage className='login-window-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
-        <p className='login-window-brand'>Финик Карта</p>
-        <p className='login-window-description'>Отмечай места на карте где нет нашего терминала, мы поставим его, а тебе пришлем бонусы которые ты сможешь обменять на реальные призы</p>
+        <p className='login-window-brand'>{ t('brand') } { t('map') }</p>
+        <p className='login-window-description'>{ t('loginCallToAction') }</p>
       </div>
       <div className='login-window-bottom-container'>
         <div className='login-window-button login-window-button-signin'>
-          <p>Войти в аккаунт</p>
+          <p>{ t('accountLogin') }</p>
         </div>
         <div className='login-window-button login-window-button-register'>
-          <p>Регистрация</p>
+          <p>{ t('accountRegister') }</p>
         </div>
       </div>
     </>
