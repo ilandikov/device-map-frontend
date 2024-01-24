@@ -11,7 +11,7 @@ export default function Login() {
   return (
       <>
         <div className='login-container login-background'>
-          <div className='login-container login-header'>
+          <header className='login-container login-header'>
             <div className='login-header-block'>
                 <StaticImage className='login-header-brand-logo' src='../../../assets/images/LogoGreen.svg' alt='logo' />
                 <p className='login-header-brand-text'>{ t('map') }</p>
@@ -26,7 +26,7 @@ export default function Login() {
                 <StaticImage className='login-header-apps-app-store'src="../../../assets/images/AppStore.svg" alt="login-header-apps-app-store" />
               </div>
             </div>
-          </div>
+          </header>
           <div className='login-window-container'>
             <div className='login-window'>
               <Ellipses />
