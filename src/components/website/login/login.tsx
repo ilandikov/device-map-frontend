@@ -7,11 +7,10 @@ import './login.css';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 export default function Login() {
-  const { t } = useI18next();
   return (
       <>
         <div className='login-container login-background'>
-          <LoginHeader map={t('map')} login={t('login')} />
+          <LoginHeader />
           <div className='login-window-container'>
             <div className='login-window'>
               <Ellipses />
@@ -25,21 +24,19 @@ export default function Login() {
     );
 }
 
-function LoginHeader(props: {
-  map: string,
-  login: string
-}) {
+function LoginHeader() {
+  const { t } = useI18next();
   return (
     <header className="login-container login-header">
       <div className="login-header-block">
         <StaticImage className="login-header-brand-logo" src="../../../assets/images/LogoGreen.svg" alt="logo" />
-        <p className="login-header-brand-text">{props.map}</p>
+        <p className="login-header-brand-text">{t('map')}</p>
       </div>
       <div className="login-header-block">
         <div className="login-header-inner-block">
           <StaticImage className="login-header-account-image" src="../../../assets/images/Account.svg"
                        alt="login-header-account" />
-          <p className="login-header-account-text">{props.login}</p>
+          <p className="login-header-account-text">{t('login')}</p>
         </div>
         <div className="login-header-inner-block">
           <StaticImage className="login-header-apps-google-play" src="../../../assets/images/GooglePlay.svg"
