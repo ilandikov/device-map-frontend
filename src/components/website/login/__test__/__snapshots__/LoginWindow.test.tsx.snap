@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AboutUs component should match the snapshot 1`] = `
+<div
+  className="login-window-container"
+>
+  <div
+    className="login-window"
+  >
+    <div
+      className="login-ellipses-container"
+    >
+      <div
+        className="login-ellipse-left-container"
+      >
+        <div
+          className="login-ellipse login-ellipse-green"
+        />
+      </div>
+      <div
+        className="login-ellipse-right-container"
+      >
+        <div
+          className="login-ellipse login-ellipse-blue"
+        />
+      </div>
+    </div>
+    <div
+      className="login-window-content-container"
+    >
+      <div
+        className="login-window-top-container"
+      >
+        <p
+          className="login-window-brand"
+        >
+          brand
+           
+          map
+        </p>
+        <p
+          className="login-window-description"
+        >
+          loginCallToAction
+        </p>
+      </div>
+      <div
+        className="login-window-bottom-container"
+      >
+        <div
+          className="login-window-button login-window-button-signin"
+        >
+          <p>
+            accountLogin
+          </p>
+        </div>
+        <div
+          className="login-window-button login-window-button-register"
+        >
+          <p>
+            accountRegister
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

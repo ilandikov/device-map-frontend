@@ -40,7 +40,7 @@ function LoginHeader() {
   );
 }
 
-function LoginWindow() {
+export function LoginWindow() {
   return (
     <div className="login-window-container">
       <div className="login-window">
