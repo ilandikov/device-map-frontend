@@ -10,14 +10,7 @@ export default function Login() {
   return (
     <div className='login-container login-background'>
       <LoginHeader />
-      <div className='login-window-container'>
-        <div className='login-window'>
-          <Ellipses />
-          <div className='login-window-content-container'>
-            <LoginWelcome />
-          </div>
-        </div>
-      </div>
+      <LoginWindow />
     </div>
   );
 }
@@ -44,6 +37,19 @@ function LoginHeader() {
         </div>
       </div>
     </header>
+  );
+}
+
+function LoginWindow() {
+  return (
+    <div className="login-window-container">
+      <div className="login-window">
+        <Ellipses />
+        <div className="login-window-content-container">
+          <LoginWelcome />
+        </div>
+      </div>
+    </div>
   );
 }
 
