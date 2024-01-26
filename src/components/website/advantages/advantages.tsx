@@ -91,10 +91,14 @@ function AdvantageGiftBlock({props}: {props: AdvantageSplitBlockProperties}) {
         backgroundColor: props.backgroundColor,
     };
 
+    const advantageBlocks = [
+        <AdvantageHalfBlockText style={textBlockCSS} header={props.header} description={props.description} />,
+        <AdvantageHalfBlockImage image={props.image} />,
+    ];
+
     return(
         <div className='advantage-block'>
-            <AdvantageHalfBlockText style={textBlockCSS} header={props.header} description={props.description} />
-            <AdvantageHalfBlockImage image={props.image} />
+            {advantageBlocks}
         </div>
     );
 }
