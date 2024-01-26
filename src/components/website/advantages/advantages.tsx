@@ -9,7 +9,7 @@ type AdvantageBlockProperties = {
     description: string,
     textColor: string,
     backgroundColor: string,
-    image: any,
+    image: ReactElement,
 };
 
 type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle?: string };
