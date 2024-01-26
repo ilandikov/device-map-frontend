@@ -2,35 +2,69 @@
 import React, { ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
+import { prop } from 'cheerio/lib/api/attributes';
+
+type AdvantageBlockProperties = {
+    header: string,
+    description: string,
+    textColor: string,
+    backgroundColor: string,
+    image: any
+};
 
 export default function Advantages() {
+    const phoneOnGreen: AdvantageBlockProperties = {
+        header: 'Играй',
+        description: 'Увлекательная игра',
+        textColor: '#000000',
+        backgroundColor: '#CBEA5E',
+        image: <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />,
+    };
+
+    const notebookOnBlue: AdvantageBlockProperties = {
+        header: 'Везде',
+        description: 'На всех платформах',
+        textColor: '#FFFFFF',
+        backgroundColor: '#0066FF',
+        image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
+    };
+
+    const terminalOnWhite: AdvantageBlockProperties = {
+        header: 'Оглянись',
+        description: 'Терминалы везде',
+        textColor: '#000000',
+        backgroundColor: '#FFFFFF',
+        image: TerminalImage(),
+    };
+
+
     return (
       <section className='advantages-container'>
-          {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />)}
+          <AdvantageFullBlock props={phoneOnGreen} />
           {AdvantageGiftBlock()}
-          {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />)}
-          {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
+          <AdvantageFullBlock props={notebookOnBlue} />
+          <AdvantageFullBlock props={terminalOnWhite} />
           {AdvantageLocationBlock()}
           {AdvantageMapBlock()}
       </section>
     );
 }
 
-function AdvantageFullBlock(header: string, description: string, textColor: string, backgroundColor: string, image: ReactElement) {
+function AdvantageFullBlock({props}: {props: AdvantageBlockProperties}) {
     const textBlockCSS = {
-        backgroundColor: backgroundColor,
-        color: textColor,
+        backgroundColor: props.backgroundColor,
+        color: props.textColor,
     };
 
     return(
         <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
             <div className='advantage-half-block'>
-                {image}
+                {props.image}
             </div>
             <div className='advantage-half-block'>
                 <div className='advantage-text-container advantage-text advantage-text'>
-                    <p className='advantage-text-header'>{header}.</p>
-                    <p>{description}</p>
+                    <p className='advantage-text-header'>{props.header}.</p>
+                    <p>{props.description}</p>
                 </div>
             </div>
         </div>
