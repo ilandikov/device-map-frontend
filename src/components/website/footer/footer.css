@@ -45,19 +45,19 @@
     .footer-brand-opaque-text {
         color: #FFFFFF;
         opacity: 0.5;
-    }
 
-    .footer-brand-bigger-text {
-        font-family: 'Tektur';
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 23px;
-    }
+        p:first-child {
+            font-family: 'Tektur';
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 23px;
+        }
 
-    .footer-brand-smaller-text {
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 15px;
+        p {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 15px;
+        }
     }
 }
 
