@@ -50,13 +50,22 @@ export default function Advantages() {
         imageContainerStyle: 'advantage-block-terminal-image-container',
     };
 
+    const locationLeft: AdvantageSplitBlockProperties = {
+        header: 'Отмечай',
+        description: 'Мы поставим терминал',
+        textColor: '#000000',
+        backgroundColor: '#FFFFFF',
+        image: <StaticImage src="../../../assets/images/Location.png" alt="advantage" />,
+        imageFirst: true,
+    }
+
     return (
       <section className='advantages-container'>
           <AdvantageFullBlock props={phoneOnGreen} />
           <AdvantageSplitBlock props={giftRight} />
           <AdvantageFullBlock props={notebookOnBlue} />
           <AdvantageFullBlock props={terminalOnWhite} />
-          <AdvantageLocationBlock />
+          <AdvantageSplitBlock props={locationLeft} />
           <AdvantageMapBlock />
       </section>
     );
@@ -110,27 +119,6 @@ function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
     return(
         <div className='advantage-block'>
             {advantageBlocks}
-        </div>
-    );
-}
-
-function AdvantageLocationBlock() {
-    const textBlockCSS = {
-        color: '#000000',
-        backgroundColor: '#FFFFFF',
-    };
-
-    return(
-        <div className='advantage-block'>
-            <div className='advantage-half-block'>
-                <StaticImage src="../../../assets/images/Location.png" alt="advantage" />
-            </div>
-            <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
-                <div className='advantage-text advantage-half-block-text'>
-                    <p className='advantage-text-header'>Отмечай.</p>
-                    <p>Мы поставим терминал</p>
-                </div>
-            </div>
         </div>
     );
 }
