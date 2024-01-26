@@ -126,16 +126,6 @@ function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
 }
 
 function AdvantageMapBlock() {
-    const textContainerCSS: React.CSSProperties = {
-        color: '#ffffff',
-        textAlign: 'center',
-
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',  
-    };
-
     const textBlockCSS: React.CSSProperties = {
         color: '#ffffff',
         textAlign: 'center',        
@@ -152,7 +142,7 @@ function AdvantageMapBlock() {
     }
 
     return(
-        <div className='advantage-block advantages-block-map' style={textContainerCSS}>
+        <div className='advantage-block advantages-block-map'>
             <div className='advantage-block-text' style={textBlockCSS}>
                 <p>Изучай.</p>
                 <p>Уникальная карта</p>

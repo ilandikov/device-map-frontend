@@ -53,6 +53,14 @@
 
 .advantages-block-map {
     background-image: url("../../../assets/images/Bridge.png");
+
+    color: #ffffff;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .advantage-block-terminal-image-container {
