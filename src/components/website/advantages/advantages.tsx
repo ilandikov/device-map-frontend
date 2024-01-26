@@ -103,6 +103,10 @@ function AdvantageGiftBlock({props}: {props: AdvantageSplitBlockProperties}) {
         </div>,
     ];
 
+    if (props.imageFirst) {
+        advantageBlocks.reverse();
+    }
+
     return(
         <div className='advantage-block'>
             {advantageBlocks}
