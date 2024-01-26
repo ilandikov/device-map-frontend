@@ -97,15 +97,11 @@ function AdvantageLocationBlock() {
         color: '#000000',
         backgroundColor: '#FFFFFF',
     };
-    
-    const imageCSS = {
-        width: 'auto',
-    }
 
     return(
         <div className='advantage-block'>
             <div className='advantage-half-block'>
-                <StaticImage src="../../../assets/images/Location.png" alt="advantage" style={imageCSS}/>
+                <StaticImage src="../../../assets/images/Location.png" alt="advantage" />
             </div>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
                 <div className='advantage-text advantage-half-block-text'>
