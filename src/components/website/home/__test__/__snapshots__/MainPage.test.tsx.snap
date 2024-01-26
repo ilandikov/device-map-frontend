@@ -271,24 +271,22 @@ exports[`MainPage component should match the snapshot 1`] = `
         <div
           className="footer-brand-logo"
         >
-          <p
-            className="footer-brand-name"
-          >
+          <p>
             Finik
           </p>
         </div>
-        <p
-          className="footer-brand-opaque-text footer-brand-bigger-text"
+        <div
+          className="footer-brand-description"
         >
-          Удобное и надежное отечественное приложение для оплаты в Кыргызстане
-        </p>
-        <p
-          className="footer-brand-opaque-text footer-brand-smaller-text"
-        >
-          ©2022 Averspay
-          <br />
-          Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
-        </p>
+          <p>
+            Удобное и надежное отечественное приложение для оплаты в Кыргызстане
+          </p>
+          <p>
+            ©2022 Averspay
+            <br />
+            Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
+          </p>
+        </div>
       </div>
       <div
         className="footer-links"
