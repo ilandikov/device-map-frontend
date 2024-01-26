@@ -126,11 +126,6 @@ function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
 }
 
 function AdvantageMapBlock() {
-    const textBlockCSS: React.CSSProperties = {
-        color: '#ffffff',
-        textAlign: 'center',        
-    };
-
     const shadowsCSS: React.CSSProperties = {
         marginTop: '50px',
         width: '1200px',
@@ -143,7 +138,7 @@ function AdvantageMapBlock() {
 
     return(
         <div className='advantage-block advantages-block-map'>
-            <div className='advantage-block-text' style={textBlockCSS}>
+            <div className='advantage-block-text'>
                 <p>Изучай.</p>
                 <p>Уникальная карта</p>
             </div>
