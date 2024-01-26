@@ -24,6 +24,15 @@ export default function Advantages() {
         image: <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />,
     };
 
+    const giftRight: AdvantageSplitBlockProperties = {
+        header: 'Обменивай',
+        description: 'Получай подарки',
+        textColor: '#000000',
+        backgroundColor: '#FFFFFF',
+        image: <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />,
+        imageFirst: false,
+    }
+
     const notebookOnBlue: AdvantageFullBlockProperties = {
         header: 'Везде',
         description: 'На всех платформах',
@@ -40,15 +49,6 @@ export default function Advantages() {
         image: <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />,
         imageContainerStyle: 'advantage-block-terminal-image-container',
     };
-
-    const giftRight: AdvantageSplitBlockProperties = {
-        header: 'Обменивай',
-        description: 'Получай подарки',
-        textColor: '#000000',
-        backgroundColor: '#FFFFFF',
-        image: <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />,
-        imageFirst: false,
-    }
 
     return (
       <section className='advantages-container'>
