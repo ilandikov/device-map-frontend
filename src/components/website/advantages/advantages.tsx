@@ -1,6 +1,8 @@
 /* External dependencies */
 import React, { ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
+
+/* Local dependencies */
 import './advantages.css';
 
 type AdvantageBlockProperties = {
