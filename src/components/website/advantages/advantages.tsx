@@ -12,7 +12,7 @@ type AdvantageBlockProperties = {
     image: ReactElement,
 };
 
-type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle?: string };
+type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle: string };
 type AdvantageSplitBlockProperties = AdvantageBlockProperties & { imageFirst: boolean }
 
 export default function Advantages() {
@@ -22,6 +22,7 @@ export default function Advantages() {
         textColor: '#000000',
         backgroundColor: '#CBEA5E',
         image: <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />,
+        imageContainerStyle: '',
     };
 
     const giftRight: AdvantageSplitBlockProperties = {
@@ -39,6 +40,7 @@ export default function Advantages() {
         textColor: '#FFFFFF',
         backgroundColor: '#0066FF',
         image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
+        imageContainerStyle: '',
     };
 
     const terminalOnWhite: AdvantageFullBlockProperties = {
