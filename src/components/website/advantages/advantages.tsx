@@ -74,13 +74,13 @@ export default function Advantages() {
 }
 
 function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
-    const textBlockCSS = {
+    const fullBlockColors = {
         backgroundColor: props.backgroundColor,
         color: props.textColor,
     };
 
     return(
-        <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
+        <div className='advantage-block advantage-block-radius' style={fullBlockColors}>
             <div className='advantage-block-half'>
                 <div className={props.imageContainerStyle}>
                     {props.image}
@@ -97,13 +97,13 @@ function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
 }
 
 function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
-    const textBlockCSS = {
+    const halfBlockColors = {
         color: props.textColor,
         backgroundColor: props.backgroundColor,
     };
 
     const advantageBlocks = [
-        <div className="advantage-block-half advantage-block-radius" style={textBlockCSS}>
+        <div className="advantage-block-half advantage-block-radius" style={halfBlockColors}>
             <div className="advantage-block-text advantage-block-half-text-container">
                 <p>{props.header}.</p>
                 <p>{props.description}</p>
