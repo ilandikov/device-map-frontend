@@ -52,3 +52,10 @@
 .advantages-block-with-background {
     background-image: url("../../../assets/images/Bridge.png");
 }
+
+.advantage-block-terminal-image-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

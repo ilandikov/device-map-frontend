@@ -10,7 +10,7 @@ type AdvantageBlockProperties = {
     textColor: string,
     backgroundColor: string,
     image: any,
-    imageContainerStyle?: CSSProperties,
+    imageContainerStyle?: string,
 };
 
 type NewBlockProperties = {
@@ -35,20 +35,13 @@ export default function Advantages() {
         image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
     };
 
-    const terminalImageContainerCSS: React.CSSProperties = {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-    };
-
     const terminalOnWhite: AdvantageBlockProperties = {
         header: 'Оглянись',
         description: 'Терминалы везде',
         textColor: '#000000',
         backgroundColor: '#FFFFFF',
         image: <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />,
-        imageContainerStyle: terminalImageContainerCSS,
+        imageContainerStyle: 'advantage-block-terminal-image-container',
     };
 
     const giftRight: NewBlockProperties = {
@@ -77,7 +70,7 @@ function AdvantageFullBlock({props}: {props: AdvantageBlockProperties}) {
     return(
         <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
             <div className='advantage-half-block'>
-                <div style={props.imageContainerStyle}>
+                <div className={props.imageContainerStyle}>
                     {props.image}
                 </div>
             </div>

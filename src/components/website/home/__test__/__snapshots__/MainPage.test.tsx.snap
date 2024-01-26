@@ -195,14 +195,7 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="advantage-half-block"
       >
         <div
-          style={
-            {
-              "display": "flex",
-              "flexDirection": "column",
-              "height": "100%",
-              "justifyContent": "flex-end",
-            }
-          }
+          className="advantage-block-terminal-image-container"
         />
       </div>
       <div
