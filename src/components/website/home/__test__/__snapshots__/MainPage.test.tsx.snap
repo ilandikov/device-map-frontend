@@ -327,10 +327,7 @@ exports[`MainPage component should match the snapshot 1`] = `
             className="footer-brand-opaque-text footer-brand-smaller-text"
           >
             ©2022 Averspay
-          </p>
-          <p
-            className="footer-brand-opaque-text footer-brand-smaller-text"
-          >
+            <br />
             Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
           </p>
         </div>
