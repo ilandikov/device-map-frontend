@@ -93,16 +93,32 @@ function AdvantageGiftBlock({props}: {props: AdvantageSplitBlockProperties}) {
 
     return(
         <div className='advantage-block'>
-            <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
-                <div className='advantage-text advantage-half-block-text'>
-                    <p className='advantage-text-header'>{props.header}.</p>
-                    <p>{props.description}</p>
-                </div>
-            </div>
-            <div className='advantage-half-block'>
-                {props.image}
-            </div>
+            <AdvantageHalfBlockText style={textBlockCSS} header={props.header} description={props.description} />
+            <AdvantageHalfBlockImage image={props.image} />
         </div>
+    );
+}
+
+function AdvantageHalfBlockText(props: {
+    style: { backgroundColor: string; color: string },
+    header: string,
+    description: string
+}) {
+    return (
+      <div className="advantage-half-block advantage-block-radius" style={props.style}>
+          <div className="advantage-text advantage-half-block-text">
+              <p className="advantage-text-header">{props.header}.</p>
+              <p>{props.description}</p>
+          </div>
+      </div>
+    );
+}
+
+function AdvantageHalfBlockImage(props: { image: any }) {
+    return (
+      <div className="advantage-half-block">
+          {props.image}
+      </div>
     );
 }
 
