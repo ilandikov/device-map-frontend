@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { ReactElement } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 import { prop } from 'cheerio/lib/api/attributes';
@@ -35,12 +35,20 @@ export default function Advantages() {
         image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
     };
 
+    const terminalImageContainerCSS: React.CSSProperties = {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+    };
+
     const terminalOnWhite: AdvantageBlockProperties = {
         header: 'Оглянись',
         description: 'Терминалы везде',
         textColor: '#000000',
         backgroundColor: '#FFFFFF',
-        image: TerminalImage(),
+        image: <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />,
+        imageContainerStyle: terminalImageContainerCSS,
     };
 
     const giftRight: NewBlockProperties = {
@@ -123,21 +131,6 @@ function AdvantageLocationBlock() {
             </div>
         </div>
     );
-}
-
-function TerminalImage() {
-    const terminalImageContainerCSS: React.CSSProperties = {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-    };
-    
-    return(
-        <div style={terminalImageContainerCSS}>
-            <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />
-        </div>
-    )
 }
 
 function AdvantageMapBlock() {
