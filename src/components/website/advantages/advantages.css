@@ -34,14 +34,6 @@
     border-radius: 50px;
 }
 
-/* Style for the <div> to have the 2 <p> inside */
-.advantage-text-containter {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: center;
-}
-
 .advantage-text p {
     font-size: 64px;
     font-weight: 700;
