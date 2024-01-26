@@ -9,7 +9,8 @@ type AdvantageBlockProperties = {
     description: string,
     textColor: string,
     backgroundColor: string,
-    image: any
+    image: any,
+    imageContainerStyle?: string,
 };
 
 type NewBlockProperties = {
