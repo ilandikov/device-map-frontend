@@ -152,7 +152,7 @@ function AdvantageMapBlock() {
     }
 
     return(
-        <div className='advantage-block advantages-block-with-background' style={textContainerCSS}>
+        <div className='advantage-block advantages-block-map' style={textContainerCSS}>
             <div className='advantage-block-text' style={textBlockCSS}>
                 <p>Изучай.</p>
                 <p>Уникальная карта</p>
