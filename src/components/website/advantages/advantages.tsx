@@ -3,6 +3,19 @@ import React, { ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
 
+export default function Advantages() {
+    return (
+      <section className='advantages-container'>
+          {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />)}
+          {AdvantageGiftBlock()}
+          {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />)}
+          {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
+          {AdvantageLocationBlock()}
+          {AdvantageMapBlock()}
+      </section>
+    );
+}
+
 function AdvantageFullBlock(header: string, description: string, textColor: string, backgroundColor: string, image: ReactElement) {
     const textBlockCSS = {
         backgroundColor: backgroundColor,
@@ -123,17 +136,4 @@ function AdvantageMapBlock() {
             </div>
         </div>
     )
-}
-
-export default function Advantages() {
-    return (
-        <section className='advantages-container'>
-            {AdvantageFullBlock('Играй','Увлекательная игра', '#000000', '#CBEA5E', <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />)}
-            {AdvantageGiftBlock()}
-            {AdvantageFullBlock('Везде','На всех платформах', '#FFFFFF', '#0066FF', <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />)}
-            {AdvantageFullBlock('Оглянись','Терминалы везде', '#000000', '#FFFFFF', TerminalImage())}
-            {AdvantageLocationBlock()}
-            {AdvantageMapBlock()}
-        </section>
-      );
 }
