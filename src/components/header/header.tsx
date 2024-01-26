@@ -4,8 +4,8 @@ import Logo from '../website/logo/Logo'
 
 export default function Header() {
   return (
-    <section>
+    <header>
       <Logo />
-    </section>
+    </header>
   )
 }
