@@ -297,7 +297,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       />
     </div>
   </section>
-  <section
+  <footer
     className="footer-outer-container"
   >
     <div
@@ -370,6 +370,6 @@ exports[`MainPage component should match the snapshot 1`] = `
         className="footer-contacts"
       />
     </div>
-  </section>
+  </footer>
 </div>
 `;

@@ -7,7 +7,7 @@ import './footer.css';
 
 export default function Footer() {    
     return (
-        <section className='footer-outer-container'>
+        <footer className='footer-outer-container'>
           <div className='footer-inner-container'>
             <div className='footer-brand'>
               <div className='footer-brand-logo'>
@@ -40,6 +40,6 @@ export default function Footer() {
               <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
             </div>
           </div>
-        </section>
+        </footer>
       );
 }
