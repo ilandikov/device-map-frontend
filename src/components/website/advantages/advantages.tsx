@@ -68,23 +68,32 @@ export default function Advantages() {
           <AdvantageFullBlock props={notebookOnBlue} />
           <AdvantageFullBlock props={terminalOnWhite} />
           <AdvantageSplitBlock props={locationLeft} />
-          <AdvantageMapBlock />
+          <div className="advantage-block advantages-block-map">
+              <div className="advantage-block-text">
+                  <p>Изучай.</p>
+                  <p>Уникальная карта</p>
+              </div>
+              <div className="advantage-block-map-shadows">
+                  <StaticImage src="../../../assets/images/ShadowMapLeft.png" alt="advantage" />
+                  <StaticImage src="../../../assets/images/ShadowMapRight.png" alt="advantage" />
+              </div>
+          </div>
       </section>
     );
 }
 
-function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
+function AdvantageFullBlock({ props }: { props: AdvantageFullBlockProperties }) {
     const fullBlockColors = {
         backgroundColor: props.backgroundColor,
         color: props.textColor,
     };
 
-    return(
-        <div className='advantage-block advantage-block-radius' style={fullBlockColors}>
-            <div className='advantage-block-half'>
-                <div className={props.imageContainerStyle}>
-                    {props.image}
-                </div>
+    return (
+      <div className="advantage-block advantage-block-radius" style={fullBlockColors}>
+          <div className="advantage-block-half">
+              <div className={props.imageContainerStyle}>
+                  {props.image}
+              </div>
             </div>
             <div className='advantage-block-half'>
                 <div className='advantage-block-text advantage-block-half-text-container'>
@@ -123,23 +132,4 @@ function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
             {advantageBlocks}
         </div>
     );
-}
-
-function AdvantageMapBlock() {
-    const shadowsCSS: React.CSSProperties = {
-
-    }
-
-    return(
-        <div className='advantage-block advantages-block-map'>
-            <div className='advantage-block-text'>
-                <p>Изучай.</p>
-                <p>Уникальная карта</p>
-            </div>
-            <div className='advantage-block-map-shadows'>
-                <StaticImage src="../../../assets/images/ShadowMapLeft.png" alt="advantage" />
-                <StaticImage src="../../../assets/images/ShadowMapRight.png" alt="advantage" />
-            </div>
-        </div>
-    )
 }
