@@ -1,8 +1,7 @@
 /* External dependencies */
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import './advantages.css';
-import { prop } from 'cheerio/lib/api/attributes';
 
 type AdvantageBlockProperties = {
     header: string,
