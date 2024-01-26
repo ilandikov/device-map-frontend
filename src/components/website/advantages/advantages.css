@@ -34,11 +34,13 @@
     border-radius: 50px;
 }
 
-.advantage-text p {
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 77px;
-    letter-spacing: 0em;
+.advantage-text {
+    p {
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 77px;
+        letter-spacing: 0em;
+    }
 }
 
 .advantage-block-half-text-container {
