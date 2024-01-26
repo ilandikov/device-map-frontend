@@ -81,12 +81,12 @@ function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
 
     return(
         <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
-            <div className='advantage-half-block'>
+            <div className='advantage-block-half'>
                 <div className={props.imageContainerStyle}>
                     {props.image}
                 </div>
             </div>
-            <div className='advantage-half-block'>
+            <div className='advantage-block-half'>
                 <div className='advantage-text advantage-half-block-text'>
                     <p className='advantage-text-header'>{props.header}.</p>
                     <p>{props.description}</p>
@@ -103,13 +103,13 @@ function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
     };
 
     const advantageBlocks = [
-        <div className="advantage-half-block advantage-block-radius" style={textBlockCSS}>
+        <div className="advantage-block-half advantage-block-radius" style={textBlockCSS}>
             <div className="advantage-text advantage-half-block-text">
                 <p className="advantage-text-header">{props.header}.</p>
                 <p>{props.description}</p>
             </div>
         </div>,
-        <div className="advantage-half-block">
+        <div className="advantage-block-half">
             {props.image}
         </div>,
     ];

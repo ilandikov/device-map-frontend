@@ -21,7 +21,7 @@
 }
 
 /* Each block (even the full one is split into 2 internal containers */
-.advantage-half-block {
+.advantage-block-half {
     width: 50%;
     height: 100%;
 
