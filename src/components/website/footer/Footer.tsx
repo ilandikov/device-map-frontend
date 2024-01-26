@@ -14,7 +14,7 @@ export default function Footer() {
                 <StaticImage src="../../../assets/images/Logo.svg" alt="logo" />
                 <p>Finik</p>
               </div>
-              <div className="footer-brand-opaque-text">
+              <div className="footer-brand-description">
                 <p>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
                 <p>©2022 Averspay<br />Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
               </div>
