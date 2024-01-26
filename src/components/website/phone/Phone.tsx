@@ -1,17 +1,13 @@
 /* External dependencies */
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import './phone.css';
 
 export default function Phone() {
-    const headers: string[] = [
-        "Исследуйте",
-        "Отмечайте",
-        "Зарабатывай баллы",
-    ];
-
     return (
         <section className="phone-background phone-text-blocks">
-            <TextBlocks headers={headers} />
+            <TextBlocks headers={[
+                'Исследуйте', 'Отмечайте', 'Зарабатывай баллы',
+            ]} />
         </section>
     );
 }
