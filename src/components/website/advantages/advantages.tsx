@@ -13,11 +13,7 @@ type AdvantageBlockProperties = {
 };
 
 type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle?: string };
-
-type NewBlockProperties = {
-    color: string,
-    backgroundColor: string,
-}
+type AdvantageSplitBlockProperties = AdvantageBlockProperties & { imageFirst: boolean }
 
 export default function Advantages() {
     const phoneOnGreen: AdvantageFullBlockProperties = {
@@ -45,9 +41,13 @@ export default function Advantages() {
         imageContainerStyle: 'advantage-block-terminal-image-container',
     };
 
-    const giftRight: NewBlockProperties = {
-        color: '#000000',
+    const giftRight: AdvantageSplitBlockProperties = {
+        header: 'Обменивай',
+        description: 'Получай подарки',
+        textColor: '#000000',
         backgroundColor: '#FFFFFF',
+        image: <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />,
+        imageFirst: false,
     }
 
     return (
@@ -85,9 +85,9 @@ function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
     );
 }
 
-function AdvantageGiftBlock({props}: {props: NewBlockProperties}) {
+function AdvantageGiftBlock({props}: {props: AdvantageSplitBlockProperties}) {
     const textBlockCSS = {
-        color: props.color,
+        color: props.textColor,
         backgroundColor: props.backgroundColor,
     };
 
@@ -95,12 +95,12 @@ function AdvantageGiftBlock({props}: {props: NewBlockProperties}) {
         <div className='advantage-block'>
             <div className='advantage-half-block advantage-block-radius' style={textBlockCSS}>
                 <div className='advantage-text advantage-half-block-text'>
-                    <p className='advantage-text-header'>Обменивай.</p>
-                    <p>Получай подарки</p>
+                    <p className='advantage-text-header'>{props.header}.</p>
+                    <p>{props.description}</p>
                 </div>
             </div>
             <div className='advantage-half-block'>
-                <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />
+                {props.image}
             </div>
         </div>
     );

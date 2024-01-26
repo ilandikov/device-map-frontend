@@ -139,7 +139,8 @@ exports[`MainPage component should match the snapshot 1`] = `
           <p
             className="advantage-text-header"
           >
-            Обменивай.
+            Обменивай
+            .
           </p>
           <p>
             Получай подарки
