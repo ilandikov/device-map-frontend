@@ -53,7 +53,7 @@ export default function Advantages() {
     return (
       <section className='advantages-container'>
           <AdvantageFullBlock props={phoneOnGreen} />
-          <AdvantageGiftBlock props={giftRight} />
+          <AdvantageSplitBlock props={giftRight} />
           <AdvantageFullBlock props={notebookOnBlue} />
           <AdvantageFullBlock props={terminalOnWhite} />
           <AdvantageLocationBlock />
@@ -85,7 +85,7 @@ function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
     );
 }
 
-function AdvantageGiftBlock({props}: {props: AdvantageSplitBlockProperties}) {
+function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
     const textBlockCSS = {
         color: props.textColor,
         backgroundColor: props.backgroundColor,
