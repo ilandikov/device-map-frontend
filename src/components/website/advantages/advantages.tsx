@@ -10,8 +10,9 @@ type AdvantageBlockProperties = {
     textColor: string,
     backgroundColor: string,
     image: any,
-    imageContainerStyle?: string,
 };
+
+type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle?: string };
 
 type NewBlockProperties = {
     color: string,
@@ -19,7 +20,7 @@ type NewBlockProperties = {
 }
 
 export default function Advantages() {
-    const phoneOnGreen: AdvantageBlockProperties = {
+    const phoneOnGreen: AdvantageFullBlockProperties = {
         header: 'Играй',
         description: 'Увлекательная игра',
         textColor: '#000000',
@@ -27,7 +28,7 @@ export default function Advantages() {
         image: <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />,
     };
 
-    const notebookOnBlue: AdvantageBlockProperties = {
+    const notebookOnBlue: AdvantageFullBlockProperties = {
         header: 'Везде',
         description: 'На всех платформах',
         textColor: '#FFFFFF',
@@ -35,7 +36,7 @@ export default function Advantages() {
         image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
     };
 
-    const terminalOnWhite: AdvantageBlockProperties = {
+    const terminalOnWhite: AdvantageFullBlockProperties = {
         header: 'Оглянись',
         description: 'Терминалы везде',
         textColor: '#000000',
@@ -61,7 +62,7 @@ export default function Advantages() {
     );
 }
 
-function AdvantageFullBlock({props}: {props: AdvantageBlockProperties}) {
+function AdvantageFullBlock({props}: {props: AdvantageFullBlockProperties}) {
     const textBlockCSS = {
         backgroundColor: props.backgroundColor,
         color: props.textColor,
