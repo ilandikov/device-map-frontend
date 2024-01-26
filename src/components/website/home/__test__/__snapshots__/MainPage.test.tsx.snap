@@ -33,7 +33,9 @@ exports[`MainPage component should match the snapshot 1`] = `
       <p
         className="map-text"
       >
-        Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+        Карта терминалов от Finik, исследуйте,
+        <br />
+         отмечайте и зарабатывайте баллы
       </p>
       <div
         className="map-links"
