@@ -293,9 +293,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       <div
         className="footer-links"
       >
-        <p
-          className="footer-first-link"
-        >
+        <p>
           Продукты
         </p>
         <p>
@@ -311,9 +309,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       <div
         className="footer-links"
       >
-        <p
-          className="footer-first-link"
-        >
+        <p>
           О нас
         </p>
         <p>

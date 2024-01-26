@@ -67,15 +67,15 @@
     justify-content: flex-start;
     gap: 16px;
 
-    .footer-first-link {
-        opacity: 0.5;
-    }
-
     p {
         font-size: 14px;
         font-weight: 700;
         line-height: 17px;
         color: #FFFFFF;
+    }
+
+    p:first-child {
+        opacity: 0.5;
     }
 }
 
