@@ -31,15 +31,15 @@
         justify-content: flex-start;
         align-items: center;
         gap: 8px;
-    }
 
-    .footer-brand-name {
-        font-family: 'Tektur';
-        font-size: 64px;
-        font-weight: 700;
-        line-height: 23px;
+        p {
+            font-family: 'Tektur';
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 23px;
 
-        color: #FFFFFF;
+            color: #FFFFFF;
+        }
     }
 
     .footer-brand-opaque-text {
