@@ -62,7 +62,7 @@ function AdvantageFullBlock({props}: {props: AdvantageBlockProperties}) {
                 {props.image}
             </div>
             <div className='advantage-half-block'>
-                <div className='advantage-text-container advantage-text advantage-text'>
+                <div className='advantage-text-container advantage-text advantage-half-block-text'>
                     <p className='advantage-text-header'>{props.header}.</p>
                     <p>{props.description}</p>
                 </div>
