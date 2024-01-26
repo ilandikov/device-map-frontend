@@ -127,13 +127,7 @@ function AdvantageSplitBlock({props}: {props: AdvantageSplitBlockProperties}) {
 
 function AdvantageMapBlock() {
     const shadowsCSS: React.CSSProperties = {
-        marginTop: '50px',
-        width: '1200px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
 
-        position: 'absolute',
     }
 
     return(
@@ -142,7 +136,7 @@ function AdvantageMapBlock() {
                 <p>Изучай.</p>
                 <p>Уникальная карта</p>
             </div>
-            <div style={shadowsCSS}>
+            <div className='advantage-block-map-shadows'>
                 <StaticImage src="../../../assets/images/ShadowMapLeft.png" alt="advantage" />
                 <StaticImage src="../../../assets/images/ShadowMapRight.png" alt="advantage" />
             </div>

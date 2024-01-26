@@ -63,6 +63,17 @@
     align-items: center;
 }
 
+.advantage-block-map-shadows {
+    position: absolute;
+
+    width: 1200px;
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .advantage-block-terminal-image-container {
     height: 100%;
     display: flex;
