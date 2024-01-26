@@ -10,7 +10,7 @@ type AdvantageBlockProperties = {
     textColor: string,
     backgroundColor: string,
     image: any,
-    imageContainerStyle?: string,
+    imageContainerStyle?: CSSProperties,
 };
 
 type NewBlockProperties = {
@@ -69,7 +69,9 @@ function AdvantageFullBlock({props}: {props: AdvantageBlockProperties}) {
     return(
         <div className='advantage-block advantage-block-radius' style={textBlockCSS}>
             <div className='advantage-half-block'>
-                {props.image}
+                <div style={props.imageContainerStyle}>
+                    {props.image}
+                </div>
             </div>
             <div className='advantage-half-block'>
                 <div className='advantage-text advantage-half-block-text'>

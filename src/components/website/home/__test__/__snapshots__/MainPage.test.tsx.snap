@@ -100,7 +100,9 @@ exports[`MainPage component should match the snapshot 1`] = `
     >
       <div
         className="advantage-half-block"
-      />
+      >
+        <div />
+      </div>
       <div
         className="advantage-half-block"
       >
@@ -159,7 +161,9 @@ exports[`MainPage component should match the snapshot 1`] = `
     >
       <div
         className="advantage-half-block"
-      />
+      >
+        <div />
+      </div>
       <div
         className="advantage-half-block"
       >
