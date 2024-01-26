@@ -12,6 +12,11 @@ type AdvantageBlockProperties = {
     image: any
 };
 
+type NewBlockProperties = {
+    color: string,
+    backgroundColor: string,
+}
+
 export default function Advantages() {
     const phoneOnGreen: AdvantageBlockProperties = {
         header: 'Играй',
@@ -37,11 +42,15 @@ export default function Advantages() {
         image: TerminalImage(),
     };
 
+    const giftRight: NewBlockProperties = {
+        color: '#000000',
+        backgroundColor: '#FFFFFF',
+    }
 
     return (
       <section className='advantages-container'>
           <AdvantageFullBlock props={phoneOnGreen} />
-          <AdvantageGiftBlock />
+          <AdvantageGiftBlock props={giftRight} />
           <AdvantageFullBlock props={notebookOnBlue} />
           <AdvantageFullBlock props={terminalOnWhite} />
           <AdvantageLocationBlock />
@@ -71,10 +80,10 @@ function AdvantageFullBlock({props}: {props: AdvantageBlockProperties}) {
     );
 }
 
-function AdvantageGiftBlock() {
+function AdvantageGiftBlock({props}: {props: NewBlockProperties}) {
     const textBlockCSS = {
-        color: '#000000',
-        backgroundColor: '#FFFFFF',
+        color: props.color,
+        backgroundColor: props.backgroundColor,
     };
 
     return(
