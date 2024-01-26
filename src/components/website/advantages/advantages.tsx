@@ -41,11 +41,11 @@ export default function Advantages() {
     return (
       <section className='advantages-container'>
           <AdvantageFullBlock props={phoneOnGreen} />
-          {AdvantageGiftBlock()}
+          <AdvantageGiftBlock />
           <AdvantageFullBlock props={notebookOnBlue} />
           <AdvantageFullBlock props={terminalOnWhite} />
-          {AdvantageLocationBlock()}
-          {AdvantageMapBlock()}
+          <AdvantageLocationBlock />
+          <AdvantageMapBlock />
       </section>
     );
 }
