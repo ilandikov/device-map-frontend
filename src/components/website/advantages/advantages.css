@@ -41,14 +41,14 @@
         line-height: 77px;
         letter-spacing: 0em;
     }
+
+    p:first-child {
+        opacity: 0.5;
+    }
 }
 
 .advantage-block-half-text-container {
     max-width: 437px;
-}
-
-.advantage-text-header {
-    opacity: 0.5;
 }
 
 .advantages-block-with-background {
