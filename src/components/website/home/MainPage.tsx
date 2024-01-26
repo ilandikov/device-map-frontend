@@ -7,15 +7,11 @@ import Map from '../map/Map';
 import Phone from '../phone/Phone';
 import Advantages from '../advantages/advantages';
 import Footer from '../footer/Footer';
+import './MainPage.css';
 
 export default function MainPage() {
-  const siteContainer: CSSProperties = {
-    width: '1440px',
-    margin: '0 auto',
-    overflow: 'scroll'
-  }
   return (
-    <div style={siteContainer}>
+    <div className='main-page-container'>
       <Header />
       <Map />
       <Phone />

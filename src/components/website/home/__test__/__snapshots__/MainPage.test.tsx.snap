@@ -2,13 +2,7 @@
 
 exports[`MainPage component should match the snapshot 1`] = `
 <div
-  style={
-    {
-      "margin": "0 auto",
-      "overflow": "scroll",
-      "width": "1440px",
-    }
-  }
+  className="main-page-container"
 >
   <header>
     <div
