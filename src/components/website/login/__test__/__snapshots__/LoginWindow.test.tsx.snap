@@ -48,7 +48,7 @@ exports[`AboutUs component should match the snapshot 1`] = `
         className="login-window-bottom-container"
       >
         <div
-          className="login-window-button login-window-button-signin"
+          className="login-window-button login-window-button-sign-in"
         >
           <p>
             accountLogin
