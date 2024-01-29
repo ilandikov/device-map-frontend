@@ -5,40 +5,44 @@ import React from 'react';
 /* Local dependencies */
 import './footer.css';
 
-export default function Footer() {    
+export default function Footer() {
     return (
-        <footer className='footer-outer-container'>
-          <div className='footer-inner-container'>
-            <div className='footer-brand'>
-              <div className='footer-brand-logo'>
-                <StaticImage src="../../../assets/images/Logo.svg" alt="logo" />
-                <p>Finik</p>
-              </div>
-              <div className="footer-brand-description">
-                <p>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
-                <p>©2022 Averspay<br />Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
-              </div>
+        <footer className="footer-outer-container">
+            <div className="footer-inner-container">
+                <div className="footer-brand">
+                    <div className="footer-brand-logo">
+                        <StaticImage src="../../../assets/images/Logo.svg" alt="logo" />
+                        <p>Finik</p>
+                    </div>
+                    <div className="footer-brand-description">
+                        <p>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
+                        <p>
+                            ©2022 Averspay
+                            <br />
+                            Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
+                        </p>
+                    </div>
+                </div>
+                <div className="footer-links">
+                    <p>Продукты</p>
+                    <p>Кошелек</p>
+                    <p>Терминалы</p>
+                    <p>Эквайринг</p>
+                </div>
+                <div className="footer-links">
+                    <p>О нас</p>
+                    <p>Компания</p>
+                    <p>Документы</p>
+                </div>
+                <div className="footer-contacts">
+                    <StaticImage src="../../../assets/images/SocialFacebook.png" alt="logo" />
+                    <StaticImage src="../../../assets/images/SocialTwitter.png" alt="logo" />
+                    <StaticImage src="../../../assets/images/SocialInstagram.png" alt="logo" />
+                    <StaticImage src="../../../assets/images/SocialLinkedIn.png" alt="logo" />
+                    <StaticImage src="../../../assets/images/SocialYouTube.png" alt="logo" />
+                    <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
+                </div>
             </div>
-            <div className='footer-links'>
-              <p>Продукты</p>
-              <p>Кошелек</p>
-              <p>Терминалы</p>
-              <p>Эквайринг</p>
-            </div>
-            <div className='footer-links'>
-              <p>О нас</p>
-              <p>Компания</p>
-              <p>Документы</p>
-            </div>
-            <div className='footer-contacts'>
-              <StaticImage src="../../../assets/images/SocialFacebook.png" alt="logo" />
-              <StaticImage src="../../../assets/images/SocialTwitter.png" alt="logo" />
-              <StaticImage src="../../../assets/images/SocialInstagram.png" alt="logo" />
-              <StaticImage src="../../../assets/images/SocialLinkedIn.png" alt="logo" />
-              <StaticImage src="../../../assets/images/SocialYouTube.png" alt="logo" />
-              <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
-            </div>
-          </div>
         </footer>
-      );
+    );
 }

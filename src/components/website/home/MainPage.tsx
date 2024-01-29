@@ -10,13 +10,13 @@ import Footer from '../footer/Footer';
 import './MainPage.css';
 
 export default function MainPage() {
-  return (
-    <div className='main-page-container'>
-      <Header />
-      <Map />
-      <Phone />
-      <Advantages />
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="main-page-container">
+            <Header />
+            <Map />
+            <Phone />
+            <Advantages />
+            <Footer />
+        </div>
+    );
 }

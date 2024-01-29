@@ -8,17 +8,17 @@ import i18n from '../../../../../tests/utils/i18nForTest';
 import AboutUs from '../AboutUs';
 
 describe('AboutUs component', () => {
-  function getRenderComponent() {
-    return (
-      <I18nextProvider i18n={i18n}>
-        <AboutUs />
-      </I18nextProvider>
-    );
-  }
+    function getRenderComponent() {
+        return (
+            <I18nextProvider i18n={i18n}>
+                <AboutUs />
+            </I18nextProvider>
+        );
+    }
 
-  it('should match the snapshot', () => {
-    const component = renderer.create(getRenderComponent());
+    it('should match the snapshot', () => {
+        const component = renderer.create(getRenderComponent());
 
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+        expect(component.toJSON()).toMatchSnapshot();
+    });
 });
