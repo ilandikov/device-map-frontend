@@ -14,12 +14,8 @@ export const initialGetDevicesState: GetDevicesState = {
 export default function getDevices(state = initialGetDevicesState, action: GetDevicesActions) {
     switch (action.type) {
         case GetServiceActionTypes.GET_DEVICES_REQUEST:
-      return {...state,
-        id: action.id,
-        loading: true,
-        error: null,
-    };
-    default:
-      return state;
-  }
+            return { ...state, id: action.id, loading: true, error: null };
+        default:
+            return state;
+    }
 }
