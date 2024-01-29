@@ -2,16 +2,22 @@
 import React from 'react';
 import { I18nextProvider } from 'gatsby-plugin-react-i18next';
 import renderer from 'react-test-renderer';
+import { Provider } from 'react-redux';
 
 /* Local dependencies */
 import i18n from '../../../../../tests/utils/i18nForTest';
 import { LoginWindow } from '../login';
+import { configureTestStore } from '../../../../../tests/utils';
 
 describe('AboutUs component', () => {
+  const store = configureTestStore();
+
   function getRenderComponent() {
     return (
       <I18nextProvider i18n={i18n}>
-        <LoginWindow />
+        <Provider store={store}>
+          <LoginWindow />
+        </Provider>
       </I18nextProvider>
     );
   }
