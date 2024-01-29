@@ -5,6 +5,7 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 /* Local dependencies */
 import getDevices from '../components/devices/getDevices/redux/reducer';
+import { useDispatch } from 'react-redux';
 
 const rootEpic = combineEpics();
 
@@ -24,3 +25,6 @@ export function createStore(): Store {
 }
 
 export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
