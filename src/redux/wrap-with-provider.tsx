@@ -8,7 +8,5 @@ import { createStore } from './store';
 const store = createStore();
 
 export default ({ element }) => {
-  return (
-      <Provider store={store}>{element}</Provider>
-  );
+    return <Provider store={store}>{element}</Provider>;
 };

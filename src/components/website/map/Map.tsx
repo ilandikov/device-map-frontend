@@ -10,12 +10,15 @@ export default function Map() {
     return (
         <section className="map-background">
             <div className="map-content-container">
-                <div className='map-brand'>
+                <div className="map-brand">
                     <StaticImage src="../../../assets/images/Logo.svg" alt="logo-with-brand" />
-                    <p className='map-brand-text'>Карта</p>
+                    <p className="map-brand-text">Карта</p>
                 </div>
-                <p className="map-text">Карта терминалов от Finik, исследуйте,<br/> отмечайте и зарабатывайте баллы</p>
-                <div className='map-links'>
+                <p className="map-text">
+                    Карта терминалов от Finik, исследуйте,
+                    <br /> отмечайте и зарабатывайте баллы
+                </p>
+                <div className="map-links">
                     <Link to="/webapp">
                         <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />
                     </Link>

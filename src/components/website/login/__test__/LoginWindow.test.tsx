@@ -10,21 +10,21 @@ import { LoginWindow } from '../login';
 import { configureTestStore } from '../../../../../tests/utils';
 
 describe('AboutUs component', () => {
-  const store = configureTestStore();
+    const store = configureTestStore();
 
-  function getRenderComponent() {
-    return (
-      <I18nextProvider i18n={i18n}>
-        <Provider store={store}>
-          <LoginWindow />
-        </Provider>
-      </I18nextProvider>
-    );
-  }
+    function getRenderComponent() {
+        return (
+            <I18nextProvider i18n={i18n}>
+                <Provider store={store}>
+                    <LoginWindow />
+                </Provider>
+            </I18nextProvider>
+        );
+    }
 
-  it('should match the snapshot', () => {
-    const component = renderer.create(getRenderComponent());
+    it('should match the snapshot', () => {
+        const component = renderer.create(getRenderComponent());
 
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+        expect(component.toJSON()).toMatchSnapshot();
+    });
 });
