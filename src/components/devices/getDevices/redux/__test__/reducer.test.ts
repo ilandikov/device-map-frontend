@@ -20,10 +20,12 @@ describe('getDevices() reducer tests', () => {
             acquiring: true,
         });
 
-        expect(stateWithNewId).toEqual({
+        const expectedStateWithNewId = {
             id: '996557189977',
             loading: true,
             error: null,
-        });
+        };
+
+        expect(stateWithNewId).toEqual(expectedStateWithNewId);
     });
 });
