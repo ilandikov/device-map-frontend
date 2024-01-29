@@ -1,10 +1,15 @@
 /* External dependencies */
 import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
+import { useSelector } from 'react-redux';
 
 /* Local dependencies */
 import './login.css';
 import { useI18next } from 'gatsby-plugin-react-i18next';
+import { GetDevicesState } from '../../devices/getDevices/redux/reducer';
+import { RootState, useAppDispatch } from '../../../redux/store';
+import { getDevices, GetServiceActionTypes } from '../../devices/getDevices/redux/action';
+
 
 export default function Login() {
   return (
@@ -41,9 +46,23 @@ function LoginHeader() {
 }
 
 export function LoginWindow() {
+  const dispatch = useAppDispatch();
+  const { loading } = useSelector((state: RootState): GetDevicesState => {
+    return state.getDevices || '';
+  });
+
+  console.log('Loading: ');
+  console.log(loading);
+
+  function reduxTest() {
+    const action = getDevices('123', true);
+    dispatch(action);
+  }
+
   return (
     <div className="login-window-container">
       <div className="login-window">
+        <button onClick={reduxTest}>HEY</button>
         <Ellipses />
         <div className="login-window-content-container">
           <LoginWelcome />
