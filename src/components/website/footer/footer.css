@@ -24,42 +24,41 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
-}
 
-.footer-brand-logo {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-}
+    .footer-brand-logo {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
 
-.footer-brand-name {
-    font-family: 'Tektur';
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 23px;
+        p {
+            font-family: 'Tektur', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 23px;
 
-    color: #FFFFFF;
-}
+            color: #FFFFFF;
+        }
+    }
 
-.footer-brand-bigger-text {
-    font-family: 'Tektur';
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 23px;
+    .footer-brand-description {
+        color: #FFFFFF;
+        opacity: 0.5;
 
-    color: #FFFFFF;
-    opacity: 0.5;
-}
+        p:first-child {
+            font-family: 'Tektur', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 23px;
+        }
 
-.footer-brand-smaller-text {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 15px;
-
-    color: #FFFFFF;
-    opacity: 0.5;
+        p {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 15px;
+        }
+    }
 }
 
 .footer-links {
@@ -67,17 +66,17 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 16px;
-}
 
-.footer-links p {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 17px;
-    color: #FFFFFF;
-}
+    p {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 17px;
+        color: #FFFFFF;
+    }
 
-.footer-first-link {
-    opacity: 0.5;
+    p:first-child {
+        opacity: 0.5;
+    }
 }
 
 .footer-contacts {

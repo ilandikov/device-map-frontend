@@ -78,7 +78,7 @@ function LoginWelcome() {
         <p className='login-window-description'>{ t('loginCallToAction') }</p>
       </div>
       <div className='login-window-bottom-container'>
-        <div className='login-window-button login-window-button-signin'>
+        <div className='login-window-button login-window-button-sign-in'>
           <p>{ t('accountLogin') }</p>
         </div>
         <div className='login-window-button login-window-button-register'>

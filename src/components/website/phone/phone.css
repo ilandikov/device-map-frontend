@@ -28,7 +28,7 @@
 }
 
 .phone-text-blocks {
-    padding: 0 0 0 120px;
+    padding-left: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -7,27 +7,26 @@ import './footer.css';
 
 export default function Footer() {    
     return (
-        <section className='footer-outer-container'>
+        <footer className='footer-outer-container'>
           <div className='footer-inner-container'>
             <div className='footer-brand'>
               <div className='footer-brand-logo'>
                 <StaticImage src="../../../assets/images/Logo.svg" alt="logo" />
-                <p className='footer-brand-name'>Finik</p>
+                <p>Finik</p>
               </div>
-              <p className='footer-brand-bigger-text'>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
-              <div>
-                <p className='footer-brand-smaller-text'>©2022 Averspay</p>
-                <p className='footer-brand-smaller-text'>Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
+              <div className="footer-brand-description">
+                <p>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
+                <p>©2022 Averspay<br />Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
               </div>
             </div>
             <div className='footer-links'>
-              <p className='footer-first-link'>Продукты</p>
+              <p>Продукты</p>
               <p>Кошелек</p>
               <p>Терминалы</p>
               <p>Эквайринг</p>
             </div>
             <div className='footer-links'>
-              <p className='footer-first-link'>О нас</p>
+              <p>О нас</p>
               <p>Компания</p>
               <p>Документы</p>
             </div>
@@ -40,6 +39,6 @@ export default function Footer() {
               <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
             </div>
           </div>
-        </section>
+        </footer>
       );
 }

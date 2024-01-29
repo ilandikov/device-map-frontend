@@ -14,7 +14,7 @@ export default function Map() {
                     <StaticImage src="../../../assets/images/Logo.svg" alt="logo-with-brand" />
                     <p className='map-brand-text'>Карта</p>
                 </div>
-                <p className="map-text">Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
+                <p className="map-text">Карта терминалов от Finik, исследуйте,<br/> отмечайте и зарабатывайте баллы</p>
                 <div className='map-links'>
                     <Link to="/webapp">
                         <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />

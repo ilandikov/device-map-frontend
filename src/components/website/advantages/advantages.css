@@ -21,7 +21,7 @@
 }
 
 /* Each block (even the full one is split into 2 internal containers */
-.advantage-half-block {
+.advantage-block-half {
     width: 50%;
     height: 100%;
 
@@ -34,29 +34,48 @@
     border-radius: 50px;
 }
 
-/* Style for the <div> to have the 2 <p> inside */
-.advantage-text-containter {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: center;
+.advantage-block-text {
+    p {
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 77px;
+    }
+
+    p:first-child {
+        opacity: 0.5;
+    }
 }
 
-.advantage-text p {
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 77px;
-    letter-spacing: 0em;
-}
-
-.advantage-half-block-text {
+.advantage-block-half-text-container {
     max-width: 437px;
 }
 
-.advantage-text-header {
-    opacity: 0.5;
+.advantages-block-map {
+    background-image: url("../../../assets/images/Bridge.png");
+
+    color: #ffffff;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.advantages-block-with-background {
-    background-image: url("../../../assets/images/Bridge.png");
+.advantage-block-map-shadows {
+    position: absolute;
+
+    width: inherit;
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.advantage-block-terminal-image-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
