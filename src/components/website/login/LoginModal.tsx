@@ -8,11 +8,20 @@ enum UserAuthState {
 
 export function LoginModal() {
     const { t } = useI18next();
-    const [userAuthState] = React.useState(UserAuthState.WELCOME);
+    const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
+
+    function nextUserState() {
+        setUserState(userAuthState + 1);
+    }
 
     return (
         <div className="login-modal-container">
-            <div className="login-modal">
+            <div
+                className="login-modal"
+                onClick={() => {
+                    nextUserState();
+                }}
+            >
                 {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
                     <div className="login-modal-top-container">

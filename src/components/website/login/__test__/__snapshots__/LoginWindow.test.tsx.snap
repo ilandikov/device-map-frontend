@@ -6,6 +6,7 @@ exports[`AboutUs component should match the snapshot 1`] = `
 >
   <div
     className="login-modal"
+    onClick={[Function]}
   >
     <div
       className="login-ellipses-container"
