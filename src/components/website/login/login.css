@@ -74,7 +74,7 @@
     text-decoration: underline;
 }
 
-.login-window-container {
+.login-modal-container {
     height: 100%;
 
     display: flex;
@@ -82,7 +82,7 @@
     align-items: center;
 }
 
-.login-window {
+.login-modal {
     max-width: 690px;
     max-height: 516px;
 
@@ -144,7 +144,7 @@
     background: #26FFF2;
 }
 
-.login-window-content-container {
+.login-modal-content-container {
     height: 100%;
     padding: 46px 0 32px 0;
 
@@ -154,7 +154,7 @@
     align-items: center;
 }
 
-.login-window-top-container {
+.login-modal-top-container {
     max-width: 340px;
     width: 100%;
 
@@ -165,35 +165,35 @@
     gap: 16px;
 }
 
-.login-window-logo {
+.login-modal-logo {
     max-width: 46px;
     max-height: 46px;
     width: 100%;
     height: 100%;
 }
 
-.login-window-brand {
+.login-modal-brand {
     font-size: 40px;
     font-weight: 500;
     line-height: 39px;
     color: #FFFFFF;
 }
 
-.login-window-description {
+.login-modal-description {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     color: #FFFFFF;
 }
 
-.login-window-bottom-container {
+.login-modal-bottom-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
 }
 
-.login-window-button {
+.login-modal-button {
     height: 52px;
     width: 340px;
     
@@ -208,12 +208,12 @@
     line-height: 22px;
 }
 
-.login-window-button-sign-in {
+.login-modal-button-sign-in {
     color: #000000;
     background-color: #ACF709;   
 }
 
-.login-window-button-register {
+.login-modal-button-register {
     color: #ACF709;
     background-color: #000000;
 }

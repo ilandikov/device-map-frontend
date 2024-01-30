@@ -2,10 +2,10 @@
 
 exports[`AboutUs component should match the snapshot 1`] = `
 <div
-  className="login-window-container"
+  className="login-modal-container"
 >
   <div
-    className="login-window"
+    className="login-modal"
   >
     <div
       className="login-ellipses-container"
@@ -26,36 +26,36 @@ exports[`AboutUs component should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      className="login-window-content-container"
+      className="login-modal-content-container"
     >
       <div
-        className="login-window-top-container"
+        className="login-modal-top-container"
       >
         <p
-          className="login-window-brand"
+          className="login-modal-brand"
         >
           brand
            
           map
         </p>
         <p
-          className="login-window-description"
+          className="login-modal-description"
         >
           loginCallToAction
         </p>
       </div>
       <div
-        className="login-window-bottom-container"
+        className="login-modal-bottom-container"
       >
         <div
-          className="login-window-button login-window-button-sign-in"
+          className="login-modal-button login-modal-button-sign-in"
         >
           <p>
             accountLogin
           </p>
         </div>
         <div
-          className="login-window-button login-window-button-register"
+          className="login-modal-button login-modal-button-register"
         >
           <p>
             accountRegister
