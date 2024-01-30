@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 /* Local dependencies */
 import i18n from '../../../../../tests/utils/i18nForTest';
-import { LoginWindow } from '../login';
+import { LoginModal } from '../login';
 import { configureTestStore } from '../../../../../tests/utils';
 
 describe('AboutUs component', () => {
@@ -16,7 +16,7 @@ describe('AboutUs component', () => {
         return (
             <I18nextProvider i18n={i18n}>
                 <Provider store={store}>
-                    <LoginWindow />
+                    <LoginModal />
                 </Provider>
             </I18nextProvider>
         );

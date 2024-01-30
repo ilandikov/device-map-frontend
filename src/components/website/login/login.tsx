@@ -11,12 +11,12 @@ export default function Login() {
     return (
         <div className="login-container login-background">
             <LoginHeader />
-            <LoginWindow />
+            <LoginModal />
         </div>
     );
 }
 
-export function LoginWindow() {
+export function LoginModal() {
     return (
         <div className="login-window-container">
             <div className="login-window">
