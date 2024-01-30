@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 
 /* Local dependencies */
 import i18n from '../../../../../tests/utils/i18nForTest';
-import { LoginModal } from '../login';
 import { configureTestStore } from '../../../../../tests/utils';
+import { LoginModal } from '../LoginModal';
 
 describe('AboutUs component', () => {
     const store = configureTestStore();
