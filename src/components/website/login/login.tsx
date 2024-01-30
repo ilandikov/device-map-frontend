@@ -1,10 +1,10 @@
 /* External dependencies */
 import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 /* Local dependencies */
 import './login.css';
-import { useI18next } from 'gatsby-plugin-react-i18next';
 import { LoginHeader } from './LoginHeader';
 
 export default function Login() {
