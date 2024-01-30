@@ -2,12 +2,18 @@ import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { StaticImage } from 'gatsby-plugin-image';
 
+enum UserAuthState {
+    WELCOME,
+}
+
 export function LoginModal() {
     const { t } = useI18next();
+    const [userAuthState] = React.useState(UserAuthState.WELCOME);
+
     return (
         <div className="login-modal-container">
             <div className="login-modal">
-                <Ellipses />
+                {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
                     <div className="login-modal-top-container">
                         <StaticImage
@@ -15,18 +21,26 @@ export function LoginModal() {
                             src="../../../assets/images/LogoGreen.svg"
                             alt="logo"
                         />
-                        <p className="login-modal-brand">
-                            {t('brand')} {t('map')}
-                        </p>
-                        <p className="login-modal-description">{t('loginCallToAction')}</p>
+                        {userAuthState === UserAuthState.WELCOME && (
+                            <>
+                                <p className="login-modal-brand">
+                                    {t('brand')} {t('map')}
+                                </p>
+                                <p className="login-modal-description">{t('loginCallToAction')}</p>
+                            </>
+                        )}
                     </div>
                     <div className="login-modal-bottom-container">
-                        <div className="login-modal-button login-modal-button-sign-in">
-                            <p>{t('accountLogin')}</p>
-                        </div>
-                        <div className="login-modal-button login-modal-button-register">
-                            <p>{t('accountRegister')}</p>
-                        </div>
+                        {userAuthState === UserAuthState.WELCOME && (
+                            <>
+                                <div className="login-modal-button login-modal-button-sign-in">
+                                    <p>{t('accountLogin')}</p>
+                                </div>
+                                <div className="login-modal-button login-modal-button-register">
+                                    <p>{t('accountRegister')}</p>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
