@@ -8,6 +8,8 @@ enum UserAuthState {
     MAIL_ALREADY_EXISTS,
     MAIL_NOT_VALID,
     PASSWORD_INPUT,
+    PASSWORD_MATCH_ERROR,
+    OTP_INPUT,
 }
 
 export function LoginModal() {
@@ -38,6 +40,15 @@ export function LoginModal() {
         }
 
         setUserState(UserAuthState.PASSWORD_INPUT);
+    }
+
+    function tryStorePassword() {
+        if (userPasswordA !== userPasswordB) {
+            setUserState(UserAuthState.PASSWORD_MATCH_ERROR);
+            return;
+        }
+
+        setUserState(UserAuthState.OTP_INPUT);
     }
 
     return (
@@ -95,11 +106,19 @@ export function LoginModal() {
                                 <div className="login-modal-input-outer-container">
                                     <p className="login-modal-input-help">{t('enterPassword')}</p>
                                     <div className="login-modal-input-inner-container">
-                                        <input className="login-modal-input-text" type="password" />
+                                        <input
+                                            className="login-modal-input-text"
+                                            type="password"
+                                            onChange={(event) => setUserPasswordA(event.target.value)}
+                                        />
                                     </div>
                                     <p className="login-modal-input-help">{t('repeatPassword')}</p>
                                     <div className="login-modal-input-inner-container">
-                                        <input className="login-modal-input-text" type="password" />
+                                        <input
+                                            className="login-modal-input-text"
+                                            type="password"
+                                            onChange={(event) => setUserPasswordB(event.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </>
@@ -145,7 +164,14 @@ export function LoginModal() {
                         )}
                         {userAuthState === UserAuthState.PASSWORD_INPUT && (
                             <>
-                                <input className="login-modal-button-black-on-green" type="button" value={t('next')} />
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('next')}
+                                    onClick={() => {
+                                        tryStorePassword();
+                                    }}
+                                />
                             </>
                         )}
                     </div>
