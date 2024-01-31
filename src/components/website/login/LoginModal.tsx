@@ -32,7 +32,7 @@ export function LoginModal() {
                         />
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
-                                <p className="login-modal-brand">
+                                <p className="login-modal-header">
                                     {t('brand')} {t('map')}
                                 </p>
                                 <p className="login-modal-description">{t('loginCallToAction')}</p>

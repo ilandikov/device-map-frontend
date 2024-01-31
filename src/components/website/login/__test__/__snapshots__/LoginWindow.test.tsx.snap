@@ -33,7 +33,7 @@ exports[`AboutUs component should match the snapshot 1`] = `
         className="login-modal-top-container"
       >
         <p
-          className="login-modal-brand"
+          className="login-modal-header"
         >
           brand
            
