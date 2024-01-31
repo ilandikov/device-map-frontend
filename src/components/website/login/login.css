@@ -236,6 +236,10 @@
             line-height: 18px;
         }
     }
+
+    .login-modal-input-bad-email {
+        color: #FF5572;
+    }
 }
 
 .login-modal-bottom-container {

@@ -57,7 +57,8 @@ export function LoginModal() {
                                 <p className="login-modal-description">{t('loginCallToAction')}</p>
                             </>
                         )}
-                        {userAuthState === UserAuthState.MAIL_INPUT_START && (
+                        {(userAuthState === UserAuthState.MAIL_INPUT_START ||
+                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS) && (
                             <>
                                 <p className="login-modal-header">Регистрация</p>
                                 <p className="login-modal-description login-modal-opaque-text">
@@ -77,6 +78,11 @@ export function LoginModal() {
                                             onChange={(event) => setUserEmail(event.target.value)}
                                         />
                                     </div>
+                                    {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
+                                        <p className="login-modal-input-bad-email">
+                                            Такой Email уже существует в системе
+                                        </p>
+                                    )}
                                 </div>
                             </>
                         )}
@@ -99,8 +105,16 @@ export function LoginModal() {
                                 />
                             </>
                         )}
-                        {userAuthState === UserAuthState.MAIL_INPUT_START && (
+                        {(userAuthState === UserAuthState.MAIL_INPUT_START ||
+                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS) && (
                             <>
+                                {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
+                                    <input
+                                        className="login-modal-button-green-on-black"
+                                        type="button"
+                                        value={t('accountLogin')}
+                                    />
+                                )}
                                 <input
                                     className="login-modal-button-black-on-green"
                                     type="button"
