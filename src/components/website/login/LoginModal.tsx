@@ -5,6 +5,9 @@ import { StaticImage } from 'gatsby-plugin-image';
 enum UserAuthState {
     WELCOME,
     MAIL_INPUT_START,
+    MAIL_ALREADY_EXISTS,
+    MAIL_NOT_VALID,
+    PASSWORD_INPUT,
 }
 
 export function LoginModal() {
@@ -14,6 +17,25 @@ export function LoginModal() {
 
     function nextUserState() {
         setUserState(userAuthState + 1);
+    }
+
+    function isValidEmail(email: string) {
+        const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegexp.test(email);
+    }
+
+    function tryRegisterUserEmail() {
+        if (userEmail === 'already@exists.com') {
+            setUserState(UserAuthState.MAIL_ALREADY_EXISTS);
+            return;
+        }
+
+        if (!isValidEmail(userEmail)) {
+            setUserState(UserAuthState.MAIL_NOT_VALID);
+            return;
+        }
+
+        setUserState(UserAuthState.PASSWORD_INPUT);
     }
 
     return (
@@ -84,7 +106,7 @@ export function LoginModal() {
                                     type="button"
                                     value="Далее"
                                     onClick={() => {
-                                        nextUserState();
+                                        tryRegisterUserEmail();
                                     }}
                                 />
                             </>
