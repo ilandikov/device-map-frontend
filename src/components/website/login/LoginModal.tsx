@@ -60,12 +60,12 @@ export function LoginModal() {
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
                             userAuthState === UserAuthState.MAIL_ALREADY_EXISTS) && (
                             <>
-                                <p className="login-modal-header">Регистрация</p>
+                                <p className="login-modal-header">{t('register')}</p>
                                 <p className="login-modal-description login-modal-opaque-text">
-                                    Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+                                    {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
-                                    <p className="login-modal-input-help">Нам нужна только ваша почта</p>
+                                    <p className="login-modal-input-help">{t('onlyEmail')}</p>
                                     <div className="login-modal-input-inner-container">
                                         <StaticImage
                                             className="login-modal-input-envelope-image"
@@ -79,9 +79,7 @@ export function LoginModal() {
                                         />
                                     </div>
                                     {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
-                                        <p className="login-modal-input-bad-email">
-                                            Такой Email уже существует в системе
-                                        </p>
+                                        <p className="login-modal-input-bad-email">{t('mailAlreadyExists')}</p>
                                     )}
                                 </div>
                             </>
@@ -118,7 +116,7 @@ export function LoginModal() {
                                 <input
                                     className="login-modal-button-black-on-green"
                                     type="button"
-                                    value="Далее"
+                                    value={t('next')}
                                     onClick={() => {
                                         tryRegisterUserEmail();
                                     }}
