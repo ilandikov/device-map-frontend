@@ -208,12 +208,12 @@
     line-height: 22px;
 }
 
-.login-modal-button-sign-in {
+.login-modal-button-black-on-green {
     color: #000000;
     background-color: #ACF709;   
 }
 
-.login-modal-button-register {
+.login-modal-button-green-on-black {
     color: #ACF709;
     background-color: #000000;
 }

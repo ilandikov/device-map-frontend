@@ -42,10 +42,10 @@ export function LoginModal() {
                     <div className="login-modal-bottom-container">
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
-                                <div className="login-modal-button login-modal-button-sign-in">
+                                <div className="login-modal-button login-modal-button-black-on-green">
                                     <p>{t('accountLogin')}</p>
                                 </div>
-                                <div className="login-modal-button login-modal-button-register">
+                                <div className="login-modal-button login-modal-button-green-on-black">
                                     <p>{t('accountRegister')}</p>
                                 </div>
                             </>
