@@ -4,6 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 enum UserAuthState {
     WELCOME,
+    MAIL_INPUT_START,
 }
 
 export function LoginModal() {
@@ -33,6 +34,25 @@ export function LoginModal() {
                                 <p className="login-modal-description">{t('loginCallToAction')}</p>
                             </>
                         )}
+                        {userAuthState === UserAuthState.MAIL_INPUT_START && (
+                            <>
+                                <p className="login-modal-header">Регистрация</p>
+                                <p className="login-modal-description login-modal-opaque-text">
+                                    Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
+                                </p>
+                                <div className="login-modal-input-outer-container">
+                                    <p className="login-modal-input-help">Нам нужна только ваша почта</p>
+                                    <div className="login-modal-input-inner-container">
+                                        <StaticImage
+                                            className="login-modal-input-envelope-image"
+                                            src="../../../assets/images/Envelope.svg"
+                                            alt="input-email"
+                                        />
+                                        <input className="login-modal-input-text" type="email" />
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                     <div className="login-modal-bottom-container">
                         {userAuthState === UserAuthState.WELCOME && (
@@ -46,6 +66,18 @@ export function LoginModal() {
                                     className="login-modal-button-green-on-black"
                                     type="button"
                                     value={t('accountRegister')}
+                                    onClick={() => {
+                                        nextUserState();
+                                    }}
+                                />
+                            </>
+                        )}
+                        {userAuthState === UserAuthState.MAIL_INPUT_START && (
+                            <>
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value="Далее"
                                     onClick={() => {
                                         nextUserState();
                                     }}
