@@ -207,14 +207,14 @@
         font-weight: 700;
         line-height: 22px;
     }
-}
 
-.login-modal-button-black-on-green {
-    color: #000000;
-    background-color: #ACF709;   
-}
+    .login-modal-button-black-on-green {
+        color: #000000;
+        background-color: #ACF709;
+    }
 
-.login-modal-button-green-on-black {
-    color: #ACF709;
-    background-color: #000000;
+    .login-modal-button-green-on-black {
+        color: #ACF709;
+        background-color: #000000;
+    }
 }
