@@ -16,12 +16,7 @@ export function LoginModal() {
 
     return (
         <div className="login-modal-container">
-            <div
-                className="login-modal"
-                onClick={() => {
-                    nextUserState();
-                }}
-            >
+            <div className="login-modal">
                 {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
                     <div className="login-modal-top-container">
@@ -51,6 +46,9 @@ export function LoginModal() {
                                     className="login-modal-button-green-on-black"
                                     type="button"
                                     value={t('accountRegister')}
+                                    onClick={() => {
+                                        nextUserState();
+                                    }}
                                 />
                             </>
                         )}
