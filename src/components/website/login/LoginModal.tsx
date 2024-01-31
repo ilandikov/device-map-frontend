@@ -14,6 +14,8 @@ export function LoginModal() {
     const { t } = useI18next();
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
     const [userEmail, setUserEmail] = React.useState('');
+    const [userPasswordA, setUserPasswordA] = React.useState('');
+    const [userPasswordB, setUserPasswordB] = React.useState('');
 
     function nextUserState() {
         setUserState(userAuthState + 1);
