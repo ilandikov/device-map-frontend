@@ -42,12 +42,16 @@ export function LoginModal() {
                     <div className="login-modal-bottom-container">
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
-                                <div className="login-modal-button-black-on-green">
-                                    <p>{t('accountLogin')}</p>
-                                </div>
-                                <div className="login-modal-button-green-on-black">
-                                    <p>{t('accountRegister')}</p>
-                                </div>
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('accountLogin')}
+                                />
+                                <input
+                                    className="login-modal-button-green-on-black"
+                                    type="button"
+                                    value={t('accountRegister')}
+                                />
                             </>
                         )}
                     </div>

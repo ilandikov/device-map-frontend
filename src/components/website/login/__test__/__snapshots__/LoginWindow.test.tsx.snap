@@ -48,20 +48,16 @@ exports[`AboutUs component should match the snapshot 1`] = `
       <div
         className="login-modal-bottom-container"
       >
-        <div
+        <input
           className="login-modal-button-black-on-green"
-        >
-          <p>
-            accountLogin
-          </p>
-        </div>
-        <div
+          type="button"
+          value="accountLogin"
+        />
+        <input
           className="login-modal-button-green-on-black"
-        >
-          <p>
-            accountRegister
-          </p>
-        </div>
+          type="button"
+          value="accountRegister"
+        />
       </div>
     </div>
   </div>
