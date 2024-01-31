@@ -10,6 +10,7 @@ enum UserAuthState {
 export function LoginModal() {
     const { t } = useI18next();
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
+    const [userEmail, setUserEmail] = React.useState('');
 
     function nextUserState() {
         setUserState(userAuthState + 1);
@@ -48,7 +49,11 @@ export function LoginModal() {
                                             src="../../../assets/images/Envelope.svg"
                                             alt="input-email"
                                         />
-                                        <input className="login-modal-input-text" type="email" />
+                                        <input
+                                            className="login-modal-input-text"
+                                            type="email"
+                                            onChange={(event) => setUserEmail(event.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </>
