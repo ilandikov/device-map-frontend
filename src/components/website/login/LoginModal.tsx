@@ -84,6 +84,24 @@ export function LoginModal() {
                                 </div>
                             </>
                         )}
+                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
+                            <>
+                                <p className="login-modal-header">{t('register')}</p>
+                                <p className="login-modal-description login-modal-opaque-text">
+                                    {t('finikMapProductDescription')}
+                                </p>
+                                <div className="login-modal-input-outer-container">
+                                    <p className="login-modal-input-help">{t('enterPassword')}</p>
+                                    <div className="login-modal-input-inner-container">
+                                        <input className="login-modal-input-text" type="password" />
+                                    </div>
+                                    <p className="login-modal-input-help">{t('repeatPassword')}</p>
+                                    <div className="login-modal-input-inner-container">
+                                        <input className="login-modal-input-text" type="password" />
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                     <div className="login-modal-bottom-container">
                         {userAuthState === UserAuthState.WELCOME && (
@@ -121,6 +139,11 @@ export function LoginModal() {
                                         tryRegisterUserEmail();
                                     }}
                                 />
+                            </>
+                        )}
+                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
+                            <>
+                                <input className="login-modal-button-black-on-green" type="button" value={t('next')} />
                             </>
                         )}
                     </div>
