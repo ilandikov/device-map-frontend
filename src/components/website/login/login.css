@@ -191,21 +191,22 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
-}
 
-.login-modal-button {
-    height: 52px;
-    width: 340px;
-    
-    border-radius: 10px;
+    /* This container shall have only buttons */
+    div {
+        height: 52px;
+        width: 340px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+        border-radius: 10px;
 
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 22px;
+    }
 }
 
 .login-modal-button-black-on-green {
