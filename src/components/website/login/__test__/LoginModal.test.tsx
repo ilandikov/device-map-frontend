@@ -3,7 +3,7 @@ import React from 'react';
 import { I18nextProvider } from 'gatsby-plugin-react-i18next';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { queryByTestId, render } from '@testing-library/react';
+import { queryByTestId, queryByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
@@ -46,5 +46,17 @@ describe('AboutUs component', () => {
 
         const ellipses = queryByTestId(container, 'ellipses');
         expect(ellipses).toBeInTheDocument();
+
+        const brandAndMap = queryByText(container, 'brand map');
+        expect(brandAndMap).toBeInTheDocument();
+
+        const callToAction = queryByText(container, 'loginCallToAction');
+        expect(callToAction).toBeInTheDocument();
+
+        const loginButton = queryByText(container, 'accountLogin');
+        expect(loginButton).toBeInTheDocument();
+
+        const registerButton = queryByText(container, 'accountRegister');
+        expect(registerButton).toBeInTheDocument();
     });
 });
