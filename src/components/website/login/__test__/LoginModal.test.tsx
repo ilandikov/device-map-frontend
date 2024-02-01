@@ -3,6 +3,8 @@ import React from 'react';
 import { I18nextProvider } from 'gatsby-plugin-react-i18next';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
+import { queryByTestId, render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 /* Local dependencies */
 import i18n from '../../../../../tests/utils/i18nForTest';
@@ -26,5 +28,12 @@ describe('AboutUs component', () => {
         const component = renderer.create(getRenderComponent());
 
         expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it('should render elements on the welcome stage', () => {
+        const { container } = render(getRenderComponent());
+
+        const ellipses = queryByTestId(container, 'ellipses');
+        expect(ellipses).toBeInTheDocument();
     });
 });

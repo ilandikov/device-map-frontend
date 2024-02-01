@@ -9,6 +9,7 @@ exports[`AboutUs component should match the snapshot 1`] = `
   >
     <div
       className="login-ellipses-container"
+      data-testid="ellipses"
     >
       <div
         className="login-ellipse-left-container"
