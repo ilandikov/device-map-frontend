@@ -2,7 +2,7 @@ import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { StaticImage } from 'gatsby-plugin-image';
 
-enum UserAuthState {
+export enum UserAuthState {
     WELCOME,
     MAIL_INPUT_START,
     MAIL_ALREADY_EXISTS,
@@ -12,9 +12,9 @@ enum UserAuthState {
     OTP_INPUT,
 }
 
-export function LoginModal() {
+export function LoginModal({ initialUserAuthState = UserAuthState.WELCOME }: { initialUserAuthState?: UserAuthState }) {
     const { t } = useI18next();
-    const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
+    const [userAuthState, setUserState] = React.useState(initialUserAuthState);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPasswordA, setUserPasswordA] = React.useState('');
     const [userPasswordB, setUserPasswordB] = React.useState('');
