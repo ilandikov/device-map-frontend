@@ -1,13 +1,11 @@
 /* External dependencies */
 import React from 'react';
-import { I18nextProvider } from 'gatsby-plugin-react-i18next';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import { fireEvent, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
-import i18n from '../../../../../tests/utils/i18nForTest';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 
@@ -28,50 +26,38 @@ function mockUseUserAuthState(initialUserAuthState: UserAuthState) {
         .mockImplementation((x) => [x, jest.fn()]);
 }
 
-describe('LoginModal snapshot tests', () => {
-    const store = configureTestStore();
+const store = configureTestStore();
 
-    function renderWithI18nextProviderAsJSON() {
-        const component = (
-            <I18nextProvider i18n={i18n}>
-                <Provider store={store}>
-                    <LoginModal />
-                </Provider>
-            </I18nextProvider>
-        );
-        return renderer.create(component).toJSON();
+const componentWithStoreProvider = (
+    <Provider store={store}>
+        <LoginModal />
+    </Provider>
+);
+
+describe('LoginModal snapshot tests', () => {
+    function renderComponentAsJSON() {
+        return renderer.create(componentWithStoreProvider).toJSON();
     }
 
     it('should match the snapshot at user welcome stage', () => {
         mockUseUserAuthState(UserAuthState.WELCOME);
-        const component = renderWithI18nextProviderAsJSON();
+        const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail input stage', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
-        const component = renderWithI18nextProviderAsJSON();
+        const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 });
 
 describe('LoginModal state transition tests', () => {
-    const store = configureTestStore();
-
-    function renderAtUserAuthState() {
-        const component = (
-            <Provider store={store}>
-                <LoginModal />
-            </Provider>
-        );
-        return render(component);
-    }
-
     it('should transition from welcome state to email input state', () => {
         mockUseUserAuthState(UserAuthState.WELCOME);
-        const { container } = renderAtUserAuthState();
+        const { container } = render(componentWithStoreProvider);
 
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
