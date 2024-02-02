@@ -11,6 +11,13 @@ import i18n from '../../../../../tests/utils/i18nForTest';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 
+jest.mock('gatsby-plugin-react-i18next', () => ({
+    ...jest.requireActual('gatsby-plugin-react-i18next'),
+    useI18next: jest.fn().mockImplementation(() => ({
+        t: jest.fn().mockImplementation((val) => val),
+    })),
+}));
+
 describe('AboutUs component', () => {
     const store = configureTestStore();
 
@@ -32,11 +39,9 @@ describe('AboutUs component', () => {
 
     function renderAtUserAuthState(userAuthState: UserAuthState) {
         const component = (
-            <I18nextProvider i18n={i18n}>
-                <Provider store={store}>
-                    <LoginModal initialUserAuthState={userAuthState} />
-                </Provider>
-            </I18nextProvider>
+            <Provider store={store}>
+                <LoginModal initialUserAuthState={userAuthState} />
+            </Provider>
         );
         return render(component);
     }
