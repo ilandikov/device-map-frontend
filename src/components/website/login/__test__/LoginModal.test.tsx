@@ -21,18 +21,24 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 describe('AboutUs component', () => {
     const store = configureTestStore();
 
-    function getRenderComponent() {
+    function getRenderComponent(userAuthState: UserAuthState) {
         return (
             <I18nextProvider i18n={i18n}>
                 <Provider store={store}>
-                    <LoginModal />
+                    <LoginModal initialUserAuthState={userAuthState} />
                 </Provider>
             </I18nextProvider>
         );
     }
 
-    it('should match the snapshot', () => {
-        const component = renderer.create(getRenderComponent());
+    it('should match the snapshot at user welcome stage', () => {
+        const component = renderer.create(getRenderComponent(UserAuthState.WELCOME));
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at mail input stage', () => {
+        const component = renderer.create(getRenderComponent(UserAuthState.MAIL_INPUT_START));
 
         expect(component.toJSON()).toMatchSnapshot();
     });

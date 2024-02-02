@@ -1,6 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AboutUs component should match the snapshot 1`] = `
+exports[`AboutUs component should match the snapshot at mail input stage 1`] = `
+<div
+  className="login-modal-container"
+>
+  <div
+    className="login-modal"
+  >
+    <div
+      className="login-modal-content-container"
+    >
+      <div
+        className="login-modal-top-container"
+      >
+        <p
+          className="login-modal-header"
+        >
+          register
+        </p>
+        <p
+          className="login-modal-description login-modal-opaque-text"
+        >
+          finikMapProductDescription
+        </p>
+        <div
+          className="login-modal-input-outer-container"
+        >
+          <p
+            className="login-modal-input-help"
+          >
+            onlyEmail
+          </p>
+          <div
+            className="login-modal-input-inner-container"
+          >
+            <input
+              className="login-modal-input-text"
+              onChange={[Function]}
+              type="email"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="login-modal-bottom-container"
+      >
+        <input
+          className="login-modal-button-black-on-green"
+          onClick={[Function]}
+          type="button"
+          value="next"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AboutUs component should match the snapshot at user welcome stage 1`] = `
 <div
   className="login-modal-container"
 >
