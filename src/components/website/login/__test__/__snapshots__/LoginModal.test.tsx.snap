@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AboutUs component should match the snapshot at mail input stage 1`] = `
+exports[`LoginModal snapshot tests should match the snapshot at mail input stage 1`] = `
 <div
   className="login-modal-container"
 >
@@ -36,6 +36,7 @@ exports[`AboutUs component should match the snapshot at mail input stage 1`] = `
           >
             <input
               className="login-modal-input-text"
+              data-testid="emailInput"
               onChange={[Function]}
               type="email"
             />
@@ -57,7 +58,7 @@ exports[`AboutUs component should match the snapshot at mail input stage 1`] = `
 </div>
 `;
 
-exports[`AboutUs component should match the snapshot at user welcome stage 1`] = `
+exports[`LoginModal snapshot tests should match the snapshot at user welcome stage 1`] = `
 <div
   className="login-modal-container"
 >

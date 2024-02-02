@@ -18,14 +18,24 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-describe('AboutUs component', () => {
+let setUserAuthState: jest.Mock;
+function mockUseUserAuthState(initialUserAuthState: UserAuthState) {
+    setUserAuthState = jest.fn();
+    setUserAuthState.mockImplementation((userAuthState) => userAuthState);
+    React.useState = jest
+        .fn()
+        .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
+        .mockImplementation((x) => [x, jest.fn()]);
+}
+
+describe('LoginModal snapshot tests', () => {
     const store = configureTestStore();
 
-    function renderAtUserAuthStateAsJSON(userAuthState: UserAuthState) {
+    function renderWithI18nextProviderAsJSON() {
         const component = (
             <I18nextProvider i18n={i18n}>
                 <Provider store={store}>
-                    <LoginModal initialUserAuthState={userAuthState} />
+                    <LoginModal />
                 </Provider>
             </I18nextProvider>
         );
@@ -33,13 +43,15 @@ describe('AboutUs component', () => {
     }
 
     it('should match the snapshot at user welcome stage', () => {
-        const component = renderAtUserAuthStateAsJSON(UserAuthState.WELCOME);
+        mockUseUserAuthState(UserAuthState.WELCOME);
+        const component = renderWithI18nextProviderAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail input stage', () => {
-        const component = renderAtUserAuthStateAsJSON(UserAuthState.MAIL_INPUT_START);
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
+        const component = renderWithI18nextProviderAsJSON();
 
         expect(component).toMatchSnapshot();
     });
@@ -48,27 +60,18 @@ describe('AboutUs component', () => {
 describe('LoginModal state transition tests', () => {
     const store = configureTestStore();
 
-    function renderAtUserAuthState(userAuthState: UserAuthState) {
+    function renderAtUserAuthState() {
         const component = (
             <Provider store={store}>
-                <LoginModal initialUserAuthState={userAuthState} />
+                <LoginModal />
             </Provider>
         );
         return render(component);
     }
 
-    const setUserAuthState = jest.fn();
-
-    beforeEach(() => {
-        setUserAuthState.mockImplementation((userAuthState) => userAuthState);
-        React.useState = jest
-            .fn()
-            .mockImplementationOnce(() => [UserAuthState.WELCOME, setUserAuthState])
-            .mockImplementation((x) => [x, jest.fn()]);
-    });
-
     it('should transition from welcome state to email input state', () => {
-        const { container } = renderAtUserAuthState(UserAuthState.WELCOME);
+        mockUseUserAuthState(UserAuthState.WELCOME);
+        const { container } = renderAtUserAuthState();
 
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
