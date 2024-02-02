@@ -12,9 +12,9 @@ export enum UserAuthState {
     OTP_INPUT,
 }
 
-export function LoginModal({ initialUserAuthState = UserAuthState.WELCOME }: { initialUserAuthState?: UserAuthState }) {
+export function LoginModal() {
     const { t } = useI18next();
-    const [userAuthState, setUserState] = React.useState(initialUserAuthState);
+    const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPasswordA, setUserPasswordA] = React.useState('');
     const [userPasswordB, setUserPasswordB] = React.useState('');
