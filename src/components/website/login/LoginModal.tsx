@@ -28,7 +28,7 @@ export function LoginModal() {
         return emailRegexp.test(email);
     }
 
-    function tryRegisterUserEmail() {
+    function tryRegisterUserEmail(userEmail: string) {
         if (userEmail === 'already@exists.com') {
             setUserState(UserAuthState.MAIL_ALREADY_EXISTS);
             return;
@@ -42,7 +42,7 @@ export function LoginModal() {
         setUserState(UserAuthState.PASSWORD_INPUT);
     }
 
-    function tryStorePassword() {
+    function tryStorePassword(userPasswordA: string, userPasswordB: string) {
         if (userPasswordA !== userPasswordB) {
             setUserState(UserAuthState.PASSWORD_MATCH_ERROR);
             return;
@@ -89,6 +89,7 @@ export function LoginModal() {
                                             className="login-modal-input-text"
                                             type="email"
                                             onChange={(event) => setUserEmail(event.target.value)}
+                                            data-testid="emailInput"
                                         />
                                     </div>
                                     {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
@@ -157,7 +158,7 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryRegisterUserEmail();
+                                        tryRegisterUserEmail(userEmail);
                                     }}
                                 />
                             </>
@@ -169,7 +170,7 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryStorePassword();
+                                        tryStorePassword(userPasswordA, userPasswordB);
                                     }}
                                 />
                             </>
