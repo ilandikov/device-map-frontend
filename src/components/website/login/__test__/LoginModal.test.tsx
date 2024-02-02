@@ -3,7 +3,7 @@ import React from 'react';
 import { I18nextProvider } from 'gatsby-plugin-react-i18next';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { queryByTestId, queryByText, render } from '@testing-library/react';
+import { fireEvent, getByText, queryByTestId, queryByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
@@ -63,5 +63,24 @@ describe('AboutUs component', () => {
 
         const registerButton = queryByText(container, 'accountRegister');
         expect(registerButton).toBeInTheDocument();
+    });
+
+    const setUserAuthState = jest.fn();
+
+    beforeEach(() => {
+        setUserAuthState.mockImplementation((userAuthState) => userAuthState);
+        React.useState = jest
+            .fn()
+            .mockImplementationOnce(() => [UserAuthState.WELCOME, setUserAuthState])
+            .mockImplementation((x) => [x, jest.fn()]);
+    });
+
+    it('should transition from welcome state to email input state', () => {
+        const { container } = renderAtUserAuthState(UserAuthState.WELCOME);
+
+        const registerButton = getByText(container, 'accountRegister');
+        fireEvent.click(registerButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
 });
