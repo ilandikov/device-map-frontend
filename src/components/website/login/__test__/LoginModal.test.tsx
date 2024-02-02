@@ -36,6 +36,10 @@ describe('AboutUs component', () => {
 
         expect(component.toJSON()).toMatchSnapshot();
     });
+});
+
+describe('LoginModal state transition tests', () => {
+    const store = configureTestStore();
 
     function renderAtUserAuthState(userAuthState: UserAuthState) {
         const component = (
