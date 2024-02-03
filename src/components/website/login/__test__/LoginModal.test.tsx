@@ -18,7 +18,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 let setUserAuthState: jest.Mock;
 let setUserEmail: jest.Mock;
-function mockUseUserAuthState(initialUserAuthState: UserAuthState) {
+function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEmail: string) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
     setUserEmail = jest.fn();
@@ -26,7 +26,7 @@ function mockUseUserAuthState(initialUserAuthState: UserAuthState) {
     React.useState = jest
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
-        .mockImplementationOnce(() => ['', setUserEmail])
+        .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
         .mockImplementation((x) => [x, jest.fn()]);
 }
 
@@ -44,14 +44,14 @@ describe('LoginModal snapshot tests', () => {
     }
 
     it('should match the snapshot at user welcome stage', () => {
-        mockUseUserAuthState(UserAuthState.WELCOME);
+        mockUseUserAuthState(UserAuthState.WELCOME, '');
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail input stage', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, '');
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
@@ -60,7 +60,7 @@ describe('LoginModal snapshot tests', () => {
 
 describe('LoginModal action tests', () => {
     it('should call setting the new state from welcome to email input', () => {
-        mockUseUserAuthState(UserAuthState.WELCOME);
+        mockUseUserAuthState(UserAuthState.WELCOME, '');
         const { container } = render(componentWithStoreProvider);
 
         const registerButton = getByText(container, 'accountRegister');
@@ -70,7 +70,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should transition from email input to email input error state', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, '');
         const { container, rerender } = render(componentWithStoreProvider);
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
@@ -79,5 +79,17 @@ describe('LoginModal action tests', () => {
         fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
 
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
+    });
+
+    it('should call email verification after mail has been sent to input', () => {
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
+        const { container, rerender } = render(componentWithStoreProvider);
+
+        const tryVerifyEmailButton = getByText(container, 'next') as HTMLInputElement;
+
+        expect(tryVerifyEmailButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyEmailButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
     });
 });
