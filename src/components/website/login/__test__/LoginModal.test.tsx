@@ -54,8 +54,8 @@ describe('LoginModal snapshot tests', () => {
     });
 });
 
-describe('LoginModal state transition tests', () => {
-    it('should transition from welcome state to email input state', () => {
+describe('LoginModal action tests', () => {
+    it('should call setting the new state from welcome to email input', () => {
         mockUseUserAuthState(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
 
