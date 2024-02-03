@@ -42,7 +42,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
             />
           </div>
           <p
-            className="login-modal-input-bad-email"
+            className="login-modal-wrong-input"
           >
             mailAlreadyExists
           </p>

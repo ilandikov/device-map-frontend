@@ -237,7 +237,7 @@
         }
     }
 
-    .login-modal-input-bad-email {
+    .login-modal-wrong-input {
         color: #FF5572;
     }
 }

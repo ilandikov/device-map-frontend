@@ -93,7 +93,7 @@ export function LoginModal() {
                                         />
                                     </div>
                                     {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
-                                        <p className="login-modal-input-bad-email">{t('mailAlreadyExists')}</p>
+                                        <p className="login-modal-wrong-input">{t('mailAlreadyExists')}</p>
                                     )}
                                 </div>
                             </>
