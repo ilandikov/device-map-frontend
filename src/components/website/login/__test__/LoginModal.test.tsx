@@ -78,12 +78,12 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    // it('should match the snapshot at mail not valid stage', () => {
-    //     mockUseUserAuthState(UserAuthState.PASSWORD_MATCH_ERROR, '');
-    //     const component = renderComponentAsJSON();
-    //
-    //     expect(component).toMatchSnapshot();
-    // });
+    it('should match the snapshot at password not match stage', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_MATCH_ERROR, '');
+        const component = renderComponentAsJSON();
+
+        expect(component).toMatchSnapshot();
+    });
 
     // it('should match the snapshot at mail not valid stage', () => {
     //     mockUseUserAuthState(UserAuthState.OTP_INPUT, '');

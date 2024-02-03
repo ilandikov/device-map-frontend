@@ -260,6 +260,77 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 </div>
 `;
 
+exports[`LoginModal snapshot tests should match the snapshot at password not match stage 1`] = `
+<div
+  className="login-modal-container"
+>
+  <div
+    className="login-modal"
+  >
+    <div
+      className="login-modal-content-container"
+    >
+      <div
+        className="login-modal-top-container"
+      >
+        <p
+          className="login-modal-header"
+        >
+          register
+        </p>
+        <p
+          className="login-modal-description login-modal-opaque-text"
+        >
+          finikMapProductDescription
+        </p>
+        <div
+          className="login-modal-input-outer-container"
+        >
+          <p
+            className="login-modal-input-help"
+          >
+            enterPassword
+          </p>
+          <div
+            className="login-modal-input-inner-container login-modal-input-inner-container-wrong-input"
+          >
+            <input
+              className="login-modal-input-text"
+              onChange={[Function]}
+              type="password"
+            />
+          </div>
+          <p
+            className="login-modal-input-help"
+          >
+            repeatPassword
+          </p>
+          <div
+            className="login-modal-input-inner-container login-modal-input-inner-container-wrong-input"
+          >
+            <input
+              className="login-modal-input-text"
+              onChange={[Function]}
+              type="password"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="login-modal-bottom-container"
+      >
+        <input
+          className="login-modal-button-black-on-green"
+          onClick={[Function]}
+          type="button"
+          value="next"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`LoginModal snapshot tests should match the snapshot at user welcome stage 1`] = `
 <div
   className="login-modal-container"

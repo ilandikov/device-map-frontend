@@ -102,7 +102,8 @@ export function LoginModal() {
                                 </div>
                             </>
                         )}
-                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
+                        {(userAuthState === UserAuthState.PASSWORD_INPUT ||
+                            userAuthState === UserAuthState.PASSWORD_MATCH_ERROR) && (
                             <>
                                 <p className="login-modal-header">{t('register')}</p>
                                 <p className="login-modal-description login-modal-opaque-text">
@@ -110,7 +111,10 @@ export function LoginModal() {
                                 </p>
                                 <div className="login-modal-input-outer-container">
                                     <p className="login-modal-input-help">{t('enterPassword')}</p>
-                                    <div className="login-modal-input-inner-container">
+
+                                    <div
+                                        className={`login-modal-input-inner-container${userAuthState === UserAuthState.PASSWORD_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
+                                    >
                                         <input
                                             className="login-modal-input-text"
                                             type="password"
@@ -118,7 +122,9 @@ export function LoginModal() {
                                         />
                                     </div>
                                     <p className="login-modal-input-help">{t('repeatPassword')}</p>
-                                    <div className="login-modal-input-inner-container">
+                                    <div
+                                        className={`login-modal-input-inner-container${userAuthState === UserAuthState.PASSWORD_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
+                                    >
                                         <input
                                             className="login-modal-input-text"
                                             type="password"
@@ -168,7 +174,8 @@ export function LoginModal() {
                                 />
                             </>
                         )}
-                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
+                        {(userAuthState === UserAuthState.PASSWORD_INPUT ||
+                            userAuthState === UserAuthState.PASSWORD_MATCH_ERROR) && (
                             <>
                                 <input
                                     className="login-modal-button-black-on-green"

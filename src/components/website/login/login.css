@@ -237,6 +237,10 @@
         }
     }
 
+    .login-modal-input-inner-container-wrong-input {
+        border-color: #FF5572;
+    }
+
     .login-modal-wrong-input {
         color: #FF5572;
     }
