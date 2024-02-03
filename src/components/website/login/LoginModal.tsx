@@ -2,6 +2,7 @@ import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { StaticImage } from 'gatsby-plugin-image';
 import { MailInput } from './MailInput';
+import { PasswordInput } from './PasswordInput';
 
 export enum UserAuthState {
     WELCOME,
@@ -92,27 +93,7 @@ export function LoginModal() {
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
-                                    <p className="login-modal-input-help">{t('enterPassword')}</p>
-
-                                    <div
-                                        className={`login-modal-input-inner-container${userAuthState === UserAuthState.PASSWORD_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
-                                    >
-                                        <input
-                                            className="login-modal-input-text"
-                                            type="password"
-                                            onChange={(event) => setUserPasswordA(event.target.value)}
-                                        />
-                                    </div>
-                                    <p className="login-modal-input-help">{t('repeatPassword')}</p>
-                                    <div
-                                        className={`login-modal-input-inner-container${userAuthState === UserAuthState.PASSWORD_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
-                                    >
-                                        <input
-                                            className="login-modal-input-text"
-                                            type="password"
-                                            onChange={(event) => setUserPasswordB(event.target.value)}
-                                        />
-                                    </div>
+                                    <PasswordInput {...{ userAuthState, setUserPasswordA, setUserPasswordB }} />
                                 </div>
                             </>
                         )}
