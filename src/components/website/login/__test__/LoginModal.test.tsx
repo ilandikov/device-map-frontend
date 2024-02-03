@@ -69,7 +69,7 @@ describe('LoginModal action tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
 
-    it('should transition from email input to email input error state', () => {
+    it('should call email setter from email input', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, '');
         const { container } = render(componentWithStoreProvider);
 
