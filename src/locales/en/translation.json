@@ -7,6 +7,7 @@
   "login": "Login",
   "loginCallToAction": "Use the map to mark places where a terminal is absent, we will install one and you will receive a bonus to exchange for prizes",
   "mailAlreadyExists": "This e-mail is already registered",
+  "mailNotValid": "Bad e-mail format",
   "map": "Map",
   "next": "Next",
   "onlyEmail": "Only an e-mail is necessary",

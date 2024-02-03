@@ -71,7 +71,8 @@ export function LoginModal() {
                             </>
                         )}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
-                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS) && (
+                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
+                            userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
                                 <p className="login-modal-header">{t('register')}</p>
                                 <p className="login-modal-description login-modal-opaque-text">
@@ -94,6 +95,9 @@ export function LoginModal() {
                                     </div>
                                     {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
                                         <p className="login-modal-wrong-input">{t('mailAlreadyExists')}</p>
+                                    )}
+                                    {userAuthState === UserAuthState.MAIL_NOT_VALID && (
+                                        <p className="login-modal-wrong-input">{t('mailNotValid')}</p>
                                     )}
                                 </div>
                             </>
@@ -144,7 +148,8 @@ export function LoginModal() {
                             </>
                         )}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
-                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS) && (
+                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
+                            userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
                                 {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
                                     <input
