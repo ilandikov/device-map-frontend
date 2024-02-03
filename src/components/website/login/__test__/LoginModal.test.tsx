@@ -73,7 +73,7 @@ describe('LoginModal action tests', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, '');
         const { container, rerender } = render(componentWithStoreProvider);
 
-        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
+        const emailInput = getByTestId(container, 'emailInput');
 
         expect(emailInput).toBeInTheDocument();
         fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
@@ -85,7 +85,7 @@ describe('LoginModal action tests', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
         const { container, rerender } = render(componentWithStoreProvider);
 
-        const tryVerifyEmailButton = getByText(container, 'next') as HTMLInputElement;
+        const tryVerifyEmailButton = getByText(container, 'next');
 
         expect(tryVerifyEmailButton).toBeInTheDocument();
         fireEvent.click(tryVerifyEmailButton);
