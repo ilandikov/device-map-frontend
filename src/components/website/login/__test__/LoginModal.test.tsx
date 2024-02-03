@@ -81,6 +81,11 @@ describe('LoginModal action tests', () => {
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });
 
+    /** TODO
+     * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
+     * of the callback on the button. Instead this test should be testing a dispatch
+     * of the action from the button.
+     */
     it('should call email verification after mail has been sent to input', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
         const { container } = render(componentWithStoreProvider);
