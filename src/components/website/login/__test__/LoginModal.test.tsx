@@ -2,7 +2,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { fireEvent, getByText, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
@@ -17,12 +17,16 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 }));
 
 let setUserAuthState: jest.Mock;
+let setUserEmail: jest.Mock;
 function mockUseUserAuthState(initialUserAuthState: UserAuthState) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
+    setUserEmail = jest.fn();
+    setUserEmail.mockImplementation((userEmail) => userEmail);
     React.useState = jest
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
+        .mockImplementationOnce(() => ['', setUserEmail])
         .mockImplementation((x) => [x, jest.fn()]);
 }
 
@@ -63,5 +67,17 @@ describe('LoginModal action tests', () => {
         fireEvent.click(registerButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
+    });
+
+    it('should transition from email input to email input error state', () => {
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
+        const { container, rerender } = render(componentWithStoreProvider);
+
+        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
+
+        expect(emailInput).toBeInTheDocument();
+        fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
+
+        expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });
 });
