@@ -11,6 +11,9 @@
   "map": "Map",
   "next": "Next",
   "onlyEmail": "Only an e-mail is necessary",
+  "OTPEnter": "Enter one-time password from SMS",
+  "OTPExplanation": "Enter the received one-time password to verify your phone number",
+  "OTPSendAgain": "Send one-time password again",
   "register": "Register",
   "repeatPassword": "Repeat password"
 }

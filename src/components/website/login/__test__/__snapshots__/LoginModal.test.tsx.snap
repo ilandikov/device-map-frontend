@@ -1,5 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 1`] = `
+<div
+  className="login-modal-container"
+>
+  <div
+    className="login-modal"
+  >
+    <div
+      className="login-modal-content-container"
+    >
+      <div
+        className="login-modal-top-container"
+      >
+        <p
+          className="login-modal-header"
+        >
+          register
+        </p>
+        <p
+          className="login-modal-header-description login-modal-opaque-text"
+        >
+          finikMapProductDescription
+        </p>
+        <div
+          className="login-modal-input-outer-container"
+        >
+          <p
+            className="login-modal-input-description"
+          >
+            OTPEnter
+          </p>
+          <div
+            className="login-modal-input-otp-container"
+          >
+            <input
+              maxLength={1}
+              pattern="[0-9]"
+              type="text"
+            />
+            <input
+              maxLength={1}
+              pattern="[0-9]"
+              type="text"
+            />
+            <input
+              maxLength={1}
+              pattern="[0-9]"
+              type="text"
+            />
+            <input
+              maxLength={1}
+              pattern="[0-9]"
+              type="text"
+            />
+            <input
+              maxLength={1}
+              pattern="[0-9]"
+              type="text"
+            />
+            <input
+              maxLength={1}
+              pattern="[0-9]"
+              type="text"
+            />
+          </div>
+          <p
+            className="login-modal-input-description login-modal-opaque-text"
+          >
+            OTPExplanation
+          </p>
+          <p
+            className="login-modal-input-description login-modal-correct-input"
+          >
+            OTPSendAgain
+          </p>
+        </div>
+      </div>
+      <div
+        className="login-modal-bottom-container"
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`LoginModal snapshot tests should match the snapshot at mail exists stage 1`] = `
 <div
   className="login-modal-container"
@@ -19,7 +104,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
           register
         </p>
         <p
-          className="login-modal-description login-modal-opaque-text"
+          className="login-modal-input-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -87,7 +172,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
           register
         </p>
         <p
-          className="login-modal-description login-modal-opaque-text"
+          className="login-modal-input-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -145,7 +230,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
           register
         </p>
         <p
-          className="login-modal-description login-modal-opaque-text"
+          className="login-modal-input-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -208,7 +293,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
           register
         </p>
         <p
-          className="login-modal-description login-modal-opaque-text"
+          className="login-modal-header-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -279,7 +364,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
           register
         </p>
         <p
-          className="login-modal-description login-modal-opaque-text"
+          className="login-modal-header-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -371,7 +456,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
           map
         </p>
         <p
-          className="login-modal-description"
+          className="login-modal-header-description"
         >
           loginCallToAction
         </p>

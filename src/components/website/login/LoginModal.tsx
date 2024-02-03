@@ -69,7 +69,7 @@ export function LoginModal() {
                                 <p className="login-modal-header">
                                     {t('brand')} {t('map')}
                                 </p>
-                                <p className="login-modal-description">{t('loginCallToAction')}</p>
+                                <p className="login-modal-header-description">{t('loginCallToAction')}</p>
                             </>
                         )}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
@@ -77,7 +77,7 @@ export function LoginModal() {
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
                                 <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-description login-modal-opaque-text">
+                                <p className="login-modal-input-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
@@ -89,11 +89,33 @@ export function LoginModal() {
                             userAuthState === UserAuthState.PASSWORD_MATCH_ERROR) && (
                             <>
                                 <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-description login-modal-opaque-text">
+                                <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
                                     <PasswordInput {...{ userAuthState, setUserPasswordA, setUserPasswordB }} />
+                                </div>
+                            </>
+                        )}
+                        {userAuthState === UserAuthState.OTP_INPUT && (
+                            <>
+                                <p className="login-modal-header">{t('register')}</p>
+                                <p className="login-modal-header-description login-modal-opaque-text">
+                                    {t('finikMapProductDescription')}
+                                </p>
+                                <div className="login-modal-input-outer-container">
+                                    <p className="login-modal-input-description">{t('OTPEnter')}</p>
+                                    <div className="login-modal-input-otp-container">
+                                        {[0, 1, 2, 3, 4, 5].map(() => (
+                                            <input type="text" pattern="[0-9]" maxLength={1} />
+                                        ))}
+                                    </div>
+                                    <p className="login-modal-input-description login-modal-opaque-text">
+                                        {t('OTPExplanation')}
+                                    </p>
+                                    <p className="login-modal-input-description login-modal-correct-input">
+                                        {t('OTPSendAgain')}
+                                    </p>
                                 </div>
                             </>
                         )}
