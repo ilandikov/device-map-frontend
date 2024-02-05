@@ -9,15 +9,12 @@ export function PasswordCreation(props: {
 }) {
     const { t } = useI18next();
 
-    let inputInnerContainerCSSClass = 'login-modal-input-inner-container';
-    if (props.userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) {
-        inputInnerContainerCSSClass += ' login-modal-input-inner-container-wrong-input';
-    }
-
     return (
         <>
             <p className="login-modal-input-help">{t('enterPassword')}</p>
-            <div className={inputInnerContainerCSSClass}>
+            <div
+                className={`login-modal-input-inner-container${props.userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
+            >
                 <input
                     className="login-modal-input-text"
                     type="password"
@@ -26,7 +23,9 @@ export function PasswordCreation(props: {
                 />
             </div>
             <p className="login-modal-input-help">{t('repeatPassword')}</p>
-            <div className={inputInnerContainerCSSClass}>
+            <div
+                className={`login-modal-input-inner-container${props.userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
+            >
                 <input
                     className="login-modal-input-text"
                     type="password"
