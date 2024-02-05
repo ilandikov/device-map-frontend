@@ -161,4 +161,20 @@ describe('LoginModal action tests', () => {
 
         expect(setUserPasswordB).toHaveBeenCalledWith('evenBetterPassword');
     });
+
+    /** TODO
+     * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
+     * of the callback on the button. Instead this test should be testing a dispatch
+     * of the action from the button.
+     */
+    it('should call password verifier when password input button is pressed', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const tryStoreUserPasswordButton = getByText(container, 'next');
+
+        expect(tryStoreUserPasswordButton).toBeInTheDocument();
+        fireEvent.click(tryStoreUserPasswordButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
+    });
 });
