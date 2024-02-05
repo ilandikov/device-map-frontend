@@ -18,17 +18,12 @@ export function PasswordCreation(props: {
                 onChange={(event) => props.setUserPasswordA(event.target.value)}
                 testId="userPasswordA"
             />
-            <p className="login-modal-input-help">{t('repeatPassword')}</p>
-            <div
-                className={`login-modal-input-inner-container${props.userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
-            >
-                <input
-                    className="login-modal-input-text"
-                    type="password"
-                    onChange={(event) => props.setUserPasswordB(event.target.value)}
-                    data-testid="userPasswordB"
-                />
-            </div>
+            <PasswordInputBox
+                helpText={t('repeatPassword')}
+                userAuthState={props.userAuthState}
+                onChange={(event) => props.setUserPasswordB(event.target.value)}
+                testId="userPasswordB"
+            />
         </>
     );
 }
