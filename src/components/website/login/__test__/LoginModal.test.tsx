@@ -140,6 +140,17 @@ describe('LoginModal action tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
     });
 
+    it('should move from mail already exists to password verification stage', () => {
+        mockUseUserAuthState(UserAuthState.MAIL_ALREADY_EXISTS, '');
+        const { container } = render(componentWithStoreProvider);
+        const loginButton = getByText(container, 'accountLogin');
+
+        expect(loginButton).toBeInTheDocument();
+        fireEvent.click(loginButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
+    });
+
     it('should update password A when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
         const { container } = render(componentWithStoreProvider);

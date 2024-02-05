@@ -147,6 +147,9 @@ export function LoginModal() {
                                         className="login-modal-button-green-on-black"
                                         type="button"
                                         value={t('accountLogin')}
+                                        onClick={() => {
+                                            setUserState(UserAuthState.PASSWORD_INPUT);
+                                        }}
                                     />
                                 )}
                                 <input

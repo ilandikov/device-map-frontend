@@ -144,6 +144,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
       >
         <input
           className="login-modal-button-green-on-black"
+          onClick={[Function]}
           type="button"
           value="accountLogin"
         />
