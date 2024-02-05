@@ -3,6 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { StaticImage } from 'gatsby-plugin-image';
 import { MailInput } from './MailInput';
 import { PasswordCreation } from './PasswordCreation';
+import { MailInputBox } from './MailInputBox';
 
 export enum UserAuthState {
     WELCOME,
