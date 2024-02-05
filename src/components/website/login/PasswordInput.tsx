@@ -22,6 +22,7 @@ export function PasswordInput(props: {
                     className="login-modal-input-text"
                     type="password"
                     onChange={(event) => props.setUserPasswordA(event.target.value)}
+                    data-testid="userPasswordA"
                 />
             </div>
             <p className="login-modal-input-help">{t('repeatPassword')}</p>
@@ -30,6 +31,7 @@ export function PasswordInput(props: {
                     className="login-modal-input-text"
                     type="password"
                     onChange={(event) => props.setUserPasswordB(event.target.value)}
+                    data-testid="userPasswordB"
                 />
             </div>
         </>

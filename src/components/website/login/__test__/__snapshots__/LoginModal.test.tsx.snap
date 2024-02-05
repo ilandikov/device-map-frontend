@@ -310,6 +310,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
           >
             <input
               className="login-modal-input-text"
+              data-testid="userPasswordA"
               onChange={[Function]}
               type="password"
             />
@@ -324,6 +325,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
           >
             <input
               className="login-modal-input-text"
+              data-testid="userPasswordB"
               onChange={[Function]}
               type="password"
             />
@@ -381,6 +383,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
           >
             <input
               className="login-modal-input-text"
+              data-testid="userPasswordA"
               onChange={[Function]}
               type="password"
             />
@@ -395,6 +398,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
           >
             <input
               className="login-modal-input-text"
+              data-testid="userPasswordB"
               onChange={[Function]}
               type="password"
             />

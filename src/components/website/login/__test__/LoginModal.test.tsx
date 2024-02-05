@@ -139,4 +139,26 @@ describe('LoginModal action tests', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
     });
+
+    it('should update password A when typed', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const userPasswordAInput = getByTestId(container, 'userPasswordA');
+
+        expect(userPasswordAInput).toBeInTheDocument();
+        fireEvent.change(userPasswordAInput, { target: { value: 'verySecurePassword1' } });
+
+        expect(setUserPasswordA).toHaveBeenCalledWith('verySecurePassword1');
+    });
+
+    it('should update password B when typed', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const userPasswordBInput = getByTestId(container, 'userPasswordB');
+
+        expect(userPasswordBInput).toBeInTheDocument();
+        fireEvent.change(userPasswordBInput, { target: { value: 'evenBetterPassword' } });
+
+        expect(setUserPasswordB).toHaveBeenCalledWith('evenBetterPassword');
+    });
 });
