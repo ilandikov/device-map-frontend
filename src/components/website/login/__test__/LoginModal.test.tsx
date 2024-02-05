@@ -18,16 +18,23 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 let setUserAuthState: jest.Mock;
 let setUserEmail: jest.Mock;
+let setUserPasswordA: jest.Mock;
+let setUserPasswordB: jest.Mock;
 function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEmail: string) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
     setUserEmail = jest.fn();
     setUserEmail.mockImplementation((userEmail) => userEmail);
+    setUserPasswordA = jest.fn();
+    setUserPasswordA.mockImplementation((userEmail) => userEmail);
+    setUserPasswordB = jest.fn();
+    setUserPasswordB.mockImplementation((userEmail) => userEmail);
     React.useState = jest
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
         .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementation((x) => [x, jest.fn()]);
+        .mockImplementationOnce(() => ['', setUserPasswordA])
+        .mockImplementationOnce(() => ['', setUserPasswordB]);
 }
 
 const store = configureTestStore();
