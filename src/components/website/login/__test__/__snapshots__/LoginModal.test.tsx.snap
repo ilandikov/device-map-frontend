@@ -104,7 +104,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
           register
         </p>
         <p
-          className="login-modal-input-description login-modal-opaque-text"
+          className="login-modal-header-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -172,7 +172,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
           register
         </p>
         <p
-          className="login-modal-input-description login-modal-opaque-text"
+          className="login-modal-header-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>
@@ -230,7 +230,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
           register
         </p>
         <p
-          className="login-modal-input-description login-modal-opaque-text"
+          className="login-modal-header-description login-modal-opaque-text"
         >
           finikMapProductDescription
         </p>

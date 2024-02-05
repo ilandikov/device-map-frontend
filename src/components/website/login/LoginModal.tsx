@@ -77,7 +77,7 @@ export function LoginModal() {
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
                                 <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-input-description login-modal-opaque-text">
+                                <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
