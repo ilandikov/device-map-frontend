@@ -7,8 +7,8 @@ export function MailInput(props: { setUserEmail: (newUserEmail: string) => void;
     const { t } = useI18next();
     return (
         <>
-            <p className="login-modal-input-help">{t('onlyEmail')}</p>
             <MailInputBox
+                helpText={t('onlyEmail')}
                 onChange={(event) => {
                     props.setUserEmail(event.target.value);
                 }}
