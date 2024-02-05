@@ -79,7 +79,13 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       </div>
       <div
         className="login-modal-bottom-container"
-      />
+      >
+        <input
+          className="login-modal-button-black-on-green"
+          type="button"
+          value="next"
+        />
+      </div>
     </div>
   </div>
 </div>

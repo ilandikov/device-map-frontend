@@ -172,6 +172,11 @@ export function LoginModal() {
                                 />
                             </>
                         )}
+                        {userAuthState === UserAuthState.OTP_INPUT && (
+                            <>
+                                <input className="login-modal-button-black-on-green" type="button" value={t('next')} />
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
