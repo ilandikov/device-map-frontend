@@ -5,6 +5,7 @@ export function PasswordInputBox(props: {
     helpText: string;
     userAuthState: UserAuthState.PASSWORD_CREATION | UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
     onChange: ChangeEventHandler<HTMLInputElement>;
+    testId: string;
 }) {
     return (
         <>
@@ -16,7 +17,7 @@ export function PasswordInputBox(props: {
                     className="login-modal-input-text"
                     type="password"
                     onChange={props.onChange}
-                    data-testid="userPasswordA"
+                    data-testid={props.testId}
                 />
             </div>
         </>

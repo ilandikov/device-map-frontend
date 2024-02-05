@@ -16,6 +16,7 @@ export function PasswordCreation(props: {
                 helpText={t('enterPassword')}
                 userAuthState={props.userAuthState}
                 onChange={(event) => props.setUserPasswordA(event.target.value)}
+                testId="userPasswordA"
             />
             <p className="login-modal-input-help">{t('repeatPassword')}</p>
             <div
