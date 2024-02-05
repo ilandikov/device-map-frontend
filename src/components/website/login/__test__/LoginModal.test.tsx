@@ -79,14 +79,14 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password not match stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_MATCH_ERROR, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR, '');
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
@@ -137,7 +137,7 @@ describe('LoginModal action tests', () => {
         expect(tryVerifyEmailButton).toBeInTheDocument();
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION);
     });
 
     it('should move from mail already exists to password verification stage', () => {
@@ -148,11 +148,11 @@ describe('LoginModal action tests', () => {
         expect(loginButton).toBeInTheDocument();
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION);
     });
 
     it('should update password A when typed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
         const userPasswordAInput = getByTestId(container, 'userPasswordA');
 
@@ -163,7 +163,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should update password B when typed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
         const userPasswordBInput = getByTestId(container, 'userPasswordB');
 
@@ -178,8 +178,8 @@ describe('LoginModal action tests', () => {
      * of the callback on the button. Instead this test should be testing a dispatch
      * of the action from the button.
      */
-    it('should call password verifier when password input button is pressed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+    it('should call password verifier when password shall be created', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
         const tryStoreUserPasswordButton = getByText(container, 'next');
 

@@ -2,15 +2,15 @@ import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { StaticImage } from 'gatsby-plugin-image';
 import { MailInput } from './MailInput';
-import { PasswordInput } from './PasswordInput';
+import { PasswordCreation } from './PasswordCreation';
 
 export enum UserAuthState {
     WELCOME,
     MAIL_INPUT_START,
     MAIL_ALREADY_EXISTS,
     MAIL_NOT_VALID,
-    PASSWORD_INPUT,
-    PASSWORD_MATCH_ERROR,
+    PASSWORD_CREATION,
+    PASSWORD_CREATION_MATCH_ERROR,
     OTP_INPUT,
 }
 
@@ -41,12 +41,12 @@ export function LoginModal() {
             return;
         }
 
-        setUserState(UserAuthState.PASSWORD_INPUT);
+        setUserState(UserAuthState.PASSWORD_CREATION);
     }
 
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
         if (userPasswordA !== userPasswordB) {
-            setUserState(UserAuthState.PASSWORD_MATCH_ERROR);
+            setUserState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
             return;
         }
 
@@ -85,15 +85,15 @@ export function LoginModal() {
                                 </div>
                             </>
                         )}
-                        {(userAuthState === UserAuthState.PASSWORD_INPUT ||
-                            userAuthState === UserAuthState.PASSWORD_MATCH_ERROR) && (
+                        {(userAuthState === UserAuthState.PASSWORD_CREATION ||
+                            userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                             <>
                                 <p className="login-modal-header">{t('register')}</p>
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
-                                    <PasswordInput {...{ userAuthState, setUserPasswordA, setUserPasswordB }} />
+                                    <PasswordCreation {...{ userAuthState, setUserPasswordA, setUserPasswordB }} />
                                 </div>
                             </>
                         )}
@@ -148,7 +148,7 @@ export function LoginModal() {
                                         type="button"
                                         value={t('accountLogin')}
                                         onClick={() => {
-                                            setUserState(UserAuthState.PASSWORD_INPUT);
+                                            setUserState(UserAuthState.PASSWORD_CREATION);
                                         }}
                                     />
                                 )}
@@ -162,8 +162,8 @@ export function LoginModal() {
                                 />
                             </>
                         )}
-                        {(userAuthState === UserAuthState.PASSWORD_INPUT ||
-                            userAuthState === UserAuthState.PASSWORD_MATCH_ERROR) && (
+                        {(userAuthState === UserAuthState.PASSWORD_CREATION ||
+                            userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                             <>
                                 <input
                                     className="login-modal-button-black-on-green"
