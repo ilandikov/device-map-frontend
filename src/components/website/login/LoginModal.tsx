@@ -175,7 +175,7 @@ export function LoginModal() {
                                         type="button"
                                         value={t('accountLogin')}
                                         onClick={() => {
-                                            setUserState(UserAuthState.PASSWORD_CREATION);
+                                            setUserState(UserAuthState.PASSWORD_INPUT);
                                         }}
                                     />
                                 )}

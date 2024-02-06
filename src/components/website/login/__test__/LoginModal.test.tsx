@@ -155,7 +155,7 @@ describe('LoginModal action tests', () => {
         expect(loginButton).toBeInTheDocument();
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
     });
 
     it('should update password A when typed', () => {
