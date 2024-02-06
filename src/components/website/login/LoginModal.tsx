@@ -97,6 +97,7 @@ export function LoginModal() {
                                 <div className="login-modal-input-outer-container">
                                     <MailInputBox
                                         helpText={t('onlyEmail')}
+                                        userEmail={userEmail}
                                         onChange={(event) => {
                                             setUserEmail(event.target.value);
                                         }}

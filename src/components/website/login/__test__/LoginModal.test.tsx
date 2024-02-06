@@ -158,6 +158,15 @@ describe('LoginModal action tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
     });
 
+    it('should show the already input email on password input stage', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com');
+        const { container } = render(componentWithStoreProvider);
+        const emailInput = getByTestId(container, 'emailInput');
+
+        expect(emailInput).toBeInTheDocument();
+        expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
+    });
+
     it('should update password A when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);

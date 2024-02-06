@@ -130,7 +130,6 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
               data-testid="emailInput"
               onChange={[Function]}
               type="email"
-              value=""
             />
           </div>
           <p
@@ -200,7 +199,6 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
               data-testid="emailInput"
               onChange={[Function]}
               type="email"
-              value=""
             />
           </div>
         </div>
@@ -259,7 +257,6 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
               data-testid="emailInput"
               onChange={[Function]}
               type="email"
-              value=""
             />
           </div>
           <p

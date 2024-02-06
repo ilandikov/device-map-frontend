@@ -14,7 +14,7 @@ export function MailInputBox(props: { helpText: string; onChange: (newUserEmail)
                 <input
                     className="login-modal-input-text"
                     type="email"
-                    value={props.userEmail ?? ''}
+                    value={props.userEmail}
                     onChange={props.onChange}
                     data-testid="emailInput"
                 />
