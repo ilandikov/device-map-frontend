@@ -3,7 +3,7 @@ import { UserAuthState } from './LoginModal';
 
 export function PasswordInputBox(props: {
     helpText: string;
-    userAuthState: UserAuthState.PASSWORD_CREATION | UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
+    userAuthState: UserAuthState;
     onChange: ChangeEventHandler<HTMLInputElement>;
     testId: string;
 }) {
