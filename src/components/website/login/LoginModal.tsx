@@ -4,6 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import { MailInput } from './MailInput';
 import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
+import { PasswordInputBox } from './PasswordInputBox';
 
 export enum UserAuthState {
     WELCOME,
@@ -12,6 +13,7 @@ export enum UserAuthState {
     MAIL_NOT_VALID,
     PASSWORD_CREATION,
     PASSWORD_CREATION_MATCH_ERROR,
+    PASSWORD_INPUT,
     OTP_INPUT,
 }
 
@@ -83,6 +85,30 @@ export function LoginModal() {
                                 </p>
                                 <div className="login-modal-input-outer-container">
                                     <MailInput {...{ setUserEmail, userAuthState }} />
+                                </div>
+                            </>
+                        )}
+                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
+                            <>
+                                <p className="login-modal-header">{t('entrance')}</p>
+                                <p className="login-modal-header-description login-modal-opaque-text">
+                                    {t('finikMapProductDescription')}
+                                </p>
+                                <div className="login-modal-input-outer-container">
+                                    <MailInputBox
+                                        helpText={t('onlyEmail')}
+                                        onChange={(event) => {
+                                            setUserEmail(event.target.value);
+                                        }}
+                                    />
+                                    <PasswordInputBox
+                                        helpText={t('enterPassword')}
+                                        userAuthState={userAuthState}
+                                        onChange={(event) => {
+                                            tryStorePassword(event.target.value, event.target.value);
+                                        }}
+                                        testId="userPasswordLogin"
+                                    />
                                 </div>
                             </>
                         )}
@@ -165,6 +191,18 @@ export function LoginModal() {
                         )}
                         {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                             userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
+                            <>
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('next')}
+                                    onClick={() => {
+                                        tryStorePassword(userPasswordA, userPasswordB);
+                                    }}
+                                />
+                            </>
+                        )}
+                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
                             <>
                                 <input
                                     className="login-modal-button-black-on-green"
