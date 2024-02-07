@@ -84,7 +84,7 @@ export function LoginModal() {
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
-                                    <MailInput {...{ setUserEmail, userAuthState }} />
+                                    <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                                 </div>
                             </>
                         )}

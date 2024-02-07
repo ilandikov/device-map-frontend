@@ -3,12 +3,17 @@ import React from 'react';
 import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 
-export function MailInput(props: { setUserEmail: (newUserEmail: string) => void; userAuthState: UserAuthState }) {
+export function MailInput(props: {
+    setUserEmail: (newUserEmail: string) => void;
+    userAuthState: UserAuthState;
+    userEmail: string;
+}) {
     const { t } = useI18next();
     return (
         <>
             <MailInputBox
                 helpText={t('onlyEmail')}
+                userEmail={props.userEmail}
                 onChange={(event) => {
                     props.setUserEmail(event.target.value);
                 }}
