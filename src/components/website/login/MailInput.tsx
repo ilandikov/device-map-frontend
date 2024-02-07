@@ -4,9 +4,9 @@ import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 
 export function MailInput(props: {
-    setUserEmail: (newUserEmail: string) => void;
     userAuthState: UserAuthState;
     userEmail: string;
+    setUserEmail: (newUserEmail: string) => void;
 }) {
     const { t } = useI18next();
     return (
