@@ -1,7 +1,11 @@
 import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 
-export function MailInputBox(props: { helpText: string; onChange: (newUserEmail) => void; userEmail: string }) {
+export function MailInputBox(props: {
+    helpText: string;
+    onChange: ChangeEventHandler<HTMLInputElement>;
+    userEmail: string;
+}) {
     return (
         <>
             <p className="login-modal-input-help">{props.helpText}</p>
