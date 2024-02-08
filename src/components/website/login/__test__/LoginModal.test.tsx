@@ -8,6 +8,7 @@ import '@testing-library/jest-dom';
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
+import * as userAuthStateUtils from '../userAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -130,6 +131,19 @@ describe('LoginModal action tests', () => {
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });
 
+    it('should call email verification after mail has been sent to input', () => {
+        const spyOnUserAuthStateFromUserEmail = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserEmail');
+
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
+        const { container } = render(componentWithStoreProvider);
+
+        const tryVerifyEmailButton = getByText(container, 'next');
+
+        expect(tryVerifyEmailButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyEmailButton);
+
+        expect(spyOnUserAuthStateFromUserEmail).toHaveBeenCalledWith('new@email.com');
+    });
     /** TODO
      * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
      * of the callback on the button. Instead this test should be testing a dispatch
