@@ -17,20 +17,21 @@ export enum UserAuthState {
     OTP_INPUT,
 }
 
+function isValidEmail(email: string) {
+    const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegexp.test(email);
+}
+
 export function LoginModal() {
     const { t } = useI18next();
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
+
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
 
     function nextUserState() {
         setUserState(userAuthState + 1);
-    }
-
-    function isValidEmail(email: string) {
-        const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegexp.test(email);
     }
 
     function tryRegisterUserEmail(userEmail: string) {
