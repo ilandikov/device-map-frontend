@@ -18,23 +18,23 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 let setUserAuthState: jest.Mock;
 let setUserEmail: jest.Mock;
-let setUserPasswordA: jest.Mock;
-let setUserPasswordB: jest.Mock;
+let setUserPassword: jest.Mock;
+let setUserPasswordRepeat: jest.Mock;
 function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEmail: string) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
     setUserEmail = jest.fn();
     setUserEmail.mockImplementation((userEmail) => userEmail);
-    setUserPasswordA = jest.fn();
-    setUserPasswordA.mockImplementation((userEmail) => userEmail);
-    setUserPasswordB = jest.fn();
-    setUserPasswordB.mockImplementation((userEmail) => userEmail);
+    setUserPassword = jest.fn();
+    setUserPassword.mockImplementation((userEmail) => userEmail);
+    setUserPasswordRepeat = jest.fn();
+    setUserPasswordRepeat.mockImplementation((userEmail) => userEmail);
     React.useState = jest
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
         .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementationOnce(() => ['', setUserPasswordA])
-        .mockImplementationOnce(() => ['', setUserPasswordB]);
+        .mockImplementationOnce(() => ['', setUserPassword])
+        .mockImplementationOnce(() => ['', setUserPasswordRepeat]);
 }
 
 const store = configureTestStore();
@@ -178,26 +178,26 @@ describe('LoginModal action tests', () => {
         expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
     });
 
-    it('should update password A when typed', () => {
+    it('should update user password when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
-        const userPasswordAInput = getByTestId(container, 'userPasswordA');
+        const userPasswordInput = getByTestId(container, 'userPassword');
 
-        expect(userPasswordAInput).toBeInTheDocument();
-        fireEvent.change(userPasswordAInput, { target: { value: 'verySecurePassword1' } });
+        expect(userPasswordInput).toBeInTheDocument();
+        fireEvent.change(userPasswordInput, { target: { value: 'verySecurePassword1' } });
 
-        expect(setUserPasswordA).toHaveBeenCalledWith('verySecurePassword1');
+        expect(setUserPassword).toHaveBeenCalledWith('verySecurePassword1');
     });
 
-    it('should update password B when typed', () => {
+    it('should update repeated user password when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
-        const userPasswordBInput = getByTestId(container, 'userPasswordB');
+        const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
-        expect(userPasswordBInput).toBeInTheDocument();
-        fireEvent.change(userPasswordBInput, { target: { value: 'evenBetterPassword' } });
+        expect(userPasswordRepeatInput).toBeInTheDocument();
+        fireEvent.change(userPasswordRepeatInput, { target: { value: 'evenBetterPassword' } });
 
-        expect(setUserPasswordB).toHaveBeenCalledWith('evenBetterPassword');
+        expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
     });
 
     /** TODO

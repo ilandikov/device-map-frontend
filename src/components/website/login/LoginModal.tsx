@@ -21,8 +21,8 @@ export function LoginModal() {
     const { t } = useI18next();
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
     const [userEmail, setUserEmail] = React.useState('');
-    const [userPasswordA, setUserPasswordA] = React.useState('');
-    const [userPasswordB, setUserPasswordB] = React.useState('');
+    const [userPassword, setUserPassword] = React.useState('');
+    const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
 
     function nextUserState() {
         setUserState(userAuthState + 1);
@@ -117,7 +117,7 @@ export function LoginModal() {
                                     {t('finikMapProductDescription')}
                                 </p>
                                 <div className="login-modal-input-outer-container">
-                                    <PasswordCreation {...{ userAuthState, setUserPasswordA, setUserPasswordB }} />
+                                    <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                                 </div>
                             </>
                         )}
@@ -194,7 +194,7 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryStorePassword(userPasswordA, userPasswordB);
+                                        tryStorePassword(userPassword, userPasswordRepeat);
                                     }}
                                 />
                             </>
@@ -206,7 +206,7 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryStorePassword(userPasswordA, userPasswordB);
+                                        tryStorePassword(userPassword, userPasswordRepeat);
                                     }}
                                 />
                             </>
