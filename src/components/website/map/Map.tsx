@@ -1,17 +1,20 @@
 /* External dependencies */
 import React from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 
 /* Local dependencies */
 import './map.css';
+import Logo from '/src/assets/images/Logo.svg';
+import WebApp from '/src/assets/images/WebApp.svg';
+import GooglePlay from '/src/assets/images/GooglePlayOpaque.svg';
+import AppStore from '/src/assets/images/AppStoreOpaque.svg';
 
 export default function Map() {
     return (
         <section className="map-background">
             <div className="map-content-container">
                 <div className="map-brand">
-                    <StaticImage src="../../../assets/images/Logo.svg" alt="logo-with-brand" />
+                    <img src={Logo} alt="logo-with-brand" />
                     <p className="map-brand-text">Карта</p>
                 </div>
                 <p className="map-text">
@@ -20,10 +23,10 @@ export default function Map() {
                 </p>
                 <div className="map-links">
                     <Link to="/webapp">
-                        <StaticImage src="../../../assets/images/WebApp.svg" alt="map-links" />
+                        <img src={WebApp} alt="map-links-webapp" />
                     </Link>
-                    <StaticImage src="../../../assets/images/GooglePlayOpaque.svg" alt="map-links" />
-                    <StaticImage src="../../../assets/images/AppStoreOpaque.svg" alt="map-links" />
+                    <img src={GooglePlay} alt="map-links-google-play" />
+                    <img src={AppStore} alt="map-links-apple-store" />
                 </div>
             </div>
         </section>

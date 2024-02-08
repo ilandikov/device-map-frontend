@@ -4,6 +4,13 @@ import React from 'react';
 
 /* Local dependencies */
 import './footer.css';
+import Logo from '/src/assets/images/Logo.svg';
+import SocialFacebook from '/src/assets/images/SocialFacebook.svg';
+import SocialTwitter from '/src/assets/images/SocialTwitter.svg';
+import SocialInstagram from '/src/assets/images/SocialInstagram.svg';
+import SocialLinkedIn from '/src/assets/images/SocialLinkedIn.svg';
+import SocialYouTube from '/src/assets/images/SocialYouTube.svg';
+import SocialTelegram from '/src/assets/images/SocialTelegram.svg';
 
 export default function Footer() {
     return (
@@ -11,7 +18,7 @@ export default function Footer() {
             <div className="footer-inner-container">
                 <div className="footer-brand">
                     <div className="footer-brand-logo">
-                        <StaticImage src="../../../assets/images/Logo.svg" alt="logo" />
+                        <img src={Logo} alt="logo" />
                         <p>Finik</p>
                     </div>
                     <div className="footer-brand-description">
@@ -35,12 +42,12 @@ export default function Footer() {
                     <p>Документы</p>
                 </div>
                 <div className="footer-contacts">
-                    <StaticImage src="../../../assets/images/SocialFacebook.png" alt="logo" />
-                    <StaticImage src="../../../assets/images/SocialTwitter.png" alt="logo" />
-                    <StaticImage src="../../../assets/images/SocialInstagram.png" alt="logo" />
-                    <StaticImage src="../../../assets/images/SocialLinkedIn.png" alt="logo" />
-                    <StaticImage src="../../../assets/images/SocialYouTube.png" alt="logo" />
-                    <StaticImage src="../../../assets/images/SocialTelegram.png" alt="logo" />
+                    <img src={SocialFacebook} alt="social-facebook" />
+                    <img src={SocialTwitter} alt="social-twitter" />
+                    <img src={SocialInstagram} alt="social-instagram" />
+                    <img src={SocialLinkedIn} alt="social-linkedin" />
+                    <img src={SocialYouTube} alt="social-youtube" />
+                    <img src={SocialTelegram} alt="social-telegram" />
                 </div>
             </div>
         </footer>
