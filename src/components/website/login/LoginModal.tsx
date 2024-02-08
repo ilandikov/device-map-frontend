@@ -5,6 +5,7 @@ import { MailInput } from './MailInput';
 import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
+import LogoGreen from '/src/assets/images/LogoGreen.svg';
 
 export enum UserAuthState {
     WELCOME,
@@ -62,11 +63,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
                     <div className="login-modal-top-container">
-                        <StaticImage
-                            className="login-modal-logo"
-                            src="../../../assets/images/LogoGreen.svg"
-                            alt="logo"
-                        />
+                        <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
                                 <p className="login-modal-header">

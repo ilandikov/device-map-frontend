@@ -7,7 +7,12 @@ exports[`MainPage component should match the snapshot 1`] = `
   <header>
     <div
       className="header-logo-container"
-    />
+    >
+      <img
+        alt="logo"
+        src="test-file-stub"
+      />
+    </div>
   </header>
   <section
     className="map-background"
@@ -18,6 +23,10 @@ exports[`MainPage component should match the snapshot 1`] = `
       <div
         className="map-brand"
       >
+        <img
+          alt="logo-with-brand"
+          src="test-file-stub"
+        />
         <p
           className="map-brand-text"
         >
@@ -36,6 +45,19 @@ exports[`MainPage component should match the snapshot 1`] = `
       >
         <a
           href="/webapp"
+        >
+          <img
+            alt="map-links-webapp"
+            src="test-file-stub"
+          />
+        </a>
+        <img
+          alt="map-links-google-play"
+          src="test-file-stub"
+        />
+        <img
+          alt="map-links-apple-store"
+          src="test-file-stub"
         />
       </div>
     </div>
@@ -271,6 +293,10 @@ exports[`MainPage component should match the snapshot 1`] = `
         <div
           className="footer-brand-logo"
         >
+          <img
+            alt="logo"
+            src="test-file-stub"
+          />
           <p>
             Finik
           </p>
@@ -319,7 +345,32 @@ exports[`MainPage component should match the snapshot 1`] = `
       </div>
       <div
         className="footer-contacts"
-      />
+      >
+        <img
+          alt="social-facebook"
+          src="test-file-stub"
+        />
+        <img
+          alt="social-twitter"
+          src="test-file-stub"
+        />
+        <img
+          alt="social-instagram"
+          src="test-file-stub"
+        />
+        <img
+          alt="social-linkedin"
+          src="test-file-stub"
+        />
+        <img
+          alt="social-youtube"
+          src="test-file-stub"
+        />
+        <img
+          alt="social-telegram"
+          src="test-file-stub"
+        />
+      </div>
     </div>
   </footer>
 </div>
