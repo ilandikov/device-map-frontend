@@ -1,5 +1,4 @@
 /* External dependencies */
-import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 /* Local dependencies */

@@ -15,8 +15,7 @@ export default function SEO({ title, description, image, article }: SEOProps) {
     const { pathname } = useLocation();
     const { site } = useStaticQuery(query) || '';
 
-    const { defaultTitle, defaultDescription, siteUrl, defaultImage, titleTemplate, twitterUsername } =
-        site?.siteMetadata || '';
+    const { defaultTitle, defaultDescription, siteUrl, defaultImage, twitterUsername } = site?.siteMetadata || '';
 
     const seoImage = image || defaultImage;
 

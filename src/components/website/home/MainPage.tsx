@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import Header from '../../header/header';
 
 /* Local dependencies */

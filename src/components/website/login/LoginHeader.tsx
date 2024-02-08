@@ -1,5 +1,4 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
