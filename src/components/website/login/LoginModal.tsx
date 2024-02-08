@@ -34,17 +34,17 @@ export function LoginModal() {
     }
 
     function tryRegisterUserEmail(userEmail: string) {
+        const nextUserAuthState = UserAuthState.PASSWORD_CREATION;
+
         if (userEmail === 'already@exists.com') {
             setUserState(UserAuthState.MAIL_ALREADY_EXISTS);
             return;
         }
-
         if (!isValidEmail(userEmail)) {
             setUserState(UserAuthState.MAIL_NOT_VALID);
             return;
         }
-
-        setUserState(UserAuthState.PASSWORD_CREATION);
+        setUserState(nextUserAuthState);
     }
 
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
