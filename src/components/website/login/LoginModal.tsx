@@ -22,6 +22,19 @@ function isValidEmail(email: string) {
     return emailRegexp.test(email);
 }
 
+function userAuthStateFromUserEmail(userEmail: string) {
+    let nextUserAuthState = UserAuthState.PASSWORD_CREATION;
+
+    if (userEmail === 'already@exists.com') {
+        nextUserAuthState = UserAuthState.MAIL_ALREADY_EXISTS;
+    }
+
+    if (!isValidEmail(userEmail)) {
+        nextUserAuthState = UserAuthState.MAIL_NOT_VALID;
+    }
+    return nextUserAuthState;
+}
+
 export function LoginModal() {
     const { t } = useI18next();
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
@@ -35,15 +48,7 @@ export function LoginModal() {
     }
 
     function tryRegisterUserEmail(userEmail: string) {
-        let nextUserAuthState = UserAuthState.PASSWORD_CREATION;
-
-        if (userEmail === 'already@exists.com') {
-            nextUserAuthState = UserAuthState.MAIL_ALREADY_EXISTS;
-        }
-
-        if (!isValidEmail(userEmail)) {
-            nextUserAuthState = UserAuthState.MAIL_NOT_VALID;
-        }
+        const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
 
         setUserState(nextUserAuthState);
     }
