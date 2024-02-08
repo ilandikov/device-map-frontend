@@ -135,7 +135,7 @@ describe('LoginModal action tests', () => {
      * of the callback on the button. Instead this test should be testing a dispatch
      * of the action from the button.
      */
-    it('should call email verification after mail has been sent to input', () => {
+    it('should call email verification after mail has been sent to input (new email)', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
         const { container } = render(componentWithStoreProvider);
 
@@ -145,6 +145,30 @@ describe('LoginModal action tests', () => {
         fireEvent.click(tryVerifyEmailButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION);
+    });
+
+    it('should call email verification after mail has been sent to input (bad email)', () => {
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'no at sign');
+        const { container } = render(componentWithStoreProvider);
+
+        const tryVerifyEmailButton = getByText(container, 'next');
+
+        expect(tryVerifyEmailButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyEmailButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_NOT_VALID);
+    });
+
+    it('should call email verification after mail has been sent to input (existing email)', () => {
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'already@exists.com');
+        const { container } = render(componentWithStoreProvider);
+
+        const tryVerifyEmailButton = getByText(container, 'next');
+
+        expect(tryVerifyEmailButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyEmailButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_ALREADY_EXISTS);
     });
 
     it('should move from mail already exists to password verification stage', () => {
