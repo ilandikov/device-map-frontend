@@ -9,6 +9,7 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../userAuthStateUtils';
+import { userAuthStateFromUserEmail } from '../userAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -216,39 +217,27 @@ describe('LoginModal action tests', () => {
 });
 
 describe('user email logic tests', () => {
-    it('should call email verification after mail has been sent to input (new email)', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
-        const { container } = render(componentWithStoreProvider);
+    it('should move to password creation when new email is presented', () => {
+        const email = 'good@email.com';
 
-        const tryVerifyEmailButton = getByText(container, 'next');
+        const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(tryVerifyEmailButton).toBeInTheDocument();
-        fireEvent.click(tryVerifyEmailButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION);
+        expect(newUserState).toEqual(UserAuthState.PASSWORD_CREATION);
     });
 
-    it('should call email verification after mail has been sent to input (bad email)', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'no at sign');
-        const { container } = render(componentWithStoreProvider);
+    it('should move to email not valid stage when a bad email is presented', () => {
+        const email = 'this is not an email!';
 
-        const tryVerifyEmailButton = getByText(container, 'next');
+        const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(tryVerifyEmailButton).toBeInTheDocument();
-        fireEvent.click(tryVerifyEmailButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_NOT_VALID);
+        expect(newUserState).toEqual(UserAuthState.MAIL_NOT_VALID);
     });
 
-    it('should call email verification after mail has been sent to input (existing email)', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'already@exists.com');
-        const { container } = render(componentWithStoreProvider);
+    it('should move to email already exists stage when already existing mail is presented', () => {
+        const email = 'already@exists.com';
 
-        const tryVerifyEmailButton = getByText(container, 'next');
+        const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(tryVerifyEmailButton).toBeInTheDocument();
-        fireEvent.click(tryVerifyEmailButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_ALREADY_EXISTS);
+        expect(newUserState).toEqual(UserAuthState.MAIL_ALREADY_EXISTS);
     });
 });
