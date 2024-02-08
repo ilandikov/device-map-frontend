@@ -314,35 +314,35 @@ exports[`MainPage component should match the snapshot 1`] = `
           </p>
         </div>
       </div>
-      <div
+      <ul
         className="footer-links"
       >
-        <p>
+        <li>
           Продукты
-        </p>
-        <p>
+        </li>
+        <li>
           Кошелек
-        </p>
-        <p>
+        </li>
+        <li>
           Терминалы
-        </p>
-        <p>
+        </li>
+        <li>
           Эквайринг
-        </p>
-      </div>
-      <div
+        </li>
+      </ul>
+      <ul
         className="footer-links"
       >
-        <p>
+        <li>
           О нас
-        </p>
-        <p>
+        </li>
+        <li>
           Компания
-        </p>
-        <p>
+        </li>
+        <li>
           Документы
-        </p>
-      </div>
+        </li>
+      </ul>
       <div
         className="footer-contacts"
       >
