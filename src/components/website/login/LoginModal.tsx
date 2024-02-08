@@ -47,12 +47,6 @@ export function LoginModal() {
         setUserState(userAuthState + 1);
     }
 
-    function tryRegisterUserEmail(userEmail: string) {
-        const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
-
-        setUserState(nextUserAuthState);
-    }
-
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
         if (userPasswordA !== userPasswordB) {
             setUserState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
@@ -187,7 +181,8 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryRegisterUserEmail(userEmail);
+                                        const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
+                                        setUserState(nextUserAuthState);
                                     }}
                                 />
                             </>
