@@ -4,6 +4,7 @@ import { MailInput } from './MailInput';
 import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
+import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
@@ -110,26 +111,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-outer-container">
-                                    <p className="login-modal-input-description">{t('OTPEnter')}</p>
-                                    <div className="login-modal-input-otp-container">
-                                        {[0, 1, 2, 3, 4, 5].map((index) => (
-                                            <input
-                                                type="number"
-                                                pattern="[0-9]"
-                                                maxLength={1}
-                                                key={`OTPInput${index}`}
-                                                data-testid={`OTPInput${index}`}
-                                            />
-                                        ))}
-                                    </div>
-                                    <p className="login-modal-input-description login-modal-opaque-text">
-                                        {t('OTPExplanation')}
-                                    </p>
-                                    <p className="login-modal-input-description login-modal-correct-input">
-                                        {t('OTPSendAgain')}
-                                    </p>
-                                </div>
+                                <OTPInput />
                             </>
                         )}
                     </div>
