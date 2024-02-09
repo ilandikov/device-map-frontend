@@ -13,6 +13,11 @@ export function OTPInput() {
             key={`OTPInput${index}`}
             data-testid={`OTPInput${index}`}
             ref={inputElementRefs[index]}
+            onChange={() => {
+                const nextIndex = index + 1;
+                const nextInputElement = inputElementRefs[nextIndex];
+                nextInputElement.current.focus();
+            }}
         />
     ));
 
