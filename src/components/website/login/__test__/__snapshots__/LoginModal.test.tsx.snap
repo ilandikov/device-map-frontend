@@ -40,34 +40,52 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
             className="login-modal-input-otp-container"
           >
             <input
+              data-testid="OTPInput0"
               maxLength={1}
+              onChange={[Function]}
+              onFocus={[Function]}
               pattern="[0-9]"
-              type="text"
+              type="number"
             />
             <input
+              data-testid="OTPInput1"
               maxLength={1}
+              onChange={[Function]}
+              onFocus={[Function]}
               pattern="[0-9]"
-              type="text"
+              type="number"
             />
             <input
+              data-testid="OTPInput2"
               maxLength={1}
+              onChange={[Function]}
+              onFocus={[Function]}
               pattern="[0-9]"
-              type="text"
+              type="number"
             />
             <input
+              data-testid="OTPInput3"
               maxLength={1}
+              onChange={[Function]}
+              onFocus={[Function]}
               pattern="[0-9]"
-              type="text"
+              type="number"
             />
             <input
+              data-testid="OTPInput4"
               maxLength={1}
+              onChange={[Function]}
+              onFocus={[Function]}
               pattern="[0-9]"
-              type="text"
+              type="number"
             />
             <input
+              data-testid="OTPInput5"
               maxLength={1}
+              onChange={[Function]}
+              onFocus={[Function]}
               pattern="[0-9]"
-              type="text"
+              type="number"
             />
           </div>
           <p

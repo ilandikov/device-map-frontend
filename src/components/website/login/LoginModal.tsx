@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInput } from './MailInput';
 import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
+import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
@@ -25,6 +26,8 @@ export function LoginModal() {
     const [userPassword, setUserPassword] = React.useState('');
 
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
+
+    const OTPNextButton = useRef(null);
 
     function nextUserState() {
         setUserState(userAuthState + 1);
@@ -110,20 +113,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-outer-container">
-                                    <p className="login-modal-input-description">{t('OTPEnter')}</p>
-                                    <div className="login-modal-input-otp-container">
-                                        {[0, 1, 2, 3, 4, 5].map(() => (
-                                            <input type="text" pattern="[0-9]" maxLength={1} />
-                                        ))}
-                                    </div>
-                                    <p className="login-modal-input-description login-modal-opaque-text">
-                                        {t('OTPExplanation')}
-                                    </p>
-                                    <p className="login-modal-input-description login-modal-correct-input">
-                                        {t('OTPSendAgain')}
-                                    </p>
-                                </div>
+                                <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
                     </div>
@@ -197,7 +187,12 @@ export function LoginModal() {
                         )}
                         {userAuthState === UserAuthState.OTP_INPUT && (
                             <>
-                                <input className="login-modal-button-black-on-green" type="button" value={t('next')} />
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('next')}
+                                    ref={OTPNextButton}
+                                />
                             </>
                         )}
                     </div>
