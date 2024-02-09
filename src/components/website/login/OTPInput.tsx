@@ -15,6 +15,11 @@ export function OTPInput() {
             ref={inputElementRefs[index]}
             onChange={() => {
                 const nextIndex = index + 1;
+
+                if (nextIndex === inputElementRefs.length) {
+                    return;
+                }
+
                 const nextInputElement = inputElementRefs[nextIndex];
                 nextInputElement.current.focus();
             }}

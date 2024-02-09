@@ -215,6 +215,17 @@ describe('LoginModal action tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
     });
 
+    it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
+        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+
+        expect(OTPInput).toBeInTheDocument();
+        fireEvent.change(OTPInput, { target: { value: `${inputIndex}` } });
+
+        expect(OTPInput.value).toEqual(`${inputIndex}`);
+    });
+
     it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
         mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
         const { container } = render(componentWithStoreProvider);
@@ -226,19 +237,22 @@ describe('LoginModal action tests', () => {
         expect(OTPInput.value).toEqual('');
     });
 
-    it('should focus on next input element when a digit is input', () => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
-        const { container } = render(componentWithStoreProvider);
-        const OTPInput = getByTestId(container, 'OTPInput0') as HTMLInputElement;
+    it.each([0, 1, 2, 3, 4])(
+        'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
+        (inputIndex) => {
+            mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+            const { container } = render(componentWithStoreProvider);
+            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-        expect(OTPInput).toBeInTheDocument();
-        OTPInput.focus();
-        fireEvent.change(OTPInput, { target: { value: '1' } });
+            expect(OTPInput).toBeInTheDocument();
+            OTPInput.focus();
+            fireEvent.change(OTPInput, { target: { value: '1' } });
 
-        const nextOTPInput = getByTestId(container, 'OTPInput1') as HTMLInputElement;
-        expect(nextOTPInput).toBeInTheDocument();
-        expect(nextOTPInput).toHaveFocus();
-    });
+            const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`) as HTMLInputElement;
+            expect(nextOTPInput).toBeInTheDocument();
+            expect(nextOTPInput).toHaveFocus();
+        },
+    );
 });
 
 describe('user email logic tests', () => {
