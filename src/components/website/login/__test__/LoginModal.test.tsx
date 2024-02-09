@@ -111,6 +111,13 @@ describe('LoginModal snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at OTP loading stage', () => {
+        mockUseUserAuthState(UserAuthState.OTP_LOADING);
+        const component = renderComponentAsJSON();
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 describe('LoginModal action tests - welcome stage', () => {

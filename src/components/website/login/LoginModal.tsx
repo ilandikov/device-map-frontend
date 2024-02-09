@@ -112,6 +112,15 @@ export function LoginModal() {
                                 <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
+                        {userAuthState === UserAuthState.OTP_LOADING && (
+                            <>
+                                <p className="login-modal-header">{t('register')}</p>
+                                <p className="login-modal-header-description login-modal-opaque-text">
+                                    {t('finikMapProductDescription')}
+                                </p>
+                                <p className="login-modal-input-help">{t('OTPVerifying')}</p>
+                            </>
+                        )}
                     </div>
                     <div className="login-modal-bottom-container">
                         {userAuthState === UserAuthState.WELCOME && (

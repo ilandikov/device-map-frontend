@@ -15,6 +15,7 @@
   "OTPEnter": "Enter one-time password from SMS",
   "OTPExplanation": "Enter the received one-time password to verify your phone number",
   "OTPSendAgain": "Send one-time password again",
+  "OTPVerifying": "Verifying...",
   "register": "Register",
   "repeatPassword": "Repeat password"
 }

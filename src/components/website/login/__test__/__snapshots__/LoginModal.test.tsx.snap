@@ -114,6 +114,48 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
 </div>
 `;
 
+exports[`LoginModal snapshot tests should match the snapshot at OTP loading stage 1`] = `
+<div
+  className="login-modal-container"
+>
+  <div
+    className="login-modal"
+  >
+    <div
+      className="login-modal-content-container"
+    >
+      <div
+        className="login-modal-top-container"
+      >
+        <img
+          alt="login-modal-logo"
+          className="login-modal-logo"
+          src="test-file-stub"
+        />
+        <p
+          className="login-modal-header"
+        >
+          register
+        </p>
+        <p
+          className="login-modal-header-description login-modal-opaque-text"
+        >
+          finikMapProductDescription
+        </p>
+        <p
+          className="login-modal-input-help"
+        >
+          OTPVerifying
+        </p>
+      </div>
+      <div
+        className="login-modal-bottom-container"
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`LoginModal snapshot tests should match the snapshot at mail exists stage 1`] = `
 <div
   className="login-modal-container"
