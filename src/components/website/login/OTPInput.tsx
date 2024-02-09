@@ -13,6 +13,7 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
             key={`OTPInput${index}`}
             data-testid={`OTPInput${index}`}
             ref={inputElementRefs[index]}
+            onFocus={(event) => (event.target.value = '')}
             onChange={() => {
                 const nextIndex = index + 1;
 

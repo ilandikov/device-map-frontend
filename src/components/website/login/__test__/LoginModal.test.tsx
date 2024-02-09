@@ -268,6 +268,22 @@ describe('LoginModal action tests', () => {
         expect(nextButton).toBeInTheDocument();
         expect(nextButton).toHaveFocus();
     });
+
+    it.each([0, 1, 2, 3, 4, 5])(
+        'should rewrite an existing value that has already been input in OTP input number %i',
+        (inputIndex) => {
+            mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+            const { container } = render(componentWithStoreProvider);
+            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+
+            expect(OTPInput).toBeInTheDocument();
+            fireEvent.change(OTPInput, { target: { value: '3' } });
+            expect(OTPInput.value).toEqual('3');
+
+            OTPInput.focus();
+            expect(OTPInput.value).toEqual('');
+        },
+    );
 });
 
 describe('user email logic tests', () => {
