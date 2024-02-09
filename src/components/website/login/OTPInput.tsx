@@ -1,11 +1,19 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React from 'react';
+import React, { useRef } from 'react';
 
 export function OTPInput() {
     const { t } = useI18next();
 
+    const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
     const inputElements = [0, 1, 2, 3, 4, 5].map((index) => (
-        <input type="number" pattern="[0-9]" maxLength={1} key={`OTPInput${index}`} data-testid={`OTPInput${index}`} />
+        <input
+            type="number"
+            pattern="[0-9]"
+            maxLength={1}
+            key={`OTPInput${index}`}
+            data-testid={`OTPInput${index}`}
+            ref={inputElementRefs[index]}
+        />
     ));
 
     return (
