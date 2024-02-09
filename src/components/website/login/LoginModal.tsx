@@ -34,10 +34,9 @@ export function LoginModal() {
     }
 
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
-        const nextUserState = UserAuthState.OTP_INPUT;
+        let nextUserState = UserAuthState.OTP_INPUT;
         if (userPasswordA !== userPasswordB) {
-            setUserState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
-            return;
+            nextUserState = UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
         }
         setUserState(nextUserState);
     }
