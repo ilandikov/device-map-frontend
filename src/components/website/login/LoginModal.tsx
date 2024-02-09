@@ -6,7 +6,7 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
 export enum UserAuthState {
     WELCOME,
@@ -205,6 +205,10 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     ref={OTPNextButton}
+                                    onClick={() => {
+                                        const nextUserAuthState = userAuthStateFromOTP();
+                                        setUserState(nextUserAuthState);
+                                    }}
                                 />
                             </>
                         )}

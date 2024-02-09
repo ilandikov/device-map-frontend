@@ -105,6 +105,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       >
         <input
           className="login-modal-button-black-on-green"
+          onClick={[Function]}
           type="button"
           value="next"
         />
