@@ -9,7 +9,7 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
-import { userAuthStateFromUserEmail } from '../UserAuthStateUtils';
+import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from '../UserAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -218,42 +218,22 @@ describe('LoginModal action tests', () => {
         expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
 
-    /** TODO
-     * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
-     * of the callback on the button. Instead this test should be testing a dispatch
-     * of the action from the button.
-     */
-    it('should call password verifier when password shall be created', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'securePassword', 'securePassword');
-        const { container } = render(componentWithStoreProvider);
-        const tryStoreUserPasswordButton = getByText(container, 'next');
+    it('should move to OTP input if passwords match', () => {
+        const nextUserAuthState = userAuthStateFromUserPasswords('passwordsMatch', 'passwordsMatch');
 
-        expect(tryStoreUserPasswordButton).toBeInTheDocument();
-        fireEvent.click(tryStoreUserPasswordButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
+        expect(nextUserAuthState).toEqual(UserAuthState.OTP_INPUT);
     });
 
-    it('should call password verifier when password shall be created', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'onePassword', 'anotherPassword');
-        const { container } = render(componentWithStoreProvider);
-        const tryStoreUserPasswordButton = getByText(container, 'next');
+    it('should move to error state if passwords dont match', () => {
+        const nextUserAuthState = userAuthStateFromUserPasswords('passwordsDontMatch', 'passwordsMatch');
 
-        expect(tryStoreUserPasswordButton).toBeInTheDocument();
-        fireEvent.click(tryStoreUserPasswordButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+        expect(nextUserAuthState).toEqual(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
     });
 
-    it.failing('should show error if password has not been input or it is an empty string', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', '', '');
-        const { container } = render(componentWithStoreProvider);
-        const tryStoreUserPasswordButton = getByText(container, 'next');
+    it.failing('should move to error state if password has not been input or it is an empty string', () => {
+        const nextUserAuthState = userAuthStateFromUserPasswords('', '');
 
-        expect(tryStoreUserPasswordButton).toBeInTheDocument();
-        fireEvent.click(tryStoreUserPasswordButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+        expect(nextUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
     });
 
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
