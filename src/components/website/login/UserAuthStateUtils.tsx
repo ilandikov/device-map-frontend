@@ -1,5 +1,9 @@
 import { UserAuthState } from './LoginModal';
 
+export function userAuthStateFromOTP() {
+    return UserAuthState.OTP_LOADING;
+}
+
 export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswordB: string) {
     let nextUserState = UserAuthState.OTP_INPUT;
 

@@ -17,6 +17,7 @@ export enum UserAuthState {
     PASSWORD_CREATION_MATCH_ERROR,
     PASSWORD_INPUT,
     OTP_INPUT,
+    OTP_LOADING,
 }
 
 export function LoginModal() {
