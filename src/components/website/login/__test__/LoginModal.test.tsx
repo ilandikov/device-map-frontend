@@ -113,7 +113,7 @@ describe('LoginModal snapshot tests', () => {
     });
 });
 
-describe('LoginModal action tests', () => {
+describe('LoginModal action tests - welcome stage', () => {
     it('should call setting the new state from welcome to email input', () => {
         mockUseUserAuthState(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
@@ -123,7 +123,9 @@ describe('LoginModal action tests', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
+});
 
+describe('LoginModal action tests - email stages', () => {
     it('should call email setter from email input', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
         const { container } = render(componentWithStoreProvider);
@@ -160,7 +162,9 @@ describe('LoginModal action tests', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
     });
+});
 
+describe('LoginModal action tests - password input stages', () => {
     it('should update the user email on input on password input stage', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
         const { container } = render(componentWithStoreProvider);
@@ -180,7 +184,9 @@ describe('LoginModal action tests', () => {
         expect(emailInput).toBeInTheDocument();
         expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
     });
+});
 
+describe('LoginModal action tests - password creation stages', () => {
     it('should update user password when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
         const { container } = render(componentWithStoreProvider);
@@ -216,7 +222,9 @@ describe('LoginModal action tests', () => {
 
         expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
+});
 
+describe('LoginModal action tests - OTP stages', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const { container } = render(componentWithStoreProvider);
