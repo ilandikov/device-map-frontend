@@ -214,6 +214,17 @@ describe('LoginModal action tests', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
     });
+
+    it('should not enter non numeric characters in OTP input', () => {
+        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const OTPInput = getByTestId(container, 'OTPInput0') as HTMLInputElement;
+
+        expect(OTPInput).toBeInTheDocument();
+        fireEvent.change(OTPInput, { target: { value: 'a' } });
+
+        expect(OTPInput.value).toEqual('');
+    });
 });
 
 describe('user email logic tests', () => {

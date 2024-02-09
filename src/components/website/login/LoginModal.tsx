@@ -115,7 +115,7 @@ export function LoginModal() {
                                     <div className="login-modal-input-otp-container">
                                         {[0, 1, 2, 3, 4, 5].map((index) => (
                                             <input
-                                                type="text"
+                                                type="number"
                                                 pattern="[0-9]"
                                                 maxLength={1}
                                                 key={`OTPInput${index}`}
