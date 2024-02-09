@@ -21,10 +21,10 @@ export enum UserAuthState {
 
 export function LoginModal() {
     const { t } = useI18next();
+
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
-
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
 
     const OTPNextButton = useRef(null);
