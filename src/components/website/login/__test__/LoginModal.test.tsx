@@ -215,10 +215,10 @@ describe('LoginModal action tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
     });
 
-    it('should not enter non numeric characters in OTP input', () => {
+    it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
         mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
         const { container } = render(componentWithStoreProvider);
-        const OTPInput = getByTestId(container, 'OTPInput0') as HTMLInputElement;
+        const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
         expect(OTPInput).toBeInTheDocument();
         fireEvent.change(OTPInput, { target: { value: 'a' } });
