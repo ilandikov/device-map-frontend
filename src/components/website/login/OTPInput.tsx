@@ -6,7 +6,7 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
 
     const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
-    const inputElements = [0, 1, 2, 3, 4, 5].map((index) => (
+    const inputElements = inputElementRefs.map((_, index) => (
         <input
             type="number"
             pattern="[0-9]"
