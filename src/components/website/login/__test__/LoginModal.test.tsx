@@ -205,7 +205,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userStateFromUserPasswords');
+        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
 
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'passwordOne', 'PasswordTwo');
         const { container } = render(componentWithStoreProvider);

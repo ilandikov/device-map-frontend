@@ -1,6 +1,6 @@
 import { UserAuthState } from './LoginModal';
 
-export function userStateFromUserPasswords(userPasswordA: string, userPasswordB: string) {
+export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswordB: string) {
     let nextUserState = UserAuthState.OTP_INPUT;
 
     if (userPasswordA !== userPasswordB) {

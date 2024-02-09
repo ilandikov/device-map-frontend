@@ -6,7 +6,7 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { userAuthStateFromUserEmail, userStateFromUserPasswords } from './UserAuthStateUtils';
+import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
 export enum UserAuthState {
     WELCOME,
@@ -34,7 +34,7 @@ export function LoginModal() {
     }
 
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
-        const nextUserState = userStateFromUserPasswords(userPasswordA, userPasswordB);
+        const nextUserState = userAuthStateFromUserPasswords(userPasswordA, userPasswordB);
         setUserState(nextUserState);
     }
 
