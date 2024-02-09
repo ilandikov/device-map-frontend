@@ -23,7 +23,7 @@ let setUserPassword: jest.Mock;
 let setUserPasswordRepeat: jest.Mock;
 function mockUseUserAuthState(
     initialUserAuthState: UserAuthState,
-    initialUserEmail: string,
+    initialUserEmail: string = '',
     userPassword: string = '',
     userPasswordRepeat: string = '',
 ) {
@@ -57,14 +57,14 @@ describe('LoginModal snapshot tests', () => {
     }
 
     it('should match the snapshot at user welcome stage', () => {
-        mockUseUserAuthState(UserAuthState.WELCOME, '');
+        mockUseUserAuthState(UserAuthState.WELCOME);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail input stage', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, '');
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
@@ -78,35 +78,35 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at mail not valid stage', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_NOT_VALID, '');
+        mockUseUserAuthState(UserAuthState.MAIL_NOT_VALID);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password not match stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP input stage', () => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
@@ -115,7 +115,7 @@ describe('LoginModal snapshot tests', () => {
 
 describe('LoginModal action tests', () => {
     it('should call setting the new state from welcome to email input', () => {
-        mockUseUserAuthState(UserAuthState.WELCOME, '');
+        mockUseUserAuthState(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
 
         const registerButton = getByText(container, 'accountRegister');
@@ -125,7 +125,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should call email setter from email input', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, '');
+        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
         const { container } = render(componentWithStoreProvider);
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -151,7 +151,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_ALREADY_EXISTS, '');
+        mockUseUserAuthState(UserAuthState.MAIL_ALREADY_EXISTS);
         const { container } = render(componentWithStoreProvider);
         const loginButton = getByText(container, 'accountLogin');
 
@@ -162,7 +162,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
         const { container } = render(componentWithStoreProvider);
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -182,7 +182,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
         const { container } = render(componentWithStoreProvider);
         const userPasswordInput = getByTestId(container, 'userPassword');
 
@@ -193,7 +193,7 @@ describe('LoginModal action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
         const { container } = render(componentWithStoreProvider);
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
@@ -218,7 +218,7 @@ describe('LoginModal action tests', () => {
     });
 
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const { container } = render(componentWithStoreProvider);
         const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
@@ -229,7 +229,7 @@ describe('LoginModal action tests', () => {
     });
 
     it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const { container } = render(componentWithStoreProvider);
         const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
@@ -242,7 +242,7 @@ describe('LoginModal action tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+            mockUseUserAuthState(UserAuthState.OTP_INPUT);
             const { container } = render(componentWithStoreProvider);
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
@@ -257,7 +257,7 @@ describe('LoginModal action tests', () => {
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const { container } = render(componentWithStoreProvider);
         const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
 
@@ -274,7 +274,7 @@ describe('LoginModal action tests', () => {
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+            mockUseUserAuthState(UserAuthState.OTP_INPUT);
             const { container } = render(componentWithStoreProvider);
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
@@ -288,7 +288,7 @@ describe('LoginModal action tests', () => {
     );
 
     it('should focus on the next empty input after a digit has been input', () => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const { container } = render(componentWithStoreProvider);
         const OTPInput0 = getByTestId(container, 'OTPInput0') as HTMLInputElement;
         const OTPInput1 = getByTestId(container, 'OTPInput1') as HTMLInputElement;
