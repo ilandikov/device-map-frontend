@@ -15,7 +15,7 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
             ref={inputElementRefs[index]}
             onFocus={(event) => (event.target.value = '')}
             onChange={() => {
-                const nextElementToFocus = props.nextButton;
+                let nextElementToFocus = props.nextButton;
 
                 const nextIndex = index + 1;
 
@@ -24,8 +24,8 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
                     return;
                 }
 
-                const nextInputElement = inputElementRefs[nextIndex];
-                nextInputElement.current.focus();
+                nextElementToFocus = inputElementRefs[nextIndex];
+                nextElementToFocus.current.focus();
             }}
         />
     ));
