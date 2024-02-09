@@ -1,5 +1,15 @@
 import { UserAuthState } from './LoginModal';
 
+export function userStateFromUserPasswords(userPasswordA: string, userPasswordB: string) {
+    let nextUserState = UserAuthState.OTP_INPUT;
+
+    if (userPasswordA !== userPasswordB) {
+        nextUserState = UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
+    }
+
+    return nextUserState;
+}
+
 export function userAuthStateFromUserEmail(userEmail: string) {
     let nextUserAuthState = UserAuthState.PASSWORD_CREATION;
 

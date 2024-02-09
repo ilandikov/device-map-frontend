@@ -6,7 +6,7 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
+import { userAuthStateFromUserEmail, userStateFromUserPasswords } from './UserAuthStateUtils';
 
 export enum UserAuthState {
     WELCOME,
@@ -34,10 +34,7 @@ export function LoginModal() {
     }
 
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
-        let nextUserState = UserAuthState.OTP_INPUT;
-        if (userPasswordA !== userPasswordB) {
-            nextUserState = UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
-        }
+        const nextUserState = userStateFromUserPasswords(userPasswordA, userPasswordB);
         setUserState(nextUserState);
     }
 
