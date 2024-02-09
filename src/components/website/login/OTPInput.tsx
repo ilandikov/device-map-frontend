@@ -7,13 +7,13 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
     const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
     function getNextElementForFocus(index: number) {
-        const nextIndex = index + 1;
+        const nextInputIndex = index + 1;
 
-        if (nextIndex === inputElementRefs.length) {
+        if (nextInputIndex === inputElementRefs.length) {
             return props.nextButton;
         }
 
-        return inputElementRefs[nextIndex];
+        return inputElementRefs[nextInputIndex];
     }
 
     const inputElements = [0, 1, 2, 3, 4, 5].map((index) => (
