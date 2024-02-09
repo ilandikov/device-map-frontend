@@ -6,7 +6,7 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
+import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
 export enum UserAuthState {
     WELCOME,
@@ -31,15 +31,6 @@ export function LoginModal() {
 
     function nextUserState() {
         setUserState(userAuthState + 1);
-    }
-
-    function tryStorePassword(userPasswordA: string, userPasswordB: string) {
-        if (userPasswordA !== userPasswordB) {
-            setUserState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
-            return;
-        }
-
-        setUserState(UserAuthState.OTP_INPUT);
     }
 
     return (
@@ -88,7 +79,11 @@ export function LoginModal() {
                                         helpText={t('enterPassword')}
                                         userAuthState={userAuthState}
                                         onChange={(event) => {
-                                            tryStorePassword(event.target.value, event.target.value);
+                                            const nextUserState1 = userAuthStateFromUserPasswords(
+                                                event.target.value,
+                                                event.target.value,
+                                            );
+                                            setUserState(nextUserState1);
                                         }}
                                         testId="userPasswordLogin"
                                     />
@@ -168,7 +163,11 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryStorePassword(userPassword, userPasswordRepeat);
+                                        const nextUserState = userAuthStateFromUserPasswords(
+                                            userPassword,
+                                            userPasswordRepeat,
+                                        );
+                                        setUserState(nextUserState);
                                     }}
                                 />
                             </>
@@ -180,7 +179,11 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        tryStorePassword(userPassword, userPasswordRepeat);
+                                        const nextUserState = userAuthStateFromUserPasswords(
+                                            userPassword,
+                                            userPasswordRepeat,
+                                        );
+                                        setUserState(nextUserState);
                                     }}
                                 />
                             </>

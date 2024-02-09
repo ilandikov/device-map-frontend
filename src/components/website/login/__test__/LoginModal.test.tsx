@@ -9,7 +9,7 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
-import { userAuthStateFromUserEmail } from '../UserAuthStateUtils';
+import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from '../UserAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -22,7 +22,12 @@ let setUserAuthState: jest.Mock;
 let setUserEmail: jest.Mock;
 let setUserPassword: jest.Mock;
 let setUserPasswordRepeat: jest.Mock;
-function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEmail: string) {
+function mockUseUserAuthState(
+    initialUserAuthState: UserAuthState,
+    initialUserEmail: string,
+    userPassword: string = '',
+    userPasswordRepeat: string = '',
+) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
     setUserEmail = jest.fn();
@@ -35,8 +40,8 @@ function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEm
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
         .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementationOnce(() => ['', setUserPassword])
-        .mockImplementationOnce(() => ['', setUserPasswordRepeat]);
+        .mockImplementationOnce(() => [userPassword, setUserPassword])
+        .mockImplementationOnce(() => [userPasswordRepeat, setUserPasswordRepeat]);
 }
 
 const store = configureTestStore();
@@ -199,20 +204,18 @@ describe('LoginModal action tests', () => {
         expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
     });
 
-    /** TODO
-     * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
-     * of the callback on the button. Instead this test should be testing a dispatch
-     * of the action from the button.
-     */
-    it('should call password verifier when password shall be created', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
+    it('should call password verification when next button is pressed', () => {
+        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
+
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'passwordOne', 'PasswordTwo');
         const { container } = render(componentWithStoreProvider);
-        const tryStoreUserPasswordButton = getByText(container, 'next');
 
-        expect(tryStoreUserPasswordButton).toBeInTheDocument();
-        fireEvent.click(tryStoreUserPasswordButton);
+        const tryVerifyPasswordsButton = getByText(container, 'next');
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
+        expect(tryVerifyPasswordsButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyPasswordsButton);
+
+        expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
 
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
@@ -325,5 +328,25 @@ describe('user email logic tests', () => {
         const newUserState = userAuthStateFromUserEmail(email);
 
         expect(newUserState).toEqual(UserAuthState.MAIL_ALREADY_EXISTS);
+    });
+});
+
+describe('user password logic tests', () => {
+    it('should move to OTP input if passwords match', () => {
+        const nextUserAuthState = userAuthStateFromUserPasswords('passwordsMatch', 'passwordsMatch');
+
+        expect(nextUserAuthState).toEqual(UserAuthState.OTP_INPUT);
+    });
+
+    it('should move to error state if passwords dont match', () => {
+        const nextUserAuthState = userAuthStateFromUserPasswords('passwordsDontMatch', 'passwordsMatch');
+
+        expect(nextUserAuthState).toEqual(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+    });
+
+    it.failing('should move to error state if password has not been input or it is an empty string', () => {
+        const nextUserAuthState = userAuthStateFromUserPasswords('', '');
+
+        expect(nextUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
     });
 });
