@@ -210,7 +210,7 @@ describe('LoginModal action tests', () => {
      * of the action from the button.
      */
     it('should call password verifier when password shall be created', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'securePassword', 'securePassword');
         const { container } = render(componentWithStoreProvider);
         const tryStoreUserPasswordButton = getByText(container, 'next');
 
