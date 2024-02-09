@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInput } from './MailInput';
 import { PasswordCreation } from './PasswordCreation';
@@ -26,6 +26,8 @@ export function LoginModal() {
     const [userPassword, setUserPassword] = React.useState('');
 
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
+
+    const OTPNextButton = useRef(null);
 
     function nextUserState() {
         setUserState(userAuthState + 1);
@@ -185,7 +187,12 @@ export function LoginModal() {
                         )}
                         {userAuthState === UserAuthState.OTP_INPUT && (
                             <>
-                                <input className="login-modal-button-black-on-green" type="button" value={t('next')} />
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('next')}
+                                    ref={OTPNextButton}
+                                />
                             </>
                         )}
                     </div>
