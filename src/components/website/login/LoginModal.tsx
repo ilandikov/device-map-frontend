@@ -34,12 +34,12 @@ export function LoginModal() {
     }
 
     function tryStorePassword(userPasswordA: string, userPasswordB: string) {
+        const nextUserState = UserAuthState.OTP_INPUT;
         if (userPasswordA !== userPasswordB) {
             setUserState(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
             return;
         }
-
-        setUserState(UserAuthState.OTP_INPUT);
+        setUserState(nextUserState);
     }
 
     return (
