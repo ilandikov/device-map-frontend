@@ -113,8 +113,14 @@ export function LoginModal() {
                                 <div className="login-modal-input-outer-container">
                                     <p className="login-modal-input-description">{t('OTPEnter')}</p>
                                     <div className="login-modal-input-otp-container">
-                                        {[0, 1, 2, 3, 4, 5].map(() => (
-                                            <input type="text" pattern="[0-9]" maxLength={1} />
+                                        {[0, 1, 2, 3, 4, 5].map((index) => (
+                                            <input
+                                                type="text"
+                                                pattern="[0-9]"
+                                                maxLength={1}
+                                                key={`OTPInput${index}`}
+                                                data-testid={`OTPInput${index}`}
+                                            />
                                         ))}
                                     </div>
                                     <p className="login-modal-input-description login-modal-opaque-text">
