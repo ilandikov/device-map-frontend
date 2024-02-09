@@ -163,11 +163,11 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        const nextUserState1 = userAuthStateFromUserPasswords(
+                                        const nextUserState = userAuthStateFromUserPasswords(
                                             userPassword,
                                             userPasswordRepeat,
                                         );
-                                        setUserState(nextUserState1);
+                                        setUserState(nextUserState);
                                     }}
                                 />
                             </>
@@ -179,11 +179,11 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     onClick={() => {
-                                        const nextUserState1 = userAuthStateFromUserPasswords(
+                                        const nextUserState = userAuthStateFromUserPasswords(
                                             userPassword,
                                             userPasswordRepeat,
                                         );
-                                        setUserState(nextUserState1);
+                                        setUserState(nextUserState);
                                     }}
                                 />
                             </>
