@@ -253,6 +253,21 @@ describe('LoginModal action tests', () => {
             expect(nextOTPInput).toHaveFocus();
         },
     );
+
+    it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
+        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
+
+        expect(OTPInput).toBeInTheDocument();
+        OTPInput.focus();
+        fireEvent.change(OTPInput, { target: { value: '1' } });
+
+        const nextButton = getByText(container, 'next');
+
+        expect(nextButton).toBeInTheDocument();
+        expect(nextButton).toHaveFocus();
+    });
 });
 
 describe('user email logic tests', () => {

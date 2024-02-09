@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
 
-export function OTPInput() {
+export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
     const { t } = useI18next();
 
     const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
@@ -17,6 +17,7 @@ export function OTPInput() {
                 const nextIndex = index + 1;
 
                 if (nextIndex === inputElementRefs.length) {
+                    props.nextButton.current.focus();
                     return;
                 }
 

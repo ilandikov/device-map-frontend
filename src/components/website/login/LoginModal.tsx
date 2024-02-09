@@ -113,7 +113,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <OTPInput />
+                                <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
                     </div>
