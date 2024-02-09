@@ -1,13 +1,13 @@
 /* External dependencies */
 import React from 'react';
-import Header from '../../header/header';
+import Header from '../../header/Header';
 
 /* Local dependencies */
 import Map from '../map/Map';
 import Phone from '../phone/Phone';
-import Advantages from '../advantages/advantages';
+import Advantages from '../advantages/Advantages';
 import Footer from '../footer/Footer';
-import './MainPage.css';
+import './MainPage.scss';
 
 export default function MainPage() {
     return (

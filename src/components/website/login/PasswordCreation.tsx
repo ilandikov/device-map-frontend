@@ -5,8 +5,8 @@ import { PasswordInputBox } from './PasswordInputBox';
 
 export function PasswordCreation(props: {
     userAuthState: UserAuthState.PASSWORD_CREATION | UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
-    setUserPasswordA: (newUserPassword: string) => void;
-    setUserPasswordB: (newUserPassword: string) => void;
+    setUserPassword: (newUserPassword: string) => void;
+    setUserPasswordRepeat: (newUserPassword: string) => void;
 }) {
     const { t } = useI18next();
 
@@ -15,14 +15,14 @@ export function PasswordCreation(props: {
             <PasswordInputBox
                 helpText={t('enterPassword')}
                 userAuthState={props.userAuthState}
-                onChange={(event) => props.setUserPasswordA(event.target.value)}
-                testId="userPasswordA"
+                onChange={(event) => props.setUserPassword(event.target.value)}
+                testId="userPassword"
             />
             <PasswordInputBox
                 helpText={t('repeatPassword')}
                 userAuthState={props.userAuthState}
-                onChange={(event) => props.setUserPasswordB(event.target.value)}
-                testId="userPasswordB"
+                onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
+                testId="userPasswordRepeat"
             />
         </>
     );

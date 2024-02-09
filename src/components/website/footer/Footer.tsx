@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* Local dependencies */
-import './footer.css';
+import './Footer.scss';
 import Logo from '/src/assets/images/Logo.svg';
 import SocialFacebook from '/src/assets/images/SocialFacebook.svg';
 import SocialTwitter from '/src/assets/images/SocialTwitter.svg';
@@ -29,17 +29,17 @@ export default function Footer() {
                         </p>
                     </div>
                 </div>
-                <div className="footer-links">
-                    <p>Продукты</p>
-                    <p>Кошелек</p>
-                    <p>Терминалы</p>
-                    <p>Эквайринг</p>
-                </div>
-                <div className="footer-links">
-                    <p>О нас</p>
-                    <p>Компания</p>
-                    <p>Документы</p>
-                </div>
+                <ul className="footer-links">
+                    <li>Продукты</li>
+                    <li>Кошелек</li>
+                    <li>Терминалы</li>
+                    <li>Эквайринг</li>
+                </ul>
+                <ul className="footer-links">
+                    <li>О нас</li>
+                    <li>Компания</li>
+                    <li>Документы</li>
+                </ul>
                 <div className="footer-contacts">
                     <img src={SocialFacebook} alt="social-facebook" />
                     <img src={SocialTwitter} alt="social-twitter" />

@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 /* Local dependencies */
-import './map.css';
+import './Map.scss';
 import Logo from '/src/assets/images/Logo.svg';
 import WebApp from '/src/assets/images/WebApp.svg';
 import GooglePlay from '/src/assets/images/GooglePlayOpaque.svg';

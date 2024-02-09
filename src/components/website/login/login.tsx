@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* Local dependencies */
-import './login.css';
+import './Login.scss';
 import { LoginHeader } from './LoginHeader';
 import { LoginModal } from './LoginModal';
 

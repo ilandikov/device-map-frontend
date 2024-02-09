@@ -1,6 +1,6 @@
 /* External dependencies */
 import React from 'react';
-import './phone.css';
+import './Phone.scss';
 
 export default function Phone() {
     return (

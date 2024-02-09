@@ -8,6 +8,8 @@ import '@testing-library/jest-dom';
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
+import * as userAuthStateUtils from '../UserAuthStateUtils';
+import { userAuthStateFromUserEmail } from '../UserAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -18,23 +20,23 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 let setUserAuthState: jest.Mock;
 let setUserEmail: jest.Mock;
-let setUserPasswordA: jest.Mock;
-let setUserPasswordB: jest.Mock;
+let setUserPassword: jest.Mock;
+let setUserPasswordRepeat: jest.Mock;
 function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEmail: string) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
     setUserEmail = jest.fn();
     setUserEmail.mockImplementation((userEmail) => userEmail);
-    setUserPasswordA = jest.fn();
-    setUserPasswordA.mockImplementation((userEmail) => userEmail);
-    setUserPasswordB = jest.fn();
-    setUserPasswordB.mockImplementation((userEmail) => userEmail);
+    setUserPassword = jest.fn();
+    setUserPassword.mockImplementation((userEmail) => userEmail);
+    setUserPasswordRepeat = jest.fn();
+    setUserPasswordRepeat.mockImplementation((userEmail) => userEmail);
     React.useState = jest
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
         .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementationOnce(() => ['', setUserPasswordA])
-        .mockImplementationOnce(() => ['', setUserPasswordB]);
+        .mockImplementationOnce(() => ['', setUserPassword])
+        .mockImplementationOnce(() => ['', setUserPasswordRepeat]);
 }
 
 const store = configureTestStore();
@@ -130,12 +132,9 @@ describe('LoginModal action tests', () => {
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });
 
-    /** TODO
-     * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
-     * of the callback on the button. Instead this test should be testing a dispatch
-     * of the action from the button.
-     */
     it('should call email verification after mail has been sent to input', () => {
+        const spyOnUserAuthStateFromUserEmail = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserEmail');
+
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
         const { container } = render(componentWithStoreProvider);
 
@@ -144,7 +143,7 @@ describe('LoginModal action tests', () => {
         expect(tryVerifyEmailButton).toBeInTheDocument();
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION);
+        expect(spyOnUserAuthStateFromUserEmail).toHaveBeenCalledWith('new@email.com');
     });
 
     it('should move from mail already exists to password verification stage', () => {
@@ -178,26 +177,26 @@ describe('LoginModal action tests', () => {
         expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
     });
 
-    it('should update password A when typed', () => {
+    it('should update user password when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
-        const userPasswordAInput = getByTestId(container, 'userPasswordA');
+        const userPasswordInput = getByTestId(container, 'userPassword');
 
-        expect(userPasswordAInput).toBeInTheDocument();
-        fireEvent.change(userPasswordAInput, { target: { value: 'verySecurePassword1' } });
+        expect(userPasswordInput).toBeInTheDocument();
+        fireEvent.change(userPasswordInput, { target: { value: 'verySecurePassword1' } });
 
-        expect(setUserPasswordA).toHaveBeenCalledWith('verySecurePassword1');
+        expect(setUserPassword).toHaveBeenCalledWith('verySecurePassword1');
     });
 
-    it('should update password B when typed', () => {
+    it('should update repeated user password when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '');
         const { container } = render(componentWithStoreProvider);
-        const userPasswordBInput = getByTestId(container, 'userPasswordB');
+        const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
-        expect(userPasswordBInput).toBeInTheDocument();
-        fireEvent.change(userPasswordBInput, { target: { value: 'evenBetterPassword' } });
+        expect(userPasswordRepeatInput).toBeInTheDocument();
+        fireEvent.change(userPasswordRepeatInput, { target: { value: 'evenBetterPassword' } });
 
-        expect(setUserPasswordB).toHaveBeenCalledWith('evenBetterPassword');
+        expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
     });
 
     /** TODO
@@ -214,5 +213,31 @@ describe('LoginModal action tests', () => {
         fireEvent.click(tryStoreUserPasswordButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
+    });
+});
+
+describe('user email logic tests', () => {
+    it('should move to password creation when new email is presented', () => {
+        const email = 'good@email.com';
+
+        const newUserState = userAuthStateFromUserEmail(email);
+
+        expect(newUserState).toEqual(UserAuthState.PASSWORD_CREATION);
+    });
+
+    it('should move to email not valid stage when a bad email is presented', () => {
+        const email = 'this is not an email!';
+
+        const newUserState = userAuthStateFromUserEmail(email);
+
+        expect(newUserState).toEqual(UserAuthState.MAIL_NOT_VALID);
+    });
+
+    it('should move to email already exists stage when already existing mail is presented', () => {
+        const email = 'already@exists.com';
+
+        const newUserState = userAuthStateFromUserEmail(email);
+
+        expect(newUserState).toEqual(UserAuthState.MAIL_ALREADY_EXISTS);
     });
 });
