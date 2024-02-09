@@ -220,6 +220,17 @@ describe('LoginModal action tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_INPUT);
     });
 
+    it('should call password verifier when password shall be created', () => {
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'onePassword', 'anotherPassword');
+        const { container } = render(componentWithStoreProvider);
+        const tryStoreUserPasswordButton = getByText(container, 'next');
+
+        expect(tryStoreUserPasswordButton).toBeInTheDocument();
+        fireEvent.click(tryStoreUserPasswordButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+    });
+
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
         const { container } = render(componentWithStoreProvider);
