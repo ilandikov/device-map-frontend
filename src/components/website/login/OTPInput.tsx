@@ -6,21 +6,24 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
 
     const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
-    const inputElements = inputElementRefs.map((inputElementRef, index) => (
-        <input
-            type="number"
-            pattern="[0-9]"
-            maxLength={1}
-            key={`OTPInput${index}`}
-            data-testid={`OTPInput${index}`}
-            ref={inputElementRef}
-            onFocus={(event) => (event.target.value = '')}
-            onChange={() => {
-                const nextElementToFocus = getNextElementForFocus(index);
-                nextElementToFocus.current.focus();
-            }}
-        />
-    ));
+    const inputElements = inputElementRefs.map((inputElementRef, index) => {
+        const OTPInputUniqueId = `OTPInput${index}`;
+        return (
+            <input
+                type="number"
+                pattern="[0-9]"
+                maxLength={1}
+                key={OTPInputUniqueId}
+                data-testid={OTPInputUniqueId}
+                ref={inputElementRef}
+                onFocus={(event) => (event.target.value = '')}
+                onChange={() => {
+                    const nextElementToFocus = getNextElementForFocus(index);
+                    nextElementToFocus.current.focus();
+                }}
+            />
+        );
+    });
 
     function getNextElementForFocus(index: number) {
         const nextInputIndex = index + 1;
