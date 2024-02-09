@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 
 /* Local dependencies */
-import './advantages.css';
+import './Advantages.scss';
 
 type AdvantageBlockProperties = {
     header: string;

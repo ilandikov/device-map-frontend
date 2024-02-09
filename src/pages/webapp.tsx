@@ -3,8 +3,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 /* Local dependencies */
-
-import Login from '../components/website/login/login';
+import Login from '../components/website/login/Login';
 import Layout from '../components/layout';
 
 export default function WebApp() {

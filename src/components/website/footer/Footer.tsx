@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* Local dependencies */
-import './footer.css';
+import './Footer.scss';
 import Logo from '/src/assets/images/Logo.svg';
 import SocialFacebook from '/src/assets/images/SocialFacebook.svg';
 import SocialTwitter from '/src/assets/images/SocialTwitter.svg';
