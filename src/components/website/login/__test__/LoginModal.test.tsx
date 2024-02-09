@@ -284,6 +284,22 @@ describe('LoginModal action tests', () => {
             expect(OTPInput.value).toEqual('');
         },
     );
+
+    it('should focus on the next empty input after a digit has been input', () => {
+        mockUseUserAuthState(UserAuthState.OTP_INPUT, '');
+        const { container } = render(componentWithStoreProvider);
+        const OTPInput0 = getByTestId(container, 'OTPInput0') as HTMLInputElement;
+        const OTPInput1 = getByTestId(container, 'OTPInput1') as HTMLInputElement;
+        const OTPInput2 = getByTestId(container, 'OTPInput2') as HTMLInputElement;
+        const OTPInput3 = getByTestId(container, 'OTPInput3') as HTMLInputElement;
+        fireEvent.change(OTPInput1, { target: { value: '1' } });
+        fireEvent.change(OTPInput2, { target: { value: '2' } });
+
+        OTPInput0.focus();
+        fireEvent.change(OTPInput0, { target: { value: '1' } });
+
+        expect(OTPInput3).toHaveFocus();
+    });
 });
 
 describe('user email logic tests', () => {

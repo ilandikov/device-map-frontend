@@ -13,6 +13,11 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
             return props.nextButton;
         }
 
+        const valueInNextInput = inputElementRefs[nextInputIndex].current.value;
+        if (valueInNextInput !== '') {
+            return getNextElementForFocus(nextInputIndex);
+        }
+
         return inputElementRefs[nextInputIndex];
     }
 
