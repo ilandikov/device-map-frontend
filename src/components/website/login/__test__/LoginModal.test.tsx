@@ -22,7 +22,12 @@ let setUserAuthState: jest.Mock;
 let setUserEmail: jest.Mock;
 let setUserPassword: jest.Mock;
 let setUserPasswordRepeat: jest.Mock;
-function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEmail: string) {
+function mockUseUserAuthState(
+    initialUserAuthState: UserAuthState,
+    initialUserEmail: string,
+    userPassword: string = '',
+    userPasswordRepeat: string = '',
+) {
     setUserAuthState = jest.fn();
     setUserAuthState.mockImplementation((userAuthState) => userAuthState);
     setUserEmail = jest.fn();
@@ -35,8 +40,8 @@ function mockUseUserAuthState(initialUserAuthState: UserAuthState, initialUserEm
         .fn()
         .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
         .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementationOnce(() => ['', setUserPassword])
-        .mockImplementationOnce(() => ['', setUserPasswordRepeat]);
+        .mockImplementationOnce(() => [userPassword, setUserPassword])
+        .mockImplementationOnce(() => [userPasswordRepeat, setUserPasswordRepeat]);
 }
 
 const store = configureTestStore();
