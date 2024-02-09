@@ -204,6 +204,20 @@ describe('LoginModal action tests', () => {
         expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
     });
 
+    it('should call password verification when next button is pressed', () => {
+        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userStateFromUserPasswords');
+
+        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'passwordOne', 'PasswordTwo');
+        const { container } = render(componentWithStoreProvider);
+
+        const tryVerifyPasswordsButton = getByText(container, 'next');
+
+        expect(tryVerifyPasswordsButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyPasswordsButton);
+
+        expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
+    });
+
     /** TODO
      * This test now tests calling setUserAuthState() which is ONE OF THE ENDPOINTS
      * of the callback on the button. Instead this test should be testing a dispatch
