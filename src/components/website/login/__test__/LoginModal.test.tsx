@@ -8,8 +8,8 @@ import '@testing-library/jest-dom';
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
-import * as userAuthStateUtils from '../userAuthStateUtils';
-import { userAuthStateFromUserEmail } from '../userAuthStateUtils';
+import * as userAuthStateUtils from '../UserAuthStateUtils';
+import { userAuthStateFromUserEmail } from '../UserAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),

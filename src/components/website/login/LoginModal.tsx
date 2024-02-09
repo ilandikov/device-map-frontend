@@ -5,7 +5,7 @@ import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { userAuthStateFromUserEmail } from './userAuthStateUtils';
+import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
 export enum UserAuthState {
     WELCOME,
