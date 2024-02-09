@@ -17,6 +17,7 @@ let store;
 
 export function createStore(): Store {
     const epicMiddleware = createEpicMiddleware();
+    // @ts-ignore
     store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
 
     epicMiddleware.run(rootEpic);
