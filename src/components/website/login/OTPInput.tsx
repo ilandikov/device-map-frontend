@@ -6,21 +6,6 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
 
     const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
-    function getNextElementForFocus(index: number) {
-        const nextInputIndex = index + 1;
-
-        if (nextInputIndex === inputElementRefs.length) {
-            return props.nextButton;
-        }
-
-        const valueInNextInput = inputElementRefs[nextInputIndex].current.value;
-        if (valueInNextInput !== '') {
-            return getNextElementForFocus(nextInputIndex);
-        }
-
-        return inputElementRefs[nextInputIndex];
-    }
-
     const inputElements = [0, 1, 2, 3, 4, 5].map((index) => (
         <input
             type="number"
@@ -36,6 +21,21 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
             }}
         />
     ));
+
+    function getNextElementForFocus(index: number) {
+        const nextInputIndex = index + 1;
+
+        if (nextInputIndex === inputElementRefs.length) {
+            return props.nextButton;
+        }
+
+        const valueInNextInput = inputElementRefs[nextInputIndex].current.value;
+        if (valueInNextInput !== '') {
+            return getNextElementForFocus(nextInputIndex);
+        }
+
+        return inputElementRefs[nextInputIndex];
+    }
 
     return (
         <div className="login-modal-input-outer-container">
