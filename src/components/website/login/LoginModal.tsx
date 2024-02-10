@@ -77,8 +77,9 @@ export function LoginModal() {
                                         }}
                                     />
                                     <PasswordInputBox
-                                        helpText={t('enterPassword')}
                                         userAuthState={userAuthState}
+                                        helpText={t('enterPassword')}
+                                        testId="userPasswordLogin"
                                         onChange={(event) => {
                                             const nextUserState = userAuthStateFromUserPasswords(
                                                 event.target.value,
@@ -86,7 +87,6 @@ export function LoginModal() {
                                             );
                                             setUserState(nextUserState);
                                         }}
-                                        testId="userPasswordLogin"
                                     />
                                 </div>
                             </>

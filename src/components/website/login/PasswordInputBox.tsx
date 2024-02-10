@@ -2,10 +2,10 @@ import React, { ChangeEventHandler } from 'react';
 import { UserAuthState } from './LoginModal';
 
 export function PasswordInputBox(props: {
-    helpText: string;
     userAuthState: UserAuthState;
-    onChange: ChangeEventHandler<HTMLInputElement>;
+    helpText: string;
     testId: string;
+    onChange: ChangeEventHandler<HTMLInputElement>;
 }) {
     return (
         <>

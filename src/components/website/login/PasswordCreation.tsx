@@ -13,16 +13,16 @@ export function PasswordCreation(props: {
     return (
         <>
             <PasswordInputBox
-                helpText={t('enterPassword')}
                 userAuthState={props.userAuthState}
-                onChange={(event) => props.setUserPassword(event.target.value)}
+                helpText={t('enterPassword')}
                 testId="userPassword"
+                onChange={(event) => props.setUserPassword(event.target.value)}
             />
             <PasswordInputBox
-                helpText={t('repeatPassword')}
                 userAuthState={props.userAuthState}
-                onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
+                helpText={t('repeatPassword')}
                 testId="userPasswordRepeat"
+                onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
             />
         </>
     );
