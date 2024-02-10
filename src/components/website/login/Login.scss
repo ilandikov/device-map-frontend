@@ -203,6 +203,10 @@
     color: #FFFFFF;
 }
 
+.login-modal-wrong-input {
+    color: #FF5572;
+}
+
 .login-modal-input-box-container {
     height: 52px;
     width: 340px;
@@ -237,10 +241,6 @@
 
     .login-modal-correct-input {
         color: #ACF709;
-    }
-
-    .login-modal-wrong-input {
-        color: #FF5572;
     }
 
     .login-modal-input-otp-container {
