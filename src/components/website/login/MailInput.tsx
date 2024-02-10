@@ -19,10 +19,10 @@ export function MailInput(props: {
                 }}
             />
             {props.userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
-                <p className="login-modal-wrong-input">{t('mailAlreadyExists')}</p>
+                <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>
             )}
             {props.userAuthState === UserAuthState.MAIL_NOT_VALID && (
-                <p className="login-modal-wrong-input">{t('mailNotValid')}</p>
+                <p className="login-modal-input-help login-modal-wrong-input">{t('mailNotValid')}</p>
             )}
         </>
     );

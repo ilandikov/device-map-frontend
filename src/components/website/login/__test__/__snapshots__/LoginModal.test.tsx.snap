@@ -11,7 +11,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -28,80 +28,76 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-description"
-          >
-            OTPEnter
-          </p>
-          <div
-            className="login-modal-input-otp-container"
-          >
-            <input
-              data-testid="OTPInput0"
-              maxLength={1}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9]"
-              type="number"
-            />
-            <input
-              data-testid="OTPInput1"
-              maxLength={1}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9]"
-              type="number"
-            />
-            <input
-              data-testid="OTPInput2"
-              maxLength={1}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9]"
-              type="number"
-            />
-            <input
-              data-testid="OTPInput3"
-              maxLength={1}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9]"
-              type="number"
-            />
-            <input
-              data-testid="OTPInput4"
-              maxLength={1}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9]"
-              type="number"
-            />
-            <input
-              data-testid="OTPInput5"
-              maxLength={1}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9]"
-              type="number"
-            />
-          </div>
-          <p
-            className="login-modal-input-description login-modal-opaque-text"
-          >
-            OTPExplanation
-          </p>
-          <p
-            className="login-modal-input-description login-modal-correct-input"
-          >
-            OTPSendAgain
-          </p>
+          OTPEnter
+        </p>
+        <div
+          className="login-modal-input-otp-container"
+        >
+          <input
+            data-testid="OTPInput0"
+            maxLength={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            pattern="[0-9]"
+            type="number"
+          />
+          <input
+            data-testid="OTPInput1"
+            maxLength={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            pattern="[0-9]"
+            type="number"
+          />
+          <input
+            data-testid="OTPInput2"
+            maxLength={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            pattern="[0-9]"
+            type="number"
+          />
+          <input
+            data-testid="OTPInput3"
+            maxLength={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            pattern="[0-9]"
+            type="number"
+          />
+          <input
+            data-testid="OTPInput4"
+            maxLength={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            pattern="[0-9]"
+            type="number"
+          />
+          <input
+            data-testid="OTPInput5"
+            maxLength={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            pattern="[0-9]"
+            type="number"
+          />
         </div>
+        <p
+          className="login-modal-input-help login-modal-opaque-text"
+        >
+          OTPExplanation
+        </p>
+        <p
+          className="login-modal-input-help login-modal-correct-input"
+        >
+          OTPSendAgain
+        </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -126,7 +122,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -150,7 +146,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       />
     </div>
   </div>
@@ -168,7 +164,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -185,34 +181,30 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-help"
-          >
-            onlyEmail
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="emailInput"
-              onChange={[Function]}
-              type="email"
-              value=""
-            />
-          </div>
-          <p
-            className="login-modal-wrong-input"
-          >
-            mailAlreadyExists
-          </p>
+          onlyEmail
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="emailInput"
+            onChange={[Function]}
+            type="email"
+            value=""
+          />
         </div>
+        <p
+          className="login-modal-input-help login-modal-wrong-input"
+        >
+          mailAlreadyExists
+        </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-green-on-black"
@@ -243,7 +235,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -260,29 +252,25 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-help"
-          >
-            onlyEmail
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="emailInput"
-              onChange={[Function]}
-              type="email"
-              value=""
-            />
-          </div>
+          onlyEmail
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="emailInput"
+            onChange={[Function]}
+            type="email"
+            value=""
+          />
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -307,7 +295,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -324,34 +312,30 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-help"
-          >
-            onlyEmail
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="emailInput"
-              onChange={[Function]}
-              type="email"
-              value=""
-            />
-          </div>
-          <p
-            className="login-modal-wrong-input"
-          >
-            mailNotValid
-          </p>
+          onlyEmail
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="emailInput"
+            onChange={[Function]}
+            type="email"
+            value=""
+          />
         </div>
+        <p
+          className="login-modal-input-help login-modal-wrong-input"
+        >
+          mailNotValid
+        </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -376,7 +360,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -393,43 +377,39 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-help"
-          >
-            enterPassword
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="userPassword"
-              onChange={[Function]}
-              type="password"
-            />
-          </div>
-          <p
-            className="login-modal-input-help"
-          >
-            repeatPassword
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="userPasswordRepeat"
-              onChange={[Function]}
-              type="password"
-            />
-          </div>
+          enterPassword
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="userPassword"
+            onChange={[Function]}
+            type="password"
+          />
+        </div>
+        <p
+          className="login-modal-input-help"
+        >
+          repeatPassword
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="userPasswordRepeat"
+            onChange={[Function]}
+            type="password"
+          />
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -454,7 +434,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -471,44 +451,40 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-help"
-          >
-            onlyEmail
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="emailInput"
-              onChange={[Function]}
-              type="email"
-              value=""
-            />
-          </div>
-          <p
-            className="login-modal-input-help"
-          >
-            enterPassword
-          </p>
-          <div
-            className="login-modal-input-inner-container"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="userPasswordLogin"
-              onChange={[Function]}
-              type="password"
-            />
-          </div>
+          onlyEmail
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="emailInput"
+            onChange={[Function]}
+            type="email"
+            value=""
+          />
+        </div>
+        <p
+          className="login-modal-input-help"
+        >
+          enterPassword
+        </p>
+        <div
+          className="login-modal-input-box-container"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="userPasswordLogin"
+            onChange={[Function]}
+            type="password"
+          />
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -533,7 +509,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -550,43 +526,39 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
         >
           finikMapProductDescription
         </p>
-        <div
-          className="login-modal-input-outer-container"
+        <p
+          className="login-modal-input-help"
         >
-          <p
-            className="login-modal-input-help"
-          >
-            enterPassword
-          </p>
-          <div
-            className="login-modal-input-inner-container login-modal-input-inner-container-wrong-input"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="userPassword"
-              onChange={[Function]}
-              type="password"
-            />
-          </div>
-          <p
-            className="login-modal-input-help"
-          >
-            repeatPassword
-          </p>
-          <div
-            className="login-modal-input-inner-container login-modal-input-inner-container-wrong-input"
-          >
-            <input
-              className="login-modal-input-text"
-              data-testid="userPasswordRepeat"
-              onChange={[Function]}
-              type="password"
-            />
-          </div>
+          enterPassword
+        </p>
+        <div
+          className="login-modal-input-box-container login-modal-input-wrong"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="userPassword"
+            onChange={[Function]}
+            type="password"
+          />
+        </div>
+        <p
+          className="login-modal-input-help"
+        >
+          repeatPassword
+        </p>
+        <div
+          className="login-modal-input-box-container login-modal-input-wrong"
+        >
+          <input
+            className="login-modal-input-text"
+            data-testid="userPasswordRepeat"
+            onChange={[Function]}
+            type="password"
+          />
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -630,7 +602,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -651,7 +623,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
