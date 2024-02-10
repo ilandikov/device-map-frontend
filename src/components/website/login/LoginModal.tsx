@@ -116,7 +116,7 @@ export function LoginModal() {
                             </>
                         )}
                     </div>
-                    <div className="login-modal-bottom-container">
+                    <div className="login-modal-button-container">
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
                                 <input

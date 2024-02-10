@@ -97,7 +97,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -146,7 +146,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       />
     </div>
   </div>
@@ -204,7 +204,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-green-on-black"
@@ -270,7 +270,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -335,7 +335,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -409,7 +409,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -484,7 +484,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -558,7 +558,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
         </div>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
@@ -623,7 +623,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
         </p>
       </div>
       <div
-        className="login-modal-bottom-container"
+        className="login-modal-button-container"
       >
         <input
           className="login-modal-button-black-on-green"
