@@ -29,7 +29,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-description"
@@ -186,7 +186,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-help"
@@ -261,7 +261,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-help"
@@ -325,7 +325,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-help"
@@ -394,7 +394,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-help"
@@ -472,7 +472,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-help"
@@ -551,7 +551,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
           finikMapProductDescription
         </p>
         <div
-          className="login-modal-input-outer-container"
+          className="login-modal-input-container"
         >
           <p
             className="login-modal-input-help"

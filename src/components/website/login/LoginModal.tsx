@@ -57,7 +57,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-outer-container">
+                                <div className="login-modal-input-container">
                                     <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                                 </div>
                             </>
@@ -68,7 +68,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-outer-container">
+                                <div className="login-modal-input-container">
                                     <MailInputBox
                                         helpText={t('onlyEmail')}
                                         userEmail={userEmail}
@@ -98,7 +98,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-outer-container">
+                                <div className="login-modal-input-container">
                                     <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                                 </div>
                             </>
