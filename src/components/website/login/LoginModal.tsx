@@ -39,7 +39,7 @@ export function LoginModal() {
             <div className="login-modal">
                 {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
-                    <div className="login-modal-top-container">
+                    <div className="login-modal-input-container">
                         <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
                         {userAuthState === UserAuthState.WELCOME && (
                             <>

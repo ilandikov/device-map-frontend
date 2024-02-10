@@ -11,7 +11,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -122,7 +122,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -164,7 +164,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -235,7 +235,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -295,7 +295,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -360,7 +360,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -434,7 +434,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -509,7 +509,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
@@ -602,7 +602,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
       className="login-modal-content-container"
     >
       <div
-        className="login-modal-top-container"
+        className="login-modal-input-container"
       >
         <img
           alt="login-modal-logo"
