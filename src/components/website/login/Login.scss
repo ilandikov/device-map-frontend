@@ -235,10 +235,6 @@
         line-height: 18px;
     }
 
-    .login-modal-input-inner-container-wrong-input {
-        border-color: #FF5572;
-    }
-
     .login-modal-correct-input {
         color: #ACF709;
     }
@@ -265,6 +261,10 @@
             color: #FFFFFF;
         }
     }
+}
+
+.login-modal-input-inner-container-wrong-input {
+    border-color: #FF5572;
 }
 
 .login-modal-bottom-container {
