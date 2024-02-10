@@ -1,5 +1,6 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
+import './OTPInput.scss';
 
 export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
     const { t } = useI18next();
