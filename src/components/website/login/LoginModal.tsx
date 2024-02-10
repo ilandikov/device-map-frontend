@@ -57,9 +57,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-container">
-                                    <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
-                                </div>
+                                <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.PASSWORD_INPUT && (
@@ -68,27 +66,25 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-container">
-                                    <MailInputBox
-                                        helpText={t('onlyEmail')}
-                                        userEmail={userEmail}
-                                        onChange={(event) => {
-                                            setUserEmail(event.target.value);
-                                        }}
-                                    />
-                                    <PasswordInputBox
-                                        userAuthState={userAuthState}
-                                        helpText={t('enterPassword')}
-                                        testId="userPasswordLogin"
-                                        onChange={(event) => {
-                                            const nextUserState = userAuthStateFromUserPasswords(
-                                                event.target.value,
-                                                event.target.value,
-                                            );
-                                            setUserState(nextUserState);
-                                        }}
-                                    />
-                                </div>
+                                <MailInputBox
+                                    helpText={t('onlyEmail')}
+                                    userEmail={userEmail}
+                                    onChange={(event) => {
+                                        setUserEmail(event.target.value);
+                                    }}
+                                />
+                                <PasswordInputBox
+                                    userAuthState={userAuthState}
+                                    helpText={t('enterPassword')}
+                                    testId="userPasswordLogin"
+                                    onChange={(event) => {
+                                        const nextUserState = userAuthStateFromUserPasswords(
+                                            event.target.value,
+                                            event.target.value,
+                                        );
+                                        setUserState(nextUserState);
+                                    }}
+                                />
                             </>
                         )}
                         {(userAuthState === UserAuthState.PASSWORD_CREATION ||
@@ -98,9 +94,7 @@ export function LoginModal() {
                                 <p className="login-modal-header-description login-modal-opaque-text">
                                     {t('finikMapProductDescription')}
                                 </p>
-                                <div className="login-modal-input-container">
-                                    <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
-                                </div>
+                                <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.OTP_INPUT && (
