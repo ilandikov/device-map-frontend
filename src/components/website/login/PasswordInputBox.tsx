@@ -11,7 +11,7 @@ export function PasswordInputBox(props: {
         <>
             <p className="login-modal-input-help">{props.helpText}</p>
             <div
-                className={`login-modal-input-box-container${props.userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR ? ' login-modal-input-inner-container-wrong-input' : ''}`}
+                className={`login-modal-input-box-container${props.userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR ? ' login-modal-input-bad-input' : ''}`}
             >
                 <input
                     className="login-modal-input-text"
