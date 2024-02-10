@@ -1,4 +1,8 @@
-import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from '../UserAuthStateUtils';
+import {
+    userAuthStateFromOTP,
+    userAuthStateFromUserEmail,
+    userAuthStateFromUserPasswords,
+} from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
 
 describe('user email logic tests', () => {
@@ -44,5 +48,13 @@ describe('user password logic tests', () => {
         const nextUserAuthState = userAuthStateFromUserPasswords('', '');
 
         expect(nextUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+    });
+});
+
+describe('OTP logic tests', () => {
+    it('should move to OTP loading stage', () => {
+        const nextUserAuthState = userAuthStateFromOTP();
+
+        expect(nextUserAuthState).toEqual(UserAuthState.OTP_LOADING);
     });
 });

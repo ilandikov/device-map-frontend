@@ -111,6 +111,13 @@ describe('LoginModal snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at OTP loading stage', () => {
+        mockUseUserAuthState(UserAuthState.OTP_LOADING);
+        const component = renderComponentAsJSON();
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 describe('LoginModal action tests - welcome stage', () => {
@@ -309,5 +316,17 @@ describe('LoginModal action tests - OTP stages', () => {
         fireEvent.change(OTPInput0, { target: { value: '1' } });
 
         expect(OTPInput3).toHaveFocus();
+    });
+
+    it('should transition to loading from OTP stage', () => {
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
+        const { container } = render(componentWithStoreProvider);
+
+        const nextButton = getByText(container, 'next');
+        expect(nextButton).toBeInTheDocument();
+
+        fireEvent.click(nextButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_LOADING);
     });
 });

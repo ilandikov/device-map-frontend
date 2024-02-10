@@ -6,7 +6,7 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
 export enum UserAuthState {
     WELCOME,
@@ -17,6 +17,7 @@ export enum UserAuthState {
     PASSWORD_CREATION_MATCH_ERROR,
     PASSWORD_INPUT,
     OTP_INPUT,
+    OTP_LOADING,
 }
 
 export function LoginModal() {
@@ -111,6 +112,15 @@ export function LoginModal() {
                                 <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
+                        {userAuthState === UserAuthState.OTP_LOADING && (
+                            <>
+                                <p className="login-modal-header">{t('register')}</p>
+                                <p className="login-modal-header-description login-modal-opaque-text">
+                                    {t('finikMapProductDescription')}
+                                </p>
+                                <p className="login-modal-input-help">{t('OTPVerifying')}</p>
+                            </>
+                        )}
                     </div>
                     <div className="login-modal-bottom-container">
                         {userAuthState === UserAuthState.WELCOME && (
@@ -195,6 +205,10 @@ export function LoginModal() {
                                     type="button"
                                     value={t('next')}
                                     ref={OTPNextButton}
+                                    onClick={() => {
+                                        const nextUserAuthState = userAuthStateFromOTP();
+                                        setUserState(nextUserAuthState);
+                                    }}
                                 />
                             </>
                         )}
