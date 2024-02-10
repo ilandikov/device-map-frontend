@@ -238,28 +238,28 @@
     .login-modal-correct-input {
         color: #ACF709;
     }
+}
 
-    .login-modal-input-otp-container {
-        width: 340px;
+.login-modal-input-otp-container {
+    width: 340px;
 
-        display: flex;
-        align-content: space-between;
-        gap: 10px;
+    display: flex;
+    align-content: space-between;
+    gap: 10px;
 
-        input {
-            height: 48px;
-            width: 48px;
+    input {
+        height: 48px;
+        width: 48px;
 
-            border: 2px solid #3A3A3A;
-            border-radius: 10px;
+        border: 2px solid #3A3A3A;
+        border-radius: 10px;
 
-            font-size: 32px;
-            font-weight: 500;
-            line-height: 24px;
-            text-align: center;
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 24px;
+        text-align: center;
 
-            color: #FFFFFF;
-        }
+        color: #FFFFFF;
     }
 }
 
