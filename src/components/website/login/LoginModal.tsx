@@ -80,11 +80,11 @@ export function LoginModal() {
                                         helpText={t('enterPassword')}
                                         userAuthState={userAuthState}
                                         onChange={(event) => {
-                                            const nextUserState1 = userAuthStateFromUserPasswords(
+                                            const nextUserState = userAuthStateFromUserPasswords(
                                                 event.target.value,
                                                 event.target.value,
                                             );
-                                            setUserState(nextUserState1);
+                                            setUserState(nextUserState);
                                         }}
                                         testId="userPasswordLogin"
                                     />
