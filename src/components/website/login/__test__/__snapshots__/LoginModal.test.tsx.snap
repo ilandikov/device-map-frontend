@@ -194,7 +194,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
             onlyEmail
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -269,7 +269,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
             onlyEmail
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -333,7 +333,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
             onlyEmail
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -402,7 +402,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
             enterPassword
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -417,7 +417,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
             repeatPassword
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -480,7 +480,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
             onlyEmail
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -496,7 +496,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
             enterPassword
           </p>
           <div
-            className="login-modal-input-inner-container"
+            className="login-modal-input-box-container"
           >
             <input
               className="login-modal-input-text"
@@ -559,7 +559,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
             enterPassword
           </p>
           <div
-            className="login-modal-input-inner-container login-modal-input-inner-container-wrong-input"
+            className="login-modal-input-box-container login-modal-input-inner-container-wrong-input"
           >
             <input
               className="login-modal-input-text"
@@ -574,7 +574,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
             repeatPassword
           </p>
           <div
-            className="login-modal-input-inner-container login-modal-input-inner-container-wrong-input"
+            className="login-modal-input-box-container login-modal-input-inner-container-wrong-input"
           >
             <input
               className="login-modal-input-text"
