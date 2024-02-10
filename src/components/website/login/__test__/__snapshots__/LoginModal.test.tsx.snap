@@ -29,7 +29,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
           finikMapProductDescription
         </p>
         <p
-          className="login-modal-input-description"
+          className="login-modal-input-help"
         >
           OTPEnter
         </p>
@@ -86,12 +86,12 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
           />
         </div>
         <p
-          className="login-modal-input-description login-modal-opaque-text"
+          className="login-modal-input-help login-modal-opaque-text"
         >
           OTPExplanation
         </p>
         <p
-          className="login-modal-input-description login-modal-correct-input"
+          className="login-modal-input-help login-modal-correct-input"
         >
           OTPSendAgain
         </p>
