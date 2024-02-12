@@ -9,7 +9,7 @@ import AppStore from '/src/assets/images/AppStore.svg';
 export function LoginHeader() {
     const { t } = useI18next();
     return (
-        <header className="login-container login-header">
+        <header className="login-header">
             <div className="login-header-block">
                 <img className="login-header-brand-logo" src={LogoGreen} alt="logo" />
                 <p className="login-header-brand-text">{t('map')}</p>

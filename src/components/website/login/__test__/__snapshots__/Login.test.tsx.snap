@@ -5,7 +5,7 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
   className="login-container login-background"
 >
   <header
-    className="login-container login-header"
+    className="login-header"
   >
     <div
       className="login-header-block"
