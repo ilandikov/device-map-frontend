@@ -1,0 +1,63 @@
+.login-header {
+    position: absolute;
+
+    padding: 20px 20px 0 20px;
+
+    width: inherit;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .login-header-block {
+        max-height: 46px;
+
+        background-color: #000000;
+
+        padding: 13px 20px;
+
+        border: 1px solid #454545;
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .login-header-brand-logo {
+        height: 20px;
+        width: 20px;
+    }
+
+    .login-header-brand-text {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
+
+    .login-header-inner-block {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .login-header-account-image {
+        height: 100%;
+        width: 100%;
+    }
+
+    .login-header-account-text {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+
+        color: #FFFFFF;
+
+        text-decoration: underline;
+    }
+}
