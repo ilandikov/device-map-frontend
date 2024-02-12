@@ -47,13 +47,7 @@ const store = configureTestStore();
 
 const componentWithStoreProvider = (
     <Provider store={store}>
-        <div className="login-modal-container">
-            <div className="login-modal">
-                <div className="login-modal-content-container">
-                    <LoginModal />
-                </div>
-            </div>
-        </div>
+        <LoginModal />
     </Provider>
 );
 
