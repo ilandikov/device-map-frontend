@@ -59,7 +59,7 @@ export function LoginModal() {
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
                                 <LoginModalHeader
-                                    header={t('register')}
+                                    header={t('signUp')}
                                     description={t('finikMapProductDescription')}
                                     opaqueDescription={true}
                                 />
@@ -98,7 +98,7 @@ export function LoginModal() {
                             userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                             <>
                                 <LoginModalHeader
-                                    header={t('register')}
+                                    header={t('signUp')}
                                     description={t('finikMapProductDescription')}
                                     opaqueDescription={true}
                                 />
@@ -108,7 +108,7 @@ export function LoginModal() {
                         {userAuthState === UserAuthState.OTP_INPUT && (
                             <>
                                 <LoginModalHeader
-                                    header={t('register')}
+                                    header={t('signUp')}
                                     description={t('finikMapProductDescription')}
                                     opaqueDescription={true}
                                 />
@@ -118,7 +118,7 @@ export function LoginModal() {
                         {userAuthState === UserAuthState.OTP_LOADING && (
                             <>
                                 <LoginModalHeader
-                                    header={t('register')}
+                                    header={t('signUp')}
                                     description={t('finikMapProductDescription')}
                                     opaqueDescription={true}
                                 />

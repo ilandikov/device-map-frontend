@@ -21,7 +21,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
@@ -132,7 +132,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
@@ -174,7 +174,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
@@ -245,7 +245,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
@@ -305,7 +305,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
@@ -370,7 +370,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
@@ -519,7 +519,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
         <p
           className="login-modal-header"
         >
-          register
+          signUp
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"
