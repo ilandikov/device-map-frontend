@@ -44,6 +44,21 @@ export function LoginModal() {
                             <div className="login-modal-input-container">
                                 <WelcomeHeader />
                             </div>
+                            <div className="login-modal-button-container">
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('accountLogin')}
+                                />
+                                <input
+                                    className="login-modal-button-green-on-black"
+                                    type="button"
+                                    value={t('accountRegister')}
+                                    onClick={() => {
+                                        nextUserState();
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
                     {(userAuthState === UserAuthState.MAIL_INPUT_START ||
@@ -127,23 +142,6 @@ export function LoginModal() {
                                 <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                             </div>
                         </>
-                    )}
-                    {userAuthState === UserAuthState.WELCOME && (
-                        <div className="login-modal-button-container">
-                            <input
-                                className="login-modal-button-black-on-green"
-                                type="button"
-                                value={t('accountLogin')}
-                            />
-                            <input
-                                className="login-modal-button-green-on-black"
-                                type="button"
-                                value={t('accountRegister')}
-                                onClick={() => {
-                                    nextUserState();
-                                }}
-                            />
-                        </div>
                     )}
                     {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                         userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
