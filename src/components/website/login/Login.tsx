@@ -4,13 +4,19 @@ import React from 'react';
 /* Local dependencies */
 import './Login.scss';
 import { LoginHeader } from './LoginHeader';
-import { LoginModal } from './LoginModal';
+import { AppleSauce } from './LoginModal';
 
 export default function Login() {
     return (
         <div className="login-container login-background">
             <LoginHeader />
-            <LoginModal />
+            <div className="login-modal-container">
+                <div className="login-modal">
+                    <div className="login-modal-content-container">
+                        <AppleSauce />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

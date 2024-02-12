@@ -21,7 +21,7 @@ export enum UserAuthState {
     OTP_LOADING,
 }
 
-function AppleSauce() {
+export function AppleSauce() {
     const { t } = useI18next();
 
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
@@ -174,17 +174,5 @@ function AppleSauce() {
                 </>
             )}
         </>
-    );
-}
-
-export function LoginModal() {
-    return (
-        <div className="login-modal-container">
-            <div className="login-modal">
-                <div className="login-modal-content-container">
-                    <AppleSauce />
-                </div>
-            </div>
-        </div>
     );
 }
