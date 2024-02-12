@@ -40,6 +40,14 @@ function SignUpHeader() {
     );
 }
 
+function LogInHeader() {
+    const { t } = useI18next();
+
+    return (
+        <LoginModalHeader header={t('logIn')} description={t('finikMapProductDescription')} opaqueDescription={true} />
+    );
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -72,11 +80,7 @@ export function LoginModal() {
                         )}
                         {userAuthState === UserAuthState.PASSWORD_INPUT && (
                             <>
-                                <LoginModalHeader
-                                    header={t('logIn')}
-                                    description={t('finikMapProductDescription')}
-                                    opaqueDescription={true}
-                                />
+                                <LogInHeader />
                                 <MailInputBox
                                     helpText={t('onlyEmail')}
                                     userEmail={userEmail}
