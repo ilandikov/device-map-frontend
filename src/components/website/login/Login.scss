@@ -148,7 +148,6 @@
 
 .login-modal-content-container {
     height: 100%;
-    padding: 46px 0 32px 0;
 
     display: flex;
     flex-direction: column;
@@ -159,6 +158,8 @@
 .login-modal-input-container {
     max-width: 340px;
     width: 100%;
+
+    padding-top: 46px;
 
     display: flex;
     flex-direction: column;
@@ -245,6 +246,8 @@
 }
 
 .login-modal-button-container {
+    padding-bottom: 32px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
