@@ -97,58 +97,8 @@
     text-align: center;
 }
 
-.login-ellipses-container {
-    max-width: inherit;
-    max-height: inherit;
-
-    width: 100%;
-    height: 100%;
-
-    position: absolute;
-
-    z-index: -1;
-
-    border-radius: inherit;
-    opacity: 0.4;
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.login-ellipse-left-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.login-ellipse-right-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.login-ellipse {
-    width: 335px;
-    height: 335px;
-    opacity: 0.6;
-    border-radius: 50%;
-    filter: blur(50px);
-}
-.login-ellipse-green {
-    transform: translate(-45%, -10%);
-    background: #72CC00;
-}
-
-.login-ellipse-blue {
-    transform: translate(60%, 30%);
-    background: #26FFF2;
-}
-
 .login-modal-content-container {
     height: 100%;
-    padding: 46px 0 32px 0;
 
     display: flex;
     flex-direction: column;
@@ -159,6 +109,8 @@
 .login-modal-input-container {
     max-width: 340px;
     width: 100%;
+
+    padding-top: 46px;
 
     display: flex;
     flex-direction: column;
@@ -245,6 +197,8 @@
 }
 
 .login-modal-button-container {
+    padding-bottom: 32px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
