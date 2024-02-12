@@ -612,9 +612,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
         <p
           className="login-modal-header"
         >
-          brand
-           
-          map
+          brand map
         </p>
         <p
           className="login-modal-header-description"

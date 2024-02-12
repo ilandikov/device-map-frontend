@@ -43,9 +43,7 @@ export function LoginModal() {
                         <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
-                                <p className="login-modal-header">
-                                    {t('brand')} {t('map')}
-                                </p>
+                                <p className="login-modal-header">{`${t('brand')} ${t('map')}`}</p>
                                 <p className="login-modal-header-description">{t('loginCallToAction')}</p>
                             </>
                         )}
