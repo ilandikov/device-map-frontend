@@ -115,35 +115,35 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
 
-.login-ellipse-left-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
+    .login-ellipse-left-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 
-.login-ellipse-right-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
+    .login-ellipse-right-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
 
-.login-ellipse {
-    width: 335px;
-    height: 335px;
-    opacity: 0.6;
-    border-radius: 50%;
-    filter: blur(50px);
-}
-.login-ellipse-green {
-    transform: translate(-45%, -10%);
-    background: #72CC00;
-}
+    .login-ellipse {
+        width: 335px;
+        height: 335px;
+        opacity: 0.6;
+        border-radius: 50%;
+        filter: blur(50px);
+    }
+    .login-ellipse-green {
+        transform: translate(-45%, -10%);
+        background: #72CC00;
+    }
 
-.login-ellipse-blue {
-    transform: translate(60%, 30%);
-    background: #26FFF2;
+    .login-ellipse-blue {
+        transform: translate(60%, 30%);
+        background: #26FFF2;
+    }
 }
 
 .login-modal-content-container {
