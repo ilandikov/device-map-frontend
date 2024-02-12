@@ -8,6 +8,7 @@ import { OTPInput } from './OTPInput';
 import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
+import './LoginModal.scss';
 
 export enum UserAuthState {
     WELCOME,
