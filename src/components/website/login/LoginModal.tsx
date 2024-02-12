@@ -7,7 +7,7 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
-import { LoginModalHeader } from './LoginModalHeader';
+import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 
 export enum UserAuthState {
     WELCOME,
@@ -19,33 +19,6 @@ export enum UserAuthState {
     PASSWORD_INPUT,
     OTP_INPUT,
     OTP_LOADING,
-}
-
-function WelcomeHeader() {
-    const { t } = useI18next();
-    return (
-        <LoginModalHeader
-            header={`${t('brand')} ${t('map')}`}
-            description={t('loginCallToAction')}
-            opaqueDescription={false}
-        />
-    );
-}
-
-function SignUpHeader() {
-    const { t } = useI18next();
-
-    return (
-        <LoginModalHeader header={t('signUp')} description={t('finikMapProductDescription')} opaqueDescription={true} />
-    );
-}
-
-function LogInHeader() {
-    const { t } = useI18next();
-
-    return (
-        <LoginModalHeader header={t('logIn')} description={t('finikMapProductDescription')} opaqueDescription={true} />
-    );
 }
 
 export function LoginModal() {
