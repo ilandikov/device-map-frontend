@@ -32,6 +32,14 @@ function WelcomeHeader() {
     );
 }
 
+function SignUpHeader() {
+    const { t } = useI18next();
+
+    return (
+        <LoginModalHeader header={t('signUp')} description={t('finikMapProductDescription')} opaqueDescription={true} />
+    );
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -117,11 +125,7 @@ export function LoginModal() {
                         )}
                         {userAuthState === UserAuthState.OTP_LOADING && (
                             <>
-                                <LoginModalHeader
-                                    header={t('signUp')}
-                                    description={t('finikMapProductDescription')}
-                                    opaqueDescription={true}
-                                />
+                                <SignUpHeader />
                                 <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                             </>
                         )}
