@@ -232,6 +232,20 @@ describe('LoginModal action tests - password creation stages', () => {
 });
 
 describe('LoginModal action tests - OTP stages', () => {
+    it('should transition to loading from OTP stage', () => {
+        mockUseUserAuthState(UserAuthState.OTP_INPUT);
+        const { container } = render(componentWithStoreProvider);
+
+        const nextButton = getByText(container, 'next');
+        expect(nextButton).toBeInTheDocument();
+
+        fireEvent.click(nextButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_LOADING);
+    });
+});
+
+describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         mockUseUserAuthState(UserAuthState.OTP_INPUT);
         const { container } = render(componentWithStoreProvider);
@@ -316,17 +330,5 @@ describe('LoginModal action tests - OTP stages', () => {
         fireEvent.change(OTPInput0, { target: { value: '1' } });
 
         expect(OTPInput3).toHaveFocus();
-    });
-
-    it('should transition to loading from OTP stage', () => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT);
-        const { container } = render(componentWithStoreProvider);
-
-        const nextButton = getByText(container, 'next');
-        expect(nextButton).toBeInTheDocument();
-
-        fireEvent.click(nextButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_LOADING);
     });
 });
