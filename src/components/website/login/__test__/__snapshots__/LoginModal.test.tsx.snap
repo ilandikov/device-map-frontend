@@ -444,7 +444,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
         <p
           className="login-modal-header"
         >
-          entrance
+          logIn
         </p>
         <p
           className="login-modal-header-description login-modal-opaque-text"

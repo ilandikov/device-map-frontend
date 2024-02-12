@@ -73,7 +73,7 @@ export function LoginModal() {
                         {userAuthState === UserAuthState.PASSWORD_INPUT && (
                             <>
                                 <LoginModalHeader
-                                    header={t('entrance')}
+                                    header={t('logIn')}
                                     description={t('finikMapProductDescription')}
                                     opaqueDescription={true}
                                 />
