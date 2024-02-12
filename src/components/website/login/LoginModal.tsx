@@ -41,9 +41,8 @@ export function LoginModal() {
             {userAuthState === UserAuthState.WELCOME && (
                 <>
                     <Ellipses />
-                    <div className="login-modal-input-container">
-                        <WelcomeHeader />
-                    </div>
+                    <WelcomeHeader />
+                    <div className="login-modal-input-container"></div>
                     <div className="login-modal-button-container">
                         <input className="login-modal-button-black-on-green" type="button" value={t('accountLogin')} />
                         <input
@@ -61,8 +60,8 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
+                    <SignUpHeader />
                     <div className="login-modal-input-container">
-                        <SignUpHeader />
                         <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                     </div>
                     <div className="login-modal-button-container">
@@ -90,8 +89,8 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
+                    <LogInHeader />
                     <div className="login-modal-input-container">
-                        <LogInHeader />
                         <MailInputBox
                             helpText={t('onlyEmail')}
                             userEmail={userEmail}
@@ -128,8 +127,8 @@ export function LoginModal() {
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
+                    <SignUpHeader />
                     <div className="login-modal-input-container">
-                        <SignUpHeader />
                         <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                     </div>
                     <div className="login-modal-button-container">
@@ -147,8 +146,8 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.OTP_INPUT && (
                 <>
+                    <SignUpHeader />
                     <div className="login-modal-input-container">
-                        <SignUpHeader />
                         <OTPInput nextButton={OTPNextButton} />
                     </div>
                     <div className="login-modal-button-container">
@@ -167,8 +166,8 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.OTP_LOADING && (
                 <>
+                    <SignUpHeader />
                     <div className="login-modal-input-container">
-                        <SignUpHeader />
                         <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                     </div>
                     <div className="login-modal-button-container"></div>

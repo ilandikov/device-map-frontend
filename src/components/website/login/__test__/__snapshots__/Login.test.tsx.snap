@@ -82,28 +82,27 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="login-modal-input-container"
+          className="login-modal-header-container"
         >
-          <div
-            className="login-modal-header-container"
+          <img
+            alt="login-modal-logo"
+            className="login-modal-logo"
+            src="test-file-stub"
+          />
+          <p
+            className="login-modal-header"
           >
-            <img
-              alt="login-modal-logo"
-              className="login-modal-logo"
-              src="test-file-stub"
-            />
-            <p
-              className="login-modal-header"
-            >
-              brand map
-            </p>
-            <p
-              className="login-modal-header-description"
-            >
-              loginCallToAction
-            </p>
-          </div>
+            brand map
+          </p>
+          <p
+            className="login-modal-header-description"
+          >
+            loginCallToAction
+          </p>
         </div>
+        <div
+          className="login-modal-input-container"
+        />
         <div
           className="login-modal-button-container"
         >
