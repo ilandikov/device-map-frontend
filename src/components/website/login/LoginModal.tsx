@@ -34,6 +34,8 @@ export function LoginModal() {
         setUserState(userAuthState + 1);
     }
 
+    const header = `${t('brand')} ${t('map')}`;
+    const description = t('loginCallToAction');
     return (
         <div className="login-modal-container">
             <div className="login-modal">
@@ -43,8 +45,8 @@ export function LoginModal() {
                         <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
-                                <p className="login-modal-header">{`${t('brand')} ${t('map')}`}</p>
-                                <p className="login-modal-header-description">{t('loginCallToAction')}</p>
+                                <p className="login-modal-header">{header}</p>
+                                <p className="login-modal-header-description">{description}</p>
                             </>
                         )}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
