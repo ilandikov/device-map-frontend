@@ -46,6 +46,7 @@ export function LoginModal() {
                             <LoginModalHeader
                                 header={`${t('brand')} ${t('map')}`}
                                 description={t('loginCallToAction')}
+                                opaqueDescription={false}
                             />
                         )}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
