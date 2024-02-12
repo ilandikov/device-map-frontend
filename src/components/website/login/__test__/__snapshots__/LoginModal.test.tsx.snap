@@ -580,27 +580,27 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
     className="login-modal"
   >
     <div
-      className="login-ellipses-container"
-      data-testid="ellipses"
-    >
-      <div
-        className="login-ellipse-left-container"
-      >
-        <div
-          className="login-ellipse login-ellipse-green"
-        />
-      </div>
-      <div
-        className="login-ellipse-right-container"
-      >
-        <div
-          className="login-ellipse login-ellipse-blue"
-        />
-      </div>
-    </div>
-    <div
       className="login-modal-content-container"
     >
+      <div
+        className="login-ellipses-container"
+        data-testid="ellipses"
+      >
+        <div
+          className="login-ellipse-left-container"
+        >
+          <div
+            className="login-ellipse login-ellipse-green"
+          />
+        </div>
+        <div
+          className="login-ellipse-right-container"
+        >
+          <div
+            className="login-ellipse login-ellipse-blue"
+          />
+        </div>
+      </div>
       <div
         className="login-modal-input-container"
       >

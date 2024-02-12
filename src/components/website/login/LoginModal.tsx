@@ -37,10 +37,10 @@ export function LoginModal() {
     return (
         <div className="login-modal-container">
             <div className="login-modal">
-                {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
                     {userAuthState === UserAuthState.WELCOME && (
                         <>
+                            {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                             <div className="login-modal-input-container">
                                 <WelcomeHeader />
                             </div>
