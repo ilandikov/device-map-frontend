@@ -66,11 +66,7 @@ export function LoginModal() {
                             userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
-                                <LoginModalHeader
-                                    header={t('signUp')}
-                                    description={t('finikMapProductDescription')}
-                                    opaqueDescription={true}
-                                />
+                                <SignUpHeader />
                                 <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                             </>
                         )}
@@ -105,21 +101,13 @@ export function LoginModal() {
                         {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                             userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                             <>
-                                <LoginModalHeader
-                                    header={t('signUp')}
-                                    description={t('finikMapProductDescription')}
-                                    opaqueDescription={true}
-                                />
+                                <SignUpHeader />
                                 <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.OTP_INPUT && (
                             <>
-                                <LoginModalHeader
-                                    header={t('signUp')}
-                                    description={t('finikMapProductDescription')}
-                                    opaqueDescription={true}
-                                />
+                                <SignUpHeader />
                                 <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
