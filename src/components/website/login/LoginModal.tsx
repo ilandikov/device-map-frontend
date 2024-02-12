@@ -54,6 +54,27 @@ export function LoginModal() {
                                 <SignUpHeader />
                                 <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                             </div>
+                            <div className="login-modal-button-container">
+                                {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
+                                    <input
+                                        className="login-modal-button-green-on-black"
+                                        type="button"
+                                        value={t('accountLogin')}
+                                        onClick={() => {
+                                            setUserState(UserAuthState.PASSWORD_INPUT);
+                                        }}
+                                    />
+                                )}
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('next')}
+                                    onClick={() => {
+                                        const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
+                                        setUserState(nextUserAuthState);
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
                     {userAuthState === UserAuthState.PASSWORD_INPUT && (
@@ -120,31 +141,6 @@ export function LoginModal() {
                                 value={t('accountRegister')}
                                 onClick={() => {
                                     nextUserState();
-                                }}
-                            />
-                        </div>
-                    )}
-                    {(userAuthState === UserAuthState.MAIL_INPUT_START ||
-                        userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
-                        userAuthState === UserAuthState.MAIL_NOT_VALID) && (
-                        <div className="login-modal-button-container">
-                            {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
-                                <input
-                                    className="login-modal-button-green-on-black"
-                                    type="button"
-                                    value={t('accountLogin')}
-                                    onClick={() => {
-                                        setUserState(UserAuthState.PASSWORD_INPUT);
-                                    }}
-                                />
-                            )}
-                            <input
-                                className="login-modal-button-black-on-green"
-                                type="button"
-                                value={t('next')}
-                                onClick={() => {
-                                    const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
-                                    setUserState(nextUserAuthState);
                                 }}
                             />
                         </div>
