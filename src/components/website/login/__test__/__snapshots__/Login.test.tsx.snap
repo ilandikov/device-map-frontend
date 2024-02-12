@@ -82,7 +82,7 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="login-modal-input-container"
+          className="login-modal-header-container"
         >
           <img
             alt="login-modal-logo"
@@ -100,6 +100,9 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
             loginCallToAction
           </p>
         </div>
+        <div
+          className="login-modal-input-container"
+        />
         <div
           className="login-modal-button-container"
         >

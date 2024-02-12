@@ -3,7 +3,7 @@
 exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -20,6 +20,10 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -104,7 +108,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
 exports[`LoginModal snapshot tests should match the snapshot at OTP loading stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -121,6 +125,10 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -136,7 +144,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
 exports[`LoginModal snapshot tests should match the snapshot at mail exists stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -153,6 +161,10 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -197,7 +209,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
 exports[`LoginModal snapshot tests should match the snapshot at mail input stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -214,6 +226,10 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -247,7 +263,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
 exports[`LoginModal snapshot tests should match the snapshot at mail not valid stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -264,6 +280,10 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -302,7 +322,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -319,6 +339,10 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -366,7 +390,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 2`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -383,6 +407,10 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -431,7 +459,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 exports[`LoginModal snapshot tests should match the snapshot at password not match stage 1`] = `
 [
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -448,6 +476,10 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
     >
       finikMapProductDescription
     </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
     <p
       className="login-modal-input-help"
     >
@@ -513,7 +545,7 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
     </div>
   </div>,
   <div
-    className="login-modal-input-container"
+    className="login-modal-header-container"
   >
     <img
       alt="login-modal-logo"
@@ -531,6 +563,9 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
       loginCallToAction
     </p>
   </div>,
+  <div
+    className="login-modal-input-container"
+  />,
   <div
     className="login-modal-button-container"
   >
