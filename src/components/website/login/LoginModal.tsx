@@ -7,6 +7,7 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 
 export enum UserAuthState {
     WELCOME,
@@ -41,31 +42,18 @@ export function LoginModal() {
                 <div className="login-modal-content-container">
                     <div className="login-modal-input-container">
                         <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
-                        {userAuthState === UserAuthState.WELCOME && (
-                            <>
-                                <p className="login-modal-header">
-                                    {t('brand')} {t('map')}
-                                </p>
-                                <p className="login-modal-header-description">{t('loginCallToAction')}</p>
-                            </>
-                        )}
+                        {userAuthState === UserAuthState.WELCOME && <WelcomeHeader />}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
                             userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <SignUpHeader />
                                 <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.PASSWORD_INPUT && (
                             <>
-                                <p className="login-modal-header">{t('entrance')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <LogInHeader />
                                 <MailInputBox
                                     helpText={t('onlyEmail')}
                                     userEmail={userEmail}
@@ -90,28 +78,19 @@ export function LoginModal() {
                         {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                             userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <SignUpHeader />
                                 <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.OTP_INPUT && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <SignUpHeader />
                                 <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
                         {userAuthState === UserAuthState.OTP_LOADING && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <SignUpHeader />
                                 <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                             </>
                         )}

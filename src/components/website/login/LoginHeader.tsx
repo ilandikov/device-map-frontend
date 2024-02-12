@@ -17,7 +17,7 @@ export function LoginHeader() {
             <div className="login-header-block">
                 <div className="login-header-inner-block">
                     <img className="login-header-account-image" src={Account} alt="login-header-account" />
-                    <p className="login-header-account-text">{t('login')}</p>
+                    <p className="login-header-account-text">{t('loginAction')}</p>
                 </div>
                 <div className="login-header-inner-block">
                     <img
