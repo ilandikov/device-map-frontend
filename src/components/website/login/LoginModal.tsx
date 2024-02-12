@@ -181,11 +181,8 @@ export function LoginModal() {
                                 <SignUpHeader />
                                 <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                             </div>
+                            <div className="login-modal-button-container"></div>
                         </>
-                    )}
-
-                    {userAuthState === UserAuthState.OTP_LOADING && (
-                        <div className="login-modal-button-container"></div>
                     )}
                 </div>
             </div>
