@@ -7,6 +7,7 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
+import { Ellipses } from './Ellipses/Ellipses';
 
 export enum UserAuthState {
     WELCOME,
@@ -185,19 +186,6 @@ export function LoginModal() {
                         </>
                     )}
                 </div>
-            </div>
-        </div>
-    );
-}
-
-function Ellipses() {
-    return (
-        <div className="login-ellipses-container" data-testid="ellipses">
-            <div className="login-ellipse-left-container">
-                <div className="login-ellipse login-ellipse-green"></div>
-            </div>
-            <div className="login-ellipse-right-container">
-                <div className="login-ellipse login-ellipse-blue"></div>
             </div>
         </div>
     );
