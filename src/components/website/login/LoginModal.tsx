@@ -21,7 +21,7 @@ export enum UserAuthState {
     OTP_LOADING,
 }
 
-export function AppleSauce() {
+export function LoginModal() {
     const { t } = useI18next();
 
     const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);

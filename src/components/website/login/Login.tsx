@@ -4,7 +4,7 @@ import React from 'react';
 /* Local dependencies */
 import './Login.scss';
 import { LoginHeader } from './LoginHeader';
-import { AppleSauce } from './LoginModal';
+import { LoginModal } from './LoginModal';
 
 export default function Login() {
     return (
@@ -13,7 +13,7 @@ export default function Login() {
             <div className="login-modal-container">
                 <div className="login-modal">
                     <div className="login-modal-content-container">
-                        <AppleSauce />
+                        <LoginModal />
                     </div>
                 </div>
             </div>

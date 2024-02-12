@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
-import { AppleSauce, UserAuthState } from '../LoginModal';
+import { LoginModal, UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -50,7 +50,7 @@ const componentWithStoreProvider = (
         <div className="login-modal-container">
             <div className="login-modal">
                 <div className="login-modal-content-container">
-                    <AppleSauce />
+                    <LoginModal />
                 </div>
             </div>
         </div>
