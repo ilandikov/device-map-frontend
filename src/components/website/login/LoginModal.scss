@@ -18,6 +18,16 @@
   height: 100%;
 }
 
+.login-modal-header-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
 .login-modal-header {
   font-size: 40px;
   font-weight: 500;
