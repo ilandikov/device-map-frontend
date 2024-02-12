@@ -3,7 +3,7 @@ import './Ellipses.scss';
 
 export function Ellipses() {
     return (
-        <div className="login-ellipses-container" data-testid="ellipses">
+        <div className="login-ellipses-container">
             <div className="login-ellipse-left-container">
                 <div className="login-ellipse login-ellipse-green"></div>
             </div>

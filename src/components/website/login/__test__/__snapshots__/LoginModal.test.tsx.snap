@@ -584,7 +584,6 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
     >
       <div
         className="login-ellipses-container"
-        data-testid="ellipses"
       >
         <div
           className="login-ellipse-left-container"
