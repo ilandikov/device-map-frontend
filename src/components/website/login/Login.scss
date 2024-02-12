@@ -1,10 +1,8 @@
-.login-container {
+.login-background-container {
     width: 1440px;
 
     margin: 0 auto;
-}
 
-.login-background {
     background-image: url(../../../assets/images/GoogleMaps.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,69 +10,7 @@
     height: 100vh;
 }
 
-.login-header {
-    position: absolute;
-
-    padding: 20px 20px 0 20px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.login-header-block {
-    max-height: 46px;
-    
-    background-color: #000000;
-
-    padding: 13px 20px;
-
-    border: 1px solid #454545;
-    border-radius: 10px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.login-header-brand-logo {
-    height: 20px;
-    width: 20px;
-}
-
-.login-header-brand-text {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 19px;
-    color: #FFFFFF;
-}
-
-.login-header-inner-block {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-}
-
-.login-header-account-image {
-    height: 100%;
-    width: 100%;
-}
-
-.login-header-account-text {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 17px;
-
-    color: #FFFFFF;
-
-    text-decoration: underline;
-}
-
-.login-modal-container {
+.login-content-container {
     height: 100%;
 
     display: flex;
@@ -82,7 +18,7 @@
     align-items: center;
 }
 
-.login-modal {
+.login-window {
     max-width: 690px;
     max-height: 516px;
 
@@ -97,134 +33,11 @@
     text-align: center;
 }
 
-.login-modal-content-container {
+.login-window-content-container {
     height: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
-
-.login-modal-input-container {
-    max-width: 340px;
-    width: 100%;
-
-    padding-top: 46px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-}
-
-.login-modal-logo {
-    max-width: 46px;
-    max-height: 46px;
-    width: 100%;
-    height: 100%;
-}
-
-.login-modal-header {
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 39px;
-    color: #FFFFFF;
-}
-
-.login-modal-header-description {
-    text-align: center;
-
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #FFFFFF;
-}
-
-.login-modal-opaque-text {
-    opacity: 50%;
-}
-
-.login-modal-input-help {
-    margin-right: auto;
-
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 17px;
-    color: #FFFFFF;
-}
-
-.login-modal-wrong-input {
-    color: #FF5572;
-}
-
-.login-modal-input-box-container {
-    height: 52px;
-    width: 340px;
-
-    background-color: #222222;
-
-    border: 2px solid #3A3A3A;
-    border-radius: 10px;
-
-    padding: 0 14px;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-
-    .login-modal-input-envelope-image {
-        width: 20px;
-        height: 16px;
-    }
-
-    .login-modal-input-text {
-        color: #FFFFFF;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 18px;
-    }
-
-    .login-modal-correct-input {
-        color: #ACF709;
-    }
-}
-
-.login-modal-input-wrong {
-    border-color: #FF5572;
-}
-
-.login-modal-button-container {
-    padding-bottom: 32px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
-
-    /* This container shall have only buttons */
-    input {
-        height: 52px;
-        width: 340px;
-
-        border-radius: 10px;
-
-        text-align: center;
-
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 22px;
-    }
-
-    .login-modal-button-black-on-green {
-        color: #000000;
-        background-color: #ACF709;
-    }
-
-    .login-modal-button-green-on-black {
-        color: #ACF709;
-        background-color: #000000;
-    }
 }

@@ -2,10 +2,10 @@
 
 exports[`Login snapshot tests should match the snapshot 1`] = `
 <div
-  className="login-container login-background"
+  className="login-background-container"
 >
   <header
-    className="login-container login-header"
+    className="login-header"
   >
     <div
       className="login-header-block"
@@ -55,13 +55,13 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
     </div>
   </header>
   <div
-    className="login-modal-container"
+    className="login-content-container"
   >
     <div
-      className="login-modal"
+      className="login-window"
     >
       <div
-        className="login-modal-content-container"
+        className="login-window-content-container"
       >
         <div
           className="login-ellipses-container"

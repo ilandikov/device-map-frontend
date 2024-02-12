@@ -1,6 +1,8 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
+import './LoginHeader.scss';
+
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
@@ -9,7 +11,7 @@ import AppStore from '/src/assets/images/AppStore.svg';
 export function LoginHeader() {
     const { t } = useI18next();
     return (
-        <header className="login-container login-header">
+        <header className="login-header">
             <div className="login-header-block">
                 <img className="login-header-brand-logo" src={LogoGreen} alt="logo" />
                 <p className="login-header-brand-text">{t('map')}</p>
