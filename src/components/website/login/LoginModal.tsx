@@ -21,6 +21,17 @@ export enum UserAuthState {
     OTP_LOADING,
 }
 
+function WelcomeHeader() {
+    const { t } = useI18next();
+    return (
+        <LoginModalHeader
+            header={`${t('brand')} ${t('map')}`}
+            description={t('loginCallToAction')}
+            opaqueDescription={false}
+        />
+    );
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -42,13 +53,7 @@ export function LoginModal() {
                 <div className="login-modal-content-container">
                     <div className="login-modal-input-container">
                         <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
-                        {userAuthState === UserAuthState.WELCOME && (
-                            <LoginModalHeader
-                                header={`${t('brand')} ${t('map')}`}
-                                description={t('loginCallToAction')}
-                                opaqueDescription={false}
-                            />
-                        )}
+                        {userAuthState === UserAuthState.WELCOME && <WelcomeHeader />}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
                             userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
