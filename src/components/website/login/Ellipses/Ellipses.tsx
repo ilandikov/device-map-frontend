@@ -1,4 +1,5 @@
 import React from 'react';
+import './Ellipses.scss';
 
 export function Ellipses() {
     return (
