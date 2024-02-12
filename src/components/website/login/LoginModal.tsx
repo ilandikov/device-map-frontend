@@ -40,7 +40,7 @@ export function LoginModal() {
                 <div className="login-modal-content-container">
                     {userAuthState === UserAuthState.WELCOME && (
                         <>
-                            {userAuthState === UserAuthState.WELCOME && <Ellipses />}
+                            <Ellipses />
                             <div className="login-modal-input-container">
                                 <WelcomeHeader />
                             </div>
