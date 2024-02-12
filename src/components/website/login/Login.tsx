@@ -8,11 +8,11 @@ import { LoginModal } from './LoginModal';
 
 export default function Login() {
     return (
-        <div className="login-container">
+        <div className="login-background-container">
             <LoginHeader />
-            <div className="login-modal-container">
-                <div className="login-modal">
-                    <div className="login-modal-content-container">
+            <div className="login-content-container">
+                <div className="login-window">
+                    <div className="login-window-content-container">
                         <LoginModal />
                     </div>
                 </div>

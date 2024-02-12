@@ -1,4 +1,4 @@
-.login-container {
+.login-background-container {
     width: 1440px;
 
     margin: 0 auto;
@@ -10,7 +10,7 @@
     height: 100vh;
 }
 
-.login-modal-container {
+.login-content-container {
     height: 100%;
 
     display: flex;
@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-.login-modal {
+.login-window {
     max-width: 690px;
     max-height: 516px;
 
@@ -33,7 +33,7 @@
     text-align: center;
 }
 
-.login-modal-content-container {
+.login-window-content-container {
     height: 100%;
 
     display: flex;
