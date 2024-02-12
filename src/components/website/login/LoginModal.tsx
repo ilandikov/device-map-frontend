@@ -53,19 +53,21 @@ export function LoginModal() {
                             userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                             userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <LoginModalHeader
+                                    header={t('register')}
+                                    description={t('finikMapProductDescription')}
+                                    opaqueDescription={true}
+                                />
                                 <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.PASSWORD_INPUT && (
                             <>
-                                <p className="login-modal-header">{t('entrance')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <LoginModalHeader
+                                    header={t('entrance')}
+                                    description={t('finikMapProductDescription')}
+                                    opaqueDescription={true}
+                                />
                                 <MailInputBox
                                     helpText={t('onlyEmail')}
                                     userEmail={userEmail}
@@ -90,28 +92,31 @@ export function LoginModal() {
                         {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                             userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <LoginModalHeader
+                                    header={t('register')}
+                                    description={t('finikMapProductDescription')}
+                                    opaqueDescription={true}
+                                />
                                 <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                             </>
                         )}
                         {userAuthState === UserAuthState.OTP_INPUT && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <LoginModalHeader
+                                    header={t('register')}
+                                    description={t('finikMapProductDescription')}
+                                    opaqueDescription={true}
+                                />
                                 <OTPInput nextButton={OTPNextButton} />
                             </>
                         )}
                         {userAuthState === UserAuthState.OTP_LOADING && (
                             <>
-                                <p className="login-modal-header">{t('register')}</p>
-                                <p className="login-modal-header-description login-modal-opaque-text">
-                                    {t('finikMapProductDescription')}
-                                </p>
+                                <LoginModalHeader
+                                    header={t('register')}
+                                    description={t('finikMapProductDescription')}
+                                    opaqueDescription={true}
+                                />
                                 <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                             </>
                         )}
