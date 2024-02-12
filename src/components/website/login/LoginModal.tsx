@@ -39,60 +39,62 @@ export function LoginModal() {
             <div className="login-modal">
                 {userAuthState === UserAuthState.WELCOME && <Ellipses />}
                 <div className="login-modal-content-container">
-                    <div className="login-modal-input-container">
-                        {userAuthState === UserAuthState.WELCOME && <WelcomeHeader />}
-                        {(userAuthState === UserAuthState.MAIL_INPUT_START ||
-                            userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
-                            userAuthState === UserAuthState.MAIL_NOT_VALID) && (
-                            <>
-                                <SignUpHeader />
-                                <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
-                            </>
-                        )}
-                        {userAuthState === UserAuthState.PASSWORD_INPUT && (
-                            <>
-                                <LogInHeader />
-                                <MailInputBox
-                                    helpText={t('onlyEmail')}
-                                    userEmail={userEmail}
-                                    onChange={(event) => {
-                                        setUserEmail(event.target.value);
-                                    }}
-                                />
-                                <PasswordInputBox
-                                    userAuthState={userAuthState}
-                                    helpText={t('enterPassword')}
-                                    testId="userPasswordLogin"
-                                    onChange={(event) => {
-                                        const nextUserState = userAuthStateFromUserPasswords(
-                                            event.target.value,
-                                            event.target.value,
-                                        );
-                                        setUserState(nextUserState);
-                                    }}
-                                />
-                            </>
-                        )}
-                        {(userAuthState === UserAuthState.PASSWORD_CREATION ||
-                            userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
-                            <>
-                                <SignUpHeader />
-                                <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
-                            </>
-                        )}
-                        {userAuthState === UserAuthState.OTP_INPUT && (
-                            <>
-                                <SignUpHeader />
-                                <OTPInput nextButton={OTPNextButton} />
-                            </>
-                        )}
-                        {userAuthState === UserAuthState.OTP_LOADING && (
-                            <>
-                                <SignUpHeader />
-                                <p className="login-modal-input-help">{t('OTPVerifying')}</p>
-                            </>
-                        )}
-                    </div>
+                    {userAuthState === UserAuthState.WELCOME && (
+                        <div className="login-modal-input-container">
+                            <WelcomeHeader />
+                        </div>
+                    )}
+                    {(userAuthState === UserAuthState.MAIL_INPUT_START ||
+                        userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
+                        userAuthState === UserAuthState.MAIL_NOT_VALID) && (
+                        <div className="login-modal-input-container">
+                            <SignUpHeader />
+                            <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
+                        </div>
+                    )}
+                    {userAuthState === UserAuthState.PASSWORD_INPUT && (
+                        <div className="login-modal-input-container">
+                            <LogInHeader />
+                            <MailInputBox
+                                helpText={t('onlyEmail')}
+                                userEmail={userEmail}
+                                onChange={(event) => {
+                                    setUserEmail(event.target.value);
+                                }}
+                            />
+                            <PasswordInputBox
+                                userAuthState={userAuthState}
+                                helpText={t('enterPassword')}
+                                testId="userPasswordLogin"
+                                onChange={(event) => {
+                                    const nextUserState = userAuthStateFromUserPasswords(
+                                        event.target.value,
+                                        event.target.value,
+                                    );
+                                    setUserState(nextUserState);
+                                }}
+                            />
+                        </div>
+                    )}
+                    {(userAuthState === UserAuthState.PASSWORD_CREATION ||
+                        userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
+                        <div className="login-modal-input-container">
+                            <SignUpHeader />
+                            <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
+                        </div>
+                    )}
+                    {userAuthState === UserAuthState.OTP_INPUT && (
+                        <div className="login-modal-input-container">
+                            <SignUpHeader />
+                            <OTPInput nextButton={OTPNextButton} />
+                        </div>
+                    )}
+                    {userAuthState === UserAuthState.OTP_LOADING && (
+                        <div className="login-modal-input-container">
+                            <SignUpHeader />
+                            <p className="login-modal-input-help">{t('OTPVerifying')}</p>
+                        </div>
+                    )}
                     <div className="login-modal-button-container">
                         {userAuthState === UserAuthState.WELCOME && (
                             <>
