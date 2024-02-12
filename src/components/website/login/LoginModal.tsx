@@ -7,6 +7,7 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { LoginModalHeader } from './LoginModalHeader';
 
 export enum UserAuthState {
     WELCOME,
@@ -44,10 +45,7 @@ export function LoginModal() {
                     <div className="login-modal-input-container">
                         <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
                         {userAuthState === UserAuthState.WELCOME && (
-                            <>
-                                <p className="login-modal-header">{header}</p>
-                                <p className="login-modal-header-description">{description}</p>
-                            </>
+                            <LoginModalHeader header={header} description={description} />
                         )}
                         {(userAuthState === UserAuthState.MAIL_INPUT_START ||
                             userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
