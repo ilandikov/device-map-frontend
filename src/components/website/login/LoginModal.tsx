@@ -161,6 +161,18 @@ export function LoginModal() {
                                 <SignUpHeader />
                                 <OTPInput nextButton={OTPNextButton} />
                             </div>
+                            <div className="login-modal-button-container">
+                                <input
+                                    className="login-modal-button-black-on-green"
+                                    type="button"
+                                    value={t('next')}
+                                    ref={OTPNextButton}
+                                    onClick={() => {
+                                        const nextUserAuthState = userAuthStateFromOTP();
+                                        setUserState(nextUserAuthState);
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
                     {userAuthState === UserAuthState.OTP_LOADING && (
@@ -171,20 +183,7 @@ export function LoginModal() {
                             </div>
                         </>
                     )}
-                    {userAuthState === UserAuthState.OTP_INPUT && (
-                        <div className="login-modal-button-container">
-                            <input
-                                className="login-modal-button-black-on-green"
-                                type="button"
-                                value={t('next')}
-                                ref={OTPNextButton}
-                                onClick={() => {
-                                    const nextUserAuthState = userAuthStateFromOTP();
-                                    setUserState(nextUserAuthState);
-                                }}
-                            />
-                        </div>
-                    )}
+
                     {userAuthState === UserAuthState.OTP_LOADING && (
                         <div className="login-modal-button-container"></div>
                     )}
