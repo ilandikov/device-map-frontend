@@ -6,6 +6,8 @@ import { userAuthStateFromOTP } from './UserAuthStateUtils';
 export function OTPInput(props: { nextButton: React.MutableRefObject<any>; setUserAuthState: (string) => void }) {
     const { t } = useI18next();
 
+    const OTPNextButton = useRef(null);
+
     const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
     const inputElements = inputElementRefs.map((inputElementRef, index) => {
@@ -55,7 +57,7 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any>; setUs
                     className="login-modal-button-black-on-green"
                     type="button"
                     value={t('next')}
-                    ref={props.nextButton}
+                    ref={OTPNextButton}
                     onClick={() => {
                         const nextUserAuthState = userAuthStateFromOTP();
                         props.setUserAuthState(nextUserAuthState);
