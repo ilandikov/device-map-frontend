@@ -12,14 +12,6 @@ export function MailInput(props: {
 }) {
     const { t } = useI18next();
 
-    const onNextButtonClick = () => {
-        const nextUserAuthState = userAuthStateFromUserEmail(props.userEmail);
-        props.setUserAuthState(nextUserAuthState);
-    };
-    const onLoginButtonClick = () => {
-        props.setUserAuthState(UserAuthState.PASSWORD_INPUT);
-    };
-
     return (
         <>
             <div className="login-modal-input-container">
@@ -43,14 +35,19 @@ export function MailInput(props: {
                         className="login-modal-button-green-on-black"
                         type="button"
                         value={t('accountLogin')}
-                        onClick={onLoginButtonClick}
+                        onClick={() => {
+                            props.setUserAuthState(UserAuthState.PASSWORD_INPUT);
+                        }}
                     />
                 )}
                 <input
                     className="login-modal-button-black-on-green"
                     type="button"
                     value={t('next')}
-                    onClick={onNextButtonClick}
+                    onClick={() => {
+                        const nextUserAuthState = userAuthStateFromUserEmail(props.userEmail);
+                        props.setUserAuthState(nextUserAuthState);
+                    }}
                 />
             </div>
         </>
