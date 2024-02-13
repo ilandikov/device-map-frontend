@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { MailInput } from './MailInput';
+import { MailInputForm } from './MailInputForm';
 import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
@@ -61,7 +61,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
                     <SignUpHeader />
-                    <MailInput
+                    <MailInputForm
                         {...{
                             userAuthState,
                             setUserAuthState: setUserState,

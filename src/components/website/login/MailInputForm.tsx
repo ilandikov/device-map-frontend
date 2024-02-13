@@ -4,7 +4,7 @@ import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
-export function MailInput(props: {
+export function MailInputForm(props: {
     userAuthState: UserAuthState;
     setUserAuthState: (userAuthState: UserAuthState) => void;
     userEmail: string;
