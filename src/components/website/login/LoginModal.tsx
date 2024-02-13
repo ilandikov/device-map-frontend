@@ -71,12 +71,14 @@ export function LoginModal() {
                 <>
                     <LogInHeader />
                     <LogInForm
-                        userAuthState={userAuthState}
-                        setUserAuthState={setUserAuthState}
-                        userEmail={userEmail}
-                        setUserEmail={setUserEmail}
-                        userPassword={userPassword}
-                        userPasswordRepeat={userPasswordRepeat}
+                        {...{
+                            userAuthState,
+                            setUserAuthState,
+                            userEmail,
+                            setUserEmail,
+                            userPassword,
+                            userPasswordRepeat,
+                        }}
                     />
                 </>
             )}
@@ -87,7 +89,7 @@ export function LoginModal() {
                     <PasswordCreation
                         {...{
                             userAuthState,
-                            setUserAuthState: setUserAuthState,
+                            setUserAuthState,
                             userPassword,
                             setUserPassword,
                             userPasswordRepeat,
@@ -99,7 +101,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.OTP_INPUT && (
                 <>
                     <SignUpHeader />
-                    <OTPInput setUserAuthState={setUserAuthState} />
+                    <OTPInput {...{ setUserAuthState }} />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_LOADING && (
