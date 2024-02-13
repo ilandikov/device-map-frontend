@@ -68,23 +68,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
                     <SignUpHeader />
-                    <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
-                    <div className="login-modal-button-container">
-                        {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
-                            <input
-                                className="login-modal-button-green-on-black"
-                                type="button"
-                                value={t('accountLogin')}
-                                onClick={onLoginButtonClick}
-                            />
-                        )}
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            onClick={onNextButtonClick}
-                        />
-                    </div>
+                    <MailInput {...{ setUserEmail, userAuthState, userEmail, onLoginButtonClick, onNextButtonClick }} />
                 </>
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
