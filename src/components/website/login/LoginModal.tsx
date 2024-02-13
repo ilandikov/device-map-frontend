@@ -28,10 +28,6 @@ export function LoginModal() {
     const [userPassword, setUserPassword] = React.useState('');
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
 
-    function nextUserState() {
-        setUserAuthState(userAuthState + 1);
-    }
-
     return (
         <>
             {userAuthState === UserAuthState.WELCOME && (
@@ -46,7 +42,7 @@ export function LoginModal() {
                             type="button"
                             value={t('accountRegister')}
                             onClick={() => {
-                                nextUserState();
+                                setUserAuthState(userAuthState + 1);
                             }}
                         />
                     </div>
