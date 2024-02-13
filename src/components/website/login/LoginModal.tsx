@@ -2,13 +2,12 @@ import React, { useRef } from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreation } from './PasswordCreation';
-import { MailInputBox } from './MailInputBox';
-import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
 import { userAuthStateFromOTP, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
+import { LogInForm } from './LogInForm';
 
 export enum UserAuthState {
     WELCOME,
@@ -74,38 +73,24 @@ export function LoginModal() {
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
                     <LogInHeader />
-                    <div className="login-modal-input-container">
-                        <MailInputBox
-                            helpText={t('onlyEmail')}
-                            userEmail={userEmail}
-                            onChange={(event) => {
-                                setUserEmail(event.target.value);
-                            }}
-                        />
-                        <PasswordInputBox
-                            userAuthState={userAuthState}
-                            helpText={t('enterPassword')}
-                            testId="userPasswordLogin"
-                            onChange={(event) => {
-                                const nextUserState = userAuthStateFromUserPasswords(
-                                    event.target.value,
-                                    event.target.value,
-                                );
-                                setUserState(nextUserState);
-                            }}
-                        />
-                    </div>
-                    <div className="login-modal-button-container">
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            onClick={() => {
-                                const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
-                                setUserState(nextUserState);
-                            }}
-                        />
-                    </div>
+                    <LogInForm
+                        userEmail={userEmail}
+                        onChange={(event) => {
+                            setUserEmail(event.target.value);
+                        }}
+                        userAuthState={userAuthState}
+                        onChange1={(event) => {
+                            const nextUserState = userAuthStateFromUserPasswords(
+                                event.target.value,
+                                event.target.value,
+                            );
+                            setUserState(nextUserState);
+                        }}
+                        onClick={() => {
+                            const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
+                            setUserState(nextUserState);
+                        }}
+                    />
                 </>
             )}
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
