@@ -10,7 +10,7 @@ export function MailInput(props: {
 }) {
     const { t } = useI18next();
     return (
-        <>
+        <div className="login-modal-input-container">
             <MailInputBox
                 helpText={t('onlyEmail')}
                 userEmail={props.userEmail}
@@ -24,6 +24,6 @@ export function MailInput(props: {
             {props.userAuthState === UserAuthState.MAIL_NOT_VALID && (
                 <p className="login-modal-input-help login-modal-wrong-input">{t('mailNotValid')}</p>
             )}
-        </>
+        </div>
     );
 }
