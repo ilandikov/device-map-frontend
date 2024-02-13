@@ -2,18 +2,8 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { OTPInput } from '../OTPInput';
 
-// TODO when OTP input will incorporate the button section, there should be no need to mock this
-jest.spyOn(React, 'useRef').mockReturnValue({
-    current: {
-        focus: jest.fn(),
-    },
-});
-
-const mockNextButton = React.useRef();
-
 const OTPInputComponent = (
     <OTPInput
-        nextButton={mockNextButton}
         setUserAuthState={() => {
             return;
         }}
