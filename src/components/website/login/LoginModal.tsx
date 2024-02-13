@@ -70,9 +70,9 @@ export function LoginModal() {
                     <SignUpHeader />
                     <MailInput
                         {...{
-                            setUserEmail,
                             userAuthState,
                             setUserAuthState: setUserState,
+                            setUserEmail,
                             userEmail,
                             onLoginButtonClick,
                             onNextButtonClick,
