@@ -2,18 +2,8 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { OTPInput } from '../OTPInput';
 
-// TODO when OTP input will incorporate the button section, there should be no need to mock this
-jest.spyOn(React, 'useRef').mockReturnValue({
-    current: {
-        focus: jest.fn(),
-    },
-});
-
-const mockNextButton = React.useRef();
-
 const OTPInputComponent = (
     <OTPInput
-        nextButton={mockNextButton}
         setUserAuthState={() => {
             return;
         }}
@@ -57,7 +47,7 @@ describe('OTP input tests', () => {
         },
     );
 
-    it.failing('should focus on "next" button when a digit is input for last input (index = 5)', () => {
+    it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = render(OTPInputComponent);
         const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
 

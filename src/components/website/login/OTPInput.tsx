@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 
-export function OTPInput(props: { nextButton: React.MutableRefObject<any>; setUserAuthState: (string) => void }) {
+export function OTPInput(props: { setUserAuthState: (string) => void }) {
     const { t } = useI18next();
 
     const OTPNextButton = useRef(null);
@@ -33,7 +33,7 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any>; setUs
         const nextInputIndex = index + 1;
 
         if (nextInputIndex === inputElementRefs.length) {
-            return props.nextButton;
+            return OTPNextButton;
         }
 
         const valueInNextInput = inputElementRefs[nextInputIndex].current.value;
