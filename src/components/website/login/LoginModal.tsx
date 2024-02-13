@@ -87,9 +87,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
                     <SignUpHeader />
-                    <div className="login-modal-input-container">
-                        <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
-                    </div>
+                    <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
                     <div className="login-modal-button-container">
                         <input
                             className="login-modal-button-black-on-green"

@@ -11,7 +11,7 @@ export function PasswordCreation(props: {
     const { t } = useI18next();
 
     return (
-        <>
+        <div className="login-modal-input-container">
             <PasswordInputBox
                 userAuthState={props.userAuthState}
                 helpText={t('enterPassword')}
@@ -24,6 +24,6 @@ export function PasswordCreation(props: {
                 testId="userPasswordRepeat"
                 onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
             />
-        </>
+        </div>
     );
 }
