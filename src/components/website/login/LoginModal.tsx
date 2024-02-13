@@ -68,7 +68,16 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
                     <SignUpHeader />
-                    <MailInput {...{ setUserEmail, userAuthState, userEmail, onLoginButtonClick, onNextButtonClick }} />
+                    <MailInput
+                        {...{
+                            setUserEmail,
+                            userAuthState,
+                            setUserAuthState: setUserState,
+                            userEmail,
+                            onLoginButtonClick,
+                            onNextButtonClick,
+                        }}
+                    />
                 </>
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (

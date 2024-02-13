@@ -5,6 +5,7 @@ import { MailInputBox } from './MailInputBox';
 
 export function MailInput(props: {
     userAuthState: UserAuthState;
+    setUserAuthState: (userAuthState: UserAuthState) => void;
     userEmail: string;
     setUserEmail: (newUserEmail: string) => void;
     onLoginButtonClick: React.MouseEventHandler<HTMLInputElement>;
