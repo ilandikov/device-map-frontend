@@ -40,7 +40,13 @@ export function LogInForm(props: {
                     className="login-modal-button-black-on-green"
                     type="button"
                     value={t('next')}
-                    onClick={props.onClick}
+                    onClick={() => {
+                        const nextUserState = userAuthStateFromUserPasswords(
+                            props.userPassword,
+                            props.userPasswordRepeat,
+                        );
+                        props.setUserAuthState(nextUserState);
+                    }}
                 />
             </div>
         </>
