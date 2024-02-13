@@ -42,7 +42,7 @@ export function LoginModal() {
                             type="button"
                             value={t('accountRegister')}
                             onClick={() => {
-                                setUserAuthState(userAuthState + 1);
+                                setUserAuthState(UserAuthState.MAIL_INPUT_START);
                             }}
                         />
                     </div>
