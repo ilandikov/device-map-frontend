@@ -1,33 +1,38 @@
-import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { UserAuthState } from './LoginModal';
+import { useI18next } from 'gatsby-plugin-react-i18next';
+import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
+import { UserAuthState } from './LoginModal';
 import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
-export function PasswordCreation(props: {
-    userAuthState: UserAuthState.PASSWORD_CREATION | UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
+export function LogInForm(props: {
+    userAuthState: UserAuthState;
     setUserAuthState: (string) => void;
+    userEmail: string;
+    setUserEmail: (string) => void;
     userPassword: string;
-    setUserPassword: (newUserPassword: string) => void;
     userPasswordRepeat: string;
-    setUserPasswordRepeat: (newUserPassword: string) => void;
 }) {
     const { t } = useI18next();
 
     return (
         <>
             <div className="login-modal-input-container">
-                <PasswordInputBox
-                    userAuthState={props.userAuthState}
-                    helpText={t('enterPassword')}
-                    testId="userPassword"
-                    onChange={(event) => props.setUserPassword(event.target.value)}
+                <MailInputBox
+                    helpText={t('onlyEmail')}
+                    userEmail={props.userEmail}
+                    onChange={(event) => {
+                        props.setUserEmail(event.target.value);
+                    }}
                 />
                 <PasswordInputBox
                     userAuthState={props.userAuthState}
-                    helpText={t('repeatPassword')}
-                    testId="userPasswordRepeat"
-                    onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
+                    helpText={t('enterPassword')}
+                    testId="userPasswordLogin"
+                    onChange={(event) => {
+                        const nextUserState = userAuthStateFromUserPasswords(event.target.value, event.target.value);
+                        props.setUserAuthState(nextUserState);
+                    }}
                 />
             </div>
             <div className="login-modal-button-container">

@@ -1,14 +1,12 @@
 import React, { useRef } from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { MailInput } from './MailInput';
+import { MailInputForm } from './MailInputForm';
 import { PasswordCreation } from './PasswordCreation';
-import { MailInputBox } from './MailInputBox';
-import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
-import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
+import { LogInForm } from './LogInForm';
 
 export enum UserAuthState {
     WELCOME,
@@ -61,107 +59,49 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
                     <SignUpHeader />
-                    <div className="login-modal-input-container">
-                        <MailInput {...{ setUserEmail, userAuthState, userEmail }} />
-                    </div>
-                    <div className="login-modal-button-container">
-                        {userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
-                            <input
-                                className="login-modal-button-green-on-black"
-                                type="button"
-                                value={t('accountLogin')}
-                                onClick={() => {
-                                    setUserState(UserAuthState.PASSWORD_INPUT);
-                                }}
-                            />
-                        )}
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            onClick={() => {
-                                const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
-                                setUserState(nextUserAuthState);
-                            }}
-                        />
-                    </div>
+                    <MailInputForm
+                        {...{
+                            userAuthState,
+                            setUserAuthState: setUserState,
+                            setUserEmail,
+                            userEmail,
+                        }}
+                    />
                 </>
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
                     <LogInHeader />
-                    <div className="login-modal-input-container">
-                        <MailInputBox
-                            helpText={t('onlyEmail')}
-                            userEmail={userEmail}
-                            onChange={(event) => {
-                                setUserEmail(event.target.value);
-                            }}
-                        />
-                        <PasswordInputBox
-                            userAuthState={userAuthState}
-                            helpText={t('enterPassword')}
-                            testId="userPasswordLogin"
-                            onChange={(event) => {
-                                const nextUserState = userAuthStateFromUserPasswords(
-                                    event.target.value,
-                                    event.target.value,
-                                );
-                                setUserState(nextUserState);
-                            }}
-                        />
-                    </div>
-                    <div className="login-modal-button-container">
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            onClick={() => {
-                                const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
-                                setUserState(nextUserState);
-                            }}
-                        />
-                    </div>
+                    <LogInForm
+                        userAuthState={userAuthState}
+                        setUserAuthState={setUserState}
+                        userEmail={userEmail}
+                        setUserEmail={setUserEmail}
+                        userPassword={userPassword}
+                        userPasswordRepeat={userPasswordRepeat}
+                    />
                 </>
             )}
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
                     <SignUpHeader />
-                    <div className="login-modal-input-container">
-                        <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
-                    </div>
-                    <div className="login-modal-button-container">
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            onClick={() => {
-                                const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
-                                setUserState(nextUserState);
-                            }}
-                        />
-                    </div>
+                    <PasswordCreation
+                        {...{
+                            userAuthState,
+                            setUserAuthState: setUserState,
+                            userPassword,
+                            setUserPassword,
+                            userPasswordRepeat,
+                            setUserPasswordRepeat,
+                        }}
+                    />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_INPUT && (
                 <>
                     <SignUpHeader />
-                    <div className="login-modal-input-container">
-                        <OTPInput nextButton={OTPNextButton} />
-                    </div>
-                    <div className="login-modal-button-container">
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            ref={OTPNextButton}
-                            onClick={() => {
-                                const nextUserAuthState = userAuthStateFromOTP();
-                                setUserState(nextUserAuthState);
-                            }}
-                        />
-                    </div>
+                    <OTPInput setUserAuthState={setUserState} nextButton={OTPNextButton} />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_LOADING && (
