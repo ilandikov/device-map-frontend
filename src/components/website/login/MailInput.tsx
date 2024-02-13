@@ -2,6 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
+import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
 export function MailInput(props: {
     userAuthState: UserAuthState;
@@ -12,6 +13,15 @@ export function MailInput(props: {
     onNextButtonClick: React.MouseEventHandler<HTMLInputElement>;
 }) {
     const { t } = useI18next();
+
+    const onNextButtonClick = () => {
+        const nextUserAuthState = userAuthStateFromUserEmail(props.userEmail);
+        props.setUserAuthState(nextUserAuthState);
+    };
+    const onLoginButtonClick = () => {
+        props.setUserAuthState(UserAuthState.PASSWORD_INPUT);
+    };
+
     return (
         <>
             <div className="login-modal-input-container">
@@ -35,14 +45,14 @@ export function MailInput(props: {
                         className="login-modal-button-green-on-black"
                         type="button"
                         value={t('accountLogin')}
-                        onClick={props.onLoginButtonClick}
+                        onClick={onLoginButtonClick}
                     />
                 )}
                 <input
                     className="login-modal-button-black-on-green"
                     type="button"
                     value={t('next')}
-                    onClick={props.onNextButtonClick}
+                    onClick={onNextButtonClick}
                 />
             </div>
         </>
