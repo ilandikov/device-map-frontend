@@ -3,7 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreation } from './PasswordCreation';
 import { OTPInput } from './OTPInput';
-import { userAuthStateFromOTP, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
@@ -87,18 +87,16 @@ export function LoginModal() {
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
                     <SignUpHeader />
-                    <PasswordCreation {...{ userAuthState, setUserPassword, setUserPasswordRepeat }} />
-                    <div className="login-modal-button-container">
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            onClick={() => {
-                                const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
-                                setUserState(nextUserState);
-                            }}
-                        />
-                    </div>
+                    <PasswordCreation
+                        {...{
+                            userAuthState,
+                            setUserAuthState: setUserState,
+                            userPassword,
+                            setUserPassword,
+                            userPasswordRepeat,
+                            setUserPasswordRepeat,
+                        }}
+                    />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_INPUT && (
