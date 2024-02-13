@@ -10,7 +10,6 @@ export function LogInForm(props: {
     setUserAuthState: (string) => void;
     userEmail: string;
     setUserEmail: (string) => void;
-    onChange: (event) => void;
     onClick: () => void;
 }) {
     const { t } = useI18next();
@@ -18,7 +17,13 @@ export function LogInForm(props: {
     return (
         <>
             <div className="login-modal-input-container">
-                <MailInputBox helpText={t('onlyEmail')} userEmail={props.userEmail} onChange={props.onChange} />
+                <MailInputBox
+                    helpText={t('onlyEmail')}
+                    userEmail={props.userEmail}
+                    onChange={(event) => {
+                        props.setUserEmail(event.target.value);
+                    }}
+                />
                 <PasswordInputBox
                     userAuthState={props.userAuthState}
                     helpText={t('enterPassword')}

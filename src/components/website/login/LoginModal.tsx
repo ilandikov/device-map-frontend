@@ -78,9 +78,6 @@ export function LoginModal() {
                         setUserAuthState={setUserState}
                         userEmail={userEmail}
                         setUserEmail={setUserEmail}
-                        onChange={(event) => {
-                            setUserEmail(event.target.value);
-                        }}
                         onClick={() => {
                             const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
                             setUserState(nextUserState);
