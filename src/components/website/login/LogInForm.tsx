@@ -6,7 +6,9 @@ import { UserAuthState } from './LoginModal';
 
 export function LogInForm(props: {
     userAuthState: UserAuthState;
+    setUserAuthState: (string) => void;
     userEmail: string;
+    setUserEmail: (string) => void;
     onChange: (event) => void;
     onChange1: (event) => void;
     onClick: () => void;

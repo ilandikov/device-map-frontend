@@ -75,7 +75,9 @@ export function LoginModal() {
                     <LogInHeader />
                     <LogInForm
                         userAuthState={userAuthState}
+                        setUserAuthState={setUserState}
                         userEmail={userEmail}
+                        setUserEmail={setUserEmail}
                         onChange={(event) => {
                             setUserEmail(event.target.value);
                         }}
