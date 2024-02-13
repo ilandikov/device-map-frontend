@@ -9,8 +9,6 @@ export function MailInput(props: {
     setUserAuthState: (userAuthState: UserAuthState) => void;
     userEmail: string;
     setUserEmail: (newUserEmail: string) => void;
-    onLoginButtonClick: React.MouseEventHandler<HTMLInputElement>;
-    onNextButtonClick: React.MouseEventHandler<HTMLInputElement>;
 }) {
     const { t } = useI18next();
 

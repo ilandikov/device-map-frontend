@@ -5,7 +5,7 @@ import { PasswordCreation } from './PasswordCreation';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { OTPInput } from './OTPInput';
-import { userAuthStateFromOTP, userAuthStateFromUserEmail, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { userAuthStateFromOTP, userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
@@ -36,13 +36,6 @@ export function LoginModal() {
         setUserState(userAuthState + 1);
     }
 
-    const onNextButtonClick = () => {
-        const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
-        setUserState(nextUserAuthState);
-    };
-    const onLoginButtonClick = () => {
-        setUserState(UserAuthState.PASSWORD_INPUT);
-    };
     return (
         <>
             {userAuthState === UserAuthState.WELCOME && (
@@ -74,8 +67,6 @@ export function LoginModal() {
                             setUserAuthState: setUserState,
                             setUserEmail,
                             userEmail,
-                            onLoginButtonClick,
-                            onNextButtonClick,
                         }}
                     />
                 </>
