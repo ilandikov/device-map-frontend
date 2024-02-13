@@ -3,6 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState } from './LoginModal';
+import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
 export function LogInForm(props: {
     userAuthState: UserAuthState;
@@ -10,7 +11,6 @@ export function LogInForm(props: {
     userEmail: string;
     setUserEmail: (string) => void;
     onChange: (event) => void;
-    onChange1: (event) => void;
     onClick: () => void;
 }) {
     const { t } = useI18next();
@@ -23,7 +23,10 @@ export function LogInForm(props: {
                     userAuthState={props.userAuthState}
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
-                    onChange={props.onChange1}
+                    onChange={(event) => {
+                        const nextUserState = userAuthStateFromUserPasswords(event.target.value, event.target.value);
+                        props.setUserAuthState(nextUserState);
+                    }}
                 />
             </div>
             <div className="login-modal-button-container">
