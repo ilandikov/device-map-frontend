@@ -36,6 +36,13 @@ export function LoginModal() {
         setUserState(userAuthState + 1);
     }
 
+    const onNextButtonClick = () => {
+        const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
+        setUserState(nextUserAuthState);
+    };
+    const onLoginButtonClick = () => {
+        setUserState(UserAuthState.PASSWORD_INPUT);
+    };
     return (
         <>
             {userAuthState === UserAuthState.WELCOME && (
@@ -68,19 +75,14 @@ export function LoginModal() {
                                 className="login-modal-button-green-on-black"
                                 type="button"
                                 value={t('accountLogin')}
-                                onClick={() => {
-                                    setUserState(UserAuthState.PASSWORD_INPUT);
-                                }}
+                                onClick={onLoginButtonClick}
                             />
                         )}
                         <input
                             className="login-modal-button-black-on-green"
                             type="button"
                             value={t('next')}
-                            onClick={() => {
-                                const nextUserAuthState = userAuthStateFromUserEmail(userEmail);
-                                setUserState(nextUserAuthState);
-                            }}
+                            onClick={onNextButtonClick}
                         />
                     </div>
                 </>
