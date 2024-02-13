@@ -33,7 +33,7 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any>; setUs
         const nextInputIndex = index + 1;
 
         if (nextInputIndex === inputElementRefs.length) {
-            return props.nextButton;
+            return OTPNextButton;
         }
 
         const valueInNextInput = inputElementRefs[nextInputIndex].current.value;
