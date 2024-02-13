@@ -23,13 +23,13 @@ export enum UserAuthState {
 export function LoginModal() {
     const { t } = useI18next();
 
-    const [userAuthState, setUserState] = React.useState(UserAuthState.WELCOME);
+    const [userAuthState, setUserAuthState] = React.useState(UserAuthState.WELCOME);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
 
     function nextUserState() {
-        setUserState(userAuthState + 1);
+        setUserAuthState(userAuthState + 1);
     }
 
     return (
@@ -60,7 +60,7 @@ export function LoginModal() {
                     <MailInputForm
                         {...{
                             userAuthState,
-                            setUserAuthState: setUserState,
+                            setUserAuthState: setUserAuthState,
                             setUserEmail,
                             userEmail,
                         }}
@@ -72,7 +72,7 @@ export function LoginModal() {
                     <LogInHeader />
                     <LogInForm
                         userAuthState={userAuthState}
-                        setUserAuthState={setUserState}
+                        setUserAuthState={setUserAuthState}
                         userEmail={userEmail}
                         setUserEmail={setUserEmail}
                         userPassword={userPassword}
@@ -87,7 +87,7 @@ export function LoginModal() {
                     <PasswordCreation
                         {...{
                             userAuthState,
-                            setUserAuthState: setUserState,
+                            setUserAuthState: setUserAuthState,
                             userPassword,
                             setUserPassword,
                             userPasswordRepeat,
@@ -99,7 +99,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.OTP_INPUT && (
                 <>
                     <SignUpHeader />
-                    <OTPInput setUserAuthState={setUserState} />
+                    <OTPInput setUserAuthState={setUserAuthState} />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_LOADING && (
