@@ -102,7 +102,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.OTP_INPUT && (
                 <>
                     <SignUpHeader />
-                    <OTPInput nextButton={OTPNextButton} />
+                    <OTPInput setUserAuthState={setUserState} nextButton={OTPNextButton} />
                     <div className="login-modal-button-container">
                         <input
                             className="login-modal-button-black-on-green"
