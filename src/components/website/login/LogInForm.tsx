@@ -10,7 +10,8 @@ export function LogInForm(props: {
     setUserAuthState: (string) => void;
     userEmail: string;
     setUserEmail: (string) => void;
-    onClick: () => void;
+    userPassword: string;
+    userPasswordRepeat: string;
 }) {
     const { t } = useI18next();
 

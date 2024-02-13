@@ -78,6 +78,8 @@ export function LoginModal() {
                         setUserAuthState={setUserState}
                         userEmail={userEmail}
                         setUserEmail={setUserEmail}
+                        userPassword={userPassword}
+                        userPasswordRepeat={userPasswordRepeat}
                         onClick={() => {
                             const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
                             setUserState(nextUserState);
