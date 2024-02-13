@@ -74,11 +74,11 @@ export function LoginModal() {
                 <>
                     <LogInHeader />
                     <LogInForm
+                        userAuthState={userAuthState}
                         userEmail={userEmail}
                         onChange={(event) => {
                             setUserEmail(event.target.value);
                         }}
-                        userAuthState={userAuthState}
                         onChange1={(event) => {
                             const nextUserState = userAuthStateFromUserPasswords(
                                 event.target.value,

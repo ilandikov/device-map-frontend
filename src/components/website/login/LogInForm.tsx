@@ -5,9 +5,9 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState } from './LoginModal';
 
 export function LogInForm(props: {
+    userAuthState: UserAuthState;
     userEmail: string;
     onChange: (event) => void;
-    userAuthState: UserAuthState.PASSWORD_INPUT;
     onChange1: (event) => void;
     onClick: () => void;
 }) {
