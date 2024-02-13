@@ -42,11 +42,11 @@ export function OTPInput(props: { nextButton: React.MutableRefObject<any> }) {
     }
 
     return (
-        <>
+        <div className="login-modal-input-container">
             <p className="login-modal-input-help">{t('OTPEnter')}</p>
             <div className="login-modal-input-otp-container">{inputElements}</div>
             <p className="login-modal-input-help login-modal-opaque-text">{t('OTPExplanation')}</p>
             <p className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</p>
-        </>
+        </div>
     );
 }
