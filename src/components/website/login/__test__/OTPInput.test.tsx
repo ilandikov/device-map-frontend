@@ -11,7 +11,14 @@ jest.spyOn(React, 'useRef').mockReturnValue({
 
 const mockNextButton = React.useRef();
 
-const OTPInputComponent = <OTPInput nextButton={mockNextButton} />;
+const OTPInputComponent = (
+    <OTPInput
+        nextButton={mockNextButton}
+        setUserAuthState={() => {
+            return;
+        }}
+    />
+);
 
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
@@ -50,7 +57,7 @@ describe('OTP input tests', () => {
         },
     );
 
-    it.failing('should focus on "next" button when a digit is input for last input (index = 5)', () => {
+    it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = render(OTPInputComponent);
         const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
 

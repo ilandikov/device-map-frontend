@@ -3,7 +3,6 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreation } from './PasswordCreation';
 import { OTPInput } from './OTPInput';
-import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
@@ -103,18 +102,6 @@ export function LoginModal() {
                 <>
                     <SignUpHeader />
                     <OTPInput setUserAuthState={setUserState} nextButton={OTPNextButton} />
-                    <div className="login-modal-button-container">
-                        <input
-                            className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('next')}
-                            ref={OTPNextButton}
-                            onClick={() => {
-                                const nextUserAuthState = userAuthStateFromOTP();
-                                setUserState(nextUserAuthState);
-                            }}
-                        />
-                    </div>
                 </>
             )}
             {userAuthState === UserAuthState.OTP_LOADING && (
