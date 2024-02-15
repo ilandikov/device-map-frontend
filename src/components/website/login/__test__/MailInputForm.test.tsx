@@ -40,16 +40,18 @@ function mockUseUserAuthState(
 
 const store = configureTestStore();
 
-const componentWithStoreProvider = (
-    <Provider store={store}>
-        <LoginModal />
-    </Provider>
-);
+function componentWithStoreProvider() {
+    return (
+        <Provider store={store}>
+            <LoginModal />
+        </Provider>
+    );
+}
 
 describe('LoginModal action tests - email stages', () => {
     it('should call email setter from email input', () => {
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
-        const { container } = render(componentWithStoreProvider);
+        const { container } = render(componentWithStoreProvider());
 
         const emailInput = getByTestId(container, 'emailInput');
 
@@ -63,7 +65,7 @@ describe('LoginModal action tests - email stages', () => {
         const spyOnUserAuthStateFromUserEmail = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserEmail');
 
         mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
-        const { container } = render(componentWithStoreProvider);
+        const { container } = render(componentWithStoreProvider());
 
         const tryVerifyEmailButton = getByText(container, 'next');
 
@@ -75,7 +77,7 @@ describe('LoginModal action tests - email stages', () => {
 
     it('should move from mail already exists to password verification stage', () => {
         mockUseUserAuthState(UserAuthState.MAIL_ALREADY_EXISTS);
-        const { container } = render(componentWithStoreProvider);
+        const { container } = render(componentWithStoreProvider());
         const loginButton = getByText(container, 'accountLogin');
 
         expect(loginButton).toBeInTheDocument();
