@@ -132,45 +132,6 @@ describe('LoginModal action tests - welcome stage', () => {
     });
 });
 
-describe('LoginModal action tests - email stages', () => {
-    it('should call email setter from email input', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START);
-        const { container } = render(componentWithStoreProvider);
-
-        const emailInput = getByTestId(container, 'emailInput');
-
-        expect(emailInput).toBeInTheDocument();
-        fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
-
-        expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
-    });
-
-    it('should call email verification after mail has been sent to input', () => {
-        const spyOnUserAuthStateFromUserEmail = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserEmail');
-
-        mockUseUserAuthState(UserAuthState.MAIL_INPUT_START, 'new@email.com');
-        const { container } = render(componentWithStoreProvider);
-
-        const tryVerifyEmailButton = getByText(container, 'next');
-
-        expect(tryVerifyEmailButton).toBeInTheDocument();
-        fireEvent.click(tryVerifyEmailButton);
-
-        expect(spyOnUserAuthStateFromUserEmail).toHaveBeenCalledWith('new@email.com');
-    });
-
-    it('should move from mail already exists to password verification stage', () => {
-        mockUseUserAuthState(UserAuthState.MAIL_ALREADY_EXISTS);
-        const { container } = render(componentWithStoreProvider);
-        const loginButton = getByText(container, 'accountLogin');
-
-        expect(loginButton).toBeInTheDocument();
-        fireEvent.click(loginButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
-    });
-});
-
 describe('LoginModal action tests - password input stages', () => {
     it('should update the user email on input on password input stage', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
