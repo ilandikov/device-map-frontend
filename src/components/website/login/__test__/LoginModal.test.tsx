@@ -16,10 +16,17 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-const setUserAuthState = jest.fn().mockImplementation((userAuthState) => userAuthState);
-const setUserEmail = jest.fn().mockImplementation((userEmail) => userEmail);
-const setUserPassword = jest.fn().mockImplementation((userEmail) => userEmail);
-const setUserPasswordRepeat = jest.fn().mockImplementation((userEmail) => userEmail);
+function mockLoginModalHooks() {
+    return {
+        setUserAuthState: jest.fn().mockImplementation((userAuthState) => userAuthState),
+        setUserEmail: jest.fn().mockImplementation((userEmail) => userEmail),
+        setUserPassword: jest.fn().mockImplementation((userEmail) => userEmail),
+        setUserPasswordRepeat: jest.fn().mockImplementation((userEmail) => userEmail),
+    };
+}
+
+const { setUserAuthState, setUserEmail, setUserPassword, setUserPasswordRepeat } = mockLoginModalHooks();
+
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
     initialUserEmail: string = '',
