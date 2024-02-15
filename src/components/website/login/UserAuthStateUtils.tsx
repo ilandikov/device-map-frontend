@@ -1,5 +1,9 @@
 import { UserAuthState } from './LoginModal';
 
+export function userAuthStateFromUserLogin() {
+    return UserAuthState.PASSWORD_INPUT;
+}
+
 export function userAuthStateFromOTP() {
     return UserAuthState.OTP_LOADING;
 }
@@ -26,7 +30,6 @@ export function userAuthStateFromUserEmail(userEmail: string) {
     }
     return nextUserAuthState;
 }
-
 function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);

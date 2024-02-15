@@ -1,9 +1,10 @@
-import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { UserAuthState } from '../LoginModal';
 import { LogInForm } from '../LogInForm';
+import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { mockLoginModalHooks } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -67,5 +68,18 @@ describe('LoginModal action tests - password input stages', () => {
         fireEvent.change(userPasswordInput, { target: { value: 'strongPassword' } });
 
         expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
+    });
+
+    it('should call user authentication when next button is pressed', () => {
+        const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
+
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_CREATION, 'user@mail.com', 'short', '');
+
+        const tryVerifyPasswordsButton = getByText(container, 'next');
+
+        expect(tryVerifyPasswordsButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyPasswordsButton);
+
+        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledTimes(1);
     });
 });

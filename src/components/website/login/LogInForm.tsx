@@ -3,7 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState } from './LoginModal';
-import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+import { userAuthStateFromUserLogin } from './UserAuthStateUtils';
 
 export function LogInForm(props: {
     userAuthState: UserAuthState;
@@ -41,11 +41,7 @@ export function LogInForm(props: {
                     type="button"
                     value={t('next')}
                     onClick={() => {
-                        // TODO not tested
-                        const nextUserState = userAuthStateFromUserPasswords(
-                            props.userPassword,
-                            props.userPasswordRepeat,
-                        );
+                        const nextUserState = userAuthStateFromUserLogin();
                         props.setUserAuthState(nextUserState);
                     }}
                 />
