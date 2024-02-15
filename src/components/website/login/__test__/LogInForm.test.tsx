@@ -12,31 +12,8 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-let setUserAuthState: jest.Mock;
-let setUserEmail: jest.Mock;
-let setUserPassword: jest.Mock;
-let setUserPasswordRepeat: jest.Mock;
-function mockUseUserAuthState(
-    initialUserAuthState: UserAuthState,
-    initialUserEmail: string = '',
-    userPassword: string = '',
-    userPasswordRepeat: string = '',
-) {
-    setUserAuthState = jest.fn();
-    setUserAuthState.mockImplementation((userAuthState) => userAuthState);
-    setUserEmail = jest.fn();
-    setUserEmail.mockImplementation((userEmail) => userEmail);
-    setUserPassword = jest.fn();
-    setUserPassword.mockImplementation((userEmail) => userEmail);
-    setUserPasswordRepeat = jest.fn();
-    setUserPasswordRepeat.mockImplementation((userEmail) => userEmail);
-    React.useState = jest
-        .fn()
-        .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
-        .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementationOnce(() => [userPassword, setUserPassword])
-        .mockImplementationOnce(() => [userPasswordRepeat, setUserPasswordRepeat]);
-}
+const setUserAuthState = jest.fn().mockImplementation((userAuthState) => userAuthState);
+const setUserEmail = jest.fn().mockImplementation((userEmail) => userEmail);
 
 const store = configureTestStore();
 
@@ -64,7 +41,6 @@ function componentWithStoreProvider(
 
 describe('LoginModal action tests - password input stages', () => {
     it('should update the user email on input on password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
         const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -75,7 +51,6 @@ describe('LoginModal action tests - password input stages', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com');
         const { container } = componentWithStoreProvider(
             UserAuthState.MAIL_INPUT_START,
             'here_is_my@email.com',
