@@ -1,14 +1,11 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { OTPInputForm } from '../OTPInputForm';
+import { UserAuthState } from '../LoginModal';
 
-const OTPInputComponent = (
-    <OTPInputForm
-        setUserAuthState={() => {
-            return;
-        }}
-    />
-);
+const setUserAuthState = jest.fn().mockImplementation((userAuthState) => userAuthState);
+
+const OTPInputComponent = <OTPInputForm {...{ setUserAuthState }} />;
 
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
@@ -89,5 +86,18 @@ describe('OTP input tests', () => {
         fireEvent.change(OTPInput0, { target: { value: '1' } });
 
         expect(OTPInput3).toHaveFocus();
+    });
+});
+
+describe('LoginModal action tests - OTP stages', () => {
+    it('should transition to loading from OTP stage', () => {
+        const { container } = render(OTPInputComponent);
+
+        const nextButton = getByText(container, 'next');
+        expect(nextButton).toBeInTheDocument();
+
+        fireEvent.click(nextButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_LOADING);
     });
 });

@@ -1,0 +1,65 @@
+import { fireEvent, getByTestId, render } from '@testing-library/react';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { configureTestStore } from '../../../../../tests/utils';
+import { UserAuthState } from '../LoginModal';
+import { LogInForm } from '../LogInForm';
+
+jest.mock('gatsby-plugin-react-i18next', () => ({
+    ...jest.requireActual('gatsby-plugin-react-i18next'),
+    useI18next: jest.fn().mockImplementation(() => ({
+        t: jest.fn().mockImplementation((val) => val),
+    })),
+}));
+
+const setUserAuthState = jest.fn().mockImplementation((userAuthState) => userAuthState);
+const setUserEmail = jest.fn().mockImplementation((userEmail) => userEmail);
+
+const store = configureTestStore();
+
+function componentWithStoreProvider(
+    userAuthState: UserAuthState,
+    userEmail: string,
+    userPassword: string,
+    userPasswordRepeat: string,
+) {
+    return render(
+        <Provider store={store}>
+            <LogInForm
+                {...{
+                    userAuthState,
+                    setUserAuthState,
+                    userEmail,
+                    setUserEmail,
+                    userPassword,
+                    userPasswordRepeat,
+                }}
+            />
+        </Provider>,
+    );
+}
+
+describe('LoginModal action tests - password input stages', () => {
+    it('should update the user email on input on password input stage', () => {
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, '', '', '');
+
+        const emailInput = getByTestId(container, 'emailInput');
+        expect(emailInput).toBeInTheDocument();
+
+        fireEvent.change(emailInput, { target: { value: 'hereIsMyMail@server.com' } });
+        expect(setUserEmail).toHaveBeenCalledWith('hereIsMyMail@server.com');
+    });
+
+    it('should show the already input email on password input stage', () => {
+        const { container } = componentWithStoreProvider(
+            UserAuthState.MAIL_INPUT_START,
+            'here_is_my@email.com',
+            '',
+            '',
+        );
+        const emailInput = getByTestId(container, 'emailInput');
+
+        expect(emailInput).toBeInTheDocument();
+        expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
+    });
+});
