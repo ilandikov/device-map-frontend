@@ -1,9 +1,9 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
-import { OTPInput } from '../OTPInput';
+import { OTPInputForm } from '../OTPInputForm';
 
 const OTPInputComponent = (
-    <OTPInput
+    <OTPInputForm
         setUserAuthState={() => {
             return;
         }}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
-import { PasswordCreation } from './PasswordCreation';
-import { OTPInput } from './OTPInput';
+import { PasswordCreationForm } from './PasswordCreationForm';
+import { OTPInputForm } from './OTPInputForm';
 import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
@@ -82,7 +82,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
                     <SignUpHeader />
-                    <PasswordCreation
+                    <PasswordCreationForm
                         {...{
                             userAuthState,
                             setUserAuthState,
@@ -97,7 +97,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.OTP_INPUT && (
                 <>
                     <SignUpHeader />
-                    <OTPInput {...{ setUserAuthState }} />
+                    <OTPInputForm {...{ setUserAuthState }} />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_LOADING && (

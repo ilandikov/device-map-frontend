@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 
-export function OTPInput(props: { setUserAuthState: (string) => void }) {
+export function OTPInputForm(props: { setUserAuthState: (string) => void }) {
     const { t } = useI18next();
 
     const OTPNextButton = useRef(null);
