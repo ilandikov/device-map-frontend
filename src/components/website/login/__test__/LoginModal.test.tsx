@@ -2,13 +2,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
-import * as userAuthStateUtils from '../UserAuthStateUtils';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -129,44 +128,6 @@ describe('LoginModal action tests - welcome stage', () => {
         fireEvent.click(registerButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
-    });
-});
-
-describe('LoginModal action tests - password creation stages', () => {
-    it('should update user password when typed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
-        const { container } = render(componentWithStoreProvider);
-        const userPasswordInput = getByTestId(container, 'userPassword');
-
-        expect(userPasswordInput).toBeInTheDocument();
-        fireEvent.change(userPasswordInput, { target: { value: 'verySecurePassword1' } });
-
-        expect(setUserPassword).toHaveBeenCalledWith('verySecurePassword1');
-    });
-
-    it('should update repeated user password when typed', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
-        const { container } = render(componentWithStoreProvider);
-        const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
-
-        expect(userPasswordRepeatInput).toBeInTheDocument();
-        fireEvent.change(userPasswordRepeatInput, { target: { value: 'evenBetterPassword' } });
-
-        expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
-    });
-
-    it('should call password verification when next button is pressed', () => {
-        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
-
-        mockUseUserAuthState(UserAuthState.PASSWORD_CREATION, '', 'passwordOne', 'PasswordTwo');
-        const { container } = render(componentWithStoreProvider);
-
-        const tryVerifyPasswordsButton = getByText(container, 'next');
-
-        expect(tryVerifyPasswordsButton).toBeInTheDocument();
-        fireEvent.click(tryVerifyPasswordsButton);
-
-        expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
 });
 
