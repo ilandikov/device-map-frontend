@@ -13,7 +13,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-const { setUserAuthState, setUserEmail } = mockLoginModalHooks();
+const { setUserAuthState, setUserEmail, setUserPassword } = mockLoginModalHooks();
 
 const store = configureTestStore();
 
@@ -32,6 +32,7 @@ function componentWithStoreProvider(
                     userEmail,
                     setUserEmail,
                     userPassword,
+                    setUserPassword,
                     userPasswordRepeat,
                 }}
             />

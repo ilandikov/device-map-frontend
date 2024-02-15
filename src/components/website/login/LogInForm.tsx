@@ -11,6 +11,7 @@ export function LogInForm(props: {
     userEmail: string;
     setUserEmail: (string) => void;
     userPassword: string;
+    setUserPassword: (string) => void;
     userPasswordRepeat: string;
 }) {
     const { t } = useI18next();

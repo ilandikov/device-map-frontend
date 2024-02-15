@@ -73,6 +73,7 @@ export function LoginModal() {
                             userEmail,
                             setUserEmail,
                             userPassword,
+                            setUserPassword,
                             userPasswordRepeat,
                         }}
                     />
