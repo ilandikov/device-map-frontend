@@ -51,12 +51,7 @@ describe('LoginModal action tests - password input stages', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        const { container } = componentWithStoreProvider(
-            UserAuthState.MAIL_INPUT_START,
-            'here_is_my@email.com',
-            '',
-            '',
-        );
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com', '', '');
         const emailInput = getByTestId(container, 'emailInput');
 
         expect(emailInput).toBeInTheDocument();
