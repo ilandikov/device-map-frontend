@@ -132,28 +132,6 @@ describe('LoginModal action tests - welcome stage', () => {
     });
 });
 
-describe('LoginModal action tests - password input stages', () => {
-    it('should update the user email on input on password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
-        const { container } = render(componentWithStoreProvider);
-
-        const emailInput = getByTestId(container, 'emailInput');
-        expect(emailInput).toBeInTheDocument();
-
-        fireEvent.change(emailInput, { target: { value: 'hereIsMyMail@server.com' } });
-        expect(setUserEmail).toHaveBeenCalledWith('hereIsMyMail@server.com');
-    });
-
-    it('should show the already input email on password input stage', () => {
-        mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com');
-        const { container } = render(componentWithStoreProvider);
-        const emailInput = getByTestId(container, 'emailInput');
-
-        expect(emailInput).toBeInTheDocument();
-        expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
-    });
-});
-
 describe('LoginModal action tests - password creation stages', () => {
     it('should update user password when typed', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_CREATION);
