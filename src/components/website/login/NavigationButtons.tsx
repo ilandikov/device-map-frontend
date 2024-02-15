@@ -1,4 +1,5 @@
 import React from 'react';
+import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 
