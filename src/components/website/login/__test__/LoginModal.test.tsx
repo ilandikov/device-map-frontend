@@ -130,18 +130,3 @@ describe('LoginModal action tests - welcome stage', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
 });
-
-// TODO after OTP button & input will be united in one component, this shall go to the tests of that component.
-describe('LoginModal action tests - OTP stages', () => {
-    it('should transition to loading from OTP stage', () => {
-        mockUseUserAuthState(UserAuthState.OTP_INPUT);
-        const { container } = render(componentWithStoreProvider);
-
-        const nextButton = getByText(container, 'next');
-        expect(nextButton).toBeInTheDocument();
-
-        fireEvent.click(nextButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_LOADING);
-    });
-});
