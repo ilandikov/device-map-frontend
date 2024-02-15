@@ -1,6 +1,7 @@
 import {
     userAuthStateFromOTP,
     userAuthStateFromUserEmail,
+    userAuthStateFromUserLogin,
     userAuthStateFromUserPasswords,
 } from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
@@ -56,5 +57,19 @@ describe('OTP logic tests', () => {
         const nextUserAuthState = userAuthStateFromOTP();
 
         expect(nextUserAuthState).toEqual(UserAuthState.OTP_LOADING);
+    });
+});
+
+describe('User authentication logic tests', () => {
+    it('should move a good user to logged state', () => {
+        const nextUserAuthState = userAuthStateFromUserLogin('user@mail.com', 'short');
+
+        expect(nextUserAuthState).toEqual(UserAuthState.USER_LOGGED_IN);
+    });
+
+    it('should keep a bad user at the password input state', () => {
+        const nextUserAuthState = userAuthStateFromUserLogin('bad@user.com', 'badPassword');
+
+        expect(nextUserAuthState).toEqual(UserAuthState.PASSWORD_INPUT);
     });
 });

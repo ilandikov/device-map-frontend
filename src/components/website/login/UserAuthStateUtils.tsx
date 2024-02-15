@@ -1,6 +1,10 @@
 import { UserAuthState } from './LoginModal';
 
-export function userAuthStateFromUserLogin() {
+export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
+    if (userEmail === 'user@mail.com' && userPassword === 'short') {
+        return UserAuthState.USER_LOGGED_IN;
+    }
+
     return UserAuthState.PASSWORD_INPUT;
 }
 

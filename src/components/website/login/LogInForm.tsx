@@ -41,7 +41,7 @@ export function LogInForm(props: {
                     type="button"
                     value={t('next')}
                     onClick={() => {
-                        const nextUserState = userAuthStateFromUserLogin();
+                        const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
                         props.setUserAuthState(nextUserState);
                     }}
                 />

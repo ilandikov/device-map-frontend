@@ -73,13 +73,18 @@ describe('LoginModal action tests - password input stages', () => {
     it('should call user authentication when next button is pressed', () => {
         const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
 
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_CREATION, 'user@mail.com', 'short', '');
+        const { container } = componentWithStoreProvider(
+            UserAuthState.PASSWORD_CREATION,
+            'user@mail.com',
+            'aPassword',
+            '',
+        );
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
 
         expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledTimes(1);
+        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledWith('user@mail.com', 'aPassword');
     });
 });
