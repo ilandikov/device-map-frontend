@@ -58,4 +58,14 @@ describe('LoginModal action tests - password input stages', () => {
         expect(emailInput).toBeInTheDocument();
         expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
     });
+
+    it('should update user password when typed', () => {
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'user@email.com', '', '');
+        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
+
+        expect(userPasswordInput).toBeInTheDocument();
+        fireEvent.change(userPasswordInput, { target: { value: 'strongPassword' } });
+
+        expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
+    });
 });

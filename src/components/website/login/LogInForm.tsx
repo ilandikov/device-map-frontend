@@ -31,9 +31,7 @@ export function LogInForm(props: {
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
-                        // TODO not tested
-                        const nextUserState = userAuthStateFromUserPasswords(event.target.value, event.target.value);
-                        props.setUserAuthState(nextUserState);
+                        props.setUserPassword(event.target.value);
                     }}
                 />
             </div>
