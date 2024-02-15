@@ -18,6 +18,7 @@ export enum UserAuthState {
     PASSWORD_INPUT,
     OTP_INPUT,
     OTP_LOADING,
+    USER_LOGGED_IN,
 }
 
 export function LoginModal() {
