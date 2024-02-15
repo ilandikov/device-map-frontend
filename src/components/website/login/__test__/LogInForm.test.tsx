@@ -1,9 +1,10 @@
-import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { UserAuthState } from '../LoginModal';
 import { LogInForm } from '../LogInForm';
+import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { mockLoginModalHooks } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -13,7 +14,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-const { setUserAuthState, setUserEmail } = mockLoginModalHooks();
+const { setUserAuthState, setUserEmail, setUserPassword } = mockLoginModalHooks();
 
 const store = configureTestStore();
 
@@ -32,6 +33,7 @@ function componentWithStoreProvider(
                     userEmail,
                     setUserEmail,
                     userPassword,
+                    setUserPassword,
                     userPasswordRepeat,
                 }}
             />
@@ -51,15 +53,33 @@ describe('LoginModal action tests - password input stages', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        const { container } = componentWithStoreProvider(
-            UserAuthState.MAIL_INPUT_START,
-            'here_is_my@email.com',
-            '',
-            '',
-        );
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com', '', '');
         const emailInput = getByTestId(container, 'emailInput');
 
         expect(emailInput).toBeInTheDocument();
         expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
+    });
+
+    it('should update user password when typed', () => {
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'user@email.com', '', '');
+        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
+
+        expect(userPasswordInput).toBeInTheDocument();
+        fireEvent.change(userPasswordInput, { target: { value: 'strongPassword' } });
+
+        expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
+    });
+
+    it('should call user authentication when next button is pressed', () => {
+        const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
+
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_CREATION, 'user@mail.com', 'short', '');
+
+        const tryVerifyPasswordsButton = getByText(container, 'next');
+
+        expect(tryVerifyPasswordsButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyPasswordsButton);
+
+        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledTimes(1);
     });
 });
