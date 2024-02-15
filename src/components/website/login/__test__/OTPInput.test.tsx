@@ -2,13 +2,9 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { OTPInputForm } from '../OTPInputForm';
 
-const OTPInputComponent = (
-    <OTPInputForm
-        setUserAuthState={() => {
-            return;
-        }}
-    />
-);
+const setUserAuthState = jest.fn().mockImplementation((userAuthState) => userAuthState);
+
+const OTPInputComponent = <OTPInputForm {...{ setUserAuthState }} />;
 
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
