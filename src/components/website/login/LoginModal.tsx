@@ -68,6 +68,7 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
+                    <NavigationButtons />
                     <LogInHeader />
                     <LogInForm
                         {...{
@@ -85,6 +86,7 @@ export function LoginModal() {
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
+                    <NavigationButtons />
                     <SignUpHeader />
                     <PasswordCreationForm
                         {...{
