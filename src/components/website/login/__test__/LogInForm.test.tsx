@@ -2,7 +2,8 @@ import { fireEvent, getByTestId, render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
-import { LoginModal, UserAuthState } from '../LoginModal';
+import { UserAuthState } from '../LoginModal';
+import { LogInForm } from '../LogInForm';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -39,16 +40,32 @@ function mockUseUserAuthState(
 
 const store = configureTestStore();
 
-const componentWithStoreProvider = (
-    <Provider store={store}>
-        <LoginModal />
-    </Provider>
-);
+function componentWithStoreProvider(
+    userAuthState: UserAuthState,
+    userEmail: string,
+    userPassword: string,
+    userPasswordRepeat: string,
+) {
+    return render(
+        <Provider store={store}>
+            <LogInForm
+                {...{
+                    userAuthState,
+                    setUserAuthState,
+                    userEmail,
+                    setUserEmail,
+                    userPassword,
+                    userPasswordRepeat,
+                }}
+            />
+        </Provider>,
+    );
+}
 
 describe('LoginModal action tests - password input stages', () => {
     it('should update the user email on input on password input stage', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_INPUT);
-        const { container } = render(componentWithStoreProvider);
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
         expect(emailInput).toBeInTheDocument();
@@ -59,7 +76,12 @@ describe('LoginModal action tests - password input stages', () => {
 
     it('should show the already input email on password input stage', () => {
         mockUseUserAuthState(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com');
-        const { container } = render(componentWithStoreProvider);
+        const { container } = componentWithStoreProvider(
+            UserAuthState.MAIL_INPUT_START,
+            'here_is_my@email.com',
+            '',
+            '',
+        );
         const emailInput = getByTestId(container, 'emailInput');
 
         expect(emailInput).toBeInTheDocument();
