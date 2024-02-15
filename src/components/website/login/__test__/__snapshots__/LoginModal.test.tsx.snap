@@ -144,6 +144,20 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
 exports[`LoginModal snapshot tests should match the snapshot at mail exists stage 1`] = `
 [
   <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+  </div>,
+  <div
     className="login-modal-header-container"
   >
     <img
@@ -209,6 +223,20 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
 exports[`LoginModal snapshot tests should match the snapshot at mail input stage 1`] = `
 [
   <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+  </div>,
+  <div
     className="login-modal-header-container"
   >
     <img
@@ -262,6 +290,20 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
 
 exports[`LoginModal snapshot tests should match the snapshot at mail not valid stage 1`] = `
 [
+  <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+  </div>,
   <div
     className="login-modal-header-container"
   >
@@ -321,6 +363,20 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
 
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 1`] = `
 [
+  <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+  </div>,
   <div
     className="login-modal-header-container"
   >
@@ -390,6 +446,20 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 2`] = `
 [
   <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+  </div>,
+  <div
     className="login-modal-header-container"
   >
     <img
@@ -458,6 +528,20 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 
 exports[`LoginModal snapshot tests should match the snapshot at password not match stage 1`] = `
 [
+  <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      src="test-file-stub"
+    />
+  </div>,
   <div
     className="login-modal-header-container"
   >

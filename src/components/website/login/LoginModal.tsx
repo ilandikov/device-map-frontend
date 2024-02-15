@@ -7,6 +7,7 @@ import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
+import { NavigationButtons } from './NavigationButtons';
 
 export enum UserAuthState {
     WELCOME,
@@ -53,6 +54,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
+                    <NavigationButtons />
                     <SignUpHeader />
                     <MailInputForm
                         {...{
@@ -66,6 +68,7 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
+                    <NavigationButtons />
                     <LogInHeader />
                     <LogInForm
                         {...{
@@ -83,6 +86,7 @@ export function LoginModal() {
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
+                    <NavigationButtons />
                     <SignUpHeader />
                     <PasswordCreationForm
                         {...{
