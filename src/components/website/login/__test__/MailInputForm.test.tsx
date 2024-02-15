@@ -33,7 +33,7 @@ function componentWithStoreProvider(userAuthState: UserAuthState, userEmail: str
     );
 }
 
-describe('LoginModal action tests - email stages', () => {
+describe('MailInputForm action tests', () => {
     it('should call email setter from email input', () => {
         const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START, '');
 

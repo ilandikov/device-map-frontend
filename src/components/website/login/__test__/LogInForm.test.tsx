@@ -41,7 +41,7 @@ function componentWithStoreProvider(
     );
 }
 
-describe('LoginModal action tests - password input stages', () => {
+describe('LogInForm action tests', () => {
     it('should update the user email on input on password input stage', () => {
         const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, '', '', '');
 

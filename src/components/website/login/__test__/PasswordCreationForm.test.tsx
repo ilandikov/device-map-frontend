@@ -40,7 +40,7 @@ function componentWithStoreProvider(
     );
 }
 
-describe('LoginModal action tests - password creation stages', () => {
+describe('PasswordCreationForm action tests', () => {
     it('should update user password when typed', () => {
         const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_CREATION, '', '', '');
         const userPasswordInput = getByTestId(container, 'userPassword');

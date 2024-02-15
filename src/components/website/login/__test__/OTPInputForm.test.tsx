@@ -90,7 +90,7 @@ describe('OTP input tests', () => {
     });
 });
 
-describe('LoginModal action tests - OTP stages', () => {
+describe('OTPInputForm action tests', () => {
     it('should transition to loading from OTP stage', () => {
         const { container } = render(OTPInputComponent);
 
