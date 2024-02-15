@@ -7,8 +7,7 @@ import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
-import GoBack from '/src/assets/images/GoBack.svg';
-import Cancel from '/src/assets/images/Cancel.svg';
+import { NavigationButtons } from './NavigationButtons';
 
 export enum UserAuthState {
     WELCOME,
@@ -55,18 +54,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
-                    <div className="login-modal-navigation-container">
-                        <img
-                            className="login-modal-navigation-button"
-                            src={GoBack}
-                            alt="login-modal-navigation-go-back"
-                        />
-                        <img
-                            className="login-modal-navigation-button"
-                            src={Cancel}
-                            alt="login-modal-navigation-cancel"
-                        />
-                    </div>
+                    <NavigationButtons />
                     <SignUpHeader />
                     <MailInputForm
                         {...{
