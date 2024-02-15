@@ -5,6 +5,7 @@ import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
+import { mockLoginModalHooks } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -13,8 +14,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-const setUserAuthState = jest.fn().mockImplementation((userAuthState) => userAuthState);
-const setUserEmail = jest.fn().mockImplementation((userEmail) => userEmail);
+const { setUserAuthState, setUserEmail } = mockLoginModalHooks();
 
 const store = configureTestStore();
 
