@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
+import { UserAuthState } from '../LoginModal';
 import { mockLoginModalHooks } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
@@ -24,6 +25,8 @@ describe('Navigation buttons tests', () => {
 
         expect(cancelButton).toBeInTheDocument();
         fireEvent.click(cancelButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.WELCOME);
     });
 
     it('should click on go back button', () => {

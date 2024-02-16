@@ -156,6 +156,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
       data-testid="cancelButton"
+      onClick={[Function]}
       src="test-file-stub"
     />
   </div>,
@@ -237,6 +238,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
       data-testid="cancelButton"
+      onClick={[Function]}
       src="test-file-stub"
     />
   </div>,
@@ -307,6 +309,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
       data-testid="cancelButton"
+      onClick={[Function]}
       src="test-file-stub"
     />
   </div>,
@@ -382,6 +385,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
       data-testid="cancelButton"
+      onClick={[Function]}
       src="test-file-stub"
     />
   </div>,
@@ -466,6 +470,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
       data-testid="cancelButton"
+      onClick={[Function]}
       src="test-file-stub"
     />
   </div>,
@@ -551,6 +556,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
       data-testid="cancelButton"
+      onClick={[Function]}
       src="test-file-stub"
     />
   </div>,
