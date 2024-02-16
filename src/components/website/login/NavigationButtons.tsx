@@ -12,6 +12,9 @@ export function NavigationButtons(props: { setUserAuthState: (string) => void; g
                 src={GoBack}
                 alt="login-modal-navigation-go-back"
                 data-testid="goBackButton"
+                onClick={() => {
+                    props.setUserAuthState(props.goBackState);
+                }}
             />
             <img
                 className="login-modal-navigation-button"

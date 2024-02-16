@@ -8,17 +8,21 @@ import { mockLoginModalHooks } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
 
-const { setUserAuthState } = mockLoginModalHooks();
+let setUserAuthState: jest.Mock;
 
-function componentWithStoreProvider() {
+function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.WELCOME) {
     return render(
         <Provider store={store}>
-            <NavigationButtons {...{ setUserAuthState }} />
+            <NavigationButtons {...{ setUserAuthState, goBackState }} />
         </Provider>,
     );
 }
 
 describe('Navigation buttons tests', () => {
+    beforeEach(() => {
+        setUserAuthState = mockLoginModalHooks().setUserAuthState;
+    });
+
     it('should click on cancel button', () => {
         const { container } = componentWithStoreProvider();
         const cancelButton = getByTestId(container, 'cancelButton');
@@ -30,10 +34,12 @@ describe('Navigation buttons tests', () => {
     });
 
     it('should click on go back button', () => {
-        const { container } = componentWithStoreProvider();
+        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START);
         const goBackButton = getByTestId(container, 'goBackButton');
 
         expect(goBackButton).toBeInTheDocument();
         fireEvent.click(goBackButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
 });
