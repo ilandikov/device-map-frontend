@@ -4,11 +4,9 @@ import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
 import { UserAuthState } from '../LoginModal';
-import { mockLoginModalHooks } from './LoginModalTestHelpers';
+import { resetHookMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
-
-let setUserAuthState: jest.Mock;
 
 function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.WELCOME) {
     return render(
@@ -20,7 +18,7 @@ function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.W
 
 describe('Navigation buttons tests', () => {
     beforeEach(() => {
-        setUserAuthState = mockLoginModalHooks().setUserAuthState;
+        resetHookMocks();
     });
 
     it('should go back to welcome stage on cancel button click', () => {
