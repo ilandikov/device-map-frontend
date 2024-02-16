@@ -54,7 +54,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
-                    <NavigationButtons {...{ setUserAuthState }} />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
                     <SignUpHeader />
                     <MailInputForm
                         {...{

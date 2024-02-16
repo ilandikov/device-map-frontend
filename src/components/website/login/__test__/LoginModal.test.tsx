@@ -2,7 +2,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { fireEvent, getByText, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
@@ -131,4 +131,28 @@ describe('LoginModal action tests - welcome stage', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
+});
+
+describe('LoginModal go back button click actions', () => {
+    beforeEach(() => {
+        const hooks = mockLoginModalHooks();
+        setUserAuthState = hooks.setUserAuthState;
+        setUserEmail = hooks.setUserEmail;
+        setUserPassword = hooks.setUserPassword;
+        setUserPasswordRepeat = hooks.setUserPasswordRepeat;
+    });
+
+    it.each([UserAuthState.MAIL_INPUT_START, UserAuthState.MAIL_ALREADY_EXISTS, UserAuthState.MAIL_NOT_VALID])(
+        'should go back to welcome state from state %s',
+        () => {
+            mockLoginModalUseStates(UserAuthState.MAIL_INPUT_START);
+            const { container } = render(componentWithStoreProvider);
+
+            const goBackButton = getByTestId(container, 'goBackButton');
+            expect(goBackButton).toBeInTheDocument();
+            fireEvent.click(goBackButton);
+
+            expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.WELCOME);
+        },
+    );
 });
