@@ -105,4 +105,15 @@ describe('OTPInputForm action tests', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP_LOADING);
     });
+
+    it('should transition from log in OTP to loading OTP state', () => {
+        const { container } = renderOTPInputComponent(UserAuthState.LOGIN_OTP);
+
+        const nextButton = getByText(container, 'next');
+        expect(nextButton).toBeInTheDocument();
+
+        fireEvent.click(nextButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_OTP_LOADING);
+    });
 });
