@@ -142,17 +142,18 @@ describe('LoginModal go back button click actions', () => {
         setUserPasswordRepeat = hooks.setUserPasswordRepeat;
     });
 
-    it.each([UserAuthState.MAIL_INPUT_START, UserAuthState.MAIL_ALREADY_EXISTS, UserAuthState.MAIL_NOT_VALID])(
-        'should go back to welcome state from state %s',
-        (goBackClickedState) => {
-            mockLoginModalUseStates(goBackClickedState);
-            const { container } = render(componentWithStoreProvider);
+    it.each([
+        [UserAuthState.MAIL_INPUT_START, UserAuthState.WELCOME],
+        [UserAuthState.MAIL_ALREADY_EXISTS, UserAuthState.WELCOME],
+        [UserAuthState.MAIL_NOT_VALID, UserAuthState.WELCOME],
+    ])('should go back from state %s to %s state ', (goBackClickedState, goBackToState) => {
+        mockLoginModalUseStates(goBackClickedState);
+        const { container } = render(componentWithStoreProvider);
 
-            const goBackButton = getByTestId(container, 'goBackButton');
-            expect(goBackButton).toBeInTheDocument();
-            fireEvent.click(goBackButton);
+        const goBackButton = getByTestId(container, 'goBackButton');
+        expect(goBackButton).toBeInTheDocument();
+        fireEvent.click(goBackButton);
 
-            expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.WELCOME);
-        },
-    );
+        expect(setUserAuthState).toHaveBeenCalledWith(goBackToState);
+    });
 });
