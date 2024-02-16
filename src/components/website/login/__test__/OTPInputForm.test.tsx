@@ -95,7 +95,7 @@ describe('OTPInputForm action tests', () => {
         resetHookMocks();
     });
 
-    it('should transition to loading from OTP stage', () => {
+    it('should transition from sign up OTP to loading OTP state', () => {
         const { container } = renderOTPInputComponent(UserAuthState.SIGNUP_OTP);
 
         const nextButton = getByText(container, 'next');
