@@ -23,7 +23,7 @@ describe('Navigation buttons tests', () => {
         setUserAuthState = mockLoginModalHooks().setUserAuthState;
     });
 
-    it('should click on cancel button', () => {
+    it('should go back to welcome stage on cancel button click', () => {
         const { container } = componentWithStoreProvider();
         const cancelButton = getByTestId(container, 'cancelButton');
 
@@ -33,7 +33,7 @@ describe('Navigation buttons tests', () => {
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.WELCOME);
     });
 
-    it('should click on go back button', () => {
+    it('should go back to a desired go back state on go back button click', () => {
         const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START);
         const goBackButton = getByTestId(container, 'goBackButton');
 
