@@ -143,10 +143,15 @@ describe('LoginModal go back button click actions', () => {
     });
 
     it.each([
+        // From mail input to welcome
         [UserAuthState.MAIL_INPUT_START, UserAuthState.WELCOME],
         [UserAuthState.MAIL_ALREADY_EXISTS, UserAuthState.WELCOME],
         [UserAuthState.MAIL_NOT_VALID, UserAuthState.WELCOME],
+
+        // From password input to mail input
         [UserAuthState.PASSWORD_INPUT, UserAuthState.MAIL_INPUT_START],
+
+        // From password creation to mail input
         [UserAuthState.PASSWORD_CREATION, UserAuthState.MAIL_INPUT_START],
         [UserAuthState.PASSWORD_CREATION_MATCH_ERROR, UserAuthState.MAIL_INPUT_START],
     ])('should go back from state %s to %s state ', (goBackClickedState, goBackToState) => {
