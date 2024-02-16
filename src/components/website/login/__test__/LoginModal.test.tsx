@@ -22,6 +22,14 @@ let setUserEmail: jest.Mock;
 let setUserPassword: jest.Mock;
 let setUserPasswordRepeat: jest.Mock;
 
+function resetHookMocks() {
+    const hooks = mockLoginModalHooks();
+    setUserAuthState = hooks.setUserAuthState;
+    setUserEmail = hooks.setUserEmail;
+    setUserPassword = hooks.setUserPassword;
+    setUserPasswordRepeat = hooks.setUserPasswordRepeat;
+}
+
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
     initialUserEmail: string = '',
@@ -115,11 +123,7 @@ describe('LoginModal snapshot tests', () => {
 
 describe('LoginModal action tests - welcome stage', () => {
     beforeEach(() => {
-        const hooks = mockLoginModalHooks();
-        setUserAuthState = hooks.setUserAuthState;
-        setUserEmail = hooks.setUserEmail;
-        setUserPassword = hooks.setUserPassword;
-        setUserPasswordRepeat = hooks.setUserPasswordRepeat;
+        resetHookMocks();
     });
 
     it('should call setting the new state from welcome to email input', () => {
@@ -135,11 +139,7 @@ describe('LoginModal action tests - welcome stage', () => {
 
 describe('LoginModal go back button click actions', () => {
     beforeEach(() => {
-        const hooks = mockLoginModalHooks();
-        setUserAuthState = hooks.setUserAuthState;
-        setUserEmail = hooks.setUserEmail;
-        setUserPassword = hooks.setUserPassword;
-        setUserPasswordRepeat = hooks.setUserPasswordRepeat;
+        resetHookMocks();
     });
 
     it.each([
