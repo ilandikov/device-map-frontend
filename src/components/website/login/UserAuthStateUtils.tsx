@@ -8,7 +8,11 @@ export function userAuthStateFromUserLogin(userEmail: string, userPassword: stri
     return UserAuthState.LOGIN;
 }
 
-export function userAuthStateFromOTP() {
+export function userAuthStateFromOTP(userAuthState: UserAuthState) {
+    if (userAuthState === UserAuthState.LOGIN_OTP) {
+        return UserAuthState.LOGIN_OTP_LOADING;
+    }
+
     return UserAuthState.SIGNUP_OTP_LOADING;
 }
 

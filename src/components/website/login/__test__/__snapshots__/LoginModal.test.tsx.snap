@@ -620,6 +620,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   >
     <input
       className="login-modal-button-black-on-green"
+      onClick={[Function]}
       type="button"
       value="OTPSendSMS"
     />

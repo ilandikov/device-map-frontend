@@ -21,6 +21,8 @@ export enum UserAuthState {
     SIGNUP_OTP_LOADING = 'SIGNUP_OTP_LOADING',
     LOGIN = 'LOGIN',
     LOGIN_PASSWORD_RESET = 'LOGIN_PASSWORD_RESET',
+    LOGIN_OTP = 'LOGIN_OTP',
+    LOGIN_OTP_LOADING = 'LOGIN_OTP_LOADING',
     LOGGED_IN = 'LOGGED_IN',
 }
 
@@ -95,7 +97,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.SIGNUP_OTP && (
                 <>
                     <SignUpHeader />
-                    <OTPInputForm {...{ setUserAuthState }} />
+                    <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
@@ -128,9 +130,11 @@ export function LoginModal() {
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.LOGIN }} />
                     <NewPasswordHeader />
-                    <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
+                    <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
                 </>
             )}
+            {userAuthState === UserAuthState.LOGIN_OTP && <></>}
+            {userAuthState === UserAuthState.LOGIN_OTP_LOADING && <></>}
         </>
     );
 }

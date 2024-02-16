@@ -1,8 +1,13 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { MailInputBox } from './MailInputBox';
+import { UserAuthState } from './LoginModal';
 
-export function PasswordResetRequestForm(props: { userEmail: string; setUserEmail: (event) => void }) {
+export function PasswordResetRequestForm(props: {
+    setUserAuthState: (string) => void;
+    userEmail: string;
+    setUserEmail: (event) => void;
+}) {
     const { t } = useI18next();
 
     return (
@@ -17,7 +22,12 @@ export function PasswordResetRequestForm(props: { userEmail: string; setUserEmai
                 />
             </div>
             <div className="login-modal-button-container">
-                <input className="login-modal-button-black-on-green" type="button" value={t('OTPSendSMS')} />
+                <input
+                    className="login-modal-button-black-on-green"
+                    type="button"
+                    value={t('OTPSendSMS')}
+                    onClick={() => props.setUserAuthState(UserAuthState.LOGIN_OTP)}
+                />
             </div>
         </>
     );
