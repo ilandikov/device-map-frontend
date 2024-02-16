@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
@@ -29,5 +29,15 @@ describe('rename me', () => {
         fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
 
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
+    });
+
+    it('should click request OTP button', () => {
+        const { container } = componentWithStoreProvider();
+
+        const requestOTPButton = getByText(container, 'OTPSendSMS');
+        expect(requestOTPButton).toBeInTheDocument();
+        fireEvent.click(requestOTPButton);
+
+        // TODO add an expect() here
     });
 });
