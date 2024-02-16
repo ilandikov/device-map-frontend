@@ -4,8 +4,8 @@ import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
 import { resetHookMocks, setUserAuthState } from './LoginModalTestHelpers';
 
-function renderOTPInputComponent() {
-    return render(<OTPInputForm {...{ userAuthState: UserAuthState.SIGNUP_OTP, setUserAuthState }} />);
+function renderOTPInputComponent(userAuthState: UserAuthState = UserAuthState.SIGNUP_OTP) {
+    return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
 }
 
 describe('OTP input tests', () => {
@@ -96,7 +96,7 @@ describe('OTPInputForm action tests', () => {
     });
 
     it('should transition to loading from OTP stage', () => {
-        const { container } = renderOTPInputComponent();
+        const { container } = renderOTPInputComponent(UserAuthState.SIGNUP_OTP);
 
         const nextButton = getByText(container, 'next');
         expect(nextButton).toBeInTheDocument();
