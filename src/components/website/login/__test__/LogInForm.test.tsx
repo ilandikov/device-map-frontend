@@ -89,4 +89,14 @@ describe('LogInForm action tests', () => {
 
         expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledWith('user@mail.com', 'aPassword');
     });
+
+    it('should transition to password reset state when reset button was clicked', () => {
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'user@email.com', '', '');
+
+        const resetPasswordButton = getByText(container, 'resetPassword');
+        expect(resetPasswordButton).toBeInTheDocument();
+        fireEvent.click(resetPasswordButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_RESET);
+    });
 });
