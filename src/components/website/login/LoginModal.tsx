@@ -12,16 +12,16 @@ import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 
 export enum UserAuthState {
     WELCOME,
-    MAIL_INPUT_START,
-    MAIL_ALREADY_EXISTS,
-    MAIL_NOT_VALID,
-    PASSWORD_CREATION,
-    PASSWORD_CREATION_MATCH_ERROR,
-    PASSWORD_INPUT,
-    PASSWORD_RESET,
-    OTP_INPUT,
-    OTP_LOADING,
-    USER_LOGGED_IN,
+    MAIL_INPUT,
+    MAIL_INPUT_ERROR_EXISTENCE,
+    MAIL_INPUT_ERROR_VALIDITY,
+    SIGNUP_PASSWORD,
+    SIGNUP_PASSWORD_ERROR,
+    SIGNUP_OTP,
+    SIGNUP_OTP_LOADING,
+    LOGIN,
+    LOGIN_PASSWORD_RESET,
+    LOGGED_IN,
 }
 
 export function LoginModal() {
@@ -45,7 +45,7 @@ export function LoginModal() {
                             type="button"
                             value={t('accountLogin')}
                             onClick={() => {
-                                setUserAuthState(UserAuthState.PASSWORD_INPUT);
+                                setUserAuthState(UserAuthState.LOGIN);
                             }}
                         />
                         <input
@@ -53,15 +53,15 @@ export function LoginModal() {
                             type="button"
                             value={t('accountRegister')}
                             onClick={() => {
-                                setUserAuthState(UserAuthState.MAIL_INPUT_START);
+                                setUserAuthState(UserAuthState.MAIL_INPUT);
                             }}
                         />
                     </div>
                 </>
             )}
-            {(userAuthState === UserAuthState.MAIL_INPUT_START ||
-                userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
-                userAuthState === UserAuthState.MAIL_NOT_VALID) && (
+            {(userAuthState === UserAuthState.MAIL_INPUT ||
+                userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE ||
+                userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
                     <SignUpHeader />
@@ -75,9 +75,41 @@ export function LoginModal() {
                     />
                 </>
             )}
-            {userAuthState === UserAuthState.PASSWORD_INPUT && (
+            {(userAuthState === UserAuthState.SIGNUP_PASSWORD ||
+                userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) && (
                 <>
-                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT_START }} />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
+                    <SignUpHeader />
+                    <PasswordCreationForm
+                        {...{
+                            userAuthState,
+                            setUserAuthState,
+                            userPassword,
+                            setUserPassword,
+                            userPasswordRepeat,
+                            setUserPasswordRepeat,
+                        }}
+                    />
+                </>
+            )}
+            {userAuthState === UserAuthState.SIGNUP_OTP && (
+                <>
+                    <SignUpHeader />
+                    <OTPInputForm {...{ setUserAuthState }} />
+                </>
+            )}
+            {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
+                <>
+                    <SignUpHeader />
+                    <div className="login-modal-input-container">
+                        <p className="login-modal-input-help">{t('OTPVerifying')}</p>
+                    </div>
+                    <div className="login-modal-button-container"></div>
+                </>
+            )}
+            {userAuthState === UserAuthState.LOGIN && (
+                <>
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
                     <LogInHeader />
                     <LogInForm
                         {...{
@@ -92,42 +124,10 @@ export function LoginModal() {
                     />
                 </>
             )}
-            {(userAuthState === UserAuthState.PASSWORD_CREATION ||
-                userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
-                <>
-                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT_START }} />
-                    <SignUpHeader />
-                    <PasswordCreationForm
-                        {...{
-                            userAuthState,
-                            setUserAuthState,
-                            userPassword,
-                            setUserPassword,
-                            userPasswordRepeat,
-                            setUserPasswordRepeat,
-                        }}
-                    />
-                </>
-            )}
-            {userAuthState === UserAuthState.PASSWORD_RESET && (
+            {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                 <>
                     <NewPasswordHeader />
                     <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
-                </>
-            )}
-            {userAuthState === UserAuthState.OTP_INPUT && (
-                <>
-                    <SignUpHeader />
-                    <OTPInputForm {...{ setUserAuthState }} />
-                </>
-            )}
-            {userAuthState === UserAuthState.OTP_LOADING && (
-                <>
-                    <SignUpHeader />
-                    <div className="login-modal-input-container">
-                        <p className="login-modal-input-help">{t('OTPVerifying')}</p>
-                    </div>
-                    <div className="login-modal-button-container"></div>
                 </>
             )}
         </>

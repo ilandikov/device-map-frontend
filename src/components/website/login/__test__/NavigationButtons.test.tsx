@@ -32,12 +32,12 @@ describe('Navigation buttons tests', () => {
     });
 
     it('should go back to a desired go back state on go back button click', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START);
+        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT);
         const goBackButton = getByTestId(container, 'goBackButton');
 
         expect(goBackButton).toBeInTheDocument();
         fireEvent.click(goBackButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT);
     });
 });

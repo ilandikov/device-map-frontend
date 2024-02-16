@@ -45,7 +45,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, '', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
         expect(emailInput).toBeInTheDocument();
@@ -55,7 +55,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'here_is_my@email.com', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'here_is_my@email.com', '', '');
         const emailInput = getByTestId(container, 'emailInput');
 
         expect(emailInput).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'user@email.com', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
         const userPasswordInput = getByTestId(container, 'userPasswordLogin');
 
         expect(userPasswordInput).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe('LogInForm action tests', () => {
         const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
 
         const { container } = componentWithStoreProvider(
-            UserAuthState.PASSWORD_CREATION,
+            UserAuthState.SIGNUP_PASSWORD,
             'user@mail.com',
             'aPassword',
             '',
@@ -91,12 +91,12 @@ describe('LogInForm action tests', () => {
     });
 
     it('should transition to password reset state when reset button was clicked', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'user@email.com', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
 
         const resetPasswordButton = getByText(container, 'resetPassword');
         expect(resetPasswordButton).toBeInTheDocument();
         fireEvent.click(resetPasswordButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_RESET);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_PASSWORD_RESET);
     });
 });
