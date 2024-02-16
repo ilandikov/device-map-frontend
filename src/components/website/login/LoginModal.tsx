@@ -3,12 +3,11 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPInputForm } from './OTPInputForm';
-import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
+import { LogInHeader, NewPasswordHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
-import { LoginModalHeader } from './LoginModalHeader';
 import { MailInputBox } from './MailInputBox';
 
 export enum UserAuthState {
@@ -23,18 +22,6 @@ export enum UserAuthState {
     OTP_INPUT,
     OTP_LOADING,
     USER_LOGGED_IN,
-}
-
-function NewPasswordHeader() {
-    const { t } = useI18next();
-
-    return (
-        <LoginModalHeader
-            header={t('newPassword')}
-            description={t('finikMapProductDescription')}
-            opaqueDescription={true}
-        />
-    );
 }
 
 export function LoginModal() {
