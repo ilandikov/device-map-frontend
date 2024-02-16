@@ -68,7 +68,7 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
-                    <NavigationButtons {...{ setUserAuthState }} />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT_START }} />
                     <LogInHeader />
                     <LogInForm
                         {...{
