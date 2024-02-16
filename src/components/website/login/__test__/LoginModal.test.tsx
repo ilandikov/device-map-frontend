@@ -126,7 +126,7 @@ describe('LoginModal action tests - welcome stage', () => {
         resetHookMocks();
     });
 
-    it('should call setting the new state from welcome to email input', () => {
+    it('should transition to email input from welcome state', () => {
         mockLoginModalUseStates(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
 
