@@ -2,9 +2,7 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
-import { mockLoginModalHooks } from './LoginModalTestHelpers';
-
-const { setUserAuthState } = mockLoginModalHooks();
+import { resetHookMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPInputComponent() {
     return render(<OTPInputForm {...{ setUserAuthState }} />);
@@ -93,6 +91,10 @@ describe('OTP input tests', () => {
 });
 
 describe('OTPInputForm action tests', () => {
+    beforeEach(() => {
+        resetHookMocks();
+    });
+
     it('should transition to loading from OTP stage', () => {
         const { container } = renderOTPInputComponent();
 
