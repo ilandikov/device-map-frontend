@@ -8,7 +8,7 @@ import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
-import { MailInputBox } from './MailInputBox';
+import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 
 export enum UserAuthState {
     WELCOME,
@@ -105,18 +105,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.PASSWORD_RESET && (
                 <>
                     <NewPasswordHeader />
-                    <div className="login-modal-input-container">
-                        <MailInputBox
-                            helpText={t('mailForPasswordReset')}
-                            userEmail={userEmail}
-                            onChange={(event) => {
-                                setUserEmail(event.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className="login-modal-button-container">
-                        <input className="login-modal-button-black-on-green" type="button" value={t('OTPSendSMS')} />
-                    </div>
+                    <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_INPUT && (
