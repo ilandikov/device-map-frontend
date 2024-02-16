@@ -144,8 +144,8 @@ describe('LoginModal go back button click actions', () => {
 
     it.each([UserAuthState.MAIL_INPUT_START, UserAuthState.MAIL_ALREADY_EXISTS, UserAuthState.MAIL_NOT_VALID])(
         'should go back to welcome state from state %s',
-        () => {
-            mockLoginModalUseStates(UserAuthState.MAIL_INPUT_START);
+        (goBackClickedState) => {
+            mockLoginModalUseStates(goBackClickedState);
             const { container } = render(componentWithStoreProvider);
 
             const goBackButton = getByTestId(container, 'goBackButton');
