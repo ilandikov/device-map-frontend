@@ -130,7 +130,7 @@ export function LoginModal() {
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.LOGIN }} />
                     <NewPasswordHeader />
-                    <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
+                    <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
                 </>
             )}
         </>

@@ -3,14 +3,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import { resetHookMocks, setUserEmail } from './LoginModalTestHelpers';
+import { resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
 
 function componentWithStoreProvider(userEmail: string = '') {
     return render(
         <Provider store={store}>
-            <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
+            <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
         </Provider>,
     );
 }

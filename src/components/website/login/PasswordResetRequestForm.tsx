@@ -2,7 +2,11 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { MailInputBox } from './MailInputBox';
 
-export function PasswordResetRequestForm(props: { userEmail: string; setUserEmail: (event) => void }) {
+export function PasswordResetRequestForm(props: {
+    setUserAuthState: (string) => void;
+    userEmail: string;
+    setUserEmail: (event) => void;
+}) {
     const { t } = useI18next();
 
     return (
