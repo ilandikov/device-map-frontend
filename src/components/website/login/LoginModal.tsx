@@ -17,10 +17,10 @@ export enum UserAuthState {
     PASSWORD_CREATION,
     PASSWORD_CREATION_MATCH_ERROR,
     PASSWORD_INPUT,
+    PASSWORD_RESET,
     OTP_INPUT,
     OTP_LOADING,
     USER_LOGGED_IN,
-    PASSWORD_RESET,
 }
 
 export function LoginModal() {
