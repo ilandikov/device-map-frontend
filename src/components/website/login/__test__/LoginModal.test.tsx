@@ -161,6 +161,9 @@ describe('LoginModal go back button click actions', () => {
         // From password input to mail input
         [UserAuthState.LOGIN, UserAuthState.MAIL_INPUT],
 
+        // From password reset to login
+        [UserAuthState.LOGIN_PASSWORD_RESET, UserAuthState.LOGIN],
+
         // From password creation to mail input
         [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
         [UserAuthState.SIGNUP_PASSWORD_ERROR, UserAuthState.MAIL_INPUT],

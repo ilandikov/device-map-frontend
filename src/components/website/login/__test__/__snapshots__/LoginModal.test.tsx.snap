@@ -559,6 +559,24 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 3`] = `
 [
   <div
+    className="login-modal-navigation-container"
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      className="login-modal-navigation-button"
+      data-testid="goBackButton"
+      onClick={[Function]}
+      src="test-file-stub"
+    />
+    <img
+      alt="login-modal-navigation-cancel"
+      className="login-modal-navigation-button"
+      data-testid="cancelButton"
+      onClick={[Function]}
+      src="test-file-stub"
+    />
+  </div>,
+  <div
     className="login-modal-header-container"
   >
     <img

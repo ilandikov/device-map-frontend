@@ -126,6 +126,7 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                 <>
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.LOGIN }} />
                     <NewPasswordHeader />
                     <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
                 </>
