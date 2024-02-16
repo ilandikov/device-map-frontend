@@ -36,15 +36,25 @@ export function LogInForm(props: {
                 />
             </div>
             <div className="login-modal-button-container">
-                <input
-                    className="login-modal-button-black-on-green"
-                    type="button"
-                    value={t('next')}
-                    onClick={() => {
-                        const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
-                        props.setUserAuthState(nextUserState);
-                    }}
-                />
+                <div className="login-modal-two-buttons-on-one-row">
+                    <p
+                        className="login-modal-correct-input"
+                        onClick={() => {
+                            props.setUserAuthState(UserAuthState.PASSWORD_RESET);
+                        }}
+                    >
+                        {t('resetPassword')}
+                    </p>
+                    <input
+                        className="login-modal-button-black-on-green"
+                        type="button"
+                        value={t('next')}
+                        onClick={() => {
+                            const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
+                            props.setUserAuthState(nextUserState);
+                        }}
+                    />
+                </div>
             </div>
         </>
     );

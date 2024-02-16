@@ -20,6 +20,7 @@ export enum UserAuthState {
     OTP_INPUT,
     OTP_LOADING,
     USER_LOGGED_IN,
+    PASSWORD_RESET,
 }
 
 export function LoginModal() {

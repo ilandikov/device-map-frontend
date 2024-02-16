@@ -87,10 +87,10 @@
     font-weight: 700;
     line-height: 18px;
   }
+}
 
-  .login-modal-correct-input {
-    color: #ACF709;
-  }
+.login-modal-correct-input {
+  color: #ACF709;
 }
 
 .login-modal-input-wrong {
@@ -107,6 +107,19 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
+
+  .login-modal-two-buttons-on-one-row {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 11px;
+
+    p {
+      white-space: nowrap;
+    }
+  }
 
   /* This container shall have only buttons */
   input {

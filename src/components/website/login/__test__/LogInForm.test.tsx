@@ -5,7 +5,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { UserAuthState } from '../LoginModal';
 import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
-import { mockLoginModalHooks } from './LoginModalTestHelpers';
+import { resetHookMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -13,8 +13,6 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
         t: jest.fn().mockImplementation((val) => val),
     })),
 }));
-
-const { setUserAuthState, setUserEmail, setUserPassword } = mockLoginModalHooks();
 
 const store = configureTestStore();
 
@@ -42,6 +40,10 @@ function componentWithStoreProvider(
 }
 
 describe('LogInForm action tests', () => {
+    beforeEach(() => {
+        resetHookMocks();
+    });
+
     it('should update the user email on input on password input stage', () => {
         const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, '', '', '');
 
@@ -86,5 +88,15 @@ describe('LogInForm action tests', () => {
         fireEvent.click(tryVerifyPasswordsButton);
 
         expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledWith('user@mail.com', 'aPassword');
+    });
+
+    it('should transition to password reset state when reset button was clicked', () => {
+        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_INPUT, 'user@email.com', '', '');
+
+        const resetPasswordButton = getByText(container, 'resetPassword');
+        expect(resetPasswordButton).toBeInTheDocument();
+        fireEvent.click(resetPasswordButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_RESET);
     });
 });
