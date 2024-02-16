@@ -54,7 +54,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_ALREADY_EXISTS ||
                 userAuthState === UserAuthState.MAIL_NOT_VALID) && (
                 <>
-                    <NavigationButtons />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
                     <SignUpHeader />
                     <MailInputForm
                         {...{
@@ -68,7 +68,7 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.PASSWORD_INPUT && (
                 <>
-                    <NavigationButtons />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT_START }} />
                     <LogInHeader />
                     <LogInForm
                         {...{
@@ -86,7 +86,7 @@ export function LoginModal() {
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
-                    <NavigationButtons />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT_START }} />
                     <SignUpHeader />
                     <PasswordCreationForm
                         {...{
