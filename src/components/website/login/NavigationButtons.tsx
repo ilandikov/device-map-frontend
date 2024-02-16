@@ -3,7 +3,7 @@ import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 
-export function NavigationButtons() {
+export function NavigationButtons(props: { setUserAuthState: (string) => void }) {
     return (
         <div className="login-modal-navigation-container">
             <img className="login-modal-navigation-button" src={GoBack} alt="login-modal-navigation-go-back" />
