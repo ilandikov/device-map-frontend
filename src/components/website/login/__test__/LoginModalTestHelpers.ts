@@ -1,3 +1,8 @@
+export let setUserAuthState: jest.Mock;
+export let setUserEmail: jest.Mock;
+export let setUserPassword: jest.Mock;
+export let setUserPasswordRepeat: jest.Mock;
+
 export function mockLoginModalHooks() {
     return {
         setUserAuthState: jest.fn().mockImplementation((userAuthState) => userAuthState),
@@ -5,4 +10,12 @@ export function mockLoginModalHooks() {
         setUserPassword: jest.fn().mockImplementation((userEmail) => userEmail),
         setUserPasswordRepeat: jest.fn().mockImplementation((userEmail) => userEmail),
     };
+}
+
+export function resetHookMocks() {
+    const hooks = mockLoginModalHooks();
+    setUserAuthState = hooks.setUserAuthState;
+    setUserEmail = hooks.setUserEmail;
+    setUserPassword = hooks.setUserPassword;
+    setUserPasswordRepeat = hooks.setUserPasswordRepeat;
 }
