@@ -59,7 +59,7 @@ export function OTPInputForm(props: { setUserAuthState: (string) => void }) {
                     value={t('next')}
                     ref={OTPNextButton}
                     onClick={() => {
-                        const nextUserAuthState = userAuthStateFromOTP();
+                        const nextUserAuthState = userAuthStateFromOTP(UserAuthState.SIGNUP_OTP);
                         props.setUserAuthState(nextUserAuthState);
                     }}
                 />
