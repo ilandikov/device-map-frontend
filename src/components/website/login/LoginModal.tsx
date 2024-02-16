@@ -133,6 +133,8 @@ export function LoginModal() {
                     <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
                 </>
             )}
+            {userAuthState === UserAuthState.LOGIN_OTP && <></>}
+            {userAuthState === UserAuthState.LOGIN_OTP_LOADING && <></>}
         </>
     );
 }
