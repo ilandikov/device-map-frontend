@@ -8,6 +8,8 @@ import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
+import { LoginModalHeader } from './LoginModalHeader';
+import { MailInputBox } from './MailInputBox';
 
 export enum UserAuthState {
     WELCOME,
@@ -99,6 +101,27 @@ export function LoginModal() {
                             setUserPasswordRepeat,
                         }}
                     />
+                </>
+            )}
+            {userAuthState === UserAuthState.PASSWORD_RESET && (
+                <>
+                    <LoginModalHeader
+                        header={t('newPassword')}
+                        description={t('finikMapProductDescription')}
+                        opaqueDescription={true}
+                    />
+                    <div className="login-modal-input-container">
+                        <MailInputBox
+                            helpText={t('mailForPasswordReset')}
+                            userEmail={userEmail}
+                            onChange={(event) => {
+                                setUserEmail(event.target.value);
+                            }}
+                        />
+                    </div>
+                    <div className="login-modal-button-container">
+                        <input className="login-modal-button-black-on-green" type="button" value={t('OTPSendSMS')} />
+                    </div>
                 </>
             )}
             {userAuthState === UserAuthState.OTP_INPUT && (

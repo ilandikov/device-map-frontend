@@ -556,7 +556,58 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 ]
 `;
 
-exports[`LoginModal snapshot tests should match the snapshot at password input stage 3`] = `null`;
+exports[`LoginModal snapshot tests should match the snapshot at password input stage 3`] = `
+[
+  <div
+    className="login-modal-header-container"
+  >
+    <img
+      alt="login-modal-logo"
+      className="login-modal-logo"
+      src="test-file-stub"
+    />
+    <p
+      className="login-modal-header"
+    >
+      newPassword
+    </p>
+    <p
+      className="login-modal-header-description login-modal-opaque-text"
+    >
+      finikMapProductDescription
+    </p>
+  </div>,
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      mailForPasswordReset
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="emailInput"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <input
+      className="login-modal-button-black-on-green"
+      type="button"
+      value="OTPSendSMS"
+    />
+  </div>,
+]
+`;
 
 exports[`LoginModal snapshot tests should match the snapshot at password not match stage 1`] = `
 [
