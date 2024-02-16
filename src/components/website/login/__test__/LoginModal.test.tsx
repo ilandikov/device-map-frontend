@@ -135,6 +135,16 @@ describe('LoginModal action tests - welcome stage', () => {
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
     });
+
+    it('should transition to login from welcome state', () => {
+        mockLoginModalUseStates(UserAuthState.WELCOME);
+        const { container } = render(componentWithStoreProvider);
+
+        const loginButton = getByText(container, 'accountLogin');
+        fireEvent.click(loginButton);
+
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
+    });
 });
 
 describe('LoginModal go back button click actions', () => {

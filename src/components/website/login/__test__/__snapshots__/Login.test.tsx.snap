@@ -108,6 +108,7 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
         >
           <input
             className="login-modal-button-black-on-green"
+            onClick={[Function]}
             type="button"
             value="accountLogin"
           />

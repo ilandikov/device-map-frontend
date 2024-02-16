@@ -40,7 +40,14 @@ export function LoginModal() {
                     <WelcomeHeader />
                     <div className="login-modal-input-container"></div>
                     <div className="login-modal-button-container">
-                        <input className="login-modal-button-black-on-green" type="button" value={t('accountLogin')} />
+                        <input
+                            className="login-modal-button-black-on-green"
+                            type="button"
+                            value={t('accountLogin')}
+                            onClick={() => {
+                                setUserAuthState(UserAuthState.PASSWORD_INPUT);
+                            }}
+                        />
                         <input
                             className="login-modal-button-green-on-black"
                             type="button"
