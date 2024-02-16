@@ -5,7 +5,7 @@ import { UserAuthState } from '../LoginModal';
 import { resetHookMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPInputComponent() {
-    return render(<OTPInputForm {...{ setUserAuthState }} />);
+    return render(<OTPInputForm {...{ userAuthState: UserAuthState.SIGNUP_OTP, setUserAuthState }} />);
 }
 
 describe('OTP input tests', () => {

@@ -95,7 +95,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.SIGNUP_OTP && (
                 <>
                     <SignUpHeader />
-                    <OTPInputForm {...{ setUserAuthState }} />
+                    <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
