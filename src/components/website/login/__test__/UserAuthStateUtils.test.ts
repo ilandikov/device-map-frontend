@@ -58,6 +58,12 @@ describe('OTP logic tests', () => {
 
         expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP_LOADING);
     });
+
+    it('should move from log in OTP to log in OTP loading stage', () => {
+        const nextUserAuthState = userAuthStateFromOTP(UserAuthState.LOGIN_OTP);
+
+        expect(nextUserAuthState).toEqual(UserAuthState.LOGIN_OTP_LOADING);
+    });
 });
 
 describe('User authentication logic tests', () => {
