@@ -17,7 +17,10 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-const { setUserAuthState, setUserEmail, setUserPassword, setUserPasswordRepeat } = mockLoginModalHooks();
+let setUserAuthState: jest.Mock;
+let setUserEmail: jest.Mock;
+let setUserPassword: jest.Mock;
+let setUserPasswordRepeat: jest.Mock;
 
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
@@ -111,6 +114,14 @@ describe('LoginModal snapshot tests', () => {
 });
 
 describe('LoginModal action tests - welcome stage', () => {
+    beforeEach(() => {
+        const hooks = mockLoginModalHooks();
+        setUserAuthState = hooks.setUserAuthState;
+        setUserEmail = hooks.setUserEmail;
+        setUserPassword = hooks.setUserPassword;
+        setUserPasswordRepeat = hooks.setUserPasswordRepeat;
+    });
+
     it('should call setting the new state from welcome to email input', () => {
         mockLoginModalUseStates(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
