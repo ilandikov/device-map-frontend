@@ -6,11 +6,13 @@ import { mockLoginModalHooks } from './LoginModalTestHelpers';
 
 const { setUserAuthState } = mockLoginModalHooks();
 
-const OTPInputComponent = <OTPInputForm {...{ setUserAuthState }} />;
+function OTPInputComponent() {
+    return <OTPInputForm {...{ setUserAuthState }} />;
+}
 
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        const { container } = render(OTPInputComponent);
+        const { container } = render(OTPInputComponent());
         const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
         expect(OTPInput).toBeInTheDocument();
@@ -20,7 +22,7 @@ describe('OTP input tests', () => {
     });
 
     it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
-        const { container } = render(OTPInputComponent);
+        const { container } = render(OTPInputComponent());
         const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
         expect(OTPInput).toBeInTheDocument();
@@ -32,7 +34,7 @@ describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            const { container } = render(OTPInputComponent);
+            const { container } = render(OTPInputComponent());
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
             expect(OTPInput).toBeInTheDocument();
@@ -46,7 +48,7 @@ describe('OTP input tests', () => {
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        const { container } = render(OTPInputComponent);
+        const { container } = render(OTPInputComponent());
         const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
 
         expect(OTPInput).toBeInTheDocument();
@@ -62,7 +64,7 @@ describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            const { container } = render(OTPInputComponent);
+            const { container } = render(OTPInputComponent());
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
             expect(OTPInput).toBeInTheDocument();
@@ -75,7 +77,7 @@ describe('OTP input tests', () => {
     );
 
     it('should focus on the next empty input after a digit has been input', () => {
-        const { container } = render(OTPInputComponent);
+        const { container } = render(OTPInputComponent());
         const OTPInput0 = getByTestId(container, 'OTPInput0') as HTMLInputElement;
         const OTPInput1 = getByTestId(container, 'OTPInput1') as HTMLInputElement;
         const OTPInput2 = getByTestId(container, 'OTPInput2') as HTMLInputElement;
@@ -92,7 +94,7 @@ describe('OTP input tests', () => {
 
 describe('OTPInputForm action tests', () => {
     it('should transition to loading from OTP stage', () => {
-        const { container } = render(OTPInputComponent);
+        const { container } = render(OTPInputComponent());
 
         const nextButton = getByText(container, 'next');
         expect(nextButton).toBeInTheDocument();
