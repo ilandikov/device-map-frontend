@@ -25,6 +25,18 @@ export enum UserAuthState {
     USER_LOGGED_IN,
 }
 
+function NewPasswordHeader() {
+    const { t } = useI18next();
+
+    return (
+        <LoginModalHeader
+            header={t('newPassword')}
+            description={t('finikMapProductDescription')}
+            opaqueDescription={true}
+        />
+    );
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -105,11 +117,7 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.PASSWORD_RESET && (
                 <>
-                    <LoginModalHeader
-                        header={t('newPassword')}
-                        description={t('finikMapProductDescription')}
-                        opaqueDescription={true}
-                    />
+                    <NewPasswordHeader />
                     <div className="login-modal-input-container">
                         <MailInputBox
                             helpText={t('mailForPasswordReset')}
