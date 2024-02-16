@@ -99,6 +99,13 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
+    it('should match the snapshot at password input stage', () => {
+        mockLoginModalUseStates(UserAuthState.PASSWORD_RESET);
+        const component = renderComponentAsJSON();
+
+        expect(component).toMatchSnapshot();
+    });
+
     it('should match the snapshot at OTP input stage', () => {
         mockLoginModalUseStates(UserAuthState.OTP_INPUT);
         const component = renderComponentAsJSON();

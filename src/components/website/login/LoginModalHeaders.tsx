@@ -29,3 +29,15 @@ export function LogInHeader() {
         <LoginModalHeader header={t('logIn')} description={t('finikMapProductDescription')} opaqueDescription={true} />
     );
 }
+
+export function NewPasswordHeader() {
+    const { t } = useI18next();
+
+    return (
+        <LoginModalHeader
+            header={t('newPassword')}
+            description={t('finikMapProductDescription')}
+            opaqueDescription={true}
+        />
+    );
+}

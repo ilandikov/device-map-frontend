@@ -3,11 +3,12 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPInputForm } from './OTPInputForm';
-import { LogInHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
+import { LogInHeader, NewPasswordHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
+import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 
 export enum UserAuthState {
     WELCOME,
@@ -99,6 +100,12 @@ export function LoginModal() {
                             setUserPasswordRepeat,
                         }}
                     />
+                </>
+            )}
+            {userAuthState === UserAuthState.PASSWORD_RESET && (
+                <>
+                    <NewPasswordHeader />
+                    <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
                 </>
             )}
             {userAuthState === UserAuthState.OTP_INPUT && (
