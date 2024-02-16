@@ -6,8 +6,18 @@ import Cancel from '/src/assets/images/Cancel.svg';
 export function NavigationButtons(props: { setUserAuthState: (string) => void }) {
     return (
         <div className="login-modal-navigation-container">
-            <img className="login-modal-navigation-button" src={GoBack} alt="login-modal-navigation-go-back" />
-            <img className="login-modal-navigation-button" src={Cancel} alt="login-modal-navigation-cancel" />
+            <img
+                className="login-modal-navigation-button"
+                src={GoBack}
+                alt="login-modal-navigation-go-back"
+                data-testid="goBackButton"
+            />
+            <img
+                className="login-modal-navigation-button"
+                src={Cancel}
+                alt="login-modal-navigation-cancel"
+                data-testid="cancelButton"
+            />
         </div>
     );
 }

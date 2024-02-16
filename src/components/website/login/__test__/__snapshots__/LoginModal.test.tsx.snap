@@ -149,11 +149,13 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
     <img
       alt="login-modal-navigation-go-back"
       className="login-modal-navigation-button"
+      data-testid="goBackButton"
       src="test-file-stub"
     />
     <img
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
+      data-testid="cancelButton"
       src="test-file-stub"
     />
   </div>,
@@ -228,11 +230,13 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     <img
       alt="login-modal-navigation-go-back"
       className="login-modal-navigation-button"
+      data-testid="goBackButton"
       src="test-file-stub"
     />
     <img
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
+      data-testid="cancelButton"
       src="test-file-stub"
     />
   </div>,
@@ -296,11 +300,13 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
     <img
       alt="login-modal-navigation-go-back"
       className="login-modal-navigation-button"
+      data-testid="goBackButton"
       src="test-file-stub"
     />
     <img
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
+      data-testid="cancelButton"
       src="test-file-stub"
     />
   </div>,
@@ -369,11 +375,13 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     <img
       alt="login-modal-navigation-go-back"
       className="login-modal-navigation-button"
+      data-testid="goBackButton"
       src="test-file-stub"
     />
     <img
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
+      data-testid="cancelButton"
       src="test-file-stub"
     />
   </div>,
@@ -451,11 +459,13 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     <img
       alt="login-modal-navigation-go-back"
       className="login-modal-navigation-button"
+      data-testid="goBackButton"
       src="test-file-stub"
     />
     <img
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
+      data-testid="cancelButton"
       src="test-file-stub"
     />
   </div>,
@@ -534,11 +544,13 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
     <img
       alt="login-modal-navigation-go-back"
       className="login-modal-navigation-button"
+      data-testid="goBackButton"
       src="test-file-stub"
     />
     <img
       alt="login-modal-navigation-cancel"
       className="login-modal-navigation-button"
+      data-testid="cancelButton"
       src="test-file-stub"
     />
   </div>,
