@@ -5,7 +5,7 @@ import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
-import { mockLoginModalHooks } from './LoginModalTestHelpers';
+import { resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -13,8 +13,6 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
         t: jest.fn().mockImplementation((val) => val),
     })),
 }));
-
-const { setUserAuthState, setUserEmail } = mockLoginModalHooks();
 
 const store = configureTestStore();
 
@@ -34,6 +32,10 @@ function componentWithStoreProvider(userAuthState: UserAuthState, userEmail: str
 }
 
 describe('MailInputForm action tests', () => {
+    beforeEach(() => {
+        resetHookMocks();
+    });
+
     it('should call email setter from email input', () => {
         const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START, '');
 
