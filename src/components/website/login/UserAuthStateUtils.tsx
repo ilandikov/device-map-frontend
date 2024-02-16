@@ -2,35 +2,35 @@ import { UserAuthState } from './LoginModal';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {
-        return UserAuthState.USER_LOGGED_IN;
+        return UserAuthState.LOGGED_IN;
     }
 
-    return UserAuthState.PASSWORD_INPUT;
+    return UserAuthState.LOGIN;
 }
 
 export function userAuthStateFromOTP() {
-    return UserAuthState.OTP_LOADING;
+    return UserAuthState.SIGNUP_OTP_LOADING;
 }
 
 export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswordB: string) {
-    let nextUserState = UserAuthState.OTP_INPUT;
+    let nextUserState = UserAuthState.SIGNUP_OTP;
 
     if (userPasswordA !== userPasswordB) {
-        nextUserState = UserAuthState.PASSWORD_CREATION_MATCH_ERROR;
+        nextUserState = UserAuthState.SIGNUP_PASSWORD_ERROR;
     }
 
     return nextUserState;
 }
 
 export function userAuthStateFromUserEmail(userEmail: string) {
-    let nextUserAuthState = UserAuthState.PASSWORD_CREATION;
+    let nextUserAuthState = UserAuthState.SIGNUP_PASSWORD;
 
     if (userEmail === 'already@exists.com') {
-        nextUserAuthState = UserAuthState.MAIL_ALREADY_EXISTS;
+        nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_EXISTENCE;
     }
 
     if (!isValidEmail(userEmail)) {
-        nextUserAuthState = UserAuthState.MAIL_NOT_VALID;
+        nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_VALIDITY;
     }
     return nextUserAuthState;
 }

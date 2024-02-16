@@ -40,7 +40,7 @@ export function LogInForm(props: {
                     <p
                         className="login-modal-correct-input"
                         onClick={() => {
-                            props.setUserAuthState(UserAuthState.PASSWORD_RESET);
+                            props.setUserAuthState(UserAuthState.LOGIN_PASSWORD_RESET);
                         }}
                     >
                         {t('resetPassword')}

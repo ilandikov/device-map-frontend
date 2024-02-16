@@ -37,7 +37,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email setter from email input', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START, '');
+        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT, '');
 
         const emailInput = getByTestId(container, 'emailInput');
 
@@ -50,7 +50,7 @@ describe('MailInputForm action tests', () => {
     it('should call email verification after mail has been sent to input', () => {
         const spyOnUserAuthStateFromUserEmail = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserEmail');
 
-        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_START, 'new@email.com');
+        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT, 'new@email.com');
 
         const tryVerifyEmailButton = getByText(container, 'next');
 
@@ -61,12 +61,12 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.MAIL_ALREADY_EXISTS, '');
+        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, '');
         const loginButton = getByText(container, 'accountLogin');
 
         expect(loginButton).toBeInTheDocument();
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN);
     });
 });

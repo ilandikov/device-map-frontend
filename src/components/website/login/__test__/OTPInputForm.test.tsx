@@ -103,6 +103,6 @@ describe('OTPInputForm action tests', () => {
 
         fireEvent.click(nextButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.OTP_LOADING);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP_LOADING);
     });
 });

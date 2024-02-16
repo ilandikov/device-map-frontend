@@ -58,63 +58,63 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at mail input stage', () => {
-        mockLoginModalUseStates(UserAuthState.MAIL_INPUT_START);
+        mockLoginModalUseStates(UserAuthState.MAIL_INPUT);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists stage', () => {
-        mockLoginModalUseStates(UserAuthState.MAIL_ALREADY_EXISTS, '');
+        mockLoginModalUseStates(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, '');
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail not valid stage', () => {
-        mockLoginModalUseStates(UserAuthState.MAIL_NOT_VALID);
+        mockLoginModalUseStates(UserAuthState.MAIL_INPUT_ERROR_VALIDITY);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
-        mockLoginModalUseStates(UserAuthState.PASSWORD_CREATION);
+        mockLoginModalUseStates(UserAuthState.SIGNUP_PASSWORD);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password not match stage', () => {
-        mockLoginModalUseStates(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+        mockLoginModalUseStates(UserAuthState.SIGNUP_PASSWORD_ERROR);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
-        mockLoginModalUseStates(UserAuthState.PASSWORD_INPUT);
+        mockLoginModalUseStates(UserAuthState.LOGIN);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
-        mockLoginModalUseStates(UserAuthState.PASSWORD_RESET);
+        mockLoginModalUseStates(UserAuthState.LOGIN_PASSWORD_RESET);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP input stage', () => {
-        mockLoginModalUseStates(UserAuthState.OTP_INPUT);
+        mockLoginModalUseStates(UserAuthState.SIGNUP_OTP);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP loading stage', () => {
-        mockLoginModalUseStates(UserAuthState.OTP_LOADING);
+        mockLoginModalUseStates(UserAuthState.SIGNUP_OTP_LOADING);
         const component = renderComponentAsJSON();
 
         expect(component).toMatchSnapshot();
@@ -133,7 +133,7 @@ describe('LoginModal action tests - welcome stage', () => {
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT_START);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT);
     });
 
     it('should transition to login from welcome state', () => {
@@ -143,7 +143,7 @@ describe('LoginModal action tests - welcome stage', () => {
         const loginButton = getByText(container, 'accountLogin');
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_INPUT);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN);
     });
 });
 
@@ -154,16 +154,16 @@ describe('LoginModal go back button click actions', () => {
 
     it.each([
         // From mail input to welcome
-        [UserAuthState.MAIL_INPUT_START, UserAuthState.WELCOME],
-        [UserAuthState.MAIL_ALREADY_EXISTS, UserAuthState.WELCOME],
-        [UserAuthState.MAIL_NOT_VALID, UserAuthState.WELCOME],
+        [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
+        [UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, UserAuthState.WELCOME],
+        [UserAuthState.MAIL_INPUT_ERROR_VALIDITY, UserAuthState.WELCOME],
 
         // From password input to mail input
-        [UserAuthState.PASSWORD_INPUT, UserAuthState.MAIL_INPUT_START],
+        [UserAuthState.LOGIN, UserAuthState.MAIL_INPUT],
 
         // From password creation to mail input
-        [UserAuthState.PASSWORD_CREATION, UserAuthState.MAIL_INPUT_START],
-        [UserAuthState.PASSWORD_CREATION_MATCH_ERROR, UserAuthState.MAIL_INPUT_START],
+        [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
+        [UserAuthState.SIGNUP_PASSWORD_ERROR, UserAuthState.MAIL_INPUT],
     ])('should go back from state %s to %s state on go back button click', (goBackClickedState, goBackToState) => {
         mockLoginModalUseStates(goBackClickedState);
         const { container } = render(componentWithStoreProvider);

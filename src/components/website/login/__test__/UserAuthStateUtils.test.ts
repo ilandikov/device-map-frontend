@@ -12,7 +12,7 @@ describe('user email logic tests', () => {
 
         const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(newUserState).toEqual(UserAuthState.PASSWORD_CREATION);
+        expect(newUserState).toEqual(UserAuthState.SIGNUP_PASSWORD);
     });
 
     it('should move to email not valid stage when a bad email is presented', () => {
@@ -20,7 +20,7 @@ describe('user email logic tests', () => {
 
         const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(newUserState).toEqual(UserAuthState.MAIL_NOT_VALID);
+        expect(newUserState).toEqual(UserAuthState.MAIL_INPUT_ERROR_VALIDITY);
     });
 
     it('should move to email already exists stage when already existing mail is presented', () => {
@@ -28,7 +28,7 @@ describe('user email logic tests', () => {
 
         const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(newUserState).toEqual(UserAuthState.MAIL_ALREADY_EXISTS);
+        expect(newUserState).toEqual(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE);
     });
 });
 
@@ -36,19 +36,19 @@ describe('user password logic tests', () => {
     it('should move to OTP input if passwords match', () => {
         const nextUserAuthState = userAuthStateFromUserPasswords('passwordsMatch', 'passwordsMatch');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.OTP_INPUT);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
     });
 
     it('should move to error state if passwords dont match', () => {
         const nextUserAuthState = userAuthStateFromUserPasswords('passwordsDontMatch', 'passwordsMatch');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD_ERROR);
     });
 
     it.failing('should move to error state if password has not been input or it is an empty string', () => {
         const nextUserAuthState = userAuthStateFromUserPasswords('', '');
 
-        expect(nextUserAuthState).toHaveBeenCalledWith(UserAuthState.PASSWORD_CREATION_MATCH_ERROR);
+        expect(nextUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_PASSWORD_ERROR);
     });
 });
 
@@ -56,7 +56,7 @@ describe('OTP logic tests', () => {
     it('should move to OTP loading stage', () => {
         const nextUserAuthState = userAuthStateFromOTP();
 
-        expect(nextUserAuthState).toEqual(UserAuthState.OTP_LOADING);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP_LOADING);
     });
 });
 
@@ -64,12 +64,12 @@ describe('User authentication logic tests', () => {
     it('should move a good user to logged state', () => {
         const nextUserAuthState = userAuthStateFromUserLogin('user@mail.com', 'short');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.USER_LOGGED_IN);
+        expect(nextUserAuthState).toEqual(UserAuthState.LOGGED_IN);
     });
 
     it('should keep a bad user at the password input state', () => {
         const nextUserAuthState = userAuthStateFromUserLogin('bad@user.com', 'badPassword');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.PASSWORD_INPUT);
+        expect(nextUserAuthState).toEqual(UserAuthState.LOGIN);
     });
 });

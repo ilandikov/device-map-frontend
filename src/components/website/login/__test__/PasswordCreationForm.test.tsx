@@ -44,7 +44,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_CREATION, '', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '', '');
         const userPasswordInput = getByTestId(container, 'userPassword');
 
         expect(userPasswordInput).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.PASSWORD_CREATION, '', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '', '');
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
         expect(userPasswordRepeatInput).toBeInTheDocument();
@@ -67,7 +67,7 @@ describe('PasswordCreationForm action tests', () => {
         const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
 
         const { container } = componentWithStoreProvider(
-            UserAuthState.PASSWORD_CREATION,
+            UserAuthState.SIGNUP_PASSWORD,
             '',
             'passwordOne',
             'PasswordTwo',

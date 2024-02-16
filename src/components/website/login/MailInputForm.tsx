@@ -22,21 +22,21 @@ export function MailInputForm(props: {
                         props.setUserEmail(event.target.value);
                     }}
                 />
-                {props.userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
+                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
                     <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>
                 )}
-                {props.userAuthState === UserAuthState.MAIL_NOT_VALID && (
+                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY && (
                     <p className="login-modal-input-help login-modal-wrong-input">{t('mailNotValid')}</p>
                 )}
             </div>
             <div className="login-modal-button-container">
-                {props.userAuthState === UserAuthState.MAIL_ALREADY_EXISTS && (
+                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
                     <input
                         className="login-modal-button-green-on-black"
                         type="button"
                         value={t('accountLogin')}
                         onClick={() => {
-                            props.setUserAuthState(UserAuthState.PASSWORD_INPUT);
+                            props.setUserAuthState(UserAuthState.LOGIN);
                         }}
                     />
                 )}
