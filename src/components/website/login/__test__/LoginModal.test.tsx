@@ -8,7 +8,13 @@ import '@testing-library/jest-dom';
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
-import { mockLoginModalHooks } from './LoginModalTestHelpers';
+import {
+    resetHookMocks,
+    setUserAuthState,
+    setUserEmail,
+    setUserPassword,
+    setUserPasswordRepeat,
+} from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -16,19 +22,6 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
         t: jest.fn().mockImplementation((val) => val),
     })),
 }));
-
-let setUserAuthState: jest.Mock;
-let setUserEmail: jest.Mock;
-let setUserPassword: jest.Mock;
-let setUserPasswordRepeat: jest.Mock;
-
-function resetHookMocks() {
-    const hooks = mockLoginModalHooks();
-    setUserAuthState = hooks.setUserAuthState;
-    setUserEmail = hooks.setUserEmail;
-    setUserPassword = hooks.setUserPassword;
-    setUserPasswordRepeat = hooks.setUserPasswordRepeat;
-}
 
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
