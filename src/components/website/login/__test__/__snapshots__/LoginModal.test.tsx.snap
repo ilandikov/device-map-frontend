@@ -556,6 +556,8 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 ]
 `;
 
+exports[`LoginModal snapshot tests should match the snapshot at password input stage 3`] = `null`;
+
 exports[`LoginModal snapshot tests should match the snapshot at password not match stage 1`] = `
 [
   <div
