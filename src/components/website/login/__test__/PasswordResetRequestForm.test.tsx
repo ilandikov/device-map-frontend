@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
+import { UserAuthState } from '../LoginModal';
 import { resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
@@ -31,13 +32,13 @@ describe('rename me', () => {
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });
 
-    it('should click request OTP button', () => {
+    it('should transition to login OTP state on OTP button click', () => {
         const { container } = componentWithStoreProvider();
 
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         expect(requestOTPButton).toBeInTheDocument();
         fireEvent.click(requestOTPButton);
 
-        // TODO add an expect() here
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_OTP);
     });
 });
