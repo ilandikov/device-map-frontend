@@ -657,7 +657,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
       enterPassword
     </p>
     <div
-      className="login-modal-input-box-container login-modal-input-wrong"
+      className="login-modal-input-box-container login-modal-wrong-input-border"
     >
       <input
         className="login-modal-input-text"
@@ -672,7 +672,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
       repeatPassword
     </p>
     <div
-      className="login-modal-input-box-container login-modal-input-wrong"
+      className="login-modal-input-box-container login-modal-wrong-input-border"
     >
       <input
         className="login-modal-input-text"
