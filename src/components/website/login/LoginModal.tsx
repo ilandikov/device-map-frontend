@@ -86,7 +86,7 @@ export function LoginModal() {
             {(userAuthState === UserAuthState.PASSWORD_CREATION ||
                 userAuthState === UserAuthState.PASSWORD_CREATION_MATCH_ERROR) && (
                 <>
-                    <NavigationButtons {...{ setUserAuthState }} />
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT_START }} />
                     <SignUpHeader />
                     <PasswordCreationForm
                         {...{
