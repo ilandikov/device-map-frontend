@@ -16,7 +16,7 @@ function componentWithStoreProvider(userEmail: string = '') {
     );
 }
 
-describe('rename me', () => {
+describe('PasswordResetRequest form action tests', () => {
     beforeEach(() => {
         resetHookMocks();
     });
