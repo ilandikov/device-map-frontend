@@ -75,23 +75,6 @@ export function LoginModal() {
                     />
                 </>
             )}
-            {userAuthState === UserAuthState.LOGIN && (
-                <>
-                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
-                    <LogInHeader />
-                    <LogInForm
-                        {...{
-                            userAuthState,
-                            setUserAuthState,
-                            userEmail,
-                            setUserEmail,
-                            userPassword,
-                            setUserPassword,
-                            userPasswordRepeat,
-                        }}
-                    />
-                </>
-            )}
             {(userAuthState === UserAuthState.SIGNUP_PASSWORD ||
                 userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) && (
                 <>
@@ -109,12 +92,6 @@ export function LoginModal() {
                     />
                 </>
             )}
-            {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
-                <>
-                    <NewPasswordHeader />
-                    <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
-                </>
-            )}
             {userAuthState === UserAuthState.SIGNUP_OTP && (
                 <>
                     <SignUpHeader />
@@ -128,6 +105,29 @@ export function LoginModal() {
                         <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                     </div>
                     <div className="login-modal-button-container"></div>
+                </>
+            )}
+            {userAuthState === UserAuthState.LOGIN && (
+                <>
+                    <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
+                    <LogInHeader />
+                    <LogInForm
+                        {...{
+                            userAuthState,
+                            setUserAuthState,
+                            userEmail,
+                            setUserEmail,
+                            userPassword,
+                            setUserPassword,
+                            userPasswordRepeat,
+                        }}
+                    />
+                </>
+            )}
+            {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
+                <>
+                    <NewPasswordHeader />
+                    <PasswordResetRequestForm {...{ userEmail, setUserEmail }} />
                 </>
             )}
         </>
