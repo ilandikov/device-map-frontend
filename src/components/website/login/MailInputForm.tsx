@@ -4,6 +4,11 @@ import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 import { getUserEmailError } from './UserAuthStateUtils';
 
+export enum MailInputError {
+    NOT_VALID = 'mailNotValid',
+    ALREADY_EXISTS = 'mailAlreadyExists',
+}
+
 export function MailInputForm(props: {
     setUserAuthState: (userAuthState: UserAuthState) => void;
     userEmail: string;
@@ -26,7 +31,7 @@ export function MailInputForm(props: {
                 />
             </div>
             <div className="login-modal-button-container">
-                {mailInputError && mailInputError.message === 'mailAlreadyExists' && (
+                {mailInputError && mailInputError.message === MailInputError.ALREADY_EXISTS && (
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {

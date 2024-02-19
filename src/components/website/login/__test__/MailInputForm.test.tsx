@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
-import { MailInputForm } from '../MailInputForm';
+import { MailInputError, MailInputForm } from '../MailInputForm';
 import { renderAsJSON, resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -61,14 +61,14 @@ describe('MailInputForm snapshot tests', () => {
     });
 
     it('should match the snapshot at mail exists stage', () => {
-        mockMailInputErrorUseState(new Error('mailAlreadyExists'));
+        mockMailInputErrorUseState(new Error(MailInputError.ALREADY_EXISTS));
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail not valid stage', () => {
-        mockMailInputErrorUseState(new Error('mailNotValid'));
+        mockMailInputErrorUseState(new Error(MailInputError.NOT_VALID));
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
@@ -110,7 +110,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockMailInputErrorUseState(new Error('mailAlreadyExists'));
+        mockMailInputErrorUseState(new Error(MailInputError.ALREADY_EXISTS));
         const { container } = render(componentWithStoreProvider(''));
         const loginButton = getByText(container, 'accountLogin');
 

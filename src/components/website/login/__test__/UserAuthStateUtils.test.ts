@@ -5,6 +5,7 @@ import {
     userAuthStateFromUserPasswords,
 } from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
+import { MailInputError } from '../MailInputForm';
 
 describe('user email logic tests', () => {
     it('should not throw error when good email is presented', () => {
@@ -20,7 +21,7 @@ describe('user email logic tests', () => {
 
         const userEmailError = getUserEmailError(email);
 
-        expect(userEmailError).toEqual(new Error('mailNotValid'));
+        expect(userEmailError).toEqual(new Error(MailInputError.NOT_VALID));
     });
 
     it('should throw mail already exists error', () => {
@@ -28,7 +29,7 @@ describe('user email logic tests', () => {
 
         const userEmailError = getUserEmailError(email);
 
-        expect(userEmailError).toEqual(new Error('mailAlreadyExists'));
+        expect(userEmailError).toEqual(new Error(MailInputError.ALREADY_EXISTS));
     });
 });
 
