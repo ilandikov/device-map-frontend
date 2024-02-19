@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MailInputForm snapshot tests should match the snapshot at mail exists stage 1`] = `
+[
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      onlyEmail
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="emailInput"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      mailAlreadyExists
+    </p>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <button
+      className="login-modal-button-green-on-black"
+      onClick={[Function]}
+    >
+      accountLogin
+    </button>
+    <button
+      className="login-modal-button-black-on-green"
+      onClick={[Function]}
+    >
+      next
+    </button>
+  </div>,
+]
+`;
+
+exports[`MailInputForm snapshot tests should match the snapshot at mail input stage 1`] = `
+[
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      onlyEmail
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="emailInput"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <button
+      className="login-modal-button-black-on-green"
+      onClick={[Function]}
+    >
+      next
+    </button>
+  </div>,
+]
+`;
+
+exports[`MailInputForm snapshot tests should match the snapshot at mail not valid stage 1`] = `
+[
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      onlyEmail
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="emailInput"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      mailNotValid
+    </p>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <button
+      className="login-modal-button-black-on-green"
+      onClick={[Function]}
+    >
+      next
+    </button>
+  </div>,
+]
+`;

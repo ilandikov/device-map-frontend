@@ -1,6 +1,5 @@
 /* External dependencies */
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -9,6 +8,7 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import {
+    renderAsJSON,
     resetHookMocks,
     setUserAuthState,
     setUserEmail,
@@ -46,76 +46,58 @@ const componentWithStoreProvider = (
 );
 
 describe('LoginModal snapshot tests', () => {
-    function renderComponentAsJSON() {
-        return renderer.create(componentWithStoreProvider).toJSON();
-    }
-
     it('should match the snapshot at user welcome stage', () => {
         mockLoginModalUseStates(UserAuthState.WELCOME);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail input stage', () => {
         mockLoginModalUseStates(UserAuthState.MAIL_INPUT);
-        const component = renderComponentAsJSON();
-
-        expect(component).toMatchSnapshot();
-    });
-
-    it('should match the snapshot at mail exists stage', () => {
-        mockLoginModalUseStates(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, '');
-        const component = renderComponentAsJSON();
-
-        expect(component).toMatchSnapshot();
-    });
-
-    it('should match the snapshot at mail not valid stage', () => {
-        mockLoginModalUseStates(UserAuthState.MAIL_INPUT_ERROR_VALIDITY);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
         mockLoginModalUseStates(UserAuthState.SIGNUP_PASSWORD);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password not match stage', () => {
         mockLoginModalUseStates(UserAuthState.SIGNUP_PASSWORD_ERROR);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
         mockLoginModalUseStates(UserAuthState.LOGIN);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password input stage', () => {
         mockLoginModalUseStates(UserAuthState.LOGIN_PASSWORD_RESET);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP input stage', () => {
         mockLoginModalUseStates(UserAuthState.SIGNUP_OTP);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP loading stage', () => {
         mockLoginModalUseStates(UserAuthState.SIGNUP_OTP_LOADING);
-        const component = renderComponentAsJSON();
+        const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
