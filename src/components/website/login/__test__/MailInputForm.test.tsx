@@ -31,24 +31,37 @@ function componentWithStoreProvider(userAuthState: UserAuthState, userEmail: str
     );
 }
 
+export let setMailInputError: jest.Mock;
+
+function mockMailInputErrorUseState(initialMailInputError: Error | null) {
+    React.useState = jest.fn().mockImplementationOnce(() => [initialMailInputError, setMailInputError]);
+}
+
+function resetHookMock() {
+    setMailInputError = jest.fn().mockImplementation((error) => error);
+}
+
 describe('MailInputForm snapshot tests', () => {
     beforeEach(() => {
-        resetHookMocks();
+        resetHookMock();
     });
 
     it('should match the snapshot at mail input stage', () => {
+        mockMailInputErrorUseState(null);
         const component = renderAsJSON(componentWithStoreProvider(UserAuthState.MAIL_INPUT, ''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists stage', () => {
+        mockMailInputErrorUseState(new Error('mailAlreadyExists'));
         const component = renderAsJSON(componentWithStoreProvider(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, ''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail not valid stage', () => {
+        mockMailInputErrorUseState(new Error('mailNotValid'));
         const component = renderAsJSON(componentWithStoreProvider(UserAuthState.MAIL_INPUT_ERROR_VALIDITY, ''));
 
         expect(component).toMatchSnapshot();
@@ -57,6 +70,7 @@ describe('MailInputForm snapshot tests', () => {
 
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
+        resetHookMock();
         resetHookMocks();
     });
 
