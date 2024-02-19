@@ -3,13 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPInputForm } from './OTPInputForm';
-import {
-    LogInHeader,
-    LoginModalHeaderState,
-    NewPasswordHeader,
-    SignUpHeader,
-    WelcomeHeader,
-} from './LoginModalHeaders';
+import { LoginModalHeaderState, NewPasswordHeader, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
@@ -118,7 +112,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.LOGIN && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
-                    <LogInHeader />
+                    <WelcomeHeader {...{ state: LoginModalHeaderState.LOGIN }} />
                     <LogInForm
                         {...{
                             userAuthState,
