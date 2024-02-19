@@ -4,11 +4,21 @@ import { LoginModalHeader } from './LoginModalHeader';
 
 export enum LoginModalHeaderState {
     WELCOME = 'WELCOME',
+    SIGNUP = 'SIGNUP',
 }
 
 export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
     const { t } = useI18next();
 
+    if (props.state === LoginModalHeaderState.SIGNUP) {
+        return (
+            <LoginModalHeader
+                header={t('signUp')}
+                description={t('finikMapProductDescription')}
+                opaqueDescription={true}
+            />
+        );
+    }
     return (
         <LoginModalHeader
             header={`${t('brand')} ${t('map')}`}

@@ -72,7 +72,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
-                    <SignUpHeader />
+                    <WelcomeHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <MailInputForm
                         {...{
                             userAuthState,
