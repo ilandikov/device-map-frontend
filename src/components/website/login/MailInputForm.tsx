@@ -12,6 +12,10 @@ export function MailInputForm(props: {
 }) {
     const { t } = useI18next();
 
+    function getError() {
+        return null;
+    }
+
     return (
         <>
             <div className="login-modal-input-container">
@@ -21,7 +25,7 @@ export function MailInputForm(props: {
                     onChange={(event) => {
                         props.setUserEmail(event.target.value);
                     }}
-                    error={null}
+                    error={getError()}
                 />
                 {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
                     <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>
