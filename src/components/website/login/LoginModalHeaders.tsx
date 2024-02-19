@@ -10,29 +10,34 @@ export enum LoginModalHeaderState {
 }
 
 export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
-    const { t } = useI18next();
+    function getHeaderDetails() {
+        const { t } = useI18next();
 
-    let header = `${t('brand')} ${t('map')}`;
-    let description = t('loginCallToAction');
-    let opaqueDescription = false;
+        let header = `${t('brand')} ${t('map')}`;
+        let description = t('loginCallToAction');
+        let opaqueDescription = false;
 
-    if (props.state === LoginModalHeaderState.SIGNUP) {
-        header = t('signUp');
-        description = t('finikMapProductDescription');
-        opaqueDescription = true;
+        if (props.state === LoginModalHeaderState.SIGNUP) {
+            header = t('signUp');
+            description = t('finikMapProductDescription');
+            opaqueDescription = true;
+        }
+
+        if (props.state === LoginModalHeaderState.LOGIN) {
+            header = t('logIn');
+            description = t('finikMapProductDescription');
+            opaqueDescription = true;
+        }
+
+        if (props.state === LoginModalHeaderState.NEW_PASSWORD) {
+            header = t('newPassword');
+            description = t('finikMapProductDescription');
+            opaqueDescription = true;
+        }
+        return { header, description, opaqueDescription };
     }
 
-    if (props.state === LoginModalHeaderState.LOGIN) {
-        header = t('logIn');
-        description = t('finikMapProductDescription');
-        opaqueDescription = true;
-    }
-
-    if (props.state === LoginModalHeaderState.NEW_PASSWORD) {
-        header = t('newPassword');
-        description = t('finikMapProductDescription');
-        opaqueDescription = true;
-    }
+    const { header, description, opaqueDescription } = getHeaderDetails();
 
     return <LoginModalHeader {...{ header, description, opaqueDescription }} />;
 }
