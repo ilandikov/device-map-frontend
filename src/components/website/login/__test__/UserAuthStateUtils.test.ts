@@ -7,7 +7,7 @@ import {
 import { UserAuthState } from '../LoginModal';
 
 describe('user email logic tests', () => {
-    it('should move to password creation when new email is presented', () => {
+    it('should not throw error when good email is presented', () => {
         const email = 'good@email.com';
 
         const userEmailError = getUserEmailError(email);
@@ -15,7 +15,7 @@ describe('user email logic tests', () => {
         expect(userEmailError).toEqual(null);
     });
 
-    it('should move to email not valid stage when a bad email is presented', () => {
+    it('should throw mail not valid error', () => {
         const email = 'this is not an email!';
 
         const userEmailError = getUserEmailError(email);
@@ -23,7 +23,7 @@ describe('user email logic tests', () => {
         expect(userEmailError).toEqual(new Error('mailNotValid'));
     });
 
-    it('should move to email already exists stage when already existing mail is presented', () => {
+    it('should throw mail already exists error', () => {
         const email = 'already@exists.com';
 
         const userEmailError = getUserEmailError(email);
