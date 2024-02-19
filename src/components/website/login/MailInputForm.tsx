@@ -13,6 +13,10 @@ export function MailInputForm(props: {
     const { t } = useI18next();
 
     function getError() {
+        if (props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
+            return new Error('mailAlreadyExists');
+        }
+
         return null;
     }
 
