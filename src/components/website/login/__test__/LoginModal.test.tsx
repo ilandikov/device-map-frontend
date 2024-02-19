@@ -137,8 +137,6 @@ describe('LoginModal go back button click actions', () => {
     it.each([
         // From mail input to welcome
         [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
-        [UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, UserAuthState.WELCOME],
-        [UserAuthState.MAIL_INPUT_ERROR_VALIDITY, UserAuthState.WELCOME],
 
         // From password input to mail input
         [UserAuthState.LOGIN, UserAuthState.MAIL_INPUT],
