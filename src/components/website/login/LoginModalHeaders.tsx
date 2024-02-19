@@ -6,6 +6,7 @@ export enum LoginModalHeaderState {
     WELCOME = 'WELCOME',
     SIGNUP = 'SIGNUP',
     LOGIN = 'LOGIN',
+    NEW_PASSWORD = 'NEW_PASSWORD',
 }
 
 export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
@@ -23,6 +24,12 @@ export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
 
     if (props.state === LoginModalHeaderState.LOGIN) {
         header = t('logIn');
+        description = t('finikMapProductDescription');
+        opaqueDescription = true;
+    }
+
+    if (props.state === LoginModalHeaderState.NEW_PASSWORD) {
+        header = t('newPassword');
         description = t('finikMapProductDescription');
         opaqueDescription = true;
     }
