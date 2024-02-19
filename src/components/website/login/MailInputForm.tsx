@@ -24,6 +24,8 @@ export function MailInputForm(props: {
         return null;
     }
 
+    const mailInputError = getError();
+
     return (
         <>
             <div className="login-modal-input-container">
@@ -37,7 +39,7 @@ export function MailInputForm(props: {
                 />
             </div>
             <div className="login-modal-button-container">
-                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
+                {mailInputError && mailInputError.message === 'mailAlreadyExists' && (
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {
