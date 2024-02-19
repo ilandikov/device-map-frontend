@@ -1,6 +1,6 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import LogoGreen from '*.svg';
+import LogoGreen from '/src/assets/images/LogoGreen.svg';
 
 export enum LoginModalHeaderState {
     WELCOME = 'WELCOME',
