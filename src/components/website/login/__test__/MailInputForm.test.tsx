@@ -35,7 +35,7 @@ function renderComponent(userAuthState: UserAuthState, userEmail: string) {
     return render(componentWithStoreProvider(userAuthState, userEmail));
 }
 
-describe('LoginModal snapshot tests', () => {
+describe('MailInputForm snapshot tests', () => {
     beforeEach(() => {
         resetHookMocks();
     });
