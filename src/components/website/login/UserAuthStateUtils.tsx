@@ -1,4 +1,5 @@
 import { UserAuthState } from './LoginModal';
+import { getError } from './MailInputForm';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {
@@ -36,7 +37,7 @@ export function userAuthStateFromUserEmail(userEmail: string): [UserAuthState, E
     if (!isValidEmail(userEmail)) {
         nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_VALIDITY;
     }
-    return [nextUserAuthState, null];
+    return [nextUserAuthState, getError(nextUserAuthState)];
 }
 function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

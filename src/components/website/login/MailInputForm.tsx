@@ -4,7 +4,7 @@ import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
-function getError(userAuthState: UserAuthState): Error | null {
+export function getError(userAuthState: UserAuthState): Error | null {
     if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
         return new Error('mailAlreadyExists');
     }
