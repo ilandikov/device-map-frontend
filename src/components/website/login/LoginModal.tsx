@@ -69,7 +69,6 @@ export function LoginModal() {
                     <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <MailInputForm
                         {...{
-                            userAuthState,
                             setUserAuthState: setUserAuthState,
                             setUserEmail,
                             userEmail,
