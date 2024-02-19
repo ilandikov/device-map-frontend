@@ -1,6 +1,6 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { LoginModalHeader } from './LoginModalHeader';
+import LogoGreen from '*.svg';
 
 export enum LoginModalHeaderState {
     WELCOME = 'WELCOME',
@@ -46,5 +46,13 @@ export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
 
     const { header, description, opaqueDescription } = getHeaderDetails();
 
-    return <LoginModalHeader {...{ header, description, opaqueDescription }} />;
+    return (
+        <div className="login-modal-header-container">
+            <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
+            <p className="login-modal-header">{header}</p>
+            <p className={`login-modal-header-description${opaqueDescription ? ' login-modal-opaque-text' : ''}`}>
+                {description}
+            </p>
+        </div>
+    );
 }
