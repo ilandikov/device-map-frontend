@@ -1,5 +1,5 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
@@ -31,10 +31,18 @@ function componentWithStoreProvider(userAuthState: UserAuthState, userEmail: str
     );
 }
 
-export let setMailInputError: jest.Mock;
+jest.mock('react', () => {
+    const originalModule = jest.requireActual('react');
+    return {
+        ...originalModule,
+        useState: jest.fn(),
+    };
+});
+
+let setMailInputError: jest.Mock;
 
 function mockMailInputErrorUseState(initialMailInputError: Error | null) {
-    React.useState = jest.fn().mockImplementationOnce(() => [initialMailInputError, setMailInputError]);
+    (useState as jest.Mock).mockReturnValueOnce([initialMailInputError, setMailInputError]);
 }
 
 function resetHookMock() {
@@ -75,6 +83,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email setter from email input', () => {
+        mockMailInputErrorUseState(null);
         const { container } = render(componentWithStoreProvider(UserAuthState.MAIL_INPUT, ''));
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -88,6 +97,7 @@ describe('MailInputForm action tests', () => {
     it('should call email verification after mail has been sent to input', () => {
         const spyOnUserAuthStateFromUserEmail = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserEmail');
 
+        mockMailInputErrorUseState(null);
         const { container } = render(componentWithStoreProvider(UserAuthState.MAIL_INPUT, 'new@email.com'));
 
         const tryVerifyEmailButton = getByText(container, 'next');
@@ -99,7 +109,8 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        const { container } = render(componentWithStoreProvider(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, ''));
+        mockMailInputErrorUseState(new Error('mailAlreadyExists'));
+        const { container } = render(componentWithStoreProvider(UserAuthState.MAIL_INPUT, ''));
         const loginButton = getByText(container, 'accountLogin');
 
         expect(loginButton).toBeInTheDocument();
