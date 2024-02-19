@@ -26,7 +26,7 @@ export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswo
     return nextUserState;
 }
 
-export function userAuthStateFromUserEmail(userEmail: string): Error | null {
+export function getUserEmailError(userEmail: string): Error | null {
     if (userEmail === 'already@exists.com') {
         return new Error('mailAlreadyExists');
     }
