@@ -3,7 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPInputForm } from './OTPInputForm';
-import { LoginModalHeaderState, SignUpHeader, WelcomeHeader } from './LoginModalHeaders';
+import { LoginModalHeaderState, WelcomeHeader } from './LoginModalHeaders';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
@@ -81,7 +81,7 @@ export function LoginModal() {
                 userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
-                    <SignUpHeader />
+                    <WelcomeHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <PasswordCreationForm
                         {...{
                             userAuthState,
@@ -96,13 +96,13 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.SIGNUP_OTP && (
                 <>
-                    <SignUpHeader />
+                    <WelcomeHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                 <>
-                    <SignUpHeader />
+                    <WelcomeHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <div className="login-modal-input-container">
                         <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                     </div>
