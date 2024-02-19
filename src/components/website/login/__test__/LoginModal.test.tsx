@@ -45,11 +45,11 @@ const componentWithStoreProvider = (
     </Provider>
 );
 
-describe('LoginModal snapshot tests', () => {
-    function renderComponentAsJSON(component: React.ReactElement) {
-        return renderer.create(component).toJSON();
-    }
+function renderComponentAsJSON(component: React.ReactElement) {
+    return renderer.create(component).toJSON();
+}
 
+describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at user welcome stage', () => {
         mockLoginModalUseStates(UserAuthState.WELCOME);
         const component = renderComponentAsJSON(componentWithStoreProvider);
