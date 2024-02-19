@@ -16,8 +16,8 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 const store = configureTestStore();
 
-function renderComponent(userAuthState: UserAuthState, userEmail: string) {
-    return render(
+function componentWithStoreProvider(userAuthState: UserAuthState, userEmail: string) {
+    return (
         <Provider store={store}>
             <MailInputForm
                 {...{
@@ -27,8 +27,12 @@ function renderComponent(userAuthState: UserAuthState, userEmail: string) {
                     setUserEmail,
                 }}
             />
-        </Provider>,
+        </Provider>
     );
+}
+
+function renderComponent(userAuthState: UserAuthState, userEmail: string) {
+    return render(componentWithStoreProvider(userAuthState, userEmail));
 }
 
 describe('MailInputForm action tests', () => {
