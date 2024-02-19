@@ -13,10 +13,6 @@ export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
     function getHeaderDetails() {
         const { t } = useI18next();
 
-        const header = `${t('brand')} ${t('map')}`;
-        const description = t('loginCallToAction');
-        const opaqueDescription = false;
-
         if (props.state === LoginModalHeaderState.SIGNUP) {
             return {
                 header: t('signUp'),
@@ -40,6 +36,11 @@ export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
                 opaqueDescription: true,
             };
         }
+
+        const header = `${t('brand')} ${t('map')}`;
+        const description = t('loginCallToAction');
+        const opaqueDescription = false;
+
         return { header, description, opaqueDescription };
     }
 
