@@ -9,7 +9,7 @@ export enum LoginModalHeaderState {
     NEW_PASSWORD = 'NEW_PASSWORD',
 }
 
-export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
+export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
     function getHeaderDetails() {
         const { t } = useI18next();
 
