@@ -1,11 +1,15 @@
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { ChangeEventHandler } from 'react';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 export function MailInputBox(props: {
     helpText: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
     userEmail: string;
+    error: Error | null;
 }) {
+    const { t } = useI18next();
+
     return (
         <>
             <p className="login-modal-input-help">{props.helpText}</p>
@@ -23,6 +27,9 @@ export function MailInputBox(props: {
                     data-testid="emailInput"
                 />
             </div>
+            {props.error !== null && (
+                <p className="login-modal-input-help login-modal-wrong-input">{t(props.error.message)}</p>
+            )}
         </>
     );
 }

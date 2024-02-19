@@ -12,6 +12,20 @@ export function MailInputForm(props: {
 }) {
     const { t } = useI18next();
 
+    function getError(userAuthState: UserAuthState): Error | null {
+        if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
+            return new Error('mailAlreadyExists');
+        }
+
+        if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) {
+            return new Error('mailNotValid');
+        }
+
+        return null;
+    }
+
+    const mailInputError = getError(props.userAuthState);
+
     return (
         <>
             <div className="login-modal-input-container">
@@ -21,16 +35,11 @@ export function MailInputForm(props: {
                     onChange={(event) => {
                         props.setUserEmail(event.target.value);
                     }}
+                    error={mailInputError}
                 />
-                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
-                    <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>
-                )}
-                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY && (
-                    <p className="login-modal-input-help login-modal-wrong-input">{t('mailNotValid')}</p>
-                )}
             </div>
             <div className="login-modal-button-container">
-                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
+                {mailInputError && mailInputError.message === 'mailAlreadyExists' && (
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {
