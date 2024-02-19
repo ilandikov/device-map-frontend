@@ -1,6 +1,7 @@
 .login-container {
-    width: 1440px;
+    max-width: 1440px;
     height: 100vh;
+    width: 100%;
 }
 
 .login-window {
@@ -36,4 +37,18 @@
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
+}
+
+.login-map-image {
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    object-fit: cover;
+
+    z-index: -1000;
 }
