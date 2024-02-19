@@ -1,21 +1,7 @@
-.login-background-container {
-    width: 1440px;
-
-    margin: 0 auto;
-
-    background-image: url(../../../assets/images/GoogleMaps.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-
+.login-container {
+    max-width: 1440px;
     height: 100vh;
-}
-
-.login-content-container {
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 }
 
 .login-window {
@@ -24,6 +10,11 @@
 
     width: 100%;
     height: 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     border-radius: 10px;
     border: 1px solid #454545;
@@ -46,4 +37,18 @@
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
+}
+
+.login-map-image {
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    object-fit: cover;
+
+    z-index: -1000;
 }

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login snapshot tests should match the snapshot 1`] = `
-<div
-  className="login-background-container"
->
+[
   <header
     className="login-header"
   >
@@ -53,9 +51,9 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
         />
       </div>
     </div>
-  </header>
+  </header>,
   <div
-    className="login-content-container"
+    className="login-container"
   >
     <div
       className="login-window"
@@ -121,6 +119,11 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+  <img
+    alt="map"
+    className="login-map-image"
+    src="test-file-stub"
+  />,
+]
 `;
