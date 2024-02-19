@@ -10,19 +10,16 @@ export enum LoginModalHeaderState {
 export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
     const { t } = useI18next();
 
-    const header = `${t('brand')} ${t('map')}`;
-    const description = t('loginCallToAction');
-    const opaqueDescription = false;
+    let header = `${t('brand')} ${t('map')}`;
+    let description = t('loginCallToAction');
+    let opaqueDescription = false;
 
     if (props.state === LoginModalHeaderState.SIGNUP) {
-        return (
-            <LoginModalHeader
-                header={t('signUp')}
-                description={t('finikMapProductDescription')}
-                opaqueDescription={true}
-            />
-        );
+        header = t('signUp');
+        description = t('finikMapProductDescription');
+        opaqueDescription = true;
     }
+
     return <LoginModalHeader {...{ header, description, opaqueDescription }} />;
 }
 
