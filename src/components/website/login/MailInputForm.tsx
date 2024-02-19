@@ -31,24 +31,24 @@ export function MailInputForm(props: {
             </div>
             <div className="login-modal-button-container">
                 {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
-                    <input
+                    <button
                         className="login-modal-button-green-on-black"
-                        type="button"
-                        value={t('accountLogin')}
                         onClick={() => {
                             props.setUserAuthState(UserAuthState.LOGIN);
                         }}
-                    />
+                    >
+                        {t('accountLogin')}
+                    </button>
                 )}
-                <input
+                <button
                     className="login-modal-button-black-on-green"
-                    type="button"
-                    value={t('next')}
                     onClick={() => {
                         const nextUserAuthState = userAuthStateFromUserEmail(props.userEmail);
                         props.setUserAuthState(nextUserAuthState);
                     }}
-                />
+                >
+                    {t('next')}
+                </button>
             </div>
         </>
     );
