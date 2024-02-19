@@ -36,31 +36,3 @@ export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
 
     return <LoginModalHeader {...{ header, description, opaqueDescription }} />;
 }
-
-export function SignUpHeader() {
-    const { t } = useI18next();
-
-    return (
-        <LoginModalHeader header={t('signUp')} description={t('finikMapProductDescription')} opaqueDescription={true} />
-    );
-}
-
-export function LogInHeader() {
-    const { t } = useI18next();
-
-    return (
-        <LoginModalHeader header={t('logIn')} description={t('finikMapProductDescription')} opaqueDescription={true} />
-    );
-}
-
-export function NewPasswordHeader() {
-    const { t } = useI18next();
-
-    return (
-        <LoginModalHeader
-            header={t('newPassword')}
-            description={t('finikMapProductDescription')}
-            opaqueDescription={true}
-        />
-    );
-}
