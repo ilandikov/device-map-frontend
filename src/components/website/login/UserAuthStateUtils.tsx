@@ -1,5 +1,4 @@
 import { UserAuthState } from './LoginModal';
-import { getError } from './MailInputForm';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {
@@ -28,17 +27,17 @@ export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswo
 }
 
 export function userAuthStateFromUserEmail(userEmail: string): Error | null {
-    let nextUserAuthState = UserAuthState.SIGNUP_PASSWORD;
-
     if (userEmail === 'already@exists.com') {
-        nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_EXISTENCE;
+        return new Error('mailAlreadyExists');
     }
 
     if (!isValidEmail(userEmail)) {
-        nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_VALIDITY;
+        return new Error('mailNotValid');
     }
-    return getError(nextUserAuthState);
+
+    return null;
 }
+
 function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);
