@@ -5,6 +5,7 @@ export function MailInputBox(props: {
     helpText: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
     userEmail: string;
+    error: Error;
 }) {
     return (
         <>

@@ -21,6 +21,7 @@ export function MailInputForm(props: {
                     onChange={(event) => {
                         props.setUserEmail(event.target.value);
                     }}
+                    error={null}
                 />
                 {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
                     <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>

@@ -25,6 +25,7 @@ export function LogInForm(props: {
                     onChange={(event) => {
                         props.setUserEmail(event.target.value);
                     }}
+                    error={null}
                 />
                 <PasswordInputBox
                     userAuthState={props.userAuthState}

@@ -19,6 +19,7 @@ export function PasswordResetRequestForm(props: {
                     onChange={(event) => {
                         props.setUserEmail(event.target.value);
                     }}
+                    error={null}
                 />
             </div>
             <div className="login-modal-button-container">
