@@ -24,7 +24,7 @@ export function MailInputForm(props: {
 }) {
     const { t } = useI18next();
 
-    const [mailInputError, setMailInputError] = useState(getError(props.userAuthState));
+    const [mailInputError, setMailInputError] = useState(null);
 
     return (
         <>
