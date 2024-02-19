@@ -13,6 +13,6 @@ export function resetHookMocks() {
     setUserPasswordRepeat = jest.fn().mockImplementation((userEmail) => userEmail);
 }
 
-export function renderComponentAsJSON(component: React.ReactElement) {
+export function renderAsJSON(component: React.ReactElement) {
     return renderer.create(component).toJSON();
 }
