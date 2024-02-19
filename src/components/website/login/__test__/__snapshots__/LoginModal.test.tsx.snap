@@ -545,12 +545,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       >
         resetPassword
       </p>
-      <input
+      <button
         className="login-modal-button-black-on-green"
         onClick={[Function]}
-        type="button"
-        value="next"
-      />
+      >
+        next
+      </button>
     </div>
   </div>,
 ]

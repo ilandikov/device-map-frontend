@@ -45,15 +45,15 @@ export function LogInForm(props: {
                     >
                         {t('resetPassword')}
                     </p>
-                    <input
+                    <button
                         className="login-modal-button-black-on-green"
-                        type="button"
-                        value={t('next')}
                         onClick={() => {
                             const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
                             props.setUserAuthState(nextUserState);
                         }}
-                    />
+                    >
+                        {t('next')}
+                    </button>
                 </div>
             </div>
         </>
