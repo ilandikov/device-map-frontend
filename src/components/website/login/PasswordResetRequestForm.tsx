@@ -22,12 +22,12 @@ export function PasswordResetRequestForm(props: {
                 />
             </div>
             <div className="login-modal-button-container">
-                <input
+                <button
                     className="login-modal-button-black-on-green"
-                    type="button"
-                    value={t('OTPSendSMS')}
                     onClick={() => props.setUserAuthState(UserAuthState.LOGIN_OTP)}
-                />
+                >
+                    {t('OTPSendSMS')}
+                </button>
             </div>
         </>
     );
