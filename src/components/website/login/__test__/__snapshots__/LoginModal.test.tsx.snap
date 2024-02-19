@@ -95,12 +95,12 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
