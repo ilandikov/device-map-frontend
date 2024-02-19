@@ -10,11 +10,9 @@ export default function Login() {
     return (
         <div className="login-background-container">
             <LoginHeader />
-            <div className="login-content-container">
-                <div className="login-window">
-                    <div className="login-window-content-container">
-                        <LoginModal />
-                    </div>
+            <div className="login-window">
+                <div className="login-window-content-container">
+                    <LoginModal />
                 </div>
             </div>
         </div>

@@ -55,70 +55,66 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
     </div>
   </header>
   <div
-    className="login-content-container"
+    className="login-window"
   >
     <div
-      className="login-window"
+      className="login-window-content-container"
     >
       <div
-        className="login-window-content-container"
+        className="login-ellipses-container"
       >
         <div
-          className="login-ellipses-container"
+          className="login-ellipse-left-container"
         >
           <div
-            className="login-ellipse-left-container"
-          >
-            <div
-              className="login-ellipse login-ellipse-green"
-            />
-          </div>
-          <div
-            className="login-ellipse-right-container"
-          >
-            <div
-              className="login-ellipse login-ellipse-blue"
-            />
-          </div>
-        </div>
-        <div
-          className="login-modal-header-container"
-        >
-          <img
-            alt="login-modal-logo"
-            className="login-modal-logo"
-            src="test-file-stub"
+            className="login-ellipse login-ellipse-green"
           />
-          <p
-            className="login-modal-header"
-          >
-            brand map
-          </p>
-          <p
-            className="login-modal-header-description"
-          >
-            loginCallToAction
-          </p>
         </div>
         <div
-          className="login-modal-input-container"
-        />
-        <div
-          className="login-modal-button-container"
+          className="login-ellipse-right-container"
         >
-          <button
-            className="login-modal-button-black-on-green"
-            onClick={[Function]}
-          >
-            accountLogin
-          </button>
-          <button
-            className="login-modal-button-green-on-black"
-            onClick={[Function]}
-          >
-            accountRegister
-          </button>
+          <div
+            className="login-ellipse login-ellipse-blue"
+          />
         </div>
+      </div>
+      <div
+        className="login-modal-header-container"
+      >
+        <img
+          alt="login-modal-logo"
+          className="login-modal-logo"
+          src="test-file-stub"
+        />
+        <p
+          className="login-modal-header"
+        >
+          brand map
+        </p>
+        <p
+          className="login-modal-header-description"
+        >
+          loginCallToAction
+        </p>
+      </div>
+      <div
+        className="login-modal-input-container"
+      />
+      <div
+        className="login-modal-button-container"
+      >
+        <button
+          className="login-modal-button-black-on-green"
+          onClick={[Function]}
+        >
+          accountLogin
+        </button>
+        <button
+          className="login-modal-button-green-on-black"
+          onClick={[Function]}
+        >
+          accountRegister
+        </button>
       </div>
     </div>
   </div>
