@@ -1,6 +1,5 @@
 /* External dependencies */
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -9,6 +8,7 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import {
+    renderComponentAsJSON,
     resetHookMocks,
     setUserAuthState,
     setUserEmail,
@@ -44,10 +44,6 @@ const componentWithStoreProvider = (
         <LoginModal />
     </Provider>
 );
-
-function renderComponentAsJSON(component: React.ReactElement) {
-    return renderer.create(component).toJSON();
-}
 
 describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at user welcome stage', () => {
