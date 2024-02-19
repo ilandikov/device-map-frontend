@@ -3,7 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPInputForm } from './OTPInputForm';
-import { LoginModalHeader, LoginModalHeaderState } from './LoginModalHeaders';
+import { LoginModalHeader, LoginModalHeaderState } from './LoginModalHeader';
 import { Ellipses } from './Ellipses/Ellipses';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
