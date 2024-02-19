@@ -13,26 +13,32 @@ export function WelcomeHeader(props: { state: LoginModalHeaderState }) {
     function getHeaderDetails() {
         const { t } = useI18next();
 
-        let header = `${t('brand')} ${t('map')}`;
-        let description = t('loginCallToAction');
-        let opaqueDescription = false;
+        const header = `${t('brand')} ${t('map')}`;
+        const description = t('loginCallToAction');
+        const opaqueDescription = false;
 
         if (props.state === LoginModalHeaderState.SIGNUP) {
-            header = t('signUp');
-            description = t('finikMapProductDescription');
-            opaqueDescription = true;
+            return {
+                header: t('signUp'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
         }
 
         if (props.state === LoginModalHeaderState.LOGIN) {
-            header = t('logIn');
-            description = t('finikMapProductDescription');
-            opaqueDescription = true;
+            return {
+                header: t('logIn'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
         }
 
         if (props.state === LoginModalHeaderState.NEW_PASSWORD) {
-            header = t('newPassword');
-            description = t('finikMapProductDescription');
-            opaqueDescription = true;
+            return {
+                header: t('newPassword'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
         }
         return { header, description, opaqueDescription };
     }
