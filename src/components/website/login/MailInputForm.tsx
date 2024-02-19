@@ -24,7 +24,7 @@ export function MailInputForm(props: {
 }) {
     const { t } = useI18next();
 
-    const [mailInputError] = useState(getError(props.userAuthState));
+    const [mailInputError, setMailInputError] = useState(getError(props.userAuthState));
 
     return (
         <>
@@ -52,8 +52,13 @@ export function MailInputForm(props: {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const [nextUserAuthState] = userAuthStateFromUserEmail(props.userEmail);
-                        props.setUserAuthState(nextUserAuthState);
+                        const [nextUserAuthState, mailInputError] = userAuthStateFromUserEmail(props.userEmail);
+
+                        if (mailInputError === null) {
+                            props.setUserAuthState(nextUserAuthState);
+                        }
+
+                        setMailInputError(mailInputError);
                     }}
                 >
                     {t('next')}
