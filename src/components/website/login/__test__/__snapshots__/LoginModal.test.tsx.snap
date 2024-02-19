@@ -95,12 +95,12 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
@@ -208,18 +208,18 @@ exports[`LoginModal snapshot tests should match the snapshot at mail exists stag
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-green-on-black"
       onClick={[Function]}
-      type="button"
-      value="accountLogin"
-    />
-    <input
+    >
+      accountLogin
+    </button>
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
@@ -286,12 +286,12 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
@@ -363,12 +363,12 @@ exports[`LoginModal snapshot tests should match the snapshot at mail not valid s
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
@@ -449,12 +449,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
@@ -545,12 +545,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       >
         resetPassword
       </p>
-      <input
+      <button
         className="login-modal-button-black-on-green"
         onClick={[Function]}
-        type="button"
-        value="next"
-      />
+      >
+        next
+      </button>
     </div>
   </div>,
 ]
@@ -618,12 +618,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="OTPSendSMS"
-    />
+    >
+      OTPSendSMS
+    </button>
   </div>,
 ]
 `;
@@ -704,12 +704,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="next"
-    />
+    >
+      next
+    </button>
   </div>,
 ]
 `;
@@ -759,18 +759,18 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
   <div
     className="login-modal-button-container"
   >
-    <input
+    <button
       className="login-modal-button-black-on-green"
       onClick={[Function]}
-      type="button"
-      value="accountLogin"
-    />
-    <input
+    >
+      accountLogin
+    </button>
+    <button
       className="login-modal-button-green-on-black"
       onClick={[Function]}
-      type="button"
-      value="accountRegister"
-    />
+    >
+      accountRegister
+    </button>
   </div>,
 ]
 `;

@@ -54,16 +54,16 @@ export function OTPInputForm(props: { userAuthState: UserAuthState; setUserAuthS
                 <p className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</p>
             </div>
             <div className="login-modal-button-container">
-                <input
+                <button
                     className="login-modal-button-black-on-green"
-                    type="button"
-                    value={t('next')}
                     ref={OTPNextButton}
                     onClick={() => {
                         const nextUserAuthState = userAuthStateFromOTP(props.userAuthState);
                         props.setUserAuthState(nextUserAuthState);
                     }}
-                />
+                >
+                    {t('next')}
+                </button>
             </div>
         </>
     );

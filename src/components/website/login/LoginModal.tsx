@@ -42,22 +42,22 @@ export function LoginModal() {
                     <WelcomeHeader />
                     <div className="login-modal-input-container"></div>
                     <div className="login-modal-button-container">
-                        <input
+                        <button
                             className="login-modal-button-black-on-green"
-                            type="button"
-                            value={t('accountLogin')}
                             onClick={() => {
                                 setUserAuthState(UserAuthState.LOGIN);
                             }}
-                        />
-                        <input
+                        >
+                            {t('accountLogin')}
+                        </button>
+                        <button
                             className="login-modal-button-green-on-black"
-                            type="button"
-                            value={t('accountRegister')}
                             onClick={() => {
                                 setUserAuthState(UserAuthState.MAIL_INPUT);
                             }}
-                        />
+                        >
+                            {t('accountRegister')}
+                        </button>
                     </div>
                 </>
             )}

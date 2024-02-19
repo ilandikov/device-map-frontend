@@ -31,10 +31,8 @@ export function PasswordCreationForm(props: {
                 />
             </div>
             <div className="login-modal-button-container">
-                <input
+                <button
                     className="login-modal-button-black-on-green"
-                    type="button"
-                    value={t('next')}
                     onClick={() => {
                         const nextUserState = userAuthStateFromUserPasswords(
                             props.userPassword,
@@ -42,7 +40,9 @@ export function PasswordCreationForm(props: {
                         );
                         props.setUserAuthState(nextUserState);
                     }}
-                />
+                >
+                    {t('next')}
+                </button>
             </div>
         </>
     );

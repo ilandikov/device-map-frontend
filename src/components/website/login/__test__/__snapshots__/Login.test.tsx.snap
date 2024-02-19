@@ -106,18 +106,18 @@ exports[`Login snapshot tests should match the snapshot 1`] = `
         <div
           className="login-modal-button-container"
         >
-          <input
+          <button
             className="login-modal-button-black-on-green"
             onClick={[Function]}
-            type="button"
-            value="accountLogin"
-          />
-          <input
+          >
+            accountLogin
+          </button>
+          <button
             className="login-modal-button-green-on-black"
             onClick={[Function]}
-            type="button"
-            value="accountRegister"
-          />
+          >
+            accountRegister
+          </button>
         </div>
       </div>
     </div>
