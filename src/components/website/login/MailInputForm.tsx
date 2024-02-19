@@ -31,9 +31,6 @@ export function MailInputForm(props: {
                     }}
                     error={getError()}
                 />
-                {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE && (
-                    <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>
-                )}
                 {props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY && (
                     <p className="login-modal-input-help login-modal-wrong-input">{t('mailNotValid')}</p>
                 )}
