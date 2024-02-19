@@ -5,7 +5,7 @@ import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
-import { resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { renderComponentAsJSON, resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -34,6 +34,34 @@ function componentWithStoreProvider(userAuthState: UserAuthState, userEmail: str
 function renderComponent(userAuthState: UserAuthState, userEmail: string) {
     return render(componentWithStoreProvider(userAuthState, userEmail));
 }
+
+describe('LoginModal snapshot tests', () => {
+    beforeEach(() => {
+        resetHookMocks();
+    });
+
+    it('should match the snapshot at mail input stage', () => {
+        const component = renderComponentAsJSON(componentWithStoreProvider(UserAuthState.MAIL_INPUT, ''));
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at mail exists stage', () => {
+        const component = renderComponentAsJSON(
+            componentWithStoreProvider(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, ''),
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at mail not valid stage', () => {
+        const component = renderComponentAsJSON(
+            componentWithStoreProvider(UserAuthState.MAIL_INPUT_ERROR_VALIDITY, ''),
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
