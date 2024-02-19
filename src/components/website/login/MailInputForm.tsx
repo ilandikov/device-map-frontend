@@ -52,7 +52,7 @@ export function MailInputForm(props: {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const nextUserAuthState = userAuthStateFromUserEmail(props.userEmail);
+                        const [nextUserAuthState] = userAuthStateFromUserEmail(props.userEmail);
                         props.setUserAuthState(nextUserAuthState);
                     }}
                 >

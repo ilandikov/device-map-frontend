@@ -26,7 +26,7 @@ export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswo
     return nextUserState;
 }
 
-export function userAuthStateFromUserEmail(userEmail: string) {
+export function userAuthStateFromUserEmail(userEmail: string): [UserAuthState, Error | null] {
     let nextUserAuthState = UserAuthState.SIGNUP_PASSWORD;
 
     if (userEmail === 'already@exists.com') {
@@ -36,7 +36,7 @@ export function userAuthStateFromUserEmail(userEmail: string) {
     if (!isValidEmail(userEmail)) {
         nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_VALIDITY;
     }
-    return nextUserAuthState;
+    return [nextUserAuthState, null];
 }
 function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
