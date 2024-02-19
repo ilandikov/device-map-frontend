@@ -12,7 +12,7 @@ describe('user email logic tests', () => {
 
         const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(newUserState).toEqual([UserAuthState.SIGNUP_PASSWORD, null]);
+        expect(newUserState).toEqual(null);
     });
 
     it('should move to email not valid stage when a bad email is presented', () => {
@@ -20,7 +20,7 @@ describe('user email logic tests', () => {
 
         const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(newUserState).toEqual([UserAuthState.MAIL_INPUT_ERROR_VALIDITY, new Error('mailNotValid')]);
+        expect(newUserState).toEqual(new Error('mailNotValid'));
     });
 
     it('should move to email already exists stage when already existing mail is presented', () => {
@@ -28,7 +28,7 @@ describe('user email logic tests', () => {
 
         const newUserState = userAuthStateFromUserEmail(email);
 
-        expect(newUserState).toEqual([UserAuthState.MAIL_INPUT_ERROR_EXISTENCE, new Error('mailAlreadyExists')]);
+        expect(newUserState).toEqual(new Error('mailAlreadyExists'));
     });
 });
 
