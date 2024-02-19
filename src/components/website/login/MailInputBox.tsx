@@ -28,7 +28,7 @@ export function MailInputBox(props: {
                 />
             </div>
             {props.error !== null && (
-                <p className="login-modal-input-help login-modal-wrong-input">{t('mailAlreadyExists')}</p>
+                <p className="login-modal-input-help login-modal-wrong-input">{t(props.error.message)}</p>
             )}
         </>
     );
