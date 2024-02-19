@@ -4,6 +4,18 @@ import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 import { userAuthStateFromUserEmail } from './UserAuthStateUtils';
 
+function getError(userAuthState: UserAuthState): Error | null {
+    if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
+        return new Error('mailAlreadyExists');
+    }
+
+    if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) {
+        return new Error('mailNotValid');
+    }
+
+    return null;
+}
+
 export function MailInputForm(props: {
     userAuthState: UserAuthState;
     setUserAuthState: (userAuthState: UserAuthState) => void;
@@ -11,18 +23,6 @@ export function MailInputForm(props: {
     setUserEmail: (newUserEmail: string) => void;
 }) {
     const { t } = useI18next();
-
-    function getError(userAuthState: UserAuthState): Error | null {
-        if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
-            return new Error('mailAlreadyExists');
-        }
-
-        if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) {
-            return new Error('mailNotValid');
-        }
-
-        return null;
-    }
 
     const [mailInputError] = useState(getError(props.userAuthState));
 
