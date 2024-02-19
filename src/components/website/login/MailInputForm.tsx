@@ -35,7 +35,7 @@ export function MailInputForm(props: {
                     onChange={(event) => {
                         props.setUserEmail(event.target.value);
                     }}
-                    error={getError()}
+                    error={mailInputError}
                 />
             </div>
             <div className="login-modal-button-container">
