@@ -12,19 +12,19 @@ export function MailInputForm(props: {
 }) {
     const { t } = useI18next();
 
-    function getError(): Error | null {
-        if (props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
+    function getError(userAuthState: UserAuthState): Error | null {
+        if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE) {
             return new Error('mailAlreadyExists');
         }
 
-        if (props.userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) {
+        if (userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) {
             return new Error('mailNotValid');
         }
 
         return null;
     }
 
-    const mailInputError = getError();
+    const mailInputError = getError(props.userAuthState);
 
     return (
         <>
