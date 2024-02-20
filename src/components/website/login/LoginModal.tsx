@@ -66,8 +66,8 @@ export function LoginModal() {
                     <MailInputForm
                         {...{
                             setUserAuthState,
-                            setUserEmail,
                             userEmail,
+                            setUserEmail,
                         }}
                     />
                 </>
