@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { UserAuthState } from '../LoginModal';
-import { resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
 
@@ -17,10 +17,6 @@ function componentWithStoreProvider(userEmail: string = '') {
 }
 
 describe('PasswordResetRequest form action tests', () => {
-    beforeEach(() => {
-        resetHookMocks();
-    });
-
     it('should update user mail when set', () => {
         const { container } = componentWithStoreProvider();
 

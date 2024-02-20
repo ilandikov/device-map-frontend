@@ -5,7 +5,7 @@ import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
-import { resetHookMocks, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
+import { setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -39,10 +39,6 @@ function componentWithStoreProvider(
 }
 
 describe('PasswordCreationForm action tests', () => {
-    beforeEach(() => {
-        resetHookMocks();
-    });
-
     it('should update user password when typed', () => {
         const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '', '');
         const userPasswordInput = getByTestId(container, 'userPassword');

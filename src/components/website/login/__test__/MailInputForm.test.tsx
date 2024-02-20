@@ -6,7 +6,7 @@ import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { MailInputError } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
-import { renderAsJSON, resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { renderAsJSON, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -79,7 +79,6 @@ describe('MailInputForm snapshot tests', () => {
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
         resetHookMock();
-        resetHookMocks();
     });
 
     it('should call email setter from email input', () => {

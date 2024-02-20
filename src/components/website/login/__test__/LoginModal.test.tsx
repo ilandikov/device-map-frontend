@@ -9,7 +9,6 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import {
     renderAsJSON,
-    resetHookMocks,
     setUserAuthState,
     setUserEmail,
     setUserPassword,
@@ -104,10 +103,6 @@ describe('LoginModal snapshot tests', () => {
 });
 
 describe('LoginModal action tests - welcome stage', () => {
-    beforeEach(() => {
-        resetHookMocks();
-    });
-
     it('should transition to email input from welcome state', () => {
         mockLoginModalUseStates(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
@@ -130,10 +125,6 @@ describe('LoginModal action tests - welcome stage', () => {
 });
 
 describe('LoginModal go back button click actions', () => {
-    beforeEach(() => {
-        resetHookMocks();
-    });
-
     it.each([
         // From mail input to welcome
         [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
