@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
+import { MailInputError } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
-import { MailInputError, MailInputForm } from '../MailInputForm';
+import { MailInputForm } from '../MailInputForm';
 import { renderAsJSON, resetHookMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({

@@ -1,11 +1,11 @@
 import {
+    MailInputError,
     getUserEmailError,
     userAuthStateFromOTP,
     userAuthStateFromUserLogin,
     userAuthStateFromUserPasswords,
 } from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
-import { MailInputError } from '../MailInputForm';
 
 describe('user email logic tests', () => {
     it('should not throw error when good email is presented', () => {

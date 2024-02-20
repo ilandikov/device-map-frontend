@@ -1,5 +1,4 @@
 import { UserAuthState } from './LoginModal';
-import { MailInputError } from './MailInputForm';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {
@@ -25,6 +24,11 @@ export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswo
     }
 
     return nextUserState;
+}
+
+export enum MailInputError {
+    NOT_VALID = 'mailNotValid',
+    ALREADY_EXISTS = 'mailAlreadyExists',
 }
 
 export function getUserEmailError(userEmail: string): Error | null {

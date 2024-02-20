@@ -2,12 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
 import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
-import { getUserEmailError } from './UserAuthStateUtils';
-
-export enum MailInputError {
-    NOT_VALID = 'mailNotValid',
-    ALREADY_EXISTS = 'mailAlreadyExists',
-}
+import { MailInputError, getUserEmailError } from './UserAuthStateUtils';
 
 export function MailInputForm(props: {
     setUserAuthState: (userAuthState: UserAuthState) => void;
