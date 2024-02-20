@@ -13,8 +13,6 @@ import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 export enum UserAuthState {
     WELCOME = 'WELCOME',
     MAIL_INPUT = 'MAIL_INPUT',
-    MAIL_INPUT_ERROR_EXISTENCE = 'MAIL_INPUT_ERROR_EXISTENCE',
-    MAIL_INPUT_ERROR_VALIDITY = 'MAIL_INPUT_ERROR_VALIDITY',
     SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
     SIGNUP_PASSWORD_ERROR = 'SIGNUP_PASSWORD_ERROR',
     SIGNUP_OTP = 'SIGNUP_OTP',
@@ -61,15 +59,12 @@ export function LoginModal() {
                     </div>
                 </>
             )}
-            {(userAuthState === UserAuthState.MAIL_INPUT ||
-                userAuthState === UserAuthState.MAIL_INPUT_ERROR_EXISTENCE ||
-                userAuthState === UserAuthState.MAIL_INPUT_ERROR_VALIDITY) && (
+            {userAuthState === UserAuthState.MAIL_INPUT && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
                     <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <MailInputForm
                         {...{
-                            userAuthState,
                             setUserAuthState: setUserAuthState,
                             setUserEmail,
                             userEmail,

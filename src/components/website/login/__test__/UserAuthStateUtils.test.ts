@@ -1,34 +1,35 @@
 import {
+    MailInputError,
+    getUserEmailError,
     userAuthStateFromOTP,
-    userAuthStateFromUserEmail,
     userAuthStateFromUserLogin,
     userAuthStateFromUserPasswords,
 } from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
 
 describe('user email logic tests', () => {
-    it('should move to password creation when new email is presented', () => {
+    it('should not throw error when good email is presented', () => {
         const email = 'good@email.com';
 
-        const newUserState = userAuthStateFromUserEmail(email);
+        const userEmailError = getUserEmailError(email);
 
-        expect(newUserState).toEqual(UserAuthState.SIGNUP_PASSWORD);
+        expect(userEmailError).toEqual(null);
     });
 
-    it('should move to email not valid stage when a bad email is presented', () => {
+    it('should throw mail not valid error', () => {
         const email = 'this is not an email!';
 
-        const newUserState = userAuthStateFromUserEmail(email);
+        const userEmailError = getUserEmailError(email);
 
-        expect(newUserState).toEqual(UserAuthState.MAIL_INPUT_ERROR_VALIDITY);
+        expect(userEmailError).toEqual(new Error(MailInputError.NOT_VALID));
     });
 
-    it('should move to email already exists stage when already existing mail is presented', () => {
+    it('should throw mail already exists error', () => {
         const email = 'already@exists.com';
 
-        const newUserState = userAuthStateFromUserEmail(email);
+        const userEmailError = getUserEmailError(email);
 
-        expect(newUserState).toEqual(UserAuthState.MAIL_INPUT_ERROR_EXISTENCE);
+        expect(userEmailError).toEqual(new Error(MailInputError.ALREADY_EXISTS));
     });
 });
 

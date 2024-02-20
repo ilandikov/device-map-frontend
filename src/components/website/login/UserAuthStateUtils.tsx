@@ -26,18 +26,23 @@ export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswo
     return nextUserState;
 }
 
-export function userAuthStateFromUserEmail(userEmail: string) {
-    let nextUserAuthState = UserAuthState.SIGNUP_PASSWORD;
+export enum MailInputError {
+    NOT_VALID = 'mailNotValid',
+    ALREADY_EXISTS = 'mailAlreadyExists',
+}
 
+export function getUserEmailError(userEmail: string): Error | null {
     if (userEmail === 'already@exists.com') {
-        nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_EXISTENCE;
+        return new Error(MailInputError.ALREADY_EXISTS);
     }
 
     if (!isValidEmail(userEmail)) {
-        nextUserAuthState = UserAuthState.MAIL_INPUT_ERROR_VALIDITY;
+        return new Error(MailInputError.NOT_VALID);
     }
-    return nextUserAuthState;
+
+    return null;
 }
+
 function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);
