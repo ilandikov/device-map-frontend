@@ -6,8 +6,6 @@ export const setUserEmail = jest.fn().mockImplementation((userEmail) => userEmai
 export const setUserPassword = jest.fn().mockImplementation((userEmail) => userEmail);
 export const setUserPasswordRepeat = jest.fn().mockImplementation((userEmail) => userEmail);
 
-export function resetHookMocks() {}
-
 export function renderAsJSON(component: React.ReactElement) {
     return renderer.create(component).toJSON();
 }
