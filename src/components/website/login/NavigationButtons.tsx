@@ -6,7 +6,7 @@ import { UserAuthState } from './LoginModal';
 
 export function NavigationButtons(props: { setUserAuthState: (string) => void; goBackState: UserAuthState }) {
     return (
-        <div className="login-modal-navigation-container">
+        <header className="login-modal-navigation-container">
             <img
                 className="login-modal-navigation-button"
                 src={GoBack}
@@ -25,6 +25,6 @@ export function NavigationButtons(props: { setUserAuthState: (string) => void; g
                     props.setUserAuthState(UserAuthState.WELCOME);
                 }}
             />
-        </div>
+        </header>
     );
 }

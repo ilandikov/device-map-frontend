@@ -143,7 +143,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
 
 exports[`LoginModal snapshot tests should match the snapshot at mail input stage 1`] = `
 [
-  <div
+  <header
     className="login-modal-navigation-container"
   >
     <img
@@ -160,7 +160,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
       onClick={[Function]}
       src="test-file-stub"
     />
-  </div>,
+  </header>,
   <div
     className="login-modal-header-container"
   >
@@ -215,7 +215,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
 
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 1`] = `
 [
-  <div
+  <header
     className="login-modal-navigation-container"
   >
     <img
@@ -232,7 +232,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       onClick={[Function]}
       src="test-file-stub"
     />
-  </div>,
+  </header>,
   <div
     className="login-modal-header-container"
   >
@@ -301,7 +301,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 2`] = `
 [
-  <div
+  <header
     className="login-modal-navigation-container"
   >
     <img
@@ -318,7 +318,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       onClick={[Function]}
       src="test-file-stub"
     />
-  </div>,
+  </header>,
   <div
     className="login-modal-header-container"
   >
@@ -398,7 +398,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 
 exports[`LoginModal snapshot tests should match the snapshot at password input stage 3`] = `
 [
-  <div
+  <header
     className="login-modal-navigation-container"
   >
     <img
@@ -415,7 +415,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
       onClick={[Function]}
       src="test-file-stub"
     />
-  </div>,
+  </header>,
   <div
     className="login-modal-header-container"
   >
@@ -470,7 +470,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
 
 exports[`LoginModal snapshot tests should match the snapshot at password not match stage 1`] = `
 [
-  <div
+  <header
     className="login-modal-navigation-container"
   >
     <img
@@ -487,7 +487,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
       onClick={[Function]}
       src="test-file-stub"
     />
-  </div>,
+  </header>,
   <div
     className="login-modal-header-container"
   >
