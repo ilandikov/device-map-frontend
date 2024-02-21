@@ -121,7 +121,7 @@ describe('MailInputForm action tests', () => {
     });
 });
 
-function myHook(callBack: () => void, _dependency: Error | null) {
+function myHook(props: { callBack: () => void; _dependency: Error | null }) {
     const hasMounted = useRef(false);
 
     if (hasMounted.current === false) {
@@ -129,7 +129,7 @@ function myHook(callBack: () => void, _dependency: Error | null) {
         return;
     }
 
-    callBack();
+    props.callBack();
     return;
 }
 
@@ -137,13 +137,13 @@ describe('Custom hook test', () => {
     const callBack = jest.fn();
 
     it('should not call callback after the first render', () => {
-        renderHook(() => myHook(callBack, null));
+        renderHook(() => myHook({ callBack, _dependency: null }));
 
         expect(callBack).toHaveBeenCalledTimes(0);
     });
 
     it('should call callback function after each rerender', () => {
-        const { rerender } = renderHook(() => myHook(callBack, null));
+        const { rerender } = renderHook(() => myHook({ callBack, _dependency: null }));
 
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
 
