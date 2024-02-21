@@ -144,6 +144,7 @@ describe('Custom hook test', () => {
 
     it('should call callback function after each rerender', () => {
         const { rerender } = renderHook(() => myHook(callBack));
+
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
 
         arrayFrom1To241.forEach((i) => {
