@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render, renderHook } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
@@ -118,5 +118,17 @@ describe('MailInputForm action tests', () => {
         fireEvent.click(loginButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN);
+    });
+});
+
+function myHook() {
+    return;
+}
+
+describe('Custom hook test', () => {
+    it('rename me too', () => {
+        const { rerender } = renderHook(() => myHook());
+
+        expect(rerender).toBeTruthy();
     });
 });
