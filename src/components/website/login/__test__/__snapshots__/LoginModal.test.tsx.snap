@@ -146,20 +146,24 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
   <header
     className="login-modal-navigation-container"
   >
-    <img
-      alt="login-modal-navigation-go-back"
-      className="login-modal-navigation-button"
-      data-testid="goBackButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
-    <img
-      alt="login-modal-navigation-cancel"
-      className="login-modal-navigation-button"
-      data-testid="cancelButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
+    <button>
+      <img
+        alt="login-modal-navigation-go-back"
+        className="login-modal-navigation-button"
+        data-testid="goBackButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
+    <button>
+      <img
+        alt="login-modal-navigation-cancel"
+        className="login-modal-navigation-button"
+        data-testid="cancelButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
   </header>,
   <div
     className="login-modal-header-container"
@@ -218,20 +222,24 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <header
     className="login-modal-navigation-container"
   >
-    <img
-      alt="login-modal-navigation-go-back"
-      className="login-modal-navigation-button"
-      data-testid="goBackButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
-    <img
-      alt="login-modal-navigation-cancel"
-      className="login-modal-navigation-button"
-      data-testid="cancelButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
+    <button>
+      <img
+        alt="login-modal-navigation-go-back"
+        className="login-modal-navigation-button"
+        data-testid="goBackButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
+    <button>
+      <img
+        alt="login-modal-navigation-cancel"
+        className="login-modal-navigation-button"
+        data-testid="cancelButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
   </header>,
   <div
     className="login-modal-header-container"
@@ -304,20 +312,24 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <header
     className="login-modal-navigation-container"
   >
-    <img
-      alt="login-modal-navigation-go-back"
-      className="login-modal-navigation-button"
-      data-testid="goBackButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
-    <img
-      alt="login-modal-navigation-cancel"
-      className="login-modal-navigation-button"
-      data-testid="cancelButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
+    <button>
+      <img
+        alt="login-modal-navigation-go-back"
+        className="login-modal-navigation-button"
+        data-testid="goBackButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
+    <button>
+      <img
+        alt="login-modal-navigation-cancel"
+        className="login-modal-navigation-button"
+        data-testid="cancelButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
   </header>,
   <div
     className="login-modal-header-container"
@@ -401,20 +413,24 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <header
     className="login-modal-navigation-container"
   >
-    <img
-      alt="login-modal-navigation-go-back"
-      className="login-modal-navigation-button"
-      data-testid="goBackButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
-    <img
-      alt="login-modal-navigation-cancel"
-      className="login-modal-navigation-button"
-      data-testid="cancelButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
+    <button>
+      <img
+        alt="login-modal-navigation-go-back"
+        className="login-modal-navigation-button"
+        data-testid="goBackButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
+    <button>
+      <img
+        alt="login-modal-navigation-cancel"
+        className="login-modal-navigation-button"
+        data-testid="cancelButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
   </header>,
   <div
     className="login-modal-header-container"
@@ -473,20 +489,24 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
   <header
     className="login-modal-navigation-container"
   >
-    <img
-      alt="login-modal-navigation-go-back"
-      className="login-modal-navigation-button"
-      data-testid="goBackButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
-    <img
-      alt="login-modal-navigation-cancel"
-      className="login-modal-navigation-button"
-      data-testid="cancelButton"
-      onClick={[Function]}
-      src="test-file-stub"
-    />
+    <button>
+      <img
+        alt="login-modal-navigation-go-back"
+        className="login-modal-navigation-button"
+        data-testid="goBackButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
+    <button>
+      <img
+        alt="login-modal-navigation-cancel"
+        className="login-modal-navigation-button"
+        data-testid="cancelButton"
+        onClick={[Function]}
+        src="test-file-stub"
+      />
+    </button>
   </header>,
   <div
     className="login-modal-header-container"
