@@ -146,21 +146,23 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
   <header
     className="login-modal-navigation-container"
   >
-    <button>
+    <button
+      data-testid="goBackButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-go-back"
         className="login-modal-navigation-button"
-        data-testid="goBackButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
-    <button>
+    <button
+      data-testid="cancelButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-cancel"
         className="login-modal-navigation-button"
-        data-testid="cancelButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
@@ -222,21 +224,23 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <header
     className="login-modal-navigation-container"
   >
-    <button>
+    <button
+      data-testid="goBackButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-go-back"
         className="login-modal-navigation-button"
-        data-testid="goBackButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
-    <button>
+    <button
+      data-testid="cancelButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-cancel"
         className="login-modal-navigation-button"
-        data-testid="cancelButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
@@ -312,21 +316,23 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <header
     className="login-modal-navigation-container"
   >
-    <button>
+    <button
+      data-testid="goBackButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-go-back"
         className="login-modal-navigation-button"
-        data-testid="goBackButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
-    <button>
+    <button
+      data-testid="cancelButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-cancel"
         className="login-modal-navigation-button"
-        data-testid="cancelButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
@@ -413,21 +419,23 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
   <header
     className="login-modal-navigation-container"
   >
-    <button>
+    <button
+      data-testid="goBackButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-go-back"
         className="login-modal-navigation-button"
-        data-testid="goBackButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
-    <button>
+    <button
+      data-testid="cancelButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-cancel"
         className="login-modal-navigation-button"
-        data-testid="cancelButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
@@ -489,21 +497,23 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
   <header
     className="login-modal-navigation-container"
   >
-    <button>
+    <button
+      data-testid="goBackButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-go-back"
         className="login-modal-navigation-button"
-        data-testid="goBackButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
-    <button>
+    <button
+      data-testid="cancelButton"
+      onClick={[Function]}
+    >
       <img
         alt="login-modal-navigation-cancel"
         className="login-modal-navigation-button"
-        data-testid="cancelButton"
-        onClick={[Function]}
         src="test-file-stub"
       />
     </button>
