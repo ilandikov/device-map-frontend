@@ -27,9 +27,7 @@ export function MailInputBox(props: {
                     data-testid="emailInput"
                 />
             </div>
-            {props.error !== null && (
-                <p className="login-modal-input-help login-modal-wrong-input">{t(props.error.message)}</p>
-            )}
+            {props.error && <p className="login-modal-input-help login-modal-wrong-input">{t(props.error.message)}</p>}
         </>
     );
 }
