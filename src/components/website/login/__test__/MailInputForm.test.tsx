@@ -121,14 +121,17 @@ describe('MailInputForm action tests', () => {
     });
 });
 
-function myHook() {
+function myHook(callBack: () => void) {
+    callBack();
     return;
 }
 
 describe('Custom hook test', () => {
     it('rename me too', () => {
-        const { rerender } = renderHook(() => myHook());
+        const callBack = jest.fn();
 
-        expect(rerender).toBeTruthy();
+        renderHook(() => myHook(callBack));
+
+        expect(callBack).toHaveBeenCalledTimes(1);
     });
 });
