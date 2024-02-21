@@ -38,14 +38,14 @@ export function LogInForm(props: {
             </div>
             <div className="login-modal-button-container">
                 <div className="login-modal-two-buttons-on-one-row">
-                    <p
+                    <button
                         className="login-modal-correct-input"
                         onClick={() => {
                             props.setUserAuthState(UserAuthState.LOGIN_PASSWORD_RESET);
                         }}
                     >
                         {t('resetPassword')}
-                    </p>
+                    </button>
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {

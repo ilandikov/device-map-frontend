@@ -397,12 +397,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     <div
       className="login-modal-two-buttons-on-one-row"
     >
-      <p
+      <button
         className="login-modal-correct-input"
         onClick={[Function]}
       >
         resetPassword
-      </p>
+      </button>
       <button
         className="login-modal-button-black-on-green"
         onClick={[Function]}
