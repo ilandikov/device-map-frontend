@@ -134,14 +134,20 @@ function myHook(callBack: () => void) {
 }
 
 describe('Custom hook test', () => {
-    it('should call callback function each time after rerender', () => {
+    it('should not call callback after the first render', () => {
+        const callBack = jest.fn();
+
+        renderHook(() => myHook(callBack));
+
+        expect(callBack).toHaveBeenCalledTimes(0);
+    });
+
+    it('should call callback function after each rerender', () => {
         const callBack = jest.fn();
 
         const { rerender } = renderHook(() => myHook(callBack));
-
-        expect(callBack).toHaveBeenCalledTimes(0);
-
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+
         arrayFrom1To241.forEach((i) => {
             rerender();
             expect(callBack).toHaveBeenCalledTimes(i);
