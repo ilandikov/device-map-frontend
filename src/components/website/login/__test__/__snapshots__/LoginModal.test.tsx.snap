@@ -152,7 +152,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -162,7 +162,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -230,7 +230,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -240,7 +240,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -322,7 +322,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -332,7 +332,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -425,7 +425,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -435,7 +435,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password input s
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -503,7 +503,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -513,7 +513,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password not mat
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button"
+        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
