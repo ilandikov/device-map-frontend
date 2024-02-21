@@ -10,40 +10,6 @@ export enum LoginModalHeaderState {
 }
 
 export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
-    function getHeaderDetails(state: LoginModalHeaderState) {
-        const { t } = useI18next();
-
-        if (state === LoginModalHeaderState.SIGNUP) {
-            return {
-                header: t('signUp'),
-                description: t('finikMapProductDescription'),
-                opaqueDescription: true,
-            };
-        }
-
-        if (state === LoginModalHeaderState.LOGIN) {
-            return {
-                header: t('logIn'),
-                description: t('finikMapProductDescription'),
-                opaqueDescription: true,
-            };
-        }
-
-        if (state === LoginModalHeaderState.NEW_PASSWORD) {
-            return {
-                header: t('newPassword'),
-                description: t('finikMapProductDescription'),
-                opaqueDescription: true,
-            };
-        }
-
-        const header = `${t('brand')} ${t('map')}`;
-        const description = t('loginCallToAction');
-        const opaqueDescription = false;
-
-        return { header, description, opaqueDescription };
-    }
-
     const { header, description, opaqueDescription } = getHeaderDetails(props.state);
 
     return (
@@ -55,4 +21,38 @@ export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
             </p>
         </div>
     );
+}
+
+function getHeaderDetails(state: LoginModalHeaderState) {
+    const { t } = useI18next();
+
+    if (state === LoginModalHeaderState.SIGNUP) {
+        return {
+            header: t('signUp'),
+            description: t('finikMapProductDescription'),
+            opaqueDescription: true,
+        };
+    }
+
+    if (state === LoginModalHeaderState.LOGIN) {
+        return {
+            header: t('logIn'),
+            description: t('finikMapProductDescription'),
+            opaqueDescription: true,
+        };
+    }
+
+    if (state === LoginModalHeaderState.NEW_PASSWORD) {
+        return {
+            header: t('newPassword'),
+            description: t('finikMapProductDescription'),
+            opaqueDescription: true,
+        };
+    }
+
+    const header = `${t('brand')} ${t('map')}`;
+    const description = t('loginCallToAction');
+    const opaqueDescription = false;
+
+    return { header, description, opaqueDescription };
 }
