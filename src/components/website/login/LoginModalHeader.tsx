@@ -10,10 +10,10 @@ export enum LoginModalHeaderState {
 }
 
 export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
-    function getHeaderDetails() {
+    function getHeaderDetails(state: LoginModalHeaderState) {
         const { t } = useI18next();
 
-        if (props.state === LoginModalHeaderState.SIGNUP) {
+        if (state === LoginModalHeaderState.SIGNUP) {
             return {
                 header: t('signUp'),
                 description: t('finikMapProductDescription'),
@@ -21,7 +21,7 @@ export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
             };
         }
 
-        if (props.state === LoginModalHeaderState.LOGIN) {
+        if (state === LoginModalHeaderState.LOGIN) {
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),
@@ -29,7 +29,7 @@ export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
             };
         }
 
-        if (props.state === LoginModalHeaderState.NEW_PASSWORD) {
+        if (state === LoginModalHeaderState.NEW_PASSWORD) {
             return {
                 header: t('newPassword'),
                 description: t('finikMapProductDescription'),
@@ -44,7 +44,7 @@ export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
         return { header, description, opaqueDescription };
     }
 
-    const { header, description, opaqueDescription } = getHeaderDetails();
+    const { header, description, opaqueDescription } = getHeaderDetails(props.state);
 
     return (
         <div className="login-modal-header-container">
