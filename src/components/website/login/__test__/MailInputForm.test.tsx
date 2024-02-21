@@ -1,5 +1,5 @@
 import { fireEvent, getByTestId, getByText, render, renderHook } from '@testing-library/react';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
@@ -122,16 +122,29 @@ describe('MailInputForm action tests', () => {
 });
 
 function myHook(callBack: () => void) {
+    const hasMounted = useRef(false);
+
+    if (hasMounted.current === false) {
+        hasMounted.current = true;
+        return;
+    }
+
     callBack();
     return;
 }
 
 describe('Custom hook test', () => {
-    it('rename me too', () => {
+    it('should call callback function each time after rerender', () => {
         const callBack = jest.fn();
 
-        renderHook(() => myHook(callBack));
+        const { rerender } = renderHook(() => myHook(callBack));
 
-        expect(callBack).toHaveBeenCalledTimes(1);
+        expect(callBack).toHaveBeenCalledTimes(0);
+
+        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+        arrayFrom1To241.forEach((i) => {
+            rerender();
+            expect(callBack).toHaveBeenCalledTimes(i);
+        });
     });
 });
