@@ -123,12 +123,20 @@ describe('MailInputForm action tests', () => {
 
 function myHook(props: { callBack: () => void; error: Error | null }) {
     const hasMounted = useRef(false);
+    const previousError = useRef<Error | null>(null);
 
     useEffect(() => {
         if (hasMounted.current === false) {
             hasMounted.current = true;
+            previousError.current = props.error;
             return;
         }
+
+        if (previousError?.current.message === props.error?.message) {
+            return;
+        }
+
+        previousError.current = props.error;
 
         props.callBack();
     }, [props.error]);
@@ -136,6 +144,10 @@ function myHook(props: { callBack: () => void; error: Error | null }) {
 
 describe('Custom hook test', () => {
     const callBack = jest.fn();
+
+    afterEach(() => {
+        callBack.mockReset();
+    });
 
     it('should not call callback after the first render', () => {
         renderHook(() => myHook({ callBack, error: null }));
@@ -184,5 +196,14 @@ describe('Custom hook test', () => {
         });
 
         expect(callBack).toHaveBeenCalledTimes(randomNumberOfTimes.length);
+    });
+
+    it('should not call callback if error message is same as previous', () => {
+        const error = new Error('terribly wrong');
+        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
+
+        rerender({ callBack, error: new Error('terribly wrong') });
+
+        expect(callBack).toHaveBeenCalledTimes(0);
     });
 });
