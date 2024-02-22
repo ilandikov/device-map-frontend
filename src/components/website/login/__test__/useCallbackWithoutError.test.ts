@@ -14,13 +14,13 @@ describe('useCallbackWithoutError custom hook tests', () => {
         expect(callbackMock).toHaveBeenCalledTimes(0);
     });
 
-    it('should call callback if there is no error on rerender', () => {
+    it('should not call callback if there is still no error on rerender', () => {
         const noError = null;
         const { rerender } = renderHook(() => useCallbackWithoutError({ callback: callbackMock, error: noError }));
 
         rerender({ callback: callbackMock, noError });
 
-        expect(callbackMock).toHaveBeenCalledTimes(1);
+        expect(callbackMock).toHaveBeenCalledTimes(0);
     });
 
     it('should not call callback if error is still present on rerender', () => {
@@ -32,5 +32,16 @@ describe('useCallbackWithoutError custom hook tests', () => {
         rerender({ callback: callbackMock, error: new Error('new oops') });
 
         expect(callbackMock).not.toHaveBeenCalled();
+    });
+
+    it('should call callback if error disappears', () => {
+        const error = new Error('I shall disappear on rerender');
+        const { rerender } = renderHook((props) => useCallbackWithoutError(props), {
+            initialProps: { callback: callbackMock, error },
+        });
+
+        rerender({ callback: callbackMock, error: null });
+
+        expect(callbackMock).toHaveBeenCalledTimes(1);
     });
 });
