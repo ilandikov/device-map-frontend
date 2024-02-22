@@ -202,8 +202,11 @@ describe('Custom hook test', () => {
         const error = new Error('terribly wrong');
         const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
 
-        rerender({ callBack, error: new Error('terribly wrong') });
+        const randomNumberOfTimes = getArrayOfRandomLength();
+        randomNumberOfTimes.forEach((errorNumber) => {
+            rerender({ callBack, error: new Error('terribly wrong') });
+        });
 
-        expect(callBack).toHaveBeenCalledTimes(0);
+        expect(callBack).not.toHaveBeenCalled();
     });
 });
