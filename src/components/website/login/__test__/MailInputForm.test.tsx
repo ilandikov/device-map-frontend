@@ -1,5 +1,5 @@
 import { fireEvent, getByTestId, getByText, render, renderHook } from '@testing-library/react';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
@@ -124,13 +124,14 @@ describe('MailInputForm action tests', () => {
 function myHook(props: { callBack: () => void; _dependency: Error | null }) {
     const hasMounted = useRef(false);
 
-    if (hasMounted.current === false) {
-        hasMounted.current = true;
-        return;
-    }
+    useEffect(() => {
+        if (hasMounted.current === false) {
+            hasMounted.current = true;
+            return;
+        }
 
-    props.callBack();
-    return;
+        props.callBack();
+    });
 }
 
 describe('Custom hook test', () => {
@@ -144,7 +145,6 @@ describe('Custom hook test', () => {
 
     it('should call callback function after each rerender', () => {
         const { rerender } = renderHook(() => myHook({ callBack, _dependency: null }));
-
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
 
         arrayFrom1To241.forEach((i) => {
