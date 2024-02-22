@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { useCallbackWithoutError } from '../useCallbackWithoutError';
 
-describe('Custom hook test', () => {
+describe('useCallbackWithoutError custom hook tests', () => {
     const callbackMock = jest.fn();
 
     afterEach(() => {
