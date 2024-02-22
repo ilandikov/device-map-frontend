@@ -1,5 +1,5 @@
-import { fireEvent, getByTestId, getByText, render, renderHook } from '@testing-library/react';
-import React, { useEffect, useRef, useState } from 'react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
@@ -118,56 +118,5 @@ describe('MailInputForm action tests', () => {
         fireEvent.click(loginButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN);
-    });
-});
-
-function useCallbackWithoutError(props: { callback: () => void; error: Error | null }) {
-    const hasMounted = useRef(false);
-
-    useEffect(() => {
-        if (hasMounted.current === false) {
-            hasMounted.current = true;
-            return;
-        }
-
-        if (props.error) {
-            return;
-        }
-
-        props.callback();
-    });
-}
-
-describe('Custom hook test', () => {
-    const callbackMock = jest.fn();
-
-    afterEach(() => {
-        callbackMock.mockReset();
-    });
-
-    it('should not call callback after the first render without error', () => {
-        renderHook(() => useCallbackWithoutError({ callback: callbackMock, error: null }));
-
-        expect(callbackMock).toHaveBeenCalledTimes(0);
-    });
-
-    it('should call callback if there is no error on rerender', () => {
-        const noError = null;
-        const { rerender } = renderHook(() => useCallbackWithoutError({ callback: callbackMock, error: noError }));
-
-        rerender({ callback: callbackMock, noError });
-
-        expect(callbackMock).toHaveBeenCalledTimes(1);
-    });
-
-    it('should not call callback if error is still present on rerender', () => {
-        const error = new Error('oops');
-        const { rerender } = renderHook((props) => useCallbackWithoutError(props), {
-            initialProps: { callback: callbackMock, error },
-        });
-
-        rerender({ callback: callbackMock, error: new Error('new oops') });
-
-        expect(callbackMock).not.toHaveBeenCalled();
     });
 });
