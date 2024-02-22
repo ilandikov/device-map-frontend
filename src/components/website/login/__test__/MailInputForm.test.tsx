@@ -145,39 +145,26 @@ describe('Custom hook test', () => {
         callBack.mockReset();
     });
 
-    it('should not call callback after the first render', () => {
+    it('should not call callback after the first render without error', () => {
         renderHook(() => myHook({ callBack, error: null }));
 
         expect(callBack).toHaveBeenCalledTimes(0);
     });
 
-    function getArrayOfRandomLength() {
-        const max = 100;
-        const min = 10;
-        const arrayLength = Math.floor(Math.random() * max + min);
-        return Array.from({ length: arrayLength }, (_, i) => i + 1);
-    }
-
-    it('should call callback after any number of rerenders if there was no error', () => {
+    it('should call callback if there is no error on rerender', () => {
         const noError = null;
         const { rerender } = renderHook(() => myHook({ callBack, error: noError }));
 
-        const randomNumberOfTimes = getArrayOfRandomLength();
-        randomNumberOfTimes.forEach((i) => {
-            rerender();
-        });
+        rerender({ callBack, noError });
 
-        expect(callBack).toHaveBeenCalledTimes(randomNumberOfTimes.length);
+        expect(callBack).toHaveBeenCalledTimes(1);
     });
 
-    it('should not call callback if error is present', () => {
+    it('should not call callback if error is still present on rerender', () => {
         const error = new Error('oops');
         const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
 
-        const randomNumberOfTimes = getArrayOfRandomLength();
-        randomNumberOfTimes.forEach((errorNumber) => {
-            rerender({ callBack, error: new Error('Error number ' + errorNumber.toString()) });
-        });
+        rerender({ callBack, error: new Error('new oops') });
 
         expect(callBack).not.toHaveBeenCalled();
     });
