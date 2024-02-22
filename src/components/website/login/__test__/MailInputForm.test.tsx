@@ -121,7 +121,7 @@ describe('MailInputForm action tests', () => {
     });
 });
 
-function myHook(props: { callBack: () => void; dependency: Error | null }) {
+function myHook(props: { callBack: () => void; error: Error | null }) {
     const hasMounted = useRef(false);
 
     useEffect(() => {
@@ -131,14 +131,14 @@ function myHook(props: { callBack: () => void; dependency: Error | null }) {
         }
 
         props.callBack();
-    }, [props.dependency]);
+    }, [props.error]);
 }
 
 describe('Custom hook test', () => {
     const callBack = jest.fn();
 
     it('should not call callback after the first render', () => {
-        renderHook(() => myHook({ callBack, dependency: null }));
+        renderHook(() => myHook({ callBack, error: null }));
 
         expect(callBack).toHaveBeenCalledTimes(0);
     });
@@ -150,9 +150,9 @@ describe('Custom hook test', () => {
         return Array.from({ length: arrayLength }, (_, i) => i + 1);
     }
 
-    it('should not call callback after any number of rerenders if dependency was null', () => {
-        const error = null;
-        const { rerender } = renderHook(() => myHook({ callBack, dependency: error }));
+    it('should not call callback after any number of rerenders if there was no error', () => {
+        const noError = null;
+        const { rerender } = renderHook(() => myHook({ callBack, error: noError }));
 
         const randomNumberOfTimes = getArrayOfRandomLength();
         randomNumberOfTimes.forEach((i) => {
@@ -162,9 +162,9 @@ describe('Custom hook test', () => {
         expect(callBack).not.toHaveBeenCalled();
     });
 
-    it('should not call callback after any number of rerenders if non-null dependency did not change', () => {
+    it('should not call callback after any number of rerenders if error did not change', () => {
         const error = new Error('something went wrong');
-        const { rerender } = renderHook((props) => myHook({ callBack, dependency: error }));
+        const { rerender } = renderHook((props) => myHook({ callBack, error }));
 
         const randomNumberOfTimes = getArrayOfRandomLength();
         randomNumberOfTimes.forEach(() => {
@@ -174,13 +174,13 @@ describe('Custom hook test', () => {
         expect(callBack).not.toHaveBeenCalled();
     });
 
-    it('should call callback after any number of rerenders when dependency changed', () => {
+    it('should call callback the number of times that the error changed', () => {
         const error = new Error('something went wrong');
-        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, dependency: error } });
+        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
 
         const randomNumberOfTimes = getArrayOfRandomLength();
         randomNumberOfTimes.forEach((errorNumber) => {
-            rerender({ callBack, dependency: new Error('Error number ' + errorNumber.toString()) });
+            rerender({ callBack, error: new Error('Error number ' + errorNumber.toString()) });
         });
 
         expect(callBack).toHaveBeenCalledTimes(randomNumberOfTimes.length);
