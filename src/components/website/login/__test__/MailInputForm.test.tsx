@@ -132,7 +132,7 @@ function myHook(props: { callBack: () => void; error: Error | null }) {
             return;
         }
 
-        if (previousError?.current.message === props.error?.message) {
+        if (props.error) {
             return;
         }
 
@@ -186,7 +186,7 @@ describe('Custom hook test', () => {
         expect(callBack).not.toHaveBeenCalled();
     });
 
-    it('should call callback the number of times that the error changed', () => {
+    it('should not call callback if error message changed', () => {
         const error = new Error('oops');
         const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
 
@@ -195,7 +195,7 @@ describe('Custom hook test', () => {
             rerender({ callBack, error: new Error('Error number ' + errorNumber.toString()) });
         });
 
-        expect(callBack).toHaveBeenCalledTimes(randomNumberOfTimes.length);
+        expect(callBack).not.toHaveBeenCalled();
     });
 
     it('should not call callback if error message is same as previous', () => {
