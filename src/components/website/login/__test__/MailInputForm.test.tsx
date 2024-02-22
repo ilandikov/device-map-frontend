@@ -131,7 +131,7 @@ function myHook(props: { callBack: () => void; _dependency: Error | null }) {
         }
 
         props.callBack();
-    });
+    }, [props._dependency]);
 }
 
 describe('Custom hook test', () => {
@@ -143,13 +143,39 @@ describe('Custom hook test', () => {
         expect(callBack).toHaveBeenCalledTimes(0);
     });
 
-    it('should call callback function after each rerender', () => {
-        const { rerender } = renderHook(() => myHook({ callBack, _dependency: null }));
-        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+    it('should not call callback after any number of rerenders if dependency was null', () => {
+        const error = null;
+        const { rerender } = renderHook(() => myHook({ callBack, _dependency: error }));
 
+        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
         arrayFrom1To241.forEach((i) => {
             rerender();
-            expect(callBack).toHaveBeenCalledTimes(i);
         });
+
+        expect(callBack).not.toHaveBeenCalled();
+    });
+
+    it('should not call callback after any number of rerenders if non-null dependency did not change', () => {
+        const error = new Error('something went wrong');
+        const { rerender } = renderHook((props) => myHook({ callBack, _dependency: error }));
+
+        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+        arrayFrom1To241.forEach(() => {
+            rerender();
+        });
+
+        expect(callBack).not.toHaveBeenCalled();
+    });
+
+    it('should call callback after any number of rerenders when dependency changed', () => {
+        const error = new Error('something went wrong');
+        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, _dependency: error } });
+
+        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+        arrayFrom1To241.forEach((errorNumber) => {
+            rerender({ callBack, _dependency: new Error('Error number ' + errorNumber.toString()) });
+        });
+
+        expect(callBack).toHaveBeenCalledTimes(arrayFrom1To241.length);
     });
 });
