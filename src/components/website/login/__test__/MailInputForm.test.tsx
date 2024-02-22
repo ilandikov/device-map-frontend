@@ -143,11 +143,15 @@ describe('Custom hook test', () => {
         expect(callBack).toHaveBeenCalledTimes(0);
     });
 
+    function getArrayOf241Numbers() {
+        return Array.from({ length: 241 }, (_, i) => i + 1);
+    }
+
     it('should not call callback after any number of rerenders if dependency was null', () => {
         const error = null;
         const { rerender } = renderHook(() => myHook({ callBack, dependency: error }));
 
-        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+        const arrayFrom1To241 = getArrayOf241Numbers();
         arrayFrom1To241.forEach((i) => {
             rerender();
         });
@@ -159,7 +163,7 @@ describe('Custom hook test', () => {
         const error = new Error('something went wrong');
         const { rerender } = renderHook((props) => myHook({ callBack, dependency: error }));
 
-        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+        const arrayFrom1To241 = getArrayOf241Numbers();
         arrayFrom1To241.forEach(() => {
             rerender();
         });
@@ -171,7 +175,7 @@ describe('Custom hook test', () => {
         const error = new Error('something went wrong');
         const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, dependency: error } });
 
-        const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
+        const arrayFrom1To241 = getArrayOf241Numbers();
         arrayFrom1To241.forEach((errorNumber) => {
             rerender({ callBack, dependency: new Error('Error number ' + errorNumber.toString()) });
         });
