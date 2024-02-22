@@ -121,7 +121,7 @@ describe('MailInputForm action tests', () => {
     });
 });
 
-function myHook(props: { callBack: () => void; error: Error | null }) {
+function useCallbackWithoutError(props: { callback: () => void; error: Error | null }) {
     const hasMounted = useRef(false);
 
     useEffect(() => {
@@ -134,38 +134,40 @@ function myHook(props: { callBack: () => void; error: Error | null }) {
             return;
         }
 
-        props.callBack();
+        props.callback();
     });
 }
 
 describe('Custom hook test', () => {
-    const callBack = jest.fn();
+    const callbackMock = jest.fn();
 
     afterEach(() => {
-        callBack.mockReset();
+        callbackMock.mockReset();
     });
 
     it('should not call callback after the first render without error', () => {
-        renderHook(() => myHook({ callBack, error: null }));
+        renderHook(() => useCallbackWithoutError({ callback: callbackMock, error: null }));
 
-        expect(callBack).toHaveBeenCalledTimes(0);
+        expect(callbackMock).toHaveBeenCalledTimes(0);
     });
 
     it('should call callback if there is no error on rerender', () => {
         const noError = null;
-        const { rerender } = renderHook(() => myHook({ callBack, error: noError }));
+        const { rerender } = renderHook(() => useCallbackWithoutError({ callback: callbackMock, error: noError }));
 
-        rerender({ callBack, noError });
+        rerender({ callback: callbackMock, noError });
 
-        expect(callBack).toHaveBeenCalledTimes(1);
+        expect(callbackMock).toHaveBeenCalledTimes(1);
     });
 
     it('should not call callback if error is still present on rerender', () => {
         const error = new Error('oops');
-        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
+        const { rerender } = renderHook((props) => useCallbackWithoutError(props), {
+            initialProps: { callback: callbackMock, error },
+        });
 
-        rerender({ callBack, error: new Error('new oops') });
+        rerender({ callback: callbackMock, error: new Error('new oops') });
 
-        expect(callBack).not.toHaveBeenCalled();
+        expect(callbackMock).not.toHaveBeenCalled();
     });
 });
