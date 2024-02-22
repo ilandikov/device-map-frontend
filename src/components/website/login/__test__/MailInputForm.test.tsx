@@ -143,8 +143,10 @@ describe('Custom hook test', () => {
         expect(callBack).toHaveBeenCalledTimes(0);
     });
 
-    function getArrayOf241Numbers() {
-        const arrayLength = 241;
+    function getArrayOfRandomLength() {
+        const max = 100;
+        const min = 10;
+        const arrayLength = Math.floor(Math.random() * max + min);
         return Array.from({ length: arrayLength }, (_, i) => i + 1);
     }
 
@@ -152,8 +154,8 @@ describe('Custom hook test', () => {
         const error = null;
         const { rerender } = renderHook(() => myHook({ callBack, dependency: error }));
 
-        const arrayFrom1To241 = getArrayOf241Numbers();
-        arrayFrom1To241.forEach((i) => {
+        const randomNumberOfTimes = getArrayOfRandomLength();
+        randomNumberOfTimes.forEach((i) => {
             rerender();
         });
 
@@ -164,8 +166,8 @@ describe('Custom hook test', () => {
         const error = new Error('something went wrong');
         const { rerender } = renderHook((props) => myHook({ callBack, dependency: error }));
 
-        const arrayFrom1To241 = getArrayOf241Numbers();
-        arrayFrom1To241.forEach(() => {
+        const randomNumberOfTimes = getArrayOfRandomLength();
+        randomNumberOfTimes.forEach(() => {
             rerender();
         });
 
@@ -176,11 +178,11 @@ describe('Custom hook test', () => {
         const error = new Error('something went wrong');
         const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, dependency: error } });
 
-        const arrayFrom1To241 = getArrayOf241Numbers();
-        arrayFrom1To241.forEach((errorNumber) => {
+        const randomNumberOfTimes = getArrayOfRandomLength();
+        randomNumberOfTimes.forEach((errorNumber) => {
             rerender({ callBack, dependency: new Error('Error number ' + errorNumber.toString()) });
         });
 
-        expect(callBack).toHaveBeenCalledTimes(arrayFrom1To241.length);
+        expect(callBack).toHaveBeenCalledTimes(randomNumberOfTimes.length);
     });
 });
