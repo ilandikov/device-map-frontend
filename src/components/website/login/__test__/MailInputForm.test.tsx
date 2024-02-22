@@ -144,7 +144,8 @@ describe('Custom hook test', () => {
     });
 
     function getArrayOf241Numbers() {
-        return Array.from({ length: 241 }, (_, i) => i + 1);
+        const arrayLength = 241;
+        return Array.from({ length: arrayLength }, (_, i) => i + 1);
     }
 
     it('should not call callback after any number of rerenders if dependency was null', () => {
