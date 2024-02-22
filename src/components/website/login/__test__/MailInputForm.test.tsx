@@ -139,7 +139,7 @@ function myHook(props: { callBack: () => void; error: Error | null }) {
         previousError.current = props.error;
 
         props.callBack();
-    }, [props.error]);
+    });
 }
 
 describe('Custom hook test', () => {
@@ -162,7 +162,7 @@ describe('Custom hook test', () => {
         return Array.from({ length: arrayLength }, (_, i) => i + 1);
     }
 
-    it('should not call callback after any number of rerenders if there was no error', () => {
+    it('should call callback after any number of rerenders if there was no error', () => {
         const noError = null;
         const { rerender } = renderHook(() => myHook({ callBack, error: noError }));
 
@@ -171,7 +171,7 @@ describe('Custom hook test', () => {
             rerender();
         });
 
-        expect(callBack).not.toHaveBeenCalled();
+        expect(callBack).toHaveBeenCalledTimes(randomNumberOfTimes.length);
     });
 
     it('should not call callback after any number of rerenders if error did not change', () => {
