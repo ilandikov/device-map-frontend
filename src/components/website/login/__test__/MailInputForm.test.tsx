@@ -175,7 +175,7 @@ describe('Custom hook test', () => {
     });
 
     it('should call callback the number of times that the error changed', () => {
-        const error = new Error('something went wrong');
+        const error = new Error('oops');
         const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, error } });
 
         const randomNumberOfTimes = getArrayOfRandomLength();
