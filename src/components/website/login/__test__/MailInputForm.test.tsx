@@ -121,7 +121,7 @@ describe('MailInputForm action tests', () => {
     });
 });
 
-function myHook(props: { callBack: () => void; _dependency: Error | null }) {
+function myHook(props: { callBack: () => void; dependency: Error | null }) {
     const hasMounted = useRef(false);
 
     useEffect(() => {
@@ -131,21 +131,21 @@ function myHook(props: { callBack: () => void; _dependency: Error | null }) {
         }
 
         props.callBack();
-    }, [props._dependency]);
+    }, [props.dependency]);
 }
 
 describe('Custom hook test', () => {
     const callBack = jest.fn();
 
     it('should not call callback after the first render', () => {
-        renderHook(() => myHook({ callBack, _dependency: null }));
+        renderHook(() => myHook({ callBack, dependency: null }));
 
         expect(callBack).toHaveBeenCalledTimes(0);
     });
 
     it('should not call callback after any number of rerenders if dependency was null', () => {
         const error = null;
-        const { rerender } = renderHook(() => myHook({ callBack, _dependency: error }));
+        const { rerender } = renderHook(() => myHook({ callBack, dependency: error }));
 
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
         arrayFrom1To241.forEach((i) => {
@@ -157,7 +157,7 @@ describe('Custom hook test', () => {
 
     it('should not call callback after any number of rerenders if non-null dependency did not change', () => {
         const error = new Error('something went wrong');
-        const { rerender } = renderHook((props) => myHook({ callBack, _dependency: error }));
+        const { rerender } = renderHook((props) => myHook({ callBack, dependency: error }));
 
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
         arrayFrom1To241.forEach(() => {
@@ -169,11 +169,11 @@ describe('Custom hook test', () => {
 
     it('should call callback after any number of rerenders when dependency changed', () => {
         const error = new Error('something went wrong');
-        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, _dependency: error } });
+        const { rerender } = renderHook((props) => myHook(props), { initialProps: { callBack, dependency: error } });
 
         const arrayFrom1To241 = Array.from({ length: 241 }, (_, i) => i + 1);
         arrayFrom1To241.forEach((errorNumber) => {
-            rerender({ callBack, _dependency: new Error('Error number ' + errorNumber.toString()) });
+            rerender({ callBack, dependency: new Error('Error number ' + errorNumber.toString()) });
         });
 
         expect(callBack).toHaveBeenCalledTimes(arrayFrom1To241.length);
