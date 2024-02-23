@@ -41,11 +41,11 @@ export function MailInputForm(props: {
                     onClick={() => {
                         const mailInputError = getUserEmailError(props.userEmail);
 
+                        setMailInputError(mailInputError);
+
                         if (mailInputError === null) {
                             props.setUserAuthState(UserAuthState.SIGNUP_PASSWORD);
                         }
-
-                        setMailInputError(mailInputError);
                     }}
                 >
                     {t('next')}
