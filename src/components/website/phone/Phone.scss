@@ -13,14 +13,14 @@
     font-weight: 500;
     line-height: 24px;
     text-align: left;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgb(255 255 255 / 60%);
 }
 
 .phone-background {
     min-width: 1342px;
     width: 100%;
     height: 1082px;
-    background-image: url(../../../assets/images/Phone.png);
+    background-image: url("../../../assets/images/Phone.png");
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
