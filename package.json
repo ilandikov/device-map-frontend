@@ -16,7 +16,8 @@
     "deploy": "gatsby-plugin-s3 deploy -y",
     "dev": "gatsby develop --host=0.0.0.0",
     "prepare-env": "node ./prepare-env.js",
-    "test": "npm run clean:test && jest src/** --coverage"
+    "test": "npm run clean:test && jest src/** --coverage",
+    "lint": "eslint --fix --ext .js,.ts,.jsx,.tsx,.html ./src && stylelint \"src/**/*.scss\" --fix"
   },
   "engines": {
     "node": "~18",
@@ -103,6 +104,10 @@
     "react-test-renderer": "18.2.0",
     "redux-mock-store": "1.5.4",
     "replace-in-file": "7.1.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-scss": "^6.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.3.3"
   }

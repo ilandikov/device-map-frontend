@@ -1,0 +1,12 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
+  "rules": {
+    "declaration-empty-line-before": [
+      "always",
+      {
+        "ignore": ["after-declaration", "first-nested", "inside-single-line-block"]
+      }
+    ],
+    "color-hex-length": "long"
+  }
+}
