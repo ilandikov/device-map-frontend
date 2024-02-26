@@ -16,7 +16,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 const store = configureTestStore();
 
-function RenameToComponentWithStoreProvider(props: {
+function componentWithStoreProvider(props: {
     userAuthState: UserAuthState;
     userPassword: string;
     userPasswordRepeat: string;
@@ -40,11 +40,11 @@ function RenameToComponentWithStoreProvider(props: {
 describe('PasswordCreationForm action tests', () => {
     it('should update user password when typed', () => {
         const { container } = render(
-            <RenameToComponentWithStoreProvider
-                userAuthState={UserAuthState.SIGNUP_PASSWORD}
-                userPassword={''}
-                userPasswordRepeat={''}
-            />,
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
         );
         const userPasswordInput = getByTestId(container, 'userPassword');
 
@@ -56,11 +56,11 @@ describe('PasswordCreationForm action tests', () => {
 
     it('should update repeated user password when typed', () => {
         const { container } = render(
-            <RenameToComponentWithStoreProvider
-                userAuthState={UserAuthState.SIGNUP_PASSWORD}
-                userPassword={''}
-                userPasswordRepeat={''}
-            />,
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
         );
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
@@ -74,11 +74,11 @@ describe('PasswordCreationForm action tests', () => {
         const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
 
         const { container } = render(
-            <RenameToComponentWithStoreProvider
-                userAuthState={UserAuthState.SIGNUP_PASSWORD}
-                userPassword={'passwordOne'}
-                userPasswordRepeat={'PasswordTwo'}
-            />,
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: 'passwordOne',
+                userPasswordRepeat: 'PasswordTwo',
+            }),
         );
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
