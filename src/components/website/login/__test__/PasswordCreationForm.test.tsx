@@ -123,7 +123,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
+        const spyOnGetPasswordInputError = jest.spyOn(userAuthStateUtils, 'getPasswordInputError');
 
         mockPasswordInputErrorUseState(null);
         const { container } = render(
@@ -140,7 +140,7 @@ describe('PasswordCreationForm action tests', () => {
         fireEvent.click(tryVerifyPasswordsButton);
 
         expect(setPasswordInputError).toHaveBeenCalledWith(new Error());
-        expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
+        expect(spyOnGetPasswordInputError).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
 
     it('should call move to OTP stage after matching passwords have been input and password error was fixed', () => {

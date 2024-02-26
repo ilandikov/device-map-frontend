@@ -1,9 +1,9 @@
 import {
     MailInputError,
+    getPasswordInputError,
     getUserEmailError,
     userAuthStateFromOTP,
     userAuthStateFromUserLogin,
-    userAuthStateFromUserPasswords,
 } from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
 
@@ -34,22 +34,22 @@ describe('user email logic tests', () => {
 });
 
 describe('user password logic tests', () => {
-    it('should move to OTP input if passwords match', () => {
-        const nextUserAuthState = userAuthStateFromUserPasswords('passwordsMatch', 'passwordsMatch');
+    it('should return no error if passwords match', () => {
+        const error = getPasswordInputError('passwordsMatch', 'passwordsMatch');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
+        expect(error).toEqual(null);
     });
 
-    it('should move to error state if passwords dont match', () => {
-        const nextUserAuthState = userAuthStateFromUserPasswords('passwordsDontMatch', 'passwordsMatch');
+    it('should return an error state if passwords dont match', () => {
+        const error = getPasswordInputError('passwordsDontMatch', 'passwordsMatch');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD_ERROR);
+        expect(error).not.toEqual(null);
     });
 
     it.failing('should move to error state if password has not been input or it is an empty string', () => {
-        const nextUserAuthState = userAuthStateFromUserPasswords('', '');
+        const error = getPasswordInputError('', '');
 
-        expect(nextUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_PASSWORD_ERROR);
+        expect(error).not.toEqual(null);
     });
 });
 

@@ -16,16 +16,6 @@ export function userAuthStateFromOTP(userAuthState: UserAuthState) {
     return UserAuthState.SIGNUP_OTP_LOADING;
 }
 
-export function userAuthStateFromUserPasswords(userPasswordA: string, userPasswordB: string) {
-    let nextUserState = UserAuthState.SIGNUP_OTP;
-
-    if (userPasswordA !== userPasswordB) {
-        nextUserState = UserAuthState.SIGNUP_PASSWORD_ERROR;
-    }
-
-    return nextUserState;
-}
-
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
     ALREADY_EXISTS = 'mailAlreadyExists',
@@ -46,4 +36,12 @@ export function getUserEmailError(userEmail: string): Error | null {
 function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);
+}
+
+export function getPasswordInputError(userPassword: string, userPasswordRepeat: string): Error | null {
+    if (userPassword !== userPasswordRepeat) {
+        return new Error();
+    }
+
+    return null;
 }
