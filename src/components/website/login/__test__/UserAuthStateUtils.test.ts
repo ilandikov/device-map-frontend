@@ -1,6 +1,6 @@
 import {
     MailInputError,
-    getFinalError,
+    getPasswordInputError,
     getUserEmailError,
     userAuthStateFromOTP,
     userAuthStateFromUserLogin,
@@ -35,19 +35,19 @@ describe('user email logic tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error if passwords match', () => {
-        const error = getFinalError('passwordsMatch', 'passwordsMatch');
+        const error = getPasswordInputError('passwordsMatch', 'passwordsMatch');
 
         expect(error).toEqual(null);
     });
 
     it('should return an error state if passwords dont match', () => {
-        const error = getFinalError('passwordsDontMatch', 'passwordsMatch');
+        const error = getPasswordInputError('passwordsDontMatch', 'passwordsMatch');
 
         expect(error).not.toEqual(null);
     });
 
     it.failing('should move to error state if password has not been input or it is an empty string', () => {
-        const error = getFinalError('', '');
+        const error = getPasswordInputError('', '');
 
         expect(error).not.toEqual(null);
     });

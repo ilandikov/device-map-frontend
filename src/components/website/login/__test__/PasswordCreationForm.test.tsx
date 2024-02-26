@@ -123,7 +123,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'getFinalError');
+        const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'getPasswordInputError');
 
         mockPasswordInputErrorUseState(null);
         const { container } = render(
