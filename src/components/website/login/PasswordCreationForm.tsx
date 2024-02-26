@@ -4,6 +4,15 @@ import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
 import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
+function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState) {
+    let passwordInputError: Error | null;
+    passwordInputError = null;
+    if (userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
+        passwordInputError = new Error();
+    }
+    return passwordInputError;
+}
+
 export function PasswordCreationForm(props: {
     userAuthState: UserAuthState;
     setUserAuthState: (string) => void;
@@ -14,11 +23,8 @@ export function PasswordCreationForm(props: {
 }) {
     const { t } = useI18next();
 
-    let passwordInputError: Error | null;
-    passwordInputError = null;
-    if (props.userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
-        passwordInputError = new Error();
-    }
+    const passwordInputError = passwordInputErrorFromUserAuthState(props.userAuthState);
+
     return (
         <>
             <div className="login-modal-input-container">
