@@ -12,7 +12,7 @@ function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState): Erro
     return null;
 }
 
-function getFinalError(userPassword: string, userPasswordRepeat: string): Error | null {
+export function getFinalError(userPassword: string, userPasswordRepeat: string): Error | null {
     const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
     return passwordInputErrorFromUserAuthState(nextUserState);
 }
