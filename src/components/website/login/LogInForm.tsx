@@ -28,12 +28,12 @@ export function LogInForm(props: {
                     error={null}
                 />
                 <PasswordInputBox
-                    userAuthState={props.userAuthState}
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
                         props.setUserPassword(event.target.value);
                     }}
+                    error={null}
                 />
             </div>
             <div className="login-modal-button-container">
