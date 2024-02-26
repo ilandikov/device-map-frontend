@@ -5,7 +5,7 @@ import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
-import { setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
+import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -36,6 +36,32 @@ function componentWithStoreProvider(props: {
         </Provider>
     );
 }
+
+describe('PasswordCreationForm snapshot tests', () => {
+    it('should match the snapshot at password input stage', () => {
+        const component = renderAsJSON(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at password not match stage', () => {
+        const component = renderAsJSON(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD_ERROR,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('PasswordCreationForm action tests', () => {
     it('should update user password when typed', () => {
