@@ -51,7 +51,7 @@ function resetHookMock() {
 }
 
 describe('PasswordCreationForm snapshot tests', () => {
-    it('should match the snapshot at password input stage', () => {
+    it('should match the snapshot without error', () => {
         mockPasswordInputErrorUseState(null);
         const component = renderAsJSON(
             componentWithStoreProvider({
@@ -63,7 +63,7 @@ describe('PasswordCreationForm snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at password not match stage', () => {
+    it('should match the snapshot at password not match error', () => {
         mockPasswordInputErrorUseState(new Error());
         const component = renderAsJSON(
             componentWithStoreProvider({

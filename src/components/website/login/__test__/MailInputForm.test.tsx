@@ -54,21 +54,21 @@ describe('MailInputForm snapshot tests', () => {
         resetHookMock();
     });
 
-    it('should match the snapshot at mail input stage', () => {
+    it('should match the snapshot without error', () => {
         mockMailInputErrorUseState(null);
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at mail exists stage', () => {
+    it('should match the snapshot at mail exists error', () => {
         mockMailInputErrorUseState(new Error(MailInputError.ALREADY_EXISTS));
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at mail not valid stage', () => {
+    it('should match the snapshot at mail not valid error', () => {
         mockMailInputErrorUseState(new Error(MailInputError.NOT_VALID));
         const component = renderAsJSON(componentWithStoreProvider(''));
 
