@@ -14,7 +14,8 @@ export function PasswordCreationForm(props: {
 }) {
     const { t } = useI18next();
 
-    let passwordInputError: Error | null = null;
+    let passwordInputError: Error | null;
+    passwordInputError = null;
     if (props.userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
         passwordInputError = new Error();
     }
