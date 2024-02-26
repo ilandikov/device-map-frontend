@@ -142,4 +142,24 @@ describe('PasswordCreationForm action tests', () => {
         expect(setPasswordInputError).toHaveBeenCalledWith(new Error());
         expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
+
+    it('should call move to OTP stage after matching passwords have been input and password error was fixed', () => {
+        mockPasswordInputErrorUseState(new Error());
+        const { container } = render(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: 'theGoodPassword',
+                userPasswordRepeat: 'theGoodPassword',
+            }),
+        );
+
+        // expect(setUserAuthState).toHaveBeenCalledTimes(1);
+        const tryVerifyPasswordsButton = getByText(container, 'next');
+
+        expect(tryVerifyPasswordsButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyPasswordsButton);
+
+        expect(setPasswordInputError).toHaveBeenCalledWith(null);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP);
+    });
 });
