@@ -14,6 +14,10 @@ export function PasswordCreationForm(props: {
 }) {
     const { t } = useI18next();
 
+    let passwordInputError: Error | null = null;
+    if (props.userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
+        passwordInputError = new Error();
+    }
     return (
         <>
             <div className="login-modal-input-container">
@@ -22,14 +26,14 @@ export function PasswordCreationForm(props: {
                     helpText={t('enterPassword')}
                     testId="userPassword"
                     onChange={(event) => props.setUserPassword(event.target.value)}
-                    error={null}
+                    error={passwordInputError}
                 />
                 <PasswordInputBox
                     userAuthState={props.userAuthState}
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
                     onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
-                    error={null}
+                    error={passwordInputError}
                 />
             </div>
             <div className="login-modal-button-container">
