@@ -22,14 +22,12 @@ export function PasswordCreationForm(props: {
         <>
             <div className="login-modal-input-container">
                 <PasswordInputBox
-                    userAuthState={props.userAuthState}
                     helpText={t('enterPassword')}
                     testId="userPassword"
                     onChange={(event) => props.setUserPassword(event.target.value)}
                     error={passwordInputError}
                 />
                 <PasswordInputBox
-                    userAuthState={props.userAuthState}
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
                     onChange={(event) => props.setUserPasswordRepeat(event.target.value)}

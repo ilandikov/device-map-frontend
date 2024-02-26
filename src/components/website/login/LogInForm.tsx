@@ -28,7 +28,6 @@ export function LogInForm(props: {
                     error={null}
                 />
                 <PasswordInputBox
-                    userAuthState={props.userAuthState}
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
