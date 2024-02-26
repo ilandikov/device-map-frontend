@@ -39,13 +39,7 @@ function isValidEmail(email: string) {
 }
 
 export function getFinalError(userPassword: string, userPasswordRepeat: string): Error | null {
-    let nextUserState = UserAuthState.SIGNUP_OTP;
-
     if (userPassword !== userPasswordRepeat) {
-        nextUserState = UserAuthState.SIGNUP_PASSWORD_ERROR;
-    }
-
-    if (nextUserState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
         return new Error();
     }
 
