@@ -49,7 +49,8 @@ export function PasswordCreationForm(props: {
                             props.userPassword,
                             props.userPasswordRepeat,
                         );
-                        setNewPasswordInputError(passwordInputErrorFromUserAuthState(nextUserState));
+                        const error = passwordInputErrorFromUserAuthState(nextUserState);
+                        setNewPasswordInputError(error);
                         props.setUserAuthState(nextUserState);
                     }}
                 >
