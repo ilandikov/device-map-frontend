@@ -5,12 +5,11 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
 function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState) {
-    let passwordInputError: Error | null;
-    passwordInputError = null;
     if (userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
-        passwordInputError = new Error();
+        return new Error();
     }
-    return passwordInputError;
+
+    return null;
 }
 
 export function PasswordCreationForm(props: {
