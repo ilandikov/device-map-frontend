@@ -14,7 +14,6 @@ export enum UserAuthState {
     WELCOME = 'WELCOME',
     MAIL_INPUT = 'MAIL_INPUT',
     SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
-    SIGNUP_PASSWORD_ERROR = 'SIGNUP_PASSWORD_ERROR',
     SIGNUP_OTP = 'SIGNUP_OTP',
     SIGNUP_OTP_LOADING = 'SIGNUP_OTP_LOADING',
     LOGIN = 'LOGIN',
@@ -72,8 +71,7 @@ export function LoginModal() {
                     />
                 </>
             )}
-            {(userAuthState === UserAuthState.SIGNUP_PASSWORD ||
-                userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) && (
+            {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
                     <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />

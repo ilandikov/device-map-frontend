@@ -130,7 +130,6 @@ describe('LoginModal go back button click actions', () => {
 
         // From password creation to mail input
         [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
-        [UserAuthState.SIGNUP_PASSWORD_ERROR, UserAuthState.MAIL_INPUT],
     ])('should go back from state %s to %s state on go back button click', (goBackClickedState, goBackToState) => {
         mockLoginModalUseStates(goBackClickedState);
         const { container } = render(componentWithStoreProvider);
