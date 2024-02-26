@@ -34,6 +34,7 @@ export function LogInForm(props: {
                     onChange={(event) => {
                         props.setUserPassword(event.target.value);
                     }}
+                    error={null}
                 />
             </div>
             <div className="login-modal-button-container">

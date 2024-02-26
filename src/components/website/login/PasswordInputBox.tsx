@@ -6,6 +6,7 @@ export function PasswordInputBox(props: {
     helpText: string;
     testId: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
+    error: Error | null;
 }) {
     return (
         <>
