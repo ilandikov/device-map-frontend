@@ -16,12 +16,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(
-    userAuthState: UserAuthState,
-    userEmail: string,
-    userPassword: string,
-    userPasswordRepeat: string,
-) {
+function componentWithStoreProvider(userAuthState: UserAuthState, userPassword: string, userPasswordRepeat: string) {
     return render(
         <Provider store={store}>
             <PasswordCreationForm
@@ -40,7 +35,7 @@ function componentWithStoreProvider(
 
 describe('PasswordCreationForm action tests', () => {
     it('should update user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '');
         const userPasswordInput = getByTestId(container, 'userPassword');
 
         expect(userPasswordInput).toBeInTheDocument();
@@ -50,7 +45,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '', '');
+        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '');
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
         expect(userPasswordRepeatInput).toBeInTheDocument();
@@ -62,12 +57,7 @@ describe('PasswordCreationForm action tests', () => {
     it('should call password verification when next button is pressed', () => {
         const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
 
-        const { container } = componentWithStoreProvider(
-            UserAuthState.SIGNUP_PASSWORD,
-            '',
-            'passwordOne',
-            'PasswordTwo',
-        );
+        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, 'passwordOne', 'PasswordTwo');
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
 
