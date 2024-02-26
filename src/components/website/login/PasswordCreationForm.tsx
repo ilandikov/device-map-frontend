@@ -22,7 +22,7 @@ export function PasswordCreationForm(props: {
 }) {
     const { t } = useI18next();
 
-    const [_newPasswordInputError, _setNewPasswordInputError] = useState(null);
+    const [_newPasswordInputError, setNewPasswordInputError] = useState(null);
     const passwordInputError = passwordInputErrorFromUserAuthState(props.userAuthState);
 
     return (
@@ -49,6 +49,7 @@ export function PasswordCreationForm(props: {
                             props.userPassword,
                             props.userPasswordRepeat,
                         );
+                        setNewPasswordInputError(passwordInputErrorFromUserAuthState(nextUserState));
                         props.setUserAuthState(nextUserState);
                     }}
                 >

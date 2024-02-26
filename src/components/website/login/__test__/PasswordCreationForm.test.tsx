@@ -139,6 +139,7 @@ describe('PasswordCreationForm action tests', () => {
         expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
+        expect(setPasswordInputError).toHaveBeenCalledWith(new Error());
         expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
     });
 });
