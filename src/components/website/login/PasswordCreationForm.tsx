@@ -12,6 +12,19 @@ function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState): Erro
     return null;
 }
 
+function getFinalError(props: {
+    userAuthState: UserAuthState;
+    setUserAuthState: (string) => void;
+    userPassword: string;
+    setUserPassword: (newUserPassword: string) => void;
+    userPasswordRepeat: string;
+    setUserPasswordRepeat: (newUserPassword: string) => void;
+}) {
+    const nextUserState = userAuthStateFromUserPasswords(props.userPassword, props.userPasswordRepeat);
+    const error = passwordInputErrorFromUserAuthState(nextUserState);
+    return error;
+}
+
 export function PasswordCreationForm(props: {
     userAuthState: UserAuthState;
     setUserAuthState: (string) => void;
@@ -44,11 +57,7 @@ export function PasswordCreationForm(props: {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const nextUserState = userAuthStateFromUserPasswords(
-                            props.userPassword,
-                            props.userPasswordRepeat,
-                        );
-                        const error = passwordInputErrorFromUserAuthState(nextUserState);
+                        const error = getFinalError(props);
                         setPasswordInputError(error);
 
                         if (error === null) {
