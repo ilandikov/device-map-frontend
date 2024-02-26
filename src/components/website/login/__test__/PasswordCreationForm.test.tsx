@@ -16,20 +16,34 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(userAuthState: UserAuthState, userPassword: string, userPasswordRepeat: string) {
-    return render(
+function RenameToComponentWithStoreProvider(props: {
+    userAuthState: UserAuthState;
+    userPassword: string;
+    userPasswordRepeat: string;
+}) {
+    return (
         <Provider store={store}>
             <PasswordCreationForm
                 {...{
-                    userAuthState,
+                    userAuthState: props.userAuthState,
                     setUserAuthState,
-                    userPassword,
+                    userPassword: props.userPassword,
                     setUserPassword,
-                    userPasswordRepeat,
+                    userPasswordRepeat: props.userPasswordRepeat,
                     setUserPasswordRepeat,
                 }}
             />
-        </Provider>,
+        </Provider>
+    );
+}
+
+function componentWithStoreProvider(userAuthState: UserAuthState, userPassword: string, userPasswordRepeat: string) {
+    return render(
+        <RenameToComponentWithStoreProvider
+            userAuthState={userAuthState}
+            userPassword={userPassword}
+            userPasswordRepeat={userPasswordRepeat}
+        />,
     );
 }
 
