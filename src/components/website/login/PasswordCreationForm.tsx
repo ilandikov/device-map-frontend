@@ -4,7 +4,7 @@ import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
 import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
 
-function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState) {
+function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState): Error | null {
     if (userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
         return new Error();
     }
