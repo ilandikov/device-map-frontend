@@ -66,13 +66,6 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at password not match stage', () => {
-        mockLoginModalUseStates(UserAuthState.SIGNUP_PASSWORD_ERROR);
-        const component = renderAsJSON(componentWithStoreProvider);
-
-        expect(component).toMatchSnapshot();
-    });
-
     it('should match the snapshot at password input stage', () => {
         mockLoginModalUseStates(UserAuthState.LOGIN);
         const component = renderAsJSON(componentWithStoreProvider);

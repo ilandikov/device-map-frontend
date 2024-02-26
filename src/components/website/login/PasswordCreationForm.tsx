@@ -1,8 +1,16 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
 import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
+
+function passwordInputErrorFromUserAuthState(userAuthState: UserAuthState): Error | null {
+    if (userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
+        return new Error();
+    }
+
+    return null;
+}
 
 export function PasswordCreationForm(props: {
     userAuthState: UserAuthState;
@@ -14,10 +22,8 @@ export function PasswordCreationForm(props: {
 }) {
     const { t } = useI18next();
 
-    let passwordInputError: Error | null = null;
-    if (props.userAuthState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
-        passwordInputError = new Error();
-    }
+    const [passwordInputError, setPasswordInputError] = useState(null);
+
     return (
         <>
             <div className="login-modal-input-container">
@@ -42,7 +48,12 @@ export function PasswordCreationForm(props: {
                             props.userPassword,
                             props.userPasswordRepeat,
                         );
-                        props.setUserAuthState(nextUserState);
+                        const error = passwordInputErrorFromUserAuthState(nextUserState);
+                        setPasswordInputError(error);
+
+                        if (error === null) {
+                            props.setUserAuthState(UserAuthState.SIGNUP_OTP);
+                        }
                     }}
                 >
                     {t('next')}

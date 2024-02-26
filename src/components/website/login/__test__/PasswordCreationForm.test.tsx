@@ -1,11 +1,11 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
-import { setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
+import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -16,26 +16,87 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(userAuthState: UserAuthState, userPassword: string, userPasswordRepeat: string) {
-    return render(
+function componentWithStoreProvider(props: {
+    userAuthState: UserAuthState;
+    userPassword: string;
+    userPasswordRepeat: string;
+}) {
+    return (
         <Provider store={store}>
             <PasswordCreationForm
                 {...{
-                    userAuthState,
+                    userAuthState: props.userAuthState,
                     setUserAuthState,
-                    userPassword,
+                    userPassword: props.userPassword,
                     setUserPassword,
-                    userPasswordRepeat,
+                    userPasswordRepeat: props.userPasswordRepeat,
                     setUserPasswordRepeat,
                 }}
             />
-        </Provider>,
+        </Provider>
     );
 }
 
+jest.mock('react', () => {
+    const originalModule = jest.requireActual('react');
+    return {
+        ...originalModule,
+        useState: jest.fn(),
+    };
+});
+
+let setPasswordInputError: jest.Mock;
+
+function mockPasswordInputErrorUseState(initialMailInputError: Error | null) {
+    (useState as jest.Mock).mockReturnValueOnce([initialMailInputError, setPasswordInputError]);
+}
+
+function resetHookMock() {
+    setPasswordInputError = jest.fn().mockImplementation((error) => error);
+}
+
+describe('PasswordCreationForm snapshot tests', () => {
+    it('should match the snapshot at password input stage', () => {
+        mockPasswordInputErrorUseState(null);
+        const component = renderAsJSON(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at password not match stage', () => {
+        mockPasswordInputErrorUseState(new Error());
+        const component = renderAsJSON(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD_ERROR,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+});
+
 describe('PasswordCreationForm action tests', () => {
+    beforeEach(() => {
+        resetHookMock();
+    });
+
     it('should update user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '');
+        mockPasswordInputErrorUseState(null);
+        const { container } = render(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
+        );
         const userPasswordInput = getByTestId(container, 'userPassword');
 
         expect(userPasswordInput).toBeInTheDocument();
@@ -45,7 +106,14 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, '', '');
+        mockPasswordInputErrorUseState(null);
+        const { container } = render(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: '',
+                userPasswordRepeat: '',
+            }),
+        );
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
         expect(userPasswordRepeatInput).toBeInTheDocument();
@@ -57,13 +125,41 @@ describe('PasswordCreationForm action tests', () => {
     it('should call password verification when next button is pressed', () => {
         const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
 
-        const { container } = componentWithStoreProvider(UserAuthState.SIGNUP_PASSWORD, 'passwordOne', 'PasswordTwo');
+        mockPasswordInputErrorUseState(null);
+        const { container } = render(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: 'passwordOne',
+                userPasswordRepeat: 'PasswordTwo',
+            }),
+        );
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
 
         expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
+        expect(setPasswordInputError).toHaveBeenCalledWith(new Error());
         expect(spyOnUserAuthStateFromUserPasswords).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
+    });
+
+    it('should call move to OTP stage after matching passwords have been input and password error was fixed', () => {
+        mockPasswordInputErrorUseState(new Error());
+        const { container } = render(
+            componentWithStoreProvider({
+                userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                userPassword: 'theGoodPassword',
+                userPasswordRepeat: 'theGoodPassword',
+            }),
+        );
+
+        // expect(setUserAuthState).toHaveBeenCalledTimes(1);
+        const tryVerifyPasswordsButton = getByText(container, 'next');
+
+        expect(tryVerifyPasswordsButton).toBeInTheDocument();
+        fireEvent.click(tryVerifyPasswordsButton);
+
+        expect(setPasswordInputError).toHaveBeenCalledWith(null);
+        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP);
     });
 });
