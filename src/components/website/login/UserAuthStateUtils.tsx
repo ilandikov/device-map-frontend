@@ -47,3 +47,13 @@ function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);
 }
+
+export function getFinalError(userPassword: string, userPasswordRepeat: string): Error | null {
+    const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
+
+    if (nextUserState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
+        return new Error();
+    }
+
+    return null;
+}

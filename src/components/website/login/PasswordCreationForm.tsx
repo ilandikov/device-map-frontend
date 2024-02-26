@@ -2,17 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
 import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
-import { userAuthStateFromUserPasswords } from './UserAuthStateUtils';
-
-export function getFinalError(userPassword: string, userPasswordRepeat: string): Error | null {
-    const nextUserState = userAuthStateFromUserPasswords(userPassword, userPasswordRepeat);
-
-    if (nextUserState === UserAuthState.SIGNUP_PASSWORD_ERROR) {
-        return new Error();
-    }
-
-    return null;
-}
+import { getFinalError } from './UserAuthStateUtils';
 
 export function PasswordCreationForm(props: {
     userAuthState: UserAuthState;
