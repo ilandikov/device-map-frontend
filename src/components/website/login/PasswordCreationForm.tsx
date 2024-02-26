@@ -5,7 +5,6 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { getPasswordInputError } from './UserAuthStateUtils';
 
 export function PasswordCreationForm(props: {
-    userAuthState: UserAuthState;
     setUserAuthState: (string) => void;
     userPassword: string;
     setUserPassword: (newUserPassword: string) => void;

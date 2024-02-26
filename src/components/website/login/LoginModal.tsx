@@ -79,7 +79,6 @@ export function LoginModal() {
                     <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
                     <PasswordCreationForm
                         {...{
-                            userAuthState,
                             setUserAuthState,
                             userPassword,
                             setUserPassword,

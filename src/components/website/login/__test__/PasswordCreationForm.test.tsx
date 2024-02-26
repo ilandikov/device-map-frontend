@@ -16,16 +16,11 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(props: {
-    userAuthState: UserAuthState;
-    userPassword: string;
-    userPasswordRepeat: string;
-}) {
+function componentWithStoreProvider(props: { userPassword: string; userPasswordRepeat: string }) {
     return (
         <Provider store={store}>
             <PasswordCreationForm
                 {...{
-                    userAuthState: props.userAuthState,
                     setUserAuthState,
                     userPassword: props.userPassword,
                     setUserPassword,
@@ -60,7 +55,6 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockPasswordInputErrorUseState(null);
         const component = renderAsJSON(
             componentWithStoreProvider({
-                userAuthState: UserAuthState.SIGNUP_PASSWORD,
                 userPassword: '',
                 userPasswordRepeat: '',
             }),
@@ -73,7 +67,6 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockPasswordInputErrorUseState(new Error());
         const component = renderAsJSON(
             componentWithStoreProvider({
-                userAuthState: UserAuthState.SIGNUP_PASSWORD_ERROR,
                 userPassword: '',
                 userPasswordRepeat: '',
             }),
@@ -92,7 +85,6 @@ describe('PasswordCreationForm action tests', () => {
         mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
-                userAuthState: UserAuthState.SIGNUP_PASSWORD,
                 userPassword: '',
                 userPasswordRepeat: '',
             }),
@@ -109,7 +101,6 @@ describe('PasswordCreationForm action tests', () => {
         mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
-                userAuthState: UserAuthState.SIGNUP_PASSWORD,
                 userPassword: '',
                 userPasswordRepeat: '',
             }),
@@ -128,7 +119,6 @@ describe('PasswordCreationForm action tests', () => {
         mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
-                userAuthState: UserAuthState.SIGNUP_PASSWORD,
                 userPassword: 'passwordOne',
                 userPasswordRepeat: 'PasswordTwo',
             }),
@@ -147,7 +137,6 @@ describe('PasswordCreationForm action tests', () => {
         mockPasswordInputErrorUseState(new Error());
         const { container } = render(
             componentWithStoreProvider({
-                userAuthState: UserAuthState.SIGNUP_PASSWORD,
                 userPassword: 'theGoodPassword',
                 userPasswordRepeat: 'theGoodPassword',
             }),
