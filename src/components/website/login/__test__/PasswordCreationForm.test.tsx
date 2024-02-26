@@ -1,5 +1,5 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
@@ -37,8 +37,27 @@ function componentWithStoreProvider(props: {
     );
 }
 
+jest.mock('react', () => {
+    const originalModule = jest.requireActual('react');
+    return {
+        ...originalModule,
+        useState: jest.fn(),
+    };
+});
+
+let setPasswordInputError: jest.Mock;
+
+function mockPasswordInputErrorUseState(initialMailInputError: Error | null) {
+    (useState as jest.Mock).mockReturnValueOnce([initialMailInputError, setPasswordInputError]);
+}
+
+function resetHookMock() {
+    setPasswordInputError = jest.fn().mockImplementation((error) => error);
+}
+
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot at password input stage', () => {
+        mockPasswordInputErrorUseState(null);
         const component = renderAsJSON(
             componentWithStoreProvider({
                 userAuthState: UserAuthState.SIGNUP_PASSWORD,
@@ -51,6 +70,7 @@ describe('PasswordCreationForm snapshot tests', () => {
     });
 
     it('should match the snapshot at password not match stage', () => {
+        mockPasswordInputErrorUseState(new Error());
         const component = renderAsJSON(
             componentWithStoreProvider({
                 userAuthState: UserAuthState.SIGNUP_PASSWORD_ERROR,
@@ -64,7 +84,12 @@ describe('PasswordCreationForm snapshot tests', () => {
 });
 
 describe('PasswordCreationForm action tests', () => {
+    beforeEach(() => {
+        resetHookMock();
+    });
+
     it('should update user password when typed', () => {
+        mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
                 userAuthState: UserAuthState.SIGNUP_PASSWORD,
@@ -81,6 +106,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
+        mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
                 userAuthState: UserAuthState.SIGNUP_PASSWORD,
@@ -99,6 +125,7 @@ describe('PasswordCreationForm action tests', () => {
     it('should call password verification when next button is pressed', () => {
         const spyOnUserAuthStateFromUserPasswords = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserPasswords');
 
+        mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
                 userAuthState: UserAuthState.SIGNUP_PASSWORD,
