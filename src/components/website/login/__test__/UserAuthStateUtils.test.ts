@@ -57,15 +57,12 @@ describe('user password logic tests', () => {
         expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
     });
 
-    it.failing(
-        'should return an error and keep the state if password has not been input or it is an empty string',
-        () => {
-            const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
+    it('should return an error and keep the state if passwords have not been input', () => {
+        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
 
-            expect(passwordInputError).not.toEqual(null);
-            expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
-        },
-    );
+        expect(passwordInputError).not.toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
+    });
 });
 
 describe('OTP logic tests', () => {

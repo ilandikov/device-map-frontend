@@ -27,6 +27,10 @@ function isValidEmail(email: string) {
 }
 
 function getPasswordInputError(userPassword: string, userPasswordRepeat: string): Error | null {
+    if (userPassword === '' && userPasswordRepeat === '') {
+        return new Error();
+    }
+
     if (userPassword !== userPasswordRepeat) {
         return new Error();
     }
@@ -36,6 +40,7 @@ function getPasswordInputError(userPassword: string, userPasswordRepeat: string)
 
 export function getPasswordInputErrorAndNextState(userPassword: string, userPasswordRepeat: string) {
     const passwordInputError = getPasswordInputError(userPassword, userPasswordRepeat);
+    console.log(passwordInputError);
     const nextUserAuthState = passwordInputError ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
 
     return { passwordInputError, nextUserAuthState };
