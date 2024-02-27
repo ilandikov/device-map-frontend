@@ -4,7 +4,9 @@ import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
 import { setUserAuthState } from './LoginModalTestHelpers';
 
-function renderOTPInputComponent(userAuthState: UserAuthState = UserAuthState.SIGNUP_OTP) {
+function renderOTPInputComponent(
+    userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP,
+) {
     return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
 }
 
