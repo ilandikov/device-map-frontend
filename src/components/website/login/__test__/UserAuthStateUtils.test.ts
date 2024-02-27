@@ -11,25 +11,28 @@ describe('user email logic tests', () => {
     it('should not throw error when good email is presented', () => {
         const email = 'good@email.com';
 
-        const { mailInputError } = getUserEmailErrorAndNextState(email);
+        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(email);
 
         expect(mailInputError).toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
     });
 
     it('should throw mail not valid error', () => {
         const email = 'this is not an email!';
 
-        const { mailInputError } = getUserEmailErrorAndNextState(email);
+        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(email);
 
         expect(mailInputError).toEqual(new Error(MailInputError.NOT_VALID));
+        expect(nextUserAuthState).toEqual(UserAuthState.MAIL_INPUT);
     });
 
     it('should throw mail already exists error', () => {
         const email = 'already@exists.com';
 
-        const { mailInputError } = getUserEmailErrorAndNextState(email);
+        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(email);
 
         expect(mailInputError).toEqual(new Error(MailInputError.ALREADY_EXISTS));
+        expect(nextUserAuthState).toEqual(UserAuthState.MAIL_INPUT);
     });
 });
 
