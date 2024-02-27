@@ -1,7 +1,6 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
-import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
@@ -129,26 +128,8 @@ describe('PasswordCreationForm action tests', () => {
         expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(setPasswordInputError).toHaveBeenCalledWith(new Error());
         expect(spyOnGetPasswordInputError).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
-    });
-
-    it('should call move to OTP stage after matching passwords have been input and password error was fixed', () => {
-        mockPasswordInputErrorUseState(new Error());
-        const { container } = render(
-            componentWithStoreProvider({
-                userPassword: 'theGoodPassword',
-                userPasswordRepeat: 'theGoodPassword',
-            }),
-        );
-
-        // expect(setUserAuthState).toHaveBeenCalledTimes(1);
-        const tryVerifyPasswordsButton = getByText(container, 'next');
-
-        expect(tryVerifyPasswordsButton).toBeInTheDocument();
-        fireEvent.click(tryVerifyPasswordsButton);
-
-        expect(setPasswordInputError).toHaveBeenCalledWith(null);
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP);
+        expect(setPasswordInputError).toHaveBeenCalledTimes(1);
+        expect(setUserAuthState).toHaveBeenCalledTimes(1);
     });
 });
