@@ -94,7 +94,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        const spyOnGetUserEmailError = jest.spyOn(userAuthStateUtils, 'getUserEmailError');
+        const spyOnGetUserEmailError = jest.spyOn(userAuthStateUtils, 'getUserEmailErrorAndNextState');
 
         mockMailInputErrorUseState(null);
         const { container } = render(componentWithStoreProvider('new@email.com'));

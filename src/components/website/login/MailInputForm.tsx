@@ -2,18 +2,12 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
 import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
-import { MailInputError, getUserEmailError } from './UserAuthStateUtils';
+import { MailInputError, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
 
 interface MailInputFormProps {
     setUserAuthState: (userAuthState: UserAuthState) => void;
     userEmail: string;
     setUserEmail: (newUserEmail: string) => void;
-}
-
-function getUserEmailErrorAndNextState(userEmail: string) {
-    const mailInputError = getUserEmailError(userEmail);
-    const nextUserAuthState = mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
-    return { mailInputError, nextUserAuthState };
 }
 
 export function MailInputForm(props: MailInputFormProps) {
