@@ -35,21 +35,30 @@ describe('user email logic tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error if passwords match', () => {
-        const { passwordInputError } = getPasswordInputErrorAndNextState('passwordsMatch', 'passwordsMatch');
+        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+            'passwordsMatch',
+            'passwordsMatch',
+        );
 
         expect(passwordInputError).toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
     });
 
     it('should return an error state if passwords dont match', () => {
-        const { passwordInputError } = getPasswordInputErrorAndNextState('passwordsDontMatch', 'passwordsMatch');
+        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+            'passwordsDontMatch',
+            'passwordsMatch',
+        );
 
         expect(passwordInputError).not.toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
     });
 
     it.failing('should move to error state if password has not been input or it is an empty string', () => {
-        const { passwordInputError } = getPasswordInputErrorAndNextState('', '');
+        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
 
         expect(passwordInputError).not.toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
     });
 });
 
