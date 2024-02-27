@@ -13,11 +13,7 @@ export function NavigationButtons(props: { setUserAuthState: (string) => void; g
                     props.setUserAuthState(props.goBackState);
                 }}
             >
-                <img
-                    className="login-modal-navigation-button-image"
-                    src={GoBack}
-                    alt="login-modal-navigation-go-back"
-                />
+                <img src={GoBack} alt="login-modal-navigation-go-back" />
             </button>
             <button
                 data-testid="cancelButton"
@@ -25,7 +21,7 @@ export function NavigationButtons(props: { setUserAuthState: (string) => void; g
                     props.setUserAuthState(UserAuthState.WELCOME);
                 }}
             >
-                <img className="login-modal-navigation-button-image" src={Cancel} alt="login-modal-navigation-cancel" />
+                <img src={Cancel} alt="login-modal-navigation-cancel" />
             </button>
         </header>
     );

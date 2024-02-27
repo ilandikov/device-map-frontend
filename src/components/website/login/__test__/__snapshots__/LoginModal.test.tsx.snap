@@ -257,7 +257,6 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -267,7 +266,6 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -360,7 +358,6 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -370,7 +367,6 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -438,7 +434,6 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -448,7 +443,6 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -530,7 +524,6 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -540,7 +533,6 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
