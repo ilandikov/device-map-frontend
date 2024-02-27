@@ -38,7 +38,7 @@ function isValidEmail(email: string) {
     return emailRegexp.test(email);
 }
 
-export function getPasswordInputError(userPassword: string, userPasswordRepeat: string): Error | null {
+function getPasswordInputError(userPassword: string, userPasswordRepeat: string): Error | null {
     if (userPassword !== userPasswordRepeat) {
         return new Error();
     }
