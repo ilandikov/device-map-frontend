@@ -3,11 +3,13 @@ import React from 'react';
 import { MailInputBox } from './MailInputBox';
 import { UserAuthState } from './LoginModal';
 
-export function PasswordResetRequestForm(props: {
+interface PasswordResetRequestFormProps {
     setUserAuthState: (string) => void;
     userEmail: string;
     setUserEmail: (event) => void;
-}) {
+}
+
+export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
     const { t } = useI18next();
 
     return (

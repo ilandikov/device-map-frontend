@@ -4,7 +4,12 @@ import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 import { UserAuthState } from './LoginModal';
 
-export function NavigationButtons(props: { setUserAuthState: (string) => void; goBackState: UserAuthState }) {
+interface NavigationButtonsProps {
+    setUserAuthState: (string) => void;
+    goBackState: UserAuthState;
+}
+
+export function NavigationButtons(props: NavigationButtonsProps) {
     return (
         <nav className="login-modal-navigation-container">
             <button
