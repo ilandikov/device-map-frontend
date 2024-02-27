@@ -21,7 +21,26 @@ export enum MailInputError {
     ALREADY_EXISTS = 'mailAlreadyExists',
 }
 
-export function getUserEmailError(userEmail: string): Error | null {
+function isValidEmail(email: string) {
+    const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegexp.test(email);
+}
+
+function getPasswordInputError(userPassword: string, userPasswordRepeat: string): Error | null {
+    if (userPassword !== userPasswordRepeat) {
+        return new Error();
+    }
+
+    return null;
+}
+
+export function getPasswordInputErrorAndNextState(userPassword: string, userPasswordRepeat: string) {
+    const passwordInputError = getPasswordInputError(userPassword, userPasswordRepeat);
+    const nextUserAuthState = passwordInputError ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
+
+    return { passwordInputError, nextUserAuthState };
+}
+function getMailInputError(userEmail: string): Error | null {
     if (userEmail === 'already@exists.com') {
         return new Error(MailInputError.ALREADY_EXISTS);
     }
@@ -33,15 +52,8 @@ export function getUserEmailError(userEmail: string): Error | null {
     return null;
 }
 
-function isValidEmail(email: string) {
-    const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegexp.test(email);
-}
-
-export function getPasswordInputError(userPassword: string, userPasswordRepeat: string): Error | null {
-    if (userPassword !== userPasswordRepeat) {
-        return new Error();
-    }
-
-    return null;
+export function getUserEmailErrorAndNextState(userEmail: string) {
+    const mailInputError = getMailInputError(userEmail);
+    const nextUserAuthState = mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
+    return { mailInputError, nextUserAuthState };
 }

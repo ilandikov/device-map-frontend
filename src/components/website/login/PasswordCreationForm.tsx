@@ -1,8 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
-import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
-import { getPasswordInputError } from './UserAuthStateUtils';
+import { getPasswordInputErrorAndNextState } from './UserAuthStateUtils';
 
 interface PasswordCreationFormProps {
     setUserAuthState: (string) => void;
@@ -37,12 +36,13 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const error = getPasswordInputError(props.userPassword, props.userPasswordRepeat);
-                        setPasswordInputError(error);
+                        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+                            props.userPassword,
+                            props.userPasswordRepeat,
+                        );
 
-                        if (error === null) {
-                            props.setUserAuthState(UserAuthState.SIGNUP_OTP);
-                        }
+                        setPasswordInputError(passwordInputError);
+                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}

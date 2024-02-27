@@ -1,56 +1,71 @@
 import {
     MailInputError,
-    getPasswordInputError,
-    getUserEmailError,
+    getPasswordInputErrorAndNextState,
+    getUserEmailErrorAndNextState,
     userAuthStateFromOTP,
     userAuthStateFromUserLogin,
 } from '../UserAuthStateUtils';
 import { UserAuthState } from '../LoginModal';
 
 describe('user email logic tests', () => {
-    it('should not throw error when good email is presented', () => {
+    it('should return no error on valid mail and move to password creation state', () => {
         const email = 'good@email.com';
 
-        const userEmailError = getUserEmailError(email);
+        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(email);
 
-        expect(userEmailError).toEqual(null);
+        expect(mailInputError).toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
     });
 
-    it('should throw mail not valid error', () => {
+    it('should throw mail not valid error and stay at mail input state', () => {
         const email = 'this is not an email!';
 
-        const userEmailError = getUserEmailError(email);
+        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(email);
 
-        expect(userEmailError).toEqual(new Error(MailInputError.NOT_VALID));
+        expect(mailInputError).toEqual(new Error(MailInputError.NOT_VALID));
+        expect(nextUserAuthState).toEqual(UserAuthState.MAIL_INPUT);
     });
 
-    it('should throw mail already exists error', () => {
+    it('should throw mail already exists error and stay at mail input state', () => {
         const email = 'already@exists.com';
 
-        const userEmailError = getUserEmailError(email);
+        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(email);
 
-        expect(userEmailError).toEqual(new Error(MailInputError.ALREADY_EXISTS));
+        expect(mailInputError).toEqual(new Error(MailInputError.ALREADY_EXISTS));
+        expect(nextUserAuthState).toEqual(UserAuthState.MAIL_INPUT);
     });
 });
 
 describe('user password logic tests', () => {
-    it('should return no error if passwords match', () => {
-        const error = getPasswordInputError('passwordsMatch', 'passwordsMatch');
+    it('should return no error and provide OTP state if passwords match', () => {
+        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+            'passwordsMatch',
+            'passwordsMatch',
+        );
 
-        expect(error).toEqual(null);
+        expect(passwordInputError).toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
     });
 
-    it('should return an error state if passwords dont match', () => {
-        const error = getPasswordInputError('passwordsDontMatch', 'passwordsMatch');
+    it('should return an error and keep the state if passwords dont match', () => {
+        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+            'passwordsDontMatch',
+            'passwordsMatch',
+        );
 
-        expect(error).not.toEqual(null);
+        expect(passwordInputError).not.toEqual(null);
+        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
     });
 
-    it.failing('should move to error state if password has not been input or it is an empty string', () => {
-        const error = getPasswordInputError('', '');
+    it.failing(
+        'should return an error and keep the state if password has not been input or it is an empty string',
+        () => {
+            const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
 
-        expect(error).not.toEqual(null);
-    });
+            expect(passwordInputError).not.toEqual(null);
+            expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
+        },
+    );
 });
 
 describe('OTP logic tests', () => {

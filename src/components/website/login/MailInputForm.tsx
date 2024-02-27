@@ -2,7 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
 import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
-import { MailInputError, getUserEmailError } from './UserAuthStateUtils';
+import { MailInputError, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
 
 interface MailInputFormProps {
     setUserAuthState: (userAuthState: UserAuthState) => void;
@@ -41,13 +41,10 @@ export function MailInputForm(props: MailInputFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const mailInputError = getUserEmailError(props.userEmail);
+                        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(props.userEmail);
 
                         setMailInputError(mailInputError);
-
-                        if (mailInputError === null) {
-                            props.setUserAuthState(UserAuthState.SIGNUP_PASSWORD);
-                        }
+                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}
