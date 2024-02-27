@@ -10,6 +10,12 @@ interface MailInputFormProps {
     setUserEmail: (newUserEmail: string) => void;
 }
 
+function getUserEmailErrorAndNextState(userEmail: string) {
+    const mailInputError = getUserEmailError(userEmail);
+    const nextUserAuthState = mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
+    return { mailInputError, nextUserAuthState };
+}
+
 export function MailInputForm(props: MailInputFormProps) {
     const { t } = useI18next();
 
@@ -41,10 +47,7 @@ export function MailInputForm(props: MailInputFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const mailInputError = getUserEmailError(props.userEmail);
-                        const nextUserAuthState = mailInputError
-                            ? UserAuthState.MAIL_INPUT
-                            : UserAuthState.SIGNUP_PASSWORD;
+                        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(props.userEmail);
 
                         setMailInputError(mailInputError);
                         props.setUserAuthState(nextUserAuthState);
