@@ -37,10 +37,12 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const error = getPasswordInputError(props.userPassword, props.userPasswordRepeat);
-                        setPasswordInputError(error);
+                        const passwordInputError = getPasswordInputError(props.userPassword, props.userPasswordRepeat);
+                        const nextUserAuthState = passwordInputError
+                            ? UserAuthState.SIGNUP_PASSWORD
+                            : UserAuthState.SIGNUP_OTP;
 
-                        const nextUserAuthState = error ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
+                        setPasswordInputError(passwordInputError);
                         props.setUserAuthState(nextUserAuthState);
                     }}
                 >

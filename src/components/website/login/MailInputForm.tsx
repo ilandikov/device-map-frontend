@@ -42,12 +42,11 @@ export function MailInputForm(props: MailInputFormProps) {
                     className="login-modal-button-black-on-green"
                     onClick={() => {
                         const mailInputError = getUserEmailError(props.userEmail);
-
-                        setMailInputError(mailInputError);
-
                         const nextUserAuthState = mailInputError
                             ? UserAuthState.MAIL_INPUT
                             : UserAuthState.SIGNUP_PASSWORD;
+
+                        setMailInputError(mailInputError);
                         props.setUserAuthState(nextUserAuthState);
                     }}
                 >
