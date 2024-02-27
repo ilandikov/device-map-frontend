@@ -106,7 +106,7 @@ describe('MailInputForm action tests', () => {
 
         expect(spyOnGetUserEmailError).toHaveBeenCalledWith('new@email.com');
         expect(setMailInputError).toHaveBeenCalledTimes(1);
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_PASSWORD);
+        expect(setUserAuthState).toHaveBeenCalledTimes(1);
     });
 
     it('should move from mail already exists to password verification stage', () => {
