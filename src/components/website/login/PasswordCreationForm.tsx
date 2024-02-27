@@ -12,6 +12,13 @@ interface PasswordCreationFormProps {
     setUserPasswordRepeat: (newUserPassword: string) => void;
 }
 
+function getPasswordInputErrorAndNextState(userPassword: string, userPasswordRepeat: string) {
+    const passwordInputError = getPasswordInputError(userPassword, userPasswordRepeat);
+    const nextUserAuthState = passwordInputError ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
+
+    return { passwordInputError, nextUserAuthState };
+}
+
 export function PasswordCreationForm(props: PasswordCreationFormProps) {
     const { t } = useI18next();
 
@@ -37,10 +44,10 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const passwordInputError = getPasswordInputError(props.userPassword, props.userPasswordRepeat);
-                        const nextUserAuthState = passwordInputError
-                            ? UserAuthState.SIGNUP_PASSWORD
-                            : UserAuthState.SIGNUP_OTP;
+                        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+                            props.userPassword,
+                            props.userPasswordRepeat,
+                        );
 
                         setPasswordInputError(passwordInputError);
                         props.setUserAuthState(nextUserAuthState);
