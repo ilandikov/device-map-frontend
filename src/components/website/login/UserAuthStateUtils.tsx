@@ -45,3 +45,10 @@ export function getPasswordInputError(userPassword: string, userPasswordRepeat: 
 
     return null;
 }
+
+export function getPasswordInputErrorAndNextState(userPassword: string, userPasswordRepeat: string) {
+    const passwordInputError = getPasswordInputError(userPassword, userPasswordRepeat);
+    const nextUserAuthState = passwordInputError ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
+
+    return { passwordInputError, nextUserAuthState };
+}

@@ -1,8 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
-import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
-import { getPasswordInputError } from './UserAuthStateUtils';
+import { getPasswordInputErrorAndNextState } from './UserAuthStateUtils';
 
 interface PasswordCreationFormProps {
     setUserAuthState: (string) => void;
@@ -10,13 +9,6 @@ interface PasswordCreationFormProps {
     setUserPassword: (newUserPassword: string) => void;
     userPasswordRepeat: string;
     setUserPasswordRepeat: (newUserPassword: string) => void;
-}
-
-function getPasswordInputErrorAndNextState(userPassword: string, userPasswordRepeat: string) {
-    const passwordInputError = getPasswordInputError(userPassword, userPasswordRepeat);
-    const nextUserAuthState = passwordInputError ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
-
-    return { passwordInputError, nextUserAuthState };
 }
 
 export function PasswordCreationForm(props: PasswordCreationFormProps) {
