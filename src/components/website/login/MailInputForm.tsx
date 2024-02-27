@@ -45,9 +45,10 @@ export function MailInputForm(props: MailInputFormProps) {
 
                         setMailInputError(mailInputError);
 
-                        if (mailInputError === null) {
-                            props.setUserAuthState(UserAuthState.SIGNUP_PASSWORD);
-                        }
+                        const nextUserAuthState = mailInputError
+                            ? UserAuthState.MAIL_INPUT
+                            : UserAuthState.SIGNUP_PASSWORD;
+                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}
