@@ -40,9 +40,8 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                         const error = getPasswordInputError(props.userPassword, props.userPasswordRepeat);
                         setPasswordInputError(error);
 
-                        if (error === null) {
-                            props.setUserAuthState(UserAuthState.SIGNUP_OTP);
-                        }
+                        const nextUserAuthState = error ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
+                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}
