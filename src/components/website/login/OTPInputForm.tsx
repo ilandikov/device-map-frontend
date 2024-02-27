@@ -4,10 +4,12 @@ import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { UserAuthState } from './LoginModal';
 
-export function OTPInputForm(props: {
+interface OTPInputFormProps {
     userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP;
     setUserAuthState: (string) => void;
-}) {
+}
+
+export function OTPInputForm(props: OTPInputFormProps) {
     const { t } = useI18next();
 
     const OTPNextButton = useRef(null);

@@ -36,7 +36,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.WELCOME && (
                 <>
                     <Ellipses />
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.WELCOME }} />
+                    <LoginModalHeader state={LoginModalHeaderState.WELCOME} />
                     <div className="login-modal-input-container"></div>
                     <div className="login-modal-button-container">
                         <button
@@ -61,7 +61,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.MAIL_INPUT && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
+                    <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                     <MailInputForm
                         {...{
                             setUserAuthState,
@@ -74,7 +74,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
+                    <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                     <PasswordCreationForm
                         {...{
                             setUserAuthState,
@@ -88,13 +88,13 @@ export function LoginModal() {
             )}
             {userAuthState === UserAuthState.SIGNUP_OTP && (
                 <>
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
+                    <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                     <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                 <>
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.SIGNUP }} />
+                    <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                     <div className="login-modal-input-container">
                         <p className="login-modal-input-help">{t('OTPVerifying')}</p>
                     </div>
@@ -104,7 +104,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.LOGIN && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.LOGIN }} />
+                    <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
                     <LogInForm
                         {...{
                             userAuthState,
@@ -121,13 +121,13 @@ export function LoginModal() {
             {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                 <>
                     <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.LOGIN }} />
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.NEW_PASSWORD }} />
+                    <LoginModalHeader state={LoginModalHeaderState.NEW_PASSWORD} />
                     <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
                 </>
             )}
             {userAuthState === UserAuthState.LOGIN_OTP && (
                 <>
-                    <LoginModalHeader {...{ state: LoginModalHeaderState.LOGIN }} />
+                    <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
                     <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}

@@ -4,11 +4,13 @@ import { UserAuthState } from './LoginModal';
 import { MailInputBox } from './MailInputBox';
 import { MailInputError, getUserEmailError } from './UserAuthStateUtils';
 
-export function MailInputForm(props: {
+interface MailInputFormProps {
     setUserAuthState: (userAuthState: UserAuthState) => void;
     userEmail: string;
     setUserEmail: (newUserEmail: string) => void;
-}) {
+}
+
+export function MailInputForm(props: MailInputFormProps) {
     const { t } = useI18next();
 
     const [mailInputError, setMailInputError] = useState(null);

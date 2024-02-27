@@ -4,13 +4,15 @@ import { UserAuthState } from './LoginModal';
 import { PasswordInputBox } from './PasswordInputBox';
 import { getPasswordInputError } from './UserAuthStateUtils';
 
-export function PasswordCreationForm(props: {
+interface PasswordCreationFormProps {
     setUserAuthState: (string) => void;
     userPassword: string;
     setUserPassword: (newUserPassword: string) => void;
     userPasswordRepeat: string;
     setUserPasswordRepeat: (newUserPassword: string) => void;
-}) {
+}
+
+export function PasswordCreationForm(props: PasswordCreationFormProps) {
     const { t } = useI18next();
 
     const [passwordInputError, setPasswordInputError] = useState(null);

@@ -248,7 +248,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
 
 exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] = `
 [
-  <header
+  <nav
     className="login-modal-navigation-container"
   >
     <button
@@ -257,7 +257,6 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -267,11 +266,10 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
-  </header>,
+  </nav>,
   <div
     className="login-modal-header-container"
   >
@@ -351,7 +349,7 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
 
 exports[`LoginModal snapshot tests should match the snapshot at mail input stage 1`] = `
 [
-  <header
+  <nav
     className="login-modal-navigation-container"
   >
     <button
@@ -360,7 +358,6 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -370,11 +367,10 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
-  </header>,
+  </nav>,
   <div
     className="login-modal-header-container"
   >
@@ -429,7 +425,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
 
 exports[`LoginModal snapshot tests should match the snapshot at password creation stage 1`] = `
 [
-  <header
+  <nav
     className="login-modal-navigation-container"
   >
     <button
@@ -438,7 +434,6 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -448,11 +443,10 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
-  </header>,
+  </nav>,
   <div
     className="login-modal-header-container"
   >
@@ -521,7 +515,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
 
 exports[`LoginModal snapshot tests should match the snapshot at password reset stage 1`] = `
 [
-  <header
+  <nav
     className="login-modal-navigation-container"
   >
     <button
@@ -530,7 +524,6 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
     >
       <img
         alt="login-modal-navigation-go-back"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
@@ -540,11 +533,10 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
     >
       <img
         alt="login-modal-navigation-cancel"
-        className="login-modal-navigation-button-image"
         src="test-file-stub"
       />
     </button>
-  </header>,
+  </nav>,
   <div
     className="login-modal-header-container"
   >

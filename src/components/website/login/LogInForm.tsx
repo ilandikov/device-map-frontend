@@ -5,7 +5,7 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState } from './LoginModal';
 import { userAuthStateFromUserLogin } from './UserAuthStateUtils';
 
-export function LogInForm(props: {
+interface LogInFormProps {
     userAuthState: UserAuthState;
     setUserAuthState: (string) => void;
     userEmail: string;
@@ -13,7 +13,9 @@ export function LogInForm(props: {
     userPassword: string;
     setUserPassword: (string) => void;
     userPasswordRepeat: string;
-}) {
+}
+
+export function LogInForm(props: LogInFormProps) {
     const { t } = useI18next();
 
     return (
