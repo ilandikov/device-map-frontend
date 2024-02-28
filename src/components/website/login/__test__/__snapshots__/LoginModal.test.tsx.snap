@@ -232,16 +232,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
     </p>
   </div>,
   <div
-    className="login-modal-input-container"
-  >
-    <p
-      className="login-modal-input-help"
-    >
-      OTPVerifying
-    </p>
-  </div>,
-  <div
-    className="login-modal-button-container"
+    className="login-modal-loader"
   />,
 ]
 `;
