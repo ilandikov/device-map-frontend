@@ -36,6 +36,42 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP checking for
 ]
 `;
 
+exports[`LoginModal snapshot tests should match the snapshot at OTP checking for sign up stage 1`] = `
+[
+  <div
+    className="login-modal-header-container"
+  >
+    <img
+      alt="login-modal-logo"
+      className="login-modal-logo"
+      src="test-file-stub"
+    />
+    <p
+      className="login-modal-header"
+    >
+      signUp
+    </p>
+    <p
+      className="login-modal-header-description login-modal-opaque-text"
+    >
+      finikMapProductDescription
+    </p>
+  </div>,
+  <div
+    className="login-modal-loader-container"
+  >
+    <div
+      className="login-modal-loader"
+    />
+    <p
+      className="login-modal-loader-text"
+    >
+      checking
+    </p>
+  </div>,
+]
+`;
+
 exports[`LoginModal snapshot tests should match the snapshot at OTP for login stage 1`] = `
 [
   <div
@@ -242,42 +278,6 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
     >
       next
     </button>
-  </div>,
-]
-`;
-
-exports[`LoginModal snapshot tests should match the snapshot at OTP loading stage 1`] = `
-[
-  <div
-    className="login-modal-header-container"
-  >
-    <img
-      alt="login-modal-logo"
-      className="login-modal-logo"
-      src="test-file-stub"
-    />
-    <p
-      className="login-modal-header"
-    >
-      signUp
-    </p>
-    <p
-      className="login-modal-header-description login-modal-opaque-text"
-    >
-      finikMapProductDescription
-    </p>
-  </div>,
-  <div
-    className="login-modal-loader-container"
-  >
-    <div
-      className="login-modal-loader"
-    />
-    <p
-      className="login-modal-loader-text"
-    >
-      checking
-    </p>
   </div>,
 ]
 `;

@@ -101,7 +101,7 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at OTP loading stage', () => {
+    it('should match the snapshot at OTP checking for sign up stage', () => {
         mockLoginModalUseStates(UserAuthState.SIGNUP_OTP_LOADING);
         const component = renderAsJSON(componentWithStoreProvider);
 
