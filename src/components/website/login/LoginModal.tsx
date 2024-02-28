@@ -129,7 +129,12 @@ export function LoginModal() {
                     <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}
-            {userAuthState === UserAuthState.LOGIN_OTP_LOADING && <></>}
+            {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (
+                <>
+                    <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
+                    <Loader />
+                </>
+            )}
         </>
     );
 }
