@@ -9,6 +9,7 @@ import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
+import { Loader } from './Loader';
 
 export enum UserAuthState {
     WELCOME = 'WELCOME',
@@ -95,10 +96,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                 <>
                     <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
-                    <div className="login-modal-input-container">
-                        <p className="login-modal-input-help">{t('OTPVerifying')}</p>
-                    </div>
-                    <div className="login-modal-button-container"></div>
+                    <Loader />
                 </>
             )}
             {userAuthState === UserAuthState.LOGIN && (
@@ -131,7 +129,12 @@ export function LoginModal() {
                     <OTPInputForm {...{ userAuthState, setUserAuthState }} />
                 </>
             )}
-            {userAuthState === UserAuthState.LOGIN_OTP_LOADING && <></>}
+            {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (
+                <>
+                    <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
+                    <Loader />
+                </>
+            )}
         </>
     );
 }
