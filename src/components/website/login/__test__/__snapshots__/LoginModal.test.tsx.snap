@@ -240,7 +240,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP loading stag
     <p
       className="login-modal-loader-text"
     >
-      Проверка...
+      checking
     </p>
   </div>,
 ]

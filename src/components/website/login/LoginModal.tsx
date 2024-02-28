@@ -97,7 +97,7 @@ export function LoginModal() {
                     <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                     <div className="login-modal-loader-container">
                         <div className="login-modal-loader"></div>
-                        <p className="login-modal-loader-text">Проверка...</p>
+                        <p className="login-modal-loader-text">{t('checking')}</p>
                     </div>
                 </>
             )}
