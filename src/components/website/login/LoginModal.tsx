@@ -95,7 +95,10 @@ export function LoginModal() {
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                 <>
                     <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
-                    <div className="login-modal-loader"></div>
+                    <div className="login-modal-loader-container">
+                        <div className="login-modal-loader"></div>
+                        <p className="login-modal-loader-text">Проверка...</p>
+                    </div>
                 </>
             )}
             {userAuthState === UserAuthState.LOGIN && (
