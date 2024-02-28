@@ -9,6 +9,7 @@ import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
+import { Loader } from './Loader';
 
 export enum UserAuthState {
     WELCOME = 'WELCOME',
@@ -21,16 +22,6 @@ export enum UserAuthState {
     LOGIN_OTP = 'LOGIN_OTP',
     LOGIN_OTP_LOADING = 'LOGIN_OTP_LOADING',
     LOGGED_IN = 'LOGGED_IN',
-}
-
-function Loader() {
-    const { t } = useI18next();
-    return (
-        <div className="login-modal-loader-container">
-            <div className="login-modal-loader"></div>
-            <p className="login-modal-loader-text">{t('checking')}</p>
-        </div>
-    );
 }
 
 export function LoginModal() {
