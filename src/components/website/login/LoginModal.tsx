@@ -23,6 +23,16 @@ export enum UserAuthState {
     LOGGED_IN = 'LOGGED_IN',
 }
 
+function Loader() {
+    const { t } = useI18next();
+    return (
+        <div className="login-modal-loader-container">
+            <div className="login-modal-loader"></div>
+            <p className="login-modal-loader-text">{t('checking')}</p>
+        </div>
+    );
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -95,10 +105,7 @@ export function LoginModal() {
             {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                 <>
                     <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
-                    <div className="login-modal-loader-container">
-                        <div className="login-modal-loader"></div>
-                        <p className="login-modal-loader-text">{t('checking')}</p>
-                    </div>
+                    <Loader />
                 </>
             )}
             {userAuthState === UserAuthState.LOGIN && (
