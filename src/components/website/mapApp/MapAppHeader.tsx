@@ -1,14 +1,14 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
-import './AppHeader.scss';
+import './MapAppHeader.scss';
 
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
 
-export function AppHeader() {
+export function MapAppHeader() {
     const { t } = useI18next();
     return (
         <header className="login-header">

@@ -4,13 +4,13 @@ import React from 'react';
 /* Local dependencies */
 import './MapApp.scss';
 import mapImage from '../../../assets/images/GoogleMaps.png';
-import { AppHeader } from '../AppHeader/AppHeader';
+import { MapAppHeader } from '../mapApp/MapAppHeader';
 import { LoginModal } from './LoginModal';
 
 export default function MapApp() {
     return (
         <>
-            <AppHeader />
+            <MapAppHeader />
             <div className="map-app-container">
                 <LoginModal />
             </div>
