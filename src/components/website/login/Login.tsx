@@ -12,11 +12,7 @@ export default function Login() {
         <>
             <LoginHeader />
             <div className="login-container">
-                <div className="login-modal-window">
-                    <div className="login-modal-container">
-                        <LoginModal />
-                    </div>
-                </div>
+                <LoginModal />
             </div>
             <img className="login-map-image" src={mapImage} alt="map" />
         </>
