@@ -1,4 +1,4 @@
-.login-header {
+.map-app-header {
     position: absolute;
 
     padding: 20px 20px 0;
@@ -9,7 +9,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    .login-header-block {
+    .map-app-header-block {
         max-height: 46px;
 
         background-color: #000000;
@@ -26,19 +26,19 @@
         gap: 20px;
     }
 
-    .login-header-brand-logo {
+    .map-app-header-brand-logo {
         height: 20px;
         width: 20px;
     }
 
-    .login-header-brand-text {
+    .map-app-header-brand-text {
         font-size: 20px;
         font-weight: 500;
         line-height: 19px;
         color: #FFFFFF;
     }
 
-    .login-header-inner-block {
+    .map-app-header-inner-block {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -46,12 +46,12 @@
         gap: 8px;
     }
 
-    .login-header-account-image {
+    .map-app-header-account-image {
         height: 100%;
         width: 100%;
     }
 
-    .login-header-account-text {
+    .map-app-header-account-text {
         font-size: 14px;
         font-weight: 500;
         line-height: 17px;
