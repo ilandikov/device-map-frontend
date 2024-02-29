@@ -1,3 +1,39 @@
+.login-modal-window {
+  max-width: 690px;
+  max-height: 516px;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #454545;
+  background: linear-gradient(0deg, rgb(30 30 30 / 90%) 0%, rgb(46 46 46 / 90%) 100%);
+  backdrop-filter: blur(10px);
+
+  text-align: center;
+}
+
+.login-modal-container {
+  max-width: 340px;
+
+  height: 100%;
+  width: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+
 .login-modal-input-container {
   width: 100%;
 
