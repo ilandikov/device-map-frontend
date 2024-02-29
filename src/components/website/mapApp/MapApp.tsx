@@ -9,12 +9,10 @@ import { MapAppHeader } from './MapAppHeader';
 
 export default function MapApp() {
     return (
-        <>
+        <div className="map-app-container">
             <MapAppHeader />
-            <div className="map-app-container">
-                <LoginModal />
-            </div>
+            <LoginModal />
             <img className="map-app-map-image" src={mapImage} alt="map" />
-        </>
+        </div>
     );
 }

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapApp snapshot tests should match the snapshot 1`] = `
-[
+<div
+  className="map-app-container"
+>
   <header
     className="map-app-header"
   >
@@ -49,67 +51,63 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
         />
       </div>
     </div>
-  </header>,
+  </header>
   <div
-    className="map-app-container"
+    className="login-modal-window"
   >
     <div
-      className="login-modal-window"
+      className="login-modal-container"
     >
       <div
-        className="login-modal-container"
+        className="login-modal-shadow login-modal-shadow-green"
+      />
+      <div
+        className="login-modal-shadow login-modal-shadow-blue"
+      />
+      <div
+        className="login-modal-header-container"
       >
-        <div
-          className="login-modal-shadow login-modal-shadow-green"
+        <img
+          alt="login-modal-logo"
+          className="login-modal-logo"
+          src="test-file-stub"
         />
-        <div
-          className="login-modal-shadow login-modal-shadow-blue"
-        />
-        <div
-          className="login-modal-header-container"
+        <p
+          className="login-modal-header"
         >
-          <img
-            alt="login-modal-logo"
-            className="login-modal-logo"
-            src="test-file-stub"
-          />
-          <p
-            className="login-modal-header"
-          >
-            brand map
-          </p>
-          <p
-            className="login-modal-header-description"
-          >
-            loginCallToAction
-          </p>
-        </div>
-        <div
-          className="login-modal-input-container"
-        />
-        <div
-          className="login-modal-button-container"
+          brand map
+        </p>
+        <p
+          className="login-modal-header-description"
         >
-          <button
-            className="login-modal-button-black-on-green"
-            onClick={[Function]}
-          >
-            accountLogin
-          </button>
-          <button
-            className="login-modal-button-green-on-black"
-            onClick={[Function]}
-          >
-            accountRegister
-          </button>
-        </div>
+          loginCallToAction
+        </p>
+      </div>
+      <div
+        className="login-modal-input-container"
+      />
+      <div
+        className="login-modal-button-container"
+      >
+        <button
+          className="login-modal-button-black-on-green"
+          onClick={[Function]}
+        >
+          accountLogin
+        </button>
+        <button
+          className="login-modal-button-green-on-black"
+          onClick={[Function]}
+        >
+          accountRegister
+        </button>
       </div>
     </div>
-  </div>,
+  </div>
   <img
     alt="map"
     className="map-app-map-image"
     src="test-file-stub"
-  />,
-]
+  />
+</div>
 `;
