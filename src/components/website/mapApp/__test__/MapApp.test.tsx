@@ -1,10 +1,10 @@
 import renderer from 'react-test-renderer';
 import React from 'react';
-import Login from '../Login';
+import MapApp from '../MapApp';
 
-describe('Login snapshot tests', () => {
+describe('MapApp snapshot tests', () => {
     it('should match the snapshot', () => {
-        const component = renderer.create(<Login />).toJSON();
+        const component = renderer.create(<MapApp />).toJSON();
 
         expect(component).toMatchSnapshot();
     });
