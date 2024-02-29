@@ -3,13 +3,13 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 /* Local dependencies */
-import Login from '../components/website/login/Login';
+import MapApp from '../components/website/login/MapApp';
 import Layout from '../components/layout';
 
 export default function WebApp() {
     return (
         <Layout>
-            <Login />
+            <MapApp />
         </Layout>
     );
 }

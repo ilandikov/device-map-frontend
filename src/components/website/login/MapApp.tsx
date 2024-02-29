@@ -2,12 +2,12 @@
 import React from 'react';
 
 /* Local dependencies */
-import './Login.scss';
+import './MapApp.scss';
 import mapImage from '../../../assets/images/GoogleMaps.png';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { LoginModal } from './LoginModal';
 
-export default function Login() {
+export default function MapApp() {
     return (
         <>
             <AppHeader />
