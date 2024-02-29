@@ -12,8 +12,8 @@ export default function Login() {
         <>
             <LoginHeader />
             <div className="login-container">
-                <div className="login-window">
-                    <div className="login-window-content-container">
+                <div className="login-modal-window">
+                    <div className="login-modal-container">
                         <LoginModal />
                     </div>
                 </div>
