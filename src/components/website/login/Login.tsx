@@ -4,13 +4,13 @@ import React from 'react';
 /* Local dependencies */
 import './Login.scss';
 import mapImage from '../../../assets/images/GoogleMaps.png';
-import { LoginHeader } from './LoginHeader';
+import { AppHeader } from './AppHeader';
 import { LoginModal } from './LoginModal';
 
 export default function Login() {
     return (
         <>
-            <LoginHeader />
+            <AppHeader />
             <div className="login-container">
                 <LoginModal />
             </div>
