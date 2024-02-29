@@ -11,10 +11,10 @@ export default function MapApp() {
     return (
         <>
             <AppHeader />
-            <div className="login-container">
+            <div className="map-app-container">
                 <LoginModal />
             </div>
-            <img className="login-map-image" src={mapImage} alt="map" />
+            <img className="map-app-map-image" src={mapImage} alt="map" />
         </>
     );
 }
