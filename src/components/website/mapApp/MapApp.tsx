@@ -4,8 +4,8 @@ import React from 'react';
 /* Local dependencies */
 import './MapApp.scss';
 import mapImage from '../../../assets/images/GoogleMaps.png';
-import { MapAppHeader } from '../mapApp/MapAppHeader';
-import { LoginModal } from './LoginModal';
+import { LoginModal } from '../login/LoginModal';
+import { MapAppHeader } from './MapAppHeader';
 
 export default function MapApp() {
     return (

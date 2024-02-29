@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 /* Local dependencies */
-import MapApp from '../components/website/login/MapApp';
+import MapApp from '../components/website/mapApp/MapApp';
 import Layout from '../components/layout';
 
 export default function WebApp() {
