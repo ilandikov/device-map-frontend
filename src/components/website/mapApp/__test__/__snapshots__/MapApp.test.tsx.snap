@@ -53,6 +53,24 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
     </div>
   </header>
   <div
+    className="map-app-product-description"
+  >
+    <div
+      className="map-app-product-description-text"
+    >
+      <h1>
+        brand map
+      </h1>
+      <p>
+        loginCallToAction
+      </p>
+    </div>
+    <img
+      alt="map-app-description-image"
+      src="test-file-stub"
+    />
+  </div>
+  <div
     className="login-modal-window"
   >
     <div
