@@ -681,20 +681,20 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
     className="login-modal-container"
   >
     <div
-      className="login-ellipses-container"
+      className="login-modal-shadows-container"
     >
       <div
-        className="login-ellipse-left-container"
+        className="login-modal-shadows-left-container"
       >
         <div
-          className="login-ellipse login-ellipse-green"
+          className="login-modal-shadow login-modal-shadow-green"
         />
       </div>
       <div
-        className="login-ellipse-right-container"
+        className="login-modal-shadows-right-container"
       >
         <div
-          className="login-ellipse login-ellipse-blue"
+          className="login-modal-shadow login-modal-shadow-blue"
         />
       </div>
     </div>
