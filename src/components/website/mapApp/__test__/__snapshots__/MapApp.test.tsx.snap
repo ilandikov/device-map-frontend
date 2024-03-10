@@ -60,23 +60,11 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
         className="login-modal-container"
       >
         <div
-          className="login-modal-shadows-container"
-        >
-          <div
-            className="login-modal-shadows-left-container"
-          >
-            <div
-              className="login-modal-shadow login-modal-shadow-green"
-            />
-          </div>
-          <div
-            className="login-modal-shadows-right-container"
-          >
-            <div
-              className="login-modal-shadow login-modal-shadow-blue"
-            />
-          </div>
-        </div>
+          className="login-modal-shadow login-modal-shadow-green"
+        />
+        <div
+          className="login-modal-shadow login-modal-shadow-blue"
+        />
         <div
           className="login-modal-header-container"
         >
