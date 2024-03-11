@@ -28,18 +28,18 @@ describe('OTP input tests', () => {
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`);
 
             fireEvent.change(OTPInput, createEvent('1'));
 
-            const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`) as HTMLInputElement;
+            const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`);
             expect(nextOTPInput).toHaveFocus();
         },
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
+        const OTPInput = getByTestId(container, 'OTPInput5');
 
         fireEvent.change(OTPInput, createEvent('1'));
 
@@ -64,10 +64,10 @@ describe('OTP input tests', () => {
 
     it('should focus on the next empty input after a digit has been input', () => {
         const { container } = renderOTPInputComponent();
-        const OTPInput0 = getByTestId(container, 'OTPInput0') as HTMLInputElement;
-        const OTPInput1 = getByTestId(container, 'OTPInput1') as HTMLInputElement;
-        const OTPInput2 = getByTestId(container, 'OTPInput2') as HTMLInputElement;
-        const OTPInput3 = getByTestId(container, 'OTPInput3') as HTMLInputElement;
+        const OTPInput0 = getByTestId(container, 'OTPInput0');
+        const OTPInput1 = getByTestId(container, 'OTPInput1');
+        const OTPInput2 = getByTestId(container, 'OTPInput2');
+        const OTPInput3 = getByTestId(container, 'OTPInput3');
         fireEvent.change(OTPInput1, createEvent('1'));
         fireEvent.change(OTPInput2, createEvent('2'));
 
