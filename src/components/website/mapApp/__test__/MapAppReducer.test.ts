@@ -1,14 +1,4 @@
-interface MapAppState {
-    isUserLoggedIn: boolean;
-}
-
-const mapAppInitialState: MapAppState = {
-    isUserLoggedIn: false,
-};
-
-export function MapAppReducer(state: MapAppState = mapAppInitialState) {
-    return state;
-}
+import { MapAppReducer } from '../MapAppReducer';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
