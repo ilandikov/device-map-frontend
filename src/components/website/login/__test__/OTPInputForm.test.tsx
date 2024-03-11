@@ -28,20 +28,20 @@ describe('OTP input tests', () => {
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`);
+            const input = getByTestId(container, `OTPInput${inputIndex}`);
 
-            fireEvent.change(OTPInput, createEvent('1'));
+            fireEvent.change(input, createEvent('1'));
 
-            const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`);
-            expect(nextOTPInput).toHaveFocus();
+            const nextInput = getByTestId(container, `OTPInput${inputIndex + 1}`);
+            expect(nextInput).toHaveFocus();
         },
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, 'OTPInput5');
+        const input = getByTestId(container, 'OTPInput5');
 
-        fireEvent.change(OTPInput, createEvent('1'));
+        fireEvent.change(input, createEvent('1'));
 
         const nextButton = getByText(container, 'next');
         expect(nextButton).toHaveFocus();
@@ -51,29 +51,29 @@ describe('OTP input tests', () => {
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+            const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-            fireEvent.change(OTPInput, createEvent('3'));
-            expect(OTPInput.value).toEqual('3');
+            fireEvent.change(input, createEvent('3'));
+            expect(input.value).toEqual('3');
 
-            OTPInput.focus();
+            input.focus();
 
-            expect(OTPInput.value).toEqual('');
+            expect(input.value).toEqual('');
         },
     );
 
     it('should focus on the next empty input after a digit has been input', () => {
         const { container } = renderOTPInputComponent();
-        const OTPInput0 = getByTestId(container, 'OTPInput0');
-        const OTPInput1 = getByTestId(container, 'OTPInput1');
-        const OTPInput2 = getByTestId(container, 'OTPInput2');
-        const OTPInput3 = getByTestId(container, 'OTPInput3');
-        fireEvent.change(OTPInput1, createEvent('1'));
-        fireEvent.change(OTPInput2, createEvent('2'));
+        const input0 = getByTestId(container, 'OTPInput0');
+        const input1 = getByTestId(container, 'OTPInput1');
+        const input2 = getByTestId(container, 'OTPInput2');
+        const input3 = getByTestId(container, 'OTPInput3');
+        fireEvent.change(input1, createEvent('1'));
+        fireEvent.change(input2, createEvent('2'));
 
-        fireEvent.change(OTPInput0, createEvent('1'));
+        fireEvent.change(input0, createEvent('1'));
 
-        expect(OTPInput3).toHaveFocus();
+        expect(input3).toHaveFocus();
     });
 });
 
