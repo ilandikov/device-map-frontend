@@ -39,7 +39,7 @@ describe('OTP input tests', () => {
             const { container } = renderOTPInputComponent();
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-            fireEvent.change(OTPInput, { target: { value: '1' } });
+            fireEvent.change(OTPInput, createEvent('1'));
 
             const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`) as HTMLInputElement;
             expect(nextOTPInput).toHaveFocus();
