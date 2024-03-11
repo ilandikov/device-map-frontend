@@ -39,12 +39,10 @@ describe('OTP input tests', () => {
             const { container } = renderOTPInputComponent();
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-            expect(OTPInput).toBeInTheDocument();
             OTPInput.focus();
             fireEvent.change(OTPInput, { target: { value: '1' } });
 
             const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`) as HTMLInputElement;
-            expect(nextOTPInput).toBeInTheDocument();
             expect(nextOTPInput).toHaveFocus();
         },
     );
@@ -53,13 +51,10 @@ describe('OTP input tests', () => {
         const { container } = renderOTPInputComponent();
         const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
 
-        expect(OTPInput).toBeInTheDocument();
         OTPInput.focus();
         fireEvent.change(OTPInput, createEvent('1'));
 
         const nextButton = getByText(container, 'next');
-
-        expect(nextButton).toBeInTheDocument();
         expect(nextButton).toHaveFocus();
     });
 
@@ -69,7 +64,6 @@ describe('OTP input tests', () => {
             const { container } = renderOTPInputComponent();
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-            expect(OTPInput).toBeInTheDocument();
             fireEvent.change(OTPInput, createEvent('3'));
             expect(OTPInput.value).toEqual('3');
 
@@ -103,11 +97,10 @@ describe('OTPInputForm action tests', () => {
         nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING | UserAuthState.LOGIN_OTP_LOADING,
     ) {
         const { container } = renderOTPInputComponent(renderState);
+
         const nextButton = getByText(container, 'next');
-
-        expect(nextButton).toBeInTheDocument();
-
         fireEvent.click(nextButton);
+
         expect(setUserAuthState).toHaveBeenCalledWith(nextButtonCallingState);
     }
 
