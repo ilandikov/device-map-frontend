@@ -2,22 +2,13 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
+import { createEvent, getNonNumeric } from '../../TestHelpers';
 import { setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPInputComponent(
     userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP,
 ) {
     return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
-}
-
-function createEvent(value: any) {
-    return { target: { value: `${value}` } };
-}
-
-function getNonNumeric() {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;:',.<>/?`~";
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    return characters[randomIndex];
 }
 
 describe('OTP input tests', () => {
