@@ -13,7 +13,7 @@ export function ProductDescription() {
                     <h1>{`${t('brand')} ${t('map')}`}</h1>
                     <p>{t('loginCallToAction')}</p>
                 </div>
-                <img src={phoneCut} alt="map-app-description-image" />
+                <img src={phoneCut} alt="product-description-phone-image" />
             </div>
         </div>
     );

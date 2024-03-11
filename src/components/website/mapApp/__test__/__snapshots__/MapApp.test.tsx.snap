@@ -72,7 +72,7 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
         </p>
       </div>
       <img
-        alt="map-app-description-image"
+        alt="product-description-phone-image"
         src="test-file-stub"
       />
     </div>
