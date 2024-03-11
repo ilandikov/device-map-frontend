@@ -6,8 +6,8 @@ const mapAppInitialState: MapAppState = {
     isUserLoggedIn: false,
 };
 
-export function MapAppReducer() {
-    return mapAppInitialState;
+export function MapAppReducer(state: MapAppState = mapAppInitialState) {
+    return state;
 }
 
 describe('MapApp reducer tests', () => {
