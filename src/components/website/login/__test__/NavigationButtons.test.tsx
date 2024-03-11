@@ -8,7 +8,7 @@ import { setUserAuthState } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.WELCOME) {
+function componentWithStoreProvider(goBackState: UserAuthState) {
     return render(
         <Provider store={store}>
             <NavigationButtons {...{ setUserAuthState, goBackState }} />
@@ -18,7 +18,7 @@ function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.W
 
 describe('Navigation buttons tests', () => {
     it('should go back to welcome stage on cancel button click', () => {
-        const { container } = componentWithStoreProvider();
+        const { container } = componentWithStoreProvider(UserAuthState.WELCOME);
 
         const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
