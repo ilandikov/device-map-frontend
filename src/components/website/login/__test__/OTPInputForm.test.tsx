@@ -14,6 +14,12 @@ function createEvent(value: any) {
     return { target: { value: `${value}` } };
 }
 
+function getNonNumeric() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;:',.<>/?`~";
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters[randomIndex];
+}
+
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
@@ -23,7 +29,7 @@ describe('OTP input tests', () => {
         fireEvent.change(input, createEvent('1'));
         expect(input.value).toEqual('1');
 
-        fireEvent.change(input, createEvent('a'));
+        fireEvent.change(input, createEvent(getNonNumeric()));
         expect(input.value).toEqual('');
     });
 
