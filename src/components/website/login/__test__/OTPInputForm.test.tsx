@@ -18,7 +18,7 @@ describe('OTP input tests', () => {
 
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
-        const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+        const input = getInput(container, inputIndex);
         expect(input.value).toEqual('');
 
         fireEvent.change(input, createEvent('1'));
@@ -32,18 +32,18 @@ describe('OTP input tests', () => {
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const input = getByTestId(container, `OTPInput${inputIndex}`);
+            const input = getInput(container, inputIndex);
 
             fireEvent.change(input, createEvent('1'));
 
-            const nextInput = getByTestId(container, `OTPInput${inputIndex + 1}`);
+            const nextInput = getInput(container, inputIndex + 1);
             expect(nextInput).toHaveFocus();
         },
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = renderOTPInputComponent();
-        const input = getByTestId(container, 'OTPInput5');
+        const input = getInput(container, 5);
 
         fireEvent.change(input, createEvent('1'));
 
@@ -68,10 +68,10 @@ describe('OTP input tests', () => {
 
     it('should focus on the next empty input after a digit has been input', () => {
         const { container } = renderOTPInputComponent();
-        const input0 = getByTestId(container, 'OTPInput0');
-        const input1 = getByTestId(container, 'OTPInput1');
-        const input2 = getByTestId(container, 'OTPInput2');
-        const input3 = getByTestId(container, 'OTPInput3');
+        const input0 = getInput(container, 0);
+        const input1 = getInput(container, 1);
+        const input2 = getInput(container, 2);
+        const input3 = getInput(container, 3);
         fireEvent.change(input1, createEvent('1'));
         fireEvent.change(input2, createEvent('2'));
 
