@@ -10,6 +10,10 @@ function renderOTPInputComponent(
     return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
 }
 
+function createEvent(value: string) {
+    return { target: { value: value } };
+}
+
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
@@ -26,7 +30,7 @@ describe('OTP input tests', () => {
         const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
         expect(input).toBeInTheDocument();
-        fireEvent.change(input, { target: { value: 'a' } });
+        fireEvent.change(input, createEvent('a'));
 
         expect(input.value).toEqual('');
     });
