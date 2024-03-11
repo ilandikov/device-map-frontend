@@ -8,7 +8,7 @@ import { setUserAuthState } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.WELCOME) {
+function componentWithStoreProvider(goBackState: UserAuthState) {
     return render(
         <Provider store={store}>
             <NavigationButtons {...{ setUserAuthState, goBackState }} />
@@ -18,10 +18,9 @@ function componentWithStoreProvider(goBackState: UserAuthState = UserAuthState.W
 
 describe('Navigation buttons tests', () => {
     it('should go back to welcome stage on cancel button click', () => {
-        const { container } = componentWithStoreProvider();
-        const cancelButton = getByTestId(container, 'cancelButton');
+        const { container } = componentWithStoreProvider(UserAuthState.WELCOME);
 
-        expect(cancelButton).toBeInTheDocument();
+        const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.WELCOME);
@@ -29,9 +28,8 @@ describe('Navigation buttons tests', () => {
 
     it('should go back to a desired go back state on go back button click', () => {
         const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT);
-        const goBackButton = getByTestId(container, 'goBackButton');
 
-        expect(goBackButton).toBeInTheDocument();
+        const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT);

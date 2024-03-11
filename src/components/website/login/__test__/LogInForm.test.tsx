@@ -5,6 +5,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { UserAuthState } from '../LoginModal';
 import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
+import { createEvent } from '../../TestHelpers';
 import { setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -44,33 +45,30 @@ describe('LogInForm action tests', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
-        expect(emailInput).toBeInTheDocument();
+        fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
 
-        fireEvent.change(emailInput, { target: { value: 'hereIsMyMail@server.com' } });
         expect(setUserEmail).toHaveBeenCalledWith('hereIsMyMail@server.com');
     });
 
     it('should show the already input email on password input stage', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'here_is_my@email.com', '', '');
-        const emailInput = getByTestId(container, 'emailInput');
 
-        expect(emailInput).toBeInTheDocument();
-        expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
+        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
+
+        expect(emailInput.value).toEqual('here_is_my@email.com');
     });
 
     it('should update user password when typed', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
-        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
 
-        expect(userPasswordInput).toBeInTheDocument();
-        fireEvent.change(userPasswordInput, { target: { value: 'strongPassword' } });
+        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
+        fireEvent.change(userPasswordInput, createEvent('strongPassword'));
 
         expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
     });
 
     it('should call user authentication when next button is pressed', () => {
         const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
-
         const { container } = componentWithStoreProvider(
             UserAuthState.SIGNUP_PASSWORD,
             'user@mail.com',
@@ -79,8 +77,6 @@ describe('LogInForm action tests', () => {
         );
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
-
-        expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
         expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledWith('user@mail.com', 'aPassword');
@@ -90,7 +86,6 @@ describe('LogInForm action tests', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
 
         const resetPasswordButton = getByText(container, 'resetPassword');
-        expect(resetPasswordButton).toBeInTheDocument();
         fireEvent.click(resetPasswordButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_PASSWORD_RESET);

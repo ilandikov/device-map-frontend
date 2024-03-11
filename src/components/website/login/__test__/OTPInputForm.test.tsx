@@ -2,6 +2,7 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
+import { createEvent, getNonNumeric } from '../../TestHelpers';
 import { setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPInputComponent(
@@ -11,53 +12,42 @@ function renderOTPInputComponent(
 }
 
 describe('OTP input tests', () => {
+    function getInput(container: HTMLElement, inputIndex: number) {
+        return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+    }
+
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+        const input = getInput(container, inputIndex);
+        expect(input.value).toEqual('');
 
-        expect(OTPInput).toBeInTheDocument();
-        fireEvent.change(OTPInput, { target: { value: `${inputIndex}` } });
+        fireEvent.change(input, createEvent('1'));
+        expect(input.value).toEqual('1');
 
-        expect(OTPInput.value).toEqual(`${inputIndex}`);
-    });
-
-    it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
-        const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
-
-        expect(OTPInput).toBeInTheDocument();
-        fireEvent.change(OTPInput, { target: { value: 'a' } });
-
-        expect(OTPInput.value).toEqual('');
+        fireEvent.change(input, createEvent(getNonNumeric()));
+        expect(input.value).toEqual('');
     });
 
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+            const input = getInput(container, inputIndex);
 
-            expect(OTPInput).toBeInTheDocument();
-            OTPInput.focus();
-            fireEvent.change(OTPInput, { target: { value: '1' } });
+            fireEvent.change(input, createEvent('1'));
 
-            const nextOTPInput = getByTestId(container, `OTPInput${inputIndex + 1}`) as HTMLInputElement;
-            expect(nextOTPInput).toBeInTheDocument();
-            expect(nextOTPInput).toHaveFocus();
+            const nextInput = getInput(container, inputIndex + 1);
+            expect(nextInput).toHaveFocus();
         },
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, 'OTPInput5') as HTMLInputElement;
+        const input = getInput(container, 5);
 
-        expect(OTPInput).toBeInTheDocument();
-        OTPInput.focus();
-        fireEvent.change(OTPInput, { target: { value: '1' } });
+        fireEvent.change(input, createEvent('1'));
 
         const nextButton = getByText(container, 'next');
-
-        expect(nextButton).toBeInTheDocument();
         expect(nextButton).toHaveFocus();
     });
 
@@ -65,53 +55,53 @@ describe('OTP input tests', () => {
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+            const input = getInput(container, inputIndex);
 
-            expect(OTPInput).toBeInTheDocument();
-            fireEvent.change(OTPInput, { target: { value: '3' } });
-            expect(OTPInput.value).toEqual('3');
+            fireEvent.change(input, createEvent('3'));
+            expect(input.value).toEqual('3');
 
-            OTPInput.focus();
-            expect(OTPInput.value).toEqual('');
+            input.focus();
+
+            expect(input.value).toEqual('');
         },
     );
 
     it('should focus on the next empty input after a digit has been input', () => {
         const { container } = renderOTPInputComponent();
-        const OTPInput0 = getByTestId(container, 'OTPInput0') as HTMLInputElement;
-        const OTPInput1 = getByTestId(container, 'OTPInput1') as HTMLInputElement;
-        const OTPInput2 = getByTestId(container, 'OTPInput2') as HTMLInputElement;
-        const OTPInput3 = getByTestId(container, 'OTPInput3') as HTMLInputElement;
-        fireEvent.change(OTPInput1, { target: { value: '1' } });
-        fireEvent.change(OTPInput2, { target: { value: '2' } });
+        const input0 = getInput(container, 0);
+        const input1 = getInput(container, 1);
+        const input2 = getInput(container, 2);
+        const input3 = getInput(container, 3);
+        fireEvent.change(input1, createEvent('1'));
+        fireEvent.change(input2, createEvent('2'));
 
-        OTPInput0.focus();
-        fireEvent.change(OTPInput0, { target: { value: '1' } });
+        fireEvent.change(input0, createEvent('1'));
 
-        expect(OTPInput3).toHaveFocus();
+        expect(input3).toHaveFocus();
     });
 });
 
 describe('OTPInputForm action tests', () => {
-    it('should transition from sign up OTP to loading OTP state', () => {
-        const { container } = renderOTPInputComponent(UserAuthState.SIGNUP_OTP);
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+    function verifyNextButton(
+        renderState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP,
+        nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING | UserAuthState.LOGIN_OTP_LOADING,
+    ) {
+        const { container } = renderOTPInputComponent(renderState);
 
         const nextButton = getByText(container, 'next');
-        expect(nextButton).toBeInTheDocument();
-
         fireEvent.click(nextButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP_LOADING);
+        expect(setUserAuthState).toHaveBeenCalledWith(nextButtonCallingState);
+    }
+
+    it('should transition from sign up OTP to loading OTP state', () => {
+        verifyNextButton(UserAuthState.SIGNUP_OTP, UserAuthState.SIGNUP_OTP_LOADING);
     });
 
     it('should transition from log in OTP to loading OTP state', () => {
-        const { container } = renderOTPInputComponent(UserAuthState.LOGIN_OTP);
-
-        const nextButton = getByText(container, 'next');
-        expect(nextButton).toBeInTheDocument();
-
-        fireEvent.click(nextButton);
-
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_OTP_LOADING);
+        verifyNextButton(UserAuthState.LOGIN_OTP, UserAuthState.LOGIN_OTP_LOADING);
     });
 });

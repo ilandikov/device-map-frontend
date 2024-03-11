@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
+import { createEvent } from '../../TestHelpers';
 import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -88,10 +89,9 @@ describe('PasswordCreationForm action tests', () => {
                 userPasswordRepeat: '',
             }),
         );
-        const userPasswordInput = getByTestId(container, 'userPassword');
 
-        expect(userPasswordInput).toBeInTheDocument();
-        fireEvent.change(userPasswordInput, { target: { value: 'verySecurePassword1' } });
+        const userPasswordInput = getByTestId(container, 'userPassword');
+        fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
 
         expect(setUserPassword).toHaveBeenCalledWith('verySecurePassword1');
     });
@@ -104,17 +104,15 @@ describe('PasswordCreationForm action tests', () => {
                 userPasswordRepeat: '',
             }),
         );
-        const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
 
-        expect(userPasswordRepeatInput).toBeInTheDocument();
-        fireEvent.change(userPasswordRepeatInput, { target: { value: 'evenBetterPassword' } });
+        const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
+        fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
 
         expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
     });
 
     it('should call password verification when next button is pressed', () => {
         const spyOnGetPasswordInputError = jest.spyOn(userAuthStateUtils, 'getPasswordInputErrorAndNextState');
-
         mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
@@ -124,8 +122,6 @@ describe('PasswordCreationForm action tests', () => {
         );
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
-
-        expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
         expect(spyOnGetPasswordInputError).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
