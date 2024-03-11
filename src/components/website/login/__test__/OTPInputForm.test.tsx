@@ -95,15 +95,21 @@ describe('OTP input tests', () => {
 });
 
 describe('OTPInputForm action tests', () => {
-    it('should transition from sign up OTP to loading OTP state', () => {
-        const { container } = renderOTPInputComponent(UserAuthState.SIGNUP_OTP);
-
+    function verifyNextButton(
+        renderState: UserAuthState.SIGNUP_OTP,
+        nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING,
+    ) {
+        const { container } = renderOTPInputComponent(renderState);
         const nextButton = getByText(container, 'next');
+
         expect(nextButton).toBeInTheDocument();
 
         fireEvent.click(nextButton);
+        expect(setUserAuthState).toHaveBeenCalledWith(nextButtonCallingState);
+    }
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.SIGNUP_OTP_LOADING);
+    it('should transition from sign up OTP to loading OTP state', () => {
+        verifyNextButton(UserAuthState.SIGNUP_OTP, UserAuthState.SIGNUP_OTP_LOADING);
     });
 
     it('should transition from log in OTP to loading OTP state', () => {
