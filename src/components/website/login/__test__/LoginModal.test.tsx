@@ -149,7 +149,6 @@ describe('LoginModal go back button click actions', () => {
         const { container } = render(componentWithStoreProvider);
 
         const goBackButton = getByTestId(container, 'goBackButton');
-        expect(goBackButton).toBeInTheDocument();
         fireEvent.click(goBackButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(goBackToState);

@@ -21,8 +21,6 @@ describe('PasswordResetRequest form action tests', () => {
         const { container } = componentWithStoreProvider();
 
         const emailInput = getByTestId(container, 'emailInput');
-
-        expect(emailInput).toBeInTheDocument();
         fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
 
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
@@ -32,7 +30,6 @@ describe('PasswordResetRequest form action tests', () => {
         const { container } = componentWithStoreProvider();
 
         const requestOTPButton = getByText(container, 'OTPSendSMS');
-        expect(requestOTPButton).toBeInTheDocument();
         fireEvent.click(requestOTPButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_OTP);

@@ -44,25 +44,23 @@ describe('LogInForm action tests', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
-        expect(emailInput).toBeInTheDocument();
-
         fireEvent.change(emailInput, { target: { value: 'hereIsMyMail@server.com' } });
+
         expect(setUserEmail).toHaveBeenCalledWith('hereIsMyMail@server.com');
     });
 
     it('should show the already input email on password input stage', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'here_is_my@email.com', '', '');
-        const emailInput = getByTestId(container, 'emailInput');
 
-        expect(emailInput).toBeInTheDocument();
-        expect((emailInput as HTMLInputElement).value).toEqual('here_is_my@email.com');
+        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
+
+        expect(emailInput.value).toEqual('here_is_my@email.com');
     });
 
     it('should update user password when typed', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
-        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
 
-        expect(userPasswordInput).toBeInTheDocument();
+        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
         fireEvent.change(userPasswordInput, { target: { value: 'strongPassword' } });
 
         expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
@@ -70,7 +68,6 @@ describe('LogInForm action tests', () => {
 
     it('should call user authentication when next button is pressed', () => {
         const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
-
         const { container } = componentWithStoreProvider(
             UserAuthState.SIGNUP_PASSWORD,
             'user@mail.com',
@@ -79,8 +76,6 @@ describe('LogInForm action tests', () => {
         );
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
-
-        expect(tryVerifyPasswordsButton).toBeInTheDocument();
         fireEvent.click(tryVerifyPasswordsButton);
 
         expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledWith('user@mail.com', 'aPassword');
@@ -90,7 +85,6 @@ describe('LogInForm action tests', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
 
         const resetPasswordButton = getByText(container, 'resetPassword');
-        expect(resetPasswordButton).toBeInTheDocument();
         fireEvent.click(resetPasswordButton);
 
         expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_PASSWORD_RESET);
