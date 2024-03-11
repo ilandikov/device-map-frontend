@@ -4,7 +4,7 @@ import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPInputForm } from './OTPInputForm';
 import { LoginModalHeader, LoginModalHeaderState } from './LoginModalHeader';
-import { Ellipses } from './Ellipses/Ellipses';
+import { LoginModalShadows } from './LoginModalShadows/LoginModalShadows';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
@@ -37,7 +37,7 @@ export function LoginModal() {
             <div className="login-modal-container">
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
-                        <Ellipses />
+                        <LoginModalShadows />
                         <LoginModalHeader state={LoginModalHeaderState.WELCOME} />
                         <div className="login-modal-input-container"></div>
                         <div className="login-modal-button-container">

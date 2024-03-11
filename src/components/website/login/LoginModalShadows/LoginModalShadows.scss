@@ -1,0 +1,22 @@
+.login-modal-shadow {
+    width: 335px;
+    height: 335px;
+
+    position: absolute;
+
+    z-index: -1000;
+
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(50px);
+}
+
+.login-modal-shadow-green {
+    transform: translate(-85%, -10%);
+    background: #72CC00;
+}
+
+.login-modal-shadow-blue {
+    transform: translate(100%, 90%);
+    background: #26FFF2;
+}
