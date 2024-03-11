@@ -53,16 +53,16 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
     </div>
   </header>
   <div
-    className="map-app-product-description"
+    className="product-description-window"
   >
     <div
-      className="map-app-product-description-shadow"
+      className="product-description-shadow"
     />
     <div
-      className="map-app-product-description-container"
+      className="product-description-content-container"
     >
       <div
-        className="map-app-product-description-text"
+        className="product-description-text"
       >
         <h1>
           brand map

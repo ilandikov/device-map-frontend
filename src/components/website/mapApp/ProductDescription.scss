@@ -1,4 +1,4 @@
-.map-app-product-description {
+.product-description-window {
   max-width: 335px;
   max-height: 576px;
 
@@ -12,7 +12,7 @@
   border-radius: 10px;
   border: 1px solid #454545;
 
-  .map-app-product-description-shadow {
+  .product-description-shadow {
     width: 475px;
     height: 475px;
 
@@ -24,10 +24,10 @@
     background-color: #ACF709;
   }
 
-  .map-app-product-description-container {
+  .product-description-content-container {
     position: relative;
 
-    .map-app-product-description-text {
+    .product-description-text {
       margin: 25px 57px 0 16px;
       padding-bottom: 16px;
 
