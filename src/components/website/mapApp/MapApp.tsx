@@ -15,11 +15,14 @@ export default function MapApp() {
         <div className="map-app-container">
             <MapAppHeader />
             <div className="map-app-product-description">
-                <div className="map-app-product-description-text">
-                    <h1>{`${t('brand')} ${t('map')}`}</h1>
-                    <p>{t('loginCallToAction')}</p>
+                <div className="map-app-product-description-shadow" />
+                <div className="map-app-product-description-container">
+                    <div className="map-app-product-description-text">
+                        <h1>{`${t('brand')} ${t('map')}`}</h1>
+                        <p>{t('loginCallToAction')}</p>
+                    </div>
+                    <img src={phoneCut} alt="map-app-description-image" />
                 </div>
-                <img src={phoneCut} alt="map-app-description-image" />
             </div>
             <LoginModal />
             <img className="map-app-map-image" src={mapImage} alt="map" />
