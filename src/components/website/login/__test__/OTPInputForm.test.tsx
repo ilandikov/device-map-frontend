@@ -19,7 +19,6 @@ describe('OTP input tests', () => {
         const { container } = renderOTPInputComponent();
         const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-        expect(OTPInput).toBeInTheDocument();
         fireEvent.change(OTPInput, createEvent(inputIndex));
 
         expect(OTPInput.value).toEqual(`${inputIndex}`);
@@ -29,7 +28,6 @@ describe('OTP input tests', () => {
         const { container } = renderOTPInputComponent();
         const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-        expect(input).toBeInTheDocument();
         fireEvent.change(input, createEvent('a'));
 
         expect(input.value).toEqual('');
