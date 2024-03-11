@@ -17,19 +17,13 @@ function createEvent(value: any) {
 describe('OTP input tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
-
-        fireEvent.change(OTPInput, createEvent(inputIndex));
-
-        expect(OTPInput.value).toEqual(`${inputIndex}`);
-    });
-
-    it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
-        const { container } = renderOTPInputComponent();
         const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+        expect(input.value).toEqual('');
+
+        fireEvent.change(input, createEvent('1'));
+        expect(input.value).toEqual('1');
 
         fireEvent.change(input, createEvent('a'));
-
         expect(input.value).toEqual('');
     });
 
