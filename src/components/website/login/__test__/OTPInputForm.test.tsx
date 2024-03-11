@@ -55,7 +55,7 @@ describe('OTP input tests', () => {
 
         expect(OTPInput).toBeInTheDocument();
         OTPInput.focus();
-        fireEvent.change(OTPInput, { target: { value: '1' } });
+        fireEvent.change(OTPInput, createEvent('1'));
 
         const nextButton = getByText(container, 'next');
 
@@ -70,7 +70,7 @@ describe('OTP input tests', () => {
             const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
             expect(OTPInput).toBeInTheDocument();
-            fireEvent.change(OTPInput, { target: { value: '3' } });
+            fireEvent.change(OTPInput, createEvent('3'));
             expect(OTPInput.value).toEqual('3');
 
             OTPInput.focus();
@@ -84,11 +84,11 @@ describe('OTP input tests', () => {
         const OTPInput1 = getByTestId(container, 'OTPInput1') as HTMLInputElement;
         const OTPInput2 = getByTestId(container, 'OTPInput2') as HTMLInputElement;
         const OTPInput3 = getByTestId(container, 'OTPInput3') as HTMLInputElement;
-        fireEvent.change(OTPInput1, { target: { value: '1' } });
-        fireEvent.change(OTPInput2, { target: { value: '2' } });
+        fireEvent.change(OTPInput1, createEvent('1'));
+        fireEvent.change(OTPInput2, createEvent('2'));
 
         OTPInput0.focus();
-        fireEvent.change(OTPInput0, { target: { value: '1' } });
+        fireEvent.change(OTPInput0, createEvent('1'));
 
         expect(OTPInput3).toHaveFocus();
     });
