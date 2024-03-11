@@ -23,12 +23,12 @@ describe('OTP input tests', () => {
 
     it.each([0, 1, 2, 3, 4, 5])('should not enter non numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
-        const OTPInput = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+        const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 
-        expect(OTPInput).toBeInTheDocument();
-        fireEvent.change(OTPInput, { target: { value: 'a' } });
+        expect(input).toBeInTheDocument();
+        fireEvent.change(input, { target: { value: 'a' } });
 
-        expect(OTPInput.value).toEqual('');
+        expect(input.value).toEqual('');
     });
 
     it.each([0, 1, 2, 3, 4])(
