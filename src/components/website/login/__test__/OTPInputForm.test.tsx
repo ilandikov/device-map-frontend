@@ -12,6 +12,10 @@ function renderOTPInputComponent(
 }
 
 describe('OTP input tests', () => {
+    function getInput(container: HTMLElement, inputIndex: number) {
+        return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+    }
+
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPInputComponent();
         const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
@@ -51,7 +55,7 @@ describe('OTP input tests', () => {
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
             const { container } = renderOTPInputComponent();
-            const input = getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+            const input = getInput(container, inputIndex);
 
             fireEvent.change(input, createEvent('3'));
             expect(input.value).toEqual('3');
