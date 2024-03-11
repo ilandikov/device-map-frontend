@@ -5,6 +5,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { UserAuthState } from '../LoginModal';
 import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
+import { createEvent } from '../../TestHelpers';
 import { setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -44,7 +45,7 @@ describe('LogInForm action tests', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, { target: { value: 'hereIsMyMail@server.com' } });
+        fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
 
         expect(setUserEmail).toHaveBeenCalledWith('hereIsMyMail@server.com');
     });
@@ -61,7 +62,7 @@ describe('LogInForm action tests', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
 
         const userPasswordInput = getByTestId(container, 'userPasswordLogin');
-        fireEvent.change(userPasswordInput, { target: { value: 'strongPassword' } });
+        fireEvent.change(userPasswordInput, createEvent('strongPassword'));
 
         expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
     });

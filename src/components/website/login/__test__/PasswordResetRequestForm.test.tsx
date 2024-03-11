@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { UserAuthState } from '../LoginModal';
+import { createEvent } from '../../TestHelpers';
 import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
@@ -21,7 +22,7 @@ describe('PasswordResetRequest form action tests', () => {
         const { container } = componentWithStoreProvider();
 
         const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
+        fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });

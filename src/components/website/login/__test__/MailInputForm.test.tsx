@@ -6,6 +6,7 @@ import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { MailInputError } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
+import { createEvent } from '../../TestHelpers';
 import { renderAsJSON, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -87,7 +88,7 @@ describe('MailInputForm action tests', () => {
 
         const emailInput = getByTestId(container, 'emailInput');
 
-        fireEvent.change(emailInput, { target: { value: 'new@email.com' } });
+        fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
     });

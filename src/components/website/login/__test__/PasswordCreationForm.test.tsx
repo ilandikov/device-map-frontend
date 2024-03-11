@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
+import { createEvent } from '../../TestHelpers';
 import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -90,7 +91,7 @@ describe('PasswordCreationForm action tests', () => {
         );
 
         const userPasswordInput = getByTestId(container, 'userPassword');
-        fireEvent.change(userPasswordInput, { target: { value: 'verySecurePassword1' } });
+        fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
 
         expect(setUserPassword).toHaveBeenCalledWith('verySecurePassword1');
     });
@@ -105,7 +106,7 @@ describe('PasswordCreationForm action tests', () => {
         );
 
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
-        fireEvent.change(userPasswordRepeatInput, { target: { value: 'evenBetterPassword' } });
+        fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
 
         expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
     });
