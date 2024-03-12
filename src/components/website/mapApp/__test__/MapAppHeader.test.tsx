@@ -8,12 +8,16 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('MapAppHeader action tests', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it('should show login modal on login button click', () => {
         const { container } = render(<MapAppHeader />);
 
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenCalledTimes(1);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1);
     });
 });
