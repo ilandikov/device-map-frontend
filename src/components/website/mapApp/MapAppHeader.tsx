@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../../redux/store';
 
 export function MapAppHeader() {
     const { t } = useI18next();
+    const useDispatch = useAppDispatch();
     return (
         <header className="map-app-header">
             <div className="map-app-header-block">
@@ -22,7 +23,7 @@ export function MapAppHeader() {
                     className="map-app-header-inner-block"
                     data-testid="loginButton"
                     onClick={() => {
-                        useAppDispatch()({ type: 'SHOW_LOGIN_MODAL' });
+                        useDispatch({ type: 'SHOW_LOGIN_MODAL' });
                     }}
                 >
                     <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
