@@ -11,5 +11,10 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
         return state;
     }
 
+    switch (action.type) {
+        case 'SHOW_LOGIN_MODAL':
+            return { ...state, showProductDescription: false };
+    }
+
     return state;
 }
