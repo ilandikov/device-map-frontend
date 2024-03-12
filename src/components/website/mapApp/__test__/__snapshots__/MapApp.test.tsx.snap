@@ -26,6 +26,8 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
     >
       <button
         className="map-app-header-inner-block"
+        data-testid="loginButton"
+        onClick={[Function]}
       >
         <img
           alt="login-header-account"

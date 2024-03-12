@@ -7,6 +7,7 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
+import { useAppDispatch } from '../../../redux/store';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -17,7 +18,13 @@ export function MapAppHeader() {
                 <p className="map-app-header-brand-text">{t('map')}</p>
             </div>
             <div className="map-app-header-block">
-                <button className="map-app-header-inner-block">
+                <button
+                    className="map-app-header-inner-block"
+                    data-testid="loginButton"
+                    onClick={() => {
+                        useAppDispatch()();
+                    }}
+                >
                     <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
                     <p className="map-app-header-account-text">{t('loginAction')}</p>
                 </button>
