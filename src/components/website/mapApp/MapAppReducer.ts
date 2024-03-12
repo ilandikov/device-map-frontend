@@ -1,9 +1,9 @@
 export interface MapAppState {
-    isUserLoggedIn: boolean;
+    showProductDescription: boolean;
 }
 
 export const mapAppInitialState: MapAppState = {
-    isUserLoggedIn: false,
+    showProductDescription: true,
 };
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState) {

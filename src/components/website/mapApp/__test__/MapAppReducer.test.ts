@@ -5,7 +5,7 @@ describe('MapApp reducer tests', () => {
         const initialState = MapAppReducer();
 
         const expectedInitialState = {
-            isUserLoggedIn: false,
+            showProductDescription: true,
         };
 
         expect(initialState).toEqual(expectedInitialState);
