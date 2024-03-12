@@ -11,7 +11,7 @@ describe('MapApp reducer tests', () => {
         expect(initialState).toEqual(expectedInitialState);
     });
 
-    it('should show login modal and hide product description on login click action', () => {
+    it('should hide product description on login click action', () => {
         const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
 
         const resultingState = MapAppReducer(undefined, action);
