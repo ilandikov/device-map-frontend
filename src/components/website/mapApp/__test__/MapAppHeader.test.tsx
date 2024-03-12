@@ -18,6 +18,6 @@ describe('MapAppHeader action tests', () => {
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'SHOW_LOGIN_MODAL' });
     });
 });
