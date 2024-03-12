@@ -13,7 +13,7 @@ describe('MapAppHeader action tests', () => {
         jest.resetAllMocks();
     });
 
-    it('should show login modal on login button click', () => {
+    it('should dispatch click action on login button click', () => {
         const { container } = render(<MapAppHeader />);
 
         const loginButton = getByTestId(container, 'loginButton');
