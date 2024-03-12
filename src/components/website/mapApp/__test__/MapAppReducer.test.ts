@@ -1,4 +1,4 @@
-import { MapAppReducer, MapAppState } from '../MapAppReducer';
+import { MapAppActionTypes, MapAppReducer, MapAppState } from '../MapAppReducer';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
@@ -12,7 +12,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should show login modal and hide product description on login click action', () => {
-        const action = { type: 'SHOW_LOGIN_MODAL' };
+        const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
 
         const resultingState = MapAppReducer(undefined, action);
 

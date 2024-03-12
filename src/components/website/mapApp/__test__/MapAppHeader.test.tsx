@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
 import { MapAppHeader } from '../MapAppHeader';
+import { MapAppActionTypes } from '../MapAppReducer';
 
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
@@ -18,6 +19,6 @@ describe('MapAppHeader action tests', () => {
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'SHOW_LOGIN_MODAL' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
     });
 });

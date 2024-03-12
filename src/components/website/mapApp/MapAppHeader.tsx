@@ -8,6 +8,7 @@ import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
 import { useAppDispatch } from '../../../redux/store';
+import { MapAppActionTypes } from './MapAppReducer';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -23,7 +24,7 @@ export function MapAppHeader() {
                     className="map-app-header-inner-block"
                     data-testid="loginButton"
                     onClick={() => {
-                        useDispatch({ type: 'SHOW_LOGIN_MODAL' });
+                        useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
                     }}
                 >
                     <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
