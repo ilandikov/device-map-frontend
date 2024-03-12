@@ -24,8 +24,10 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
     <div
       className="map-app-header-block"
     >
-      <div
+      <button
         className="map-app-header-inner-block"
+        data-testid="loginButton"
+        onClick={[Function]}
       >
         <img
           alt="login-header-account"
@@ -37,7 +39,7 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
         >
           loginAction
         </p>
-      </div>
+      </button>
       <div
         className="map-app-header-inner-block"
       >

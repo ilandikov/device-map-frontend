@@ -1,4 +1,4 @@
-import { MapAppReducer } from '../MapAppReducer';
+import { MapAppActionTypes, MapAppReducer, MapAppState } from '../MapAppReducer';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
@@ -9,5 +9,14 @@ describe('MapApp reducer tests', () => {
         };
 
         expect(initialState).toEqual(expectedInitialState);
+    });
+
+    it('should hide product description on login click action', () => {
+        const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
+
+        const resultingState = MapAppReducer(undefined, action);
+
+        const expectedState: MapAppState = { showProductDescription: false };
+        expect(resultingState).toEqual(expectedState);
     });
 });

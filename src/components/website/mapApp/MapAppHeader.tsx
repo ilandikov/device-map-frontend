@@ -7,9 +7,12 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
+import { useAppDispatch } from '../../../redux/store';
+import { MapAppActionTypes } from './MapAppReducer';
 
 export function MapAppHeader() {
     const { t } = useI18next();
+    const useDispatch = useAppDispatch();
     return (
         <header className="map-app-header">
             <div className="map-app-header-block">
@@ -17,10 +20,16 @@ export function MapAppHeader() {
                 <p className="map-app-header-brand-text">{t('map')}</p>
             </div>
             <div className="map-app-header-block">
-                <div className="map-app-header-inner-block">
+                <button
+                    className="map-app-header-inner-block"
+                    data-testid="loginButton"
+                    onClick={() => {
+                        useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
+                    }}
+                >
                     <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
                     <p className="map-app-header-account-text">{t('loginAction')}</p>
-                </div>
+                </button>
                 <div className="map-app-header-inner-block">
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
                     <img src={AppStore} alt="map-app-header-apps-app-store" />
