@@ -6,11 +6,13 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import getDevices from '../components/devices/getDevices/redux/reducer';
+import { MapAppReducer } from '../components/website/mapApp/MapAppReducer';
 
 const rootEpic = combineEpics();
 
 const rootReducer = combineReducers({
     getDevices,
+    mapAppState: MapAppReducer,
 });
 
 let store;
