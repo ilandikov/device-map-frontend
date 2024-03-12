@@ -19,7 +19,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
 
     switch (action.type) {
         case MapAppActionTypes.LOGIN_BUTTON_CLICK:
-            return { ...state, showProductDescription: false };
+            return { ...state, showProductDescription: false, showLoginModal: true };
     }
 
     return state;
