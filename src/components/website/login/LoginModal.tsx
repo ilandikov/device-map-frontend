@@ -51,7 +51,7 @@ export function LoginModal() {
                             <button
                                 className="login-modal-button-green-on-black"
                                 onClick={() => {
-                                    dispatch({ type: 'buttonClicked', button: 'accountRegister' });
+                                    dispatch({ type: LoginModalActionTypes.BUTTON_CLICKED, button: 'accountRegister' });
                                     setUserAuthState(UserAuthState.MAIL_INPUT);
                                 }}
                             >
