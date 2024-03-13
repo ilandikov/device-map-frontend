@@ -40,9 +40,13 @@ function componentWithStoreProvider(
     );
 }
 
+function resetLoginModalMocks() {
+    setUserAuthState.mockReset();
+}
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
-        setUserAuthState.mockReset();
+        resetLoginModalMocks();
     });
 
     it('should update the user email on input on password input stage', () => {
