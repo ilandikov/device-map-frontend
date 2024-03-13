@@ -4,28 +4,27 @@ import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { UserAuthState } from './LoginModal';
 
-interface OTPInputFormProps {
+interface OTPFormProps {
     userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP;
     setUserAuthState: (string) => void;
 }
 
-export function OTPInputForm(props: OTPInputFormProps) {
+export function OTPForm(props: OTPFormProps) {
     const { t } = useI18next();
 
-    const OTPNextButton = useRef(null);
+    const nextButton = useRef(null);
 
-    const inputElementRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
+    const inputRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
-    const inputElements = inputElementRefs.map((inputElementRef, index) => {
-        const OTPInputUniqueId = `OTPInput${index}`;
+    const inputs = inputRefs.map((inputRef, index) => {
         return (
             <input
                 type="number"
                 pattern="[0-9]"
                 maxLength={1}
-                key={OTPInputUniqueId}
-                data-testid={OTPInputUniqueId}
-                ref={inputElementRef}
+                key={`OTPInput${index}`}
+                data-testid={`OTPInput${index}`}
+                ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
                 onChange={() => {
                     const nextElementToFocus = getNextElementForFocus(index);
@@ -38,30 +37,30 @@ export function OTPInputForm(props: OTPInputFormProps) {
     function getNextElementForFocus(index: number) {
         const nextInputIndex = index + 1;
 
-        if (nextInputIndex === inputElementRefs.length) {
-            return OTPNextButton;
+        if (nextInputIndex === inputRefs.length) {
+            return nextButton;
         }
 
-        const valueInNextInput = inputElementRefs[nextInputIndex].current.value;
+        const valueInNextInput = inputRefs[nextInputIndex].current.value;
         if (valueInNextInput !== '') {
             return getNextElementForFocus(nextInputIndex);
         }
 
-        return inputElementRefs[nextInputIndex];
+        return inputRefs[nextInputIndex];
     }
 
     return (
         <>
             <div className="login-modal-input-container">
                 <p className="login-modal-input-help">{t('OTPEnter')}</p>
-                <div className="login-modal-input-otp-container">{inputElements}</div>
+                <div className="login-modal-input-otp-container">{inputs}</div>
                 <p className="login-modal-input-help login-modal-opaque-text">{t('OTPExplanation')}</p>
                 <p className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</p>
             </div>
             <div className="login-modal-button-container">
                 <button
                     className="login-modal-button-black-on-green"
-                    ref={OTPNextButton}
+                    ref={nextButton}
                     onClick={() => {
                         const nextUserAuthState = userAuthStateFromOTP(props.userAuthState);
                         props.setUserAuthState(nextUserAuthState);
