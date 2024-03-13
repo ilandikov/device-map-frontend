@@ -15,7 +15,7 @@ export function getInput(container: HTMLElement, inputIndex: number) {
     return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 }
 
-describe('OTP input tests', () => {
+describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
@@ -54,7 +54,7 @@ describe('OTP input tests', () => {
     });
 });
 
-describe('OTPInputForm action tests', () => {
+describe('OTP form action tests', () => {
     beforeEach(() => {
         resetLoginModalMocks();
     });
