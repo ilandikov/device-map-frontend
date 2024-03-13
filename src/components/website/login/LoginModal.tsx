@@ -15,7 +15,10 @@ import { Loader } from './Loader';
 import { UserAuthState } from './UserAuthStateUtils';
 import { LoginModalState } from './reducer';
 
-const type = 'buttonClicked';
+enum LoginModalActionTypes {
+    BUTTON_CLICKED = 'buttonClicked',
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -39,7 +42,7 @@ export function LoginModal() {
                             <button
                                 className="login-modal-button-black-on-green"
                                 onClick={() => {
-                                    dispatch({ type: type, button: 'accountLogin' });
+                                    dispatch({ type: LoginModalActionTypes.BUTTON_CLICKED, button: 'accountLogin' });
                                     setUserAuthState(UserAuthState.LOGIN);
                                 }}
                             >
