@@ -17,14 +17,13 @@ export function OTPInputForm(props: OTPInputFormProps) {
     const inputRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
     const inputs = inputRefs.map((inputRef, index) => {
-        const inputId = `OTPInput${index}`;
         return (
             <input
                 type="number"
                 pattern="[0-9]"
                 maxLength={1}
-                key={inputId}
-                data-testid={inputId}
+                key={`OTPInput${index}`}
+                data-testid={`OTPInput${index}`}
                 ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
                 onChange={() => {
