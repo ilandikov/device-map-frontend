@@ -19,6 +19,10 @@ enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
 }
 
+function loginModalButtonClick(button: string) {
+    return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
+}
+
 export function LoginModal() {
     const { t } = useI18next();
 
@@ -42,7 +46,7 @@ export function LoginModal() {
                             <button
                                 className="login-modal-button-black-on-green"
                                 onClick={() => {
-                                    dispatch({ type: LoginModalActionTypes.BUTTON_CLICKED, button: 'accountLogin' });
+                                    dispatch(loginModalButtonClick('accountLogin'));
                                     setUserAuthState(UserAuthState.LOGIN);
                                 }}
                             >
