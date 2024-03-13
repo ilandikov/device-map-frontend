@@ -9,7 +9,7 @@ function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.L
     return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
 }
 
-describe('OTP input tests', () => {
+describe('OTP form tests', () => {
     function getInput(container: HTMLElement, inputIndex: number) {
         return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
     }
@@ -79,7 +79,7 @@ describe('OTP input tests', () => {
     });
 });
 
-describe('OTPInputForm action tests', () => {
+describe('OTP form action tests', () => {
     beforeEach(() => {
         resetLoginModalMocks();
     });
