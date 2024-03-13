@@ -7,6 +7,8 @@ export interface LoginModalButtonClick {
     button: string;
 }
 
+export type LoginModalAction = LoginModalButtonClick;
+
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
 }
