@@ -9,7 +9,7 @@ export interface MapAppState {
 export const mapAppInitialState: MapAppState = {
     showProductDescription: true,
     showLoginModal: false,
-    userAuthState: UserAuthState.WELCOME,
+    userAuthState: UserAuthState.PRODUCT_DESCRIPTION,
 };
 
 export enum MapAppActionTypes {

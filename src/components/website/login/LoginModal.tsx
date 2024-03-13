@@ -12,6 +12,7 @@ import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
 
 export enum UserAuthState {
+    PRODUCT_DESCRIPTION = 'PRODUCT_DESCRIPTION',
     WELCOME = 'WELCOME',
     MAIL_INPUT = 'MAIL_INPUT',
     SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
