@@ -1,14 +1,10 @@
 import { UserAuthState } from '../login/LoginModal';
 
 export interface MapAppState {
-    showProductDescription: boolean;
-    showLoginModal: boolean;
     userAuthState: UserAuthState;
 }
 
 export const mapAppInitialState: MapAppState = {
-    showProductDescription: true,
-    showLoginModal: false,
     userAuthState: UserAuthState.PRODUCT_DESCRIPTION,
 };
 
@@ -25,8 +21,6 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
         case MapAppActionTypes.LOGIN_BUTTON_CLICK:
             return {
                 ...state,
-                showProductDescription: false,
-                showLoginModal: true,
                 userAuthState: UserAuthState.WELCOME,
             };
     }

@@ -6,8 +6,6 @@ describe('MapApp reducer tests', () => {
         const initialState = MapAppReducer();
 
         const expectedInitialState = {
-            showProductDescription: true,
-            showLoginModal: false,
             userAuthState: UserAuthState.PRODUCT_DESCRIPTION,
         };
 
@@ -20,8 +18,6 @@ describe('MapApp reducer tests', () => {
         const resultingState = MapAppReducer(undefined, action);
 
         const expectedState: MapAppState = {
-            showProductDescription: false,
-            showLoginModal: true,
             userAuthState: UserAuthState.WELCOME,
         };
         expect(resultingState).toEqual(expectedState);
