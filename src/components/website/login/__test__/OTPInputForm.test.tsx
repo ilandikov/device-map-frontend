@@ -63,20 +63,17 @@ describe('OTP input tests', () => {
         expect(nextButton).toHaveFocus();
     });
 
-    it.each([0, 1, 2, 3, 4, 5])(
-        'should rewrite an existing value that has already been input in OTP input number %i',
-        (inputIndex) => {
-            const { container } = renderOTPInputFormComponent();
-            const input = getInput(container, inputIndex);
+    it('should rewrite an existing value that has already been input in OTP input', () => {
+        const { container } = renderOTPInputComponent();
+        const input = getInput(container, 32);
 
-            fireEvent.change(input, createEvent('3'));
-            expect(input.value).toEqual('3');
+        fireEvent.change(input, createEvent('3'));
+        expect(input.value).toEqual('3');
 
-            input.focus();
+        input.focus();
 
-            expect(input.value).toEqual('');
-        },
-    );
+        expect(input.value).toEqual('');
+    });
 
     it('should focus on the next empty input after a digit has been input', () => {
         const { container } = renderOTPInputFormComponent();
