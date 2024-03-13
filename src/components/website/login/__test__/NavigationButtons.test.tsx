@@ -16,9 +16,16 @@ function componentWithStoreProvider(goBackState: UserAuthState) {
     );
 }
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 describe('Navigation buttons tests', () => {
     beforeEach(() => {
         resetLoginModalMocks();
+        mockDispatch.mockReset();
     });
 
     it('should go back to welcome stage on cancel button click', () => {
@@ -28,6 +35,7 @@ describe('Navigation buttons tests', () => {
         fireEvent.click(cancelButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.WELCOME);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'cancel' });
     });
 
     it('should go back to a desired go back state on go back button click', () => {
@@ -37,5 +45,6 @@ describe('Navigation buttons tests', () => {
         fireEvent.click(goBackButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'goBack' });
     });
 });
