@@ -9,9 +9,9 @@ interface OTPInputProps {
     onChange: () => void;
 }
 
-const OTPInput = forwardRef<HTMLInputElement>(function OTPInput(
+export const OTPInput = forwardRef<HTMLInputElement>(function OTPInput(
     props: OTPInputProps,
-    ref: React.Ref<HTMLInputElement>,
+    ref: React.Ref<HTMLInputElement> | null,
 ) {
     return (
         <input
