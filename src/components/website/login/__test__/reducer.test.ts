@@ -27,11 +27,14 @@ describe('LoginModal reducer tests', () => {
         });
     });
 
-    it('nav cancel button: should transition back to welcome from login', () => {
-        const nextState = loginModalReducer({ userAuthState: UserAuthState.LOGIN }, loginModalButtonClick('cancel'));
+    it.each(Object.keys(UserAuthState))(
+        'nav cancel button: should transition back to welcome from %s state',
+        (userAuthState: UserAuthState) => {
+            const nextState = loginModalReducer({ userAuthState }, loginModalButtonClick('cancel'));
 
-        expect(nextState).toEqual({
-            userAuthState: UserAuthState.WELCOME,
-        });
-    });
+            expect(nextState).toEqual({
+                userAuthState: UserAuthState.WELCOME,
+            });
+        },
+    );
 });
