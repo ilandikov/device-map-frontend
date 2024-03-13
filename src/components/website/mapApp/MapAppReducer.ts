@@ -1,11 +1,15 @@
+import { UserAuthState } from '../login/LoginModal';
+
 export interface MapAppState {
     showProductDescription: boolean;
     showLoginModal: boolean;
+    userAuthState: UserAuthState;
 }
 
 export const mapAppInitialState: MapAppState = {
     showProductDescription: true,
     showLoginModal: false,
+    userAuthState: UserAuthState.WELCOME,
 };
 
 export enum MapAppActionTypes {

@@ -1,4 +1,5 @@
 import { MapAppActionTypes, MapAppReducer, MapAppState } from '../MapAppReducer';
+import { UserAuthState } from '../../login/LoginModal';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
@@ -7,6 +8,7 @@ describe('MapApp reducer tests', () => {
         const expectedInitialState = {
             showProductDescription: true,
             showLoginModal: false,
+            userAuthState: UserAuthState.WELCOME,
         };
 
         expect(initialState).toEqual(expectedInitialState);
@@ -17,7 +19,11 @@ describe('MapApp reducer tests', () => {
 
         const resultingState = MapAppReducer(undefined, action);
 
-        const expectedState: MapAppState = { showProductDescription: false, showLoginModal: true };
+        const expectedState: MapAppState = {
+            showProductDescription: false,
+            showLoginModal: true,
+            userAuthState: UserAuthState.WELCOME,
+        };
         expect(resultingState).toEqual(expectedState);
     });
 });
