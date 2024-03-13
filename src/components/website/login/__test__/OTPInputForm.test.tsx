@@ -1,8 +1,8 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
-import { OTPInput, OTPInputForm } from '../OTPInputForm';
+import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
-import { createEvent, getNonNumeric } from '../../TestHelpers';
+import { createEvent } from '../../TestHelpers';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPInputForm(
@@ -11,35 +11,11 @@ function renderOTPInputForm(
     return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
 }
 
-function renderOTPInput() {
-    return render(
-        <OTPInput
-            {...{
-                index: 32,
-                onChange: () => {},
-            }}
-            ref={null}
-        />,
-    );
-}
-
-function getInput(container: HTMLElement, inputIndex: number) {
+export function getInput(container: HTMLElement, inputIndex: number) {
     return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 }
 
 describe('OTP input tests', () => {
-    it('should enter numeric characters in OTP input', () => {
-        const { container } = renderOTPInput();
-        const input = getInput(container, 32);
-        expect(input.value).toEqual('');
-
-        fireEvent.change(input, createEvent('1'));
-        expect(input.value).toEqual('1');
-
-        fireEvent.change(input, createEvent(getNonNumeric()));
-        expect(input.value).toEqual('');
-    });
-
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
@@ -61,18 +37,6 @@ describe('OTP input tests', () => {
 
         const nextButton = getByText(container, 'next');
         expect(nextButton).toHaveFocus();
-    });
-
-    it('should rewrite an existing value that has already been input in OTP input', () => {
-        const { container } = renderOTPInput();
-        const input = getInput(container, 32);
-
-        fireEvent.change(input, createEvent('3'));
-        expect(input.value).toEqual('3');
-
-        input.focus();
-
-        expect(input.value).toEqual('');
     });
 
     it('should focus on the next empty input after a digit has been input', () => {
