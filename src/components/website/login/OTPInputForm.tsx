@@ -1,5 +1,5 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React, { useRef } from 'react';
+import React, { createRef, useRef } from 'react';
 import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { UserAuthState } from './LoginModal';
@@ -14,7 +14,7 @@ export function OTPInputForm(props: OTPInputFormProps) {
 
     const nextButton = useRef(null);
 
-    const inputRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
+    const inputRefs = [0, 1, 2, 3, 4, 5].map(() => createRef<HTMLInputElement>());
 
     const inputs = inputRefs.map((inputRef, index) => {
         return (
