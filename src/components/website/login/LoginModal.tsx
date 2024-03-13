@@ -19,7 +19,12 @@ enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
 }
 
-function loginModalButtonClick(button: string) {
+interface LoginModalButtonClick {
+    type: LoginModalActionTypes;
+    button: string;
+}
+
+function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
 }
 
