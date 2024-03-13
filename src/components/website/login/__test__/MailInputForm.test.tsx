@@ -49,6 +49,12 @@ function resetHookMock() {
     setMailInputError = jest.fn().mockImplementation((error) => error);
 }
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 describe('MailInputForm snapshot tests', () => {
     beforeEach(() => {
         resetHookMock();
@@ -91,6 +97,7 @@ describe('MailInputForm action tests', () => {
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'userEmailInput', userEmail: 'new@email.com' });
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {

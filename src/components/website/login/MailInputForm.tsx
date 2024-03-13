@@ -1,5 +1,6 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { MailInputError, UserAuthState, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
 
@@ -11,6 +12,7 @@ interface MailInputFormProps {
 
 export function MailInputForm(props: MailInputFormProps) {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
 
     const [mailInputError, setMailInputError] = useState(null);
 
@@ -21,6 +23,7 @@ export function MailInputForm(props: MailInputFormProps) {
                     helpText={t('onlyEmail')}
                     userEmail={props.userEmail}
                     onChange={(event) => {
+                        dispatch({ type: 'userEmailInput', userEmail: event.target.value });
                         props.setUserEmail(event.target.value);
                     }}
                     error={mailInputError}
