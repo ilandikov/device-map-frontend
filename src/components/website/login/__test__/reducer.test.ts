@@ -37,4 +37,24 @@ describe('LoginModal reducer tests', () => {
             });
         },
     );
+
+    it.each([
+        // From mail input to welcome
+        [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
+
+        // From password input to mail input
+        [UserAuthState.LOGIN, UserAuthState.MAIL_INPUT],
+
+        // From password reset to login
+        [UserAuthState.LOGIN_PASSWORD_RESET, UserAuthState.LOGIN],
+
+        // From password creation to mail input
+        [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
+    ])('nav go back button: should transition from %s to %s', (initialState, expectedState) => {
+        const nextState = loginModalReducer({ userAuthState: initialState }, loginModalButtonClick('goBack'));
+
+        expect(nextState).toEqual({
+            userAuthState: expectedState,
+        });
+    });
 });
