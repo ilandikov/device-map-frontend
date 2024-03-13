@@ -3,7 +3,7 @@ import React from 'react';
 import { OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
-import { setUserAuthState } from './LoginModalTestHelpers';
+import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPInputComponent(
     userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP,
@@ -83,7 +83,7 @@ describe('OTP input tests', () => {
 
 describe('OTPInputForm action tests', () => {
     beforeEach(() => {
-        jest.resetAllMocks();
+        resetLoginModalMocks();
     });
 
     function verifyNextButton(
