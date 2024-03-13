@@ -1,16 +1,12 @@
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
 import { UserAuthState } from '../LoginModal';
-import { createEvent } from '../../TestHelpers';
+import { createEvent, getInput } from '../../TestHelpers';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {
     return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
-}
-
-export function getInput(container: HTMLElement, inputIndex: number) {
-    return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 }
 
 describe('OTP form tests', () => {
