@@ -17,13 +17,12 @@ import { UserAuthState } from './UserAuthStateUtils';
 export function LoginModal() {
     const { t } = useI18next();
 
-    const [userAuthState, setUserAuthState] = React.useState(UserAuthState.WELCOME);
+    const loginModalState = useSelector((state: RootState) => state.loginModalState);
+
+    const [userAuthState, setUserAuthState] = React.useState(loginModalState);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
-
-    // @ts-expect-error
-    const loginModalState = useSelector((state: RootState) => state.loginModalState);
 
     return (
         <div className="login-modal-window">
