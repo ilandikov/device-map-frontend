@@ -1,6 +1,6 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
-import { OTPInputForm } from '../OTPInputForm';
+import { OTPInput, OTPInputForm } from '../OTPInputForm';
 import { UserAuthState } from '../LoginModal';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
@@ -11,14 +11,26 @@ function renderOTPInputFormComponent(
     return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
 }
 
+function renderOTPInputComponent() {
+    return render(
+        <OTPInput
+            {...{
+                index: 32,
+                onChange: () => {},
+            }}
+            ref={null}
+        />,
+    );
+}
+
 describe('OTP input tests', () => {
     function getInput(container: HTMLElement, inputIndex: number) {
         return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
     }
 
-    it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        const { container } = renderOTPInputFormComponent();
-        const input = getInput(container, inputIndex);
+    it('should enter numeric characters in OTP input', () => {
+        const { container } = renderOTPInputComponent();
+        const input = getInput(container, 32);
         expect(input.value).toEqual('');
 
         fireEvent.change(input, createEvent('1'));
