@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { OTPInput } from '../OTPInputForm';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
+import { OTPInput } from '../OTPInput';
 import { getInput } from './OTPInputForm.test';
 
 function renderOTPInput() {

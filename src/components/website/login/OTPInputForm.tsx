@@ -1,31 +1,9 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React, { createRef, forwardRef, useRef } from 'react';
+import React, { createRef, useRef } from 'react';
 import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { UserAuthState } from './LoginModal';
-
-interface OTPInputProps {
-    index: number;
-    onChange: () => void;
-}
-
-export const OTPInput = forwardRef<HTMLInputElement>(function OTPInput(
-    props: OTPInputProps,
-    ref: React.Ref<HTMLInputElement> | null,
-) {
-    return (
-        <input
-            key={`OTPInput${props.index}`}
-            data-testid={`OTPInput${props.index}`}
-            type="number"
-            pattern="[0-9]"
-            maxLength={1}
-            ref={ref}
-            onFocus={(event) => (event.target.value = '')}
-            onChange={props.onChange}
-        />
-    );
-});
+import { OTPInput } from './OTPInput';
 
 interface OTPInputFormProps {
     userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP;
