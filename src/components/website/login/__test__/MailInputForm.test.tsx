@@ -86,6 +86,7 @@ describe('MailInputForm action tests', () => {
     beforeEach(() => {
         resetHookMock();
         resetLoginModalMocks();
+        mockDispatch.mockReset();
     });
 
     it('should call email setter from email input', () => {
@@ -113,6 +114,7 @@ describe('MailInputForm action tests', () => {
         expect(spyOnGetUserEmailError).toHaveBeenNthCalledWith(1, 'new@email.com');
         expect(setMailInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'requestVerifyUserEmail' });
     });
 
     it('should move from mail already exists to password verification stage', () => {
