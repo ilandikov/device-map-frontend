@@ -2,7 +2,7 @@ import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
-import { OTPInputForm } from './OTPInputForm';
+import { OTPForm } from './OTPForm';
 import { LoginModalHeader, LoginModalHeaderState } from './LoginModalHeader';
 import { LoginModalShadows } from './LoginModalShadows/LoginModalShadows';
 import './LoginModal.scss';
@@ -91,7 +91,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.SIGNUP_OTP && (
                     <>
                         <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
-                        <OTPInputForm {...{ userAuthState, setUserAuthState }} />
+                        <OTPForm {...{ userAuthState, setUserAuthState }} />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
@@ -127,7 +127,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.LOGIN_OTP && (
                     <>
                         <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
-                        <OTPInputForm {...{ userAuthState, setUserAuthState }} />
+                        <OTPForm {...{ userAuthState, setUserAuthState }} />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (

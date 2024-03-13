@@ -1,14 +1,12 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
-import { OTPInputForm } from '../OTPInputForm';
+import { OTPForm } from '../OTPForm';
 import { UserAuthState } from '../LoginModal';
 import { createEvent } from '../../TestHelpers';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
-function renderOTPInputForm(
-    userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP,
-) {
-    return render(<OTPInputForm {...{ userAuthState, setUserAuthState }} />);
+function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {
+    return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
 }
 
 export function getInput(container: HTMLElement, inputIndex: number) {
@@ -19,7 +17,7 @@ describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            const { container } = renderOTPInputForm();
+            const { container } = renderOTPForm();
             const input = getInput(container, inputIndex);
 
             fireEvent.change(input, createEvent('1'));
@@ -30,7 +28,7 @@ describe('OTP form tests', () => {
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        const { container } = renderOTPInputForm();
+        const { container } = renderOTPForm();
         const input = getInput(container, 5);
 
         fireEvent.change(input, createEvent('1'));
@@ -40,7 +38,7 @@ describe('OTP form tests', () => {
     });
 
     it('should focus on the next empty input after a digit has been input', () => {
-        const { container } = renderOTPInputForm();
+        const { container } = renderOTPForm();
         const input0 = getInput(container, 0);
         const input1 = getInput(container, 1);
         const input2 = getInput(container, 2);
@@ -63,7 +61,7 @@ describe('OTP form action tests', () => {
         renderState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP,
         nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING | UserAuthState.LOGIN_OTP_LOADING,
     ) {
-        const { container } = renderOTPInputForm(renderState);
+        const { container } = renderOTPForm(renderState);
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
