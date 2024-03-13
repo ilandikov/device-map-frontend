@@ -8,6 +8,7 @@ describe('LoginModal reducer tests', () => {
 
         expect(initialState).toEqual({
             userAuthState: UserAuthState.WELCOME,
+            userEmail: '',
         });
     });
 
@@ -16,6 +17,7 @@ describe('LoginModal reducer tests', () => {
 
         expect(nextState).toEqual({
             userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: '',
         });
     });
 
@@ -24,6 +26,7 @@ describe('LoginModal reducer tests', () => {
 
         expect(nextState).toEqual({
             userAuthState: UserAuthState.LOGIN,
+            userEmail: '',
         });
     });
 

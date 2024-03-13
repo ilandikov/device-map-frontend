@@ -3,10 +3,12 @@ import { LoginModalAction, LoginModalActionTypes } from './actions';
 
 export interface LoginModalState {
     userAuthState: UserAuthState;
+    userEmail: string;
 }
 
 const loginModalInitialState: LoginModalState = {
     userAuthState: UserAuthState.WELCOME,
+    userEmail: '',
 };
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
