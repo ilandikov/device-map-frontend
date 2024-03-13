@@ -17,6 +17,8 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                     return { ...state, userAuthState: UserAuthState.MAIL_INPUT };
                 case 'accountLogin':
                     return { ...state, userAuthState: UserAuthState.LOGIN };
+                case 'cancel':
+                    return { ...state, userAuthState: UserAuthState.WELCOME };
             }
     }
     return state;

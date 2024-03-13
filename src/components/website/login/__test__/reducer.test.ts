@@ -26,4 +26,12 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.LOGIN,
         });
     });
+
+    it('nav cancel button: should transition back to welcome from login', () => {
+        const nextState = loginModalReducer({ userAuthState: UserAuthState.LOGIN }, loginModalButtonClick('cancel'));
+
+        expect(nextState).toEqual({
+            userAuthState: UserAuthState.WELCOME,
+        });
+    });
 });
