@@ -18,4 +18,12 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
         });
     });
+
+    it('should transition to user login', () => {
+        const nextState = loginModalReducer(undefined, loginModalButtonClick('accountLogin'));
+
+        expect(nextState).toEqual({
+            userAuthState: UserAuthState.LOGIN,
+        });
+    });
 });

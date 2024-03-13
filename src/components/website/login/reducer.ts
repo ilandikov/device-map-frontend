@@ -15,6 +15,8 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
             switch (action.button) {
                 case 'accountRegister':
                     return { ...state, userAuthState: UserAuthState.MAIL_INPUT };
+                case 'accountLogin':
+                    return { ...state, userAuthState: UserAuthState.LOGIN };
             }
     }
     return state;
