@@ -9,6 +9,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal, UserAuthState } from '../LoginModal';
 import {
     renderAsJSON,
+    resetLoginModalMocks,
     setUserAuthState,
     setUserEmail,
     setUserPassword,
@@ -110,6 +111,10 @@ describe('LoginModal snapshot tests', () => {
 });
 
 describe('LoginModal action tests - welcome stage', () => {
+    beforeEach(() => {
+        resetLoginModalMocks();
+    });
+
     it('should transition to email input from welcome state', () => {
         mockLoginModalUseStates(UserAuthState.WELCOME);
         const { container } = render(componentWithStoreProvider);
@@ -117,7 +122,7 @@ describe('LoginModal action tests - welcome stage', () => {
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.MAIL_INPUT);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
     });
 
     it('should transition to login from welcome state', () => {
@@ -127,11 +132,15 @@ describe('LoginModal action tests - welcome stage', () => {
         const loginButton = getByText(container, 'accountLogin');
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
     });
 });
 
 describe('LoginModal go back button click actions', () => {
+    beforeEach(() => {
+        resetLoginModalMocks();
+    });
+
     it.each([
         // From mail input to welcome
         [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
@@ -151,6 +160,6 @@ describe('LoginModal go back button click actions', () => {
         const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(goBackToState);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, goBackToState);
     });
 });

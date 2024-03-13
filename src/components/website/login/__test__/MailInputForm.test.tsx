@@ -7,7 +7,7 @@ import { MailInputError } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';
-import { renderAsJSON, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { renderAsJSON, resetLoginModalMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -80,6 +80,7 @@ describe('MailInputForm snapshot tests', () => {
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
         resetHookMock();
+        resetLoginModalMocks();
     });
 
     it('should call email setter from email input', () => {
@@ -90,7 +91,7 @@ describe('MailInputForm action tests', () => {
 
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
+        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
@@ -103,7 +104,7 @@ describe('MailInputForm action tests', () => {
 
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(spyOnGetUserEmailError).toHaveBeenCalledWith('new@email.com');
+        expect(spyOnGetUserEmailError).toHaveBeenNthCalledWith(1, 'new@email.com');
         expect(setMailInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
     });
@@ -115,6 +116,6 @@ describe('MailInputForm action tests', () => {
 
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
     });
 });

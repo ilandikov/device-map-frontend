@@ -24,7 +24,7 @@ describe('PasswordResetRequest form action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(setUserEmail).toHaveBeenCalledWith('new@email.com');
+        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
     });
 
     it('should transition to login OTP state on OTP button click', () => {
@@ -33,6 +33,6 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_OTP);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN_OTP);
     });
 });
