@@ -22,7 +22,7 @@ describe('MapApp reducer tests', () => {
         const expectedState: MapAppState = {
             showProductDescription: false,
             showLoginModal: true,
-            userAuthState: UserAuthState.PRODUCT_DESCRIPTION,
+            userAuthState: UserAuthState.WELCOME,
         };
         expect(resultingState).toEqual(expectedState);
     });
