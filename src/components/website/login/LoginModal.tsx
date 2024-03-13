@@ -14,19 +14,7 @@ import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
 import { UserAuthState } from './UserAuthStateUtils';
 import { LoginModalState } from './reducer';
-
-enum LoginModalActionTypes {
-    BUTTON_CLICKED = 'buttonClicked',
-}
-
-interface LoginModalButtonClick {
-    type: LoginModalActionTypes;
-    button: string;
-}
-
-function loginModalButtonClick(button: string): LoginModalButtonClick {
-    return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
-}
+import { LoginModalActionTypes, loginModalButtonClick } from './actions';
 
 export function LoginModal() {
     const { t } = useI18next();
