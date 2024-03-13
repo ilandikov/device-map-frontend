@@ -24,6 +24,12 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
     initialUserEmail: string = '',
@@ -114,6 +120,7 @@ describe('LoginModal snapshot tests', () => {
 describe('LoginModal action tests - welcome stage', () => {
     beforeEach(() => {
         resetLoginModalMocks();
+        mockDispatch.mockReset();
     });
 
     it('should transition to email input from welcome state', () => {
@@ -124,6 +131,7 @@ describe('LoginModal action tests - welcome stage', () => {
         fireEvent.click(registerButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'accountRegister' });
     });
 
     it('should transition to login from welcome state', () => {
@@ -134,6 +142,7 @@ describe('LoginModal action tests - welcome stage', () => {
         fireEvent.click(loginButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'accountLogin' });
     });
 });
 

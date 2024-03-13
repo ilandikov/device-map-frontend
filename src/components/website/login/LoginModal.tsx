@@ -1,7 +1,7 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -19,6 +19,7 @@ export function LoginModal() {
     const { t } = useI18next();
 
     const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
+    const dispatch = useAppDispatch();
 
     const [userAuthState, setUserAuthState] = React.useState(loginModalState.userAuthState);
     const [userEmail, setUserEmail] = React.useState('');
@@ -37,6 +38,7 @@ export function LoginModal() {
                             <button
                                 className="login-modal-button-black-on-green"
                                 onClick={() => {
+                                    dispatch({ type: 'buttonClicked', button: 'accountLogin' });
                                     setUserAuthState(UserAuthState.LOGIN);
                                 }}
                             >
@@ -45,6 +47,7 @@ export function LoginModal() {
                             <button
                                 className="login-modal-button-green-on-black"
                                 onClick={() => {
+                                    dispatch({ type: 'buttonClicked', button: 'accountRegister' });
                                     setUserAuthState(UserAuthState.MAIL_INPUT);
                                 }}
                             >
