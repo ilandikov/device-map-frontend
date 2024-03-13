@@ -13,7 +13,7 @@ function getInput(container: HTMLElement, inputIndex: number) {
     return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 }
 
-describe('OTP form tests', () => {
+describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPForm();
         const input = getInput(container, inputIndex);
@@ -26,6 +26,23 @@ describe('OTP form tests', () => {
         expect(input.value).toEqual('');
     });
 
+    it.each([0, 1, 2, 3, 4, 5])(
+        'should rewrite an existing value that has already been input in OTP input number %i',
+        (inputIndex) => {
+            const { container } = renderOTPForm();
+            const input = getInput(container, inputIndex);
+
+            fireEvent.change(input, createEvent('3'));
+            expect(input.value).toEqual('3');
+
+            input.focus();
+
+            expect(input.value).toEqual('');
+        },
+    );
+});
+
+describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
@@ -48,21 +65,6 @@ describe('OTP form tests', () => {
         const nextButton = getByText(container, 'next');
         expect(nextButton).toHaveFocus();
     });
-
-    it.each([0, 1, 2, 3, 4, 5])(
-        'should rewrite an existing value that has already been input in OTP input number %i',
-        (inputIndex) => {
-            const { container } = renderOTPForm();
-            const input = getInput(container, inputIndex);
-
-            fireEvent.change(input, createEvent('3'));
-            expect(input.value).toEqual('3');
-
-            input.focus();
-
-            expect(input.value).toEqual('');
-        },
-    );
 
     it('should focus on the next empty input after a digit has been input', () => {
         const { container } = renderOTPForm();
