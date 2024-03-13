@@ -1,5 +1,7 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -19,6 +21,9 @@ export function LoginModal() {
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
+
+    // @ts-expect-error
+    const loginModalState = useSelector((state: RootState) => state.loginModalState);
 
     return (
         <div className="login-modal-window">
