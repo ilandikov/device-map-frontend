@@ -85,6 +85,7 @@ describe('OTPInputForm action tests', () => {
     beforeEach(() => {
         jest.resetAllMocks();
     });
+
     function verifyNextButton(
         renderState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP,
         nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING | UserAuthState.LOGIN_OTP_LOADING,
@@ -94,7 +95,7 @@ describe('OTPInputForm action tests', () => {
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(nextButtonCallingState);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, nextButtonCallingState);
     }
 
     it('should transition from sign up OTP to loading OTP state', () => {
