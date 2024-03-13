@@ -1,8 +1,31 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React, { createRef, useRef } from 'react';
+import React, { createRef, forwardRef, useRef } from 'react';
 import './OTPInput.scss';
 import { userAuthStateFromOTP } from './UserAuthStateUtils';
 import { UserAuthState } from './LoginModal';
+
+interface OTPInputProps {
+    index: number;
+    onChange: () => void;
+}
+
+const OTPInput = forwardRef<HTMLInputElement>(function OTPInput(
+    props: OTPInputProps,
+    ref: React.Ref<HTMLInputElement>,
+) {
+    return (
+        <input
+            key={`OTPInput${props.index}`}
+            data-testid={`OTPInput${props.index}`}
+            type="number"
+            pattern="[0-9]"
+            maxLength={1}
+            ref={ref}
+            onFocus={(event) => (event.target.value = '')}
+            onChange={props.onChange}
+        />
+    );
+});
 
 interface OTPInputFormProps {
     userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP;
@@ -18,18 +41,15 @@ export function OTPInputForm(props: OTPInputFormProps) {
 
     const inputs = inputRefs.map((inputRef, index) => {
         return (
-            <input
-                type="number"
-                pattern="[0-9]"
-                maxLength={1}
-                key={`OTPInput${index}`}
-                data-testid={`OTPInput${index}`}
-                ref={inputRef}
-                onFocus={(event) => (event.target.value = '')}
-                onChange={() => {
-                    const nextElementToFocus = getNextElementForFocus(index);
-                    nextElementToFocus.current.focus();
+            <OTPInput
+                {...{
+                    index,
+                    onChange: () => {
+                        const nextElementToFocus = getNextElementForFocus(index);
+                        nextElementToFocus.current.focus();
+                    },
                 }}
+                ref={inputRef}
             />
         );
     });
