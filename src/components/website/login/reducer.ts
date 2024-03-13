@@ -1,6 +1,6 @@
 import { UserAuthState } from './UserAuthStateUtils';
 
-interface LoginModalState {
+export interface LoginModalState {
     userAuthState: UserAuthState;
 }
 

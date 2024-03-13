@@ -13,13 +13,14 @@ import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
 import { UserAuthState } from './UserAuthStateUtils';
+import { LoginModalState } from './reducer';
 
 export function LoginModal() {
     const { t } = useI18next();
 
-    const loginModalState = useSelector((state: RootState) => state.loginModalState);
+    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
 
-    const [userAuthState, setUserAuthState] = React.useState(loginModalState);
+    const [userAuthState, setUserAuthState] = React.useState(loginModalState.userAuthState);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
     const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
