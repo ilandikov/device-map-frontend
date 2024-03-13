@@ -14,7 +14,7 @@ import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
 import { UserAuthState } from './UserAuthStateUtils';
 import { LoginModalState } from './reducer';
-import { LoginModalActionTypes, loginModalButtonClick } from './actions';
+import { loginModalButtonClick } from './actions';
 
 export function LoginModal() {
     const { t } = useI18next();
@@ -48,7 +48,7 @@ export function LoginModal() {
                             <button
                                 className="login-modal-button-green-on-black"
                                 onClick={() => {
-                                    dispatch({ type: LoginModalActionTypes.BUTTON_CLICKED, button: 'accountRegister' });
+                                    dispatch(loginModalButtonClick('accountRegister'));
                                     setUserAuthState(UserAuthState.MAIL_INPUT);
                                 }}
                             >
