@@ -9,11 +9,11 @@ function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.L
     return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
 }
 
-describe('OTP form tests', () => {
-    function getInput(container: HTMLElement, inputIndex: number) {
-        return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
-    }
+function getInput(container: HTMLElement, inputIndex: number) {
+    return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+}
 
+describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const { container } = renderOTPForm();
         const input = getInput(container, inputIndex);
