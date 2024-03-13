@@ -23,11 +23,11 @@ function renderOTPInput() {
     );
 }
 
-describe('OTP input tests', () => {
-    function getInput(container: HTMLElement, inputIndex: number) {
-        return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
-    }
+function getInput(container: HTMLElement, inputIndex: number) {
+    return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
+}
 
+describe('OTP input tests', () => {
     it('should enter numeric characters in OTP input', () => {
         const { container } = renderOTPInput();
         const input = getInput(container, 32);
