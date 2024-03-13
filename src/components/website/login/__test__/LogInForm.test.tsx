@@ -41,13 +41,17 @@ function componentWithStoreProvider(
 }
 
 describe('LogInForm action tests', () => {
+    beforeEach(() => {
+        setUserAuthState.mockReset();
+    });
+
     it('should update the user email on input on password input stage', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
 
-        expect(setUserEmail).toHaveBeenCalledWith('hereIsMyMail@server.com');
+        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'hereIsMyMail@server.com');
     });
 
     it('should show the already input email on password input stage', () => {
@@ -64,7 +68,7 @@ describe('LogInForm action tests', () => {
         const userPasswordInput = getByTestId(container, 'userPasswordLogin');
         fireEvent.change(userPasswordInput, createEvent('strongPassword'));
 
-        expect(setUserPassword).toHaveBeenCalledWith('strongPassword');
+        expect(setUserPassword).toHaveBeenNthCalledWith(1, 'strongPassword');
     });
 
     it('should call user authentication when next button is pressed', () => {
@@ -79,7 +83,7 @@ describe('LogInForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenCalledWith('user@mail.com', 'aPassword');
+        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenNthCalledWith(1, 'user@mail.com', 'aPassword');
     });
 
     it('should transition to password reset state when reset button was clicked', () => {
@@ -88,6 +92,6 @@ describe('LogInForm action tests', () => {
         const resetPasswordButton = getByText(container, 'resetPassword');
         fireEvent.click(resetPasswordButton);
 
-        expect(setUserAuthState).toHaveBeenCalledWith(UserAuthState.LOGIN_PASSWORD_RESET);
+        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN_PASSWORD_RESET);
     });
 });
