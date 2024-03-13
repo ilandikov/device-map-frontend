@@ -1,7 +1,8 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { MailInputBox } from './MailInputBox';
-import { UserAuthState } from './LoginModal';
+
+import { UserAuthState } from './UserAuthStateUtils';
 
 interface PasswordResetRequestFormProps {
     setUserAuthState: (string) => void;

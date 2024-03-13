@@ -2,8 +2,7 @@ import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
-import { UserAuthState } from './LoginModal';
-import { userAuthStateFromUserLogin } from './UserAuthStateUtils';
+import { UserAuthState, userAuthStateFromUserLogin } from './UserAuthStateUtils';
 
 interface LogInFormProps {
     userAuthState: UserAuthState;

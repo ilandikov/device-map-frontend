@@ -1,8 +1,8 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
-import { UserAuthState } from '../LoginModal';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
+import { UserAuthState } from '../UserAuthStateUtils';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {

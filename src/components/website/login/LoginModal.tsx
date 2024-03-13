@@ -10,19 +10,7 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-
-export enum UserAuthState {
-    WELCOME = 'WELCOME',
-    MAIL_INPUT = 'MAIL_INPUT',
-    SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
-    SIGNUP_OTP = 'SIGNUP_OTP',
-    SIGNUP_OTP_LOADING = 'SIGNUP_OTP_LOADING',
-    LOGIN = 'LOGIN',
-    LOGIN_PASSWORD_RESET = 'LOGIN_PASSWORD_RESET',
-    LOGIN_OTP = 'LOGIN_OTP',
-    LOGIN_OTP_LOADING = 'LOGIN_OTP_LOADING',
-    LOGGED_IN = 'LOGGED_IN',
-}
+import { UserAuthState } from './UserAuthStateUtils';
 
 export function LoginModal() {
     const { t } = useI18next();

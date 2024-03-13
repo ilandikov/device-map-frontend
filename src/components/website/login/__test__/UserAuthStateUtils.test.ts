@@ -1,11 +1,11 @@
 import {
     MailInputError,
+    UserAuthState,
     getPasswordInputErrorAndNextState,
     getUserEmailErrorAndNextState,
     userAuthStateFromOTP,
     userAuthStateFromUserLogin,
 } from '../UserAuthStateUtils';
-import { UserAuthState } from '../LoginModal';
 
 describe('user email logic tests', () => {
     it('should return no error on valid mail and move to password creation state', () => {

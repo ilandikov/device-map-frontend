@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
-import { UserAuthState } from '../LoginModal';
+import { UserAuthState } from '../UserAuthStateUtils';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 const store = configureTestStore();

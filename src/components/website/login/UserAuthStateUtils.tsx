@@ -1,4 +1,15 @@
-import { UserAuthState } from './LoginModal';
+export enum UserAuthState {
+    WELCOME = 'WELCOME',
+    MAIL_INPUT = 'MAIL_INPUT',
+    SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
+    SIGNUP_OTP = 'SIGNUP_OTP',
+    SIGNUP_OTP_LOADING = 'SIGNUP_OTP_LOADING',
+    LOGIN = 'LOGIN',
+    LOGIN_PASSWORD_RESET = 'LOGIN_PASSWORD_RESET',
+    LOGIN_OTP = 'LOGIN_OTP',
+    LOGIN_OTP_LOADING = 'LOGIN_OTP_LOADING',
+    LOGGED_IN = 'LOGGED_IN',
+}
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {

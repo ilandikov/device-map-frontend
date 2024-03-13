@@ -3,8 +3,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import { UserAuthState } from '../LoginModal';
 import { createEvent } from '../../TestHelpers';
+import { UserAuthState } from '../UserAuthStateUtils';
 import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 const store = configureTestStore();

@@ -2,7 +2,8 @@ import React from 'react';
 import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
-import { UserAuthState } from './LoginModal';
+
+import { UserAuthState } from './UserAuthStateUtils';
 
 interface NavigationButtonsProps {
     setUserAuthState: (string) => void;

@@ -6,7 +6,8 @@ import '@testing-library/jest-dom';
 
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
-import { LoginModal, UserAuthState } from '../LoginModal';
+import { LoginModal } from '../LoginModal';
+import { UserAuthState } from '../UserAuthStateUtils';
 import {
     renderAsJSON,
     resetLoginModalMocks,

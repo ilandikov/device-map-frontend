@@ -1,9 +1,8 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
-import { UserAuthState } from '../LoginModal';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
-import { MailInputError } from '../UserAuthStateUtils';
+import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';

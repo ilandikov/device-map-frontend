@@ -2,9 +2,9 @@ import { fireEvent, getByTestId, getByText, render } from '@testing-library/reac
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
-import { UserAuthState } from '../LoginModal';
 import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
+import { UserAuthState } from '../UserAuthStateUtils';
 import { createEvent } from '../../TestHelpers';
 import { resetLoginModalMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
