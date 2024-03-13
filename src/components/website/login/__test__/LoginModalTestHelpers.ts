@@ -9,3 +9,7 @@ export const setUserPasswordRepeat = jest.fn().mockImplementation((userEmail) =>
 export function renderAsJSON(component: React.ReactElement) {
     return renderer.create(component).toJSON();
 }
+
+export function resetLoginModalMocks() {
+    setUserAuthState.mockReset();
+}
