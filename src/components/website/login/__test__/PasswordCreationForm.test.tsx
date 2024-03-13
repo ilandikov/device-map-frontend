@@ -93,7 +93,7 @@ describe('PasswordCreationForm action tests', () => {
         const userPasswordInput = getByTestId(container, 'userPassword');
         fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
 
-        expect(setUserPassword).toHaveBeenCalledWith('verySecurePassword1');
+        expect(setUserPassword).toHaveBeenNthCalledWith(1, 'verySecurePassword1');
     });
 
     it('should update repeated user password when typed', () => {
@@ -108,7 +108,7 @@ describe('PasswordCreationForm action tests', () => {
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
 
-        expect(setUserPasswordRepeat).toHaveBeenCalledWith('evenBetterPassword');
+        expect(setUserPasswordRepeat).toHaveBeenNthCalledWith(1, 'evenBetterPassword');
     });
 
     it('should call password verification when next button is pressed', () => {
@@ -124,7 +124,7 @@ describe('PasswordCreationForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(spyOnGetPasswordInputError).toHaveBeenCalledWith('passwordOne', 'PasswordTwo');
+        expect(spyOnGetPasswordInputError).toHaveBeenNthCalledWith(1, 'passwordOne', 'PasswordTwo');
         expect(setPasswordInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
     });
