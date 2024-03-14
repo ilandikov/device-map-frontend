@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState, userAuthStateFromUserLogin } from './UserAuthStateUtils';
-import { LoginModalInputTypes, loginModalInput } from './actions';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './actions';
 
 interface LogInFormProps {
     userAuthState: UserAuthState;
@@ -55,6 +55,7 @@ export function LogInForm(props: LogInFormProps) {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
+                            dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD));
                             const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
                             props.setUserAuthState(nextUserState);
                         }}

@@ -6,7 +6,7 @@ import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { createEvent } from '../../TestHelpers';
-import { LoginModalInputTypes, loginModalInput } from '../actions';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from '../actions';
 import { resetLoginModalMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -101,6 +101,10 @@ describe('LogInForm action tests', () => {
         fireEvent.click(tryVerifyPasswordsButton);
 
         expect(spyOnUserAuthStateFromUserLogin).toHaveBeenNthCalledWith(1, 'user@mail.com', 'aPassword');
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD),
+        );
     });
 
     it('should transition to password reset state when reset button was clicked', () => {

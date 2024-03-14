@@ -7,6 +7,7 @@ export enum LoginModalActionTypes {
 export enum LoginModalVerifyTypes {
     USER_EMAIL = 'userEmail',
     USER_PASSWORD = 'userPassword',
+    USER_EMAIL_AND_PASSWORD = 'userEmailAndPassword',
 }
 
 export enum LoginModalInputTypes {
