@@ -1,5 +1,5 @@
 import { LoginModalState, loginModalReducer } from '../reducer';
-import { UserAuthState } from '../UserAuthStateUtils';
+import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import {
     LoginModalAction,
     LoginModalActionTypes,
@@ -149,7 +149,7 @@ describe('LoginModal reducer tests', () => {
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'this is not an email!',
-            userEmailError: new Error('mailNotValid'),
+            userEmailError: new Error(MailInputError.NOT_VALID),
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -167,7 +167,7 @@ describe('LoginModal reducer tests', () => {
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'already@exists.com',
-            userEmailError: new Error('mailAlreadyExists'),
+            userEmailError: new Error(MailInputError.ALREADY_EXISTS),
         };
 
         verifyNextState(initialState, action, expectedState);
