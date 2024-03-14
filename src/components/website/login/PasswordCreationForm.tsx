@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
 import { getPasswordInputErrorAndNextState } from './UserAuthStateUtils';
-import { LoginModalActionTypes } from './actions';
+import { LoginModalActionTypes, LoginModalVerifyTypes, loginModalVerifyRequest } from './actions';
 
 interface PasswordCreationFormProps {
     setUserAuthState: (string) => void;
@@ -48,7 +48,7 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch({ type: LoginModalActionTypes.REQUEST_VERIFY_USER_PASSWORDS });
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
                         const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
                             props.userPassword,
                             props.userPasswordRepeat,

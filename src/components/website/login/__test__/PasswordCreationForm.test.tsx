@@ -5,7 +5,7 @@ import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
-import { LoginModalActionTypes } from '../actions';
+import { LoginModalActionTypes, LoginModalVerifyTypes, loginModalVerifyRequest } from '../actions';
 import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -143,8 +143,6 @@ describe('PasswordCreationForm action tests', () => {
         expect(spyOnGetPasswordInputError).toHaveBeenNthCalledWith(1, 'passwordOne', 'PasswordTwo');
         expect(setPasswordInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, {
-            type: LoginModalActionTypes.REQUEST_VERIFY_USER_PASSWORDS,
-        });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
     });
 });

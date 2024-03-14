@@ -9,6 +9,7 @@ export enum LoginModalActionTypes {
 
 export enum LoginModalVerifyTypes {
     USER_EMAIL = 'userEmail',
+    USER_PASSWORD = 'userPassword',
 }
 
 export interface LoginModalButtonClick {
