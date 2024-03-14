@@ -1,6 +1,6 @@
 import { LoginModalState, loginModalReducer } from '../reducer';
 import { UserAuthState } from '../UserAuthStateUtils';
-import { LoginModalActionTypes, LoginModalUserEmailInput, loginModalButtonClick } from '../actions';
+import { LoginModalAction, LoginModalActionTypes, LoginModalUserEmailInput, loginModalButtonClick } from '../actions';
 
 function buildLoginModalInitialState({
     userAuthState,
@@ -10,6 +10,11 @@ function buildLoginModalInitialState({
     userEmail?: string;
 }): LoginModalState {
     return { userAuthState: userAuthState ?? UserAuthState.WELCOME, userEmail: userEmail ?? '' };
+}
+
+function verifyNextState(initialState: LoginModalState, action: LoginModalAction, expectedState: LoginModalState) {
+    const nextState = loginModalReducer(initialState, action);
+    expect(nextState).toEqual(expectedState);
 }
 
 describe('LoginModal reducer tests', () => {
@@ -47,13 +52,12 @@ describe('LoginModal reducer tests', () => {
             const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
             const action = loginModalButtonClick('cancel');
 
-            const nextState = loginModalReducer(initialState, action);
-
             const expectedState: LoginModalState = {
                 userAuthState: UserAuthState.WELCOME,
                 userEmail: '',
             };
-            expect(nextState).toEqual(expectedState);
+
+            verifyNextState(initialState, action, expectedState);
         },
     );
 
