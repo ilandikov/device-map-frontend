@@ -4,6 +4,7 @@ export enum LoginModalActionTypes {
     REQUEST_VERIFY_USER_EMAIL = 'requestVerifyUserEmail',
     USER_PASSWORD_INPUT = 'userPasswordInput',
     USER_PASSWORD_REPEAT_INPUT = 'userPasswordRepeatInput',
+    REQUEST_VERIFY_USER_PASSWORDS = 'requestVerifyPassword',
 }
 
 export interface LoginModalButtonClick {

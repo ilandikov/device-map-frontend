@@ -144,7 +144,7 @@ describe('PasswordCreationForm action tests', () => {
         expect(setPasswordInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, {
-            type: 'requestVerifyPassword',
+            type: LoginModalActionTypes.REQUEST_VERIFY_USER_PASSWORDS,
         });
     });
 });
