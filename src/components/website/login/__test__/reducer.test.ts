@@ -43,9 +43,9 @@ describe('LoginModal reducer tests', () => {
 
     it.each(Object.keys(UserAuthState))(
         'nav cancel button: should transition back to welcome from %s state',
-        (userAuthState: UserAuthState) => {
+        (initialUserAuthState: UserAuthState) => {
             const nextState = loginModalReducer(
-                buildLoginModalInitialState({ userAuthState }),
+                buildLoginModalInitialState({ userAuthState: initialUserAuthState }),
                 loginModalButtonClick('cancel'),
             );
 
@@ -68,14 +68,14 @@ describe('LoginModal reducer tests', () => {
 
         // From password creation to mail input
         [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
-    ])('nav go back button: should transition from %s to %s', (initialState, expectedState) => {
+    ])('nav go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
         const nextState = loginModalReducer(
-            buildLoginModalInitialState({ userAuthState: initialState }),
+            buildLoginModalInitialState({ userAuthState: initialUserAuthState }),
             loginModalButtonClick('goBack'),
         );
 
         expect(nextState).toEqual({
-            userAuthState: expectedState,
+            userAuthState: expectedUserAuthState,
             userEmail: '',
         });
     });
