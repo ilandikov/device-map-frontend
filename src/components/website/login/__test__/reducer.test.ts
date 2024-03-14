@@ -15,7 +15,7 @@ function buildLoginModalInitialState({
     userAuthState?: UserAuthState;
     userEmail?: string;
 }): LoginModalState {
-    return { userAuthState: userAuthState ?? UserAuthState.WELCOME, userEmail: userEmail ?? '' };
+    return { userAuthState: userAuthState ?? UserAuthState.WELCOME, userEmail: userEmail ?? '', userEmailError: null };
 }
 
 function verifyNextState(initialState: LoginModalState, action: LoginModalAction, expectedState: LoginModalState) {
@@ -31,6 +31,7 @@ describe('LoginModal reducer tests', () => {
         expect(initialState).toEqual({
             userAuthState: UserAuthState.WELCOME,
             userEmail: '',
+            userEmailError: null,
         });
     });
 
@@ -40,6 +41,7 @@ describe('LoginModal reducer tests', () => {
         expect(nextState).toEqual({
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: '',
+            userEmailError: null,
         });
     });
 
@@ -49,6 +51,7 @@ describe('LoginModal reducer tests', () => {
         expect(nextState).toEqual({
             userAuthState: UserAuthState.LOGIN,
             userEmail: '',
+            userEmailError: null,
         });
     });
 
@@ -61,6 +64,7 @@ describe('LoginModal reducer tests', () => {
             const expectedState: LoginModalState = {
                 userAuthState: UserAuthState.WELCOME,
                 userEmail: '',
+                userEmailError: null,
             };
 
             verifyNextState(initialState, action, expectedState);
@@ -86,6 +90,7 @@ describe('LoginModal reducer tests', () => {
         const expectedState: LoginModalState = {
             userAuthState: expectedUserAuthState,
             userEmail: '',
+            userEmailError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -101,6 +106,7 @@ describe('LoginModal reducer tests', () => {
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'myMail@myServer.xyz',
+            userEmailError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -118,6 +124,7 @@ describe('LoginModal reducer tests', () => {
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
             userEmail: 'good@email.com',
+            userEmailError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
