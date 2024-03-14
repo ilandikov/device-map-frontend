@@ -393,4 +393,23 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+
+    it('should transition to OTP verification from after password reset request', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
+            userEmail: 'please@reset.com',
+        });
+        const action = loginModalButtonClick('OTPSendSMS');
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.LOGIN_OTP,
+            userEmail: 'please@reset.com',
+            userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
 });

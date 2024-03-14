@@ -72,6 +72,9 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                     return { ...state, userAuthState: UserAuthState.WELCOME };
                 case 'passwordReset':
                     return { ...state, userAuthState: UserAuthState.LOGIN_PASSWORD_RESET, userPassword: '' };
+                case 'OTPSendSMS': {
+                    return { ...state, userAuthState: UserAuthState.LOGIN_OTP };
+                }
                 case 'next':
                     switch (state.userAuthState) {
                         case UserAuthState.SIGNUP_OTP:
