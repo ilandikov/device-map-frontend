@@ -333,4 +333,24 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+
+    it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.LOGIN,
+            userEmail: 'writeMe@mail.com',
+            userPassword: 'iForgot',
+        });
+        const action = loginModalButtonClick('passwordReset');
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
+            userEmail: 'writeMe@mail.com',
+            userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
 });
