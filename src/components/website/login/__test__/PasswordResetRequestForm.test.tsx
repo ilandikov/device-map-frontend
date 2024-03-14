@@ -5,6 +5,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { createEvent } from '../../TestHelpers';
 import { UserAuthState } from '../UserAuthStateUtils';
+import { LoginModalInputTypes, loginModalInput } from '../actions';
 import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 const store = configureTestStore();
@@ -17,6 +18,12 @@ function componentWithStoreProvider(userEmail: string = '') {
     );
 }
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 describe('PasswordResetRequest form action tests', () => {
     it('should update user mail when set', () => {
         const { container } = componentWithStoreProvider();
@@ -25,6 +32,10 @@ describe('PasswordResetRequest form action tests', () => {
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
+        );
     });
 
     it('should transition to login OTP state on OTP button click', () => {
