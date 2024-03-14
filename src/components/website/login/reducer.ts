@@ -19,8 +19,9 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
             return { ...state, userEmail: action.userEmail };
         }
         case LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL: {
-            const { nextUserAuthState } = getUserEmailErrorAndNextState(state.userEmail);
-            return { ...state, userAuthState: nextUserAuthState };
+            // TODO move or inline getUserEmailErrorAndNextState() to this file
+            const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(state.userEmail);
+            return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
         }
         case LoginModalActionTypes.BUTTON_CLICKED:
             switch (action.button) {

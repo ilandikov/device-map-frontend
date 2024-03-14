@@ -122,6 +122,7 @@ describe('LoginModal reducer tests', () => {
         const initialState = buildLoginModalInitialState({
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'good@email.com',
+            userEmailError: new Error('omgSomethingIsWrong'),
         });
         const action: LoginModalRequestVerifyUserEmail = {
             type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
@@ -131,6 +132,42 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
             userEmail: 'good@email.com',
             userEmailError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should set mail error and stay at mail input when bad mail has been sent to verification', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'this is not an email!',
+        });
+        const action: LoginModalRequestVerifyUserEmail = {
+            type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
+        };
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'this is not an email!',
+            userEmailError: new Error('mailNotValid'),
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'already@exists.com',
+        });
+        const action: LoginModalRequestVerifyUserEmail = {
+            type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
+        };
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'already@exists.com',
+            userEmailError: new Error('mailAlreadyExists'),
         };
 
         verifyNextState(initialState, action, expectedState);
