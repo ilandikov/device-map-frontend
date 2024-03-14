@@ -11,11 +11,17 @@ import {
 function buildLoginModalInitialState({
     userAuthState,
     userEmail,
+    userEmailError,
 }: {
     userAuthState?: UserAuthState;
     userEmail?: string;
+    userEmailError?: Error;
 }): LoginModalState {
-    return { userAuthState: userAuthState ?? UserAuthState.WELCOME, userEmail: userEmail ?? '', userEmailError: null };
+    return {
+        userAuthState: userAuthState ?? UserAuthState.WELCOME,
+        userEmail: userEmail ?? '',
+        userEmailError: userEmailError ?? null,
+    };
 }
 
 function verifyNextState(initialState: LoginModalState, action: LoginModalAction, expectedState: LoginModalState) {
