@@ -48,6 +48,7 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
+                        dispatch({ type: 'requestVerifyPassword' });
                         const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
                             props.userPassword,
                             props.userPasswordRepeat,

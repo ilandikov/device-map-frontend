@@ -143,5 +143,8 @@ describe('PasswordCreationForm action tests', () => {
         expect(spyOnGetPasswordInputError).toHaveBeenNthCalledWith(1, 'passwordOne', 'PasswordTwo');
         expect(setPasswordInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+            type: 'requestVerifyPassword',
+        });
     });
 });
