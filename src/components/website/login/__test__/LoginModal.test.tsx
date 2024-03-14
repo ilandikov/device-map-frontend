@@ -29,7 +29,14 @@ const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
+    useSelector: () => mockUseSelector(),
 }));
+
+function mockUseSelector() {
+    return {
+        userAuthState: UserAuthState.WELCOME,
+    };
+}
 
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
@@ -55,7 +62,6 @@ const componentWithStoreProvider = (
 
 describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at user welcome stage', () => {
-        mockLoginModalUseStates(UserAuthState.WELCOME);
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
