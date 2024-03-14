@@ -125,7 +125,7 @@ describe('LoginModal reducer tests', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT });
         const action: LoginModalUserEmailInput = {
             type: LoginModalActionTypes.USER_EMAIL_INPUT,
-            userEmail: 'myMail@myServer.xyz',
+            input: 'myMail@myServer.xyz',
         };
 
         const expectedState: LoginModalState = {

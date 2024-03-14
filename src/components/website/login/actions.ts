@@ -22,7 +22,7 @@ export interface LoginModalButtonClick {
 
 export interface LoginModalUserEmailInput {
     type: LoginModalActionTypes.USER_EMAIL_INPUT;
-    userEmail: string;
+    input: string;
 }
 
 export interface LoginModalVerifyRequest {
@@ -61,6 +61,6 @@ export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginMod
 export function loginModalInput(type: LoginModalInput, input: string): LoginModalUserEmailInput {
     return {
         type: LoginModalActionTypes.USER_EMAIL_INPUT,
-        userEmail: input,
+        input: input,
     };
 }

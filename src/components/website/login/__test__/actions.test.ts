@@ -28,7 +28,7 @@ describe('Login Modal action creator tests', () => {
 
         expect(action).toEqual({
             type: LoginModalActionTypes.USER_EMAIL_INPUT,
-            userEmail: 'fancy@address.com',
+            input: 'fancy@address.com',
         });
     });
 });
