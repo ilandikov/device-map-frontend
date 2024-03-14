@@ -8,6 +8,8 @@ export interface LoginModalState {
     userEmailError: Error | null;
     userPassword: string;
     userPasswordRepeat: string;
+    // TODO make userPasswordError optional
+    userPasswordError: Error | null;
 }
 
 const loginModalInitialState: LoginModalState = {
@@ -16,6 +18,7 @@ const loginModalInitialState: LoginModalState = {
     userEmailError: null,
     userPassword: '',
     userPasswordRepeat: '',
+    userPasswordError: null,
 };
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {

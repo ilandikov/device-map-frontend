@@ -28,6 +28,7 @@ function buildLoginModalInitialState({
         userEmailError: userEmailError ?? null,
         userPassword: userPassword ?? '',
         userPasswordRepeat: userPasswordRepeat ?? '',
+        userPasswordError: null,
     };
 }
 
@@ -47,6 +48,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         });
     });
 
@@ -59,6 +61,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         });
     });
 
@@ -71,6 +74,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         });
     });
 
@@ -86,6 +90,7 @@ describe('LoginModal reducer tests', () => {
                 userEmailError: null,
                 userPassword: '',
                 userPasswordRepeat: '',
+                userPasswordError: null,
             };
 
             verifyNextState(initialState, action, expectedState);
@@ -114,6 +119,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -129,6 +135,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -148,6 +155,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -166,6 +174,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: new Error(MailInputError.NOT_VALID),
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -184,6 +193,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: new Error(MailInputError.ALREADY_EXISTS),
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -203,6 +213,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -219,6 +230,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: 'haha!!11',
             userPasswordRepeat: '',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -235,6 +247,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: 'lmao!rofl!',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -255,6 +268,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: 'passwordsMatch',
             userPasswordRepeat: 'passwordsMatch',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -275,6 +289,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: 'dontMatch',
             userPasswordRepeat: 'likeForSureDontMatch',
+            userPasswordError: null,
         };
 
         verifyNextState(initialState, action, expectedState);
