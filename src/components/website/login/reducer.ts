@@ -4,6 +4,7 @@ import { LoginModalAction, LoginModalActionTypes, LoginModalVerifyTypes } from '
 export interface LoginModalState {
     userAuthState: UserAuthState;
     userEmail: string;
+    // TODO make userEmailError optional
     userEmailError: Error | null;
     userPassword: string;
     userPasswordRepeat: string;
