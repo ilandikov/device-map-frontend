@@ -172,4 +172,21 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+
+    it('should remove mail error and transition to login with an existing mail', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'already@exists.com',
+            userEmailError: new Error(MailInputError.ALREADY_EXISTS),
+        });
+        const action = loginModalButtonClick('accountLogin');
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.LOGIN,
+            userEmail: 'already@exists.com',
+            userEmailError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
 });
