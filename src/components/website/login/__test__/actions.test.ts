@@ -27,7 +27,7 @@ describe('Login Modal action creator tests', () => {
         const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'fancy@address.com');
 
         expect(action).toEqual({
-            type: LoginModalActionTypes.USER_EMAIL_INPUT,
+            type: LoginModalActionTypes.INPUT,
             input: {
                 type: LoginModalInputTypes.USER_EMAIL,
                 payload: 'fancy@address.com',

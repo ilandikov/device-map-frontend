@@ -20,7 +20,7 @@ const loginModalInitialState: LoginModalState = {
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
     switch (action.type) {
-        case LoginModalActionTypes.USER_EMAIL_INPUT: {
+        case LoginModalActionTypes.INPUT: {
             return { ...state, userEmail: action.input.payload };
         }
         case LoginModalActionTypes.VERIFY_REQUEST: {

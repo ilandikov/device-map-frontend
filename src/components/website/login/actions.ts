@@ -1,6 +1,6 @@
 export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
-    USER_EMAIL_INPUT = 'userEmailInput',
+    INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
     USER_PASSWORD_INPUT = 'userPasswordInput',
     USER_PASSWORD_REPEAT_INPUT = 'userPasswordRepeatInput',
@@ -21,7 +21,7 @@ export interface LoginModalButtonClick {
 }
 
 export interface LoginModalInput {
-    type: LoginModalActionTypes.USER_EMAIL_INPUT;
+    type: LoginModalActionTypes.INPUT;
     input: {
         type: LoginModalInputTypes;
         payload: string;
@@ -63,7 +63,7 @@ export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginMod
 
 export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: string): LoginModalInput {
     return {
-        type: LoginModalActionTypes.USER_EMAIL_INPUT,
+        type: LoginModalActionTypes.INPUT,
         input: {
             type: inputType,
             payload: inputPayload,
