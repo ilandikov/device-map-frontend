@@ -8,6 +8,7 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal } from '../LoginModal';
 import { UserAuthState } from '../UserAuthStateUtils';
+import { loginModalButtonClick } from '../actions';
 import {
     renderAsJSON,
     resetLoginModalMocks,
@@ -131,7 +132,7 @@ describe('LoginModal action tests - welcome stage', () => {
         fireEvent.click(registerButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'accountRegister' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountRegister'));
     });
 
     it('should transition to login from welcome state', () => {
@@ -142,7 +143,7 @@ describe('LoginModal action tests - welcome stage', () => {
         fireEvent.click(loginButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'accountLogin' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
     });
 });
 
