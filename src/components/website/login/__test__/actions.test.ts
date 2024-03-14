@@ -1,7 +1,9 @@
 import {
     LoginModalActionTypes,
+    LoginModalInput,
     LoginModalVerifyTypes,
     loginModalButtonClick,
+    loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
 
@@ -18,6 +20,15 @@ describe('Login Modal action creator tests', () => {
         expect(action).toEqual({
             type: LoginModalActionTypes.VERIFY_REQUEST,
             verify: LoginModalVerifyTypes.USER_EMAIL,
+        });
+    });
+
+    it('should create input action', () => {
+        const action = loginModalInput(LoginModalInput.USER_EMAIL, 'fancy@address.com');
+
+        expect(action).toEqual({
+            type: LoginModalActionTypes.USER_EMAIL_INPUT,
+            userEmail: 'fancy@address.com',
         });
     });
 });
