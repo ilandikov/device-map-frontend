@@ -8,6 +8,7 @@ export enum LoginModalVerifyTypes {
     USER_EMAIL = 'userEmail',
     USER_PASSWORD = 'userPassword',
     USER_EMAIL_AND_PASSWORD = 'userEmailAndPassword',
+    OTP = 'OTP',
 }
 
 export enum LoginModalInputTypes {

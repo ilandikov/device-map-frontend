@@ -1,7 +1,9 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
 import './OTPInput.scss';
+import { useAppDispatch } from '../../../redux/store';
 import { UserAuthState, userAuthStateFromOTP } from './UserAuthStateUtils';
+import { LoginModalVerifyTypes, loginModalVerifyRequest } from './actions';
 
 interface OTPFormProps {
     userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP;
@@ -10,6 +12,7 @@ interface OTPFormProps {
 
 export function OTPForm(props: OTPFormProps) {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
 
     const nextButton = useRef(null);
 
@@ -61,6 +64,7 @@ export function OTPForm(props: OTPFormProps) {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
                         const nextUserAuthState = userAuthStateFromOTP(props.userAuthState);
                         props.setUserAuthState(nextUserAuthState);
                     }}
