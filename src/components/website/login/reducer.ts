@@ -24,6 +24,10 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
             switch (action.input.type) {
                 case LoginModalInputTypes.USER_EMAIL:
                     return { ...state, userEmail: action.input.payload };
+                case LoginModalInputTypes.USER_PASSWORD:
+                    return { ...state, userPassword: action.input.payload };
+                case LoginModalInputTypes.USER_PASSWORD_REPEAT:
+                    return { ...state, userPasswordRepeat: action.input.payload };
             }
             return state;
         }

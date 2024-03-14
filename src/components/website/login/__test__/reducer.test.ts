@@ -2,10 +2,7 @@ import { LoginModalState, loginModalReducer } from '../reducer';
 import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import {
     LoginModalAction,
-    LoginModalActionTypes,
     LoginModalInputTypes,
-    LoginModalUserPasswordInput,
-    LoginModalUserPasswordRepeatInput,
     LoginModalVerifyTypes,
     loginModalButtonClick,
     loginModalInput,
@@ -214,10 +211,7 @@ describe('LoginModal reducer tests', () => {
     it('should set user password', () => {
         const initialState = buildLoginModalInitialState({});
 
-        const action: LoginModalUserPasswordInput = {
-            type: LoginModalActionTypes.USER_PASSWORD_INPUT,
-            userPassword: 'haha!!11',
-        };
+        const action = loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'haha!!11');
 
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.WELCOME,
@@ -233,10 +227,7 @@ describe('LoginModal reducer tests', () => {
     it('should set user password repeat', () => {
         const initialState = buildLoginModalInitialState({});
 
-        const action: LoginModalUserPasswordRepeatInput = {
-            type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT,
-            userPasswordRepeat: 'lmao!rofl!',
-        };
+        const action = loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'lmao!rofl!');
 
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.WELCOME,
