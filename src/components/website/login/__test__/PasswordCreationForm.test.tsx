@@ -5,13 +5,7 @@ import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
-import {
-    LoginModalActionTypes,
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
-    loginModalInput,
-    loginModalVerifyRequest,
-} from '../actions';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from '../actions';
 import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -127,10 +121,10 @@ describe('PasswordCreationForm action tests', () => {
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
 
         expect(setUserPasswordRepeat).toHaveBeenNthCalledWith(1, 'evenBetterPassword');
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, {
-            type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT,
-            userPassword: 'evenBetterPassword',
-        });
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'evenBetterPassword'),
+        );
     });
 
     it('should call password verification when next button is pressed', () => {

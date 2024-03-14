@@ -14,6 +14,7 @@ export enum LoginModalVerifyTypes {
 export enum LoginModalInputTypes {
     USER_EMAIL = 'userEmail',
     USER_PASSWORD = 'userPassword',
+    USER_PASSWORD_REPEAT = 'userPasswordRepeat',
 }
 
 export interface LoginModalButtonClick {

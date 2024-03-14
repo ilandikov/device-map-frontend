@@ -3,13 +3,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
 import { getPasswordInputErrorAndNextState } from './UserAuthStateUtils';
-import {
-    LoginModalActionTypes,
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
-    loginModalInput,
-    loginModalVerifyRequest,
-} from './actions';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './actions';
 
 interface PasswordCreationFormProps {
     setUserAuthState: (string) => void;
@@ -41,10 +35,7 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
                     onChange={(event) => {
-                        dispatch({
-                            type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT,
-                            userPassword: event.target.value,
-                        });
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, event.target.value));
                         props.setUserPasswordRepeat(event.target.value);
                     }}
                     error={passwordInputError}
