@@ -34,6 +34,12 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockUseSelector(),
 }));
 
+function mockLoginModalState(mockState: any) {
+    mockUseSelector = jest.fn().mockImplementation(() => {
+        return mockState;
+    });
+}
+
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
     initialUserEmail: string = '',
@@ -58,10 +64,8 @@ const componentWithStoreProvider = (
 
 describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at user welcome stage', () => {
-        mockUseSelector = jest.fn().mockImplementation(() => {
-            return {
-                userAuthState: UserAuthState.WELCOME,
-            };
+        mockLoginModalState({
+            userAuthState: UserAuthState.WELCOME,
         });
 
         const component = renderAsJSON(componentWithStoreProvider);
