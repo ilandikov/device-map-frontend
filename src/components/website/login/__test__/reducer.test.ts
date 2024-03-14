@@ -12,17 +12,21 @@ function buildLoginModalInitialState({
     userAuthState,
     userEmail,
     userEmailError,
+    userPassword,
+    userPasswordRepeat,
 }: {
     userAuthState?: UserAuthState;
     userEmail?: string;
     userEmailError?: Error;
+    userPassword?: string;
+    userPasswordRepeat?: string;
 }): LoginModalState {
     return {
         userAuthState: userAuthState ?? UserAuthState.WELCOME,
         userEmail: userEmail ?? '',
         userEmailError: userEmailError ?? null,
-        userPassword: '',
-        userPasswordRepeat: '',
+        userPassword: userPassword ?? '',
+        userPasswordRepeat: userPasswordRepeat ?? '',
     };
 }
 
