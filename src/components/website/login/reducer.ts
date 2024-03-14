@@ -43,11 +43,11 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     // TODO move or inline getPasswordInputErrorAndNextState() to this file
-                    const { nextUserAuthState } = getPasswordInputErrorAndNextState(
+                    const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
                         state.userPassword,
                         state.userPasswordRepeat,
                     );
-                    return { ...state, userAuthState: nextUserAuthState };
+                    return { ...state, userAuthState: nextUserAuthState, userPasswordError: passwordInputError };
                 }
             }
             return state;

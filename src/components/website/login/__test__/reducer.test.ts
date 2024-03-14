@@ -255,11 +255,12 @@ describe('LoginModal reducer tests', () => {
         verifyNextState(initialState, action, expectedState);
     });
 
-    it('should transition to OTP verification if passwords are matching', () => {
+    it('should transition to OTP verification if passwords are matching and remove password error', () => {
         const initialState = buildLoginModalInitialState({
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
             userPassword: 'passwordsMatch',
             userPasswordRepeat: 'passwordsMatch',
+            userPasswordError: new Error('thisIsSoWrong'),
         });
 
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
@@ -291,7 +292,7 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: 'dontMatch',
             userPasswordRepeat: 'likeForSureDontMatch',
-            userPasswordError: null,
+            userPasswordError: new Error(),
         };
 
         verifyNextState(initialState, action, expectedState);
