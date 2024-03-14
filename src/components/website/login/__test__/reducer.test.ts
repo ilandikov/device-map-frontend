@@ -250,4 +250,44 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+
+    it('should transition to OTP verification if passwords are matching', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+            userPassword: 'passwordsMatch',
+            userPasswordRepeat: 'passwordsMatch',
+        });
+
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.SIGNUP_OTP,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: 'passwordsMatch',
+            userPasswordRepeat: 'passwordsMatch',
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should stay at password input if user passwords are not matching', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+            userPassword: 'dontMatch',
+            userPasswordRepeat: 'likeForSureDontMatch',
+        });
+
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: 'dontMatch',
+            userPasswordRepeat: 'likeForSureDontMatch',
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
 });
