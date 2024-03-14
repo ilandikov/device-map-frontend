@@ -334,6 +334,46 @@ describe('LoginModal reducer tests', () => {
         verifyNextState(initialState, action, expectedState);
     });
 
+    it('should transition to logged in state after correct user credentials have been presented', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.LOGIN,
+            userEmail: 'user@mail.com',
+            userPassword: 'short',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.LOGGED_IN,
+            userEmail: 'user@mail.com',
+            userEmailError: null,
+            userPassword: 'short',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should stay at login state if incorrect user credentials have been presented', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.LOGIN,
+            userEmail: 'another@user.com',
+            userPassword: 'wrongPassword',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.LOGIN,
+            userEmail: 'another@user.com',
+            userEmailError: null,
+            userPassword: 'wrongPassword',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
         const initialState = buildLoginModalInitialState({
             userAuthState: UserAuthState.LOGIN,
