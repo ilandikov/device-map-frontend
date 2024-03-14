@@ -31,8 +31,9 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                     return { ...state, userPassword: action.input.payload };
                 case LoginModalInputTypes.USER_PASSWORD_REPEAT:
                     return { ...state, userPasswordRepeat: action.input.payload };
+                default:
+                    return state;
             }
-            return state;
         }
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
@@ -49,8 +50,9 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                     );
                     return { ...state, userAuthState: nextUserAuthState, userPasswordError: passwordInputError };
                 }
+                default:
+                    return state;
             }
-            return state;
         }
         case LoginModalActionTypes.BUTTON_CLICKED:
             switch (action.button) {
