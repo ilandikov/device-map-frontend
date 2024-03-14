@@ -1,5 +1,5 @@
 import { UserAuthState, getPasswordInputErrorAndNextState, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
-import { LoginModalAction, LoginModalActionTypes, LoginModalVerifyTypes } from './actions';
+import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 
 export interface LoginModalState {
     userAuthState: UserAuthState;
@@ -21,7 +21,11 @@ const loginModalInitialState: LoginModalState = {
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
     switch (action.type) {
         case LoginModalActionTypes.INPUT: {
-            return { ...state, userEmail: action.input.payload };
+            switch (action.input.type) {
+                case LoginModalInputTypes.USER_EMAIL:
+                    return { ...state, userEmail: action.input.payload };
+            }
+            return state;
         }
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
