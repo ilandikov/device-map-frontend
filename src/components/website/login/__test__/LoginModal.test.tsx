@@ -74,56 +74,72 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at mail input stage', () => {
-        mockLoginModalUseStates(UserAuthState.MAIL_INPUT);
+        mockLoginModalState({
+            userAuthState: UserAuthState.MAIL_INPUT,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at login stage', () => {
-        mockLoginModalUseStates(UserAuthState.LOGIN);
+        mockLoginModalState({
+            userAuthState: UserAuthState.LOGIN,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password reset stage', () => {
-        mockLoginModalUseStates(UserAuthState.LOGIN_PASSWORD_RESET);
+        mockLoginModalState({
+            userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP for login stage', () => {
-        mockLoginModalUseStates(UserAuthState.LOGIN_OTP);
+        mockLoginModalState({
+            userAuthState: UserAuthState.LOGIN_OTP,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP checking for login stage', () => {
-        mockLoginModalUseStates(UserAuthState.LOGIN_OTP_LOADING);
+        mockLoginModalState({
+            userAuthState: UserAuthState.LOGIN_OTP_LOADING,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password creation stage', () => {
-        mockLoginModalUseStates(UserAuthState.SIGNUP_PASSWORD);
+        mockLoginModalState({
+            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP input stage', () => {
-        mockLoginModalUseStates(UserAuthState.SIGNUP_OTP);
+        mockLoginModalState({
+            userAuthState: UserAuthState.SIGNUP_OTP,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at OTP checking for sign up stage', () => {
-        mockLoginModalUseStates(UserAuthState.SIGNUP_OTP_LOADING);
+        mockLoginModalState({
+            userAuthState: UserAuthState.SIGNUP_OTP_LOADING,
+        });
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
