@@ -20,7 +20,22 @@ export interface LoginModalRequestVerifyUserEmail {
     type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL;
 }
 
-export type LoginModalAction = LoginModalUserEmailInput | LoginModalButtonClick | LoginModalRequestVerifyUserEmail;
+export interface LoginModalUserPasswordInput {
+    type: LoginModalActionTypes.USER_PASSWORD_INPUT;
+    userPassword: string;
+}
+
+export interface LoginModalUserPasswordRepeatInput {
+    type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT;
+    userPasswordRepeat: string;
+}
+
+export type LoginModalAction =
+    | LoginModalUserEmailInput
+    | LoginModalButtonClick
+    | LoginModalRequestVerifyUserEmail
+    | LoginModalUserPasswordInput
+    | LoginModalUserPasswordRepeatInput;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };

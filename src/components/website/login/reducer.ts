@@ -27,6 +27,12 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
             const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(state.userEmail);
             return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
         }
+        case LoginModalActionTypes.USER_PASSWORD_INPUT: {
+            return { ...state, userPassword: action.userPassword };
+        }
+        case LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT: {
+            return { ...state, userPasswordRepeat: action.userPasswordRepeat };
+        }
         case LoginModalActionTypes.BUTTON_CLICKED:
             switch (action.button) {
                 case 'accountRegister':

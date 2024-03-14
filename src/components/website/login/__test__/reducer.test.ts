@@ -5,6 +5,8 @@ import {
     LoginModalActionTypes,
     LoginModalRequestVerifyUserEmail,
     LoginModalUserEmailInput,
+    LoginModalUserPasswordInput,
+    LoginModalUserPasswordRepeatInput,
     loginModalButtonClick,
 } from '../actions';
 
@@ -211,6 +213,44 @@ describe('LoginModal reducer tests', () => {
             userEmailError: null,
             userPassword: '',
             userPasswordRepeat: '',
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should set user password', () => {
+        const initialState = buildLoginModalInitialState({});
+
+        const action: LoginModalUserPasswordInput = {
+            type: LoginModalActionTypes.USER_PASSWORD_INPUT,
+            userPassword: 'haha!!11',
+        };
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.WELCOME,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: 'haha!!11',
+            userPasswordRepeat: '',
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should set user password repeat', () => {
+        const initialState = buildLoginModalInitialState({});
+
+        const action: LoginModalUserPasswordRepeatInput = {
+            type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT,
+            userPasswordRepeat: 'lmao!rofl!',
+        };
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.WELCOME,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: 'lmao!rofl!',
         };
 
         verifyNextState(initialState, action, expectedState);
