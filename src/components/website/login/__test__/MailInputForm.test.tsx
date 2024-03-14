@@ -6,6 +6,7 @@ import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';
+import { LoginModalActionTypes } from '../actions';
 import { renderAsJSON, resetLoginModalMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -98,7 +99,10 @@ describe('MailInputForm action tests', () => {
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'userEmailInput', userEmail: 'new@email.com' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+            type: LoginModalActionTypes.USER_EMAIL_INPUT,
+            userEmail: 'new@email.com',
+        });
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
