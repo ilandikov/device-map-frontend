@@ -7,6 +7,7 @@ import {
     LoginModalUserEmailInput,
     LoginModalUserPasswordInput,
     LoginModalUserPasswordRepeatInput,
+    LoginModalVerifyTypes,
     loginModalButtonClick,
 } from '../actions';
 
@@ -146,6 +147,7 @@ describe('LoginModal reducer tests', () => {
         });
         const action: LoginModalRequestVerifyUserEmail = {
             type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
+            verify: LoginModalVerifyTypes.USER_EMAIL,
         };
 
         const expectedState: LoginModalState = {
@@ -166,6 +168,7 @@ describe('LoginModal reducer tests', () => {
         });
         const action: LoginModalRequestVerifyUserEmail = {
             type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
+            verify: LoginModalVerifyTypes.USER_EMAIL,
         };
 
         const expectedState: LoginModalState = {
@@ -186,6 +189,7 @@ describe('LoginModal reducer tests', () => {
         });
         const action: LoginModalRequestVerifyUserEmail = {
             type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
+            verify: LoginModalVerifyTypes.USER_EMAIL,
         };
 
         const expectedState: LoginModalState = {

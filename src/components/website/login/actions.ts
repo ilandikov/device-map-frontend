@@ -7,6 +7,10 @@ export enum LoginModalActionTypes {
     REQUEST_VERIFY_USER_PASSWORDS = 'requestVerifyPassword',
 }
 
+export enum LoginModalVerifyTypes {
+    USER_EMAIL = 'userEmail',
+}
+
 export interface LoginModalButtonClick {
     type: LoginModalActionTypes.BUTTON_CLICKED;
     button: string;
@@ -19,6 +23,7 @@ export interface LoginModalUserEmailInput {
 
 export interface LoginModalRequestVerifyUserEmail {
     type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL;
+    verify: LoginModalVerifyTypes;
 }
 
 export interface LoginModalUserPasswordInput {
