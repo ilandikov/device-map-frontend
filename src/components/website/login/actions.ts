@@ -11,7 +11,7 @@ export enum LoginModalVerifyTypes {
     USER_PASSWORD = 'userPassword',
 }
 
-export enum LoginModalInput {
+export enum LoginModalInputTypes {
     USER_EMAIL = 'userEmail',
 }
 
@@ -58,7 +58,7 @@ export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginMod
     };
 }
 
-export function loginModalInput(type: LoginModalInput, input: string): LoginModalUserEmailInput {
+export function loginModalInput(type: LoginModalInputTypes, input: string): LoginModalUserEmailInput {
     return {
         type: LoginModalActionTypes.USER_EMAIL_INPUT,
         input: input,

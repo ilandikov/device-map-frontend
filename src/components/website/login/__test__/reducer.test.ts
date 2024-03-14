@@ -3,7 +3,7 @@ import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import {
     LoginModalAction,
     LoginModalActionTypes,
-    LoginModalInput,
+    LoginModalInputTypes,
     LoginModalUserPasswordInput,
     LoginModalUserPasswordRepeatInput,
     LoginModalVerifyTypes,
@@ -124,7 +124,7 @@ describe('LoginModal reducer tests', () => {
 
     it('should update user email', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT });
-        const action = loginModalInput(LoginModalInput.USER_EMAIL, 'myMail@myServer.xyz');
+        const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'myMail@myServer.xyz');
 
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,

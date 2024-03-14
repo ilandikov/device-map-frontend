@@ -7,7 +7,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';
 import {
-    LoginModalInput,
+    LoginModalInputTypes,
     LoginModalVerifyTypes,
     loginModalButtonClick,
     loginModalInput,
@@ -105,7 +105,10 @@ describe('MailInputForm action tests', () => {
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInput.USER_EMAIL, 'new@email.com'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
+        );
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {

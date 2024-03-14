@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { MailInputError, UserAuthState, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
 import {
-    LoginModalInput,
+    LoginModalInputTypes,
     LoginModalVerifyTypes,
     loginModalButtonClick,
     loginModalInput,
@@ -30,7 +30,7 @@ export function MailInputForm(props: MailInputFormProps) {
                     helpText={t('onlyEmail')}
                     userEmail={props.userEmail}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInput.USER_EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                         props.setUserEmail(event.target.value);
                     }}
                     error={mailInputError}
