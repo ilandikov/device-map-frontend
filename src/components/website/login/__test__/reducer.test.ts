@@ -4,6 +4,7 @@ import { LoginModalActionTypes, LoginModalUserEmailInput, loginModalButtonClick 
 
 describe('LoginModal reducer tests', () => {
     it('should return initial state', () => {
+        // @ts-expect-error
         const initialState = loginModalReducer(undefined, { type: 'DUMMY_ACTION' });
 
         expect(initialState).toEqual({
