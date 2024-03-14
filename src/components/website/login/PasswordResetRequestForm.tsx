@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 
 import { UserAuthState } from './UserAuthStateUtils';
-import { LoginModalInputTypes, loginModalInput } from './actions';
+import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './actions';
 
 interface PasswordResetRequestFormProps {
     setUserAuthState: (string) => void;
@@ -32,7 +32,10 @@ export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
             <div className="login-modal-button-container">
                 <button
                     className="login-modal-button-black-on-green"
-                    onClick={() => props.setUserAuthState(UserAuthState.LOGIN_OTP)}
+                    onClick={() => {
+                        dispatch(loginModalButtonClick('OTPSendSMS'));
+                        props.setUserAuthState(UserAuthState.LOGIN_OTP);
+                    }}
                 >
                     {t('OTPSendSMS')}
                 </button>
