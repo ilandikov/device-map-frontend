@@ -66,6 +66,7 @@ describe('LogInForm action tests', () => {
         );
     });
 
+    // TODO set userEmail value in the store and verify it is input here
     it('should show the already input email on password input stage', () => {
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'here_is_my@email.com', '', '');
 
