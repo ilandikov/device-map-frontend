@@ -1,6 +1,12 @@
 import { LoginModalState, loginModalReducer } from '../reducer';
 import { UserAuthState } from '../UserAuthStateUtils';
-import { LoginModalAction, LoginModalActionTypes, LoginModalUserEmailInput, loginModalButtonClick } from '../actions';
+import {
+    LoginModalAction,
+    LoginModalActionTypes,
+    LoginModalRequestVerifyUserEmail,
+    LoginModalUserEmailInput,
+    loginModalButtonClick,
+} from '../actions';
 
 function buildLoginModalInitialState({
     userAuthState,
@@ -95,6 +101,23 @@ describe('LoginModal reducer tests', () => {
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'myMail@myServer.xyz',
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should remove mail error and transition to password creation after good mail has been sent to verification', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'good@email.com',
+        });
+        const action: LoginModalRequestVerifyUserEmail = {
+            type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL,
+        };
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+            userEmail: 'good@email.com',
         };
 
         verifyNextState(initialState, action, expectedState);
