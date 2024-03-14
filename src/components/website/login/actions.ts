@@ -1,7 +1,7 @@
 export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
     USER_EMAIL_INPUT = 'userEmailInput',
-    REQUEST_VERIFY_USER_EMAIL = 'requestVerifyUserEmail',
+    VERIFY_REQUEST = 'verifyRequest',
     USER_PASSWORD_INPUT = 'userPasswordInput',
     USER_PASSWORD_REPEAT_INPUT = 'userPasswordRepeatInput',
     REQUEST_VERIFY_USER_PASSWORDS = 'requestVerifyPassword',
@@ -21,8 +21,8 @@ export interface LoginModalUserEmailInput {
     userEmail: string;
 }
 
-export interface LoginModalRequestVerifyUserEmail {
-    type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL;
+export interface LoginModalVerifyRequest {
+    type: LoginModalActionTypes.VERIFY_REQUEST;
     verify: LoginModalVerifyTypes;
 }
 
@@ -39,7 +39,7 @@ export interface LoginModalUserPasswordRepeatInput {
 export type LoginModalAction =
     | LoginModalUserEmailInput
     | LoginModalButtonClick
-    | LoginModalRequestVerifyUserEmail
+    | LoginModalVerifyRequest
     | LoginModalUserPasswordInput
     | LoginModalUserPasswordRepeatInput;
 

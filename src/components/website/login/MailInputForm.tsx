@@ -45,7 +45,7 @@ export function MailInputForm(props: MailInputFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch({ type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL });
+                        dispatch({ type: LoginModalActionTypes.VERIFY_REQUEST });
                         const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(props.userEmail);
 
                         setMailInputError(mailInputError);
