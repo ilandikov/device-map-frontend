@@ -6,7 +6,12 @@ import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';
-import { LoginModalActionTypes, loginModalButtonClick } from '../actions';
+import {
+    LoginModalActionTypes,
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalVerifyRequest,
+} from '../actions';
 import { renderAsJSON, resetLoginModalMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -118,7 +123,7 @@ describe('MailInputForm action tests', () => {
         expect(spyOnGetUserEmailError).toHaveBeenNthCalledWith(1, 'new@email.com');
         expect(setMailInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: LoginModalActionTypes.VERIFY_REQUEST });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
     });
 
     it('should move from mail already exists to password verification stage', () => {

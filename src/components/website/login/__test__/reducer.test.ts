@@ -6,9 +6,9 @@ import {
     LoginModalUserEmailInput,
     LoginModalUserPasswordInput,
     LoginModalUserPasswordRepeatInput,
-    LoginModalVerifyRequest,
     LoginModalVerifyTypes,
     loginModalButtonClick,
+    loginModalVerifyRequest,
 } from '../actions';
 
 function buildLoginModalInitialState({
@@ -145,10 +145,7 @@ describe('LoginModal reducer tests', () => {
             userEmail: 'good@email.com',
             userEmailError: new Error('omgSomethingIsWrong'),
         });
-        const action: LoginModalVerifyRequest = {
-            type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_EMAIL,
-        };
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
@@ -166,10 +163,7 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'this is not an email!',
         });
-        const action: LoginModalVerifyRequest = {
-            type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_EMAIL,
-        };
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
@@ -187,10 +181,7 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'already@exists.com',
         });
-        const action: LoginModalVerifyRequest = {
-            type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_EMAIL,
-        };
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
