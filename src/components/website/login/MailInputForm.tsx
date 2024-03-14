@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { MailInputError, UserAuthState, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
-import { LoginModalActionTypes } from './actions';
+import { LoginModalActionTypes, loginModalButtonClick } from './actions';
 
 interface MailInputFormProps {
     setUserAuthState: (userAuthState: UserAuthState) => void;
@@ -35,6 +35,7 @@ export function MailInputForm(props: MailInputFormProps) {
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {
+                            dispatch(loginModalButtonClick('accountLogin'));
                             props.setUserAuthState(UserAuthState.LOGIN);
                         }}
                     >

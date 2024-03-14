@@ -6,7 +6,7 @@ import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';
-import { LoginModalActionTypes } from '../actions';
+import { LoginModalActionTypes, loginModalButtonClick } from '../actions';
 import { renderAsJSON, resetLoginModalMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -129,5 +129,6 @@ describe('MailInputForm action tests', () => {
         fireEvent.click(loginButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
     });
 });
