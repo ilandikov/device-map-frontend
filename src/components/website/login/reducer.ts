@@ -5,12 +5,16 @@ export interface LoginModalState {
     userAuthState: UserAuthState;
     userEmail: string;
     userEmailError: Error | null;
+    userPassword: string;
+    userPasswordRepeat: string;
 }
 
 const loginModalInitialState: LoginModalState = {
     userAuthState: UserAuthState.WELCOME,
     userEmail: '',
     userEmailError: null,
+    userPassword: '',
+    userPasswordRepeat: '',
 };
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {

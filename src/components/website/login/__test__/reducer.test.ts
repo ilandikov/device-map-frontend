@@ -21,6 +21,8 @@ function buildLoginModalInitialState({
         userAuthState: userAuthState ?? UserAuthState.WELCOME,
         userEmail: userEmail ?? '',
         userEmailError: userEmailError ?? null,
+        userPassword: '',
+        userPasswordRepeat: '',
     };
 }
 
@@ -38,6 +40,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.WELCOME,
             userEmail: '',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         });
     });
 
@@ -48,6 +52,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: '',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         });
     });
 
@@ -58,6 +64,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.LOGIN,
             userEmail: '',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         });
     });
 
@@ -71,6 +79,8 @@ describe('LoginModal reducer tests', () => {
                 userAuthState: UserAuthState.WELCOME,
                 userEmail: '',
                 userEmailError: null,
+                userPassword: '',
+                userPasswordRepeat: '',
             };
 
             verifyNextState(initialState, action, expectedState);
@@ -97,6 +107,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: expectedUserAuthState,
             userEmail: '',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -113,6 +125,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'myMail@myServer.xyz',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -132,6 +146,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
             userEmail: 'good@email.com',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -150,6 +166,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'this is not an email!',
             userEmailError: new Error(MailInputError.NOT_VALID),
+            userPassword: '',
+            userPasswordRepeat: '',
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -168,6 +186,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'already@exists.com',
             userEmailError: new Error(MailInputError.ALREADY_EXISTS),
+            userPassword: '',
+            userPasswordRepeat: '',
         };
 
         verifyNextState(initialState, action, expectedState);
@@ -185,6 +205,8 @@ describe('LoginModal reducer tests', () => {
             userAuthState: UserAuthState.LOGIN,
             userEmail: 'already@exists.com',
             userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
         };
 
         verifyNextState(initialState, action, expectedState);
