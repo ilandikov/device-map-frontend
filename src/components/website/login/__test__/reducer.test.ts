@@ -74,31 +74,29 @@ describe('LoginModal reducer tests', () => {
         // From password creation to mail input
         [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
     ])('nav go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
-        const nextState = loginModalReducer(
-            buildLoginModalInitialState({ userAuthState: initialUserAuthState }),
-            loginModalButtonClick('goBack'),
-        );
+        const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
+        const action = loginModalButtonClick('goBack');
 
-        expect(nextState).toEqual({
+        const expectedState: LoginModalState = {
             userAuthState: expectedUserAuthState,
             userEmail: '',
-        });
+        };
+
+        verifyNextState(initialState, action, expectedState);
     });
 
     it('should update user email', () => {
+        const initialState = buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT });
         const action: LoginModalUserEmailInput = {
             type: LoginModalActionTypes.USER_EMAIL_INPUT,
             userEmail: 'myMail@myServer.xyz',
         };
 
-        const nextState = loginModalReducer(
-            buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT }),
-            action,
-        );
-
-        expect(nextState).toEqual({
+        const expectedState: LoginModalState = {
             userAuthState: UserAuthState.MAIL_INPUT,
             userEmail: 'myMail@myServer.xyz',
-        });
+        };
+
+        verifyNextState(initialState, action, expectedState);
     });
 });
