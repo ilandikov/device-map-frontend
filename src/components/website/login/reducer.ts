@@ -13,6 +13,9 @@ const loginModalInitialState: LoginModalState = {
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
     switch (action.type) {
+        case LoginModalActionTypes.USER_EMAIL_INPUT: {
+            return { ...state, userEmail: action.userEmail };
+        }
         case LoginModalActionTypes.BUTTON_CLICKED:
             switch (action.button) {
                 case 'accountRegister':

@@ -1,6 +1,6 @@
 import { loginModalReducer } from '../reducer';
 import { UserAuthState } from '../UserAuthStateUtils';
-import { loginModalButtonClick } from '../actions';
+import { LoginModalActionTypes, LoginModalUserEmailInput, loginModalButtonClick } from '../actions';
 
 describe('LoginModal reducer tests', () => {
     it('should return initial state', () => {
@@ -58,6 +58,20 @@ describe('LoginModal reducer tests', () => {
 
         expect(nextState).toEqual({
             userAuthState: expectedState,
+        });
+    });
+
+    it('should update user email', () => {
+        const action: LoginModalUserEmailInput = {
+            type: LoginModalActionTypes.USER_EMAIL_INPUT,
+            userEmail: 'myMail@myServer.xyz',
+        };
+
+        const nextState = loginModalReducer({ userAuthState: UserAuthState.MAIL_INPUT, userEmail: '' }, action);
+
+        expect(nextState).toEqual({
+            userAuthState: UserAuthState.MAIL_INPUT,
+            userEmail: 'myMail@myServer.xyz',
         });
     });
 });
