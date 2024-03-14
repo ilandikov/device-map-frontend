@@ -41,7 +41,6 @@ export function LoginModal() {
                                 className="login-modal-button-black-on-green"
                                 onClick={() => {
                                     dispatch(loginModalButtonClick('accountLogin'));
-                                    setUserAuthState(UserAuthState.LOGIN);
                                 }}
                             >
                                 {t('accountLogin')}
@@ -50,7 +49,6 @@ export function LoginModal() {
                                 className="login-modal-button-green-on-black"
                                 onClick={() => {
                                     dispatch(loginModalButtonClick('accountRegister'));
-                                    setUserAuthState(UserAuthState.MAIL_INPUT);
                                 }}
                             >
                                 {t('accountRegister')}

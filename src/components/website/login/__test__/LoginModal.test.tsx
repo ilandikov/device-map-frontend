@@ -154,24 +154,26 @@ describe('LoginModal action tests - welcome stage', () => {
     });
 
     it('should transition to email input from welcome state', () => {
-        mockLoginModalUseStates(UserAuthState.WELCOME);
+        mockLoginModalState({
+            userAuthState: UserAuthState.WELCOME,
+        });
         const { container } = render(componentWithStoreProvider);
 
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountRegister'));
     });
 
     it('should transition to login from welcome state', () => {
-        mockLoginModalUseStates(UserAuthState.WELCOME);
+        mockLoginModalState({
+            userAuthState: UserAuthState.WELCOME,
+        });
         const { container } = render(componentWithStoreProvider);
 
         const loginButton = getByText(container, 'accountLogin');
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
     });
 });
