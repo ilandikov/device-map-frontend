@@ -118,7 +118,7 @@ describe('MailInputForm action tests', () => {
         expect(spyOnGetUserEmailError).toHaveBeenNthCalledWith(1, 'new@email.com');
         expect(setMailInputError).toHaveBeenCalledTimes(1);
         expect(setUserAuthState).toHaveBeenCalledTimes(1);
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'requestVerifyUserEmail' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: LoginModalActionTypes.REQUEST_VERIFY_USER_EMAIL });
     });
 
     it('should move from mail already exists to password verification stage', () => {
