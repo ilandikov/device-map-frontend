@@ -46,3 +46,10 @@ export type LoginModalAction =
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
 }
+
+export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginModalVerifyRequest {
+    return {
+        type: LoginModalActionTypes.VERIFY_REQUEST,
+        verify: verify,
+    };
+}
