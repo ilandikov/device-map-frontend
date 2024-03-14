@@ -118,6 +118,7 @@ describe('LoginModal snapshot tests', () => {
     });
 });
 
+// TODO extract welcome component and move it and its tests to a separate file
 describe('LoginModal action tests - welcome stage', () => {
     beforeEach(() => {
         resetLoginModalMocks();

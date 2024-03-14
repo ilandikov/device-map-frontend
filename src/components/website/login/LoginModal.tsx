@@ -31,6 +31,7 @@ export function LoginModal() {
         <div className="login-modal-window">
             <div className="login-modal-container">
                 {userAuthState === UserAuthState.WELCOME && (
+                    // TODO extract welcome component and move it and its tests to a separate file
                     <>
                         <LoginModalShadows />
                         <LoginModalHeader state={LoginModalHeaderState.WELCOME} />
