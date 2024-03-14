@@ -297,4 +297,40 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+
+    it('should move from sign up OTP to sign up OTP loading stage', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.SIGNUP_OTP,
+        });
+        const action = loginModalButtonClick('next');
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.SIGNUP_OTP_LOADING,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
+
+    it('should move from log in OTP to log in OTP loading stage', () => {
+        const initialState = buildLoginModalInitialState({
+            userAuthState: UserAuthState.LOGIN_OTP,
+        });
+        const action = loginModalButtonClick('next');
+
+        const expectedState: LoginModalState = {
+            userAuthState: UserAuthState.LOGIN_OTP_LOADING,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        };
+
+        verifyNextState(initialState, action, expectedState);
+    });
 });

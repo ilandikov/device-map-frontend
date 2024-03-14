@@ -60,6 +60,15 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                     return { ...state, userAuthState: UserAuthState.LOGIN, userEmailError: null };
                 case 'cancel':
                     return { ...state, userAuthState: UserAuthState.WELCOME };
+                case 'next':
+                    switch (state.userAuthState) {
+                        case UserAuthState.SIGNUP_OTP:
+                            return { ...state, userAuthState: UserAuthState.SIGNUP_OTP_LOADING };
+                        case UserAuthState.LOGIN_OTP:
+                            return { ...state, userAuthState: UserAuthState.LOGIN_OTP_LOADING };
+                        default:
+                            return state;
+                    }
                 case 'goBack':
                     switch (state.userAuthState) {
                         case UserAuthState.MAIL_INPUT:
