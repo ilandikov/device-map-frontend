@@ -1,8 +1,10 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState, userAuthStateFromUserLogin } from './UserAuthStateUtils';
+import { LoginModalInputTypes, loginModalInput } from './actions';
 
 interface LogInFormProps {
     userAuthState: UserAuthState;
@@ -16,6 +18,7 @@ interface LogInFormProps {
 
 export function LogInForm(props: LogInFormProps) {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
 
     return (
         <>
@@ -24,6 +27,7 @@ export function LogInForm(props: LogInFormProps) {
                     helpText={t('onlyEmail')}
                     userEmail={props.userEmail}
                     onChange={(event) => {
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                         props.setUserEmail(event.target.value);
                     }}
                     error={null}
@@ -32,6 +36,7 @@ export function LogInForm(props: LogInFormProps) {
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
                         props.setUserPassword(event.target.value);
                     }}
                     error={null}

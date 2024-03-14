@@ -6,6 +6,7 @@ import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { createEvent } from '../../TestHelpers';
+import { LoginModalInputTypes, loginModalInput } from '../actions';
 import { resetLoginModalMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -40,9 +41,16 @@ function componentWithStoreProvider(
     );
 }
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         resetLoginModalMocks();
+        mockDispatch.mockReset();
     });
 
     it('should update the user email on input on password input stage', () => {
@@ -52,6 +60,10 @@ describe('LogInForm action tests', () => {
         fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
 
         expect(setUserEmail).toHaveBeenNthCalledWith(1, 'hereIsMyMail@server.com');
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'hereIsMyMail@server.com'),
+        );
     });
 
     it('should show the already input email on password input stage', () => {
@@ -69,6 +81,10 @@ describe('LogInForm action tests', () => {
         fireEvent.change(userPasswordInput, createEvent('strongPassword'));
 
         expect(setUserPassword).toHaveBeenNthCalledWith(1, 'strongPassword');
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'strongPassword'),
+        );
     });
 
     it('should call user authentication when next button is pressed', () => {
