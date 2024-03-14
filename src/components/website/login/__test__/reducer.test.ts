@@ -1,6 +1,16 @@
-import { loginModalReducer } from '../reducer';
+import { LoginModalState, loginModalReducer } from '../reducer';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { LoginModalActionTypes, LoginModalUserEmailInput, loginModalButtonClick } from '../actions';
+
+function buildLoginModalInitialState({
+    userAuthState,
+    userEmail,
+}: {
+    userAuthState?: UserAuthState;
+    userEmail?: string;
+}): LoginModalState {
+    return { userAuthState: userAuthState ?? UserAuthState.WELCOME, userEmail: userEmail ?? '' };
+}
 
 describe('LoginModal reducer tests', () => {
     it('should return initial state', () => {
@@ -34,10 +44,14 @@ describe('LoginModal reducer tests', () => {
     it.each(Object.keys(UserAuthState))(
         'nav cancel button: should transition back to welcome from %s state',
         (userAuthState: UserAuthState) => {
-            const nextState = loginModalReducer({ userAuthState }, loginModalButtonClick('cancel'));
+            const nextState = loginModalReducer(
+                buildLoginModalInitialState({ userAuthState }),
+                loginModalButtonClick('cancel'),
+            );
 
             expect(nextState).toEqual({
                 userAuthState: UserAuthState.WELCOME,
+                userEmail: '',
             });
         },
     );
@@ -55,10 +69,14 @@ describe('LoginModal reducer tests', () => {
         // From password creation to mail input
         [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
     ])('nav go back button: should transition from %s to %s', (initialState, expectedState) => {
-        const nextState = loginModalReducer({ userAuthState: initialState }, loginModalButtonClick('goBack'));
+        const nextState = loginModalReducer(
+            buildLoginModalInitialState({ userAuthState: initialState }),
+            loginModalButtonClick('goBack'),
+        );
 
         expect(nextState).toEqual({
             userAuthState: expectedState,
+            userEmail: '',
         });
     });
 
@@ -68,7 +86,10 @@ describe('LoginModal reducer tests', () => {
             userEmail: 'myMail@myServer.xyz',
         };
 
-        const nextState = loginModalReducer({ userAuthState: UserAuthState.MAIL_INPUT, userEmail: '' }, action);
+        const nextState = loginModalReducer(
+            buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT }),
+            action,
+        );
 
         expect(nextState).toEqual({
             userAuthState: UserAuthState.MAIL_INPUT,
