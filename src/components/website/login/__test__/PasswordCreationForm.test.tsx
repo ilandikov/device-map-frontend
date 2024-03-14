@@ -86,6 +86,7 @@ describe('PasswordCreationForm snapshot tests', () => {
 describe('PasswordCreationForm action tests', () => {
     beforeEach(() => {
         resetHookMock();
+        mockDispatch.mockReset();
     });
 
     it('should update user password when typed', () => {
@@ -120,6 +121,10 @@ describe('PasswordCreationForm action tests', () => {
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
 
         expect(setUserPasswordRepeat).toHaveBeenNthCalledWith(1, 'evenBetterPassword');
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+            type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT,
+            userPassword: 'evenBetterPassword',
+        });
     });
 
     it('should call password verification when next button is pressed', () => {

@@ -34,7 +34,13 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <PasswordInputBox
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
-                    onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
+                    onChange={(event) => {
+                        dispatch({
+                            type: LoginModalActionTypes.USER_PASSWORD_REPEAT_INPUT,
+                            userPassword: event.target.value,
+                        });
+                        props.setUserPasswordRepeat(event.target.value);
+                    }}
                     error={passwordInputError}
                 />
             </div>
