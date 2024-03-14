@@ -26,17 +26,13 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 }));
 
 const mockDispatch = jest.fn();
+let mockUseSelector: jest.Mock;
+
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
     useSelector: () => mockUseSelector(),
 }));
-
-function mockUseSelector() {
-    return {
-        userAuthState: UserAuthState.WELCOME,
-    };
-}
 
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
@@ -62,6 +58,12 @@ const componentWithStoreProvider = (
 
 describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at user welcome stage', () => {
+        mockUseSelector = jest.fn().mockImplementation(() => {
+            return {
+                userAuthState: UserAuthState.WELCOME,
+            };
+        });
+
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
