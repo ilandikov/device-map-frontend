@@ -5,6 +5,7 @@ import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
+import { LoginModalActionTypes } from '../actions';
 import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -39,6 +40,12 @@ jest.mock('react', () => {
         useState: jest.fn(),
     };
 });
+
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
 
 let setPasswordInputError: jest.Mock;
 
@@ -94,6 +101,10 @@ describe('PasswordCreationForm action tests', () => {
         fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
 
         expect(setUserPassword).toHaveBeenNthCalledWith(1, 'verySecurePassword1');
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+            type: LoginModalActionTypes.USER_PASSWORD_INPUT,
+            userPassword: 'verySecurePassword1',
+        });
     });
 
     it('should update repeated user password when typed', () => {

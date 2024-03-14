@@ -2,6 +2,7 @@ export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
     USER_EMAIL_INPUT = 'userEmailInput',
     REQUEST_VERIFY_USER_EMAIL = 'requestVerifyUserEmail',
+    USER_PASSWORD_INPUT = 'userPasswordInput',
 }
 
 export interface LoginModalButtonClick {
