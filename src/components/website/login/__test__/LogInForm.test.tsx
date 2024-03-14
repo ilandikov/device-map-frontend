@@ -6,7 +6,13 @@ import { LogInForm } from '../LogInForm';
 import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { createEvent } from '../../TestHelpers';
-import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from '../actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from '../actions';
 import { resetLoginModalMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -114,5 +120,6 @@ describe('LogInForm action tests', () => {
         fireEvent.click(resetPasswordButton);
 
         expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN_PASSWORD_RESET);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('resetPassword'));
     });
 });

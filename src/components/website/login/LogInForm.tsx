@@ -4,7 +4,13 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState, userAuthStateFromUserLogin } from './UserAuthStateUtils';
-import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from './actions';
 
 interface LogInFormProps {
     userAuthState: UserAuthState;
@@ -47,6 +53,7 @@ export function LogInForm(props: LogInFormProps) {
                     <button
                         className="login-modal-correct-input"
                         onClick={() => {
+                            dispatch(loginModalButtonClick('resetPassword'));
                             props.setUserAuthState(UserAuthState.LOGIN_PASSWORD_RESET);
                         }}
                     >
