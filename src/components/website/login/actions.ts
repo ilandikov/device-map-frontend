@@ -5,7 +5,7 @@ export enum LoginModalActionTypes {
 }
 
 export interface LoginModalButtonClick {
-    type: LoginModalActionTypes;
+    type: LoginModalActionTypes.BUTTON_CLICKED;
     button: string;
 }
 
