@@ -9,7 +9,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal } from '../LoginModal';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { loginModalButtonClick } from '../actions';
-import { renderAsJSON, resetLoginModalMocks } from './LoginModalTestHelpers';
+import { renderAsJSON } from './LoginModalTestHelpers';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -121,7 +121,6 @@ describe('LoginModal snapshot tests', () => {
 
 describe('LoginModal action tests - welcome stage', () => {
     beforeEach(() => {
-        resetLoginModalMocks();
         mockDispatch.mockReset();
     });
 
