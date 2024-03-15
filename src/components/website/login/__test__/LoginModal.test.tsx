@@ -17,6 +17,7 @@ import {
     setUserPassword,
     setUserPasswordRepeat,
 } from './LoginModalTestHelpers';
+import { mockDispatch, mockLoginModalState, mockUseSelector } from './__mocks__/loginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -25,20 +26,11 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
-const mockDispatch = jest.fn();
-let mockUseSelector = jest.fn();
-
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
     useSelector: () => mockUseSelector(),
 }));
-
-function mockLoginModalState(mockState: any) {
-    mockUseSelector = jest.fn().mockImplementation(() => {
-        return mockState;
-    });
-}
 
 function mockLoginModalUseStates(
     initialUserAuthState: UserAuthState,
