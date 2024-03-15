@@ -6,15 +6,7 @@ import { PasswordInputBox } from './PasswordInputBox';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './actions';
 import { LoginModalState } from './reducer';
 
-interface PasswordCreationFormProps {
-    setUserAuthState: (string) => void;
-    userPassword: string;
-    setUserPassword: (newUserPassword: string) => void;
-    userPasswordRepeat: string;
-    setUserPasswordRepeat: (newUserPassword: string) => void;
-}
-
-export function PasswordCreationForm(props: PasswordCreationFormProps) {
+export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 

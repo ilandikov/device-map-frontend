@@ -5,7 +5,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from '../actions';
-import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
+import { renderAsJSON } from './LoginModalTestHelpers';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -23,18 +23,10 @@ jest.mock('react-redux', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(props: { userPassword: string; userPasswordRepeat: string }) {
+function componentWithStoreProvider() {
     return (
         <Provider store={store}>
-            <PasswordCreationForm
-                {...{
-                    setUserAuthState,
-                    userPassword: props.userPassword,
-                    setUserPassword,
-                    userPasswordRepeat: props.userPasswordRepeat,
-                    setUserPasswordRepeat,
-                }}
-            />
+            <PasswordCreationForm />
         </Provider>
     );
 }
@@ -44,12 +36,7 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockLoginModalState({
             userPasswordError: null,
         });
-        const component = renderAsJSON(
-            componentWithStoreProvider({
-                userPassword: '',
-                userPasswordRepeat: '',
-            }),
-        );
+        const component = renderAsJSON(componentWithStoreProvider());
 
         expect(component).toMatchSnapshot();
     });
@@ -58,12 +45,7 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockLoginModalState({
             userPasswordError: new Error(),
         });
-        const component = renderAsJSON(
-            componentWithStoreProvider({
-                userPassword: '',
-                userPasswordRepeat: '',
-            }),
-        );
+        const component = renderAsJSON(componentWithStoreProvider());
 
         expect(component).toMatchSnapshot();
     });
@@ -78,12 +60,7 @@ describe('PasswordCreationForm action tests', () => {
         mockLoginModalState({
             userPasswordError: null,
         });
-        const { container } = render(
-            componentWithStoreProvider({
-                userPassword: '',
-                userPasswordRepeat: '',
-            }),
-        );
+        const { container } = render(componentWithStoreProvider());
 
         const userPasswordInput = getByTestId(container, 'userPassword');
         fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
@@ -98,12 +75,7 @@ describe('PasswordCreationForm action tests', () => {
         mockLoginModalState({
             userPasswordError: null,
         });
-        const { container } = render(
-            componentWithStoreProvider({
-                userPassword: '',
-                userPasswordRepeat: '',
-            }),
-        );
+        const { container } = render(componentWithStoreProvider());
 
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
@@ -118,12 +90,7 @@ describe('PasswordCreationForm action tests', () => {
         mockLoginModalState({
             userPasswordError: null,
         });
-        const { container } = render(
-            componentWithStoreProvider({
-                userPassword: 'passwordOne',
-                userPasswordRepeat: 'PasswordTwo',
-            }),
-        );
+        const { container } = render(componentWithStoreProvider());
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);

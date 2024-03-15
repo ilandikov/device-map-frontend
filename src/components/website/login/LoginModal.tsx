@@ -25,7 +25,7 @@ export function LoginModal() {
     const [userAuthState, setUserAuthState] = React.useState(loginModalState.userAuthState);
     const [userEmail, setUserEmail] = React.useState('');
     const [userPassword, setUserPassword] = React.useState('');
-    const [userPasswordRepeat, setUserPasswordRepeat] = React.useState('');
+    const [userPasswordRepeat, _setUserPasswordRepeat] = React.useState('');
 
     return (
         <div className="login-modal-window">
@@ -67,15 +67,7 @@ export function LoginModal() {
                     <>
                         <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
                         <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
-                        <PasswordCreationForm
-                            {...{
-                                setUserAuthState,
-                                userPassword,
-                                setUserPassword,
-                                userPasswordRepeat,
-                                setUserPasswordRepeat,
-                            }}
-                        />
+                        <PasswordCreationForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP && (
