@@ -1,5 +1,5 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
@@ -22,9 +22,9 @@ interface MailInputFormProps {
 export function MailInputForm(props: MailInputFormProps) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
 
-    const [mailInputError, _setMailInputError] = useState(loginModalState.userEmailError);
+    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
+    const mailInputError = loginModalState.userEmailError;
 
     return (
         <>
