@@ -93,10 +93,6 @@ describe('OTP form tests', () => {
 });
 
 describe('OTP form action tests', () => {
-    beforeEach(() => {
-        mockDispatch.mockReset();
-    });
-
     function verifyNextButton() {
         const { container } = renderOTPForm();
 
@@ -106,11 +102,7 @@ describe('OTP form action tests', () => {
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     }
 
-    it('should transition from sign up OTP to loading OTP state', () => {
-        verifyNextButton();
-    });
-
-    it('should transition from log in OTP to loading OTP state', () => {
+    it('should send OTP verification request on next button click', () => {
         verifyNextButton();
     });
 });
