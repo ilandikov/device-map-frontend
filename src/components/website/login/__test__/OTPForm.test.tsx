@@ -1,9 +1,11 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 import { OTPForm } from '../OTPForm';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../actions';
+import { configureTestStore } from '../../../../../tests/utils';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
 const mockDispatch = jest.fn();
@@ -13,7 +15,11 @@ jest.mock('react-redux', () => ({
 }));
 
 function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {
-    return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
+    return render(
+        <Provider store={configureTestStore()}>
+            <OTPForm {...{ userAuthState, setUserAuthState }} />
+        </Provider>,
+    );
 }
 
 function getInput(container: HTMLElement, inputIndex: number) {
