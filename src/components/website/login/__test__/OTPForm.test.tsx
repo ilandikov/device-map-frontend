@@ -6,6 +6,12 @@ import { UserAuthState } from '../UserAuthStateUtils';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../actions';
 import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {
     return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
 }
@@ -81,12 +87,6 @@ describe('OTP form tests', () => {
         expect(input3).toHaveFocus();
     });
 });
-
-const mockDispatch = jest.fn();
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch,
-}));
 
 describe('OTP form action tests', () => {
     beforeEach(() => {
