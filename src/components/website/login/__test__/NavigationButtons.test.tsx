@@ -7,6 +7,11 @@ import { UserAuthState } from '../UserAuthStateUtils';
 import { setUserAuthState } from './LoginModalTestHelpers';
 import { mockDispatch } from './__mocks__/LoginModalState';
 
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 const store = configureTestStore();
 
 function componentWithStoreProvider(goBackState: UserAuthState) {
@@ -16,11 +21,6 @@ function componentWithStoreProvider(goBackState: UserAuthState) {
         </Provider>,
     );
 }
-
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch,
-}));
 
 describe('Navigation buttons tests', () => {
     beforeEach(() => {
