@@ -39,16 +39,10 @@ function componentWithStoreProvider(props: { userPassword: string; userPasswordR
     );
 }
 
-let setPasswordInputError: jest.Mock;
-
 function mockPasswordInputErrorUseState(initialMailInputError: Error | null) {
     mockLoginModalState({
         userPasswordError: initialMailInputError,
     });
-}
-
-function resetHookMock() {
-    setPasswordInputError = jest.fn().mockImplementation((error) => error);
 }
 
 describe('PasswordCreationForm snapshot tests', () => {
@@ -79,7 +73,6 @@ describe('PasswordCreationForm snapshot tests', () => {
 
 describe('PasswordCreationForm action tests', () => {
     beforeEach(() => {
-        resetHookMock();
         mockDispatch.mockReset();
     });
 
