@@ -10,42 +10,28 @@ export enum LoginModalHeaderState {
     NEW_PASSWORD = 'NEW_PASSWORD',
 }
 
-function getHeaderState(userAuthState: UserAuthState): LoginModalHeaderState {
+function newGetHeaderDetails(userAuthState: UserAuthState) {
+    const { t } = useI18next();
+
     switch (userAuthState) {
         case UserAuthState.MAIL_INPUT:
         case UserAuthState.SIGNUP_OTP:
         case UserAuthState.SIGNUP_OTP_LOADING:
         case UserAuthState.SIGNUP_PASSWORD:
-            return LoginModalHeaderState.SIGNUP;
-        case UserAuthState.LOGIN:
-        case UserAuthState.LOGIN_OTP:
-        case UserAuthState.LOGIN_OTP_LOADING:
-            return LoginModalHeaderState.LOGIN;
-        case UserAuthState.LOGIN_PASSWORD_RESET:
-            return LoginModalHeaderState.NEW_PASSWORD;
-    }
-
-    return LoginModalHeaderState.WELCOME;
-}
-
-function newGetHeaderDetails(userAuthState: UserAuthState) {
-    const state = getHeaderState(userAuthState);
-    const { t } = useI18next();
-
-    switch (state) {
-        case LoginModalHeaderState.SIGNUP:
             return {
                 header: t('signUp'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-        case LoginModalHeaderState.LOGIN:
+        case UserAuthState.LOGIN:
+        case UserAuthState.LOGIN_OTP:
+        case UserAuthState.LOGIN_OTP_LOADING:
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-        case LoginModalHeaderState.NEW_PASSWORD:
+        case UserAuthState.LOGIN_PASSWORD_RESET:
             return {
                 header: t('newPassword'),
                 description: t('finikMapProductDescription'),
