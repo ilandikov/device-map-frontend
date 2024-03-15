@@ -9,6 +9,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal } from '../LoginModal';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { loginModalButtonClick } from '../actions';
+import { LoginModalState } from '../reducer';
 import {
     renderAsJSON,
     resetLoginModalMocks,
@@ -35,7 +36,7 @@ function mockUseSelector() {
     return mockState;
 }
 
-function mockLoginModalState(state) {
+function mockLoginModalState(state: Partial<LoginModalState>) {
     mockState = state;
 }
 
