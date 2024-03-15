@@ -5,15 +5,14 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { createEvent } from '../../TestHelpers';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../actions';
-import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 import { mockDispatch } from './__mocks__/LoginModalState';
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(userEmail: string = '') {
+function componentWithStoreProvider() {
     return render(
         <Provider store={store}>
-            <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
+            <PasswordResetRequestForm />
         </Provider>,
     );
 }

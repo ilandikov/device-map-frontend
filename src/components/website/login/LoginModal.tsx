@@ -22,8 +22,8 @@ export function LoginModal() {
     const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
     const dispatch = useAppDispatch();
 
-    const [userAuthState, setUserAuthState] = React.useState(loginModalState.userAuthState);
-    const [userEmail, setUserEmail] = React.useState('');
+    const [userAuthState, _setUserAuthState] = React.useState(loginModalState.userAuthState);
+    const [_userEmail, _setUserEmail] = React.useState('');
     const [_userPassword, _setUserPassword] = React.useState('');
     const [_userPasswordRepeat, _setUserPasswordRepeat] = React.useState('');
 
@@ -93,7 +93,7 @@ export function LoginModal() {
                     <>
                         <NavigationButtons />
                         <LoginModalHeader state={LoginModalHeaderState.NEW_PASSWORD} />
-                        <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
+                        <PasswordResetRequestForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP && (

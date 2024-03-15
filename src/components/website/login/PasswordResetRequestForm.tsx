@@ -6,13 +6,7 @@ import { MailInputBox } from './MailInputBox';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './actions';
 import { LoginModalState } from './reducer';
 
-interface PasswordResetRequestFormProps {
-    setUserAuthState: (string) => void;
-    userEmail: string;
-    setUserEmail: (event) => void;
-}
-
-export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
+export function PasswordResetRequestForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
