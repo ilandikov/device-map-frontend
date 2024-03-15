@@ -2,7 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
-import { MailInputError, UserAuthState, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
+import { MailInputError, UserAuthState } from './UserAuthStateUtils';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -21,7 +21,7 @@ export function MailInputForm(props: MailInputFormProps) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const [mailInputError, setMailInputError] = useState(null);
+    const [mailInputError, _setMailInputError] = useState(null);
 
     return (
         <>
@@ -31,7 +31,6 @@ export function MailInputForm(props: MailInputFormProps) {
                     userEmail={props.userEmail}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
-                        props.setUserEmail(event.target.value);
                     }}
                     error={mailInputError}
                 />
@@ -42,7 +41,6 @@ export function MailInputForm(props: MailInputFormProps) {
                         className="login-modal-button-green-on-black"
                         onClick={() => {
                             dispatch(loginModalButtonClick('accountLogin'));
-                            props.setUserAuthState(UserAuthState.LOGIN);
                         }}
                     >
                         {t('accountLogin')}
@@ -52,10 +50,6 @@ export function MailInputForm(props: MailInputFormProps) {
                     className="login-modal-button-black-on-green"
                     onClick={() => {
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
-                        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(props.userEmail);
-
-                        setMailInputError(mailInputError);
-                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}

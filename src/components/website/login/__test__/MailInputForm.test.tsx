@@ -1,8 +1,7 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
-import * as userAuthStateUtils from '../UserAuthStateUtils';
-import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
+import { MailInputError } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
 import { createEvent } from '../../TestHelpers';
@@ -104,7 +103,6 @@ describe('MailInputForm action tests', () => {
 
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
@@ -112,8 +110,6 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        const spyOnGetUserEmailError = jest.spyOn(userAuthStateUtils, 'getUserEmailErrorAndNextState');
-
         mockMailInputErrorUseState(null);
         const { container } = render(componentWithStoreProvider('new@email.com'));
 
@@ -121,9 +117,6 @@ describe('MailInputForm action tests', () => {
 
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(spyOnGetUserEmailError).toHaveBeenNthCalledWith(1, 'new@email.com');
-        expect(setMailInputError).toHaveBeenCalledTimes(1);
-        expect(setUserAuthState).toHaveBeenCalledTimes(1);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
     });
 
@@ -134,7 +127,6 @@ describe('MailInputForm action tests', () => {
 
         fireEvent.click(loginButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
     });
 });
