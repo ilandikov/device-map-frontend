@@ -40,10 +40,6 @@ function componentWithStoreProvider(userEmail: string) {
 
 let setMailInputError: jest.Mock;
 
-function mockMailInputErrorUseState(initialMailInputError: Error | null) {
-    mockLoginModalState({ userEmailError: initialMailInputError });
-}
-
 function resetHookMock() {
     setMailInputError = jest.fn().mockImplementation((error) => error);
 }
@@ -60,21 +56,21 @@ describe('MailInputForm snapshot tests', () => {
     });
 
     it('should match the snapshot without error', () => {
-        mockMailInputErrorUseState(null);
+        mockLoginModalState({ userEmailError: null });
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists error', () => {
-        mockMailInputErrorUseState(new Error(MailInputError.ALREADY_EXISTS));
+        mockLoginModalState({ userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail not valid error', () => {
-        mockMailInputErrorUseState(new Error(MailInputError.NOT_VALID));
+        mockLoginModalState({ userEmailError: new Error(MailInputError.NOT_VALID) });
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
@@ -89,7 +85,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email setter from email input', () => {
-        mockMailInputErrorUseState(null);
+        mockLoginModalState({ userEmailError: null });
         const { container } = render(componentWithStoreProvider(''));
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -103,7 +99,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        mockMailInputErrorUseState(null);
+        mockLoginModalState({ userEmailError: null });
         const { container } = render(componentWithStoreProvider('new@email.com'));
 
         const tryVerifyEmailButton = getByText(container, 'next');
@@ -114,7 +110,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockMailInputErrorUseState(new Error(MailInputError.ALREADY_EXISTS));
+        mockLoginModalState({ userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
         const { container } = render(componentWithStoreProvider(''));
         const loginButton = getByText(container, 'accountLogin');
 
