@@ -1,20 +1,16 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React, { useState } from 'react';
+import React from 'react';
+import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
-import { getPasswordInputErrorAndNextState } from './UserAuthStateUtils';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
 
-interface PasswordCreationFormProps {
-    setUserAuthState: (string) => void;
-    userPassword: string;
-    setUserPassword: (newUserPassword: string) => void;
-    userPasswordRepeat: string;
-    setUserPasswordRepeat: (newUserPassword: string) => void;
-}
+import { useLoginModalState } from './redux/state';
 
-export function PasswordCreationForm(props: PasswordCreationFormProps) {
+export function PasswordCreationForm() {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
 
-    const [passwordInputError, setPasswordInputError] = useState(null);
+    const passwordInputError = useLoginModalState().userPasswordError;
 
     return (
         <>
@@ -22,13 +18,17 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <PasswordInputBox
                     helpText={t('enterPassword')}
                     testId="userPassword"
-                    onChange={(event) => props.setUserPassword(event.target.value)}
+                    onChange={(event) => {
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
+                    }}
                     error={passwordInputError}
                 />
                 <PasswordInputBox
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
-                    onChange={(event) => props.setUserPasswordRepeat(event.target.value)}
+                    onChange={(event) => {
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, event.target.value));
+                    }}
                     error={passwordInputError}
                 />
             </div>
@@ -36,13 +36,7 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-                            props.userPassword,
-                            props.userPasswordRepeat,
-                        );
-
-                        setPasswordInputError(passwordInputError);
-                        props.setUserAuthState(nextUserAuthState);
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
                     }}
                 >
                     {t('next')}

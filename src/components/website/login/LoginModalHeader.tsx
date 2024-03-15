@@ -1,16 +1,12 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
+import { UserAuthState, useLoginModalState } from './redux/state';
 
-export enum LoginModalHeaderState {
-    WELCOME = 'WELCOME',
-    SIGNUP = 'SIGNUP',
-    LOGIN = 'LOGIN',
-    NEW_PASSWORD = 'NEW_PASSWORD',
-}
+export function LoginModalHeader() {
+    const userAuthState = useLoginModalState().userAuthState;
 
-export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
-    const { header, description, opaqueDescription } = getHeaderDetails(props.state);
+    const { header, description, opaqueDescription } = getHeaderDetails(userAuthState);
 
     return (
         <div className="login-modal-header-container">
@@ -23,31 +19,33 @@ export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
     );
 }
 
-function getHeaderDetails(state: LoginModalHeaderState) {
+function getHeaderDetails(userAuthState: UserAuthState) {
     const { t } = useI18next();
 
-    if (state === LoginModalHeaderState.SIGNUP) {
-        return {
-            header: t('signUp'),
-            description: t('finikMapProductDescription'),
-            opaqueDescription: true,
-        };
-    }
-
-    if (state === LoginModalHeaderState.LOGIN) {
-        return {
-            header: t('logIn'),
-            description: t('finikMapProductDescription'),
-            opaqueDescription: true,
-        };
-    }
-
-    if (state === LoginModalHeaderState.NEW_PASSWORD) {
-        return {
-            header: t('newPassword'),
-            description: t('finikMapProductDescription'),
-            opaqueDescription: true,
-        };
+    switch (userAuthState) {
+        case UserAuthState.MAIL_INPUT:
+        case UserAuthState.SIGNUP_OTP:
+        case UserAuthState.SIGNUP_OTP_LOADING:
+        case UserAuthState.SIGNUP_PASSWORD:
+            return {
+                header: t('signUp'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
+        case UserAuthState.LOGIN:
+        case UserAuthState.LOGIN_OTP:
+        case UserAuthState.LOGIN_OTP_LOADING:
+            return {
+                header: t('logIn'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
+        case UserAuthState.LOGIN_PASSWORD_RESET:
+            return {
+                header: t('newPassword'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
     }
 
     const header = `${t('brand')} ${t('map')}`;

@@ -1,30 +1,32 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
-import { UserAuthState, userAuthStateFromUserLogin } from './UserAuthStateUtils';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from './redux/actions';
 
-interface LogInFormProps {
-    userAuthState: UserAuthState;
-    setUserAuthState: (string) => void;
-    userEmail: string;
-    setUserEmail: (string) => void;
-    userPassword: string;
-    setUserPassword: (string) => void;
-    userPasswordRepeat: string;
-}
+import { useLoginModalState } from './redux/state';
 
-export function LogInForm(props: LogInFormProps) {
+export function LogInForm() {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
+
+    const userEmail = useLoginModalState().userEmail;
 
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('onlyEmail')}
-                    userEmail={props.userEmail}
+                    userEmail={userEmail}
                     onChange={(event) => {
-                        props.setUserEmail(event.target.value);
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
                     error={null}
                 />
@@ -32,7 +34,7 @@ export function LogInForm(props: LogInFormProps) {
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
-                        props.setUserPassword(event.target.value);
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
                     }}
                     error={null}
                 />
@@ -42,7 +44,7 @@ export function LogInForm(props: LogInFormProps) {
                     <button
                         className="login-modal-correct-input"
                         onClick={() => {
-                            props.setUserAuthState(UserAuthState.LOGIN_PASSWORD_RESET);
+                            dispatch(loginModalButtonClick('resetPassword'));
                         }}
                     >
                         {t('resetPassword')}
@@ -50,8 +52,7 @@ export function LogInForm(props: LogInFormProps) {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
-                            const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
-                            props.setUserAuthState(nextUserState);
+                            dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD));
                         }}
                     >
                         {t('next')}

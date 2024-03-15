@@ -1,12 +1,23 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 import { OTPForm } from '../OTPForm';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
-import { UserAuthState } from '../UserAuthStateUtils';
-import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
+import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
+import { configureTestStore } from '../../../../../tests/utils';
+import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 
-function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {
-    return render(<OTPForm {...{ userAuthState, setUserAuthState }} />);
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
+function renderOTPForm() {
+    return render(
+        <Provider store={configureTestStore()}>
+            <OTPForm />
+        </Provider>,
+    );
 }
 
 function getInput(container: HTMLElement, inputIndex: number) {
@@ -82,27 +93,12 @@ describe('OTP form tests', () => {
 });
 
 describe('OTP form action tests', () => {
-    beforeEach(() => {
-        resetLoginModalMocks();
-    });
-
-    function verifyNextButton(
-        renderState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP,
-        nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING | UserAuthState.LOGIN_OTP_LOADING,
-    ) {
-        const { container } = renderOTPForm(renderState);
+    it('should send OTP verification request on next button click', () => {
+        const { container } = renderOTPForm();
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, nextButtonCallingState);
-    }
-
-    it('should transition from sign up OTP to loading OTP state', () => {
-        verifyNextButton(UserAuthState.SIGNUP_OTP, UserAuthState.SIGNUP_OTP_LOADING);
-    });
-
-    it('should transition from log in OTP to loading OTP state', () => {
-        verifyNextButton(UserAuthState.LOGIN_OTP, UserAuthState.LOGIN_OTP_LOADING);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     });
 });

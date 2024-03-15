@@ -1,15 +1,4 @@
-export enum UserAuthState {
-    WELCOME = 'WELCOME',
-    MAIL_INPUT = 'MAIL_INPUT',
-    SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
-    SIGNUP_OTP = 'SIGNUP_OTP',
-    SIGNUP_OTP_LOADING = 'SIGNUP_OTP_LOADING',
-    LOGIN = 'LOGIN',
-    LOGIN_PASSWORD_RESET = 'LOGIN_PASSWORD_RESET',
-    LOGIN_OTP = 'LOGIN_OTP',
-    LOGIN_OTP_LOADING = 'LOGIN_OTP_LOADING',
-    LOGGED_IN = 'LOGGED_IN',
-}
+import { MailInputError, UserAuthState } from './redux/state';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {
@@ -25,11 +14,6 @@ export function userAuthStateFromOTP(userAuthState: UserAuthState.LOGIN_OTP | Us
     }
 
     return UserAuthState.SIGNUP_OTP_LOADING;
-}
-
-export enum MailInputError {
-    NOT_VALID = 'mailNotValid',
-    ALREADY_EXISTS = 'mailAlreadyExists',
 }
 
 function isValidEmail(email: string) {

@@ -4,27 +4,39 @@ import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { createEvent } from '../../TestHelpers';
-import { UserAuthState } from '../UserAuthStateUtils';
-import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
+import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(userEmail: string = '') {
+function componentWithStoreProvider() {
     return render(
         <Provider store={store}>
-            <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
+            <PasswordResetRequestForm />
         </Provider>,
     );
 }
 
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
+
 describe('PasswordResetRequest form action tests', () => {
+    beforeEach(() => {
+        mockDispatch.mockReset();
+    });
+
     it('should update user mail when set', () => {
         const { container } = componentWithStoreProvider();
 
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
+        );
     });
 
     it('should transition to login OTP state on OTP button click', () => {
@@ -33,6 +45,6 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN_OTP);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('OTPSendSMS'));
     });
 });

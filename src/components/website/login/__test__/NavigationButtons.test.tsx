@@ -3,39 +3,43 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
-import { UserAuthState } from '../UserAuthStateUtils';
-import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
+import { mockDispatch } from '../redux/__mocks__/LoginModalState';
+
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+}));
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(goBackState: UserAuthState) {
+function componentWithStoreProvider() {
     return render(
         <Provider store={store}>
-            <NavigationButtons {...{ setUserAuthState, goBackState }} />
+            <NavigationButtons />
         </Provider>,
     );
 }
 
 describe('Navigation buttons tests', () => {
     beforeEach(() => {
-        resetLoginModalMocks();
+        mockDispatch.mockReset();
     });
 
     it('should go back to welcome stage on cancel button click', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.WELCOME);
+        const { container } = componentWithStoreProvider();
 
         const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.WELCOME);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'cancel' });
     });
 
     it('should go back to a desired go back state on go back button click', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT);
+        const { container } = componentWithStoreProvider();
 
         const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'goBack' });
     });
 });

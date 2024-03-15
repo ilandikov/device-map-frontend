@@ -1,0 +1,27 @@
+import { LoginModalState } from '../state';
+
+/* To mock the react-redux functionalities in regard to {@link LoginModalState}
+ * add the following code to the test:
+
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+    useSelector: () => mockPrepareSelector(),
+}));
+
+ * and then use the following to set the state in each test:
+
+mockLoginModalState({
+    field: value,
+        });
+
+ */
+
+export const mockDispatch = jest.fn();
+
+export let mockPrepareSelector: () => any;
+export function mockLoginModalState(mockState: Partial<LoginModalState>) {
+    mockPrepareSelector = () => {
+        return mockState;
+    };
+}

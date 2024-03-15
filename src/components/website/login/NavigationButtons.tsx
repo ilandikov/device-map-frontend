@@ -2,21 +2,18 @@ import React from 'react';
 import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
+import { useAppDispatch } from '../../../redux/store';
+import { loginModalButtonClick } from './redux/actions';
 
-import { UserAuthState } from './UserAuthStateUtils';
+export function NavigationButtons() {
+    const dispatch = useAppDispatch();
 
-interface NavigationButtonsProps {
-    setUserAuthState: (string) => void;
-    goBackState: UserAuthState;
-}
-
-export function NavigationButtons(props: NavigationButtonsProps) {
     return (
         <nav className="login-modal-navigation-container">
             <button
                 data-testid="goBackButton"
                 onClick={() => {
-                    props.setUserAuthState(props.goBackState);
+                    dispatch(loginModalButtonClick('goBack'));
                 }}
             >
                 <img src={GoBack} alt="login-modal-navigation-go-back" />
@@ -24,7 +21,7 @@ export function NavigationButtons(props: NavigationButtonsProps) {
             <button
                 data-testid="cancelButton"
                 onClick={() => {
-                    props.setUserAuthState(UserAuthState.WELCOME);
+                    dispatch(loginModalButtonClick('cancel'));
                 }}
             >
                 <img src={Cancel} alt="login-modal-navigation-cancel" />

@@ -1,27 +1,32 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React, { useState } from 'react';
+import React from 'react';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
-import { MailInputError, UserAuthState, getUserEmailErrorAndNextState } from './UserAuthStateUtils';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from './redux/actions';
+import { MailInputError, useLoginModalState } from './redux/state';
 
-interface MailInputFormProps {
-    setUserAuthState: (userAuthState: UserAuthState) => void;
-    userEmail: string;
-    setUserEmail: (newUserEmail: string) => void;
-}
-
-export function MailInputForm(props: MailInputFormProps) {
+export function MailInputForm() {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
 
-    const [mailInputError, setMailInputError] = useState(null);
+    const loginModalState = useLoginModalState();
+    const mailInputError = loginModalState.userEmailError;
+    const userEmail = loginModalState.userEmail;
 
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('onlyEmail')}
-                    userEmail={props.userEmail}
+                    userEmail={userEmail}
                     onChange={(event) => {
-                        props.setUserEmail(event.target.value);
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
                     error={mailInputError}
                 />
@@ -31,7 +36,7 @@ export function MailInputForm(props: MailInputFormProps) {
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {
-                            props.setUserAuthState(UserAuthState.LOGIN);
+                            dispatch(loginModalButtonClick('accountLogin'));
                         }}
                     >
                         {t('accountLogin')}
@@ -40,10 +45,7 @@ export function MailInputForm(props: MailInputFormProps) {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(props.userEmail);
-
-                        setMailInputError(mailInputError);
-                        props.setUserAuthState(nextUserAuthState);
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
                     }}
                 >
                     {t('next')}

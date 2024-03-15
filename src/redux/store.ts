@@ -7,12 +7,14 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { useDispatch } from 'react-redux';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/MapAppReducer';
+import { loginModalReducer } from '../components/website/login/redux/reducer';
 
 const rootEpic = combineEpics();
 
 const rootReducer = combineReducers({
     getDevices,
     mapAppState: MapAppReducer,
+    loginModalState: loginModalReducer,
 });
 
 let store;

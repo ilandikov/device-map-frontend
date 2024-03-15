@@ -1,26 +1,25 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
+import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './redux/actions';
 
-import { UserAuthState } from './UserAuthStateUtils';
+import { useLoginModalState } from './redux/state';
 
-interface PasswordResetRequestFormProps {
-    setUserAuthState: (string) => void;
-    userEmail: string;
-    setUserEmail: (event) => void;
-}
-
-export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
+export function PasswordResetRequestForm() {
     const { t } = useI18next();
+    const dispatch = useAppDispatch();
+
+    const userEmail = useLoginModalState().userEmail;
 
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('mailForPasswordReset')}
-                    userEmail={props.userEmail}
+                    userEmail={userEmail}
                     onChange={(event) => {
-                        props.setUserEmail(event.target.value);
+                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
                     error={null}
                 />
@@ -28,7 +27,9 @@ export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
             <div className="login-modal-button-container">
                 <button
                     className="login-modal-button-black-on-green"
-                    onClick={() => props.setUserAuthState(UserAuthState.LOGIN_OTP)}
+                    onClick={() => {
+                        dispatch(loginModalButtonClick('OTPSendSMS'));
+                    }}
                 >
                     {t('OTPSendSMS')}
                 </button>
