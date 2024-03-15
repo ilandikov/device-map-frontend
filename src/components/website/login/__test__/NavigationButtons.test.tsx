@@ -4,7 +4,8 @@ import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
 import { UserAuthState } from '../UserAuthStateUtils';
-import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
+import { setUserAuthState } from './LoginModalTestHelpers';
+import { mockDispatch } from './__mocks__/LoginModalState';
 
 const store = configureTestStore();
 
@@ -16,7 +17,6 @@ function componentWithStoreProvider(goBackState: UserAuthState) {
     );
 }
 
-const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
@@ -24,7 +24,6 @@ jest.mock('react-redux', () => ({
 
 describe('Navigation buttons tests', () => {
     beforeEach(() => {
-        resetLoginModalMocks();
         mockDispatch.mockReset();
     });
 
