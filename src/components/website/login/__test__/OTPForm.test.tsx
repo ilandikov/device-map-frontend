@@ -3,10 +3,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { OTPForm } from '../OTPForm';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
-import { UserAuthState } from '../UserAuthStateUtils';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../actions';
 import { configureTestStore } from '../../../../../tests/utils';
-import { setUserAuthState } from './LoginModalTestHelpers';
 import { mockDispatch } from './__mocks__/LoginModalState';
 
 jest.mock('react-redux', () => ({
@@ -14,10 +12,10 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
 }));
 
-function renderOTPForm(userAuthState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP = UserAuthState.SIGNUP_OTP) {
+function renderOTPForm() {
     return render(
         <Provider store={configureTestStore()}>
-            <OTPForm {...{ userAuthState, setUserAuthState }} />
+            <OTPForm />
         </Provider>,
     );
 }
@@ -99,11 +97,8 @@ describe('OTP form action tests', () => {
         mockDispatch.mockReset();
     });
 
-    function verifyNextButton(
-        renderState: UserAuthState.SIGNUP_OTP | UserAuthState.LOGIN_OTP,
-        nextButtonCallingState: UserAuthState.SIGNUP_OTP_LOADING | UserAuthState.LOGIN_OTP_LOADING,
-    ) {
-        const { container } = renderOTPForm(renderState);
+    function verifyNextButton() {
+        const { container } = renderOTPForm();
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
@@ -112,10 +107,10 @@ describe('OTP form action tests', () => {
     }
 
     it('should transition from sign up OTP to loading OTP state', () => {
-        verifyNextButton(UserAuthState.SIGNUP_OTP, UserAuthState.SIGNUP_OTP_LOADING);
+        verifyNextButton();
     });
 
     it('should transition from log in OTP to loading OTP state', () => {
-        verifyNextButton(UserAuthState.LOGIN_OTP, UserAuthState.LOGIN_OTP_LOADING);
+        verifyNextButton();
     });
 });

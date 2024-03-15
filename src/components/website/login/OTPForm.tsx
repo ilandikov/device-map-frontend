@@ -2,15 +2,9 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
-import { UserAuthState } from './UserAuthStateUtils';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from './actions';
 
-interface OTPFormProps {
-    userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP;
-    setUserAuthState: (string) => void;
-}
-
-export function OTPForm(props: OTPFormProps) {
+export function OTPForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 

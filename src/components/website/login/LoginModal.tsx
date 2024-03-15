@@ -73,7 +73,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.SIGNUP_OTP && (
                     <>
                         <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
-                        <OTPForm {...{ userAuthState, setUserAuthState }} />
+                        <OTPForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
@@ -109,7 +109,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.LOGIN_OTP && (
                     <>
                         <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
-                        <OTPForm {...{ userAuthState, setUserAuthState }} />
+                        <OTPForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (
