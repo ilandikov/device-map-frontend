@@ -3,7 +3,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
-import { MailInputError } from './UserAuthStateUtils';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -11,7 +10,8 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from './redux/actions';
-import { LoginModalState } from './redux/reducer';
+
+import { LoginModalState, MailInputError } from './redux/state';
 
 export function MailInputForm() {
     const { t } = useI18next();

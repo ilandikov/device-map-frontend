@@ -1,5 +1,4 @@
-import { LoginModalState, loginModalReducer } from '../reducer';
-import { MailInputError, UserAuthState } from '../../UserAuthStateUtils';
+import { loginModalReducer } from '../reducer';
 import {
     LoginModalAction,
     LoginModalInputTypes,
@@ -8,6 +7,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
+import { LoginModalState, MailInputError, UserAuthState } from '../state';
 
 function buildLoginModalInitialState({
     userAuthState,

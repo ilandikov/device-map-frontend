@@ -1,30 +1,10 @@
 import {
-    UserAuthState,
     getPasswordInputErrorAndNextState,
     getUserEmailErrorAndNextState,
     userAuthStateFromUserLogin,
 } from '../UserAuthStateUtils';
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
-
-export interface LoginModalState {
-    userAuthState: UserAuthState;
-    userEmail: string;
-    // TODO make userEmailError optional
-    userEmailError: Error | null;
-    userPassword: string;
-    userPasswordRepeat: string;
-    // TODO make userPasswordError optional
-    userPasswordError: Error | null;
-}
-
-const loginModalInitialState: LoginModalState = {
-    userAuthState: UserAuthState.WELCOME,
-    userEmail: '',
-    userEmailError: null,
-    userPassword: '',
-    userPasswordRepeat: '',
-    userPasswordError: null,
-};
+import { LoginModalState, UserAuthState, loginModalInitialState } from './state';
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
     switch (action.type) {

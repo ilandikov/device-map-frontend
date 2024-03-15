@@ -3,7 +3,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LogInForm } from '../LogInForm';
-import { UserAuthState } from '../UserAuthStateUtils';
 import { createEvent } from '../../TestHelpers';
 import {
     LoginModalInputTypes,
@@ -13,6 +12,7 @@ import {
     loginModalVerifyRequest,
 } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
+import { UserAuthState } from '../redux/state';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),

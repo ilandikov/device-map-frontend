@@ -11,7 +11,8 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from './redux/actions';
-import { LoginModalState } from './redux/reducer';
+
+import { LoginModalState } from './redux/state';
 
 export function LogInForm() {
     const { t } = useI18next();

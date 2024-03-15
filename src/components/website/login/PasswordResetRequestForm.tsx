@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './redux/actions';
-import { LoginModalState } from './redux/reducer';
+
+import { LoginModalState } from './redux/state';
 
 export function PasswordResetRequestForm() {
     const { t } = useI18next();
