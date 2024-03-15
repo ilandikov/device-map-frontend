@@ -3,7 +3,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
-import { UserAuthState, userAuthStateFromUserLogin } from './UserAuthStateUtils';
+import { UserAuthState } from './UserAuthStateUtils';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -34,7 +34,6 @@ export function LogInForm(props: LogInFormProps) {
                     userEmail={props.userEmail}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
-                        props.setUserEmail(event.target.value);
                     }}
                     error={null}
                 />
@@ -43,7 +42,6 @@ export function LogInForm(props: LogInFormProps) {
                     testId="userPasswordLogin"
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
-                        props.setUserPassword(event.target.value);
                     }}
                     error={null}
                 />
@@ -54,7 +52,6 @@ export function LogInForm(props: LogInFormProps) {
                         className="login-modal-correct-input"
                         onClick={() => {
                             dispatch(loginModalButtonClick('resetPassword'));
-                            props.setUserAuthState(UserAuthState.LOGIN_PASSWORD_RESET);
                         }}
                     >
                         {t('resetPassword')}
@@ -63,8 +60,6 @@ export function LogInForm(props: LogInFormProps) {
                         className="login-modal-button-black-on-green"
                         onClick={() => {
                             dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD));
-                            const nextUserState = userAuthStateFromUserLogin(props.userEmail, props.userPassword);
-                            props.setUserAuthState(nextUserState);
                         }}
                     >
                         {t('next')}

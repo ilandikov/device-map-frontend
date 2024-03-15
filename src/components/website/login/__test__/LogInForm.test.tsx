@@ -3,7 +3,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LogInForm } from '../LogInForm';
-import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { createEvent } from '../../TestHelpers';
 import {
@@ -65,7 +64,6 @@ describe('LogInForm action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
 
-        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'hereIsMyMail@server.com');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalInput(LoginModalInputTypes.USER_EMAIL, 'hereIsMyMail@server.com'),
@@ -87,7 +85,6 @@ describe('LogInForm action tests', () => {
         const userPasswordInput = getByTestId(container, 'userPasswordLogin');
         fireEvent.change(userPasswordInput, createEvent('strongPassword'));
 
-        expect(setUserPassword).toHaveBeenNthCalledWith(1, 'strongPassword');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'strongPassword'),
@@ -95,7 +92,6 @@ describe('LogInForm action tests', () => {
     });
 
     it('should call user authentication when next button is pressed', () => {
-        const spyOnUserAuthStateFromUserLogin = jest.spyOn(userAuthStateUtils, 'userAuthStateFromUserLogin');
         const { container } = componentWithStoreProvider(
             UserAuthState.SIGNUP_PASSWORD,
             'user@mail.com',
@@ -106,7 +102,6 @@ describe('LogInForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(spyOnUserAuthStateFromUserLogin).toHaveBeenNthCalledWith(1, 'user@mail.com', 'aPassword');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD),
@@ -119,7 +114,6 @@ describe('LogInForm action tests', () => {
         const resetPasswordButton = getByText(container, 'resetPassword');
         fireEvent.click(resetPasswordButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN_PASSWORD_RESET);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('resetPassword'));
     });
 });
