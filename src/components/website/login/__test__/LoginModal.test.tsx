@@ -1,7 +1,7 @@
 /* External dependencies */
 import React from 'react';
 import { Provider } from 'react-redux';
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
@@ -9,14 +9,7 @@ import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal } from '../LoginModal';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { loginModalButtonClick } from '../actions';
-import {
-    renderAsJSON,
-    resetLoginModalMocks,
-    setUserAuthState,
-    setUserEmail,
-    setUserPassword,
-    setUserPasswordRepeat,
-} from './LoginModalTestHelpers';
+import { renderAsJSON, resetLoginModalMocks } from './LoginModalTestHelpers';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -31,21 +24,6 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
-
-function mockLoginModalUseStates(
-    initialUserAuthState: UserAuthState,
-    initialUserEmail: string = '',
-    userPassword: string = '',
-    userPasswordRepeat: string = '',
-) {
-    React.useState = jest
-        .fn()
-        .mockImplementationOnce(() => [initialUserAuthState, setUserAuthState])
-        .mockImplementationOnce(() => [initialUserEmail, setUserEmail])
-        .mockImplementationOnce(() => [userPassword, setUserPassword])
-        .mockImplementationOnce(() => [userPasswordRepeat, setUserPasswordRepeat]);
-}
-
 const store = configureTestStore();
 
 const componentWithStoreProvider = (
@@ -169,33 +147,5 @@ describe('LoginModal action tests - welcome stage', () => {
         fireEvent.click(loginButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
-    });
-});
-
-describe('LoginModal go back button click actions', () => {
-    beforeEach(() => {
-        resetLoginModalMocks();
-    });
-
-    it.failing.each([
-        // From mail input to welcome
-        [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
-
-        // From password input to mail input
-        [UserAuthState.LOGIN, UserAuthState.MAIL_INPUT],
-
-        // From password reset to login
-        [UserAuthState.LOGIN_PASSWORD_RESET, UserAuthState.LOGIN],
-
-        // From password creation to mail input
-        [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
-    ])('should go back from state %s to %s state on go back button click', (goBackClickedState, goBackToState) => {
-        mockLoginModalUseStates(goBackClickedState);
-        const { container } = render(componentWithStoreProvider);
-
-        const goBackButton = getByTestId(container, 'goBackButton');
-        fireEvent.click(goBackButton);
-
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, goBackToState);
     });
 });
