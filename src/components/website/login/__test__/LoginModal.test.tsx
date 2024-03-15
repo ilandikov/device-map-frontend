@@ -32,10 +32,14 @@ function mockUseDispatch() {
     return mockDispatch;
 }
 
+function mockUseSelector() {
+    return mockReturnedStateValue();
+}
+
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: mockUseDispatch,
-    useSelector: () => mockReturnedStateValue(),
+    useSelector: mockUseSelector,
 }));
 
 function mockLoginModalState(mockState: any) {
