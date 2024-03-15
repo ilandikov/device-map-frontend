@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
-import { UserAuthState } from './UserAuthStateUtils';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -14,17 +13,7 @@ import {
 } from './actions';
 import { LoginModalState } from './reducer';
 
-interface LogInFormProps {
-    userAuthState: UserAuthState;
-    setUserAuthState: (string) => void;
-    userEmail: string;
-    setUserEmail: (string) => void;
-    userPassword: string;
-    setUserPassword: (string) => void;
-    userPasswordRepeat: string;
-}
-
-export function LogInForm(props: LogInFormProps) {
+export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 

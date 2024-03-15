@@ -12,7 +12,6 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
-import { setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -30,25 +29,10 @@ jest.mock('react-redux', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(
-    userAuthState: UserAuthState,
-    userEmail: string,
-    userPassword: string,
-    userPasswordRepeat: string,
-) {
+function componentWithStoreProvider() {
     return render(
         <Provider store={store}>
-            <LogInForm
-                {...{
-                    userAuthState,
-                    setUserAuthState,
-                    userEmail,
-                    setUserEmail,
-                    userPassword,
-                    setUserPassword,
-                    userPasswordRepeat,
-                }}
-            />
+            <LogInForm />
         </Provider>,
     );
 }
@@ -60,7 +44,7 @@ describe('LogInForm action tests', () => {
 
     it('should update the user email on input on password input stage', () => {
         mockLoginModalState({ userAuthState: UserAuthState.LOGIN });
-        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
+        const { container } = componentWithStoreProvider();
 
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
@@ -73,7 +57,7 @@ describe('LogInForm action tests', () => {
 
     it('should show the already input email on password input stage', () => {
         mockLoginModalState({ userEmail: 'here_is_my@email.com' });
-        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'here_is_my@email.com', '', '');
+        const { container } = componentWithStoreProvider();
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
 
@@ -81,7 +65,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
+        const { container } = componentWithStoreProvider();
 
         const userPasswordInput = getByTestId(container, 'userPasswordLogin');
         fireEvent.change(userPasswordInput, createEvent('strongPassword'));
@@ -93,12 +77,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should call user authentication when next button is pressed', () => {
-        const { container } = componentWithStoreProvider(
-            UserAuthState.SIGNUP_PASSWORD,
-            'user@mail.com',
-            'aPassword',
-            '',
-        );
+        const { container } = componentWithStoreProvider();
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
@@ -110,7 +89,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should transition to password reset state when reset button was clicked', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'user@email.com', '', '');
+        const { container } = componentWithStoreProvider();
 
         const resetPasswordButton = getByText(container, 'resetPassword');
         fireEvent.click(resetPasswordButton);
