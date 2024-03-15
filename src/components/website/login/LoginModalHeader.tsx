@@ -50,28 +50,31 @@ export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuth
 function getHeaderDetails(state: LoginModalHeaderState) {
     const { t } = useI18next();
 
-    if (state === LoginModalHeaderState.SIGNUP) {
-        return {
-            header: t('signUp'),
-            description: t('finikMapProductDescription'),
-            opaqueDescription: true,
-        };
+    switch (state) {
+        case LoginModalHeaderState.SIGNUP:
+            return {
+                header: t('signUp'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
     }
 
-    if (state === LoginModalHeaderState.LOGIN) {
-        return {
-            header: t('logIn'),
-            description: t('finikMapProductDescription'),
-            opaqueDescription: true,
-        };
+    switch (state) {
+        case LoginModalHeaderState.LOGIN:
+            return {
+                header: t('logIn'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
     }
 
-    if (state === LoginModalHeaderState.NEW_PASSWORD) {
-        return {
-            header: t('newPassword'),
-            description: t('finikMapProductDescription'),
-            opaqueDescription: true,
-        };
+    switch (state) {
+        case LoginModalHeaderState.NEW_PASSWORD:
+            return {
+                header: t('newPassword'),
+                description: t('finikMapProductDescription'),
+                opaqueDescription: true,
+            };
     }
 
     const header = `${t('brand')} ${t('map')}`;
