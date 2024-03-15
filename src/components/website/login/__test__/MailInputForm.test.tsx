@@ -12,7 +12,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
-import { renderAsJSON, resetLoginModalMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { renderAsJSON, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -38,12 +38,6 @@ function componentWithStoreProvider(userEmail: string) {
     );
 }
 
-let setMailInputError: jest.Mock;
-
-function resetHookMock() {
-    setMailInputError = jest.fn().mockImplementation((error) => error);
-}
-
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
@@ -51,10 +45,6 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('MailInputForm snapshot tests', () => {
-    beforeEach(() => {
-        resetHookMock();
-    });
-
     it('should match the snapshot without error', () => {
         mockLoginModalState({ userEmailError: null });
         const component = renderAsJSON(componentWithStoreProvider(''));
@@ -79,8 +69,6 @@ describe('MailInputForm snapshot tests', () => {
 
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
-        resetHookMock();
-        resetLoginModalMocks();
         mockDispatch.mockReset();
     });
 
