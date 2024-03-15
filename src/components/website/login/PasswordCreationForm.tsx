@@ -27,7 +27,6 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                     testId="userPassword"
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
-                        props.setUserPassword(event.target.value);
                     }}
                     error={passwordInputError}
                 />
@@ -36,7 +35,6 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                     testId="userPasswordRepeat"
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, event.target.value));
-                        props.setUserPasswordRepeat(event.target.value);
                     }}
                     error={passwordInputError}
                 />
@@ -46,13 +44,12 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                     className="login-modal-button-black-on-green"
                     onClick={() => {
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
-                        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
+                        const { passwordInputError } = getPasswordInputErrorAndNextState(
                             props.userPassword,
                             props.userPasswordRepeat,
                         );
 
                         setPasswordInputError(passwordInputError);
-                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}

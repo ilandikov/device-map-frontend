@@ -101,7 +101,6 @@ describe('PasswordCreationForm action tests', () => {
         const userPasswordInput = getByTestId(container, 'userPassword');
         fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
 
-        expect(setUserPassword).toHaveBeenNthCalledWith(1, 'verySecurePassword1');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'verySecurePassword1'),
@@ -120,7 +119,6 @@ describe('PasswordCreationForm action tests', () => {
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
 
-        expect(setUserPasswordRepeat).toHaveBeenNthCalledWith(1, 'evenBetterPassword');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'evenBetterPassword'),
@@ -142,7 +140,6 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(spyOnGetPasswordInputError).toHaveBeenNthCalledWith(1, 'passwordOne', 'PasswordTwo');
         expect(setPasswordInputError).toHaveBeenCalledTimes(1);
-        expect(setUserAuthState).toHaveBeenCalledTimes(1);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
     });
 });
