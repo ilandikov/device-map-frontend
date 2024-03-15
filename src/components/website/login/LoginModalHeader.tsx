@@ -29,8 +29,8 @@ function getHeaderState(userAuthState: UserAuthState): LoginModalHeaderState {
 }
 
 function newGetHeaderDetails(userAuthState: UserAuthState) {
-    const loginModalHeaderState = getHeaderState(userAuthState);
-    return getHeaderDetails(loginModalHeaderState);
+    const state = getHeaderState(userAuthState);
+    return getHeaderDetails(state);
 }
 
 export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
