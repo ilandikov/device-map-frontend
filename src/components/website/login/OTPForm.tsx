@@ -2,7 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
-import { UserAuthState, userAuthStateFromOTP } from './UserAuthStateUtils';
+import { UserAuthState } from './UserAuthStateUtils';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from './actions';
 
 interface OTPFormProps {
@@ -65,8 +65,6 @@ export function OTPForm(props: OTPFormProps) {
                     ref={nextButton}
                     onClick={() => {
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
-                        const nextUserAuthState = userAuthStateFromOTP(props.userAuthState);
-                        props.setUserAuthState(nextUserAuthState);
                     }}
                 >
                     {t('next')}

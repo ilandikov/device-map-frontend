@@ -102,7 +102,6 @@ describe('OTP form action tests', () => {
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, nextButtonCallingState);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     }
 
