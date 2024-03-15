@@ -1,13 +1,10 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { LoginModalState, UserAuthState } from './redux/state';
+import { UserAuthState, useLoginModalState } from './redux/state';
 
 export function LoginModalHeader() {
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
-    const userAuthState = loginModalState.userAuthState;
+    const userAuthState = useLoginModalState().userAuthState;
 
     const { header, description, opaqueDescription } = getHeaderDetails(userAuthState);
 

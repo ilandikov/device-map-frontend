@@ -1,7 +1,6 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
@@ -12,14 +11,13 @@ import {
     loginModalVerifyRequest,
 } from './redux/actions';
 
-import { LoginModalState } from './redux/state';
+import { useLoginModalState } from './redux/state';
 
 export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
-    const userEmail = loginModalState.userEmail;
+    const userEmail = useLoginModalState().userEmail;
 
     return (
         <>

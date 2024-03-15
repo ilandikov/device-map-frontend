@@ -1,18 +1,16 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './redux/actions';
 
-import { LoginModalState } from './redux/state';
+import { useLoginModalState } from './redux/state';
 
 export function PasswordResetRequestForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
-    const userEmail = loginModalState.userEmail;
+    const userEmail = useLoginModalState().userEmail;
 
     return (
         <>

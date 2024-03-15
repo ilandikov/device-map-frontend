@@ -1,18 +1,16 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
+import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
 
-import { LoginModalState } from './redux/state';
+import { useLoginModalState } from './redux/state';
 
 export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
-    const passwordInputError = loginModalState.userPasswordError;
+    const passwordInputError = useLoginModalState().userPasswordError;
 
     return (
         <>
