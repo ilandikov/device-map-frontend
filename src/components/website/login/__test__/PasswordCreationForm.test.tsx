@@ -39,15 +39,11 @@ function componentWithStoreProvider(props: { userPassword: string; userPasswordR
     );
 }
 
-function mockPasswordInputErrorUseState(initialMailInputError: Error | null) {
-    mockLoginModalState({
-        userPasswordError: initialMailInputError,
-    });
-}
-
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockPasswordInputErrorUseState(null);
+        mockLoginModalState({
+            userPasswordError: null,
+        });
         const component = renderAsJSON(
             componentWithStoreProvider({
                 userPassword: '',
@@ -59,7 +55,9 @@ describe('PasswordCreationForm snapshot tests', () => {
     });
 
     it('should match the snapshot at password not match error', () => {
-        mockPasswordInputErrorUseState(new Error());
+        mockLoginModalState({
+            userPasswordError: new Error(),
+        });
         const component = renderAsJSON(
             componentWithStoreProvider({
                 userPassword: '',
@@ -77,7 +75,9 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        mockPasswordInputErrorUseState(null);
+        mockLoginModalState({
+            userPasswordError: null,
+        });
         const { container } = render(
             componentWithStoreProvider({
                 userPassword: '',
@@ -95,7 +95,9 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        mockPasswordInputErrorUseState(null);
+        mockLoginModalState({
+            userPasswordError: null,
+        });
         const { container } = render(
             componentWithStoreProvider({
                 userPassword: '',
@@ -113,7 +115,9 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        mockPasswordInputErrorUseState(null);
+        mockLoginModalState({
+            userPasswordError: null,
+        });
         const { container } = render(
             componentWithStoreProvider({
                 userPassword: 'passwordOne',
