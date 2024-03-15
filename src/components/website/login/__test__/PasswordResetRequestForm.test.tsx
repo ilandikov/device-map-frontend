@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { createEvent } from '../../TestHelpers';
-import { UserAuthState } from '../UserAuthStateUtils';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../actions';
 import { setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
 
@@ -35,7 +34,6 @@ describe('PasswordResetRequest form action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(setUserEmail).toHaveBeenNthCalledWith(1, 'new@email.com');
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
             loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
@@ -48,7 +46,6 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.LOGIN_OTP);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('OTPSendSMS'));
     });
 });

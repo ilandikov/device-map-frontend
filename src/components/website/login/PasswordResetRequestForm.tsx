@@ -2,8 +2,6 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
-
-import { UserAuthState } from './UserAuthStateUtils';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './actions';
 
 interface PasswordResetRequestFormProps {
@@ -24,7 +22,6 @@ export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
                     userEmail={props.userEmail}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
-                        props.setUserEmail(event.target.value);
                     }}
                     error={null}
                 />
@@ -34,7 +31,6 @@ export function PasswordResetRequestForm(props: PasswordResetRequestFormProps) {
                     className="login-modal-button-black-on-green"
                     onClick={() => {
                         dispatch(loginModalButtonClick('OTPSendSMS'));
-                        props.setUserAuthState(UserAuthState.LOGIN_OTP);
                     }}
                 >
                     {t('OTPSendSMS')}
