@@ -1,3 +1,10 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+
+export function useLoginModalState(): LoginModalState {
+    return useSelector((state: RootState) => state.loginModalState);
+}
+
 export enum UserAuthState {
     WELCOME = 'WELCOME',
     MAIL_INPUT = 'MAIL_INPUT',

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
+import { useAppDispatch } from '../../../redux/store';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -13,11 +12,7 @@ import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
 import { loginModalButtonClick } from './redux/actions';
-import { LoginModalState, UserAuthState } from './redux/state';
-
-function useLoginModalState(): LoginModalState {
-    return useSelector((state: RootState) => state.loginModalState);
-}
+import { UserAuthState, useLoginModalState } from './redux/state';
 
 export function LoginModal() {
     const { t } = useI18next();
