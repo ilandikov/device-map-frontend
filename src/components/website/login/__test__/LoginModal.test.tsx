@@ -88,6 +88,7 @@ describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at password reset stage', () => {
         mockLoginModalState({
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
+            userEmail: '',
         });
         const component = renderAsJSON(componentWithStoreProvider);
 
