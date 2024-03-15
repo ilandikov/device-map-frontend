@@ -6,9 +6,9 @@ import { createEvent, getNonNumeric } from '../../TestHelpers';
 import { UserAuthState } from '../UserAuthStateUtils';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../actions';
 import { configureTestStore } from '../../../../../tests/utils';
-import { resetLoginModalMocks, setUserAuthState } from './LoginModalTestHelpers';
+import { setUserAuthState } from './LoginModalTestHelpers';
+import { mockDispatch } from './__mocks__/LoginModalState';
 
-const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
@@ -96,7 +96,7 @@ describe('OTP form tests', () => {
 
 describe('OTP form action tests', () => {
     beforeEach(() => {
-        resetLoginModalMocks();
+        mockDispatch.mockReset();
     });
 
     function verifyNextButton(
