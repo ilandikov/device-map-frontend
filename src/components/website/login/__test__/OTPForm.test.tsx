@@ -93,16 +93,12 @@ describe('OTP form tests', () => {
 });
 
 describe('OTP form action tests', () => {
-    function verifyNextButton() {
+    it('should send OTP verification request on next button click', () => {
         const { container } = renderOTPForm();
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
-    }
-
-    it('should send OTP verification request on next button click', () => {
-        verifyNextButton();
     });
 });
