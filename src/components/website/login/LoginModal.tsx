@@ -18,10 +18,9 @@ import { loginModalButtonClick } from './actions';
 
 export function LoginModal() {
     const { t } = useI18next();
-
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
     const dispatch = useAppDispatch();
 
+    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
     const userAuthState = loginModalState.userAuthState;
 
     return (
