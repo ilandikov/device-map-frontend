@@ -28,7 +28,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
                         <LoginModalShadows />
-                        <LoginModalHeader state={LoginModalHeaderState.WELCOME} />
+                        <LoginModalHeader state={LoginModalHeaderState.WELCOME} userAuthState={userAuthState} />
                         <div className="login-modal-input-container"></div>
                         <div className="login-modal-button-container">
                             <button
@@ -53,52 +53,52 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
+                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
                         <MailInputForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
+                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
                         <PasswordCreationForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
+                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
                         <OTPForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
+                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
                         <Loader />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
+                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} userAuthState={userAuthState} />
                         <LogInForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.NEW_PASSWORD} />
+                        <LoginModalHeader state={LoginModalHeaderState.NEW_PASSWORD} userAuthState={userAuthState} />
                         <PasswordResetRequestForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
+                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} userAuthState={userAuthState} />
                         <OTPForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
+                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} userAuthState={userAuthState} />
                         <Loader />
                     </>
                 )}

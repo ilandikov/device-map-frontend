@@ -1,6 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
+import { UserAuthState } from './redux/state';
 
 export enum LoginModalHeaderState {
     WELCOME = 'WELCOME',
@@ -9,7 +10,7 @@ export enum LoginModalHeaderState {
     NEW_PASSWORD = 'NEW_PASSWORD',
 }
 
-export function LoginModalHeader(props: { state: LoginModalHeaderState }) {
+export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
     const { header, description, opaqueDescription } = getHeaderDetails(props.state);
 
     return (
