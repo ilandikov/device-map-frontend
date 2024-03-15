@@ -3,15 +3,9 @@ import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 import { useAppDispatch } from '../../../redux/store';
-import { UserAuthState } from './UserAuthStateUtils';
 import { loginModalButtonClick } from './actions';
 
-interface NavigationButtonsProps {
-    setUserAuthState: (string) => void;
-    goBackState: UserAuthState;
-}
-
-export function NavigationButtons(props: NavigationButtonsProps) {
+export function NavigationButtons() {
     const dispatch = useAppDispatch();
 
     return (

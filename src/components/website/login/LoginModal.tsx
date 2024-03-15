@@ -58,14 +58,14 @@ export function LoginModal() {
                 )}
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
-                        <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.WELCOME }} />
+                        <NavigationButtons />
                         <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                         <MailInputForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
                     <>
-                        <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
+                        <NavigationButtons />
                         <LoginModalHeader state={LoginModalHeaderState.SIGNUP} />
                         <PasswordCreationForm />
                     </>
@@ -84,14 +84,14 @@ export function LoginModal() {
                 )}
                 {userAuthState === UserAuthState.LOGIN && (
                     <>
-                        <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.MAIL_INPUT }} />
+                        <NavigationButtons />
                         <LoginModalHeader state={LoginModalHeaderState.LOGIN} />
                         <LogInForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                     <>
-                        <NavigationButtons {...{ setUserAuthState, goBackState: UserAuthState.LOGIN }} />
+                        <NavigationButtons />
                         <LoginModalHeader state={LoginModalHeaderState.NEW_PASSWORD} />
                         <PasswordResetRequestForm {...{ setUserAuthState, userEmail, setUserEmail }} />
                     </>

@@ -3,8 +3,6 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
-import { UserAuthState } from '../UserAuthStateUtils';
-import { setUserAuthState } from './LoginModalTestHelpers';
 import { mockDispatch } from './__mocks__/LoginModalState';
 
 jest.mock('react-redux', () => ({
@@ -14,10 +12,10 @@ jest.mock('react-redux', () => ({
 
 const store = configureTestStore();
 
-function componentWithStoreProvider(goBackState: UserAuthState) {
+function componentWithStoreProvider() {
     return render(
         <Provider store={store}>
-            <NavigationButtons {...{ setUserAuthState, goBackState }} />
+            <NavigationButtons />
         </Provider>,
     );
 }
@@ -28,7 +26,7 @@ describe('Navigation buttons tests', () => {
     });
 
     it('should go back to welcome stage on cancel button click', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.WELCOME);
+        const { container } = componentWithStoreProvider();
 
         const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
@@ -37,7 +35,7 @@ describe('Navigation buttons tests', () => {
     });
 
     it('should go back to a desired go back state on go back button click', () => {
-        const { container } = componentWithStoreProvider(UserAuthState.MAIL_INPUT);
+        const { container } = componentWithStoreProvider();
 
         const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
