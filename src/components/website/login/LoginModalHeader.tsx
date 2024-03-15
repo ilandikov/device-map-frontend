@@ -30,24 +30,6 @@ function getHeaderState(userAuthState: UserAuthState): LoginModalHeaderState {
 
 function newGetHeaderDetails(userAuthState: UserAuthState) {
     const state = getHeaderState(userAuthState);
-    return getHeaderDetails(state);
-}
-
-export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
-    const { header, description, opaqueDescription } = newGetHeaderDetails(props.userAuthState);
-
-    return (
-        <div className="login-modal-header-container">
-            <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
-            <p className="login-modal-header">{header}</p>
-            <p className={`login-modal-header-description${opaqueDescription ? ' login-modal-opaque-text' : ''}`}>
-                {description}
-            </p>
-        </div>
-    );
-}
-
-function getHeaderDetails(state: LoginModalHeaderState) {
     const { t } = useI18next();
 
     switch (state) {
@@ -76,4 +58,18 @@ function getHeaderDetails(state: LoginModalHeaderState) {
     const opaqueDescription = false;
 
     return { header, description, opaqueDescription };
+}
+
+export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
+    const { header, description, opaqueDescription } = newGetHeaderDetails(props.userAuthState);
+
+    return (
+        <div className="login-modal-header-container">
+            <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
+            <p className="login-modal-header">{header}</p>
+            <p className={`login-modal-header-description${opaqueDescription ? ' login-modal-opaque-text' : ''}`}>
+                {description}
+            </p>
+        </div>
+    );
 }
