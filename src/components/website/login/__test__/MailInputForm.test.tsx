@@ -22,6 +22,12 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     })),
 }));
 
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+    useSelector: () => mockPrepareSelector(),
+}));
+
 const store = configureTestStore();
 
 function componentWithStoreProvider(userEmail: string) {
@@ -37,12 +43,6 @@ function componentWithStoreProvider(userEmail: string) {
         </Provider>
     );
 }
-
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch,
-    useSelector: () => mockPrepareSelector(),
-}));
 
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
