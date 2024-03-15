@@ -15,12 +15,15 @@ import { Loader } from './Loader';
 import { loginModalButtonClick } from './redux/actions';
 import { LoginModalState, UserAuthState } from './redux/state';
 
+function useLoginModalState(): LoginModalState {
+    return useSelector((state: RootState) => state.loginModalState);
+}
+
 export function LoginModal() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
-    const userAuthState = loginModalState.userAuthState;
+    const userAuthState = useLoginModalState().userAuthState;
 
     return (
         <div className="login-modal-window">
