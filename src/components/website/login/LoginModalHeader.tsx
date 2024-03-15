@@ -5,14 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { LoginModalState, UserAuthState } from './redux/state';
 
-export enum LoginModalHeaderState {
-    WELCOME = 'WELCOME',
-    SIGNUP = 'SIGNUP',
-    LOGIN = 'LOGIN',
-    NEW_PASSWORD = 'NEW_PASSWORD',
-}
-
-export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
+export function LoginModalHeader() {
     const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
     const userAuthState = loginModalState.userAuthState;
 

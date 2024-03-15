@@ -5,7 +5,7 @@ import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
-import { LoginModalHeader, LoginModalHeaderState } from './LoginModalHeader';
+import { LoginModalHeader } from './LoginModalHeader';
 import { LoginModalShadows } from './LoginModalShadows/LoginModalShadows';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
@@ -28,7 +28,7 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
                         <LoginModalShadows />
-                        <LoginModalHeader state={LoginModalHeaderState.WELCOME} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <div className="login-modal-input-container"></div>
                         <div className="login-modal-button-container">
                             <button
@@ -53,52 +53,52 @@ export function LoginModal() {
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <MailInputForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <PasswordCreationForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <OTPForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.SIGNUP} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <Loader />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <LogInForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                     <>
                         <NavigationButtons />
-                        <LoginModalHeader state={LoginModalHeaderState.NEW_PASSWORD} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <PasswordResetRequestForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <OTPForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (
                     <>
-                        <LoginModalHeader state={LoginModalHeaderState.LOGIN} userAuthState={userAuthState} />
+                        <LoginModalHeader />
                         <Loader />
                     </>
                 )}
