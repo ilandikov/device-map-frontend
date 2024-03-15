@@ -22,10 +22,7 @@ export function LoginModal() {
     const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
     const dispatch = useAppDispatch();
 
-    const [userAuthState, _setUserAuthState] = React.useState(loginModalState.userAuthState);
-    const [_userEmail, _setUserEmail] = React.useState('');
-    const [_userPassword, _setUserPassword] = React.useState('');
-    const [_userPasswordRepeat, _setUserPasswordRepeat] = React.useState('');
+    const userAuthState = loginModalState.userAuthState;
 
     return (
         <div className="login-modal-window">
