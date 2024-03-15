@@ -17,7 +17,7 @@ import {
     setUserPassword,
     setUserPasswordRepeat,
 } from './LoginModalTestHelpers';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/loginModalState';
+import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
