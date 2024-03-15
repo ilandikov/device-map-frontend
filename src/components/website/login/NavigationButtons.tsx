@@ -20,7 +20,6 @@ export function NavigationButtons(props: NavigationButtonsProps) {
                 data-testid="goBackButton"
                 onClick={() => {
                     dispatch(loginModalButtonClick('goBack'));
-                    props.setUserAuthState(props.goBackState);
                 }}
             >
                 <img src={GoBack} alt="login-modal-navigation-go-back" />
@@ -29,7 +28,6 @@ export function NavigationButtons(props: NavigationButtonsProps) {
                 data-testid="cancelButton"
                 onClick={() => {
                     dispatch(loginModalButtonClick('cancel'));
-                    props.setUserAuthState(UserAuthState.WELCOME);
                 }}
             >
                 <img src={Cancel} alt="login-modal-navigation-cancel" />

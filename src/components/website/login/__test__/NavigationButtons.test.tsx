@@ -34,7 +34,6 @@ describe('Navigation buttons tests', () => {
         const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.WELCOME);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'cancel' });
     });
 
@@ -44,7 +43,6 @@ describe('Navigation buttons tests', () => {
         const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
 
-        expect(setUserAuthState).toHaveBeenNthCalledWith(1, UserAuthState.MAIL_INPUT);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'goBack' });
     });
 });
