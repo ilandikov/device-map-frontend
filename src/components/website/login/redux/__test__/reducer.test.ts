@@ -53,7 +53,9 @@ describe('LoginModal reducer tests', () => {
             userPasswordError: null,
         });
     });
+});
 
+describe('welcome screen buttons', () => {
     it('should transition to email input', () => {
         const nextState = loginModalReducer(undefined, loginModalButtonClick('accountRegister'));
 
@@ -79,9 +81,11 @@ describe('LoginModal reducer tests', () => {
             userPasswordError: null,
         });
     });
+});
 
+describe('navigation logic', () => {
     it.each(Object.keys(UserAuthState))(
-        'nav cancel button: should transition back to welcome from %s state',
+        'cancel button: should transition back to welcome from %s state',
         (initialUserAuthState: UserAuthState) => {
             const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
             const action = loginModalButtonClick('cancel');
@@ -111,7 +115,7 @@ describe('LoginModal reducer tests', () => {
 
         // From password creation to mail input
         [UserAuthState.SIGNUP_PASSWORD, UserAuthState.MAIL_INPUT],
-    ])('nav go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
+    ])('go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
         const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
         const action = loginModalButtonClick('goBack');
 
@@ -126,7 +130,9 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+});
 
+describe('email input logic', () => {
     it('should update user email', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT });
         const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'myMail@myServer.xyz');
@@ -220,7 +226,9 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+});
 
+describe('user password logic', () => {
     it('should set user password', () => {
         const initialState = buildLoginModalInitialState({});
 
@@ -297,7 +305,9 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+});
 
+describe('OTP logic', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
         const initialState = buildLoginModalInitialState({
             userAuthState: UserAuthState.SIGNUP_OTP,
@@ -333,7 +343,9 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+});
 
+describe('login logic', () => {
     it('should transition to logged in state after correct user credentials have been presented', () => {
         const initialState = buildLoginModalInitialState({
             userAuthState: UserAuthState.LOGIN,
@@ -393,7 +405,9 @@ describe('LoginModal reducer tests', () => {
 
         verifyNextState(initialState, action, expectedState);
     });
+});
 
+describe('password reset logic', () => {
     it('should transition to OTP verification from after password reset request', () => {
         const initialState = buildLoginModalInitialState({
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
