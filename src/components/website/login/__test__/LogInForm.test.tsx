@@ -13,6 +13,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { resetLoginModalMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
+import { mockDispatch } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -46,7 +47,6 @@ function componentWithStoreProvider(
     );
 }
 
-const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
