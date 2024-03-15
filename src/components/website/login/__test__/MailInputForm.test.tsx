@@ -46,21 +46,21 @@ function componentWithStoreProvider(userEmail: string) {
 
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockLoginModalState({ userEmailError: null });
+        mockLoginModalState({ userEmail: '', userEmailError: null });
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists error', () => {
-        mockLoginModalState({ userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
+        mockLoginModalState({ userEmail: '', userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail not valid error', () => {
-        mockLoginModalState({ userEmailError: new Error(MailInputError.NOT_VALID) });
+        mockLoginModalState({ userEmail: '', userEmailError: new Error(MailInputError.NOT_VALID) });
         const component = renderAsJSON(componentWithStoreProvider(''));
 
         expect(component).toMatchSnapshot();

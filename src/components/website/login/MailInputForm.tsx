@@ -25,13 +25,14 @@ export function MailInputForm(props: MailInputFormProps) {
 
     const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
     const mailInputError = loginModalState.userEmailError;
+    const userEmail = loginModalState.userEmail;
 
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('onlyEmail')}
-                    userEmail={props.userEmail}
+                    userEmail={userEmail}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
