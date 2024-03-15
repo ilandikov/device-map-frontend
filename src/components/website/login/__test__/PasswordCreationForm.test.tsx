@@ -1,18 +1,24 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import * as userAuthStateUtils from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from '../actions';
 import { renderAsJSON, setUserAuthState, setUserPassword, setUserPasswordRepeat } from './LoginModalTestHelpers';
+import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
     useI18next: jest.fn().mockImplementation(() => ({
         t: jest.fn().mockImplementation((val) => val),
     })),
+}));
+
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
+    useSelector: () => mockPrepareSelector(),
 }));
 
 const store = configureTestStore();
@@ -33,24 +39,12 @@ function componentWithStoreProvider(props: { userPassword: string; userPasswordR
     );
 }
 
-jest.mock('react', () => {
-    const originalModule = jest.requireActual('react');
-    return {
-        ...originalModule,
-        useState: jest.fn(),
-    };
-});
-
-const mockDispatch = jest.fn();
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch,
-}));
-
 let setPasswordInputError: jest.Mock;
 
 function mockPasswordInputErrorUseState(initialMailInputError: Error | null) {
-    (useState as jest.Mock).mockReturnValueOnce([initialMailInputError, setPasswordInputError]);
+    mockLoginModalState({
+        userPasswordError: initialMailInputError,
+    });
 }
 
 function resetHookMock() {
@@ -126,7 +120,6 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        const spyOnGetPasswordInputError = jest.spyOn(userAuthStateUtils, 'getPasswordInputErrorAndNextState');
         mockPasswordInputErrorUseState(null);
         const { container } = render(
             componentWithStoreProvider({
@@ -138,8 +131,6 @@ describe('PasswordCreationForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(spyOnGetPasswordInputError).toHaveBeenNthCalledWith(1, 'passwordOne', 'PasswordTwo');
-        expect(setPasswordInputError).toHaveBeenCalledTimes(1);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
     });
 });

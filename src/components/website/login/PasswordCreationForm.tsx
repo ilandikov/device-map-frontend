@@ -1,9 +1,10 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../../redux/store';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
-import { getPasswordInputErrorAndNextState } from './UserAuthStateUtils';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './actions';
+import { LoginModalState } from './reducer';
 
 interface PasswordCreationFormProps {
     setUserAuthState: (string) => void;
@@ -17,7 +18,8 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const [passwordInputError, setPasswordInputError] = useState(null);
+    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
+    const [passwordInputError, _setPasswordInputError] = useState(loginModalState.userPasswordError);
 
     return (
         <>
@@ -44,12 +46,6 @@ export function PasswordCreationForm(props: PasswordCreationFormProps) {
                     className="login-modal-button-black-on-green"
                     onClick={() => {
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
-                        const { passwordInputError } = getPasswordInputErrorAndNextState(
-                            props.userPassword,
-                            props.userPasswordRepeat,
-                        );
-
-                        setPasswordInputError(passwordInputError);
                     }}
                 >
                     {t('next')}
