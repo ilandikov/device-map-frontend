@@ -3,7 +3,7 @@ import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 import { useAppDispatch } from '../../../redux/store';
-import { loginModalButtonClick } from './actions';
+import { loginModalButtonClick } from './redux/actions';
 
 export function NavigationButtons() {
     const dispatch = useAppDispatch();

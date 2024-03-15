@@ -8,9 +8,9 @@ import '@testing-library/jest-dom';
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal } from '../LoginModal';
 import { UserAuthState } from '../UserAuthStateUtils';
-import { loginModalButtonClick } from '../actions';
+import { loginModalButtonClick } from '../redux/actions';
+import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { renderAsJSON } from './LoginModalTestHelpers';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),

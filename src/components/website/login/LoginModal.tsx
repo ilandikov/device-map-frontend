@@ -13,8 +13,8 @@ import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
 import { UserAuthState } from './UserAuthStateUtils';
-import { LoginModalState } from './reducer';
-import { loginModalButtonClick } from './actions';
+import { LoginModalState } from './redux/reducer';
+import { loginModalButtonClick } from './redux/actions';
 
 export function LoginModal() {
     const { t } = useI18next();

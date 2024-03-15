@@ -1,4 +1,4 @@
-import { LoginModalState } from '../../reducer';
+import { LoginModalState } from '../reducer';
 
 /* To mock the react-redux functionalities in regard to {@link LoginModalState}
  * add the following code to the test:

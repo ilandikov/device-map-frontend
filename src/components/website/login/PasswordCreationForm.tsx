@@ -3,8 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
-import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './actions';
-import { LoginModalState } from './reducer';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
+import { LoginModalState } from './redux/reducer';
 
 export function PasswordCreationForm() {
     const { t } = useI18next();

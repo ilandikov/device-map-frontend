@@ -3,7 +3,7 @@ import {
     getPasswordInputErrorAndNextState,
     getUserEmailErrorAndNextState,
     userAuthStateFromUserLogin,
-} from './UserAuthStateUtils';
+} from '../UserAuthStateUtils';
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 
 export interface LoginModalState {

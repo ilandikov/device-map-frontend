@@ -10,8 +10,8 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from './actions';
-import { LoginModalState } from './reducer';
+} from './redux/actions';
+import { LoginModalState } from './redux/reducer';
 
 export function MailInputForm() {
     const { t } = useI18next();

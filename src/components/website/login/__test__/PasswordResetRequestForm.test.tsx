@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
 import { createEvent } from '../../TestHelpers';
-import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../actions';
-import { mockDispatch } from './__mocks__/LoginModalState';
+import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
+import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 
 const store = configureTestStore();
 

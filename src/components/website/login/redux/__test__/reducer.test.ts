@@ -1,5 +1,5 @@
 import { LoginModalState, loginModalReducer } from '../reducer';
-import { MailInputError, UserAuthState } from '../UserAuthStateUtils';
+import { MailInputError, UserAuthState } from '../../UserAuthStateUtils';
 import {
     LoginModalAction,
     LoginModalInputTypes,

@@ -3,8 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
-import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './actions';
-import { LoginModalState } from './reducer';
+import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from './redux/actions';
+import { LoginModalState } from './redux/reducer';
 
 export function PasswordResetRequestForm() {
     const { t } = useI18next();

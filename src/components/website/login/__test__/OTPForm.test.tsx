@@ -3,9 +3,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { OTPForm } from '../OTPForm';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
-import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../actions';
+import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
 import { configureTestStore } from '../../../../../tests/utils';
-import { mockDispatch } from './__mocks__/LoginModalState';
+import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
