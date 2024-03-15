@@ -12,7 +12,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
-import { resetLoginModalMocks, setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
+import { setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
 import { mockDispatch } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -20,6 +20,11 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
     useI18next: jest.fn().mockImplementation(() => ({
         t: jest.fn().mockImplementation((val) => val),
     })),
+}));
+
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch,
 }));
 
 const store = configureTestStore();
@@ -47,14 +52,8 @@ function componentWithStoreProvider(
     );
 }
 
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch,
-}));
-
 describe('LogInForm action tests', () => {
     beforeEach(() => {
-        resetLoginModalMocks();
         mockDispatch.mockReset();
     });
 
