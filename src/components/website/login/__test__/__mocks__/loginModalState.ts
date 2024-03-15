@@ -2,9 +2,9 @@ import { LoginModalState } from '../../reducer';
 
 export const mockDispatch = jest.fn();
 
-export let mockUseSelector: () => any;
+export let mockPrepareSelector: () => any;
 export function mockLoginModalState(mockState: Partial<LoginModalState>) {
-    mockUseSelector = () => {
+    mockPrepareSelector = () => {
         return mockState;
     };
 }
