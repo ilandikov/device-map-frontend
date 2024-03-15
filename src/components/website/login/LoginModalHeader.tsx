@@ -11,7 +11,8 @@ export enum LoginModalHeaderState {
 }
 
 export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
-    const { header, description, opaqueDescription } = getHeaderDetails(props.state);
+    const loginModalHeaderState = props.state;
+    const { header, description, opaqueDescription } = getHeaderDetails(loginModalHeaderState);
 
     return (
         <div className="login-modal-header-container">
