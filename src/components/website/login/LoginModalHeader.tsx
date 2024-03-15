@@ -28,9 +28,13 @@ function getHeaderState(userAuthState: UserAuthState): LoginModalHeaderState {
     return LoginModalHeaderState.WELCOME;
 }
 
+function newGetHeaderDetails(userAuthState: UserAuthState) {
+    const loginModalHeaderState = getHeaderState(userAuthState);
+    return getHeaderDetails(loginModalHeaderState);
+}
+
 export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
-    const loginModalHeaderState = getHeaderState(props.userAuthState);
-    const { header, description, opaqueDescription } = getHeaderDetails(loginModalHeaderState);
+    const { header, description, opaqueDescription } = newGetHeaderDetails(props.userAuthState);
 
     return (
         <div className="login-modal-header-container">
