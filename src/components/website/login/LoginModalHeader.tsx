@@ -57,18 +57,12 @@ function getHeaderDetails(state: LoginModalHeaderState) {
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-    }
-
-    switch (state) {
         case LoginModalHeaderState.LOGIN:
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-    }
-
-    switch (state) {
         case LoginModalHeaderState.NEW_PASSWORD:
             return {
                 header: t('newPassword'),
