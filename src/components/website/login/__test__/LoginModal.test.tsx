@@ -28,9 +28,13 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 const mockDispatch = jest.fn();
 let mockUseSelector = jest.fn();
 
+function mockUseDispatch() {
+    return mockDispatch;
+}
+
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch,
+    useDispatch: mockUseDispatch,
     useSelector: () => mockUseSelector(),
 }));
 
