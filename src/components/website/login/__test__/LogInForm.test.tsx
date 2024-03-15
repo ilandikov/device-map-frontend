@@ -13,7 +13,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { setUserAuthState, setUserEmail, setUserPassword } from './LoginModalTestHelpers';
-import { mockDispatch } from './__mocks__/LoginModalState';
+import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -25,6 +25,7 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
+    useSelector: () => mockPrepareSelector(),
 }));
 
 const store = configureTestStore();
@@ -58,6 +59,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
+        mockLoginModalState({ userAuthState: UserAuthState.LOGIN });
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, '', '', '');
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -69,8 +71,8 @@ describe('LogInForm action tests', () => {
         );
     });
 
-    // TODO set userEmail value in the store and verify it is input here
     it('should show the already input email on password input stage', () => {
+        mockLoginModalState({ userEmail: 'here_is_my@email.com' });
         const { container } = componentWithStoreProvider(UserAuthState.LOGIN, 'here_is_my@email.com', '', '');
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;

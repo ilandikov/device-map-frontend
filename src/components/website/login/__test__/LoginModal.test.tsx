@@ -78,6 +78,7 @@ describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at login stage', () => {
         mockLoginModalState({
             userAuthState: UserAuthState.LOGIN,
+            userEmail: '',
         });
         const component = renderAsJSON(componentWithStoreProvider);
 

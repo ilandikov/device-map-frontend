@@ -1,6 +1,7 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { useAppDispatch } from '../../../redux/store';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import { UserAuthState } from './UserAuthStateUtils';
@@ -11,6 +12,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from './actions';
+import { LoginModalState } from './reducer';
 
 interface LogInFormProps {
     userAuthState: UserAuthState;
@@ -26,12 +28,15 @@ export function LogInForm(props: LogInFormProps) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
+    const loginModalState: LoginModalState = useSelector((state: RootState) => state.loginModalState);
+    const userEmail = loginModalState.userEmail;
+
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('onlyEmail')}
-                    userEmail={props.userEmail}
+                    userEmail={userEmail}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
