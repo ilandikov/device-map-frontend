@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
-import { MailInputError, UserAuthState } from './UserAuthStateUtils';
+import { MailInputError } from './UserAuthStateUtils';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -13,13 +13,7 @@ import {
 } from './actions';
 import { LoginModalState } from './reducer';
 
-interface MailInputFormProps {
-    setUserAuthState: (userAuthState: UserAuthState) => void;
-    userEmail: string;
-    setUserEmail: (newUserEmail: string) => void;
-}
-
-export function MailInputForm(props: MailInputFormProps) {
+export function MailInputForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
