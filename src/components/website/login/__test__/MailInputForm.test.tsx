@@ -1,5 +1,5 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { MailInputError } from '../UserAuthStateUtils';
 import { configureTestStore } from '../../../../../tests/utils';
@@ -13,6 +13,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { renderAsJSON, resetLoginModalMocks, setUserAuthState, setUserEmail } from './LoginModalTestHelpers';
+import { mockDispatch, mockLoginModalState, mockPrepareSelector } from './__mocks__/LoginModalState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -37,28 +38,20 @@ function componentWithStoreProvider(userEmail: string) {
     );
 }
 
-jest.mock('react', () => {
-    const originalModule = jest.requireActual('react');
-    return {
-        ...originalModule,
-        useState: jest.fn(),
-    };
-});
-
 let setMailInputError: jest.Mock;
 
 function mockMailInputErrorUseState(initialMailInputError: Error | null) {
-    (useState as jest.Mock).mockReturnValueOnce([initialMailInputError, setMailInputError]);
+    mockLoginModalState({ userEmailError: initialMailInputError });
 }
 
 function resetHookMock() {
     setMailInputError = jest.fn().mockImplementation((error) => error);
 }
 
-const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
+    useSelector: () => mockPrepareSelector(),
 }));
 
 describe('MailInputForm snapshot tests', () => {
