@@ -67,7 +67,6 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email setter from email input', () => {
-        mockLoginModalState({ userEmailError: null });
         const { container } = render(componentWithStoreProvider());
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -81,7 +80,6 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        mockLoginModalState({ userEmailError: null });
         const { container } = render(componentWithStoreProvider());
 
         const tryVerifyEmailButton = getByText(container, 'next');

@@ -57,9 +57,6 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        mockLoginModalState({
-            userPasswordError: null,
-        });
         const { container } = render(componentWithStoreProvider());
 
         const userPasswordInput = getByTestId(container, 'userPassword');
@@ -72,9 +69,6 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        mockLoginModalState({
-            userPasswordError: null,
-        });
         const { container } = render(componentWithStoreProvider());
 
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
@@ -87,9 +81,6 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        mockLoginModalState({
-            userPasswordError: null,
-        });
         const { container } = render(componentWithStoreProvider());
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
