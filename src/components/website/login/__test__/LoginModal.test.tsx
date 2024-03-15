@@ -26,14 +26,13 @@ jest.mock('gatsby-plugin-react-i18next', () => ({
 }));
 
 const mockDispatch = jest.fn();
-let mockReturnedStateValue = jest.fn();
-
+let mockState = {};
 function mockUseDispatch() {
     return mockDispatch;
 }
 
 function mockUseSelector() {
-    return mockReturnedStateValue();
+    return mockState;
 }
 
 jest.mock('react-redux', () => ({
@@ -42,10 +41,8 @@ jest.mock('react-redux', () => ({
     useSelector: mockUseSelector,
 }));
 
-function mockLoginModalState(mockState: any) {
-    mockReturnedStateValue = jest.fn().mockImplementation(() => {
-        return mockState;
-    });
+function mockLoginModalState(state) {
+    mockState = state;
 }
 
 function mockLoginModalUseStates(
