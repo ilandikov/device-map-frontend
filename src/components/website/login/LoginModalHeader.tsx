@@ -10,8 +10,26 @@ export enum LoginModalHeaderState {
     NEW_PASSWORD = 'NEW_PASSWORD',
 }
 
+function getHeaderState(userAuthState: UserAuthState): LoginModalHeaderState {
+    switch (userAuthState) {
+        case UserAuthState.MAIL_INPUT:
+        case UserAuthState.SIGNUP_OTP:
+        case UserAuthState.SIGNUP_OTP_LOADING:
+        case UserAuthState.SIGNUP_PASSWORD:
+            return LoginModalHeaderState.SIGNUP;
+        case UserAuthState.LOGIN:
+        case UserAuthState.LOGIN_OTP:
+        case UserAuthState.LOGIN_OTP_LOADING:
+            return LoginModalHeaderState.LOGIN;
+        case UserAuthState.LOGIN_PASSWORD_RESET:
+            return LoginModalHeaderState.NEW_PASSWORD;
+    }
+
+    return LoginModalHeaderState.WELCOME;
+}
+
 export function LoginModalHeader(props: { state: LoginModalHeaderState; userAuthState: UserAuthState }) {
-    const loginModalHeaderState = props.state;
+    const loginModalHeaderState = getHeaderState(props.userAuthState);
     const { header, description, opaqueDescription } = getHeaderDetails(loginModalHeaderState);
 
     return (
