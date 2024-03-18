@@ -9,7 +9,11 @@ import {
     loginModalVerifyRequest,
 } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
-import { componentWithStoreProvider, renderForSnapshotTest } from './LoginModalTestHelpers';
+import {
+    componentWithStoreProvider,
+    renderForActionDispatchTest,
+    renderForSnapshotTest,
+} from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -43,11 +47,6 @@ describe('PasswordCreationForm snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 });
-
-function renderForActionDispatchTest(component: React.JSX.Element) {
-    const { container } = render(componentWithStoreProvider(component));
-    return container;
-}
 
 describe('PasswordCreationForm action tests', () => {
     beforeEach(() => {
