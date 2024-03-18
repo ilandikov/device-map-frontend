@@ -1,4 +1,4 @@
-import { MailInputError, UserAuthState } from './redux/state';
+import { MailInputError, UserAuthState } from './state';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {

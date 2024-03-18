@@ -1,10 +1,10 @@
+import { MailInputError, UserAuthState } from '../state';
 import {
     getPasswordInputErrorAndNextState,
     getUserEmailErrorAndNextState,
     userAuthStateFromOTP,
     userAuthStateFromUserLogin,
-} from '../UserAuthStateUtils';
-import { MailInputError, UserAuthState } from '../redux/state';
+} from '../reducerUtils';
 
 describe('user email logic tests', () => {
     it('should return no error on valid mail and move to password creation state', () => {

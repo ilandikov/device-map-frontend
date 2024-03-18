@@ -1,10 +1,10 @@
+import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
+import { LoginModalState, UserAuthState, loginModalInitialState } from './state';
 import {
     getPasswordInputErrorAndNextState,
     getUserEmailErrorAndNextState,
     userAuthStateFromUserLogin,
-} from '../UserAuthStateUtils';
-import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
-import { LoginModalState, UserAuthState, loginModalInitialState } from './state';
+} from './reducerUtils';
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
     switch (action.type) {
