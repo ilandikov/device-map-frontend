@@ -6,7 +6,8 @@ import '@testing-library/jest-dom';
 import { LoginModal } from '../LoginModal';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { UserAuthState } from '../redux/state';
-import { renderForSnapshotTest } from './LoginModalTestHelpers';
+
+import { renderForSnapshotTest } from '../../TestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),

@@ -1,8 +1,18 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
+import renderer from 'react-test-renderer';
 import { render } from '@testing-library/react';
-import { configureTestStore } from '../../../../../tests/utils';
+import { configureTestStore } from '../../../tests/utils';
+
+export function createEvent(value: any) {
+    return { target: { value: `${value}` } };
+}
+
+export function getNonNumeric() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;:',.<>/?`~";
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters[randomIndex];
+}
 
 function componentWithStoreProvider(component: React.JSX.Element) {
     return <Provider store={configureTestStore()}>{component}</Provider>;

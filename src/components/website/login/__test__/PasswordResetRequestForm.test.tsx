@@ -1,10 +1,9 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import { createEvent } from '../../TestHelpers';
+import { createEvent, renderForActionDispatchTest } from '../../TestHelpers';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
-import { renderForActionDispatchTest } from './LoginModalTestHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

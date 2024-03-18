@@ -1,7 +1,7 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { LogInForm } from '../LogInForm';
-import { createEvent } from '../../TestHelpers';
+import { createEvent, renderForActionDispatchTest } from '../../TestHelpers';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -11,7 +11,6 @@ import {
 } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { UserAuthState } from '../redux/state';
-import { renderForActionDispatchTest } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
