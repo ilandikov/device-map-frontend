@@ -26,13 +26,13 @@ export function LoginModal() {
         <div className="login-modal-window">
             <div className="login-modal-container">
                 {showShadows && <LoginModalShadows />}
+                {showNavigationButtons && <NavigationButtons />}
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
                         <LoginModalHeader />
                         <WelcomeForm />
                     </>
                 )}
-                {showNavigationButtons && <NavigationButtons />}
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
                         <LoginModalHeader />
