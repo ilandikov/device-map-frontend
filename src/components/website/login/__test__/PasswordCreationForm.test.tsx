@@ -1,7 +1,5 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { configureTestStore } from '../../../../../tests/utils';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
 import {
@@ -11,7 +9,7 @@ import {
     loginModalVerifyRequest,
 } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
-import { renderAsJSON } from './LoginModalTestHelpers';
+import { componentWithStoreProvider, renderForSnapshotTest } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -25,14 +23,6 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
-
-function componentWithStoreProvider(component: React.JSX.Element) {
-    return <Provider store={configureTestStore()}>{component}</Provider>;
-}
-
-function renderForSnapshotTest(component: React.JSX.Element) {
-    return renderAsJSON(componentWithStoreProvider(component));
-}
 
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
