@@ -1,24 +1,15 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
 import { OTPForm } from '../OTPForm';
 import { createEvent, getNonNumeric } from '../../TestHelpers';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
-import { configureTestStore } from '../../../../../tests/utils';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
+import { renderForActionDispatchTest } from './LoginModalTestHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
 }));
-
-function renderOTPForm() {
-    return render(
-        <Provider store={configureTestStore()}>
-            <OTPForm />
-        </Provider>,
-    );
-}
 
 function getInput(container: HTMLElement, inputIndex: number) {
     return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
@@ -26,7 +17,7 @@ function getInput(container: HTMLElement, inputIndex: number) {
 
 describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        const { container } = renderOTPForm();
+        const { container } = render(<OTPForm />);
         const input = getInput(container, inputIndex);
         expect(input.value).toEqual('');
 
@@ -40,7 +31,7 @@ describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            const { container } = renderOTPForm();
+            const { container } = render(<OTPForm />);
             const input = getInput(container, inputIndex);
 
             fireEvent.change(input, createEvent('3'));
@@ -57,7 +48,7 @@ describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            const { container } = renderOTPForm();
+            const { container } = render(<OTPForm />);
             const input = getInput(container, inputIndex);
 
             fireEvent.change(input, createEvent('1'));
@@ -68,7 +59,7 @@ describe('OTP form tests', () => {
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        const { container } = renderOTPForm();
+        const { container } = render(<OTPForm />);
         const input = getInput(container, 5);
 
         fireEvent.change(input, createEvent('1'));
@@ -78,7 +69,7 @@ describe('OTP form tests', () => {
     });
 
     it('should focus on the next empty input after a digit has been input', () => {
-        const { container } = renderOTPForm();
+        const { container } = render(<OTPForm />);
         const input0 = getInput(container, 0);
         const input1 = getInput(container, 1);
         const input2 = getInput(container, 2);
@@ -94,7 +85,7 @@ describe('OTP form tests', () => {
 
 describe('OTP form action tests', () => {
     it('should send OTP verification request on next button click', () => {
-        const { container } = renderOTPForm();
+        const container = renderForActionDispatchTest(<OTPForm />);
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);

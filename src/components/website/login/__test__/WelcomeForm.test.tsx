@@ -1,10 +1,9 @@
-import { fireEvent, getByText, render } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { loginModalButtonClick } from '../redux/actions';
-import { configureTestStore } from '../../../../../tests/utils';
 import { WelcomeForm } from '../WelcomeForm';
+import { renderForActionDispatchTest } from './LoginModalTestHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -12,19 +11,13 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-const componentWithStoreProvider = (
-    <Provider store={configureTestStore()}>
-        <WelcomeForm />
-    </Provider>
-);
-
 describe('WelcomeForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
 
     it('should transition to email input from welcome state', () => {
-        const { container } = render(componentWithStoreProvider);
+        const container = renderForActionDispatchTest(<WelcomeForm />);
 
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
@@ -33,7 +26,7 @@ describe('WelcomeForm action tests', () => {
     });
 
     it('should transition to login from welcome state', () => {
-        const { container } = render(componentWithStoreProvider);
+        const container = renderForActionDispatchTest(<WelcomeForm />);
 
         const loginButton = getByText(container, 'accountLogin');
         fireEvent.click(loginButton);
