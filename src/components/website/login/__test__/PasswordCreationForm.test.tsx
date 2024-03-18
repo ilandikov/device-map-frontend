@@ -26,12 +26,8 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-function componentWithStoreProvider() {
-    return (
-        <Provider store={configureTestStore()}>
-            <PasswordCreationForm />
-        </Provider>
-    );
+function componentWithStoreProvider(component: React.JSX.Element) {
+    return <Provider store={configureTestStore()}>{component}</Provider>;
 }
 
 describe('PasswordCreationForm snapshot tests', () => {
@@ -39,7 +35,7 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockLoginModalState({
             userPasswordError: null,
         });
-        const component = renderAsJSON(componentWithStoreProvider());
+        const component = renderAsJSON(componentWithStoreProvider(<PasswordCreationForm />));
 
         expect(component).toMatchSnapshot();
     });
@@ -48,7 +44,7 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockLoginModalState({
             userPasswordError: new Error(),
         });
-        const component = renderAsJSON(componentWithStoreProvider());
+        const component = renderAsJSON(componentWithStoreProvider(<PasswordCreationForm />));
 
         expect(component).toMatchSnapshot();
     });
@@ -60,7 +56,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        const { container } = render(componentWithStoreProvider());
+        const { container } = render(componentWithStoreProvider(<PasswordCreationForm />));
 
         const userPasswordInput = getByTestId(container, 'userPassword');
         fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
@@ -72,7 +68,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        const { container } = render(componentWithStoreProvider());
+        const { container } = render(componentWithStoreProvider(<PasswordCreationForm />));
 
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
@@ -84,7 +80,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        const { container } = render(componentWithStoreProvider());
+        const { container } = render(componentWithStoreProvider(<PasswordCreationForm />));
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
