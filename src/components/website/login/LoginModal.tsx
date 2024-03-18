@@ -1,6 +1,4 @@
 import React from 'react';
-import { useI18next } from 'gatsby-plugin-react-i18next';
-import { useAppDispatch } from '../../../redux/store';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -11,13 +9,10 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-import { loginModalButtonClick } from './redux/actions';
 import { UserAuthState, useLoginModalState } from './redux/state';
+import { WelcomeForm } from './WelcomeForm';
 
 export function LoginModal() {
-    const { t } = useI18next();
-    const dispatch = useAppDispatch();
-
     const userAuthState = useLoginModalState().userAuthState;
 
     return (
@@ -27,25 +22,7 @@ export function LoginModal() {
                     <>
                         <LoginModalShadows />
                         <LoginModalHeader />
-                        <div className="login-modal-input-container"></div>
-                        <div className="login-modal-button-container">
-                            <button
-                                className="login-modal-button-black-on-green"
-                                onClick={() => {
-                                    dispatch(loginModalButtonClick('accountLogin'));
-                                }}
-                            >
-                                {t('accountLogin')}
-                            </button>
-                            <button
-                                className="login-modal-button-green-on-black"
-                                onClick={() => {
-                                    dispatch(loginModalButtonClick('accountRegister'));
-                                }}
-                            >
-                                {t('accountRegister')}
-                            </button>
-                        </div>
+                        <WelcomeForm />
                     </>
                 )}
                 {userAuthState === UserAuthState.MAIL_INPUT && (
