@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 import { configureTestStore } from '../../../../../tests/utils';
 
-export function componentWithStoreProvider(component: React.JSX.Element) {
+function componentWithStoreProvider(component: React.JSX.Element) {
     return <Provider store={configureTestStore()}>{component}</Provider>;
 }
 
