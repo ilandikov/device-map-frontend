@@ -16,11 +16,12 @@ export function LoginModal() {
     const userAuthState = useLoginModalState().userAuthState;
 
     const showShadows = userAuthState === UserAuthState.WELCOME;
-    const showNavigationButtons =
-        userAuthState === UserAuthState.MAIL_INPUT ||
-        userAuthState === UserAuthState.SIGNUP_PASSWORD ||
-        userAuthState === UserAuthState.LOGIN ||
-        userAuthState === UserAuthState.LOGIN_PASSWORD_RESET;
+    const showNavigationButtons = [
+        UserAuthState.MAIL_INPUT,
+        UserAuthState.SIGNUP_PASSWORD,
+        UserAuthState.LOGIN,
+        UserAuthState.LOGIN_PASSWORD_RESET,
+    ].includes(userAuthState);
 
     return (
         <div className="login-modal-window">
