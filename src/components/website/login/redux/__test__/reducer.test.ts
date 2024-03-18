@@ -39,6 +39,19 @@ function verifyNextState(initialState: LoginModalState, action: LoginModalAction
     expect(nextState).toEqual(expectedState);
 }
 
+function verifyNextState2(
+    initialState: LoginModalState,
+    action: LoginModalAction,
+    expectedChange: Partial<LoginModalState>,
+) {
+    const expectedState: LoginModalState = {
+        ...initialState,
+        ...expectedChange,
+    };
+
+    verifyNextState(initialState, action, expectedState);
+}
+
 describe('LoginModal reducer tests', () => {
     it('should return initial state', () => {
         // @ts-expect-error
@@ -177,12 +190,8 @@ describe('email input logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         const expectedChange = { userEmailError: new Error(MailInputError.NOT_VALID) };
-        const expectedState: LoginModalState = {
-            ...initialState,
-            ...expectedChange,
-        };
 
-        verifyNextState(initialState, action, expectedState);
+        verifyNextState2(initialState, action, expectedChange);
     });
 
     it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
