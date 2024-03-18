@@ -34,22 +34,18 @@ function buildLoginModalInitialState({
     };
 }
 
-function verifyNextState(initialState: LoginModalState, action: LoginModalAction, expectedState: LoginModalState) {
-    const nextState = loginModalReducer(initialState, action);
-    expect(nextState).toEqual(expectedState);
-}
-
 function verifyNextState2(
     initialState: LoginModalState,
     action: LoginModalAction,
     expectedChange: Partial<LoginModalState>,
 ) {
+    const nextState = loginModalReducer(initialState, action);
+
     const expectedState: LoginModalState = {
         ...initialState,
         ...expectedChange,
     };
-
-    verifyNextState(initialState, action, expectedState);
+    expect(nextState).toEqual(expectedState);
 }
 
 describe('LoginModal reducer tests', () => {
