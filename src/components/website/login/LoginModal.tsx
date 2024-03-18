@@ -27,16 +27,16 @@ export function LoginModal() {
                         <WelcomeForm />
                     </>
                 )}
+                {userAuthState === UserAuthState.MAIL_INPUT && <NavigationButtons />}
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
-                        <NavigationButtons />
                         <LoginModalHeader />
                         <MailInputForm />
                     </>
                 )}
+                {userAuthState === UserAuthState.SIGNUP_PASSWORD && <NavigationButtons />}
                 {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
                     <>
-                        <NavigationButtons />
                         <LoginModalHeader />
                         <PasswordCreationForm />
                     </>
@@ -53,16 +53,16 @@ export function LoginModal() {
                         <Loader />
                     </>
                 )}
+                {userAuthState === UserAuthState.LOGIN && <NavigationButtons />}
                 {userAuthState === UserAuthState.LOGIN && (
                     <>
-                        <NavigationButtons />
                         <LoginModalHeader />
                         <LogInForm />
                     </>
                 )}
+                {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && <NavigationButtons />}
                 {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
                     <>
-                        <NavigationButtons />
                         <LoginModalHeader />
                         <PasswordResetRequestForm />
                     </>
