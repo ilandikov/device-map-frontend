@@ -27,10 +27,10 @@ export function LoginModal() {
                         <WelcomeForm />
                     </>
                 )}
-                {userAuthState === UserAuthState.MAIL_INPUT && <NavigationButtons />}
-                {userAuthState === UserAuthState.SIGNUP_PASSWORD && <NavigationButtons />}
-                {userAuthState === UserAuthState.LOGIN && <NavigationButtons />}
-                {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && <NavigationButtons />}
+                {(userAuthState === UserAuthState.MAIL_INPUT ||
+                    userAuthState === UserAuthState.SIGNUP_PASSWORD ||
+                    userAuthState === UserAuthState.LOGIN ||
+                    userAuthState === UserAuthState.LOGIN_PASSWORD_RESET) && <NavigationButtons />}
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
                         <LoginModalHeader />
