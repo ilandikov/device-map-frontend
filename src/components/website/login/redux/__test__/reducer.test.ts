@@ -176,9 +176,10 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
+        const expectedChange = { userEmailError: new Error(MailInputError.NOT_VALID) };
         const expectedState: LoginModalState = {
             ...initialState,
-            userEmailError: new Error(MailInputError.NOT_VALID),
+            ...expectedChange,
         };
 
         verifyNextState(initialState, action, expectedState);
