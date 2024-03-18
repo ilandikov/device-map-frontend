@@ -1,8 +1,7 @@
 import { fireEvent, getByText, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import React from 'react';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
-import { UserAuthState } from '../redux/state';
+import { mockDispatch, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { loginModalButtonClick } from '../redux/actions';
 import { configureTestStore } from '../../../../../tests/utils';
 import { WelcomeForm } from '../WelcomeForm';
@@ -25,9 +24,6 @@ describe('WelcomeForm action tests', () => {
     });
 
     it('should transition to email input from welcome state', () => {
-        mockLoginModalState({
-            userAuthState: UserAuthState.WELCOME,
-        });
         const { container } = render(componentWithStoreProvider);
 
         const registerButton = getByText(container, 'accountRegister');
@@ -37,9 +33,6 @@ describe('WelcomeForm action tests', () => {
     });
 
     it('should transition to login from welcome state', () => {
-        mockLoginModalState({
-            userAuthState: UserAuthState.WELCOME,
-        });
         const { container } = render(componentWithStoreProvider);
 
         const loginButton = getByText(container, 'accountLogin');
