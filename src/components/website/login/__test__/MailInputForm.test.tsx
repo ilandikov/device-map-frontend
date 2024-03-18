@@ -1,9 +1,11 @@
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { configureTestStore } from '../../../../../tests/utils';
 import { MailInputForm } from '../MailInputForm';
-import { createEvent } from '../../TestHelpers';
+import {
+    createEvent,
+    renderForActionDispatchTest,
+    renderForSnapshotTest,
+} from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -13,7 +15,6 @@ import {
 } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { MailInputError } from '../redux/state';
-import { renderAsJSON } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -28,34 +29,24 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-const store = configureTestStore();
-
-function componentWithStoreProvider() {
-    return (
-        <Provider store={store}>
-            <MailInputForm />
-        </Provider>
-    );
-}
-
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
         mockLoginModalState({ userEmail: '', userEmailError: null });
-        const component = renderAsJSON(componentWithStoreProvider());
+        const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists error', () => {
         mockLoginModalState({ userEmail: '', userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
-        const component = renderAsJSON(componentWithStoreProvider());
+        const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail not valid error', () => {
         mockLoginModalState({ userEmail: '', userEmailError: new Error(MailInputError.NOT_VALID) });
-        const component = renderAsJSON(componentWithStoreProvider());
+        const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
     });
@@ -67,7 +58,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email setter from email input', () => {
-        const { container } = render(componentWithStoreProvider());
+        const container = renderForActionDispatchTest(<MailInputForm />);
 
         const emailInput = getByTestId(container, 'emailInput');
 
@@ -80,7 +71,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        const { container } = render(componentWithStoreProvider());
+        const container = renderForActionDispatchTest(<MailInputForm />);
 
         const tryVerifyEmailButton = getByText(container, 'next');
 
@@ -91,7 +82,7 @@ describe('MailInputForm action tests', () => {
 
     it('should move from mail already exists to password verification stage', () => {
         mockLoginModalState({ userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
-        const { container } = render(componentWithStoreProvider());
+        const container = renderForActionDispatchTest(<MailInputForm />);
         const loginButton = getByText(container, 'accountLogin');
 
         fireEvent.click(loginButton);

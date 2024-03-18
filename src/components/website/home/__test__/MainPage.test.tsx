@@ -10,11 +10,9 @@ import { configureTestStore } from '../../../../../tests/utils';
 import MainPage from '../MainPage';
 
 describe('MainPage component', () => {
-    const store = configureTestStore();
-
     function getRenderComponent() {
         return (
-            <Provider store={store}>
+            <Provider store={configureTestStore()}>
                 <I18nextProvider i18n={i18n}>
                     <MainPage />
                 </I18nextProvider>

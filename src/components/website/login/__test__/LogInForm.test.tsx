@@ -1,9 +1,7 @@
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { configureTestStore } from '../../../../../tests/utils';
 import { LogInForm } from '../LogInForm';
-import { createEvent } from '../../TestHelpers';
+import { createEvent, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -27,16 +25,6 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-const store = configureTestStore();
-
-function componentWithStoreProvider() {
-    return render(
-        <Provider store={store}>
-            <LogInForm />
-        </Provider>,
-    );
-}
-
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
@@ -44,7 +32,7 @@ describe('LogInForm action tests', () => {
 
     it('should update the user email on input on password input stage', () => {
         mockLoginModalState({ userAuthState: UserAuthState.LOGIN });
-        const { container } = componentWithStoreProvider();
+        const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
@@ -57,7 +45,7 @@ describe('LogInForm action tests', () => {
 
     it('should show the already input email on password input stage', () => {
         mockLoginModalState({ userEmail: 'here_is_my@email.com' });
-        const { container } = componentWithStoreProvider();
+        const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
 
@@ -65,7 +53,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        const { container } = componentWithStoreProvider();
+        const container = renderForActionDispatchTest(<LogInForm />);
 
         const userPasswordInput = getByTestId(container, 'userPasswordLogin');
         fireEvent.change(userPasswordInput, createEvent('strongPassword'));
@@ -77,7 +65,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should call user authentication when next button is pressed', () => {
-        const { container } = componentWithStoreProvider();
+        const container = renderForActionDispatchTest(<LogInForm />);
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
@@ -89,7 +77,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should transition to password reset state when reset button was clicked', () => {
-        const { container } = componentWithStoreProvider();
+        const container = renderForActionDispatchTest(<LogInForm />);
 
         const resetPasswordButton = getByText(container, 'resetPassword');
         fireEvent.click(resetPasswordButton);
