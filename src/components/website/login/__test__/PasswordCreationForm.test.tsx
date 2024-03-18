@@ -30,12 +30,16 @@ function componentWithStoreProvider(component: React.JSX.Element) {
     return <Provider store={configureTestStore()}>{component}</Provider>;
 }
 
+function renderForSnapshotTest(component: React.JSX.Element) {
+    return renderAsJSON(componentWithStoreProvider(component));
+}
+
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
         mockLoginModalState({
             userPasswordError: null,
         });
-        const component = renderAsJSON(componentWithStoreProvider(<PasswordCreationForm />));
+        const component = renderForSnapshotTest(<PasswordCreationForm />);
 
         expect(component).toMatchSnapshot();
     });
@@ -44,7 +48,7 @@ describe('PasswordCreationForm snapshot tests', () => {
         mockLoginModalState({
             userPasswordError: new Error(),
         });
-        const component = renderAsJSON(componentWithStoreProvider(<PasswordCreationForm />));
+        const component = renderForSnapshotTest(<PasswordCreationForm />);
 
         expect(component).toMatchSnapshot();
     });
