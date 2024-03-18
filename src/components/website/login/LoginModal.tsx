@@ -15,10 +15,12 @@ import { WelcomeForm } from './WelcomeForm';
 export function LoginModal() {
     const userAuthState = useLoginModalState().userAuthState;
 
+    const showShadows = userAuthState === UserAuthState.WELCOME;
+
     return (
         <div className="login-modal-window">
             <div className="login-modal-container">
-                {userAuthState === UserAuthState.WELCOME && <LoginModalShadows />}
+                {showShadows && <LoginModalShadows />}
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
                         <LoginModalHeader />
