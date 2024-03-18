@@ -1,7 +1,11 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordCreationForm } from '../PasswordCreationForm';
-import { createEvent, renderForActionDispatchTest, renderForSnapshotTest } from '../../TestHelpers';
+import {
+    createEvent,
+    renderForActionDispatchTest,
+    renderForSnapshotTest,
+} from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,

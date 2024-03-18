@@ -1,7 +1,7 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
-import { createEvent, getNonNumeric, renderForActionDispatchTest } from '../../TestHelpers';
+import { createEvent, getNonNumeric, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 

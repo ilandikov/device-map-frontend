@@ -3,8 +3,7 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { loginModalButtonClick } from '../redux/actions';
 import { WelcomeForm } from '../WelcomeForm';
-
-import { renderForActionDispatchTest } from '../../TestHelpers';
+import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

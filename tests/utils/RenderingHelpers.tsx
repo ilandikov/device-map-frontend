@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import { render } from '@testing-library/react';
-import { configureTestStore } from '../../../tests/utils';
+import { configureTestStore } from './index';
 
 export function createEvent(value: any) {
     return { target: { value: `${value}` } };

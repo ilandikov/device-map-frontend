@@ -1,7 +1,7 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import { createEvent, renderForActionDispatchTest } from '../../TestHelpers';
+import { createEvent, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 

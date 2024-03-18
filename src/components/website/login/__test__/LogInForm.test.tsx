@@ -1,7 +1,7 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { LogInForm } from '../LogInForm';
-import { createEvent, renderForActionDispatchTest } from '../../TestHelpers';
+import { createEvent, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
