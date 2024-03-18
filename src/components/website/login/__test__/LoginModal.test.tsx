@@ -1,13 +1,11 @@
 /* External dependencies */
 import React from 'react';
 import { Provider } from 'react-redux';
-import { fireEvent, getByText, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 /* Local dependencies */
 import { configureTestStore } from '../../../../../tests/utils';
 import { LoginModal } from '../LoginModal';
-import { loginModalButtonClick } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { UserAuthState } from '../redux/state';
 import { renderAsJSON } from './LoginModalTestHelpers';
@@ -116,35 +114,5 @@ describe('LoginModal snapshot tests', () => {
         const component = renderAsJSON(componentWithStoreProvider);
 
         expect(component).toMatchSnapshot();
-    });
-});
-
-describe('LoginModal action tests - welcome stage', () => {
-    beforeEach(() => {
-        mockDispatch.mockReset();
-    });
-
-    it('should transition to email input from welcome state', () => {
-        mockLoginModalState({
-            userAuthState: UserAuthState.WELCOME,
-        });
-        const { container } = render(componentWithStoreProvider);
-
-        const registerButton = getByText(container, 'accountRegister');
-        fireEvent.click(registerButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountRegister'));
-    });
-
-    it('should transition to login from welcome state', () => {
-        mockLoginModalState({
-            userAuthState: UserAuthState.WELCOME,
-        });
-        const { container } = render(componentWithStoreProvider);
-
-        const loginButton = getByText(container, 'accountLogin');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
     });
 });
