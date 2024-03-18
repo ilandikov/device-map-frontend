@@ -28,11 +28,9 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-const store = configureTestStore();
-
 function componentWithStoreProvider() {
     return (
-        <Provider store={store}>
+        <Provider store={configureTestStore()}>
             <MailInputForm />
         </Provider>
     );

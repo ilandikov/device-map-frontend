@@ -11,11 +11,9 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
 }));
 
-const store = configureTestStore();
-
 function componentWithStoreProvider() {
     return render(
-        <Provider store={store}>
+        <Provider store={configureTestStore()}>
             <NavigationButtons />
         </Provider>,
     );
