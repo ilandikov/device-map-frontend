@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordCreationForm } from '../PasswordCreationForm';
 import { createEvent } from '../../TestHelpers';
@@ -9,11 +9,7 @@ import {
     loginModalVerifyRequest,
 } from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
-import {
-    componentWithStoreProvider,
-    renderForActionDispatchTest,
-    renderForSnapshotTest,
-} from './LoginModalTestHelpers';
+import { renderForActionDispatchTest, renderForSnapshotTest } from './LoginModalTestHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -66,7 +62,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update repeated user password when typed', () => {
-        const { container } = render(componentWithStoreProvider(<PasswordCreationForm />));
+        const container = renderForActionDispatchTest(<PasswordCreationForm />);
 
         const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
         fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
@@ -78,7 +74,7 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should call password verification when next button is pressed', () => {
-        const { container } = render(componentWithStoreProvider(<PasswordCreationForm />));
+        const container = renderForActionDispatchTest(<PasswordCreationForm />);
 
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
