@@ -4,6 +4,7 @@ import React from 'react';
 import { configureTestStore } from '../../../../../tests/utils';
 import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
+import { loginModalButtonClick } from '../redux/actions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -31,7 +32,7 @@ describe('Navigation buttons tests', () => {
         const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'cancel' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('cancel'));
     });
 
     it('should go back to a desired go back state on go back button click', () => {
@@ -40,6 +41,6 @@ describe('Navigation buttons tests', () => {
         const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'buttonClicked', button: 'goBack' });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('goBack'));
     });
 });
