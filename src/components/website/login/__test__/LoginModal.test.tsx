@@ -119,7 +119,7 @@ describe('LoginModal snapshot tests', () => {
     });
 });
 
-describe('LoginModal action tests - welcome stage', () => {
+describe('WelcomeForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
