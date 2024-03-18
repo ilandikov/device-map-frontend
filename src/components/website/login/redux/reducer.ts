@@ -67,9 +67,9 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                 case 'goBack':
                     switch (state.userAuthState) {
                         case UserAuthState.MAIL_INPUT:
+                        case UserAuthState.LOGIN:
                             return { ...state, userAuthState: UserAuthState.WELCOME };
                         case UserAuthState.SIGNUP_PASSWORD:
-                        case UserAuthState.LOGIN:
                             return { ...state, userAuthState: UserAuthState.MAIL_INPUT };
                         case UserAuthState.LOGIN_PASSWORD_RESET:
                             return { ...state, userAuthState: UserAuthState.LOGIN };

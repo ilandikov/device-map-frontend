@@ -107,8 +107,8 @@ describe('navigation logic', () => {
         // From mail input to welcome
         [UserAuthState.MAIL_INPUT, UserAuthState.WELCOME],
 
-        // From password input to mail input
-        [UserAuthState.LOGIN, UserAuthState.MAIL_INPUT],
+        // From password input to welcome
+        [UserAuthState.LOGIN, UserAuthState.WELCOME],
 
         // From password reset to login
         [UserAuthState.LOGIN_PASSWORD_RESET, UserAuthState.LOGIN],
