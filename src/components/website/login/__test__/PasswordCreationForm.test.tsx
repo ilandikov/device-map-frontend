@@ -44,13 +44,18 @@ describe('PasswordCreationForm snapshot tests', () => {
     });
 });
 
+function renderForActionDispatchTest(component: React.JSX.Element) {
+    const { container } = render(componentWithStoreProvider(component));
+    return container;
+}
+
 describe('PasswordCreationForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
 
     it('should update user password when typed', () => {
-        const { container } = render(componentWithStoreProvider(<PasswordCreationForm />));
+        const container = renderForActionDispatchTest(<PasswordCreationForm />);
 
         const userPasswordInput = getByTestId(container, 'userPassword');
         fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
