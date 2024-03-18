@@ -18,9 +18,9 @@ export function LoginModal() {
     return (
         <div className="login-modal-window">
             <div className="login-modal-container">
+                {userAuthState === UserAuthState.WELCOME && <LoginModalShadows />}
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
-                        <LoginModalShadows />
                         <LoginModalHeader />
                         <WelcomeForm />
                     </>
