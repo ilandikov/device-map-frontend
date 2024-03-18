@@ -16,6 +16,11 @@ export function LoginModal() {
     const userAuthState = useLoginModalState().userAuthState;
 
     const showShadows = userAuthState === UserAuthState.WELCOME;
+    const showNavigationButtons =
+        userAuthState === UserAuthState.MAIL_INPUT ||
+        userAuthState === UserAuthState.SIGNUP_PASSWORD ||
+        userAuthState === UserAuthState.LOGIN ||
+        userAuthState === UserAuthState.LOGIN_PASSWORD_RESET;
 
     return (
         <div className="login-modal-window">
@@ -27,10 +32,7 @@ export function LoginModal() {
                         <WelcomeForm />
                     </>
                 )}
-                {(userAuthState === UserAuthState.MAIL_INPUT ||
-                    userAuthState === UserAuthState.SIGNUP_PASSWORD ||
-                    userAuthState === UserAuthState.LOGIN ||
-                    userAuthState === UserAuthState.LOGIN_PASSWORD_RESET) && <NavigationButtons />}
+                {showNavigationButtons && <NavigationButtons />}
                 {userAuthState === UserAuthState.MAIL_INPUT && (
                     <>
                         <LoginModalHeader />
