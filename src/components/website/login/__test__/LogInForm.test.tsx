@@ -60,7 +60,6 @@ describe('LogInForm action tests', () => {
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
-
         expect(emailInput.value).toEqual('here_is_my@email.com');
     });
 

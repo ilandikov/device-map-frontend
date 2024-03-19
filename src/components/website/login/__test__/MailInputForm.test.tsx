@@ -64,7 +64,6 @@ describe('MailInputForm action tests', () => {
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const emailInput = getByTestId(container, 'emailInput');
-
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
@@ -77,7 +76,6 @@ describe('MailInputForm action tests', () => {
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const tryVerifyEmailButton = getByText(container, 'next');
-
         fireEvent.click(tryVerifyEmailButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
@@ -86,8 +84,8 @@ describe('MailInputForm action tests', () => {
     it('should move from mail already exists to password verification stage', () => {
         mockLoginModalState({ userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
         const container = renderForActionDispatchTest(<MailInputForm />);
-        const loginButton = getByText(container, 'accountLogin');
 
+        const loginButton = getByText(container, 'accountLogin');
         fireEvent.click(loginButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));

@@ -61,8 +61,8 @@ describe('OTP form tests', () => {
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
             const { container } = render(<OTPForm />);
-            const input = getInput(container, inputIndex);
 
+            const input = getInput(container, inputIndex);
             fireEvent.change(input, createEvent('1'));
 
             const nextInput = getInput(container, inputIndex + 1);
@@ -72,8 +72,8 @@ describe('OTP form tests', () => {
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
         const { container } = render(<OTPForm />);
-        const input = getInput(container, 5);
 
+        const input = getInput(container, 5);
         fireEvent.change(input, createEvent('1'));
 
         const nextButton = getByText(container, 'next');
