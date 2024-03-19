@@ -23,13 +23,16 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                     if (state.userAuthState === UserAuthState.LOGIN_PASSWORD_RESET) {
                         return { ...state, userAuthState: UserAuthState.LOGIN_OTP };
                     }
-                    const nextUserAuthState =
-                        mailInputError === null ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.MAIL_INPUT;
+
                     if (mailInputError === null) {
-                        return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
+                        return {
+                            ...state,
+                            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                            userEmailError: mailInputError,
+                        };
                     }
 
-                    return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
+                    return { ...state, userAuthState: UserAuthState.MAIL_INPUT, userEmailError: mailInputError };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     // TODO move or inline getPasswordInputErrorAndNextState() to this file
