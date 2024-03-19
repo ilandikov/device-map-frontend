@@ -19,10 +19,10 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
+                    const mailInputError = getMailInputError(state.userEmail);
                     if (state.userAuthState === UserAuthState.LOGIN_PASSWORD_RESET) {
                         return { ...state, userAuthState: UserAuthState.LOGIN_OTP };
                     }
-                    const mailInputError = getMailInputError(state.userEmail);
                     const nextUserAuthState = mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
                     return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
                 }
