@@ -32,7 +32,7 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                         };
                     }
 
-                    return { ...state, userAuthState: UserAuthState.MAIL_INPUT, userEmailError: mailInputError };
+                    return { ...state, userEmailError: mailInputError };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     // TODO move or inline getPasswordInputErrorAndNextState() to this file
