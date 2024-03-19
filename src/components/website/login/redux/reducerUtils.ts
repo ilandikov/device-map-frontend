@@ -51,8 +51,12 @@ function getMailInputError(userEmail: string): Error | null {
     return null;
 }
 
+function getNextStateFromMailInputError(mailInputError: Error) {
+    return mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
+}
+
 export function getUserEmailErrorAndNextState(userEmail: string) {
     const mailInputError = getMailInputError(userEmail);
-    const nextUserAuthState = mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
+    const nextUserAuthState = getNextStateFromMailInputError(mailInputError);
     return { mailInputError, nextUserAuthState };
 }
