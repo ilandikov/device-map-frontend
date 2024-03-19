@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationButtons snapshot tests should match snapshot 1`] = `
+<nav
+  className="login-modal-navigation-container"
+>
+  <button
+    data-testid="goBackButton"
+    onClick={[Function]}
+  >
+    <img
+      alt="login-modal-navigation-go-back"
+      src="test-file-stub"
+    />
+  </button>
+  <button
+    data-testid="cancelButton"
+    onClick={[Function]}
+  >
+    <img
+      alt="login-modal-navigation-cancel"
+      src="test-file-stub"
+    />
+  </button>
+</nav>
+`;

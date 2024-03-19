@@ -3,12 +3,20 @@ import React from 'react';
 import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 import { loginModalButtonClick } from '../redux/actions';
-import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
+import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
 }));
+
+describe('NavigationButtons snapshot tests', () => {
+    it('should match snapshot', () => {
+        const component = renderForSnapshotTest(<NavigationButtons />);
+
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('Navigation buttons tests', () => {
     beforeEach(() => {
