@@ -34,8 +34,17 @@ function buildLoginModalInitialState({
     };
 }
 
-function verifyNextState(initialState: LoginModalState, action: LoginModalAction, expectedState: LoginModalState) {
+function verifyStateChange(
+    initialState: LoginModalState,
+    action: LoginModalAction,
+    expectedChange: Partial<LoginModalState>,
+) {
     const nextState = loginModalReducer(initialState, action);
+
+    const expectedState: LoginModalState = {
+        ...initialState,
+        ...expectedChange,
+    };
     expect(nextState).toEqual(expectedState);
 }
 
@@ -90,16 +99,9 @@ describe('navigation logic', () => {
             const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
             const action = loginModalButtonClick('cancel');
 
-            const expectedState: LoginModalState = {
+            verifyStateChange(initialState, action, {
                 userAuthState: UserAuthState.WELCOME,
-                userEmail: '',
-                userEmailError: null,
-                userPassword: '',
-                userPasswordRepeat: '',
-                userPasswordError: null,
-            };
-
-            verifyNextState(initialState, action, expectedState);
+            });
         },
     );
 
@@ -119,16 +121,9 @@ describe('navigation logic', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
         const action = loginModalButtonClick('goBack');
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: expectedUserAuthState,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 });
 
@@ -137,16 +132,9 @@ describe('email input logic', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT });
         const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'myMail@myServer.xyz');
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.MAIL_INPUT,
+        verifyStateChange(initialState, action, {
             userEmail: 'myMail@myServer.xyz',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should remove mail error and transition to password creation after good mail has been sent to verification', () => {
@@ -157,16 +145,10 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
-            userEmail: 'good@email.com',
             userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should set mail error and stay at mail input when bad mail has been sent to verification', () => {
@@ -176,16 +158,9 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.MAIL_INPUT,
-            userEmail: 'this is not an email!',
-            userEmailError: new Error(MailInputError.NOT_VALID),
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
+        const expectedChange = { userEmailError: new Error(MailInputError.NOT_VALID) };
 
-        verifyNextState(initialState, action, expectedState);
+        verifyStateChange(initialState, action, expectedChange);
     });
 
     it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
@@ -195,16 +170,9 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.MAIL_INPUT,
-            userEmail: 'already@exists.com',
+        verifyStateChange(initialState, action, {
             userEmailError: new Error(MailInputError.ALREADY_EXISTS),
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should remove mail error and transition to login with an existing mail', () => {
@@ -215,16 +183,10 @@ describe('email input logic', () => {
         });
         const action = loginModalButtonClick('accountLogin');
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN,
-            userEmail: 'already@exists.com',
             userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 });
 
@@ -234,16 +196,9 @@ describe('user password logic', () => {
 
         const action = loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'haha!!11');
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.WELCOME,
-            userEmail: '',
-            userEmailError: null,
+        verifyStateChange(initialState, action, {
             userPassword: 'haha!!11',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should set user password repeat', () => {
@@ -251,16 +206,9 @@ describe('user password logic', () => {
 
         const action = loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'lmao!rofl!');
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.WELCOME,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: '',
+        verifyStateChange(initialState, action, {
             userPasswordRepeat: 'lmao!rofl!',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should transition to OTP verification if passwords are matching and remove password error', () => {
@@ -273,16 +221,10 @@ describe('user password logic', () => {
 
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.SIGNUP_OTP,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: 'passwordsMatch',
-            userPasswordRepeat: 'passwordsMatch',
             userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should stay at password input if user passwords are not matching', () => {
@@ -294,16 +236,9 @@ describe('user password logic', () => {
 
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.SIGNUP_PASSWORD,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: 'dontMatch',
-            userPasswordRepeat: 'likeForSureDontMatch',
+        verifyStateChange(initialState, action, {
             userPasswordError: new Error(),
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 });
 
@@ -314,16 +249,9 @@ describe('OTP logic', () => {
         });
         const action = loginModalButtonClick('next');
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.SIGNUP_OTP_LOADING,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should move from log in OTP to log in OTP loading stage', () => {
@@ -332,16 +260,9 @@ describe('OTP logic', () => {
         });
         const action = loginModalButtonClick('next');
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_OTP_LOADING,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 });
 
@@ -354,16 +275,9 @@ describe('login logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGGED_IN,
-            userEmail: 'user@mail.com',
-            userEmailError: null,
-            userPassword: 'short',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 
     it('should stay at login state if incorrect user credentials have been presented', () => {
@@ -374,16 +288,8 @@ describe('login logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
-        const expectedState: LoginModalState = {
-            userAuthState: UserAuthState.LOGIN,
-            userEmail: 'another@user.com',
-            userEmailError: null,
-            userPassword: 'wrongPassword',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        const expectedChange = {};
+        verifyStateChange(initialState, action, expectedChange);
     });
 
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
@@ -394,16 +300,10 @@ describe('login logic', () => {
         });
         const action = loginModalButtonClick('passwordReset');
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
-            userEmail: 'writeMe@mail.com',
-            userEmailError: null,
             userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 });
 
@@ -415,15 +315,8 @@ describe('password reset logic', () => {
         });
         const action = loginModalButtonClick('OTPSendSMS');
 
-        const expectedState: LoginModalState = {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_OTP,
-            userEmail: 'please@reset.com',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
-        };
-
-        verifyNextState(initialState, action, expectedState);
+        });
     });
 });
