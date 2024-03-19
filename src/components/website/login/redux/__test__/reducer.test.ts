@@ -299,7 +299,7 @@ describe('password reset logic', () => {
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
             userEmail: 'please@reset.com',
         });
-        const action = loginModalButtonClick('OTPSendSMS');
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_OTP,

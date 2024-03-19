@@ -6,7 +6,12 @@ import {
     renderForActionDispatchTest,
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
-import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from '../redux/actions';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 
 jest.mock('react-redux', () => ({
@@ -47,6 +52,6 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('OTPSendSMS'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
     });
 });
