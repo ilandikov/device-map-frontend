@@ -7,11 +7,12 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
-import { mockDispatch, mockLoginModalState } from '../redux/__mocks__/LoginModalState';
+import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
+    useSelector: () => mockPrepareSelector(),
 }));
 
 describe('PasswordResetRequestForm snapshot tests', () => {
