@@ -34,7 +34,7 @@ function buildLoginModalInitialState({
     };
 }
 
-function verifyNextState(
+function verifyStateChange(
     initialState: LoginModalState,
     action: LoginModalAction,
     expectedChange: Partial<LoginModalState>,
@@ -99,7 +99,7 @@ describe('navigation logic', () => {
             const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
             const action = loginModalButtonClick('cancel');
 
-            verifyNextState(initialState, action, {
+            verifyStateChange(initialState, action, {
                 userAuthState: UserAuthState.WELCOME,
             });
         },
@@ -121,7 +121,7 @@ describe('navigation logic', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: initialUserAuthState });
         const action = loginModalButtonClick('goBack');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: expectedUserAuthState,
         });
     });
@@ -132,7 +132,7 @@ describe('email input logic', () => {
         const initialState = buildLoginModalInitialState({ userAuthState: UserAuthState.MAIL_INPUT });
         const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'myMail@myServer.xyz');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userEmail: 'myMail@myServer.xyz',
         });
     });
@@ -145,7 +145,7 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.SIGNUP_PASSWORD,
             userEmailError: null,
         });
@@ -160,7 +160,7 @@ describe('email input logic', () => {
 
         const expectedChange = { userEmailError: new Error(MailInputError.NOT_VALID) };
 
-        verifyNextState(initialState, action, expectedChange);
+        verifyStateChange(initialState, action, expectedChange);
     });
 
     it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
@@ -170,7 +170,7 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userEmailError: new Error(MailInputError.ALREADY_EXISTS),
         });
     });
@@ -183,7 +183,7 @@ describe('email input logic', () => {
         });
         const action = loginModalButtonClick('accountLogin');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN,
             userEmailError: null,
         });
@@ -196,7 +196,7 @@ describe('user password logic', () => {
 
         const action = loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'haha!!11');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userPassword: 'haha!!11',
         });
     });
@@ -206,7 +206,7 @@ describe('user password logic', () => {
 
         const action = loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'lmao!rofl!');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userPasswordRepeat: 'lmao!rofl!',
         });
     });
@@ -221,7 +221,7 @@ describe('user password logic', () => {
 
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.SIGNUP_OTP,
             userPasswordError: null,
         });
@@ -236,7 +236,7 @@ describe('user password logic', () => {
 
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userPasswordError: new Error(),
         });
     });
@@ -249,7 +249,7 @@ describe('OTP logic', () => {
         });
         const action = loginModalButtonClick('next');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.SIGNUP_OTP_LOADING,
         });
     });
@@ -260,7 +260,7 @@ describe('OTP logic', () => {
         });
         const action = loginModalButtonClick('next');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_OTP_LOADING,
         });
     });
@@ -275,7 +275,7 @@ describe('login logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGGED_IN,
         });
     });
@@ -289,7 +289,7 @@ describe('login logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
         const expectedChange = {};
-        verifyNextState(initialState, action, expectedChange);
+        verifyStateChange(initialState, action, expectedChange);
     });
 
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
@@ -300,7 +300,7 @@ describe('login logic', () => {
         });
         const action = loginModalButtonClick('passwordReset');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
             userPassword: '',
         });
@@ -315,7 +315,7 @@ describe('password reset logic', () => {
         });
         const action = loginModalButtonClick('OTPSendSMS');
 
-        verifyNextState(initialState, action, {
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_OTP,
         });
     });
