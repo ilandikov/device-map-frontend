@@ -11,6 +11,7 @@ export function PasswordResetRequestForm() {
     const dispatch = useAppDispatch();
 
     const userEmail = useLoginModalState().userEmail;
+    const userEmailError = useLoginModalState().userEmailError;
 
     return (
         <>
@@ -21,7 +22,7 @@ export function PasswordResetRequestForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    error={null}
+                    error={userEmailError}
                 />
             </div>
             <div className="login-modal-button-container">
