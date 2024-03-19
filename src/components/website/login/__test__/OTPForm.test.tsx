@@ -1,7 +1,12 @@
 import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
-import { createEvent, getNonNumeric, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
+import {
+    createEvent,
+    getNonNumeric,
+    renderForActionDispatchTest,
+    renderForSnapshotTest,
+} from '../../../../../tests/utils/RenderingHelpers';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 
@@ -13,6 +18,14 @@ jest.mock('react-redux', () => ({
 function getInput(container: HTMLElement, inputIndex: number) {
     return getByTestId(container, `OTPInput${inputIndex}`) as HTMLInputElement;
 }
+
+describe('OTPForm snapshot tests', () => {
+    it('should match snapshot', () => {
+        const component = renderForSnapshotTest(<OTPForm />);
+
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
