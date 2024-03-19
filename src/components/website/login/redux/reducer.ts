@@ -24,7 +24,7 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                         return { ...state, userAuthState: UserAuthState.LOGIN_OTP };
                     }
                     const nextUserAuthState =
-                        mailInputError !== null ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
+                        mailInputError === null ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.MAIL_INPUT;
                     return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
