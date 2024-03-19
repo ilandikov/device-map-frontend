@@ -307,4 +307,16 @@ describe('password reset logic', () => {
             userEmailError: null,
         });
     });
+
+    it('should set mail error when a bad email has been set on verification', () => {
+        const initialState = buildState({
+            userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
+            userEmail: '!notAMail',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+
+        verifyStateChange(initialState, action, {
+            userEmailError: new Error(MailInputError.NOT_VALID),
+        });
+    });
 });
