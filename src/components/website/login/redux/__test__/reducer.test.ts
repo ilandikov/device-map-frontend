@@ -284,7 +284,7 @@ describe('login logic', () => {
             userEmail: 'writeMe@mail.com',
             userPassword: 'iForgot',
         });
-        const action = loginModalButtonClick('passwordReset');
+        const action = loginModalButtonClick('resetPassword');
 
         verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
