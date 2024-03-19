@@ -1,10 +1,7 @@
-/* External dependencies */
 import React from 'react';
 import { I18nextProvider } from 'gatsby-plugin-react-i18next';
 import { Provider } from 'react-redux';
 import renderer, { act } from 'react-test-renderer';
-
-/* Local dependencies */
 import i18n from '../../../../../tests/utils/i18nForTest';
 import { configureTestStore } from '../../../../../tests/utils';
 import MainPage from '../MainPage';

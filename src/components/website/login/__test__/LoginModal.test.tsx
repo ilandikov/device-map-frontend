@@ -1,8 +1,5 @@
-/* External dependencies */
 import React from 'react';
 import '@testing-library/jest-dom';
-
-/* Local dependencies */
 import { LoginModal } from '../LoginModal';
 import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { UserAuthState } from '../redux/state';
