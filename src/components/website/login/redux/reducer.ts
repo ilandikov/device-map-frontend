@@ -20,20 +20,21 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
                     const mailInputError = getMailInputError(state.userEmail);
-                    if (mailInputError === null) {
-                        const nextUserAuthState =
-                            state.userAuthState === UserAuthState.LOGIN_PASSWORD_RESET
-                                ? UserAuthState.LOGIN_OTP
-                                : UserAuthState.SIGNUP_PASSWORD;
 
-                        return {
-                            ...state,
-                            userAuthState: nextUserAuthState,
-                            userEmailError: null,
-                        };
+                    if (mailInputError !== null) {
+                        return { ...state, userEmailError: mailInputError };
                     }
 
-                    return { ...state, userEmailError: mailInputError };
+                    const nextUserAuthState =
+                        state.userAuthState === UserAuthState.LOGIN_PASSWORD_RESET
+                            ? UserAuthState.LOGIN_OTP
+                            : UserAuthState.SIGNUP_PASSWORD;
+
+                    return {
+                        ...state,
+                        userAuthState: nextUserAuthState,
+                        userEmailError: null,
+                    };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     // TODO move or inline getPasswordInputErrorAndNextState() to this file
