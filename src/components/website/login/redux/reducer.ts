@@ -1,10 +1,6 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 import { LoginModalState, UserAuthState, loginModalInitialState } from './state';
-import {
-    getPasswordInputErrorAndNextState,
-    getUserEmailErrorAndNextState,
-    userAuthStateFromUserLogin,
-} from './reducerUtils';
+import { getMailInputError, getPasswordInputErrorAndNextState, userAuthStateFromUserLogin } from './reducerUtils';
 
 export function loginModalReducer(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
     switch (action.type) {
@@ -23,12 +19,20 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
+                    const mailInputError = getMailInputError(state.userEmail);
                     if (state.userAuthState === UserAuthState.LOGIN_PASSWORD_RESET) {
                         return { ...state, userAuthState: UserAuthState.LOGIN_OTP };
                     }
-                    // TODO move or inline getUserEmailErrorAndNextState() to this file
-                    const { mailInputError, nextUserAuthState } = getUserEmailErrorAndNextState(state.userEmail);
-                    return { ...state, userAuthState: nextUserAuthState, userEmailError: mailInputError };
+
+                    if (mailInputError === null) {
+                        return {
+                            ...state,
+                            userAuthState: UserAuthState.SIGNUP_PASSWORD,
+                            userEmailError: null,
+                        };
+                    }
+
+                    return { ...state, userEmailError: mailInputError };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     // TODO move or inline getPasswordInputErrorAndNextState() to this file

@@ -39,7 +39,7 @@ export function getPasswordInputErrorAndNextState(userPassword: string, userPass
 
     return { passwordInputError, nextUserAuthState };
 }
-function getMailInputError(userEmail: string): Error | null {
+export function getMailInputError(userEmail: string): Error | null {
     if (userEmail === 'already@exists.com') {
         return new Error(MailInputError.ALREADY_EXISTS);
     }
@@ -49,10 +49,4 @@ function getMailInputError(userEmail: string): Error | null {
     }
 
     return null;
-}
-
-export function getUserEmailErrorAndNextState(userEmail: string) {
-    const mailInputError = getMailInputError(userEmail);
-    const nextUserAuthState = mailInputError ? UserAuthState.MAIL_INPUT : UserAuthState.SIGNUP_PASSWORD;
-    return { mailInputError, nextUserAuthState };
 }
