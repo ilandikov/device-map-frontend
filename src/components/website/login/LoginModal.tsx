@@ -23,12 +23,9 @@ export function LoginModal() {
         UserAuthState.LOGIN_PASSWORD_RESET,
     ].includes(userAuthState);
 
-    return (
-        <div className="login-modal-window">
-            <div className="login-modal-container">
-                {showShadows && <LoginModalShadows />}
-                {showNavigationButtons && <NavigationButtons />}
-                <LoginModalHeader />
+    function getAuthorisationComponent(userAuthState: UserAuthState) {
+        return (
+            <>
                 {userAuthState === UserAuthState.WELCOME && (
                     <>
                         <WelcomeForm />
@@ -74,6 +71,17 @@ export function LoginModal() {
                         <Loader />
                     </>
                 )}
+            </>
+        );
+    }
+
+    return (
+        <div className="login-modal-window">
+            <div className="login-modal-container">
+                {showShadows && <LoginModalShadows />}
+                {showNavigationButtons && <NavigationButtons />}
+                <LoginModalHeader />
+                {getAuthorisationComponent(userAuthState)}
             </div>
         </div>
     );
