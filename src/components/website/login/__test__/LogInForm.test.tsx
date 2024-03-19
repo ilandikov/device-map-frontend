@@ -1,7 +1,11 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { LogInForm } from '../LogInForm';
-import { createEvent, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
+import {
+    createEvent,
+    renderForActionDispatchTest,
+    renderForSnapshotTest,
+} from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
@@ -24,6 +28,14 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
+
+describe('LogInForm snapshot test', () => {
+    it('should match snapshot', () => {
+        mockLoginModalState({ userEmail: 'verify@me.uk' });
+        const component = renderForSnapshotTest(<LogInForm />);
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('LogInForm action tests', () => {
     beforeEach(() => {
