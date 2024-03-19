@@ -39,7 +39,7 @@ export function getPasswordInputErrorAndNextState(userPassword: string, userPass
 
     return { passwordInputError, nextUserAuthState };
 }
-function getMailInputError(userEmail: string): Error | null {
+export function getMailInputError(userEmail: string): Error | null {
     if (userEmail === 'already@exists.com') {
         return new Error(MailInputError.ALREADY_EXISTS);
     }
