@@ -28,7 +28,7 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                         return {
                             ...state,
                             userAuthState: UserAuthState.SIGNUP_PASSWORD,
-                            userEmailError: mailInputError,
+                            userEmailError: null,
                         };
                     }
 
