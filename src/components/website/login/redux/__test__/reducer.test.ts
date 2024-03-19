@@ -9,28 +9,14 @@ import {
 } from '../actions';
 import { LoginModalState, MailInputError, UserAuthState } from '../state';
 
-function buildLoginModalInitialState({
-    userAuthState,
-    userEmail,
-    userEmailError,
-    userPassword,
-    userPasswordRepeat,
-    userPasswordError,
-}: {
-    userAuthState?: UserAuthState;
-    userEmail?: string;
-    userEmailError?: Error;
-    userPassword?: string;
-    userPasswordRepeat?: string;
-    userPasswordError?: Error | null;
-}): LoginModalState {
+function buildLoginModalInitialState(partialState: Partial<LoginModalState>): LoginModalState {
     return {
-        userAuthState: userAuthState ?? UserAuthState.WELCOME,
-        userEmail: userEmail ?? '',
-        userEmailError: userEmailError ?? null,
-        userPassword: userPassword ?? '',
-        userPasswordRepeat: userPasswordRepeat ?? '',
-        userPasswordError: userPasswordError ?? null,
+        userAuthState: partialState.userAuthState ?? UserAuthState.WELCOME,
+        userEmail: partialState.userEmail ?? '',
+        userEmailError: partialState.userEmailError ?? null,
+        userPassword: partialState.userPassword ?? '',
+        userPasswordRepeat: partialState.userPasswordRepeat ?? '',
+        userPasswordError: partialState.userPasswordError ?? null,
     };
 }
 
