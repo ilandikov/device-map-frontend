@@ -31,16 +31,14 @@ export function LoginModal() {
                 return <MailInputForm />;
             case UserAuthState.SIGNUP_PASSWORD:
                 return <PasswordCreationForm />;
-            case UserAuthState.SIGNUP_OTP:
-                return <OTPForm />;
-            case UserAuthState.SIGNUP_OTP_LOADING:
-                return <Loader />;
             case UserAuthState.LOGIN:
                 return <LogInForm />;
             case UserAuthState.LOGIN_PASSWORD_RESET:
                 return <PasswordResetRequestForm />;
+            case UserAuthState.SIGNUP_OTP:
             case UserAuthState.LOGIN_OTP:
                 return <OTPForm />;
+            case UserAuthState.SIGNUP_OTP_LOADING:
             case UserAuthState.LOGIN_OTP_LOADING:
                 return <Loader />;
         }
