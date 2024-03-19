@@ -1,14 +1,27 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import { createEvent, renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
+import {
+    createEvent,
+    renderForActionDispatchTest,
+    renderForSnapshotTest,
+} from '../../../../../tests/utils/RenderingHelpers';
 import { LoginModalInputTypes, loginModalButtonClick, loginModalInput } from '../redux/actions';
-import { mockDispatch } from '../redux/__mocks__/LoginModalState';
+import { mockDispatch, mockLoginModalState } from '../redux/__mocks__/LoginModalState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
 }));
+
+describe('PasswordResetRequestForm snapshot tests', () => {
+    it('should match the snapshot', () => {
+        mockLoginModalState({ userEmail: 'reset@password.kr' });
+        const component = renderForSnapshotTest(<PasswordResetRequestForm />);
+
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('PasswordResetRequest form action tests', () => {
     beforeEach(() => {
