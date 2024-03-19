@@ -24,55 +24,28 @@ export function LoginModal() {
     ].includes(userAuthState);
 
     function getAuthorisationComponent(userAuthState: UserAuthState) {
-        return (
-            <>
-                {userAuthState === UserAuthState.WELCOME && (
-                    <>
-                        <WelcomeForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.MAIL_INPUT && (
-                    <>
-                        <MailInputForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.SIGNUP_PASSWORD && (
-                    <>
-                        <PasswordCreationForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.SIGNUP_OTP && (
-                    <>
-                        <OTPForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.SIGNUP_OTP_LOADING && (
-                    <>
-                        <Loader />
-                    </>
-                )}
-                {userAuthState === UserAuthState.LOGIN && (
-                    <>
-                        <LogInForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.LOGIN_PASSWORD_RESET && (
-                    <>
-                        <PasswordResetRequestForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.LOGIN_OTP && (
-                    <>
-                        <OTPForm />
-                    </>
-                )}
-                {userAuthState === UserAuthState.LOGIN_OTP_LOADING && (
-                    <>
-                        <Loader />
-                    </>
-                )}
-            </>
-        );
+        switch (userAuthState) {
+            case UserAuthState.WELCOME:
+                return <WelcomeForm />;
+            case UserAuthState.MAIL_INPUT:
+                return <MailInputForm />;
+            case UserAuthState.SIGNUP_PASSWORD:
+                return <PasswordCreationForm />;
+            case UserAuthState.SIGNUP_OTP:
+                return <OTPForm />;
+            case UserAuthState.SIGNUP_OTP_LOADING:
+                return <Loader />;
+            case UserAuthState.LOGIN:
+                return <LogInForm />;
+            case UserAuthState.LOGIN_PASSWORD_RESET:
+                return <PasswordResetRequestForm />;
+            case UserAuthState.LOGIN_OTP:
+                return <OTPForm />;
+            case UserAuthState.LOGIN_OTP_LOADING:
+                return <Loader />;
+        }
+
+        return <></>;
     }
 
     return (
