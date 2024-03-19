@@ -3,13 +3,21 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
 import { loginModalButtonClick } from '../redux/actions';
 import { WelcomeForm } from '../WelcomeForm';
-import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
+import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
+
+describe('WelcomeForm snapshot tests', () => {
+    it('should match the snapshot', () => {
+        const component = renderForSnapshotTest(<WelcomeForm />);
+
+        expect(component).toMatchSnapshot();
+    });
+});
 
 describe('WelcomeForm action tests', () => {
     beforeEach(() => {
