@@ -294,15 +294,17 @@ describe('login logic', () => {
 });
 
 describe('password reset logic', () => {
-    it('should transition to OTP verification from after password reset request', () => {
+    it('should transition to OTP verification, reset mail error on mail verification request', () => {
         const initialState = buildState({
             userAuthState: UserAuthState.LOGIN_PASSWORD_RESET,
             userEmail: 'please@reset.com',
+            userEmailError: new Error(MailInputError.NOT_VALID),
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN_OTP,
+            userEmailError: null,
         });
     });
 });
