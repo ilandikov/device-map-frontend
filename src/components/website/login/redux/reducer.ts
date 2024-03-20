@@ -1,6 +1,6 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
-import { authenticationStepFromUserLogin, getPasswordInputErrorAndNextState, isValidEmail } from './reducerUtils';
+import { authenticationStepFromUserLogin, getPasswordInputErrorAndNextState, isEmailValid } from './reducerUtils';
 
 export function isEmailRegistered(userEmail: string) {
     if (userEmail === 'already@exists.com') {
@@ -30,7 +30,7 @@ export function authentication(
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
-                    if (isValidEmail(state.email) === false) {
+                    if (isEmailValid(state.email) === false) {
                         return { ...state, emailError: new Error(MailInputError.NOT_VALID) };
                     }
 

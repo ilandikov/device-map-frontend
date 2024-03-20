@@ -3,7 +3,7 @@ import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
     getPasswordInputErrorAndNextState,
-    isValidEmail,
+    isEmailValid,
 } from '../reducerUtils';
 import { isEmailRegistered } from '../reducer';
 
@@ -11,7 +11,7 @@ describe('user email validation tests', () => {
     it('should validate good email', () => {
         const email = 'good@email.com';
 
-        const mailInputError = isValidEmail(email);
+        const mailInputError = isEmailValid(email);
 
         expect(mailInputError).toEqual(true);
     });
@@ -19,7 +19,7 @@ describe('user email validation tests', () => {
     it('should not validate bad email', () => {
         const email = 'this is not an email!';
 
-        const mailInputError = isValidEmail(email);
+        const mailInputError = isEmailValid(email);
 
         expect(mailInputError).toEqual(false);
     });

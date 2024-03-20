@@ -16,7 +16,7 @@ export function authenticationStepFromOTP(userAuthState: AuthenticationStep.LOGI
     return AuthenticationStep.SIGNUP_OTP_LOADING;
 }
 
-export function isValidEmail(email: string) {
+export function isEmailValid(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);
 }
