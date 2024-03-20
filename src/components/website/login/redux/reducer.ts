@@ -2,7 +2,10 @@ import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginMod
 import { LoginModalState, UserAuthState, loginModalInitialState } from './state';
 import { getMailInputError, getPasswordInputErrorAndNextState, userAuthStateFromUserLogin } from './reducerUtils';
 
-export function authentication(state: LoginModalState = loginModalInitialState, action: LoginModalAction) {
+export function authentication(
+    state: LoginModalState = loginModalInitialState,
+    action: LoginModalAction,
+): LoginModalState {
     switch (action.type) {
         case LoginModalActionTypes.INPUT: {
             switch (action.input.type) {
