@@ -4,9 +4,9 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { AuthenticationStep, useAuthentication } from './redux/state';
 
 export function LoginModalHeader() {
-    const userAuthState = useAuthentication().step;
+    const authenticationStep = useAuthentication().step;
 
-    const { header, description, opaqueDescription } = getHeaderDetails(userAuthState);
+    const { header, description, opaqueDescription } = getHeaderDetails(authenticationStep);
 
     return (
         <div className="login-modal-header-container">
@@ -19,10 +19,10 @@ export function LoginModalHeader() {
     );
 }
 
-function getHeaderDetails(userAuthState: AuthenticationStep) {
+function getHeaderDetails(authenticationStep: AuthenticationStep) {
     const { t } = useI18next();
 
-    switch (userAuthState) {
+    switch (authenticationStep) {
         case AuthenticationStep.MAIL_INPUT:
         case AuthenticationStep.SIGNUP_OTP:
         case AuthenticationStep.SIGNUP_OTP_LOADING:
