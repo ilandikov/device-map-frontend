@@ -1,6 +1,6 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 import { AuthenticationState, AuthenticationStep, authenticationInitialState } from './state';
-import { getMailInputError, getPasswordInputErrorAndNextState, userAuthStateFromUserLogin } from './reducerUtils';
+import { authenticationStepFromUserLogin, getMailInputError, getPasswordInputErrorAndNextState } from './reducerUtils';
 
 export function authentication(
     state: AuthenticationState = authenticationInitialState,
@@ -48,7 +48,7 @@ export function authentication(
                     return { ...state, step: nextUserAuthState, passwordError: passwordInputError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
-                    return { ...state, step: userAuthStateFromUserLogin(state.email, state.password) };
+                    return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };
                 }
                 default:
                     return state;

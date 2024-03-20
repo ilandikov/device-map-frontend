@@ -1,9 +1,9 @@
 import { AuthenticationStep, MailInputError } from '../state';
 import {
+    authenticationStepFromOTP,
+    authenticationStepFromUserLogin,
     getMailInputError,
     getPasswordInputErrorAndNextState,
-    userAuthStateFromOTP,
-    userAuthStateFromUserLogin,
 } from '../reducerUtils';
 
 describe('user email validation tests', () => {
@@ -63,13 +63,13 @@ describe('user password logic tests', () => {
 
 describe('OTP logic tests', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
-        const nextUserAuthState = userAuthStateFromOTP(AuthenticationStep.SIGNUP_OTP);
+        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.SIGNUP_OTP);
 
         expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_OTP_LOADING);
     });
 
     it('should move from log in OTP to log in OTP loading stage', () => {
-        const nextUserAuthState = userAuthStateFromOTP(AuthenticationStep.LOGIN_OTP);
+        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.LOGIN_OTP);
 
         expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN_OTP_LOADING);
     });
@@ -77,13 +77,13 @@ describe('OTP logic tests', () => {
 
 describe('User authentication logic tests', () => {
     it('should move a good user to logged state', () => {
-        const nextUserAuthState = userAuthStateFromUserLogin('user@mail.com', 'short');
+        const nextUserAuthState = authenticationStepFromUserLogin('user@mail.com', 'short');
 
         expect(nextUserAuthState).toEqual(AuthenticationStep.LOGGED_IN);
     });
 
     it('should keep a bad user at the password input state', () => {
-        const nextUserAuthState = userAuthStateFromUserLogin('bad@user.com', 'badPassword');
+        const nextUserAuthState = authenticationStepFromUserLogin('bad@user.com', 'badPassword');
 
         expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN);
     });
