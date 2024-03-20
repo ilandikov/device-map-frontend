@@ -12,12 +12,22 @@ describe('MapApp reducer tests', () => {
         expect(initialState).toEqual(expectedInitialState);
     });
 
-    it('should hide product description on login click action', () => {
+    it('should hide product description and show login modal on login click action', () => {
         const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
 
         const resultingState = MapAppReducer(undefined, action);
 
         const expectedState: MapAppState = { showProductDescription: false, showLoginModal: true };
+        expect(resultingState).toEqual(expectedState);
+    });
+
+    it('should show product description and hide login modal on navigation cancel action', () => {
+        const initialState: MapAppState = { showProductDescription: false, showLoginModal: true };
+        const action = { type: MapAppActionTypes.LOGIN_MODAL_CLOSED };
+
+        const resultingState = MapAppReducer(initialState, action);
+
+        const expectedState: MapAppState = { showProductDescription: true, showLoginModal: false };
         expect(resultingState).toEqual(expectedState);
     });
 });

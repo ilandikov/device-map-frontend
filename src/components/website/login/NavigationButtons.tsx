@@ -3,6 +3,7 @@ import './NavigationButtons.scss';
 import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 import { useAppDispatch } from '../../../redux/store';
+import { MapAppActionTypes } from '../mapApp/MapAppReducer';
 import { loginModalButtonClick } from './redux/actions';
 
 export function NavigationButtons() {
@@ -21,7 +22,7 @@ export function NavigationButtons() {
             <button
                 data-testid="cancelButton"
                 onClick={() => {
-                    dispatch(loginModalButtonClick('cancel'));
+                    dispatch({ type: MapAppActionTypes.LOGIN_MODAL_CLOSED });
                 }}
             >
                 <img src={Cancel} alt="login-modal-navigation-cancel" />
