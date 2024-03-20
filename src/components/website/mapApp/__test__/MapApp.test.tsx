@@ -26,4 +26,13 @@ describe('MapApp snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at user authenticated state', () => {
+        mockMapAppState({
+            usageStep: MapAppUsageStep.AUTHENTICATED_USER,
+        });
+        const component = renderForSnapshotTest(<MapApp />);
+
+        expect(component).toMatchSnapshot();
+    });
 });

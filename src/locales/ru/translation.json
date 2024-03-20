@@ -22,6 +22,9 @@
   "OTPSendAgain": "Отправить код заново",
   "OTPSendSMS": "Получить код через СМС",
   "OTPVerifying": "Проверка...",
+  "point": "балл",
+  "points": "баллов",
+  "search": "Поиск",
   "signUp": "Регистрация",
   "repeatPassword": "Повторите пароль"
 }

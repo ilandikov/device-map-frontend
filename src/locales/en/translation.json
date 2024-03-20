@@ -22,6 +22,9 @@
   "OTPSendAgain": "Send one-time password again",
   "OTPSendSMS": "Send OTP by SMS",
   "OTPVerifying": "Verifying...",
+  "point": "point",
+  "points": "points",
+  "search": "Search",
   "signUp": "Sign up",
   "repeatPassword": "Repeat password"
 }

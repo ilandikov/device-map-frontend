@@ -7,30 +7,57 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import { useAppDispatch } from '../../../redux/store';
-import { MapAppActionTypes } from './MapAppReducer';
+import Search from '/src/assets/images/Search.svg';
+import Points from '/src/assets/images/Points.svg';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../../redux/store';
+import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
 
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
+    const { usageStep } = useSelector((state: RootState) => state.mapAppState);
+
+    const userPoints = 320;
+
     return (
         <header className="map-app-header">
-            <div className="map-app-header-block">
-                <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
-                <p className="map-app-header-brand-text">{t('map')}</p>
+            <div className="map-app-header-block-container">
+                <div className="map-app-header-block">
+                    <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
+                    <p className="map-app-header-brand-text">{t('map')}</p>
+                </div>
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                    <div className="terminal-search-header-block">
+                        <img src={Search} alt="terminal-search-image" />
+                        <input
+                            className="terminal-search-input"
+                            type="text"
+                            data-testid="terminalSearch"
+                            placeholder={t('search')}
+                        />
+                    </div>
+                )}
             </div>
-            <div className="map-app-header-block">
-                <button
-                    className="map-app-header-inner-block"
-                    data-testid="loginButton"
-                    onClick={() => {
-                        useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
-                    }}
-                >
-                    <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
-                    <p className="map-app-header-account-text">{t('loginAction')}</p>
-                </button>
-                <div className="map-app-header-inner-block">
+            <div className="map-app-header-block-container">
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                    <div className="user-points-header-block">
+                        <img src={Points} alt="user-points-image" />
+                        <span className="user-points">{userPoints}</span>
+                        <span className="user-points">{userPoints > 1 ? t('points') : t('point')}</span>
+                    </div>
+                )}
+                <div className="map-app-header-block">
+                    <button
+                        className="map-app-header-login-button"
+                        data-testid="loginButton"
+                        onClick={() => {
+                            useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
+                        }}
+                    >
+                        <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
+                        <p className="map-app-header-account-text">{t('loginAction')}</p>
+                    </button>
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
                     <img src={AppStore} alt="map-app-header-apps-app-store" />
                 </div>

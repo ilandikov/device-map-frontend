@@ -8,41 +8,45 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
     className="map-app-header"
   >
     <div
-      className="map-app-header-block"
+      className="map-app-header-block-container"
     >
-      <img
-        alt="logo"
-        className="map-app-header-brand-logo"
-        src="test-file-stub"
-      />
-      <p
-        className="map-app-header-brand-text"
-      >
-        map
-      </p>
-    </div>
-    <div
-      className="map-app-header-block"
-    >
-      <button
-        className="map-app-header-inner-block"
-        data-testid="loginButton"
-        onClick={[Function]}
+      <div
+        className="map-app-header-block"
       >
         <img
-          alt="login-header-account"
-          className="map-app-header-account-image"
+          alt="logo"
+          className="map-app-header-brand-logo"
           src="test-file-stub"
         />
         <p
-          className="map-app-header-account-text"
+          className="map-app-header-brand-text"
         >
-          loginAction
+          map
         </p>
-      </button>
+      </div>
+    </div>
+    <div
+      className="map-app-header-block-container"
+    >
       <div
-        className="map-app-header-inner-block"
+        className="map-app-header-block"
       >
+        <button
+          className="map-app-header-login-button"
+          data-testid="loginButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="login-header-account"
+            className="map-app-header-account-image"
+            src="test-file-stub"
+          />
+          <p
+            className="map-app-header-account-text"
+          >
+            loginAction
+          </p>
+        </button>
         <img
           alt="map-app-header-apps-google-play"
           src="test-file-stub"
@@ -87,6 +91,104 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
 </div>
 `;
 
+exports[`MapApp snapshot tests should match the snapshot at user authenticated state 1`] = `
+<div
+  className="map-app-container"
+>
+  <header
+    className="map-app-header"
+  >
+    <div
+      className="map-app-header-block-container"
+    >
+      <div
+        className="map-app-header-block"
+      >
+        <img
+          alt="logo"
+          className="map-app-header-brand-logo"
+          src="test-file-stub"
+        />
+        <p
+          className="map-app-header-brand-text"
+        >
+          map
+        </p>
+      </div>
+      <div
+        className="terminal-search-header-block"
+      >
+        <img
+          alt="terminal-search-image"
+          src="test-file-stub"
+        />
+        <input
+          className="terminal-search-input"
+          data-testid="terminalSearch"
+          placeholder="search"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="map-app-header-block-container"
+    >
+      <div
+        className="user-points-header-block"
+      >
+        <img
+          alt="user-points-image"
+          src="test-file-stub"
+        />
+        <span
+          className="user-points"
+        >
+          320
+        </span>
+        <span
+          className="user-points"
+        >
+          points
+        </span>
+      </div>
+      <div
+        className="map-app-header-block"
+      >
+        <button
+          className="map-app-header-login-button"
+          data-testid="loginButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="login-header-account"
+            className="map-app-header-account-image"
+            src="test-file-stub"
+          />
+          <p
+            className="map-app-header-account-text"
+          >
+            loginAction
+          </p>
+        </button>
+        <img
+          alt="map-app-header-apps-google-play"
+          src="test-file-stub"
+        />
+        <img
+          alt="map-app-header-apps-app-store"
+          src="test-file-stub"
+        />
+      </div>
+    </div>
+  </header>
+  <img
+    alt="map"
+    className="map-app-map-image"
+    src="test-file-stub"
+  />
+</div>
+`;
+
 exports[`MapApp snapshot tests should match the snapshot at user authentication state 1`] = `
 <div
   className="map-app-container"
@@ -95,41 +197,45 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
     className="map-app-header"
   >
     <div
-      className="map-app-header-block"
+      className="map-app-header-block-container"
     >
-      <img
-        alt="logo"
-        className="map-app-header-brand-logo"
-        src="test-file-stub"
-      />
-      <p
-        className="map-app-header-brand-text"
-      >
-        map
-      </p>
-    </div>
-    <div
-      className="map-app-header-block"
-    >
-      <button
-        className="map-app-header-inner-block"
-        data-testid="loginButton"
-        onClick={[Function]}
+      <div
+        className="map-app-header-block"
       >
         <img
-          alt="login-header-account"
-          className="map-app-header-account-image"
+          alt="logo"
+          className="map-app-header-brand-logo"
           src="test-file-stub"
         />
         <p
-          className="map-app-header-account-text"
+          className="map-app-header-brand-text"
         >
-          loginAction
+          map
         </p>
-      </button>
+      </div>
+    </div>
+    <div
+      className="map-app-header-block-container"
+    >
       <div
-        className="map-app-header-inner-block"
+        className="map-app-header-block"
       >
+        <button
+          className="map-app-header-login-button"
+          data-testid="loginButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="login-header-account"
+            className="map-app-header-account-image"
+            src="test-file-stub"
+          />
+          <p
+            className="map-app-header-account-text"
+          >
+            loginAction
+          </p>
+        </button>
         <img
           alt="map-app-header-apps-google-play"
           src="test-file-stub"

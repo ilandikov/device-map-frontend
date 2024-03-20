@@ -1,10 +1,12 @@
 import React from 'react';
-import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { fireEvent, getByTestId } from '@testing-library/react';
 import { MapAppHeader } from '../MapAppHeader';
 import { MapAppActionTypes } from '../MapAppReducer';
+import { mockDispatch } from '../redux/__mocks__/MapAppState';
+import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 
-const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
 }));
 
@@ -14,7 +16,7 @@ describe('MapAppHeader action tests', () => {
     });
 
     it('should dispatch click action on login button click', () => {
-        const { container } = render(<MapAppHeader />);
+        const container = renderForActionDispatchTest(<MapAppHeader />);
 
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);

@@ -7,12 +7,29 @@
     flex-direction: row;
     justify-content: space-between;
 
-    .map-app-header-block {
+    .map-app-header-block-container {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .map-app-header-block-container:first-of-type {
+        justify-content: flex-start;
+    }
+
+    .map-app-header-block-container:last-of-type {
+        justify-content: flex-end;
+    }
+
+    %map-app-header-block-placeholder {
         max-height: 46px;
 
         background-color: #000000;
 
-        padding: 13px 20px;
+        padding: 11px 20px;
 
         border: 1px solid #454545;
         border-radius: 10px;
@@ -20,8 +37,11 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
-        gap: 20px;
+        gap: 8px;
+    }
+
+    .map-app-header-block {
+        @extend %map-app-header-block-placeholder;
     }
 
     .map-app-header-brand-logo {
@@ -36,12 +56,14 @@
         color: #FFFFFF;
     }
 
-    .map-app-header-inner-block {
+    .map-app-header-login-button {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         gap: 8px;
+
+        padding-right: 12px;
     }
 
     .map-app-header-account-image {
@@ -57,5 +79,39 @@
         color: #FFFFFF;
 
         text-decoration: underline;
+    }
+}
+
+.terminal-search-header-block {
+    @extend %map-app-header-block-placeholder;
+
+    max-width: 310px;
+    width: 100%;
+
+    .terminal-search-input {
+        color: #FFFFFF90;
+
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16.94px;
+        text-align: left;
+    }
+}
+
+.user-points-header-block {
+    @extend %map-app-header-block-placeholder;
+
+    .user-points {
+        color: #FFFFFF90;
+
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16.94px;
+    }
+
+    .user-points:first-of-type {
+        color: #FFFFFF;
     }
 }
