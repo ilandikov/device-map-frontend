@@ -139,9 +139,7 @@ describe('email input logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        const expectedChange = { emailError: new Error(MailInputError.NOT_VALID) };
-
-        verifyStateChange(initialState, action, expectedChange);
+        verifyStateChange(initialState, action, { emailError: new Error(MailInputError.NOT_VALID) });
     });
 
     it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
