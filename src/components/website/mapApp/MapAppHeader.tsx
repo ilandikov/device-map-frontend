@@ -7,18 +7,22 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import { useAppDispatch } from '../../../redux/store';
-import { MapAppActionTypes } from './MapAppReducer';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../../redux/store';
+import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
 
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
+    const usageStep = useSelector((state: RootState) => state.mapAppState);
+
     return (
         <header className="map-app-header">
             <div className="map-app-header-block">
                 <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                 <p className="map-app-header-brand-text">{t('map')}</p>
             </div>
+            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <div className="map-app-header-user-components"></div>}
             <div className="map-app-header-block">
                 <button
                     className="map-app-header-inner-block"
