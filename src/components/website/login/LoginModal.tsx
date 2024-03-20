@@ -23,7 +23,7 @@ export function LoginModal() {
         AuthenticationStep.LOGIN_PASSWORD_RESET,
     ].includes(authenticationStep);
 
-    function authenticationComponent(authenticationStep: AuthenticationStep) {
+    function getAuthenticationComponent(authenticationStep: AuthenticationStep) {
         switch (authenticationStep) {
             case AuthenticationStep.WELCOME:
                 return <WelcomeForm />;
@@ -52,7 +52,7 @@ export function LoginModal() {
                 {showShadows && <LoginModalShadows />}
                 {showNavigationButtons && <NavigationButtons />}
                 <LoginModalHeader />
-                {authenticationComponent(authenticationStep)}
+                {getAuthenticationComponent(authenticationStep)}
             </div>
         </div>
     );
