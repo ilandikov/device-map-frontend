@@ -36,8 +36,7 @@ export function authentication(
                     }
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
-                        const userEmail = state.email;
-                        if (isEmailRegistered(userEmail)) {
+                        if (isEmailRegistered(state.email)) {
                             return {
                                 ...state,
                                 step: AuthenticationStep.LOGIN_OTP,
