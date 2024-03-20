@@ -17,7 +17,7 @@ export default function MapApp() {
     return (
         <div className="map-app-container">
             <MapAppHeader />
-            {mapAppState.usageStep === MapAppUsageStep.HOMESCREEN && <ProductDescription />}
+            {mapAppState.usageStep === MapAppUsageStep.HOME_SCREEN && <ProductDescription />}
             {mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION && <LoginModal />}
             <img className="map-app-map-image" src={mapImage} alt="map" />
         </div>

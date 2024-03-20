@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MapApp snapshot tests should match the snapshot at homescreen step 1`] = `
+exports[`MapApp snapshot tests should match the snapshot at home screen step 1`] = `
 <div
   className="map-app-container"
 >

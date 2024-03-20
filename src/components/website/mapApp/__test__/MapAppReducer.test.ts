@@ -5,7 +5,7 @@ describe('MapApp reducer tests', () => {
         const initialState = MapAppReducer();
 
         const expectedInitialState: MapAppState = {
-            usageStep: MapAppUsageStep.HOMESCREEN,
+            usageStep: MapAppUsageStep.HOME_SCREEN,
         };
 
         expect(initialState).toEqual(expectedInitialState);
@@ -17,7 +17,7 @@ describe('MapApp reducer tests', () => {
         const resultingState = MapAppReducer(undefined, action);
 
         const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.HOMESCREEN,
+            usageStep: MapAppUsageStep.HOME_SCREEN,
         };
         expect(resultingState).toEqual(expectedState);
     });
@@ -31,7 +31,7 @@ describe('MapApp reducer tests', () => {
         const resultingState = MapAppReducer(initialState, action);
 
         const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.HOMESCREEN,
+            usageStep: MapAppUsageStep.HOME_SCREEN,
         };
         expect(resultingState).toEqual(expectedState);
     });
