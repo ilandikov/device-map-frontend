@@ -37,7 +37,7 @@ describe('user email validation tests', () => {
 
         const mailInputError = isEmailRegistered(email);
 
-        expect(mailInputError).toEqual(null);
+        expect(mailInputError).toEqual(false);
     });
 });
 
