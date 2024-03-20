@@ -1,11 +1,11 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
-import { LoginModalState, UserAuthState, loginModalInitialState } from './state';
+import { AuthenticationState, UserAuthState, authenticationInitialState } from './state';
 import { getMailInputError, getPasswordInputErrorAndNextState, userAuthStateFromUserLogin } from './reducerUtils';
 
 export function authentication(
-    state: LoginModalState = loginModalInitialState,
+    state: AuthenticationState = authenticationInitialState,
     action: LoginModalAction,
-): LoginModalState {
+): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.INPUT: {
             switch (action.input.type) {
@@ -61,7 +61,7 @@ export function authentication(
                 case 'accountLogin':
                     return { ...state, userAuthState: UserAuthState.LOGIN, userEmailError: null };
                 case 'cancel':
-                    return loginModalInitialState;
+                    return authenticationInitialState;
                 case 'resetPassword':
                     return { ...state, userAuthState: UserAuthState.LOGIN_PASSWORD_RESET, userPassword: '' };
                 case 'next':

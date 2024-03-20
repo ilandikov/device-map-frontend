@@ -7,9 +7,9 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
-import { LoginModalState, MailInputError, UserAuthState, loginModalInitialState } from '../state';
+import { AuthenticationState, MailInputError, UserAuthState, authenticationInitialState } from '../state';
 
-function buildState(partialState: Partial<LoginModalState>): LoginModalState {
+function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
         userAuthState: partialState.userAuthState ?? UserAuthState.WELCOME,
         userEmail: partialState.userEmail ?? '',
@@ -21,13 +21,13 @@ function buildState(partialState: Partial<LoginModalState>): LoginModalState {
 }
 
 function verifyStateChange(
-    initialState: LoginModalState,
+    initialState: AuthenticationState,
     action: LoginModalAction,
-    expectedChange: Partial<LoginModalState>,
+    expectedChange: Partial<AuthenticationState>,
 ) {
     const nextState = authentication(initialState, action);
 
-    const expectedState: LoginModalState = {
+    const expectedState: AuthenticationState = {
         ...initialState,
         ...expectedChange,
     };
@@ -36,7 +36,7 @@ function verifyStateChange(
 
 describe('LoginModal reducer tests', () => {
     it('should not change the initial state', () => {
-        const initialState = loginModalInitialState;
+        const initialState = authenticationInitialState;
         const action = { type: 'DUMMY_ACTION' };
 
         // @ts-expect-error

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
-export function useAuthentication(): LoginModalState {
+export function useAuthentication(): AuthenticationState {
     return useSelector((state: RootState) => state.authentication);
 }
 
@@ -18,7 +18,7 @@ export enum UserAuthState {
     LOGGED_IN = 'LOGGED_IN',
 }
 
-export const loginModalInitialState: LoginModalState = {
+export const authenticationInitialState: AuthenticationState = {
     userAuthState: UserAuthState.WELCOME,
     userEmail: '',
     userEmailError: null,
@@ -27,7 +27,7 @@ export const loginModalInitialState: LoginModalState = {
     userPasswordError: null,
 };
 
-export interface LoginModalState {
+export interface AuthenticationState {
     userAuthState: UserAuthState;
     userEmail: string;
     // TODO make userEmailError optional
