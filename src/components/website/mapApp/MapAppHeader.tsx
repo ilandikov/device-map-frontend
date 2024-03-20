@@ -7,15 +7,16 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
+import Search from '/src/assets/images/Search.svg';
+import Points from '/src/assets/images/Points.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
-import { AuthenticatedUserComponents } from './AuthenticatedUserComponents';
 
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
-    const usageStep = useSelector((state: RootState) => state.mapAppState);
+    const { usageStep } = useSelector((state: RootState) => state.mapAppState);
 
     return (
         <header className="map-app-header">
@@ -23,7 +24,24 @@ export function MapAppHeader() {
                 <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                 <p className="map-app-header-brand-text">{t('map')}</p>
             </div>
-            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <AuthenticatedUserComponents />}
+            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                <div className="map-app-header-block terminal-search-block">
+                    <img src={Search} alt="terminal-search-image" />
+                    <input
+                        className="terminal-search-input"
+                        type="text"
+                        data-testid="terminalSearch"
+                        placeholder="Поиск"
+                    />
+                </div>
+            )}
+            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                <div className="map-app-header-block">
+                    <img src={Points} alt="user-points-image" />
+                    <span className="user-points">320</span>
+                    <span className="user-points"> баллов</span>
+                </div>
+            )}
             <div className="map-app-header-block">
                 <button
                     className="map-app-header-login-button"

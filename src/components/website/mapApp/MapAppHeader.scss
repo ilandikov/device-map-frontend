@@ -60,3 +60,31 @@
         text-decoration: underline;
     }
 }
+
+.terminal-search-block {
+    max-width: 310px;
+    width: 100%;
+}
+
+.terminal-search-input {
+    color: #FFFFFF90;
+
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.94px;
+    text-align: left;
+}
+
+.user-points {
+    color: #FFFFFF90;
+
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.94px;
+}
+
+.user-points:first-of-type {
+    color: #FFFFFF;
+}
