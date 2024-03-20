@@ -6,6 +6,7 @@ export interface MapAppState {
 
 export enum MapAppUsageStep {
     PRODUCT_DESCRIPTION = 'PRODUCT_DESCRIPTION',
+    USER_AUTHENTICATION = 'USER_AUTHENTICATION',
 }
 
 export const mapAppInitialState: MapAppState = {
@@ -28,7 +29,12 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
         case MapAppActionTypes.LOGIN_BUTTON_CLICK:
             return { ...state, showProductDescription: false, showLoginModal: true };
         case MapAppActionTypes.LOGIN_MODAL_CLOSED:
-            return { ...state, showProductDescription: true, showLoginModal: false };
+            return {
+                ...state,
+                showProductDescription: true,
+                showLoginModal: false,
+                usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+            };
     }
 
     return state;

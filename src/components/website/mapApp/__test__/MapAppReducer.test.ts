@@ -26,11 +26,11 @@ describe('MapApp reducer tests', () => {
         expect(resultingState).toEqual(expectedState);
     });
 
-    it('should show product description and hide login modal on navigation cancel action', () => {
+    it('should show product description, hide login modal, move to homescreen on navigation cancel action', () => {
         const initialState: MapAppState = {
             showProductDescription: false,
             showLoginModal: true,
-            usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         };
         const action = { type: MapAppActionTypes.LOGIN_MODAL_CLOSED };
 
