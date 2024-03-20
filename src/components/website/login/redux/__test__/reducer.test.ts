@@ -287,10 +287,10 @@ describe('login logic', () => {
 });
 
 describe('password reset logic', () => {
-    it('should transition to OTP verification, reset mail error on mail verification request', () => {
+    it('should transition to OTP verification, reset mail error on mail verification request of an existing email', () => {
         const initialState = buildState({
             step: AuthenticationStep.LOGIN_PASSWORD_RESET,
-            email: 'please@reset.com',
+            email: 'already@exists.com',
             emailError: new Error(MailInputError.NOT_VALID),
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);

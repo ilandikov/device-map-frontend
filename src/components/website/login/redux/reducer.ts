@@ -1,5 +1,5 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
-import { AuthenticationState, AuthenticationStep, authenticationInitialState } from './state';
+import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
 import { authenticationStepFromUserLogin, getMailInputError, getPasswordInputErrorAndNextState } from './reducerUtils';
 
 export function authentication(
@@ -23,6 +23,16 @@ export function authentication(
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
                     const mailInputError = getMailInputError(state.email);
+
+                    if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
+                        if (mailInputError && mailInputError.message === MailInputError.ALREADY_EXISTS) {
+                            return {
+                                ...state,
+                                step: AuthenticationStep.LOGIN_OTP,
+                                emailError: null,
+                            };
+                        }
+                    }
 
                     if (mailInputError !== null) {
                         return { ...state, emailError: mailInputError };
