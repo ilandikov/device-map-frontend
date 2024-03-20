@@ -48,3 +48,11 @@ export function getMailInputError(userEmail: string): Error | null {
 
     return null;
 }
+
+export function isEmailRegistered(userEmail: string) {
+    if (userEmail === 'already@exists.com') {
+        return true;
+    }
+
+    return false;
+}

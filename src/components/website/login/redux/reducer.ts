@@ -1,14 +1,11 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
-import { authenticationStepFromUserLogin, getPasswordInputErrorAndNextState, isEmailValid } from './reducerUtils';
-
-export function isEmailRegistered(userEmail: string) {
-    if (userEmail === 'already@exists.com') {
-        return true;
-    }
-
-    return false;
-}
+import {
+    authenticationStepFromUserLogin,
+    getPasswordInputErrorAndNextState,
+    isEmailRegistered,
+    isEmailValid,
+} from './reducerUtils';
 
 export function authentication(
     state: AuthenticationState = authenticationInitialState,

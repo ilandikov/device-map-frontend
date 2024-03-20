@@ -3,9 +3,9 @@ import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
     getPasswordInputErrorAndNextState,
+    isEmailRegistered,
     isEmailValid,
 } from '../reducerUtils';
-import { isEmailRegistered } from '../reducer';
 
 describe('user email validation tests', () => {
     it('should validate good email', () => {
