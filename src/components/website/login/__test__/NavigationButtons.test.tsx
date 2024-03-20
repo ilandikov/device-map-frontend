@@ -31,6 +31,7 @@ describe('Navigation buttons tests', () => {
         fireEvent.click(cancelButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: MapAppActionTypes.LOGIN_MODAL_CLOSED });
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick('cancel'));
     });
 
     it('should go back to a desired go back state on go back button click', () => {

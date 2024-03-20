@@ -79,17 +79,26 @@ describe('welcome screen buttons', () => {
 });
 
 describe('navigation logic', () => {
-    it.each(Object.keys(UserAuthState))(
-        'cancel button: should transition back to welcome from %s state',
-        (initialUserAuthState: UserAuthState) => {
-            const initialState = buildState({ userAuthState: initialUserAuthState });
-            const action = loginModalButtonClick('cancel');
+    it('cancel button: should reset the state back to initial', () => {
+        const initialState = buildState({
+            userAuthState: UserAuthState.SIGNUP_OTP,
+            userEmail: 'something@somewhere.com',
+            userEmailError: new Error('whack'),
+            userPassword: 'authMePls',
+            userPasswordRepeat: 'authMePls',
+            userPasswordError: new Error('funnyPassword'),
+        });
+        const action = loginModalButtonClick('cancel');
 
-            verifyStateChange(initialState, action, {
-                userAuthState: UserAuthState.WELCOME,
-            });
-        },
-    );
+        verifyStateChange(initialState, action, {
+            userAuthState: UserAuthState.WELCOME,
+            userEmail: '',
+            userEmailError: null,
+            userPassword: '',
+            userPasswordRepeat: '',
+            userPasswordError: null,
+        });
+    });
 
     it.each([
         // From mail input to welcome

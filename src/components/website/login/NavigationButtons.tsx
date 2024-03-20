@@ -23,6 +23,7 @@ export function NavigationButtons() {
                 data-testid="cancelButton"
                 onClick={() => {
                     dispatch({ type: MapAppActionTypes.LOGIN_MODAL_CLOSED });
+                    dispatch(loginModalButtonClick('cancel'));
                 }}
             >
                 <img src={Cancel} alt="login-modal-navigation-cancel" />
