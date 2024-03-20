@@ -16,7 +16,7 @@ export function authenticationStepFromOTP(userAuthState: AuthenticationStep.LOGI
     return AuthenticationStep.SIGNUP_OTP_LOADING;
 }
 
-function isValidEmail(email: string) {
+export function isValidEmail(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegexp.test(email);
 }
@@ -44,10 +44,6 @@ export function getPasswordInputErrorAndNextState(password: string, passwordRepe
 export function getMailInputError(userEmail: string): Error | null {
     if (userEmail === 'already@exists.com') {
         return new Error(MailInputError.ALREADY_EXISTS);
-    }
-
-    if (!isValidEmail(userEmail)) {
-        return new Error(MailInputError.NOT_VALID);
     }
 
     return null;
