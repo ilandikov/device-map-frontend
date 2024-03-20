@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MapApp snapshot tests should match the snapshot 1`] = `
+exports[`MapApp snapshot tests should match the snapshot at home screen step 1`] = `
 <div
   className="map-app-container"
 >
@@ -77,6 +77,95 @@ exports[`MapApp snapshot tests should match the snapshot 1`] = `
         alt="product-description-phone-image"
         src="test-file-stub"
       />
+    </div>
+  </div>
+  <img
+    alt="map"
+    className="map-app-map-image"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`MapApp snapshot tests should match the snapshot at user authentication state 1`] = `
+<div
+  className="map-app-container"
+>
+  <header
+    className="map-app-header"
+  >
+    <div
+      className="map-app-header-block"
+    >
+      <img
+        alt="logo"
+        className="map-app-header-brand-logo"
+        src="test-file-stub"
+      />
+      <p
+        className="map-app-header-brand-text"
+      >
+        map
+      </p>
+    </div>
+    <div
+      className="map-app-header-block"
+    >
+      <button
+        className="map-app-header-inner-block"
+        data-testid="loginButton"
+        onClick={[Function]}
+      >
+        <img
+          alt="login-header-account"
+          className="map-app-header-account-image"
+          src="test-file-stub"
+        />
+        <p
+          className="map-app-header-account-text"
+        >
+          loginAction
+        </p>
+      </button>
+      <div
+        className="map-app-header-inner-block"
+      >
+        <img
+          alt="map-app-header-apps-google-play"
+          src="test-file-stub"
+        />
+        <img
+          alt="map-app-header-apps-app-store"
+          src="test-file-stub"
+        />
+      </div>
+    </div>
+  </header>
+  <div
+    className="login-modal-window"
+  >
+    <div
+      className="login-modal-container"
+    >
+      <div
+        className="login-modal-header-container"
+      >
+        <img
+          alt="login-modal-logo"
+          className="login-modal-logo"
+          src="test-file-stub"
+        />
+        <p
+          className="login-modal-header"
+        >
+          brand map
+        </p>
+        <p
+          className="login-modal-header-description"
+        >
+          loginCallToAction
+        </p>
+      </div>
     </div>
   </div>
   <img

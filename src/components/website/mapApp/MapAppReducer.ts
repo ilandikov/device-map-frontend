@@ -1,11 +1,14 @@
 export interface MapAppState {
-    showProductDescription: boolean;
-    showLoginModal: boolean;
+    usageStep: MapAppUsageStep;
+}
+
+export enum MapAppUsageStep {
+    HOME_SCREEN = 'HOME_SCREEN',
+    USER_AUTHENTICATION = 'USER_AUTHENTICATION',
 }
 
 export const mapAppInitialState: MapAppState = {
-    showProductDescription: true,
-    showLoginModal: false,
+    usageStep: MapAppUsageStep.HOME_SCREEN,
 };
 
 export enum MapAppActionTypes {
@@ -20,9 +23,12 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
 
     switch (action.type) {
         case MapAppActionTypes.LOGIN_BUTTON_CLICK:
-            return { ...state, showProductDescription: false, showLoginModal: true };
+            return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
         case MapAppActionTypes.LOGIN_MODAL_CLOSED:
-            return { ...state, showProductDescription: true, showLoginModal: false };
+            return {
+                ...state,
+                usageStep: MapAppUsageStep.HOME_SCREEN,
+            };
     }
 
     return state;
