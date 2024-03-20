@@ -1,11 +1,17 @@
 export interface MapAppState {
     showProductDescription: boolean;
     showLoginModal: boolean;
+    usageStep: MapAppUsageStep;
+}
+
+export enum MapAppUsageStep {
+    PRODUCT_DESCRIPTION = 'PRODUCT_DESCRIPTION',
 }
 
 export const mapAppInitialState: MapAppState = {
     showProductDescription: true,
     showLoginModal: false,
+    usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
 };
 
 export enum MapAppActionTypes {
