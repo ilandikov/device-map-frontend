@@ -46,28 +46,20 @@ describe('LoginModal reducer tests', () => {
 
 describe('welcome screen buttons', () => {
     it('should transition to email input', () => {
-        const nextState = loginModalReducer(undefined, loginModalButtonClick('accountRegister'));
+        const initialState = buildState({ userAuthState: UserAuthState.WELCOME });
+        const action = loginModalButtonClick('accountRegister');
 
-        expect(nextState).toEqual({
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.MAIL_INPUT,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
         });
     });
 
     it('should transition to user login', () => {
-        const nextState = loginModalReducer(undefined, loginModalButtonClick('accountLogin'));
+        const initialState = buildState({ userAuthState: UserAuthState.WELCOME });
+        const action = loginModalButtonClick('accountLogin');
 
-        expect(nextState).toEqual({
+        verifyStateChange(initialState, action, {
             userAuthState: UserAuthState.LOGIN,
-            userEmail: '',
-            userEmailError: null,
-            userPassword: '',
-            userPasswordRepeat: '',
-            userPasswordError: null,
         });
     });
 });
