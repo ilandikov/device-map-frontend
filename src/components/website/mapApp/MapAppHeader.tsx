@@ -18,6 +18,8 @@ export function MapAppHeader() {
     const useDispatch = useAppDispatch();
     const { usageStep } = useSelector((state: RootState) => state.mapAppState);
 
+    const userPoints = 320;
+
     return (
         <header className="map-app-header">
             <div className="map-app-header-block-container">
@@ -32,7 +34,7 @@ export function MapAppHeader() {
                             className="terminal-search-input"
                             type="text"
                             data-testid="terminalSearch"
-                            placeholder="Поиск"
+                            placeholder={t('search')}
                         />
                     </div>
                 )}
@@ -41,8 +43,8 @@ export function MapAppHeader() {
                 {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
                     <div className="user-points-header-block">
                         <img src={Points} alt="user-points-image" />
-                        <span className="user-points">320</span>
-                        <span className="user-points"> баллов</span>
+                        <span className="user-points">{userPoints}</span>
+                        <span className="user-points">{userPoints > 1 ? t('points') : t('point')}</span>
                     </div>
                 )}
                 <div className="map-app-header-block">
