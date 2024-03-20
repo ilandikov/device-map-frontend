@@ -58,7 +58,7 @@ export function loginModalReducer(state: LoginModalState = loginModalInitialStat
                 case 'accountLogin':
                     return { ...state, userAuthState: UserAuthState.LOGIN, userEmailError: null };
                 case 'cancel':
-                    return { ...state, userAuthState: UserAuthState.WELCOME };
+                    return loginModalInitialState;
                 case 'resetPassword':
                     return { ...state, userAuthState: UserAuthState.LOGIN_PASSWORD_RESET, userPassword: '' };
                 case 'next':

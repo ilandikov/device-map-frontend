@@ -4,6 +4,7 @@ import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../redux/__mocks__/LoginModalState';
 import { loginModalButtonClick } from '../redux/actions';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
+import { MapAppActionTypes } from '../../mapApp/MapAppReducer';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -29,7 +30,8 @@ describe('Navigation buttons tests', () => {
         const cancelButton = getByTestId(container, 'cancelButton');
         fireEvent.click(cancelButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('cancel'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: MapAppActionTypes.LOGIN_MODAL_CLOSED });
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick('cancel'));
     });
 
     it('should go back to a desired go back state on go back button click', () => {
