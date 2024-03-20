@@ -1,12 +1,12 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { UserAuthState, useLoginModalState } from './redux/state';
+import { AuthenticationStep, useAuthentication } from './redux/state';
 
 export function LoginModalHeader() {
-    const userAuthState = useLoginModalState().userAuthState;
+    const authenticationStep = useAuthentication().step;
 
-    const { header, description, opaqueDescription } = getHeaderDetails(userAuthState);
+    const { header, description, opaqueDescription } = getHeaderDetails(authenticationStep);
 
     return (
         <div className="login-modal-header-container">
@@ -19,28 +19,28 @@ export function LoginModalHeader() {
     );
 }
 
-function getHeaderDetails(userAuthState: UserAuthState) {
+function getHeaderDetails(authenticationStep: AuthenticationStep) {
     const { t } = useI18next();
 
-    switch (userAuthState) {
-        case UserAuthState.MAIL_INPUT:
-        case UserAuthState.SIGNUP_OTP:
-        case UserAuthState.SIGNUP_OTP_LOADING:
-        case UserAuthState.SIGNUP_PASSWORD:
+    switch (authenticationStep) {
+        case AuthenticationStep.MAIL_INPUT:
+        case AuthenticationStep.SIGNUP_OTP:
+        case AuthenticationStep.SIGNUP_OTP_LOADING:
+        case AuthenticationStep.SIGNUP_PASSWORD:
             return {
                 header: t('signUp'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-        case UserAuthState.LOGIN:
-        case UserAuthState.LOGIN_OTP:
-        case UserAuthState.LOGIN_OTP_LOADING:
+        case AuthenticationStep.LOGIN:
+        case AuthenticationStep.LOGIN_OTP:
+        case AuthenticationStep.LOGIN_OTP_LOADING:
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-        case UserAuthState.LOGIN_PASSWORD_RESET:
+        case AuthenticationStep.LOGIN_PASSWORD_RESET:
             return {
                 header: t('newPassword'),
                 description: t('finikMapProductDescription'),

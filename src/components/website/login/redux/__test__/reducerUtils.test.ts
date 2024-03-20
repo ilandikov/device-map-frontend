@@ -1,9 +1,9 @@
-import { MailInputError, UserAuthState } from '../state';
+import { AuthenticationStep, MailInputError } from '../state';
 import {
+    authenticationStepFromOTP,
+    authenticationStepFromUserLogin,
     getMailInputError,
     getPasswordInputErrorAndNextState,
-    userAuthStateFromOTP,
-    userAuthStateFromUserLogin,
 } from '../reducerUtils';
 
 describe('user email validation tests', () => {
@@ -40,7 +40,7 @@ describe('user password logic tests', () => {
         );
 
         expect(passwordInputError).toEqual(null);
-        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_OTP);
     });
 
     it('should return an error and keep the state if passwords dont match', () => {
@@ -50,41 +50,41 @@ describe('user password logic tests', () => {
         );
 
         expect(passwordInputError).not.toEqual(null);
-        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_PASSWORD);
     });
 
     it('should return an error and keep the state if passwords have not been input', () => {
         const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
 
         expect(passwordInputError).not.toEqual(null);
-        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_PASSWORD);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_PASSWORD);
     });
 });
 
 describe('OTP logic tests', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
-        const nextUserAuthState = userAuthStateFromOTP(UserAuthState.SIGNUP_OTP);
+        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.SIGNUP_OTP);
 
-        expect(nextUserAuthState).toEqual(UserAuthState.SIGNUP_OTP_LOADING);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_OTP_LOADING);
     });
 
     it('should move from log in OTP to log in OTP loading stage', () => {
-        const nextUserAuthState = userAuthStateFromOTP(UserAuthState.LOGIN_OTP);
+        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.LOGIN_OTP);
 
-        expect(nextUserAuthState).toEqual(UserAuthState.LOGIN_OTP_LOADING);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN_OTP_LOADING);
     });
 });
 
 describe('User authentication logic tests', () => {
     it('should move a good user to logged state', () => {
-        const nextUserAuthState = userAuthStateFromUserLogin('user@mail.com', 'short');
+        const nextUserAuthState = authenticationStepFromUserLogin('user@mail.com', 'short');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.LOGGED_IN);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.LOGGED_IN);
     });
 
     it('should keep a bad user at the password input state', () => {
-        const nextUserAuthState = userAuthStateFromUserLogin('bad@user.com', 'badPassword');
+        const nextUserAuthState = authenticationStepFromUserLogin('bad@user.com', 'badPassword');
 
-        expect(nextUserAuthState).toEqual(UserAuthState.LOGIN);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN);
     });
 });

@@ -8,7 +8,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
-import { mockDispatch } from '../redux/__mocks__/LoginModalState';
+import { mockDispatch } from '../redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

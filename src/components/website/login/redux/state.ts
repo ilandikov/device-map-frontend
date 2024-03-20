@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
-export function useLoginModalState(): LoginModalState {
-    return useSelector((state: RootState) => state.loginModalState);
+export function useAuthentication(): AuthenticationState {
+    return useSelector((state: RootState) => state.authentication);
 }
 
-export enum UserAuthState {
+export enum AuthenticationStep {
     WELCOME = 'WELCOME',
     MAIL_INPUT = 'MAIL_INPUT',
     SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
@@ -18,24 +18,24 @@ export enum UserAuthState {
     LOGGED_IN = 'LOGGED_IN',
 }
 
-export const loginModalInitialState: LoginModalState = {
-    userAuthState: UserAuthState.WELCOME,
-    userEmail: '',
-    userEmailError: null,
-    userPassword: '',
-    userPasswordRepeat: '',
-    userPasswordError: null,
+export const authenticationInitialState: AuthenticationState = {
+    step: AuthenticationStep.WELCOME,
+    email: '',
+    emailError: null,
+    password: '',
+    passwordRepeat: '',
+    passwordError: null,
 };
 
-export interface LoginModalState {
-    userAuthState: UserAuthState;
-    userEmail: string;
+export interface AuthenticationState {
+    step: AuthenticationStep;
+    email: string;
     // TODO make userEmailError optional
-    userEmailError: Error | null;
-    userPassword: string;
-    userPasswordRepeat: string;
+    emailError: Error | null;
+    password: string;
+    passwordRepeat: string;
     // TODO make userPasswordError optional
-    userPasswordError: Error | null;
+    passwordError: Error | null;
 }
 
 export enum MailInputError {

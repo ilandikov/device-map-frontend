@@ -13,7 +13,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
 import { MailInputError } from '../redux/state';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -31,16 +31,16 @@ jest.mock('react-redux', () => ({
 
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockLoginModalState({ userEmail: 'enteredMail@form.fr', userEmailError: null });
+        mockAuthenticationState({ email: 'enteredMail@form.fr', emailError: null });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists error', () => {
-        mockLoginModalState({
-            userEmail: 'existing@mail.ru',
-            userEmailError: new Error(MailInputError.ALREADY_EXISTS),
+        mockAuthenticationState({
+            email: 'existing@mail.ru',
+            emailError: new Error(MailInputError.ALREADY_EXISTS),
         });
         const component = renderForSnapshotTest(<MailInputForm />);
 
@@ -48,7 +48,7 @@ describe('MailInputForm snapshot tests', () => {
     });
 
     it('should match the snapshot at mail not valid error', () => {
-        mockLoginModalState({ userEmail: 'notAMailAddress', userEmailError: new Error(MailInputError.NOT_VALID) });
+        mockAuthenticationState({ email: 'notAMailAddress', emailError: new Error(MailInputError.NOT_VALID) });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
@@ -82,7 +82,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockLoginModalState({ userEmailError: new Error(MailInputError.ALREADY_EXISTS) });
+        mockAuthenticationState({ emailError: new Error(MailInputError.ALREADY_EXISTS) });
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const loginButton = getByText(container, 'accountLogin');
