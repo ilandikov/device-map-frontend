@@ -38,10 +38,7 @@ export function authentication(
                         return { ...state, emailError: mailInputError };
                     }
 
-                    const nextUserAuthState =
-                        state.step === AuthenticationStep.LOGIN_PASSWORD_RESET
-                            ? AuthenticationStep.LOGIN_OTP
-                            : AuthenticationStep.SIGNUP_PASSWORD;
+                    const nextUserAuthState = AuthenticationStep.SIGNUP_PASSWORD;
 
                     return {
                         ...state,
