@@ -4,13 +4,13 @@ import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
 
-import { useLoginModalState } from './redux/state';
+import { useAuthentication } from './redux/state';
 
 export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const passwordInputError = useLoginModalState().userPasswordError;
+    const passwordInputError = useAuthentication().userPasswordError;
 
     return (
         <>

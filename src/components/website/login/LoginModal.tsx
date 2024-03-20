@@ -8,12 +8,12 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-import { UserAuthState, useLoginModalState } from './redux/state';
+import { UserAuthState, useAuthentication } from './redux/state';
 import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 
 export function LoginModal() {
-    const userAuthState = useLoginModalState().userAuthState;
+    const userAuthState = useAuthentication().userAuthState;
 
     const showShadows = userAuthState === UserAuthState.WELCOME;
     const showNavigationButtons = [

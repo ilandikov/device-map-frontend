@@ -11,13 +11,13 @@ import {
     loginModalVerifyRequest,
 } from './redux/actions';
 
-import { useLoginModalState } from './redux/state';
+import { useAuthentication } from './redux/state';
 
 export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userEmail = useLoginModalState().userEmail;
+    const userEmail = useAuthentication().userEmail;
 
     return (
         <>

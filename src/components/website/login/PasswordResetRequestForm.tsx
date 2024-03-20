@@ -4,14 +4,14 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
 
-import { useLoginModalState } from './redux/state';
+import { useAuthentication } from './redux/state';
 
 export function PasswordResetRequestForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userEmail = useLoginModalState().userEmail;
-    const userEmailError = useLoginModalState().userEmailError;
+    const userEmail = useAuthentication().userEmail;
+    const userEmailError = useAuthentication().userEmailError;
 
     return (
         <>

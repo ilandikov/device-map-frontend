@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
-export function useLoginModalState(): LoginModalState {
+export function useAuthentication(): LoginModalState {
     return useSelector((state: RootState) => state.authentication);
 }
 
