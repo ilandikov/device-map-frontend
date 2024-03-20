@@ -7,7 +7,7 @@ import {
     isValidEmail,
 } from './reducerUtils';
 
-function isEmailRegistered(userEmail: string) {
+export function isEmailRegistered(userEmail: string) {
     return getMailInputError(userEmail) && getMailInputError(userEmail).message === MailInputError.ALREADY_EXISTS;
 }
 
