@@ -11,18 +11,18 @@ describe('MapApp reducer tests', () => {
         expect(initialState).toEqual(expectedInitialState);
     });
 
-    it('should hide product description and show login modal on login click action', () => {
+    it('should move to user authentication step on login click action', () => {
         const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
 
         const resultingState = MapAppReducer(undefined, action);
 
         const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.HOME_SCREEN,
+            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         };
         expect(resultingState).toEqual(expectedState);
     });
 
-    it('should show product description, hide login modal, move to homescreen on navigation cancel action', () => {
+    it('should move to homescreen on navigation cancel action', () => {
         const initialState: MapAppState = {
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         };

@@ -23,11 +23,10 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
 
     switch (action.type) {
         case MapAppActionTypes.LOGIN_BUTTON_CLICK:
-            return { ...state };
+            return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
         case MapAppActionTypes.LOGIN_MODAL_CLOSED:
             return {
                 ...state,
-
                 usageStep: MapAppUsageStep.HOME_SCREEN,
             };
     }
