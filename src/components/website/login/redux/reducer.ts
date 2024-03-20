@@ -7,6 +7,10 @@ import {
     isValidEmail,
 } from './reducerUtils';
 
+function isEmailRegistered(userEmail: string) {
+    return getMailInputError(userEmail) && getMailInputError(userEmail).message === MailInputError.ALREADY_EXISTS;
+}
+
 export function authentication(
     state: AuthenticationState = authenticationInitialState,
     action: LoginModalAction,
@@ -33,10 +37,7 @@ export function authentication(
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
                         const userEmail = state.email;
-                        if (
-                            getMailInputError(userEmail) &&
-                            getMailInputError(userEmail).message === MailInputError.ALREADY_EXISTS
-                        ) {
+                        if (isEmailRegistered(userEmail)) {
                             return {
                                 ...state,
                                 step: AuthenticationStep.LOGIN_OTP,
