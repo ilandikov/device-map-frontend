@@ -1,34 +1,43 @@
-import { AuthenticationStep, MailInputError } from '../state';
+import { AuthenticationStep } from '../state';
 import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
-    getMailInputError,
     getPasswordInputErrorAndNextState,
+    isEmailRegistered,
+    isEmailValid,
 } from '../reducerUtils';
 
 describe('user email validation tests', () => {
-    it('should return no error on valid mail', () => {
+    it('should validate good email', () => {
         const email = 'good@email.com';
 
-        const mailInputError = getMailInputError(email);
+        const mailInputError = isEmailValid(email);
 
-        expect(mailInputError).toEqual(null);
+        expect(mailInputError).toEqual(true);
     });
 
-    it('should throw mail not valid error', () => {
+    it('should not validate bad email', () => {
         const email = 'this is not an email!';
 
-        const mailInputError = getMailInputError(email);
+        const mailInputError = isEmailValid(email);
 
-        expect(mailInputError).toEqual(new Error(MailInputError.NOT_VALID));
+        expect(mailInputError).toEqual(false);
     });
 
-    it('should throw mail already exists error', () => {
+    it('should report registered email', () => {
         const email = 'already@exists.com';
 
-        const mailInputError = getMailInputError(email);
+        const mailInputError = isEmailRegistered(email);
 
-        expect(mailInputError).toEqual(new Error(MailInputError.ALREADY_EXISTS));
+        expect(mailInputError).toEqual(true);
+    });
+
+    it('should report not registered email', () => {
+        const email = 'new@user.fr';
+
+        const mailInputError = isEmailRegistered(email);
+
+        expect(mailInputError).toEqual(false);
     });
 });
 

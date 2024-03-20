@@ -1,6 +1,11 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
 import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
-import { authenticationStepFromUserLogin, getMailInputError, getPasswordInputErrorAndNextState } from './reducerUtils';
+import {
+    authenticationStepFromUserLogin,
+    getPasswordInputErrorAndNextState,
+    isEmailRegistered,
+    isEmailValid,
+} from './reducerUtils';
 
 export function authentication(
     state: AuthenticationState = authenticationInitialState,
@@ -22,14 +27,12 @@ export function authentication(
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
-                    const mailInputError = getMailInputError(state.email);
-
-                    if (mailInputError && mailInputError.message === MailInputError.NOT_VALID) {
-                        return { ...state, emailError: mailInputError };
+                    if (isEmailValid(state.email) === false) {
+                        return { ...state, emailError: new Error(MailInputError.NOT_VALID) };
                     }
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
-                        if (mailInputError && mailInputError.message === MailInputError.ALREADY_EXISTS) {
+                        if (isEmailRegistered(state.email)) {
                             return {
                                 ...state,
                                 step: AuthenticationStep.LOGIN_OTP,
@@ -40,8 +43,8 @@ export function authentication(
                         return { ...state, emailError: new Error(MailInputError.NOT_REGISTERED) };
                     }
 
-                    if (mailInputError !== null) {
-                        return { ...state, emailError: mailInputError };
+                    if (isEmailRegistered(state.email)) {
+                        return { ...state, emailError: new Error(MailInputError.ALREADY_EXISTS) };
                     }
 
                     return {
