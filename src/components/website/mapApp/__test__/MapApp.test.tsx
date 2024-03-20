@@ -11,8 +11,19 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('MapApp snapshot tests', () => {
-    it('should match the snapshot', () => {
+    it('should match the snapshot at homescreen step', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.HOMESCREEN, showProductDescription: true, showLoginModal: false });
+        const component = renderForSnapshotTest(<MapApp />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at user authentication state', () => {
+        mockMapAppState({
+            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
+            showProductDescription: false,
+            showLoginModal: true,
+        });
         const component = renderForSnapshotTest(<MapApp />);
 
         expect(component).toMatchSnapshot();
