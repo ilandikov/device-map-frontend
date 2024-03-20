@@ -15,9 +15,9 @@ export function MailInputForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const loginModalState = useAuthentication();
-    const mailInputError = loginModalState.emailError;
-    const userEmail = loginModalState.email;
+    const authenticationState = useAuthentication();
+    const mailInputError = authenticationState.emailError;
+    const userEmail = authenticationState.email;
 
     return (
         <>
