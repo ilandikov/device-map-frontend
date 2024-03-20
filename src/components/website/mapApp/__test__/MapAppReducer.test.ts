@@ -7,7 +7,7 @@ describe('MapApp reducer tests', () => {
         const expectedInitialState: MapAppState = {
             showProductDescription: true,
             showLoginModal: false,
-            usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+            usageStep: MapAppUsageStep.HOMESCREEN,
         };
 
         expect(initialState).toEqual(expectedInitialState);
@@ -21,7 +21,7 @@ describe('MapApp reducer tests', () => {
         const expectedState: MapAppState = {
             showProductDescription: false,
             showLoginModal: true,
-            usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+            usageStep: MapAppUsageStep.HOMESCREEN,
         };
         expect(resultingState).toEqual(expectedState);
     });
@@ -39,7 +39,7 @@ describe('MapApp reducer tests', () => {
         const expectedState: MapAppState = {
             showProductDescription: true,
             showLoginModal: false,
-            usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+            usageStep: MapAppUsageStep.HOMESCREEN,
         };
         expect(resultingState).toEqual(expectedState);
     });

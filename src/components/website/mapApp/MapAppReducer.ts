@@ -5,14 +5,14 @@ export interface MapAppState {
 }
 
 export enum MapAppUsageStep {
-    PRODUCT_DESCRIPTION = 'PRODUCT_DESCRIPTION',
+    HOMESCREEN = 'HOMESCREEN',
     USER_AUTHENTICATION = 'USER_AUTHENTICATION',
 }
 
 export const mapAppInitialState: MapAppState = {
     showProductDescription: true,
     showLoginModal: false,
-    usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+    usageStep: MapAppUsageStep.HOMESCREEN,
 };
 
 export enum MapAppActionTypes {
@@ -33,7 +33,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
                 ...state,
                 showProductDescription: true,
                 showLoginModal: false,
-                usageStep: MapAppUsageStep.PRODUCT_DESCRIPTION,
+                usageStep: MapAppUsageStep.HOMESCREEN,
             };
     }
 
