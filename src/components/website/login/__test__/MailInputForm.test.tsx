@@ -13,7 +13,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
 import { MailInputError } from '../redux/state';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -31,14 +31,14 @@ jest.mock('react-redux', () => ({
 
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockLoginModalState({ email: 'enteredMail@form.fr', emailError: null });
+        mockAuthenticationState({ email: 'enteredMail@form.fr', emailError: null });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists error', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             email: 'existing@mail.ru',
             emailError: new Error(MailInputError.ALREADY_EXISTS),
         });
@@ -48,7 +48,7 @@ describe('MailInputForm snapshot tests', () => {
     });
 
     it('should match the snapshot at mail not valid error', () => {
-        mockLoginModalState({ email: 'notAMailAddress', emailError: new Error(MailInputError.NOT_VALID) });
+        mockAuthenticationState({ email: 'notAMailAddress', emailError: new Error(MailInputError.NOT_VALID) });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
@@ -82,7 +82,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockLoginModalState({ emailError: new Error(MailInputError.ALREADY_EXISTS) });
+        mockAuthenticationState({ emailError: new Error(MailInputError.ALREADY_EXISTS) });
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const loginButton = getByText(container, 'accountLogin');

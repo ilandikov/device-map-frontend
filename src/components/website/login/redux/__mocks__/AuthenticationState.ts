@@ -20,7 +20,7 @@ mockLoginModalState({
 export const mockDispatch = jest.fn();
 
 export let mockPrepareSelector: () => any;
-export function mockLoginModalState(mockState: Partial<AuthenticationState>) {
+export function mockAuthenticationState(mockState: Partial<AuthenticationState>) {
     mockPrepareSelector = () => {
         return mockState;
     };

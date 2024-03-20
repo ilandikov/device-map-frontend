@@ -13,7 +13,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
 import { AuthenticationStep } from '../redux/state';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
@@ -31,7 +31,7 @@ jest.mock('react-redux', () => ({
 
 describe('LogInForm snapshot test', () => {
     it('should match snapshot', () => {
-        mockLoginModalState({ email: 'verify@me.uk' });
+        mockAuthenticationState({ email: 'verify@me.uk' });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
@@ -43,7 +43,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
-        mockLoginModalState({ authenticationStep: AuthenticationStep.LOGIN });
+        mockAuthenticationState({ authenticationStep: AuthenticationStep.LOGIN });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -56,7 +56,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        mockLoginModalState({ email: 'here_is_my@email.com' });
+        mockAuthenticationState({ email: 'here_is_my@email.com' });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;

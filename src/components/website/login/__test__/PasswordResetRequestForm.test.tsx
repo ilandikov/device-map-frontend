@@ -12,7 +12,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -22,7 +22,7 @@ jest.mock('react-redux', () => ({
 
 describe('PasswordResetRequestForm snapshot tests', () => {
     it('should match the snapshot', () => {
-        mockLoginModalState({ email: 'reset@password.kr', emailError: new Error('somethingIsWrong') });
+        mockAuthenticationState({ email: 'reset@password.kr', emailError: new Error('somethingIsWrong') });
         const component = renderForSnapshotTest(<PasswordResetRequestForm />);
 
         expect(component).toMatchSnapshot();

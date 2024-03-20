@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { LoginModal } from '../LoginModal';
-import { mockDispatch, mockLoginModalState, mockPrepareSelector } from '../redux/__mocks__/LoginModalState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
 import { AuthenticationStep } from '../redux/state';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
@@ -20,7 +20,7 @@ jest.mock('react-redux', () => ({
 
 describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at user welcome stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.WELCOME,
         });
 
@@ -30,7 +30,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at mail input stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             email: '',
             authenticationStep: AuthenticationStep.MAIL_INPUT,
         });
@@ -40,7 +40,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at login stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.LOGIN,
             email: '',
         });
@@ -50,7 +50,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at password reset stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.LOGIN_PASSWORD_RESET,
             email: '',
         });
@@ -60,7 +60,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at OTP for login stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.LOGIN_OTP,
         });
         const component = renderForSnapshotTest(<LoginModal />);
@@ -69,7 +69,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at OTP checking for login stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.LOGIN_OTP_LOADING,
         });
         const component = renderForSnapshotTest(<LoginModal />);
@@ -78,7 +78,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at password creation stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.SIGNUP_PASSWORD,
         });
         const component = renderForSnapshotTest(<LoginModal />);
@@ -87,7 +87,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at OTP input stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.SIGNUP_OTP,
         });
         const component = renderForSnapshotTest(<LoginModal />);
@@ -96,7 +96,7 @@ describe('LoginModal snapshot tests', () => {
     });
 
     it('should match the snapshot at OTP checking for sign up stage', () => {
-        mockLoginModalState({
+        mockAuthenticationState({
             authenticationStep: AuthenticationStep.SIGNUP_OTP_LOADING,
         });
         const component = renderForSnapshotTest(<LoginModal />);
