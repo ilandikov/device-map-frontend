@@ -32,9 +32,10 @@ export function authentication(
                     }
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
+                        const userEmail = state.email;
                         if (
-                            getMailInputError(state.email) &&
-                            getMailInputError(state.email).message === MailInputError.ALREADY_EXISTS
+                            getMailInputError(userEmail) &&
+                            getMailInputError(userEmail).message === MailInputError.ALREADY_EXISTS
                         ) {
                             return {
                                 ...state,
