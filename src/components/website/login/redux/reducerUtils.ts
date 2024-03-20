@@ -1,19 +1,19 @@
-import { MailInputError, UserAuthState } from './state';
+import { AuthenticationStep, MailInputError } from './state';
 
 export function userAuthStateFromUserLogin(userEmail: string, userPassword: string) {
     if (userEmail === 'user@mail.com' && userPassword === 'short') {
-        return UserAuthState.LOGGED_IN;
+        return AuthenticationStep.LOGGED_IN;
     }
 
-    return UserAuthState.LOGIN;
+    return AuthenticationStep.LOGIN;
 }
 
-export function userAuthStateFromOTP(userAuthState: UserAuthState.LOGIN_OTP | UserAuthState.SIGNUP_OTP) {
-    if (userAuthState === UserAuthState.LOGIN_OTP) {
-        return UserAuthState.LOGIN_OTP_LOADING;
+export function userAuthStateFromOTP(userAuthState: AuthenticationStep.LOGIN_OTP | AuthenticationStep.SIGNUP_OTP) {
+    if (userAuthState === AuthenticationStep.LOGIN_OTP) {
+        return AuthenticationStep.LOGIN_OTP_LOADING;
     }
 
-    return UserAuthState.SIGNUP_OTP_LOADING;
+    return AuthenticationStep.SIGNUP_OTP_LOADING;
 }
 
 function isValidEmail(email: string) {
@@ -35,7 +35,7 @@ function getPasswordInputError(userPassword: string, userPasswordRepeat: string)
 
 export function getPasswordInputErrorAndNextState(userPassword: string, userPasswordRepeat: string) {
     const passwordInputError = getPasswordInputError(userPassword, userPasswordRepeat);
-    const nextUserAuthState = passwordInputError ? UserAuthState.SIGNUP_PASSWORD : UserAuthState.SIGNUP_OTP;
+    const nextUserAuthState = passwordInputError ? AuthenticationStep.SIGNUP_PASSWORD : AuthenticationStep.SIGNUP_OTP;
 
     return { passwordInputError, nextUserAuthState };
 }

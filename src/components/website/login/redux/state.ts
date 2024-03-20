@@ -5,7 +5,7 @@ export function useAuthentication(): AuthenticationState {
     return useSelector((state: RootState) => state.authentication);
 }
 
-export enum UserAuthState {
+export enum AuthenticationStep {
     WELCOME = 'WELCOME',
     MAIL_INPUT = 'MAIL_INPUT',
     SIGNUP_PASSWORD = 'SIGNUP_PASSWORD',
@@ -19,23 +19,23 @@ export enum UserAuthState {
 }
 
 export const authenticationInitialState: AuthenticationState = {
-    userAuthState: UserAuthState.WELCOME,
-    userEmail: '',
-    userEmailError: null,
-    userPassword: '',
-    userPasswordRepeat: '',
-    userPasswordError: null,
+    authenticationStep: AuthenticationStep.WELCOME,
+    email: '',
+    emailError: null,
+    password: '',
+    passwordRepeat: '',
+    passwordError: null,
 };
 
 export interface AuthenticationState {
-    userAuthState: UserAuthState;
-    userEmail: string;
+    authenticationStep: AuthenticationStep;
+    email: string;
     // TODO make userEmailError optional
-    userEmailError: Error | null;
-    userPassword: string;
-    userPasswordRepeat: string;
+    emailError: Error | null;
+    password: string;
+    passwordRepeat: string;
     // TODO make userPasswordError optional
-    userPasswordError: Error | null;
+    passwordError: Error | null;
 }
 
 export enum MailInputError {

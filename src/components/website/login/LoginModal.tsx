@@ -8,38 +8,38 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-import { UserAuthState, useAuthentication } from './redux/state';
+import { AuthenticationStep, useAuthentication } from './redux/state';
 import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 
 export function LoginModal() {
-    const userAuthState = useAuthentication().userAuthState;
+    const userAuthState = useAuthentication().authenticationStep;
 
-    const showShadows = userAuthState === UserAuthState.WELCOME;
+    const showShadows = userAuthState === AuthenticationStep.WELCOME;
     const showNavigationButtons = [
-        UserAuthState.MAIL_INPUT,
-        UserAuthState.SIGNUP_PASSWORD,
-        UserAuthState.LOGIN,
-        UserAuthState.LOGIN_PASSWORD_RESET,
+        AuthenticationStep.MAIL_INPUT,
+        AuthenticationStep.SIGNUP_PASSWORD,
+        AuthenticationStep.LOGIN,
+        AuthenticationStep.LOGIN_PASSWORD_RESET,
     ].includes(userAuthState);
 
-    function getAuthorisationComponent(userAuthState: UserAuthState) {
+    function getAuthorisationComponent(userAuthState: AuthenticationStep) {
         switch (userAuthState) {
-            case UserAuthState.WELCOME:
+            case AuthenticationStep.WELCOME:
                 return <WelcomeForm />;
-            case UserAuthState.MAIL_INPUT:
+            case AuthenticationStep.MAIL_INPUT:
                 return <MailInputForm />;
-            case UserAuthState.SIGNUP_PASSWORD:
+            case AuthenticationStep.SIGNUP_PASSWORD:
                 return <PasswordCreationForm />;
-            case UserAuthState.LOGIN:
+            case AuthenticationStep.LOGIN:
                 return <LogInForm />;
-            case UserAuthState.LOGIN_PASSWORD_RESET:
+            case AuthenticationStep.LOGIN_PASSWORD_RESET:
                 return <PasswordResetRequestForm />;
-            case UserAuthState.SIGNUP_OTP:
-            case UserAuthState.LOGIN_OTP:
+            case AuthenticationStep.SIGNUP_OTP:
+            case AuthenticationStep.LOGIN_OTP:
                 return <OTPForm />;
-            case UserAuthState.SIGNUP_OTP_LOADING:
-            case UserAuthState.LOGIN_OTP_LOADING:
+            case AuthenticationStep.SIGNUP_OTP_LOADING:
+            case AuthenticationStep.LOGIN_OTP_LOADING:
                 return <Loader />;
         }
 

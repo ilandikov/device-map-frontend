@@ -10,7 +10,7 @@ export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const passwordInputError = useAuthentication().userPasswordError;
+    const passwordInputError = useAuthentication().passwordError;
 
     return (
         <>

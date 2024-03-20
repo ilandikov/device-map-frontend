@@ -10,8 +10,8 @@ export function PasswordResetRequestForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userEmail = useAuthentication().userEmail;
-    const userEmailError = useAuthentication().userEmailError;
+    const userEmail = useAuthentication().email;
+    const userEmailError = useAuthentication().emailError;
 
     return (
         <>

@@ -17,7 +17,7 @@ export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userEmail = useAuthentication().userEmail;
+    const userEmail = useAuthentication().email;
 
     return (
         <>
