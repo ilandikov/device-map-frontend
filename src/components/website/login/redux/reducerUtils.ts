@@ -1,4 +1,4 @@
-import { AuthenticationStep, MailInputError } from './state';
+import { AuthenticationStep } from './state';
 
 export function authenticationStepFromUserLogin(email: string, password: string) {
     if (email === 'user@mail.com' && password === 'short') {
@@ -40,13 +40,6 @@ export function getPasswordInputErrorAndNextState(password: string, passwordRepe
         : AuthenticationStep.SIGNUP_OTP;
 
     return { passwordInputError, nextUserAuthState: nextAuthenticationStep };
-}
-export function getMailInputError(userEmail: string): Error | null {
-    if (userEmail === 'already@exists.com') {
-        return new Error(MailInputError.ALREADY_EXISTS);
-    }
-
-    return null;
 }
 
 export function isEmailRegistered(userEmail: string) {
