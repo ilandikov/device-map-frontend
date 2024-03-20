@@ -31,10 +31,11 @@ export function authentication(
                         return { ...state, emailError: new Error(MailInputError.NOT_VALID) };
                     }
 
-                    const mailInputError = getMailInputError(state.email);
-
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
-                        if (mailInputError && mailInputError.message === MailInputError.ALREADY_EXISTS) {
+                        if (
+                            getMailInputError(state.email) &&
+                            getMailInputError(state.email).message === MailInputError.ALREADY_EXISTS
+                        ) {
                             return {
                                 ...state,
                                 step: AuthenticationStep.LOGIN_OTP,
@@ -45,8 +46,8 @@ export function authentication(
                         return { ...state, emailError: new Error(MailInputError.NOT_REGISTERED) };
                     }
 
-                    if (mailInputError !== null) {
-                        return { ...state, emailError: mailInputError };
+                    if (getMailInputError(state.email) !== null) {
+                        return { ...state, emailError: getMailInputError(state.email) };
                     }
 
                     return {
