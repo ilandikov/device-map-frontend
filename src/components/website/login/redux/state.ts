@@ -41,4 +41,5 @@ export interface AuthenticationState {
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
     ALREADY_EXISTS = 'mailAlreadyExists',
+    NOT_REGISTERED = 'mailNotRegistered',
 }

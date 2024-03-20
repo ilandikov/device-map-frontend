@@ -24,6 +24,10 @@ export function authentication(
                 case LoginModalVerifyTypes.USER_EMAIL: {
                     const mailInputError = getMailInputError(state.email);
 
+                    if (mailInputError && mailInputError.message === MailInputError.NOT_VALID) {
+                        return { ...state, emailError: mailInputError };
+                    }
+
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
                         if (mailInputError && mailInputError.message === MailInputError.ALREADY_EXISTS) {
                             return {
@@ -32,6 +36,8 @@ export function authentication(
                                 emailError: null,
                             };
                         }
+
+                        return { ...state, emailError: new Error(MailInputError.NOT_REGISTERED) };
                     }
 
                     if (mailInputError !== null) {

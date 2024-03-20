@@ -312,4 +312,16 @@ describe('password reset logic', () => {
             emailError: new Error(MailInputError.NOT_VALID),
         });
     });
+
+    it('should set mail error when such a mail is presented for password reset', () => {
+        const initialState = buildState({
+            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
+            email: 'notRegistered@email.co.kr',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+
+        verifyStateChange(initialState, action, {
+            emailError: new Error(MailInputError.NOT_REGISTERED),
+        });
+    });
 });
