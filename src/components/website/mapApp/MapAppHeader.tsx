@@ -26,7 +26,7 @@ export function MapAppHeader() {
             {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <AuthenticatedUserComponents />}
             <div className="map-app-header-block">
                 <button
-                    className="map-app-header-inner-block"
+                    className="map-app-header-login-button"
                     data-testid="loginButton"
                     onClick={() => {
                         useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
@@ -35,10 +35,8 @@ export function MapAppHeader() {
                     <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
                     <p className="map-app-header-account-text">{t('loginAction')}</p>
                 </button>
-                <div className="map-app-header-inner-block">
-                    <img src={GooglePlay} alt="map-app-header-apps-google-play" />
-                    <img src={AppStore} alt="map-app-header-apps-app-store" />
-                </div>
+                <img src={GooglePlay} alt="map-app-header-apps-google-play" />
+                <img src={AppStore} alt="map-app-header-apps-app-store" />
             </div>
         </header>
     );

@@ -25,7 +25,7 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
       className="map-app-header-block"
     >
       <button
-        className="map-app-header-inner-block"
+        className="map-app-header-login-button"
         data-testid="loginButton"
         onClick={[Function]}
       >
@@ -40,18 +40,14 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
           loginAction
         </p>
       </button>
-      <div
-        className="map-app-header-inner-block"
-      >
-        <img
-          alt="map-app-header-apps-google-play"
-          src="test-file-stub"
-        />
-        <img
-          alt="map-app-header-apps-app-store"
-          src="test-file-stub"
-        />
-      </div>
+      <img
+        alt="map-app-header-apps-google-play"
+        src="test-file-stub"
+      />
+      <img
+        alt="map-app-header-apps-app-store"
+        src="test-file-stub"
+      />
     </div>
   </header>
   <div
@@ -112,7 +108,7 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
       className="map-app-header-block"
     >
       <button
-        className="map-app-header-inner-block"
+        className="map-app-header-login-button"
         data-testid="loginButton"
         onClick={[Function]}
       >
@@ -127,18 +123,14 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
           loginAction
         </p>
       </button>
-      <div
-        className="map-app-header-inner-block"
-      >
-        <img
-          alt="map-app-header-apps-google-play"
-          src="test-file-stub"
-        />
-        <img
-          alt="map-app-header-apps-app-store"
-          src="test-file-stub"
-        />
-      </div>
+      <img
+        alt="map-app-header-apps-google-play"
+        src="test-file-stub"
+      />
+      <img
+        alt="map-app-header-apps-app-store"
+        src="test-file-stub"
+      />
     </div>
   </header>
   <div
