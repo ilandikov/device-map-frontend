@@ -9,15 +9,16 @@ import { RootState } from '../../../redux/store';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
-import { MapAppState } from './MapAppReducer';
+import { MapAppState, MapAppUsageStep } from './MapAppReducer';
 
 export default function MapApp() {
     const mapAppState: MapAppState = useSelector((state: RootState) => state.mapAppState);
+
     return (
         <div className="map-app-container">
             <MapAppHeader />
-            {mapAppState.showProductDescription && <ProductDescription />}
-            {mapAppState.showLoginModal && <LoginModal />}
+            {mapAppState.usageStep === MapAppUsageStep.HOMESCREEN && <ProductDescription />}
+            {mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION && <LoginModal />}
             <img className="map-app-map-image" src={mapImage} alt="map" />
         </div>
     );
