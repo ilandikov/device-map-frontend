@@ -7,6 +7,23 @@
     flex-direction: row;
     justify-content: space-between;
 
+    .map-app-header-block-container {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .map-app-header-block-container:first-of-type {
+        justify-content: flex-start;
+    }
+
+    .map-app-header-block-container:last-of-type {
+        justify-content: flex-end;
+    }
+
     .map-app-header-block {
         max-height: 46px;
 

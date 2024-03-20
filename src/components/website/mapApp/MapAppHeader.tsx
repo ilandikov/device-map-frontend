@@ -20,41 +20,45 @@ export function MapAppHeader() {
 
     return (
         <header className="map-app-header">
-            <div className="map-app-header-block">
-                <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
-                <p className="map-app-header-brand-text">{t('map')}</p>
-            </div>
-            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                <div className="map-app-header-block terminal-search-block">
-                    <img src={Search} alt="terminal-search-image" />
-                    <input
-                        className="terminal-search-input"
-                        type="text"
-                        data-testid="terminalSearch"
-                        placeholder="Поиск"
-                    />
-                </div>
-            )}
-            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+            <div className="map-app-header-block-container">
                 <div className="map-app-header-block">
-                    <img src={Points} alt="user-points-image" />
-                    <span className="user-points">320</span>
-                    <span className="user-points"> баллов</span>
+                    <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
+                    <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-            )}
-            <div className="map-app-header-block">
-                <button
-                    className="map-app-header-login-button"
-                    data-testid="loginButton"
-                    onClick={() => {
-                        useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
-                    }}
-                >
-                    <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
-                    <p className="map-app-header-account-text">{t('loginAction')}</p>
-                </button>
-                <img src={GooglePlay} alt="map-app-header-apps-google-play" />
-                <img src={AppStore} alt="map-app-header-apps-app-store" />
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                    <div className="map-app-header-block terminal-search-block">
+                        <img src={Search} alt="terminal-search-image" />
+                        <input
+                            className="terminal-search-input"
+                            type="text"
+                            data-testid="terminalSearch"
+                            placeholder="Поиск"
+                        />
+                    </div>
+                )}
+            </div>
+            <div className="map-app-header-block-container">
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                    <div className="map-app-header-block">
+                        <img src={Points} alt="user-points-image" />
+                        <span className="user-points">320</span>
+                        <span className="user-points"> баллов</span>
+                    </div>
+                )}
+                <div className="map-app-header-block">
+                    <button
+                        className="map-app-header-login-button"
+                        data-testid="loginButton"
+                        onClick={() => {
+                            useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
+                        }}
+                    >
+                        <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
+                        <p className="map-app-header-account-text">{t('loginAction')}</p>
+                    </button>
+                    <img src={GooglePlay} alt="map-app-header-apps-google-play" />
+                    <img src={AppStore} alt="map-app-header-apps-app-store" />
+                </div>
             </div>
         </header>
     );

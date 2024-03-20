@@ -8,46 +8,54 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
     className="map-app-header"
   >
     <div
-      className="map-app-header-block"
+      className="map-app-header-block-container"
     >
-      <img
-        alt="logo"
-        className="map-app-header-brand-logo"
-        src="test-file-stub"
-      />
-      <p
-        className="map-app-header-brand-text"
-      >
-        map
-      </p>
-    </div>
-    <div
-      className="map-app-header-block"
-    >
-      <button
-        className="map-app-header-login-button"
-        data-testid="loginButton"
-        onClick={[Function]}
+      <div
+        className="map-app-header-block"
       >
         <img
-          alt="login-header-account"
-          className="map-app-header-account-image"
+          alt="logo"
+          className="map-app-header-brand-logo"
           src="test-file-stub"
         />
         <p
-          className="map-app-header-account-text"
+          className="map-app-header-brand-text"
         >
-          loginAction
+          map
         </p>
-      </button>
-      <img
-        alt="map-app-header-apps-google-play"
-        src="test-file-stub"
-      />
-      <img
-        alt="map-app-header-apps-app-store"
-        src="test-file-stub"
-      />
+      </div>
+    </div>
+    <div
+      className="map-app-header-block-container"
+    >
+      <div
+        className="map-app-header-block"
+      >
+        <button
+          className="map-app-header-login-button"
+          data-testid="loginButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="login-header-account"
+            className="map-app-header-account-image"
+            src="test-file-stub"
+          />
+          <p
+            className="map-app-header-account-text"
+          >
+            loginAction
+          </p>
+        </button>
+        <img
+          alt="map-app-header-apps-google-play"
+          src="test-file-stub"
+        />
+        <img
+          alt="map-app-header-apps-app-store"
+          src="test-file-stub"
+        />
+      </div>
     </div>
   </header>
   <div
@@ -91,46 +99,54 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
     className="map-app-header"
   >
     <div
-      className="map-app-header-block"
+      className="map-app-header-block-container"
     >
-      <img
-        alt="logo"
-        className="map-app-header-brand-logo"
-        src="test-file-stub"
-      />
-      <p
-        className="map-app-header-brand-text"
-      >
-        map
-      </p>
-    </div>
-    <div
-      className="map-app-header-block"
-    >
-      <button
-        className="map-app-header-login-button"
-        data-testid="loginButton"
-        onClick={[Function]}
+      <div
+        className="map-app-header-block"
       >
         <img
-          alt="login-header-account"
-          className="map-app-header-account-image"
+          alt="logo"
+          className="map-app-header-brand-logo"
           src="test-file-stub"
         />
         <p
-          className="map-app-header-account-text"
+          className="map-app-header-brand-text"
         >
-          loginAction
+          map
         </p>
-      </button>
-      <img
-        alt="map-app-header-apps-google-play"
-        src="test-file-stub"
-      />
-      <img
-        alt="map-app-header-apps-app-store"
-        src="test-file-stub"
-      />
+      </div>
+    </div>
+    <div
+      className="map-app-header-block-container"
+    >
+      <div
+        className="map-app-header-block"
+      >
+        <button
+          className="map-app-header-login-button"
+          data-testid="loginButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="login-header-account"
+            className="map-app-header-account-image"
+            src="test-file-stub"
+          />
+          <p
+            className="map-app-header-account-text"
+          >
+            loginAction
+          </p>
+        </button>
+        <img
+          alt="map-app-header-apps-google-play"
+          src="test-file-stub"
+        />
+        <img
+          alt="map-app-header-apps-app-store"
+          src="test-file-stub"
+        />
+      </div>
     </div>
   </header>
   <div
