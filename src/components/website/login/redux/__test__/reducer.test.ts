@@ -11,7 +11,7 @@ import { AuthenticationState, AuthenticationStep, MailInputError, authentication
 
 function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
-        authenticationStep: partialState.authenticationStep ?? AuthenticationStep.WELCOME,
+        step: partialState.step ?? AuthenticationStep.WELCOME,
         email: partialState.email ?? '',
         emailError: partialState.emailError ?? null,
         password: partialState.password ?? '',
@@ -46,20 +46,20 @@ describe('LoginModal reducer tests', () => {
 
 describe('welcome screen buttons', () => {
     it('should transition to email input', () => {
-        const initialState = buildState({ authenticationStep: AuthenticationStep.WELCOME });
+        const initialState = buildState({ step: AuthenticationStep.WELCOME });
         const action = loginModalButtonClick('accountRegister');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.MAIL_INPUT,
+            step: AuthenticationStep.MAIL_INPUT,
         });
     });
 
     it('should transition to user login', () => {
-        const initialState = buildState({ authenticationStep: AuthenticationStep.WELCOME });
+        const initialState = buildState({ step: AuthenticationStep.WELCOME });
         const action = loginModalButtonClick('accountLogin');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.LOGIN,
+            step: AuthenticationStep.LOGIN,
         });
     });
 });
@@ -67,7 +67,7 @@ describe('welcome screen buttons', () => {
 describe('navigation logic', () => {
     it('cancel button: should reset the state back to initial', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.SIGNUP_OTP,
+            step: AuthenticationStep.SIGNUP_OTP,
             email: 'something@somewhere.com',
             emailError: new Error('whack'),
             password: 'authMePls',
@@ -77,7 +77,7 @@ describe('navigation logic', () => {
         const action = loginModalButtonClick('cancel');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.WELCOME,
+            step: AuthenticationStep.WELCOME,
             email: '',
             emailError: null,
             password: '',
@@ -99,18 +99,18 @@ describe('navigation logic', () => {
         // From password creation to mail input
         [AuthenticationStep.SIGNUP_PASSWORD, AuthenticationStep.MAIL_INPUT],
     ])('go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
-        const initialState = buildState({ authenticationStep: initialUserAuthState });
+        const initialState = buildState({ step: initialUserAuthState });
         const action = loginModalButtonClick('goBack');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: expectedUserAuthState,
+            step: expectedUserAuthState,
         });
     });
 });
 
 describe('email input logic', () => {
     it('should update user email', () => {
-        const initialState = buildState({ authenticationStep: AuthenticationStep.MAIL_INPUT });
+        const initialState = buildState({ step: AuthenticationStep.MAIL_INPUT });
         const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'myMail@myServer.xyz');
 
         verifyStateChange(initialState, action, {
@@ -120,21 +120,21 @@ describe('email input logic', () => {
 
     it('should remove mail error and transition to password creation after good mail has been sent to verification', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.MAIL_INPUT,
+            step: AuthenticationStep.MAIL_INPUT,
             email: 'good@email.com',
             emailError: new Error('omgSomethingIsWrong'),
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.SIGNUP_PASSWORD,
+            step: AuthenticationStep.SIGNUP_PASSWORD,
             emailError: null,
         });
     });
 
     it('should set mail error and stay at mail input when bad mail has been sent to verification', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.MAIL_INPUT,
+            step: AuthenticationStep.MAIL_INPUT,
             email: 'this is not an email!',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
@@ -144,7 +144,7 @@ describe('email input logic', () => {
 
     it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.MAIL_INPUT,
+            step: AuthenticationStep.MAIL_INPUT,
             email: 'already@exists.com',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
@@ -156,14 +156,14 @@ describe('email input logic', () => {
 
     it('should remove mail error and transition to login with an existing mail', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.MAIL_INPUT,
+            step: AuthenticationStep.MAIL_INPUT,
             email: 'already@exists.com',
             emailError: new Error(MailInputError.ALREADY_EXISTS),
         });
         const action = loginModalButtonClick('accountLogin');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.LOGIN,
+            step: AuthenticationStep.LOGIN,
             emailError: null,
         });
     });
@@ -192,7 +192,7 @@ describe('user password logic', () => {
 
     it('should transition to OTP verification if passwords are matching and remove password error', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.SIGNUP_PASSWORD,
+            step: AuthenticationStep.SIGNUP_PASSWORD,
             password: 'passwordsMatch',
             passwordRepeat: 'passwordsMatch',
             passwordError: new Error('thisIsSoWrong'),
@@ -201,14 +201,14 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.SIGNUP_OTP,
+            step: AuthenticationStep.SIGNUP_OTP,
             passwordError: null,
         });
     });
 
     it('should stay at password input if user passwords are not matching', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.SIGNUP_PASSWORD,
+            step: AuthenticationStep.SIGNUP_PASSWORD,
             password: 'dontMatch',
             passwordRepeat: 'likeForSureDontMatch',
         });
@@ -224,23 +224,23 @@ describe('user password logic', () => {
 describe('OTP logic', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.SIGNUP_OTP,
+            step: AuthenticationStep.SIGNUP_OTP,
         });
         const action = loginModalButtonClick('next');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.SIGNUP_OTP_LOADING,
+            step: AuthenticationStep.SIGNUP_OTP_LOADING,
         });
     });
 
     it('should move from log in OTP to log in OTP loading stage', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.LOGIN_OTP,
+            step: AuthenticationStep.LOGIN_OTP,
         });
         const action = loginModalButtonClick('next');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.LOGIN_OTP_LOADING,
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
         });
     });
 });
@@ -248,20 +248,20 @@ describe('OTP logic', () => {
 describe('login logic', () => {
     it('should transition to logged in state after correct user credentials have been presented', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.LOGIN,
+            step: AuthenticationStep.LOGIN,
             email: 'user@mail.com',
             password: 'short',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.LOGGED_IN,
+            step: AuthenticationStep.LOGGED_IN,
         });
     });
 
     it('should stay at login state if incorrect user credentials have been presented', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.LOGIN,
+            step: AuthenticationStep.LOGIN,
             email: 'another@user.com',
             password: 'wrongPassword',
         });
@@ -273,14 +273,14 @@ describe('login logic', () => {
 
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.LOGIN,
+            step: AuthenticationStep.LOGIN,
             email: 'writeMe@mail.com',
             password: 'iForgot',
         });
         const action = loginModalButtonClick('resetPassword');
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.LOGIN_PASSWORD_RESET,
+            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             password: '',
         });
     });
@@ -289,21 +289,21 @@ describe('login logic', () => {
 describe('password reset logic', () => {
     it('should transition to OTP verification, reset mail error on mail verification request', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.LOGIN_PASSWORD_RESET,
+            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             email: 'please@reset.com',
             emailError: new Error(MailInputError.NOT_VALID),
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
         verifyStateChange(initialState, action, {
-            authenticationStep: AuthenticationStep.LOGIN_OTP,
+            step: AuthenticationStep.LOGIN_OTP,
             emailError: null,
         });
     });
 
     it('should set mail error when a bad email has been set on verification', () => {
         const initialState = buildState({
-            authenticationStep: AuthenticationStep.LOGIN_PASSWORD_RESET,
+            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             email: '!notAMail',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);

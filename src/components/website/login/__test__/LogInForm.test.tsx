@@ -43,7 +43,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
-        mockAuthenticationState({ authenticationStep: AuthenticationStep.LOGIN });
+        mockAuthenticationState({ step: AuthenticationStep.LOGIN });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput');

@@ -29,13 +29,13 @@ export function authentication(
                     }
 
                     const nextUserAuthState =
-                        state.authenticationStep === AuthenticationStep.LOGIN_PASSWORD_RESET
+                        state.step === AuthenticationStep.LOGIN_PASSWORD_RESET
                             ? AuthenticationStep.LOGIN_OTP
                             : AuthenticationStep.SIGNUP_PASSWORD;
 
                     return {
                         ...state,
-                        authenticationStep: nextUserAuthState,
+                        step: nextUserAuthState,
                         emailError: null,
                     };
                 }
@@ -45,10 +45,10 @@ export function authentication(
                         state.password,
                         state.passwordRepeat,
                     );
-                    return { ...state, authenticationStep: nextUserAuthState, passwordError: passwordInputError };
+                    return { ...state, step: nextUserAuthState, passwordError: passwordInputError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
-                    return { ...state, authenticationStep: userAuthStateFromUserLogin(state.email, state.password) };
+                    return { ...state, step: userAuthStateFromUserLogin(state.email, state.password) };
                 }
                 default:
                     return state;
@@ -57,31 +57,31 @@ export function authentication(
         case LoginModalActionTypes.BUTTON_CLICKED:
             switch (action.button) {
                 case 'accountRegister':
-                    return { ...state, authenticationStep: AuthenticationStep.MAIL_INPUT };
+                    return { ...state, step: AuthenticationStep.MAIL_INPUT };
                 case 'accountLogin':
-                    return { ...state, authenticationStep: AuthenticationStep.LOGIN, emailError: null };
+                    return { ...state, step: AuthenticationStep.LOGIN, emailError: null };
                 case 'cancel':
                     return authenticationInitialState;
                 case 'resetPassword':
-                    return { ...state, authenticationStep: AuthenticationStep.LOGIN_PASSWORD_RESET, password: '' };
+                    return { ...state, step: AuthenticationStep.LOGIN_PASSWORD_RESET, password: '' };
                 case 'next':
-                    switch (state.authenticationStep) {
+                    switch (state.step) {
                         case AuthenticationStep.SIGNUP_OTP:
-                            return { ...state, authenticationStep: AuthenticationStep.SIGNUP_OTP_LOADING };
+                            return { ...state, step: AuthenticationStep.SIGNUP_OTP_LOADING };
                         case AuthenticationStep.LOGIN_OTP:
-                            return { ...state, authenticationStep: AuthenticationStep.LOGIN_OTP_LOADING };
+                            return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
                         default:
                             return state;
                     }
                 case 'goBack':
-                    switch (state.authenticationStep) {
+                    switch (state.step) {
                         case AuthenticationStep.MAIL_INPUT:
                         case AuthenticationStep.LOGIN:
-                            return { ...state, authenticationStep: AuthenticationStep.WELCOME };
+                            return { ...state, step: AuthenticationStep.WELCOME };
                         case AuthenticationStep.SIGNUP_PASSWORD:
-                            return { ...state, authenticationStep: AuthenticationStep.MAIL_INPUT };
+                            return { ...state, step: AuthenticationStep.MAIL_INPUT };
                         case AuthenticationStep.LOGIN_PASSWORD_RESET:
-                            return { ...state, authenticationStep: AuthenticationStep.LOGIN };
+                            return { ...state, step: AuthenticationStep.LOGIN };
                     }
             }
     }
