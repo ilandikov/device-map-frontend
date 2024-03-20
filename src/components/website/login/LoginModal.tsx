@@ -13,18 +13,18 @@ import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 
 export function LoginModal() {
-    const userAuthState = useAuthentication().step;
+    const authenticationStep = useAuthentication().step;
 
-    const showShadows = userAuthState === AuthenticationStep.WELCOME;
+    const showShadows = authenticationStep === AuthenticationStep.WELCOME;
     const showNavigationButtons = [
         AuthenticationStep.MAIL_INPUT,
         AuthenticationStep.SIGNUP_PASSWORD,
         AuthenticationStep.LOGIN,
         AuthenticationStep.LOGIN_PASSWORD_RESET,
-    ].includes(userAuthState);
+    ].includes(authenticationStep);
 
-    function getAuthorisationComponent(userAuthState: AuthenticationStep) {
-        switch (userAuthState) {
+    function authenticationComponent(authenticationStep: AuthenticationStep) {
+        switch (authenticationStep) {
             case AuthenticationStep.WELCOME:
                 return <WelcomeForm />;
             case AuthenticationStep.MAIL_INPUT:
@@ -52,7 +52,7 @@ export function LoginModal() {
                 {showShadows && <LoginModalShadows />}
                 {showNavigationButtons && <NavigationButtons />}
                 <LoginModalHeader />
-                {getAuthorisationComponent(userAuthState)}
+                {authenticationComponent(authenticationStep)}
             </div>
         </div>
     );
