@@ -47,8 +47,8 @@ export function authentication(
                         return { ...state, emailError: new Error(MailInputError.NOT_REGISTERED) };
                     }
 
-                    if (getMailInputError(state.email) !== null) {
-                        return { ...state, emailError: getMailInputError(state.email) };
+                    if (isEmailRegistered(state.email)) {
+                        return { ...state, emailError: new Error(MailInputError.ALREADY_EXISTS) };
                     }
 
                     return {
