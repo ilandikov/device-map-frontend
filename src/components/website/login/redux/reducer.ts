@@ -38,11 +38,9 @@ export function authentication(
                         return { ...state, emailError: mailInputError };
                     }
 
-                    const nextUserAuthState = AuthenticationStep.SIGNUP_PASSWORD;
-
                     return {
                         ...state,
-                        step: nextUserAuthState,
+                        step: AuthenticationStep.SIGNUP_PASSWORD,
                         emailError: null,
                     };
                 }
