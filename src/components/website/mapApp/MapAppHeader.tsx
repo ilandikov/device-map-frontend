@@ -10,6 +10,7 @@ import AppStore from '/src/assets/images/AppStore.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
+import { AuthenticatedUserComponents } from './AuthenticatedUserComponents';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -22,7 +23,7 @@ export function MapAppHeader() {
                 <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                 <p className="map-app-header-brand-text">{t('map')}</p>
             </div>
-            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <div className="map-app-header-user-components"></div>}
+            {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <AuthenticatedUserComponents />}
             <div className="map-app-header-block">
                 <button
                     className="map-app-header-inner-block"
