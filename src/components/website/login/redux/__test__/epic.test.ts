@@ -1,13 +1,14 @@
 import { lastValueFrom, of } from 'rxjs';
 import { signUpEpic } from '../epic';
+import { LoginModalActionTypes, LoginModalSignUp } from '../actions';
 
 describe('sign up epic tests', () => {
-    it('should return the sent action', async () => {
-        const sentAction = { field: 'ping', anotherField: 'pong' };
+    it('should answer sing up ok to sign up', async () => {
+        const sentAction: LoginModalSignUp = { type: LoginModalActionTypes.SIGNUP };
 
         const state$ = signUpEpic(of(sentAction));
         const receivedAction = await lastValueFrom(state$);
 
-        expect(receivedAction).toEqual({ field: 'ping', anotherField: 'pong' });
+        expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
     });
 });

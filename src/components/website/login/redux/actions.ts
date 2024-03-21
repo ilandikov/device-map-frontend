@@ -2,6 +2,8 @@ export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
     INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
+    SIGNUP = 'signUp',
+    SIGNUP_OK = 'signUpOk',
 }
 
 export enum LoginModalVerifyTypes {
@@ -30,12 +32,16 @@ export interface LoginModalInput {
     };
 }
 
+export interface LoginModalSignUp {
+    type: LoginModalActionTypes.SIGNUP | LoginModalActionTypes.SIGNUP_OK;
+}
+
 export interface LoginModalVerifyRequest {
     type: LoginModalActionTypes.VERIFY_REQUEST;
     verify: LoginModalVerifyTypes;
 }
 
-export type LoginModalAction = LoginModalInput | LoginModalButtonClick | LoginModalVerifyRequest;
+export type LoginModalAction = LoginModalInput | LoginModalButtonClick | LoginModalVerifyRequest | LoginModalSignUp;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
