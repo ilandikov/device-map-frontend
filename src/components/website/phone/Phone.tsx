@@ -3,9 +3,10 @@ import React from 'react';
 import './Phone.scss';
 
 export default function Phone() {
+    const headers = ['Исследуйте', 'Отмечайте', 'Зарабатывай баллы'];
     return (
         <section className="phone-background phone-text-blocks">
-            {['Исследуйте', 'Отмечайте', 'Зарабатывай баллы'].map((header) => {
+            {headers.map((header) => {
                 return (
                     <div className="phone-header-and-description">
                         <p className="header">{header}</p>
