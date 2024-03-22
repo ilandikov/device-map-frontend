@@ -9,7 +9,7 @@ describe('sign up epic tests', () => {
     beforeEach(() => {
         signUpMock.mockReset();
         signUpMock.mockImplementation(async (): Promise<any> => {
-            return Promise;
+            return Promise.resolve();
         });
     });
 
