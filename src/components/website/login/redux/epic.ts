@@ -11,9 +11,9 @@ const cognitoClient = new CognitoClient({
 export function signUpEpic(action$): Observable<LoginModalSignUp> {
     return action$.pipe(
         ofType(LoginModalActionTypes.SIGNUP),
-        map(() =>
+        map((action: LoginModalSignUp) =>
             cognitoClient
-                .signUp('aUser', 'aPassword')
+                .signUp(action.email, action.password)
                 .then(() => {
                     return { type: LoginModalActionTypes.SIGNUP_OK };
                 })

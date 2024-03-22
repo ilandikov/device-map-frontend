@@ -23,6 +23,7 @@ describe('sign up epic tests', () => {
         const state$ = signUpEpic(of(sentAction));
         const receivedAction = await lastValueFrom(state$);
 
+        expect(signUpMock).toHaveBeenNthCalledWith(1, 'signMeUp@cognito.com', 'securely');
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
     });
 
