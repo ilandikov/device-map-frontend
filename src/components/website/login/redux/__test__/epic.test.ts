@@ -31,11 +31,10 @@ describe('sign up epic tests', () => {
     });
 
     it('should dispatch sign up failed action on sign up', async () => {
-        signUpMock.mockRejectedValue({});
         const sentAction: LoginModalSignUp = {
             type: LoginModalActionTypes.SIGNUP,
-            email: 'signMeUp@cognito.com',
-            password: 'securely',
+            email: 'notAValidEmail',
+            password: 'softpassword',
         };
 
         const state$ = signUpEpic(of(sentAction));
