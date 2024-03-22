@@ -12,9 +12,14 @@ export function signUpEpic(action$): Observable<LoginModalSignUp> {
     return action$.pipe(
         ofType(LoginModalActionTypes.SIGNUP),
         map(() =>
-            cognitoClient.signUp('aUser', 'aPassword').then(() => {
-                return { type: LoginModalActionTypes.SIGNUP_OK };
-            }),
+            cognitoClient
+                .signUp('aUser', 'aPassword')
+                .then(() => {
+                    return { type: LoginModalActionTypes.SIGNUP_OK };
+                })
+                .catch(() => {
+                    return { type: LoginModalActionTypes.SIGNUP_FAILED };
+                }),
         ),
     );
 }

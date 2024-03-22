@@ -4,6 +4,7 @@ export enum LoginModalActionTypes {
     VERIFY_REQUEST = 'verifyRequest',
     SIGNUP = 'signUp',
     SIGNUP_OK = 'signUpOk',
+    SIGNUP_FAILED = 'signUpFailed',
 }
 
 export enum LoginModalVerifyTypes {

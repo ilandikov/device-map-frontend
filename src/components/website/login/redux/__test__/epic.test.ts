@@ -17,4 +17,14 @@ describe('sign up epic tests', () => {
 
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
     });
+
+    it('should dispatch sign up failed action on sign up', async () => {
+        signUpMock.mockRejectedValue({});
+        const sentAction: LoginModalSignUp = { type: LoginModalActionTypes.SIGNUP };
+
+        const state$ = signUpEpic(of(sentAction));
+        const receivedAction = await lastValueFrom(state$);
+
+        expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_FAILED });
+    });
 });
