@@ -3,20 +3,17 @@ import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
 import { LoginModalActionTypes, LoginModalSignUp } from '../actions';
 
-const signUpMock = jest.spyOn(CognitoClient.prototype, 'signUp');
+jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
+    async (username: string, password: string): Promise<any> => {
+        if (username === 'signMeUp@cognito.com' && 'securely') {
+            return Promise.resolve();
+        }
+
+        return Promise.reject();
+    },
+);
 
 describe('sign up epic tests', () => {
-    beforeEach(() => {
-        signUpMock.mockReset();
-        signUpMock.mockImplementation(async (username: string, password: string): Promise<any> => {
-            if (username === 'signMeUp@cognito.com' && 'securely') {
-                return Promise.resolve();
-            }
-
-            return Promise.reject();
-        });
-    });
-
     it('should dispatch sign up ok action on sign up', async () => {
         const sentAction: LoginModalSignUp = {
             type: LoginModalActionTypes.SIGNUP,
