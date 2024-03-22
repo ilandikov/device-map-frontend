@@ -5,7 +5,7 @@ import { LoginModalActionTypes, LoginModalSignUp } from '../actions';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
-        if (username === 'signMeUp@cognito.com' && 'securely') {
+        if (username === 'signMeUp@cognito.com' && password === 'securely') {
             return Promise.resolve();
         }
 
