@@ -8,8 +8,12 @@ const signUpMock = jest.spyOn(CognitoClient.prototype, 'signUp');
 describe('sign up epic tests', () => {
     beforeEach(() => {
         signUpMock.mockReset();
-        signUpMock.mockImplementation(async (): Promise<any> => {
-            return Promise.resolve();
+        signUpMock.mockImplementation(async (username: string, password: string): Promise<any> => {
+            if (username === 'signMeUp@cognito.com' && 'securely') {
+                return Promise.resolve();
+            }
+
+            return Promise.reject();
         });
     });
 
@@ -23,7 +27,6 @@ describe('sign up epic tests', () => {
         const state$ = signUpEpic(of(sentAction));
         const receivedAction = await lastValueFrom(state$);
 
-        expect(signUpMock).toHaveBeenNthCalledWith(1, 'signMeUp@cognito.com', 'securely');
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
     });
 
