@@ -14,7 +14,11 @@ describe('sign up epic tests', () => {
     });
 
     it('should dispatch sign up ok action on sign up', async () => {
-        const sentAction: LoginModalSignUp = { type: LoginModalActionTypes.SIGNUP };
+        const sentAction: LoginModalSignUp = {
+            type: LoginModalActionTypes.SIGNUP,
+            email: 'signMeUp@cognito.com',
+            password: 'securely',
+        };
 
         const state$ = signUpEpic(of(sentAction));
         const receivedAction = await lastValueFrom(state$);
@@ -24,7 +28,11 @@ describe('sign up epic tests', () => {
 
     it('should dispatch sign up failed action on sign up', async () => {
         signUpMock.mockRejectedValue({});
-        const sentAction: LoginModalSignUp = { type: LoginModalActionTypes.SIGNUP };
+        const sentAction: LoginModalSignUp = {
+            type: LoginModalActionTypes.SIGNUP,
+            email: 'signMeUp@cognito.com',
+            password: 'securely',
+        };
 
         const state$ = signUpEpic(of(sentAction));
         const receivedAction = await lastValueFrom(state$);

@@ -35,6 +35,8 @@ export interface LoginModalInput {
 
 export interface LoginModalSignUp {
     type: LoginModalActionTypes.SIGNUP;
+    email: string;
+    password: string;
 }
 
 export interface LoginModalSignUpOk {
