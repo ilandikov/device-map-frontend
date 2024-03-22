@@ -6,7 +6,7 @@ import { LoginModalActionTypes, LoginModalSignUp } from '../actions';
 const signUpMock = jest.spyOn(CognitoClient.prototype, 'signUp');
 
 describe('sign up epic tests', () => {
-    it('should answer sing up ok to sign up', async () => {
+    it('should dispatch sign up ok action on sign up', async () => {
         signUpMock.mockImplementation(async (): Promise<any> => {
             return Promise;
         });
