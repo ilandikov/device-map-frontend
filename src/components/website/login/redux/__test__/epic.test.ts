@@ -16,7 +16,15 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
 
 describe('sign up epic tests', () => {
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
-        const initialState = { value: { authentication: buildState({ passwordError: null }) } };
+        const initialState = {
+            value: {
+                authentication: buildState({
+                    email: 'signMeUp@cognito.com',
+                    password: 'securely',
+                    passwordError: null,
+                }),
+            },
+        };
         const sentAction: LoginModalSignUp = {
             type: LoginModalActionTypes.SIGNUP,
             email: 'signMeUp@cognito.com',
@@ -30,7 +38,9 @@ describe('sign up epic tests', () => {
     });
 
     it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
-        const initialState = { value: { authentication: buildState({}) } };
+        const initialState = {
+            value: { authentication: buildState({ email: 'notAValidEmail', password: 'softpassword' }) },
+        };
         const sentAction: LoginModalSignUp = {
             type: LoginModalActionTypes.SIGNUP,
             email: 'notAValidEmail',
