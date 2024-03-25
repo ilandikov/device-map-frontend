@@ -8,7 +8,7 @@ const cognitoClient = new CognitoClient({
     ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
 });
 
-export function signUpEpic(action$): Observable<LoginModalSignUp> {
+export function signUpEpic(action$, state$): Observable<LoginModalSignUp> {
     return action$.pipe(
         ofType(LoginModalActionTypes.SIGNUP),
         switchMap((action: LoginModalSignUp) =>

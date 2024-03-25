@@ -21,7 +21,7 @@ describe('sign up epic tests', () => {
             password: 'securely',
         };
 
-        const state$ = signUpEpic(of(sentAction));
+        const state$ = signUpEpic(of(sentAction), {});
         const receivedAction = await lastValueFrom(state$);
 
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
@@ -34,7 +34,7 @@ describe('sign up epic tests', () => {
             password: 'softpassword',
         };
 
-        const state$ = signUpEpic(of(sentAction));
+        const state$ = signUpEpic(of(sentAction), {});
         const receivedAction = await lastValueFrom(state$);
 
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_FAILED });
