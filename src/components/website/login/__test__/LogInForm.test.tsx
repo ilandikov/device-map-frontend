@@ -37,6 +37,11 @@ describe('LogInForm snapshot test', () => {
     });
 });
 
+function clickButtonWithText(buttonText: string, container: HTMLElement) {
+    const tryVerifyPasswordsButton = getByText(container, buttonText);
+    fireEvent.click(tryVerifyPasswordsButton);
+}
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
@@ -78,8 +83,7 @@ describe('LogInForm action tests', () => {
     it('should call user authentication when next button is pressed', () => {
         const container = renderForActionDispatchTest(<LogInForm />);
 
-        const tryVerifyPasswordsButton = getByText(container, 'next');
-        fireEvent.click(tryVerifyPasswordsButton);
+        clickButtonWithText('next', container);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
