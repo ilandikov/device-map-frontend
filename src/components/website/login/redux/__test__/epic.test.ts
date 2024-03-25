@@ -42,4 +42,18 @@ describe('sign up epic tests', () => {
 
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_FAILED });
     });
+
+    it('should dispatch no action needed action if password error is present', async () => {
+        const initialState = { value: { authentication: buildState({ passwordError: new Error() }) } };
+        const sentAction: LoginModalSignUp = {
+            type: LoginModalActionTypes.SIGNUP,
+            email: 'signMeUp@cognito.com',
+            password: 'securely',
+        };
+
+        const state$ = signUpEpic(of(sentAction), initialState);
+        const receivedAction = await lastValueFrom(state$);
+
+        expect(receivedAction).toEqual({ type: 'NO_ACTION_NEEDED' });
+    });
 });
