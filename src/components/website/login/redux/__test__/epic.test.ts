@@ -1,7 +1,7 @@
 import { lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
-import { LoginModalActionTypes, LoginModalSignUp } from '../actions';
+import { LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes } from '../actions';
 import { buildState } from './reducer.test';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
@@ -25,10 +25,9 @@ describe('sign up epic tests', () => {
                 }),
             },
         };
-        const sentAction: LoginModalSignUp = {
-            type: LoginModalActionTypes.SIGNUP,
-            email: 'signMeUp@cognito.com',
-            password: 'securely',
+        const sentAction: LoginModalVerifyRequest = {
+            type: LoginModalActionTypes.VERIFY_REQUEST,
+            verify: LoginModalVerifyTypes.USER_PASSWORD,
         };
 
         const state$ = signUpEpic(of(sentAction), initialState);
@@ -41,10 +40,9 @@ describe('sign up epic tests', () => {
         const initialState = {
             value: { authentication: buildState({ email: 'notAValidEmail', password: 'softpassword' }) },
         };
-        const sentAction: LoginModalSignUp = {
-            type: LoginModalActionTypes.SIGNUP,
-            email: 'notAValidEmail',
-            password: 'softpassword',
+        const sentAction: LoginModalVerifyRequest = {
+            type: LoginModalActionTypes.VERIFY_REQUEST,
+            verify: LoginModalVerifyTypes.USER_PASSWORD,
         };
 
         const state$ = signUpEpic(of(sentAction), initialState);
@@ -55,10 +53,9 @@ describe('sign up epic tests', () => {
 
     it('should dispatch no action needed action if password error is present', async () => {
         const initialState = { value: { authentication: buildState({ passwordError: new Error() }) } };
-        const sentAction: LoginModalSignUp = {
-            type: LoginModalActionTypes.SIGNUP,
-            email: 'signMeUp@cognito.com',
-            password: 'securely',
+        const sentAction: LoginModalVerifyRequest = {
+            type: LoginModalActionTypes.VERIFY_REQUEST,
+            verify: LoginModalVerifyTypes.USER_PASSWORD,
         };
 
         const state$ = signUpEpic(of(sentAction), initialState);

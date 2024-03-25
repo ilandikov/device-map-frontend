@@ -1,7 +1,7 @@
-import { Observable, switchMap } from 'rxjs';
+import { Observable, filter, switchMap } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { ofType } from 'redux-observable';
-import { LoginModalAction, LoginModalActionTypes } from './actions';
+import { LoginModalAction, LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes } from './actions';
 import { AuthenticationState } from './state';
 
 const cognitoClient = new CognitoClient({
@@ -11,7 +11,8 @@ const cognitoClient = new CognitoClient({
 
 export function signUpEpic(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
-        ofType(LoginModalActionTypes.SIGNUP),
+        ofType(LoginModalActionTypes.VERIFY_REQUEST),
+        filter((action: LoginModalVerifyRequest) => action.verify === LoginModalVerifyTypes.USER_PASSWORD),
         switchMap(async () => {
             const authenticationState: AuthenticationState = state$.value.authentication;
             if (authenticationState.passwordError !== null) {
