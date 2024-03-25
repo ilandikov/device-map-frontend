@@ -42,6 +42,11 @@ function clickButtonWithText(buttonText: string, container: HTMLElement) {
     fireEvent.click(tryVerifyPasswordsButton);
 }
 
+function clickButtonInComponent(component: React.JSX.Element, buttonText: string) {
+    const container = renderForActionDispatchTest(component);
+    clickButtonWithText(buttonText, container);
+}
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
@@ -81,9 +86,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should call user authentication when next button is pressed', () => {
-        const container = renderForActionDispatchTest(<LogInForm />);
-
-        clickButtonWithText('next', container);
+        clickButtonInComponent(<LogInForm />, 'next');
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
