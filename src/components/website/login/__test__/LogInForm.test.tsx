@@ -38,18 +38,16 @@ describe('LogInForm snapshot test', () => {
     });
 });
 
-function clickButtonInComponent(component: React.JSX.Element, buttonText: string) {
-    const container = renderForActionDispatchTest(component);
-    const buttonToClick = getByText(container, buttonText);
-    fireEvent.click(buttonToClick);
-}
-
 function verifyButtonClickDispatchesAction(
     component: React.JSX.Element,
     buttonText: string,
     expectedAction: LoginModalAction,
 ) {
-    clickButtonInComponent(component, buttonText);
+    const container = renderForActionDispatchTest(component);
+
+    const buttonToClick = getByText(container, buttonText);
+    fireEvent.click(buttonToClick);
+
     expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAction);
 }
 
