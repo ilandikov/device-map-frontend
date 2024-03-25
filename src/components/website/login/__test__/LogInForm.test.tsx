@@ -39,8 +39,8 @@ describe('LogInForm snapshot test', () => {
 
 function clickButtonInComponent(component: React.JSX.Element, buttonText: string) {
     const container = renderForActionDispatchTest(component);
-    const tryVerifyPasswordsButton = getByText(container, buttonText);
-    fireEvent.click(tryVerifyPasswordsButton);
+    const buttonToClick = getByText(container, buttonText);
+    fireEvent.click(buttonToClick);
 }
 
 describe('LogInForm action tests', () => {
