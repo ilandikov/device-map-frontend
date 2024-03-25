@@ -11,15 +11,15 @@ const cognitoClient = new CognitoClient({
 export function signUpEpic(action$, state$): Observable<LoginModalSignUp> {
     return action$.pipe(
         ofType(LoginModalActionTypes.SIGNUP),
-        switchMap((action: LoginModalSignUp) =>
-            cognitoClient
+        switchMap(async (action: LoginModalSignUp) => {
+            return cognitoClient
                 .signUp(action.email, action.password)
                 .then(() => {
                     return { type: LoginModalActionTypes.SIGNUP_OK };
                 })
                 .catch(() => {
                     return { type: LoginModalActionTypes.SIGNUP_FAILED };
-                }),
-        ),
+                });
+        }),
     );
 }
