@@ -15,7 +15,7 @@ import {
     authenticationInitialState,
 } from '../state';
 
-function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
+export function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
         step: partialState.step ?? AuthenticationStep.WELCOME,
         email: partialState.email ?? '',

@@ -2,6 +2,7 @@ import { lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
 import { LoginModalActionTypes, LoginModalSignUp } from '../actions';
+import { buildState } from './reducer.test';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
@@ -14,27 +15,29 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
 );
 
 describe('sign up epic tests', () => {
-    it('should dispatch sign up ok action on sign up', async () => {
+    it('should dispatch sign up ok action on sign up if there is no password error', async () => {
+        const initialState = buildState({ passwordError: null });
         const sentAction: LoginModalSignUp = {
             type: LoginModalActionTypes.SIGNUP,
             email: 'signMeUp@cognito.com',
             password: 'securely',
         };
 
-        const state$ = signUpEpic(of(sentAction), {});
+        const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
 
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
     });
 
-    it('should dispatch sign up failed action on sign up', async () => {
+    it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
+        const initialState = buildState({});
         const sentAction: LoginModalSignUp = {
             type: LoginModalActionTypes.SIGNUP,
             email: 'notAValidEmail',
             password: 'softpassword',
         };
 
-        const state$ = signUpEpic(of(sentAction), {});
+        const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
 
         expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_FAILED });
