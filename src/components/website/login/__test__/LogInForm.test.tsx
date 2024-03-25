@@ -7,6 +7,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
+    LoginModalAction,
     LoginModalInputTypes,
     LoginModalVerifyTypes,
     loginModalButtonClick,
@@ -41,6 +42,15 @@ function clickButtonInComponent(component: React.JSX.Element, buttonText: string
     const container = renderForActionDispatchTest(component);
     const buttonToClick = getByText(container, buttonText);
     fireEvent.click(buttonToClick);
+}
+
+function verifyButtonClickDispatchesAction(
+    component: React.JSX.Element,
+    buttonText: string,
+    expectedAction: LoginModalAction,
+) {
+    clickButtonInComponent(component, buttonText);
+    expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAction);
 }
 
 describe('LogInForm action tests', () => {
@@ -82,10 +92,9 @@ describe('LogInForm action tests', () => {
     });
 
     it('should call user authentication when next button is pressed', () => {
-        clickButtonInComponent(<LogInForm />, 'next');
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
+        verifyButtonClickDispatchesAction(
+            <LogInForm />,
+            'next',
             loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD),
         );
     });
