@@ -7,18 +7,16 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import Points from '/src/assets/images/Points.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
 import { TerminalSearch } from './TerminalSearch';
+import { UserPoints } from './UserPoints';
 
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
     const { usageStep } = useSelector((state: RootState) => state.mapAppState);
-
-    const userPoints = 320;
 
     return (
         <header className="map-app-header">
@@ -32,13 +30,7 @@ export function MapAppHeader() {
                 )}
             </div>
             <div className="map-app-header-block-container">
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <div className="map-app-header-block user-points-header-block">
-                        <img src={Points} alt="user-points-image" />
-                        <span className="user-points">{userPoints}</span>
-                        <span className="user-points">{userPoints > 1 ? t('points') : t('point')}</span>
-                    </div>
-                )}
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <UserPoints />}
                 <div className="map-app-header-block">
                     <button
                         className="map-app-header-login-button"
