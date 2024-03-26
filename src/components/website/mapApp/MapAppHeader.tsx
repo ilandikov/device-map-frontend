@@ -7,11 +7,11 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import Search from '/src/assets/images/Search.svg';
 import Points from '/src/assets/images/Points.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
+import { TerminalSearch } from './TerminalSearch';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -27,17 +27,7 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <div className="map-app-header-block terminal-search-header-block">
-                        <img src={Search} alt="terminal-search-image" />
-                        <input
-                            className="terminal-search-input"
-                            type="text"
-                            data-testid="terminalSearch"
-                            placeholder={t('search')}
-                        />
-                    </div>
-                )}
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <TerminalSearch />}
             </div>
             <div className="map-app-header-block-container">
                 {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
