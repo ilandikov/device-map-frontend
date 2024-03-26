@@ -10,7 +10,7 @@ export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const passwordInputError = useAuthentication().passwordError;
+    const { passwordError } = useAuthentication();
 
     return (
         <>
@@ -21,7 +21,7 @@ export function PasswordCreationForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
                     }}
-                    error={passwordInputError}
+                    error={passwordError}
                 />
                 <PasswordInputBox
                     helpText={t('repeatPassword')}
@@ -29,7 +29,7 @@ export function PasswordCreationForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, event.target.value));
                     }}
-                    error={passwordInputError}
+                    error={passwordError}
                 />
             </div>
             <div className="login-modal-button-container">
