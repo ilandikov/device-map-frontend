@@ -43,7 +43,7 @@ describe('user email validation tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error if a strong password has been input', () => {
-        const passwordInputError = getPasswordError('strongPassword1!');
+        const passwordInputError = getPasswordError('Protect91!');
 
         expect(passwordInputError).toEqual(null);
     });
@@ -54,6 +54,7 @@ describe('user password logic tests', () => {
         ['UPPERCASE', PasswordError.NO_LOWERCASE],
         ['upperCaseAndLowerCase', PasswordError.NO_DIGITS],
         ['NO1SpecialCHARS7', PasswordError.NO_SPECIAL_CHARS],
+        ['SHort50_%', PasswordError.TOO_SHORT],
     ])('should return error for password "%s"', (password, expectedErrorMessage) => {
         const passwordInputError = getPasswordError(password);
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));

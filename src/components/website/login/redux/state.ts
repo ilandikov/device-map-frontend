@@ -51,4 +51,5 @@ export enum PasswordError {
     NO_LOWERCASE = 'passwordHasNoLowercaseChars',
     NO_DIGITS = 'passwordHasNoDigit',
     NO_SPECIAL_CHARS = 'passwordHasNoSpecialCharacters',
+    TOO_SHORT = 'passwordTooShort',
 }
