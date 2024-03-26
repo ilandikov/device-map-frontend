@@ -48,18 +48,14 @@ describe('user password logic tests', () => {
         expect(passwordInputError).toEqual(null);
     });
 
-    function verifyPasswordErrorMessage(password: string, expectedErrorMessage: PasswordError) {
-        const passwordInputError = getPasswordError(password);
-        expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
-    }
-
     it.each([
         ['', PasswordError.EMPTY],
         ['lowercase', PasswordError.NO_UPPERCASE],
         ['UPPERCASE', PasswordError.NO_LOWERCASE],
         ['upperCaseAndLowerCase', PasswordError.NO_DIGITS],
     ])('should return error for password "%s"', (password, expectedError) => {
-        verifyPasswordErrorMessage(password, expectedError);
+        const passwordInputError = getPasswordError(password);
+        expect(passwordInputError).toEqual(new Error(expectedError));
     });
 });
 
