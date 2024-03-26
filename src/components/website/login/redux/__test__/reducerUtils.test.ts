@@ -53,9 +53,12 @@ describe('user password logic tests', () => {
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
     }
 
-    it('should return error if password has not been input', () => {
-        verifyPasswordErrorMessage('', PasswordError.EMPTY);
-    });
+    it.each([['', PasswordError.EMPTY]])(
+        'should return error if password has not been input',
+        (password, expectedError) => {
+            verifyPasswordErrorMessage(password, expectedError);
+        },
+    );
 
     it('should return error if password has no uppercase characters', () => {
         verifyPasswordErrorMessage('lowercase', PasswordError.NO_UPPERCASE);
