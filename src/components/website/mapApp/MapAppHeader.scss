@@ -40,6 +40,10 @@
         gap: 8px;
     }
 
+    .map-app-header-block:has(input:focus) {
+        border: 1px solid #ACF709;
+    }
+
     .map-app-header-brand-logo {
         height: 20px;
         width: 20px;
