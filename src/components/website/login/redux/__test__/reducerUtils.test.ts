@@ -53,9 +53,9 @@ describe('user password logic tests', () => {
         ['lowercase', PasswordError.NO_UPPERCASE],
         ['UPPERCASE', PasswordError.NO_LOWERCASE],
         ['upperCaseAndLowerCase', PasswordError.NO_DIGITS],
-    ])('should return error for password "%s"', (password, expectedError) => {
+    ])('should return error for password "%s"', (password, expectedErrorMessage) => {
         const passwordInputError = getPasswordError(password);
-        expect(passwordInputError).toEqual(new Error(expectedError));
+        expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
     });
 });
 
