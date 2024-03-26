@@ -206,7 +206,7 @@ describe('user password logic', () => {
         });
     });
 
-    it('should stay at password input if user passwords are not matching', () => {
+    it('should set password error if passwords are not matching', () => {
         const initialState = buildState({
             step: AuthenticationStep.SIGNUP_PASSWORD,
             password: 'dontMatch',
