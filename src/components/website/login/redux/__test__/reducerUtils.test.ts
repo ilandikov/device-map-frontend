@@ -48,12 +48,6 @@ describe('user password logic tests', () => {
         expect(passwordInputError).toEqual(null);
     });
 
-    it('should return an error and keep the state if passwords dont match', () => {
-        const passwordInputError = getPasswordError('passwordsDontMatch', 'passwordsMatch');
-
-        expect(passwordInputError).not.toEqual(null);
-    });
-
     it('should return an error and keep the state if passwords have not been input', () => {
         const passwordInputError = getPasswordError('', '');
 

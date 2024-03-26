@@ -235,7 +235,7 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            passwordError: new Error(),
+            passwordError: new Error(PasswordError.NOT_MATCHING),
         });
     });
 });

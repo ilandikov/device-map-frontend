@@ -26,10 +26,6 @@ export function getPasswordError(password: string, passwordRepeat: string): Erro
         return new Error();
     }
 
-    if (password !== passwordRepeat) {
-        return new Error();
-    }
-
     return null;
 }
 

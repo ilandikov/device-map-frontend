@@ -1,5 +1,11 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
-import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
+import {
+    AuthenticationState,
+    AuthenticationStep,
+    MailInputError,
+    PasswordError,
+    authenticationInitialState,
+} from './state';
 import { authenticationStepFromUserLogin, getPasswordError, isEmailRegistered, isEmailValid } from './reducerUtils';
 
 export function authentication(
@@ -49,6 +55,9 @@ export function authentication(
                     };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
+                    if (state.password !== state.passwordRepeat) {
+                        return { ...state, passwordError: new Error(PasswordError.NOT_MATCHING) };
+                    }
                     const passwordError = getPasswordError(state.password, state.passwordRepeat);
                     const nextAuthenticationStep = passwordError
                         ? AuthenticationStep.SIGNUP_PASSWORD
