@@ -2,7 +2,7 @@ import { AuthenticationStep } from '../state';
 import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
-    getPasswordInputError,
+    getPasswordError,
     isEmailRegistered,
     isEmailValid,
 } from '../reducerUtils';
@@ -43,19 +43,19 @@ describe('user email validation tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error and provide OTP state if passwords match', () => {
-        const passwordInputError = getPasswordInputError('passwordsMatch', 'passwordsMatch');
+        const passwordInputError = getPasswordError('passwordsMatch', 'passwordsMatch');
 
         expect(passwordInputError).toEqual(null);
     });
 
     it('should return an error and keep the state if passwords dont match', () => {
-        const passwordInputError = getPasswordInputError('passwordsDontMatch', 'passwordsMatch');
+        const passwordInputError = getPasswordError('passwordsDontMatch', 'passwordsMatch');
 
         expect(passwordInputError).not.toEqual(null);
     });
 
     it('should return an error and keep the state if passwords have not been input', () => {
-        const passwordInputError = getPasswordInputError('', '');
+        const passwordInputError = getPasswordError('', '');
 
         expect(passwordInputError).not.toEqual(null);
     });

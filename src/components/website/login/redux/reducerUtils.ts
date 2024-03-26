@@ -21,7 +21,7 @@ export function isEmailValid(email: string) {
     return emailRegexp.test(email);
 }
 
-export function getPasswordInputError(password: string, passwordRepeat: string): Error | null {
+export function getPasswordError(password: string, passwordRepeat: string): Error | null {
     if (password === '' && passwordRepeat === '') {
         return new Error();
     }
