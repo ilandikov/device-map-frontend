@@ -1,4 +1,4 @@
-import { AuthenticationStep } from './state';
+import { AuthenticationStep, PasswordError } from './state';
 
 export function authenticationStepFromUserLogin(email: string, password: string) {
     if (email === 'user@mail.com' && password === 'short') {
@@ -23,7 +23,7 @@ export function isEmailValid(email: string) {
 
 export function getPasswordError(password: string): Error | null {
     if (password === '') {
-        return new Error();
+        return new Error(PasswordError.EMPTY);
     }
 
     return null;
