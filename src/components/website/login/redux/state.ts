@@ -43,3 +43,7 @@ export enum MailInputError {
     ALREADY_EXISTS = 'mailAlreadyExists',
     NOT_REGISTERED = 'mailNotRegistered',
 }
+
+export enum PasswordError {
+    NO_UPPERCASE = 'NO_UPPERCASE',
+}

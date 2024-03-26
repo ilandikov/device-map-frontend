@@ -7,7 +7,13 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
-import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from '../state';
+import {
+    AuthenticationState,
+    AuthenticationStep,
+    MailInputError,
+    PasswordError,
+    authenticationInitialState,
+} from '../state';
 
 function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
@@ -203,6 +209,19 @@ describe('user password logic', () => {
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.SIGNUP_OTP,
             passwordError: null,
+        });
+    });
+
+    it.failing('should set weak password error for password not containing an uppercase letter', () => {
+        const initialState = buildState({
+            step: AuthenticationStep.SIGNUP_PASSWORD,
+            password: 'lowercase',
+        });
+
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+
+        verifyStateChange(initialState, action, {
+            passwordError: new Error(PasswordError.NO_UPPERCASE),
         });
     });
 
