@@ -7,7 +7,13 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../actions';
-import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from '../state';
+import {
+    AuthenticationState,
+    AuthenticationStep,
+    MailInputError,
+    PasswordError,
+    authenticationInitialState,
+} from '../state';
 
 function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
@@ -193,8 +199,8 @@ describe('user password logic', () => {
     it('should transition to OTP verification if passwords are matching and remove password error', () => {
         const initialState = buildState({
             step: AuthenticationStep.SIGNUP_PASSWORD,
-            password: 'passwordsMatch',
-            passwordRepeat: 'passwordsMatch',
+            password: 'passwordsMatchAndAreStrong9%',
+            passwordRepeat: 'passwordsMatchAndAreStrong9%',
             passwordError: new Error('thisIsSoWrong'),
         });
 
@@ -206,7 +212,7 @@ describe('user password logic', () => {
         });
     });
 
-    it('should stay at password input if user passwords are not matching', () => {
+    it('should set password error if passwords are not matching', () => {
         const initialState = buildState({
             step: AuthenticationStep.SIGNUP_PASSWORD,
             password: 'dontMatch',
@@ -216,7 +222,7 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            passwordError: new Error(),
+            passwordError: new Error(PasswordError.NOT_MATCHING),
         });
     });
 });

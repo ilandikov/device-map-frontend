@@ -1,4 +1,4 @@
-import { AuthenticationStep } from './state';
+import { AuthenticationStep, PasswordError } from './state';
 
 export function authenticationStepFromUserLogin(email: string, password: string) {
     if (email === 'user@mail.com' && password === 'short') {
@@ -21,25 +21,36 @@ export function isEmailValid(email: string) {
     return emailRegexp.test(email);
 }
 
-function getPasswordInputError(password: string, passwordRepeat: string): Error | null {
-    if (password === '' && passwordRepeat === '') {
-        return new Error();
+export function getPasswordError(password: string): Error | null {
+    if (password === '') {
+        return new Error(PasswordError.EMPTY);
     }
 
-    if (password !== passwordRepeat) {
-        return new Error();
+    const upperCaseRegExp = new RegExp(/[A-Z]/);
+    if (upperCaseRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_UPPERCASE);
+    }
+
+    const lowerCaseRegExp = new RegExp(/[a-z]/);
+    if (lowerCaseRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_LOWERCASE);
+    }
+
+    const digitsRegExp = new RegExp(/\d/);
+    if (digitsRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_DIGITS);
+    }
+
+    const specialCharacterRegExp = new RegExp(/\W|_/);
+    if (specialCharacterRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_SPECIAL_CHARS);
+    }
+
+    if (password.length < 10) {
+        return new Error(PasswordError.TOO_SHORT);
     }
 
     return null;
-}
-
-export function getPasswordInputErrorAndNextState(password: string, passwordRepeat: string) {
-    const passwordInputError = getPasswordInputError(password, passwordRepeat);
-    const nextAuthenticationStep = passwordInputError
-        ? AuthenticationStep.SIGNUP_PASSWORD
-        : AuthenticationStep.SIGNUP_OTP;
-
-    return { passwordInputError, nextUserAuthState: nextAuthenticationStep };
 }
 
 export function isEmailRegistered(userEmail: string) {

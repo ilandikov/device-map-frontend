@@ -1,11 +1,12 @@
 import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
-import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
 import {
-    authenticationStepFromUserLogin,
-    getPasswordInputErrorAndNextState,
-    isEmailRegistered,
-    isEmailValid,
-} from './reducerUtils';
+    AuthenticationState,
+    AuthenticationStep,
+    MailInputError,
+    PasswordError,
+    authenticationInitialState,
+} from './state';
+import { authenticationStepFromUserLogin, getPasswordError, isEmailRegistered, isEmailValid } from './reducerUtils';
 
 export function authentication(
     state: AuthenticationState = authenticationInitialState,
@@ -54,12 +55,15 @@ export function authentication(
                     };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
-                    // TODO move or inline getPasswordInputErrorAndNextState() to this file
-                    const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-                        state.password,
-                        state.passwordRepeat,
-                    );
-                    return { ...state, step: nextUserAuthState, passwordError: passwordInputError };
+                    if (state.password !== state.passwordRepeat) {
+                        return { ...state, passwordError: new Error(PasswordError.NOT_MATCHING) };
+                    }
+                    const passwordError = getPasswordError(state.password);
+                    const nextAuthenticationStep = passwordError
+                        ? AuthenticationStep.SIGNUP_PASSWORD
+                        : AuthenticationStep.SIGNUP_OTP;
+
+                    return { ...state, step: nextAuthenticationStep, passwordError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
                     return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };

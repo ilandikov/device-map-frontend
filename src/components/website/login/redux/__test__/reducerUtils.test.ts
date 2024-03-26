@@ -1,8 +1,8 @@
-import { AuthenticationStep } from '../state';
+import { AuthenticationStep, PasswordError } from '../state';
 import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
-    getPasswordInputErrorAndNextState,
+    getPasswordError,
     isEmailRegistered,
     isEmailValid,
 } from '../reducerUtils';
@@ -42,31 +42,22 @@ describe('user email validation tests', () => {
 });
 
 describe('user password logic tests', () => {
-    it('should return no error and provide OTP state if passwords match', () => {
-        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-            'passwordsMatch',
-            'passwordsMatch',
-        );
+    it('should return no error if a strong password has been input', () => {
+        const passwordInputError = getPasswordError('Protect91!');
 
         expect(passwordInputError).toEqual(null);
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_OTP);
     });
 
-    it('should return an error and keep the state if passwords dont match', () => {
-        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-            'passwordsDontMatch',
-            'passwordsMatch',
-        );
-
-        expect(passwordInputError).not.toEqual(null);
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_PASSWORD);
-    });
-
-    it('should return an error and keep the state if passwords have not been input', () => {
-        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
-
-        expect(passwordInputError).not.toEqual(null);
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_PASSWORD);
+    it.each([
+        ['', PasswordError.EMPTY],
+        ['lowercase', PasswordError.NO_UPPERCASE],
+        ['UPPERCASE', PasswordError.NO_LOWERCASE],
+        ['upperCaseAndLowerCase', PasswordError.NO_DIGITS],
+        ['NO1SpecialCHARS7', PasswordError.NO_SPECIAL_CHARS],
+        ['SHort50_%', PasswordError.TOO_SHORT],
+    ])('should return error for password "%s"', (password, expectedErrorMessage) => {
+        const passwordInputError = getPasswordError(password);
+        expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
     });
 });
 
