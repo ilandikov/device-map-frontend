@@ -53,6 +53,7 @@ describe('user password logic tests', () => {
         ['lowercase', PasswordError.NO_UPPERCASE],
         ['UPPERCASE', PasswordError.NO_LOWERCASE],
         ['upperCaseAndLowerCase', PasswordError.NO_DIGITS],
+        ['NO1SpecialCHARS7', PasswordError.NO_SPECIAL_CHARS],
     ])('should return error for password "%s"', (password, expectedErrorMessage) => {
         const passwordInputError = getPasswordError(password);
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));

@@ -41,6 +41,11 @@ export function getPasswordError(password: string): Error | null {
         return new Error(PasswordError.NO_DIGITS);
     }
 
+    const specialCharacterRegExp = new RegExp(/\W|_/);
+    if (specialCharacterRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_SPECIAL_CHARS);
+    }
+
     return null;
 }
 
