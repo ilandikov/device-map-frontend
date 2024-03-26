@@ -64,6 +64,10 @@ describe('user password logic tests', () => {
     it('should return error if password has no lowercase characters', () => {
         verifyPasswordErrorMessage('UPPERCASE', PasswordError.NO_LOWERCASE);
     });
+
+    it('should return error if password has no digits', () => {
+        verifyPasswordErrorMessage('upperCaseAndLowerCase', PasswordError.NO_DIGITS);
+    });
 });
 
 describe('OTP logic tests', () => {

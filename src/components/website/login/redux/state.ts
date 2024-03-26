@@ -49,4 +49,5 @@ export enum PasswordError {
     NOT_MATCHING = 'passwordsNotMatching',
     EMPTY = 'passwordEmpty',
     NO_LOWERCASE = 'passwordHasNoLowercaseChars',
+    NO_DIGITS = 'passwordHasNoDigit',
 }
