@@ -30,7 +30,7 @@ export function MapAppHeader() {
                 )}
             </div>
             <div className="map-app-header-block-container">
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <UserPoints />}
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
                     <button
                         className="map-app-header-login-button"
