@@ -2,7 +2,7 @@ import { AuthenticationStep } from '../state';
 import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
-    getPasswordInputErrorAndNextState,
+    getPasswordInputError,
     isEmailRegistered,
     isEmailValid,
 } from '../reducerUtils';
@@ -43,30 +43,21 @@ describe('user email validation tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error and provide OTP state if passwords match', () => {
-        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-            'passwordsMatch',
-            'passwordsMatch',
-        );
+        const passwordInputError = getPasswordInputError('passwordsMatch', 'passwordsMatch');
 
         expect(passwordInputError).toEqual(null);
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_OTP);
     });
 
     it('should return an error and keep the state if passwords dont match', () => {
-        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-            'passwordsDontMatch',
-            'passwordsMatch',
-        );
+        const passwordInputError = getPasswordInputError('passwordsDontMatch', 'passwordsMatch');
 
         expect(passwordInputError).not.toEqual(null);
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_PASSWORD);
     });
 
     it('should return an error and keep the state if passwords have not been input', () => {
-        const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState('', '');
+        const passwordInputError = getPasswordInputError('', '');
 
         expect(passwordInputError).not.toEqual(null);
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_PASSWORD);
     });
 });
 

@@ -2,7 +2,7 @@ import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginMod
 import { AuthenticationState, AuthenticationStep, MailInputError, authenticationInitialState } from './state';
 import {
     authenticationStepFromUserLogin,
-    getPasswordInputErrorAndNextState,
+    getPasswordInputError,
     isEmailRegistered,
     isEmailValid,
 } from './reducerUtils';
@@ -54,11 +54,11 @@ export function authentication(
                     };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
-                    // TODO move or inline getPasswordInputErrorAndNextState() to this file
-                    const { passwordInputError, nextUserAuthState } = getPasswordInputErrorAndNextState(
-                        state.password,
-                        state.passwordRepeat,
-                    );
+                    const passwordInputError = getPasswordInputError(state.password, state.passwordRepeat);
+                    const nextUserAuthState = passwordInputError
+                        ? AuthenticationStep.SIGNUP_PASSWORD
+                        : AuthenticationStep.SIGNUP_OTP;
+
                     return { ...state, step: nextUserAuthState, passwordError: passwordInputError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {

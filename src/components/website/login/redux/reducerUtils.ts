@@ -21,7 +21,7 @@ export function isEmailValid(email: string) {
     return emailRegexp.test(email);
 }
 
-function getPasswordInputError(password: string, passwordRepeat: string): Error | null {
+export function getPasswordInputError(password: string, passwordRepeat: string): Error | null {
     if (password === '' && passwordRepeat === '') {
         return new Error();
     }
@@ -31,15 +31,6 @@ function getPasswordInputError(password: string, passwordRepeat: string): Error 
     }
 
     return null;
-}
-
-export function getPasswordInputErrorAndNextState(password: string, passwordRepeat: string) {
-    const passwordInputError = getPasswordInputError(password, passwordRepeat);
-    const nextAuthenticationStep = passwordInputError
-        ? AuthenticationStep.SIGNUP_PASSWORD
-        : AuthenticationStep.SIGNUP_OTP;
-
-    return { passwordInputError, nextUserAuthState: nextAuthenticationStep };
 }
 
 export function isEmailRegistered(userEmail: string) {
