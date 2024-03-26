@@ -48,10 +48,13 @@ describe('user password logic tests', () => {
         expect(passwordInputError).toEqual(null);
     });
 
-    it('should return error if password has not been input', () => {
-        const passwordInputError = getPasswordError('');
+    function verifyPasswordErrorMessage(password: string, expectedErrorMessage: PasswordError.EMPTY) {
+        const passwordInputError = getPasswordError(password);
+        expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
+    }
 
-        expect(passwordInputError).toEqual(new Error(PasswordError.EMPTY));
+    it('should return error if password has not been input', () => {
+        verifyPasswordErrorMessage('', PasswordError.EMPTY);
     });
 
     it('should return error if password has no uppercase characters', () => {
