@@ -199,8 +199,8 @@ describe('user password logic', () => {
     it('should transition to OTP verification if passwords are matching and remove password error', () => {
         const initialState = buildState({
             step: AuthenticationStep.SIGNUP_PASSWORD,
-            password: 'passwordsMatch',
-            passwordRepeat: 'passwordsMatch',
+            password: 'passwordsMatchAndAreStrong9%',
+            passwordRepeat: 'passwordsMatchAndAreStrong9%',
             passwordError: new Error('thisIsSoWrong'),
         });
 
