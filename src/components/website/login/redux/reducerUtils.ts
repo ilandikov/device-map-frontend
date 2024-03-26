@@ -36,7 +36,7 @@ export function getPasswordError(password: string): Error | null {
         return new Error(PasswordError.NO_LOWERCASE);
     }
 
-    const digitsRegExp = new RegExp(/[0-9]/);
+    const digitsRegExp = new RegExp(/\d/);
     if (digitsRegExp.test(password) === false) {
         return new Error(PasswordError.NO_DIGITS);
     }
