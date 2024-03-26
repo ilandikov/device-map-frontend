@@ -4,8 +4,10 @@ import Search from '/src/assets/images/Search.svg';
 
 export function TerminalSearch() {
     const { t } = useI18next();
+    const className = 'map-app-header-block';
+
     return (
-        <div className="map-app-header-block terminal-search-header-block">
+        <div className={`${className} terminal-search-header-block`}>
             <img src={Search} alt="terminal-search-image" />
             <input
                 className="terminal-search-input"
