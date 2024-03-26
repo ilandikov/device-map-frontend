@@ -79,9 +79,7 @@ export default function Layout({ children }) {
                 <meta charSet="utf-8" />
             </Helmet>
             <StyleReset />
-            <header></header>
-            <main id="main">{children}</main>
-            <footer></footer>
+            {children}
         </ThemeProvider>
     );
 }
