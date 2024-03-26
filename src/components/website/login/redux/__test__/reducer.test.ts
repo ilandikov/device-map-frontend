@@ -212,19 +212,6 @@ describe('user password logic', () => {
         });
     });
 
-    it.failing('should set weak password error for password not containing an uppercase letter', () => {
-        const initialState = buildState({
-            step: AuthenticationStep.SIGNUP_PASSWORD,
-            password: 'lowercase',
-        });
-
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
-
-        verifyStateChange(initialState, action, {
-            passwordError: new Error(PasswordError.NO_UPPERCASE),
-        });
-    });
-
     it('should set password error if passwords are not matching', () => {
         const initialState = buildState({
             step: AuthenticationStep.SIGNUP_PASSWORD,

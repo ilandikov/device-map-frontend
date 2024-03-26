@@ -53,6 +53,12 @@ describe('user password logic tests', () => {
 
         expect(passwordInputError).toEqual(new Error(PasswordError.EMPTY));
     });
+
+    it('should return error if password has no uppercase characters', () => {
+        const passwordInputError = getPasswordError('lowercase');
+
+        expect(passwordInputError).toEqual(new Error(PasswordError.NO_UPPERCASE));
+    });
 });
 
 describe('OTP logic tests', () => {

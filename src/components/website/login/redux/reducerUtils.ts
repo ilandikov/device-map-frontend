@@ -26,6 +26,11 @@ export function getPasswordError(password: string): Error | null {
         return new Error(PasswordError.EMPTY);
     }
 
+    const upperCaseRegExp = new RegExp(/[A-Z]/);
+    if (upperCaseRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_UPPERCASE);
+    }
+
     return null;
 }
 
