@@ -17,6 +17,7 @@ export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
     const { usageStep } = useSelector((state: RootState) => state.mapAppState);
+    const isUserAuthenticated = usageStep === MapAppUsageStep.AUTHENTICATED_USER;
 
     return (
         <header className="map-app-header">
@@ -25,12 +26,10 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <TerminalSearch className="map-app-header-block" />
-                )}
+                {isUserAuthenticated && <TerminalSearch className="map-app-header-block" />}
             </div>
             <div className="map-app-header-block-container">
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <UserPoints className="map-app-header-block" />}
+                {isUserAuthenticated && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
                     <button
                         className="map-app-header-login-button"
