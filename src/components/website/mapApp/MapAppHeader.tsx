@@ -7,18 +7,17 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import Search from '/src/assets/images/Search.svg';
-import Points from '/src/assets/images/Points.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
+import { TerminalSearch } from './TerminalSearch';
+import { UserPoints } from './UserPoints';
 
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
     const { usageStep } = useSelector((state: RootState) => state.mapAppState);
-
-    const userPoints = 320;
+    const isUserAuthenticated = usageStep === MapAppUsageStep.AUTHENTICATED_USER;
 
     return (
         <header className="map-app-header">
@@ -27,26 +26,10 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <div className="terminal-search-header-block">
-                        <img src={Search} alt="terminal-search-image" />
-                        <input
-                            className="terminal-search-input"
-                            type="text"
-                            data-testid="terminalSearch"
-                            placeholder={t('search')}
-                        />
-                    </div>
-                )}
+                {isUserAuthenticated && <TerminalSearch className="map-app-header-block" />}
             </div>
             <div className="map-app-header-block-container">
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <div className="user-points-header-block">
-                        <img src={Points} alt="user-points-image" />
-                        <span className="user-points">{userPoints}</span>
-                        <span className="user-points">{userPoints > 1 ? t('points') : t('point')}</span>
-                    </div>
-                )}
+                {isUserAuthenticated && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
                     <button
                         className="map-app-header-login-button"

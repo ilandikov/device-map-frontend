@@ -24,7 +24,7 @@
         justify-content: flex-end;
     }
 
-    %map-app-header-block-placeholder {
+    .map-app-header-block {
         max-height: 46px;
 
         background-color: #000000;
@@ -38,10 +38,6 @@
         flex-direction: row;
         align-items: center;
         gap: 8px;
-    }
-
-    .map-app-header-block {
-        @extend %map-app-header-block-placeholder;
     }
 
     .map-app-header-brand-logo {
@@ -83,8 +79,6 @@
 }
 
 .terminal-search-header-block {
-    @extend %map-app-header-block-placeholder;
-
     max-width: 310px;
     width: 100%;
 
@@ -100,8 +94,6 @@
 }
 
 .user-points-header-block {
-    @extend %map-app-header-block-placeholder;
-
     .user-points {
         color: #FFFFFF90;
 
