@@ -10,19 +10,18 @@ export function PasswordResetRequestForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userEmail = useAuthentication().email;
-    const userEmailError = useAuthentication().emailError;
+    const { email, emailError } = useAuthentication();
 
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('mailForPasswordReset')}
-                    userEmail={userEmail}
+                    userEmail={email}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    error={userEmailError}
+                    error={emailError}
                 />
             </div>
             <div className="login-modal-button-container">

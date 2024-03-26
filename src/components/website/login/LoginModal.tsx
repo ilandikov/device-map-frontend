@@ -13,7 +13,7 @@ import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 
 export function LoginModal() {
-    const authenticationStep = useAuthentication().step;
+    const { step: authenticationStep } = useAuthentication();
 
     const showShadows = authenticationStep === AuthenticationStep.WELCOME;
     const showNavigationButtons = [

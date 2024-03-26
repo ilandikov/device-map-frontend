@@ -4,7 +4,7 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { AuthenticationStep, useAuthentication } from './redux/state';
 
 export function LoginModalHeader() {
-    const authenticationStep = useAuthentication().step;
+    const { step: authenticationStep } = useAuthentication();
 
     const { header, description, opaqueDescription } = getHeaderDetails(authenticationStep);
 
