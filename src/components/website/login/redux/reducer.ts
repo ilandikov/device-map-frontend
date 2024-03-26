@@ -58,7 +58,7 @@ export function authentication(
                     if (state.password !== state.passwordRepeat) {
                         return { ...state, passwordError: new Error(PasswordError.NOT_MATCHING) };
                     }
-                    const passwordError = getPasswordError(state.password, state.passwordRepeat);
+                    const passwordError = getPasswordError(state.password);
                     const nextAuthenticationStep = passwordError
                         ? AuthenticationStep.SIGNUP_PASSWORD
                         : AuthenticationStep.SIGNUP_OTP;

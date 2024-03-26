@@ -43,13 +43,13 @@ describe('user email validation tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error and provide OTP state if passwords match', () => {
-        const passwordInputError = getPasswordError('passwordsMatch', 'passwordsMatch');
+        const passwordInputError = getPasswordError('passwordsMatch');
 
         expect(passwordInputError).toEqual(null);
     });
 
     it('should return an error and keep the state if passwords have not been input', () => {
-        const passwordInputError = getPasswordError('', '');
+        const passwordInputError = getPasswordError('');
 
         expect(passwordInputError).not.toEqual(null);
     });
