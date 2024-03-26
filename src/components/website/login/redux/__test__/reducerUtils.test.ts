@@ -48,7 +48,7 @@ describe('user password logic tests', () => {
         expect(passwordInputError).toEqual(null);
     });
 
-    function verifyPasswordErrorMessage(password: string, expectedErrorMessage: PasswordError.EMPTY) {
+    function verifyPasswordErrorMessage(password: string, expectedErrorMessage: PasswordError) {
         const passwordInputError = getPasswordError(password);
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
     }
@@ -58,9 +58,7 @@ describe('user password logic tests', () => {
     });
 
     it('should return error if password has no uppercase characters', () => {
-        const passwordInputError = getPasswordError('lowercase');
-
-        expect(passwordInputError).toEqual(new Error(PasswordError.NO_UPPERCASE));
+        verifyPasswordErrorMessage('lowercase', PasswordError.NO_UPPERCASE);
     });
 });
 
