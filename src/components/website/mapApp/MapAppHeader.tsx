@@ -27,7 +27,9 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && <TerminalSearch />}
+                {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
+                    <TerminalSearch className="map-app-header-block" />
+                )}
             </div>
             <div className="map-app-header-block-container">
                 {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
