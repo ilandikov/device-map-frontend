@@ -5,8 +5,8 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 export function MailInputBox(props: {
     helpText: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
-    userEmail: string;
-    error: Error | null;
+    email: string;
+    emailError: Error | null;
 }) {
     const { t } = useI18next();
 
@@ -22,12 +22,14 @@ export function MailInputBox(props: {
                 <input
                     className="login-modal-input-text"
                     type="email"
-                    value={props.userEmail}
+                    value={props.email}
                     onChange={props.onChange}
                     data-testid="emailInput"
                 />
             </div>
-            {props.error && <p className="login-modal-input-help login-modal-wrong-input">{t(props.error.message)}</p>}
+            {props.emailError && (
+                <p className="login-modal-input-help login-modal-wrong-input">{t(props.emailError.message)}</p>
+            )}
         </>
     );
 }

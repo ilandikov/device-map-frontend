@@ -24,11 +24,11 @@ export function LogInForm() {
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('onlyEmail')}
-                    userEmail={email}
+                    email={email}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    error={null}
+                    emailError={null}
                 />
                 <PasswordInputBox
                     helpText={t('enterPassword')}

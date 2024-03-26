@@ -17,11 +17,11 @@ export function PasswordResetRequestForm() {
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('mailForPasswordReset')}
-                    userEmail={email}
+                    email={email}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    error={emailError}
+                    emailError={emailError}
                 />
             </div>
             <div className="login-modal-button-container">
