@@ -28,7 +28,7 @@ export function MapAppHeader() {
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
                 {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <div className="terminal-search-header-block">
+                    <div className="map-app-header-block terminal-search-header-block">
                         <img src={Search} alt="terminal-search-image" />
                         <input
                             className="terminal-search-input"
@@ -41,7 +41,7 @@ export function MapAppHeader() {
             </div>
             <div className="map-app-header-block-container">
                 {usageStep === MapAppUsageStep.AUTHENTICATED_USER && (
-                    <div className="user-points-header-block">
+                    <div className="map-app-header-block user-points-header-block">
                         <img src={Points} alt="user-points-image" />
                         <span className="user-points">{userPoints}</span>
                         <span className="user-points">{userPoints > 1 ? t('points') : t('point')}</span>

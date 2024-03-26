@@ -83,8 +83,6 @@
 }
 
 .terminal-search-header-block {
-    @extend %map-app-header-block-placeholder;
-
     max-width: 310px;
     width: 100%;
 
@@ -100,8 +98,6 @@
 }
 
 .user-points-header-block {
-    @extend %map-app-header-block-placeholder;
-
     .user-points {
         color: #FFFFFF90;
 

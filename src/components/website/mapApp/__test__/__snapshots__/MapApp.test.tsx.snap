@@ -116,7 +116,7 @@ exports[`MapApp snapshot tests should match the snapshot at user authenticated s
         </p>
       </div>
       <div
-        className="terminal-search-header-block"
+        className="map-app-header-block terminal-search-header-block"
       >
         <img
           alt="terminal-search-image"
@@ -134,7 +134,7 @@ exports[`MapApp snapshot tests should match the snapshot at user authenticated s
       className="map-app-header-block-container"
     >
       <div
-        className="user-points-header-block"
+        className="map-app-header-block user-points-header-block"
       >
         <img
           alt="user-points-image"
