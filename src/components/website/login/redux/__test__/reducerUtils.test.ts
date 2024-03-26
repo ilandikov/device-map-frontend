@@ -1,4 +1,4 @@
-import { AuthenticationStep } from '../state';
+import { AuthenticationStep, PasswordError } from '../state';
 import {
     authenticationStepFromOTP,
     authenticationStepFromUserLogin,
@@ -51,7 +51,7 @@ describe('user password logic tests', () => {
     it('should return error if password has not been input', () => {
         const passwordInputError = getPasswordError('');
 
-        expect(passwordInputError).not.toEqual(null);
+        expect(passwordInputError).toEqual(new Error(PasswordError.EMPTY));
     });
 });
 
