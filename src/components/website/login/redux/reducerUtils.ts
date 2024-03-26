@@ -31,6 +31,11 @@ export function getPasswordError(password: string): Error | null {
         return new Error(PasswordError.NO_UPPERCASE);
     }
 
+    const lowerCaseRegExp = new RegExp(/[a-z]/);
+    if (lowerCaseRegExp.test(password) === false) {
+        return new Error(PasswordError.NO_LOWERCASE);
+    }
+
     return null;
 }
 
