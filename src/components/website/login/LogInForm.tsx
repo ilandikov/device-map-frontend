@@ -17,14 +17,14 @@ export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userEmail = useAuthentication().email;
+    const { email } = useAuthentication();
 
     return (
         <>
             <div className="login-modal-input-container">
                 <MailInputBox
                     helpText={t('onlyEmail')}
-                    userEmail={userEmail}
+                    userEmail={email}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
