@@ -2,7 +2,8 @@ import { lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
 import { LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes, loginModalNoAction } from '../actions';
-import { buildState } from './reducer.test';
+
+import { buildState } from '../__mocks__/AuthenticationState';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {

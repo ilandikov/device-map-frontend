@@ -16,16 +16,7 @@ import {
     authenticationInitialState,
 } from '../state';
 
-export function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
-    return {
-        step: partialState.step ?? AuthenticationStep.WELCOME,
-        email: partialState.email ?? '',
-        emailError: partialState.emailError ?? null,
-        password: partialState.password ?? '',
-        passwordRepeat: partialState.passwordRepeat ?? '',
-        passwordError: partialState.passwordError ?? null,
-    };
-}
+import { buildState } from '../__mocks__/AuthenticationState';
 
 function verifyStateChange(
     initialState: AuthenticationState,
