@@ -43,7 +43,7 @@ function verifyStateChange(
 describe('LoginModal reducer tests', () => {
     it('should not change the initial state', () => {
         const initialState = authenticationInitialState;
-        const action = { type: 'DUMMY_ACTION' };
+        const action = { type: 'NO_ACTION' };
 
         // @ts-expect-error
         verifyStateChange(initialState, action, {});
