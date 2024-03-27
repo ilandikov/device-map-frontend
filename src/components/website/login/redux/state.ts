@@ -51,3 +51,7 @@ export enum PasswordError {
     NO_SPECIAL_CHARS = 'passwordHasNoSpecialCharacters',
     TOO_SHORT = 'passwordTooShort',
 }
+
+export enum OTPError {
+    TOO_SHORT = 'OTPTooShort',
+}

@@ -3,6 +3,7 @@ import {
     AuthenticationState,
     AuthenticationStep,
     MailInputError,
+    OTPError,
     PasswordError,
     authenticationInitialState,
 } from './state';
@@ -77,6 +78,10 @@ export function authentication(
                     return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };
                 }
                 case LoginModalVerifyTypes.OTP: {
+                    if (state.OTP.length < 6) {
+                        return { ...state, error: new Error(OTPError.TOO_SHORT) };
+                    }
+
                     return { ...state, step: AuthenticationStep.SIGNUP_OTP_LOADING };
                 }
                 default:

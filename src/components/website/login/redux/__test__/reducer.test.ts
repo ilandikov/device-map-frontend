@@ -12,6 +12,7 @@ import {
     AuthenticationState,
     AuthenticationStep,
     MailInputError,
+    OTPError,
     PasswordError,
     authenticationInitialState,
 } from '../state';
@@ -222,6 +223,7 @@ describe('OTP logic', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.SIGNUP_OTP,
+            OTP: '451035',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
@@ -249,6 +251,18 @@ describe('OTP logic', () => {
 
         verifyStateChange(initialState, action, {
             OTP: '9832',
+        });
+    });
+
+    it('should set error if OTP is less than 6 characters', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP,
+            OTP: '51094',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        verifyStateChange(initialState, action, {
+            error: new Error(OTPError.TOO_SHORT),
         });
     });
 });
