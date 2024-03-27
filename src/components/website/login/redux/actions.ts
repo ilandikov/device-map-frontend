@@ -45,7 +45,7 @@ export interface LoginModalNotification {
     notification: LoginModalNotificationTypes;
 }
 
-export interface LoginModalSignUpFailed {
+export interface LoginModalFailureNotification {
     type: LoginModalActionTypes.SIGNUP_FAILED | LoginModalActionTypes.OTP_FAILED;
 }
 
@@ -59,7 +59,7 @@ export type LoginModalAction =
     | LoginModalButtonClick
     | LoginModalVerifyRequest
     | LoginModalNotification
-    | LoginModalSignUpFailed;
+    | LoginModalFailureNotification;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
