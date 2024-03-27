@@ -1,4 +1,4 @@
-import { Observable, filter, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { ofType } from 'redux-observable';
 import {
@@ -19,21 +19,26 @@ const cognitoClient = new CognitoClient({
 export function signUpEpic(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
-        filter((action: LoginModalVerifyRequest) => action.verify === LoginModalVerifyTypes.USER_PASSWORD),
-        switchMap(async () => {
-            const authenticationState: AuthenticationState = state$.value.authentication;
-            if (authenticationState.passwordError !== null) {
-                return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
+        switchMap(async (action: LoginModalVerifyRequest) => {
+            switch (action.verify) {
+                case LoginModalVerifyTypes.USER_PASSWORD: {
+                    const authenticationState: AuthenticationState = state$.value.authentication;
+                    if (authenticationState.passwordError !== null) {
+                        return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
+                    }
+
+                    return cognitoClient
+                        .signUp(authenticationState.email, authenticationState.password)
+                        .then(() => {
+                            return loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK);
+                        })
+                        .catch(() => {
+                            return { type: LoginModalActionTypes.SIGNUP_FAILED };
+                        });
+                }
             }
 
-            return cognitoClient
-                .signUp(authenticationState.email, authenticationState.password)
-                .then(() => {
-                    return loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK);
-                })
-                .catch(() => {
-                    return { type: LoginModalActionTypes.SIGNUP_FAILED };
-                });
+            return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
         }),
     );
 }
