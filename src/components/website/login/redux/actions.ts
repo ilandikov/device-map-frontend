@@ -33,7 +33,7 @@ export interface LoginModalInput {
     };
 }
 
-export interface LoginModalSignUpOk {
+export interface LoginModalNotification {
     type: LoginModalActionTypes.SIGNUP_OK | LoginModalActionTypes.NO_ACTION;
 }
 
@@ -50,7 +50,7 @@ export type LoginModalAction =
     | LoginModalInput
     | LoginModalButtonClick
     | LoginModalVerifyRequest
-    | LoginModalSignUpOk
+    | LoginModalNotification
     | LoginModalSignUpFailed;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
@@ -74,6 +74,6 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
     };
 }
 
-export function loginModalNoAction(): LoginModalSignUpOk {
+export function loginModalNoAction(): LoginModalNotification {
     return { type: LoginModalActionTypes.NO_ACTION };
 }
