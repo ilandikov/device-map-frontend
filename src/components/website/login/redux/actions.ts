@@ -2,6 +2,8 @@ export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
     INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
+    NOTIFICATION = 'notification',
+    SIGNUP_FAILED = 'signUpFailed',
 }
 
 export enum LoginModalVerifyTypes {
@@ -17,6 +19,12 @@ export enum LoginModalInputTypes {
     USER_PASSWORD_REPEAT = 'userPasswordRepeat',
 }
 
+export enum LoginModalNotificationTypes {
+    SIGNUP_OK = 'signUpOk',
+    OTP_OK = 'OTPOk',
+    NO_ACTION = 'noAction',
+}
+
 export interface LoginModalButtonClick {
     type: LoginModalActionTypes.BUTTON_CLICKED;
     button: string;
@@ -30,12 +38,26 @@ export interface LoginModalInput {
     };
 }
 
+export interface LoginModalNotification {
+    type: LoginModalActionTypes.NOTIFICATION;
+    notification: LoginModalNotificationTypes;
+}
+
+export interface LoginModalSignUpFailed {
+    type: LoginModalActionTypes.SIGNUP_FAILED;
+}
+
 export interface LoginModalVerifyRequest {
     type: LoginModalActionTypes.VERIFY_REQUEST;
     verify: LoginModalVerifyTypes;
 }
 
-export type LoginModalAction = LoginModalInput | LoginModalButtonClick | LoginModalVerifyRequest;
+export type LoginModalAction =
+    | LoginModalInput
+    | LoginModalButtonClick
+    | LoginModalVerifyRequest
+    | LoginModalNotification
+    | LoginModalSignUpFailed;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
@@ -56,4 +78,8 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
             payload: inputPayload,
         },
     };
+}
+
+export function loginModalNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
+    return { type: LoginModalActionTypes.NOTIFICATION, notification: notification };
 }
