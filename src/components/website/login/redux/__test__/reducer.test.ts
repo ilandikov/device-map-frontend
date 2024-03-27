@@ -226,7 +226,7 @@ describe('OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.SIGNUP_OTP,
         });
-        const action = loginModalButtonClick('next');
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.SIGNUP_OTP_LOADING,
