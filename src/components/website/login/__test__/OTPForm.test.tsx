@@ -7,7 +7,12 @@ import {
     renderForActionDispatchTest,
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
-import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from '../redux/actions';
 import { mockDispatch } from '../redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
@@ -86,8 +91,8 @@ describe('OTP form tests', () => {
         const input1 = getInput(container, 1);
         const input2 = getInput(container, 2);
         const input3 = getInput(container, 3);
-        fireEvent.change(input1, createEvent('1'));
         fireEvent.change(input2, createEvent('2'));
+        fireEvent.change(input1, createEvent('1'));
 
         fireEvent.change(input0, createEvent('1'));
 
@@ -95,13 +100,26 @@ describe('OTP form tests', () => {
     });
 });
 
+function inputOTPDigit(container: HTMLElement, inputIndex: number, OTPDigit: string) {
+    const input0 = getInput(container, inputIndex);
+    fireEvent.change(input0, createEvent(OTPDigit));
+}
+
 describe('OTP form action tests', () => {
-    it('should send OTP verification request on next button click', () => {
+    it('should send OTP code and verification request on next button click', () => {
         const container = renderForActionDispatchTest(<OTPForm />);
+
+        inputOTPDigit(container, 0, '2');
+        inputOTPDigit(container, 1, '0');
+        inputOTPDigit(container, 2, '8');
+        inputOTPDigit(container, 3, '4');
+        inputOTPDigit(container, 4, '7');
+        inputOTPDigit(container, 5, '3');
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, '208473'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     });
 });

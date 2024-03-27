@@ -2,7 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
-import { LoginModalVerifyTypes, loginModalVerifyRequest } from './redux/actions';
+import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
 
 export function OTPForm() {
     const { t } = useI18next();
@@ -58,6 +58,12 @@ export function OTPForm() {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
+                        let OTPCode = '';
+                        inputRefs.forEach((input) => {
+                            OTPCode += input.current.value;
+                        });
+                        dispatch(loginModalInput(LoginModalInputTypes.OTP, OTPCode));
+
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
                     }}
                 >
