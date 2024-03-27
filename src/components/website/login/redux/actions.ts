@@ -21,6 +21,7 @@ export enum LoginModalInputTypes {
 
 export enum LoginModalNotificationTypes {
     SIGNUP_OK = 'signUpOk',
+    OTP_OK = 'OTPOk',
     NO_ACTION = 'noAction',
 }
 

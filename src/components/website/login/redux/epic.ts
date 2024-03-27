@@ -36,6 +36,8 @@ export function signUpEpic(action$, state$): Observable<LoginModalAction> {
                             return { type: LoginModalActionTypes.SIGNUP_FAILED };
                         });
                 }
+                case LoginModalVerifyTypes.OTP:
+                    return loginModalNotification(LoginModalNotificationTypes.OTP_OK);
             }
 
             return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);

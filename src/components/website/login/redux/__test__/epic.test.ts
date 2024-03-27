@@ -50,3 +50,12 @@ describe('sign up epic tests', () => {
         await verifySignUpEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.NO_ACTION));
     });
 });
+
+describe('OTP verification epic tests', () => {
+    it('should dispatch OTP verification ok action on sign up if there is no password error', async () => {
+        const initialState = buildAuthenticationStateForEpic({});
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        await verifySignUpEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.OTP_OK));
+    });
+});
