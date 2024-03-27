@@ -42,7 +42,16 @@ export interface LoginModalVerifyRequest {
     verify: LoginModalVerifyTypes;
 }
 
-export type LoginModalAction = LoginModalInput | LoginModalButtonClick | LoginModalVerifyRequest | LoginModalSignUpOk;
+export interface LoginModalNoAction {
+    type: LoginModalActionTypes.NO_ACTION;
+}
+
+export type LoginModalAction =
+    | LoginModalInput
+    | LoginModalButtonClick
+    | LoginModalVerifyRequest
+    | LoginModalSignUpOk
+    | LoginModalNoAction;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
@@ -65,6 +74,6 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
     };
 }
 
-export function loginModalNoAction() {
+export function loginModalNoAction(): LoginModalNoAction {
     return { type: LoginModalActionTypes.NO_ACTION };
 }
