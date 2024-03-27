@@ -3,8 +3,6 @@ export enum LoginModalActionTypes {
     INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
     NOTIFICATION = 'notification',
-    SIGNUP_FAILED = 'signUpFailed',
-    OTP_FAILED = 'otpFailed',
     NO_ACTION = 'noAction',
 }
 
