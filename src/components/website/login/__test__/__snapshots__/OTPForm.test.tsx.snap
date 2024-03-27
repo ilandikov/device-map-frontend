@@ -1,6 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OTPForm snapshot tests should match snapshot 1`] = `
+exports[`OTPForm snapshot tests should match snapshot with error 1`] = `
+[
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      OTPEnter
+    </p>
+    <div
+      className="login-modal-input-otp-container"
+    >
+      <input
+        data-testid="OTPInput0"
+        maxLength={1}
+        onChange={[Function]}
+        onFocus={[Function]}
+        pattern="[0-9]"
+        type="number"
+      />
+      <input
+        data-testid="OTPInput1"
+        maxLength={1}
+        onChange={[Function]}
+        onFocus={[Function]}
+        pattern="[0-9]"
+        type="number"
+      />
+      <input
+        data-testid="OTPInput2"
+        maxLength={1}
+        onChange={[Function]}
+        onFocus={[Function]}
+        pattern="[0-9]"
+        type="number"
+      />
+      <input
+        data-testid="OTPInput3"
+        maxLength={1}
+        onChange={[Function]}
+        onFocus={[Function]}
+        pattern="[0-9]"
+        type="number"
+      />
+      <input
+        data-testid="OTPInput4"
+        maxLength={1}
+        onChange={[Function]}
+        onFocus={[Function]}
+        pattern="[0-9]"
+        type="number"
+      />
+      <input
+        data-testid="OTPInput5"
+        maxLength={1}
+        onChange={[Function]}
+        onFocus={[Function]}
+        pattern="[0-9]"
+        type="number"
+      />
+    </div>
+    <p
+      className="login-modal-input-help login-modal-opaque-text"
+    >
+      OTPExplanation
+    </p>
+    <p
+      className="login-modal-input-help login-modal-correct-input"
+    >
+      OTPSendAgain
+    </p>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      thisShouldNotHappen
+    </p>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <button
+      className="login-modal-button-black-on-green"
+      onClick={[Function]}
+    >
+      next
+    </button>
+  </div>,
+]
+`;
+
+exports[`OTPForm snapshot tests should match snapshot without error 1`] = `
 [
   <div
     className="login-modal-input-container"

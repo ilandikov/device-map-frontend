@@ -3,10 +3,13 @@ import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
 import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
+import { useAuthentication } from './redux/state';
 
 export function OTPForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
+
+    const { error } = useAuthentication();
 
     const nextButton = useRef(null);
 
@@ -52,6 +55,7 @@ export function OTPForm() {
                 <div className="login-modal-input-otp-container">{inputs}</div>
                 <p className="login-modal-input-help login-modal-opaque-text">{t('OTPExplanation')}</p>
                 <p className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</p>
+                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
             </div>
             <div className="login-modal-button-container">
                 <button

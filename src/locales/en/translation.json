@@ -21,6 +21,7 @@
   "OTPExplanation": "Enter the received one-time password to verify your phone number",
   "OTPSendAgain": "Send one-time password again",
   "OTPSendSMS": "Send OTP by SMS",
+  "OTPTooShort": "OTP code is too short",
   "OTPVerifying": "Verifying...",
   "point": "point",
   "points": "points",
