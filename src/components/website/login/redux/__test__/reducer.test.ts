@@ -71,6 +71,7 @@ describe('navigation logic', () => {
             password: 'authMePls',
             passwordRepeat: 'authMePls',
             passwordError: new Error('funnyPassword'),
+            OTP: '654342',
         });
         const action = loginModalButtonClick('cancel');
 
@@ -81,6 +82,7 @@ describe('navigation logic', () => {
             password: '',
             passwordRepeat: '',
             passwordError: null,
+            OTP: '',
         });
     });
 
@@ -239,6 +241,17 @@ describe('OTP logic', () => {
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
+    });
+
+    it('should set OTP value in the state', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP,
+        });
+        const action = loginModalInput(LoginModalInputTypes.OTP, '9832');
+
+        verifyStateChange(initialState, action, {
+            OTP: '9832',
         });
     });
 });

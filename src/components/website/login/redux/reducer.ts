@@ -24,6 +24,8 @@ export function authentication(
                     return { ...state, password: action.input.payload };
                 case LoginModalInputTypes.USER_PASSWORD_REPEAT:
                     return { ...state, passwordRepeat: action.input.payload };
+                case LoginModalInputTypes.OTP:
+                    return { ...state, OTP: action.input.payload };
                 default:
                     return state;
             }
