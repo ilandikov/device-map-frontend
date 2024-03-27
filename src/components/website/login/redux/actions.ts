@@ -45,7 +45,7 @@ export interface LoginModalInput {
     };
 }
 
-export interface LoginModalSuccessNotification {
+export interface LoginModalNotification {
     type: LoginModalActionTypes.NOTIFICATION;
     notification: LoginModalNotificationTypes;
     result: LoginModalNotificationResult;
@@ -60,7 +60,7 @@ export type LoginModalAction =
     | LoginModalInput
     | LoginModalButtonClick
     | LoginModalVerifyRequest
-    | LoginModalSuccessNotification
+    | LoginModalNotification
     | LoginModalNoAction;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
@@ -84,9 +84,7 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
     };
 }
 
-export function loginModalSuccessNotification(
-    notification: LoginModalNotificationTypes,
-): LoginModalSuccessNotification {
+export function loginModalSuccessNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
         notification: notification,
@@ -102,9 +100,7 @@ export function loginModalNoAction(): LoginModalNoAction {
     return { type: LoginModalActionTypes.NO_ACTION };
 }
 
-export function loginModalFailureNotification(
-    notification: LoginModalNotificationTypes,
-): LoginModalSuccessNotification {
+export function loginModalFailureNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
         notification: notification,
