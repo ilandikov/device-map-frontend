@@ -22,13 +22,13 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
         switchMap(async (action: LoginModalVerifyRequest) => {
+            const authenticationState: AuthenticationState = state$.value.authentication;
+            if (authenticationState.error !== null) {
+                return loginModalNoAction();
+            }
+
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_PASSWORD: {
-                    const authenticationState: AuthenticationState = state$.value.authentication;
-                    if (authenticationState.error !== null) {
-                        return loginModalNoAction();
-                    }
-
                     return cognitoClient
                         .signUp(authenticationState.email, authenticationState.password)
                         .then(() => {
@@ -39,10 +39,6 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         });
                 }
                 case LoginModalVerifyTypes.OTP: {
-                    const authenticationState: AuthenticationState = state$.value.authentication;
-                    if (authenticationState.error !== null) {
-                        return loginModalNoAction();
-                    }
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
                         .then(() => {
