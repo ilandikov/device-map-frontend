@@ -85,3 +85,7 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
 export function loginModalNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
     return { type: LoginModalActionTypes.NOTIFICATION, notification: notification };
 }
+
+export function loginModalNoAction() {
+    return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
+}

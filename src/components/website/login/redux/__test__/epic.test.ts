@@ -3,6 +3,7 @@ import {
     LoginModalActionTypes,
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
+    loginModalNoAction,
     loginModalNotification,
     loginModalVerifyRequest,
 } from '../actions';
@@ -61,11 +62,7 @@ describe('sign up epic tests', () => {
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        await verifyCognitoEpic(
-            sentAction,
-            initialState,
-            loginModalNotification(LoginModalNotificationTypes.NO_ACTION),
-        );
+        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
     });
 });
 
