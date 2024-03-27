@@ -1,9 +1,17 @@
 import { lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
-import { LoginModalActionTypes, LoginModalVerifyTypes, loginModalNoAction, loginModalVerifyRequest } from '../actions';
+import {
+    LoginModalAction,
+    LoginModalActionTypes,
+    LoginModalVerifyRequest,
+    LoginModalVerifyTypes,
+    loginModalNoAction,
+    loginModalVerifyRequest,
+} from '../actions';
 
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
+import { AuthenticationState } from '../state';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
@@ -16,6 +24,19 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
 );
 
 describe('sign up epic tests', () => {
+    async function verifySignUpEpic(
+        sentAction: LoginModalVerifyRequest,
+        initialState: {
+            value: { authentication: AuthenticationState };
+        },
+        expectedAction: LoginModalAction,
+    ) {
+        const state$ = signUpEpic(of(sentAction), initialState);
+        const receivedAction = await lastValueFrom(state$);
+
+        expect(receivedAction).toEqual(expectedAction);
+    }
+
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
         const initialState = buildAuthenticationStateForEpic({
             email: 'signMeUp@cognito.com',
@@ -23,12 +44,9 @@ describe('sign up epic tests', () => {
             passwordError: null,
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
-        const expectedAction = { type: LoginModalActionTypes.SIGNUP_OK };
+        const expectedAction: LoginModalAction = { type: LoginModalActionTypes.SIGNUP_OK };
 
-        const state$ = signUpEpic(of(sentAction), initialState);
-        const receivedAction = await lastValueFrom(state$);
-
-        expect(receivedAction).toEqual(expectedAction);
+        await verifySignUpEpic(sentAction, initialState, expectedAction);
     });
 
     it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
