@@ -73,6 +73,9 @@ export function authentication(
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
                     return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };
                 }
+                case LoginModalVerifyTypes.OTP: {
+                    return { ...state, step: AuthenticationStep.SIGNUP_OTP_LOADING };
+                }
                 default:
                     return state;
             }
