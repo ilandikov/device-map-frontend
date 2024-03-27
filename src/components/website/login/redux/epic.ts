@@ -7,6 +7,7 @@ import {
     LoginModalNotificationTypes,
     LoginModalVerifyRequest,
     LoginModalVerifyTypes,
+    loginModalFailureNotification,
     loginModalNoAction,
     loginModalNotification,
 } from './actions';
@@ -34,7 +35,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             return loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK);
                         })
                         .catch(() => {
-                            return { type: LoginModalActionTypes.SIGNUP_FAILED };
+                            return loginModalFailureNotification();
                         });
                 }
                 case LoginModalVerifyTypes.OTP: {
