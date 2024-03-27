@@ -5,6 +5,7 @@ import {
     LoginModalVerifyTypes,
     loginModalButtonClick,
     loginModalInput,
+    loginModalNoAction,
     loginModalVerifyRequest,
 } from '../actions';
 import {
@@ -43,7 +44,7 @@ function verifyStateChange(
 describe('LoginModal reducer tests', () => {
     it('should not change the initial state', () => {
         const initialState = authenticationInitialState;
-        const action = { type: 'NO_ACTION' };
+        const action = loginModalNoAction();
 
         // @ts-expect-error
         verifyStateChange(initialState, action, {});

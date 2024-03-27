@@ -63,3 +63,7 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
         },
     };
 }
+
+export function loginModalNoAction() {
+    return { type: 'NO_ACTION' };
+}
