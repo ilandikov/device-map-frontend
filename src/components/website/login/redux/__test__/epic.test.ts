@@ -26,14 +26,19 @@ describe('sign up epic tests', () => {
     });
 
     it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
-        const initialState = buildAuthenticationStateForEpic({ email: 'notAValidEmail', password: 'softpassword' });
+        const initialState = buildAuthenticationStateForEpic({
+            email: 'notAValidEmailIHaveInput',
+            password: 'short',
+        });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         await verifySignUpEpic(sentAction, initialState, { type: LoginModalActionTypes.SIGNUP_FAILED });
     });
 
     it('should dispatch no action needed action if password error is present', async () => {
-        const initialState = buildAuthenticationStateForEpic({ passwordError: new Error('ohNoSomethingIsWrong') });
+        const initialState = buildAuthenticationStateForEpic({
+            passwordError: new Error('ohNoSomethingIsWrongWeCannotSolve'),
+        });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         await verifySignUpEpic(sentAction, initialState, loginModalNoAction());
