@@ -5,6 +5,7 @@ export enum LoginModalActionTypes {
     NOTIFICATION = 'notification',
     SIGNUP_FAILED = 'signUpFailed',
     OTP_FAILED = 'otpFailed',
+    NO_ACTION = 'noAction',
 }
 
 export enum LoginModalVerifyTypes {
@@ -59,7 +60,8 @@ export type LoginModalAction =
     | LoginModalButtonClick
     | LoginModalVerifyRequest
     | LoginModalNotification
-    | LoginModalFailureNotification;
+    | LoginModalFailureNotification
+    | LoginModalNoAction;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
     return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
@@ -86,6 +88,10 @@ export function loginModalNotification(notification: LoginModalNotificationTypes
     return { type: LoginModalActionTypes.NOTIFICATION, notification: notification };
 }
 
-export function loginModalNoAction() {
-    return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
+interface LoginModalNoAction {
+    type: LoginModalActionTypes.NO_ACTION;
+}
+
+export function loginModalNoAction(): LoginModalNoAction {
+    return { type: LoginModalActionTypes.NO_ACTION };
 }
