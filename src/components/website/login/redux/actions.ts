@@ -2,6 +2,7 @@ export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
     INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
+    NOTIFICATION = 'notification',
     SIGNUP_OK = 'signUpOk',
     SIGNUP_FAILED = 'signUpFailed',
     NO_ACTION = 'noAction',
@@ -39,7 +40,7 @@ export interface LoginModalInput {
 }
 
 export interface LoginModalNotification {
-    type: LoginModalActionTypes.SIGNUP_OK | LoginModalActionTypes.NO_ACTION;
+    type: LoginModalActionTypes.NOTIFICATION;
     notification: LoginModalNotificationTypes;
 }
 
@@ -81,5 +82,5 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
 }
 
 export function loginModalNotification(): LoginModalNotification {
-    return { type: LoginModalActionTypes.NO_ACTION, notification: LoginModalNotificationTypes.NO_ACTION };
+    return { type: LoginModalActionTypes.NOTIFICATION, notification: LoginModalNotificationTypes.NO_ACTION };
 }
