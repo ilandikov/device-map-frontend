@@ -1,7 +1,7 @@
 import { Observable, lastValueFrom, of } from 'rxjs';
 import { LoginModalAction, LoginModalVerifyRequest } from '../actions';
 import { AuthenticationState } from '../state';
-import { signUpEpic } from '../epic';
+import { cognito } from '../epic';
 
 export async function verifyEpic(
     epicToTest: (action$, state$) => Observable<any>,
@@ -15,12 +15,12 @@ export async function verifyEpic(
     expect(receivedAction).toEqual(expectedAction);
 }
 
-export async function verifySignUpEpic(
+export async function verifyCognitoEpic(
     sentAction: LoginModalVerifyRequest,
     initialState: {
         value: { authentication: AuthenticationState };
     },
     expectedAction: LoginModalAction,
 ) {
-    await verifyEpic(signUpEpic, sentAction, initialState, expectedAction);
+    await verifyEpic(cognito, sentAction, initialState, expectedAction);
 }

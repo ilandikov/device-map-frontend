@@ -16,7 +16,7 @@ const cognitoClient = new CognitoClient({
     ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
 });
 
-export function signUpEpic(action$, state$): Observable<LoginModalAction> {
+export function cognito(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
         switchMap(async (action: LoginModalVerifyRequest) => {
