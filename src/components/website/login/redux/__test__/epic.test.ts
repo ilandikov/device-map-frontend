@@ -19,6 +19,16 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     },
 );
 
+jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
+    async (username: string, verificationCode: string): Promise<any> => {
+        if (username === 'verify@code.me' && verificationCode === '849621') {
+            return Promise.resolve();
+        }
+
+        return Promise.reject();
+    },
+);
+
 describe('sign up epic tests', () => {
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
         const initialState = buildAuthenticationStateForEpic({
@@ -52,10 +62,17 @@ describe('sign up epic tests', () => {
 });
 
 describe('OTP verification epic tests', () => {
-    it('should dispatch OTP verification ok action on sign up if there is no password error', async () => {
-        const initialState = buildAuthenticationStateForEpic({});
+    it('should dispatch OTP verification ok action if the OTP code is incorrect', async () => {
+        const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '849621' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         await verifySignUpEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.OTP_OK));
+    });
+
+    it('should dispatch OTP verification failed action if the OTP code is incorrect', async () => {
+        const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '000000' });
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        await verifySignUpEpic(sentAction, initialState, { type: LoginModalActionTypes.OTP_FAILED });
     });
 });

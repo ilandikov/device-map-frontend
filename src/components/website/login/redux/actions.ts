@@ -4,6 +4,7 @@ export enum LoginModalActionTypes {
     VERIFY_REQUEST = 'verifyRequest',
     NOTIFICATION = 'notification',
     SIGNUP_FAILED = 'signUpFailed',
+    OTP_FAILED = 'otpFailed',
 }
 
 export enum LoginModalVerifyTypes {
@@ -45,7 +46,7 @@ export interface LoginModalNotification {
 }
 
 export interface LoginModalSignUpFailed {
-    type: LoginModalActionTypes.SIGNUP_FAILED;
+    type: LoginModalActionTypes.SIGNUP_FAILED | LoginModalActionTypes.OTP_FAILED;
 }
 
 export interface LoginModalVerifyRequest {

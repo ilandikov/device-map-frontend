@@ -36,8 +36,17 @@ export function signUpEpic(action$, state$): Observable<LoginModalAction> {
                             return { type: LoginModalActionTypes.SIGNUP_FAILED };
                         });
                 }
-                case LoginModalVerifyTypes.OTP:
-                    return loginModalNotification(LoginModalNotificationTypes.OTP_OK);
+                case LoginModalVerifyTypes.OTP: {
+                    const authenticationState: AuthenticationState = state$.value.authentication;
+                    return cognitoClient
+                        .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
+                        .then(() => {
+                            return loginModalNotification(LoginModalNotificationTypes.OTP_OK);
+                        })
+                        .catch(() => {
+                            return { type: LoginModalActionTypes.OTP_FAILED };
+                        });
+                }
             }
 
             return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
