@@ -20,6 +20,11 @@ export enum LoginModalInputTypes {
     USER_PASSWORD_REPEAT = 'userPasswordRepeat',
 }
 
+export enum LoginModalNotificationTypes {
+    SIGNUP_FAILED = 'signUpFailed',
+    NO_ACTION = 'noAction',
+}
+
 export interface LoginModalButtonClick {
     type: LoginModalActionTypes.BUTTON_CLICKED;
     button: string;
@@ -35,6 +40,7 @@ export interface LoginModalInput {
 
 export interface LoginModalNotification {
     type: LoginModalActionTypes.SIGNUP_OK | LoginModalActionTypes.NO_ACTION;
+    notification: LoginModalNotificationTypes;
 }
 
 export interface LoginModalSignUpFailed {
@@ -75,5 +81,5 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
 }
 
 export function loginModalNotification(): LoginModalNotification {
-    return { type: LoginModalActionTypes.NO_ACTION };
+    return { type: LoginModalActionTypes.NO_ACTION, notification: LoginModalNotificationTypes.NO_ACTION };
 }
