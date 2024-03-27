@@ -104,8 +104,10 @@ describe('OTP form action tests', () => {
     it('should send OTP code and verification request on next button click', () => {
         const container = renderForActionDispatchTest(<OTPForm />);
 
-        const input0 = getInput(container, 0);
-        fireEvent.change(input0, createEvent('2'));
+        const inputIndex = 0;
+        const OTPDigit = '2';
+        const input0 = getInput(container, inputIndex);
+        fireEvent.change(input0, createEvent(OTPDigit));
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
