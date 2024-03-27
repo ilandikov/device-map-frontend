@@ -1,7 +1,7 @@
 import { lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
-import { LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes, loginModalNoAction } from '../actions';
+import { LoginModalActionTypes, LoginModalVerifyTypes, loginModalNoAction, loginModalVerifyRequest } from '../actions';
 
 import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
 
@@ -26,10 +26,7 @@ describe('sign up epic tests', () => {
                 }),
             },
         };
-        const sentAction: LoginModalVerifyRequest = {
-            type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_PASSWORD,
-        };
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
@@ -41,10 +38,7 @@ describe('sign up epic tests', () => {
         const initialState = {
             value: { authentication: buildAuthenticationState({ email: 'notAValidEmail', password: 'softpassword' }) },
         };
-        const sentAction: LoginModalVerifyRequest = {
-            type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_PASSWORD,
-        };
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
@@ -56,10 +50,7 @@ describe('sign up epic tests', () => {
         const initialState = {
             value: { authentication: buildAuthenticationState({ passwordError: new Error('ohNoSomethingIsWrong') }) },
         };
-        const sentAction: LoginModalVerifyRequest = {
-            type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_PASSWORD,
-        };
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
