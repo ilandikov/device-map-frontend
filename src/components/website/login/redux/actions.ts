@@ -4,6 +4,7 @@ export enum LoginModalActionTypes {
     VERIFY_REQUEST = 'verifyRequest',
     SIGNUP_OK = 'signUpOk',
     SIGNUP_FAILED = 'signUpFailed',
+    NO_ACTION = 'noAction',
 }
 
 export enum LoginModalVerifyTypes {
@@ -65,5 +66,5 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
 }
 
 export function loginModalNoAction() {
-    return { type: 'NO_ACTION' };
+    return { type: LoginModalActionTypes.NO_ACTION };
 }
