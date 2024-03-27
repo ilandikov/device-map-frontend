@@ -6,7 +6,7 @@ import {
     LoginModalActionTypes,
     LoginModalVerifyRequest,
     LoginModalVerifyTypes,
-    loginModalNoAction,
+    loginModalNotification,
 } from './actions';
 import { AuthenticationState } from './state';
 
@@ -22,7 +22,7 @@ export function signUpEpic(action$, state$): Observable<LoginModalAction> {
         switchMap(async () => {
             const authenticationState: AuthenticationState = state$.value.authentication;
             if (authenticationState.passwordError !== null) {
-                return loginModalNoAction();
+                return loginModalNotification();
             }
 
             return cognitoClient

@@ -5,7 +5,7 @@ import {
     LoginModalVerifyTypes,
     loginModalButtonClick,
     loginModalInput,
-    loginModalNoAction,
+    loginModalNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import {
@@ -35,7 +35,7 @@ function verifyStateChange(
 describe('LoginModal reducer tests', () => {
     it('should not change the initial state', () => {
         const initialState = authenticationInitialState;
-        const action = loginModalNoAction();
+        const action = loginModalNotification();
 
         verifyStateChange(initialState, action, {});
     });
