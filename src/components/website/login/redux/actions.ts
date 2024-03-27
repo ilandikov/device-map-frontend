@@ -22,7 +22,7 @@ export enum LoginModalInputTypes {
 }
 
 export enum LoginModalNotificationTypes {
-    SIGNUP_FAILED = 'signUpFailed',
+    SIGNUP_OK = 'signUpOk',
     NO_ACTION = 'noAction',
 }
 

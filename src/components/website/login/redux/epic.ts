@@ -29,7 +29,7 @@ export function signUpEpic(action$, state$): Observable<LoginModalAction> {
             return cognitoClient
                 .signUp(authenticationState.email, authenticationState.password)
                 .then(() => {
-                    return { type: LoginModalActionTypes.SIGNUP_OK };
+                    return loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK);
                 })
                 .catch(() => {
                     return { type: LoginModalActionTypes.SIGNUP_FAILED };
