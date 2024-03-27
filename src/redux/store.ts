@@ -8,8 +8,9 @@ import { useDispatch } from 'react-redux';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/MapAppReducer';
 import { authentication } from '../components/website/login/redux/reducer';
+import { cognito } from '../components/website/login/redux/epic';
 
-const rootEpic = combineEpics();
+const rootEpic = combineEpics(cognito);
 
 const rootReducer = combineReducers({
     getDevices,
