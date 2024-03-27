@@ -46,7 +46,6 @@ describe('LoginModal reducer tests', () => {
         const initialState = authenticationInitialState;
         const action = loginModalNoAction();
 
-        // @ts-expect-error
         verifyStateChange(initialState, action, {});
     });
 });

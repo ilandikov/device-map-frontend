@@ -13,6 +13,8 @@ export function authentication(
     action: LoginModalAction,
 ): AuthenticationState {
     switch (action.type) {
+        case LoginModalActionTypes.NO_ACTION:
+            return state;
         case LoginModalActionTypes.INPUT: {
             switch (action.input.type) {
                 case LoginModalInputTypes.USER_EMAIL:
