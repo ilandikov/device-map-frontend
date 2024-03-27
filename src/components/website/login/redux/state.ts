@@ -30,11 +30,9 @@ export const authenticationInitialState: AuthenticationState = {
 export interface AuthenticationState {
     step: AuthenticationStep;
     email: string;
-    // TODO make userEmailError optional
     error: Error | null;
     password: string;
     passwordRepeat: string;
-    // TODO make userPasswordError optional
     OTP: string;
 }
 
