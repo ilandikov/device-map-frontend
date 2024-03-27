@@ -92,18 +92,18 @@ export function loginModalSuccessNotification(notification: LoginModalNotificati
     };
 }
 
-interface LoginModalNoAction {
-    type: LoginModalActionTypes.NO_ACTION;
-}
-
-export function loginModalNoAction(): LoginModalNoAction {
-    return { type: LoginModalActionTypes.NO_ACTION };
-}
-
 export function loginModalFailureNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
         notification: notification,
         result: LoginModalNotificationResult.FAILURE,
     };
+}
+
+interface LoginModalNoAction {
+    type: LoginModalActionTypes.NO_ACTION;
+}
+
+export function loginModalNoAction(): LoginModalNoAction {
+    return { type: LoginModalActionTypes.NO_ACTION };
 }
