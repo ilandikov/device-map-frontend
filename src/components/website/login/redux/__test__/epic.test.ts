@@ -23,11 +23,12 @@ describe('sign up epic tests', () => {
             passwordError: null,
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+        const expectedAction = { type: LoginModalActionTypes.SIGNUP_OK };
 
         const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
 
-        expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_OK });
+        expect(receivedAction).toEqual(expectedAction);
     });
 
     it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
