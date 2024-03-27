@@ -1,6 +1,7 @@
 import CognitoClient from '@mancho.devs/cognito';
 import {
     LoginModalActionTypes,
+    LoginModalNotificationTypes,
     LoginModalVerifyTypes,
     loginModalNotification,
     loginModalVerifyRequest,
@@ -46,6 +47,6 @@ describe('sign up epic tests', () => {
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        await verifySignUpEpic(sentAction, initialState, loginModalNotification());
+        await verifySignUpEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.NO_ACTION));
     });
 });

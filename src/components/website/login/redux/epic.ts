@@ -4,6 +4,7 @@ import { ofType } from 'redux-observable';
 import {
     LoginModalAction,
     LoginModalActionTypes,
+    LoginModalNotificationTypes,
     LoginModalVerifyRequest,
     LoginModalVerifyTypes,
     loginModalNotification,
@@ -22,7 +23,7 @@ export function signUpEpic(action$, state$): Observable<LoginModalAction> {
         switchMap(async () => {
             const authenticationState: AuthenticationState = state$.value.authentication;
             if (authenticationState.passwordError !== null) {
-                return loginModalNotification();
+                return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
             }
 
             return cognitoClient
