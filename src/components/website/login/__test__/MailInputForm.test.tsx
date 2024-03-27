@@ -31,7 +31,7 @@ jest.mock('react-redux', () => ({
 
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockAuthenticationState({ email: 'enteredMail@form.fr', emailError: null });
+        mockAuthenticationState({ email: 'enteredMail@form.fr', error: null });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
@@ -40,7 +40,7 @@ describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot at mail exists error', () => {
         mockAuthenticationState({
             email: 'existing@mail.ru',
-            emailError: new Error(MailInputError.ALREADY_EXISTS),
+            error: new Error(MailInputError.ALREADY_EXISTS),
         });
         const component = renderForSnapshotTest(<MailInputForm />);
 
@@ -48,7 +48,7 @@ describe('MailInputForm snapshot tests', () => {
     });
 
     it('should match the snapshot at mail not valid error', () => {
-        mockAuthenticationState({ email: 'notAMailAddress', emailError: new Error(MailInputError.NOT_VALID) });
+        mockAuthenticationState({ email: 'notAMailAddress', error: new Error(MailInputError.NOT_VALID) });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
@@ -82,7 +82,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockAuthenticationState({ emailError: new Error(MailInputError.ALREADY_EXISTS) });
+        mockAuthenticationState({ error: new Error(MailInputError.ALREADY_EXISTS) });
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const loginButton = getByText(container, 'accountLogin');

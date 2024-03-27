@@ -10,8 +10,8 @@ export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { emailError } = useAuthentication();
-    const passwordError = emailError;
+    const { error } = useAuthentication();
+    const passwordError = error;
 
     return (
         <>

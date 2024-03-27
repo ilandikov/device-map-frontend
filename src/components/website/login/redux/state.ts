@@ -21,7 +21,7 @@ export enum AuthenticationStep {
 export const authenticationInitialState: AuthenticationState = {
     step: AuthenticationStep.WELCOME,
     email: '',
-    emailError: null,
+    error: null,
     password: '',
     passwordRepeat: '',
     OTP: '',
@@ -31,7 +31,7 @@ export interface AuthenticationState {
     step: AuthenticationStep;
     email: string;
     // TODO make userEmailError optional
-    emailError: Error | null;
+    error: Error | null;
     password: string;
     passwordRepeat: string;
     // TODO make userPasswordError optional

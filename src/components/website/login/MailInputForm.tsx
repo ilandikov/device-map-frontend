@@ -15,7 +15,7 @@ export function MailInputForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { email, emailError } = useAuthentication();
+    const { email, error } = useAuthentication();
 
     return (
         <>
@@ -26,11 +26,11 @@ export function MailInputForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    emailError={emailError}
+                    emailError={error}
                 />
             </div>
             <div className="login-modal-button-container">
-                {emailError && emailError.message === MailInputError.ALREADY_EXISTS && (
+                {error && error.message === MailInputError.ALREADY_EXISTS && (
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {

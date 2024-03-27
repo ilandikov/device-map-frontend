@@ -37,7 +37,7 @@ describe('PasswordCreationForm snapshot tests', () => {
 
     it('should match the snapshot at password not match error', () => {
         mockAuthenticationState({
-            emailError: new Error(),
+            error: new Error(),
         });
         const component = renderForSnapshotTest(<PasswordCreationForm />);
 

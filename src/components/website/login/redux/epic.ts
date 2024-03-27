@@ -23,7 +23,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     const authenticationState: AuthenticationState = state$.value.authentication;
-                    if (authenticationState.emailError !== null) {
+                    if (authenticationState.error !== null) {
                         return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
                     }
 
