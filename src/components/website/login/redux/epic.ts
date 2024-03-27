@@ -7,6 +7,7 @@ import {
     LoginModalNotificationTypes,
     LoginModalVerifyRequest,
     LoginModalVerifyTypes,
+    loginModalNoAction,
     loginModalNotification,
 } from './actions';
 import { AuthenticationState } from './state';
@@ -24,7 +25,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     const authenticationState: AuthenticationState = state$.value.authentication;
                     if (authenticationState.error !== null) {
-                        return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
+                        return loginModalNoAction();
                     }
 
                     return cognitoClient
@@ -49,7 +50,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 }
             }
 
-            return loginModalNotification(LoginModalNotificationTypes.NO_ACTION);
+            return loginModalNoAction();
         }),
     );
 }
