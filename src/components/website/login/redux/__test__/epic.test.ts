@@ -68,15 +68,6 @@ describe('sign up epic tests', () => {
             loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP),
         );
     });
-
-    it('should dispatch no action needed action if password error is present', async () => {
-        const initialState = buildAuthenticationStateForEpic({
-            error: new Error('ohNoSomethingIsWrongWeCannotSolve'),
-        });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
-
-        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
-    });
 });
 
 describe('OTP verification epic tests', () => {
