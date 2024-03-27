@@ -58,7 +58,12 @@ export function OTPForm() {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
-                        dispatch(loginModalInput(LoginModalInputTypes.OTP, inputRefs[0].current.value));
+                        let OTPCode = '';
+                        inputRefs.forEach((input) => {
+                            OTPCode += input.current.value;
+                        });
+                        dispatch(loginModalInput(LoginModalInputTypes.OTP, OTPCode));
+
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
                     }}
                 >

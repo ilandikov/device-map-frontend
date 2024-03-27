@@ -110,11 +110,16 @@ describe('OTP form action tests', () => {
         const container = renderForActionDispatchTest(<OTPForm />);
 
         inputOTPDigit(container, 0, '2');
+        inputOTPDigit(container, 1, '0');
+        inputOTPDigit(container, 2, '8');
+        inputOTPDigit(container, 3, '4');
+        inputOTPDigit(container, 4, '7');
+        inputOTPDigit(container, 5, '3');
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, '2'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, '208473'));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     });
 });
