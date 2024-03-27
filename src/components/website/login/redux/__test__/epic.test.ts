@@ -3,7 +3,7 @@ import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
 import { LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes, loginModalNoAction } from '../actions';
 
-import { buildState } from '../__mocks__/AuthenticationState';
+import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
@@ -19,7 +19,7 @@ describe('sign up epic tests', () => {
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
         const initialState = {
             value: {
-                authentication: buildState({
+                authentication: buildAuthenticationState({
                     email: 'signMeUp@cognito.com',
                     password: '%secure1Pass',
                     passwordError: null,
@@ -39,7 +39,7 @@ describe('sign up epic tests', () => {
 
     it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
         const initialState = {
-            value: { authentication: buildState({ email: 'notAValidEmail', password: 'softpassword' }) },
+            value: { authentication: buildAuthenticationState({ email: 'notAValidEmail', password: 'softpassword' }) },
         };
         const sentAction: LoginModalVerifyRequest = {
             type: LoginModalActionTypes.VERIFY_REQUEST,
@@ -54,7 +54,7 @@ describe('sign up epic tests', () => {
 
     it('should dispatch no action needed action if password error is present', async () => {
         const initialState = {
-            value: { authentication: buildState({ passwordError: new Error('ohNoSomethingIsWrong') }) },
+            value: { authentication: buildAuthenticationState({ passwordError: new Error('ohNoSomethingIsWrong') }) },
         };
         const sentAction: LoginModalVerifyRequest = {
             type: LoginModalActionTypes.VERIFY_REQUEST,

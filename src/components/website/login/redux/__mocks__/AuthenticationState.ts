@@ -26,7 +26,7 @@ export function mockAuthenticationState(mockState: Partial<AuthenticationState>)
     };
 }
 
-export function buildState(partialState: Partial<AuthenticationState>): AuthenticationState {
+export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
         step: partialState.step ?? AuthenticationStep.WELCOME,
         email: partialState.email ?? '',
