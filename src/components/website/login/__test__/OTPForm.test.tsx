@@ -7,7 +7,12 @@ import {
     renderForActionDispatchTest,
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
-import { LoginModalVerifyTypes, loginModalVerifyRequest } from '../redux/actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from '../redux/actions';
 import { mockDispatch } from '../redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
@@ -96,12 +101,13 @@ describe('OTP form tests', () => {
 });
 
 describe('OTP form action tests', () => {
-    it('should send OTP verification request on next button click', () => {
+    it('should send OTP code and verification request on next button click', () => {
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, ''));
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     });
 });

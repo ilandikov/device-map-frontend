@@ -17,6 +17,7 @@ export enum LoginModalInputTypes {
     USER_EMAIL = 'userEmail',
     USER_PASSWORD = 'userPassword',
     USER_PASSWORD_REPEAT = 'userPasswordRepeat',
+    OTP = 'OTP',
 }
 
 export enum LoginModalNotificationTypes {
