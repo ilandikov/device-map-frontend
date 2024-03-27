@@ -1,6 +1,7 @@
 import CognitoClient from '@mancho.devs/cognito';
 import {
     LoginModalActionTypes,
+    LoginModalNotificationResult,
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
@@ -82,6 +83,7 @@ describe('OTP verification epic tests', () => {
         await verifyCognitoEpic(sentAction, initialState, {
             type: LoginModalActionTypes.OTP_FAILED,
             notification: LoginModalNotificationTypes.OTP_OK,
+            result: LoginModalNotificationResult.FAILURE,
         });
     });
 });

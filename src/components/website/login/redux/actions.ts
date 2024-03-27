@@ -27,6 +27,11 @@ export enum LoginModalNotificationTypes {
     OTP_OK = 'OTPOk',
 }
 
+export enum LoginModalNotificationResult {
+    SUCCESS = 'success',
+    FAILURE = 'failure',
+}
+
 export interface LoginModalButtonClick {
     type: LoginModalActionTypes.BUTTON_CLICKED;
     button: string;
@@ -43,11 +48,13 @@ export interface LoginModalInput {
 export interface LoginModalSuccessNotification {
     type: LoginModalActionTypes.NOTIFICATION;
     notification: LoginModalNotificationTypes;
+    result: LoginModalNotificationResult;
 }
 
 export interface LoginModalFailureNotification {
     type: LoginModalActionTypes.SIGNUP_FAILED | LoginModalActionTypes.OTP_FAILED;
     notification: LoginModalNotificationTypes;
+    result: LoginModalNotificationResult;
 }
 
 export interface LoginModalVerifyRequest {
@@ -85,7 +92,11 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
 }
 
 export function loginModalNotification(notification: LoginModalNotificationTypes): LoginModalSuccessNotification {
-    return { type: LoginModalActionTypes.NOTIFICATION, notification: notification };
+    return {
+        type: LoginModalActionTypes.NOTIFICATION,
+        notification: notification,
+        result: LoginModalNotificationResult.SUCCESS,
+    };
 }
 
 interface LoginModalNoAction {
@@ -97,5 +108,9 @@ export function loginModalNoAction(): LoginModalNoAction {
 }
 
 export function loginModalFailureNotification(): LoginModalFailureNotification {
-    return { type: LoginModalActionTypes.SIGNUP_FAILED, notification: LoginModalNotificationTypes.SIGNUP_OK };
+    return {
+        type: LoginModalActionTypes.SIGNUP_FAILED,
+        notification: LoginModalNotificationTypes.SIGNUP_OK,
+        result: LoginModalNotificationResult.FAILURE,
+    };
 }
