@@ -1,10 +1,10 @@
 import CognitoClient from '@mancho.devs/cognito';
 import {
-    LoginModalActionTypes,
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
+    loginModalFailureNotification,
     loginModalNoAction,
-    loginModalNotification,
+    loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
@@ -42,7 +42,7 @@ describe('sign up epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK),
+            loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP),
         );
     });
 
@@ -53,7 +53,11 @@ describe('sign up epic tests', () => {
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        await verifyCognitoEpic(sentAction, initialState, { type: LoginModalActionTypes.SIGNUP_FAILED });
+        await verifyCognitoEpic(
+            sentAction,
+            initialState,
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP),
+        );
     });
 
     it('should dispatch no action needed action if password error is present', async () => {
@@ -71,13 +75,21 @@ describe('OTP verification epic tests', () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '849621' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.OTP_OK));
+        await verifyCognitoEpic(
+            sentAction,
+            initialState,
+            loginModalSuccessNotification(LoginModalNotificationTypes.OTP),
+        );
     });
 
     it('should dispatch OTP verification failed action if the OTP code is incorrect', async () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '000000' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, { type: LoginModalActionTypes.OTP_FAILED });
+        await verifyCognitoEpic(
+            sentAction,
+            initialState,
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP),
+        );
     });
 });

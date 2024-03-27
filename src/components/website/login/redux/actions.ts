@@ -3,8 +3,6 @@ export enum LoginModalActionTypes {
     INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
     NOTIFICATION = 'notification',
-    SIGNUP_FAILED = 'signUpFailed',
-    OTP_FAILED = 'otpFailed',
     NO_ACTION = 'noAction',
 }
 
@@ -23,8 +21,13 @@ export enum LoginModalInputTypes {
 }
 
 export enum LoginModalNotificationTypes {
-    SIGNUP_OK = 'signUpOk',
-    OTP_OK = 'OTPOk',
+    SIGNUP = 'signUp',
+    OTP = 'OTP',
+}
+
+export enum LoginModalNotificationResult {
+    SUCCESS = 'success',
+    FAILURE = 'failure',
 }
 
 export interface LoginModalButtonClick {
@@ -43,10 +46,7 @@ export interface LoginModalInput {
 export interface LoginModalNotification {
     type: LoginModalActionTypes.NOTIFICATION;
     notification: LoginModalNotificationTypes;
-}
-
-export interface LoginModalFailureNotification {
-    type: LoginModalActionTypes.SIGNUP_FAILED | LoginModalActionTypes.OTP_FAILED;
+    result: LoginModalNotificationResult;
 }
 
 export interface LoginModalVerifyRequest {
@@ -59,7 +59,6 @@ export type LoginModalAction =
     | LoginModalButtonClick
     | LoginModalVerifyRequest
     | LoginModalNotification
-    | LoginModalFailureNotification
     | LoginModalNoAction;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
@@ -83,8 +82,20 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
     };
 }
 
-export function loginModalNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
-    return { type: LoginModalActionTypes.NOTIFICATION, notification: notification };
+export function loginModalSuccessNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
+    return {
+        type: LoginModalActionTypes.NOTIFICATION,
+        notification: notification,
+        result: LoginModalNotificationResult.SUCCESS,
+    };
+}
+
+export function loginModalFailureNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
+    return {
+        type: LoginModalActionTypes.NOTIFICATION,
+        notification: notification,
+        result: LoginModalNotificationResult.FAILURE,
+    };
 }
 
 interface LoginModalNoAction {
