@@ -3,9 +3,7 @@ export enum LoginModalActionTypes {
     INPUT = 'input',
     VERIFY_REQUEST = 'verifyRequest',
     NOTIFICATION = 'notification',
-    SIGNUP_OK = 'signUpOk',
     SIGNUP_FAILED = 'signUpFailed',
-    NO_ACTION = 'noAction',
 }
 
 export enum LoginModalVerifyTypes {
