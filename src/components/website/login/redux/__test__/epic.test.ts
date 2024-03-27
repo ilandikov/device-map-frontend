@@ -1,7 +1,7 @@
 import { lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
-import { LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes } from '../actions';
+import { LoginModalActionTypes, LoginModalVerifyRequest, LoginModalVerifyTypes, loginModalNoAction } from '../actions';
 import { buildState } from './reducer.test';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
@@ -52,7 +52,9 @@ describe('sign up epic tests', () => {
     });
 
     it('should dispatch no action needed action if password error is present', async () => {
-        const initialState = { value: { authentication: buildState({ passwordError: new Error() }) } };
+        const initialState = {
+            value: { authentication: buildState({ passwordError: new Error('ohNoSomethingIsWrong') }) },
+        };
         const sentAction: LoginModalVerifyRequest = {
             type: LoginModalActionTypes.VERIFY_REQUEST,
             verify: LoginModalVerifyTypes.USER_PASSWORD,
@@ -61,6 +63,6 @@ describe('sign up epic tests', () => {
         const state$ = signUpEpic(of(sentAction), initialState);
         const receivedAction = await lastValueFrom(state$);
 
-        expect(receivedAction).toEqual({ type: 'NO_ACTION_NEEDED' });
+        expect(receivedAction).toEqual(loginModalNoAction());
     });
 });
