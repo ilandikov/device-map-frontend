@@ -100,10 +100,12 @@ export function loginModalNoAction(): LoginModalNoAction {
     return { type: LoginModalActionTypes.NO_ACTION };
 }
 
-export function loginModalFailureNotification(): LoginModalSuccessNotification {
+export function loginModalFailureNotification(
+    notification: LoginModalNotificationTypes,
+): LoginModalSuccessNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
-        notification: LoginModalNotificationTypes.SIGNUP,
+        notification: notification,
         result: LoginModalNotificationResult.FAILURE,
     };
 }

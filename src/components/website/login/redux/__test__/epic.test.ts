@@ -51,7 +51,11 @@ describe('sign up epic tests', () => {
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        await verifyCognitoEpic(sentAction, initialState, loginModalFailureNotification());
+        await verifyCognitoEpic(
+            sentAction,
+            initialState,
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP),
+        );
     });
 
     it('should dispatch no action needed action if password error is present', async () => {
