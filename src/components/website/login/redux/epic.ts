@@ -10,7 +10,7 @@ import {
     LoginModalVerifyTypes,
     loginModalFailureNotification,
     loginModalNoAction,
-    loginModalNotification,
+    loginModalSuccessNotification,
 } from './actions';
 import { AuthenticationState } from './state';
 
@@ -33,7 +33,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return cognitoClient
                         .signUp(authenticationState.email, authenticationState.password)
                         .then(() => {
-                            return loginModalNotification(LoginModalNotificationTypes.SIGNUP);
+                            return loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP);
                         })
                         .catch(() => {
                             return loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP);
@@ -44,7 +44,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
                         .then(() => {
-                            return loginModalNotification(LoginModalNotificationTypes.OTP);
+                            return loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
                         })
                         .catch(() => {
                             return {
