@@ -23,8 +23,8 @@ export enum LoginModalInputTypes {
 }
 
 export enum LoginModalNotificationTypes {
-    SIGNUP_OK = 'signUpOk',
-    OTP_OK = 'OTPOk',
+    SIGNUP = 'signUp',
+    OTP = 'OTP',
 }
 
 export enum LoginModalNotificationResult {
@@ -110,7 +110,7 @@ export function loginModalNoAction(): LoginModalNoAction {
 export function loginModalFailureNotification(): LoginModalFailureNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
-        notification: LoginModalNotificationTypes.SIGNUP_OK,
+        notification: LoginModalNotificationTypes.SIGNUP,
         result: LoginModalNotificationResult.FAILURE,
     };
 }

@@ -41,11 +41,7 @@ describe('sign up epic tests', () => {
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        await verifyCognitoEpic(
-            sentAction,
-            initialState,
-            loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK),
-        );
+        await verifyCognitoEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.SIGNUP));
     });
 
     it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
@@ -73,7 +69,7 @@ describe('OTP verification epic tests', () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '849621' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.OTP_OK));
+        await verifyCognitoEpic(sentAction, initialState, loginModalNotification(LoginModalNotificationTypes.OTP));
     });
 
     it('should dispatch OTP verification failed action if the OTP code is incorrect', async () => {
@@ -82,7 +78,7 @@ describe('OTP verification epic tests', () => {
 
         await verifyCognitoEpic(sentAction, initialState, {
             type: LoginModalActionTypes.NOTIFICATION,
-            notification: LoginModalNotificationTypes.OTP_OK,
+            notification: LoginModalNotificationTypes.OTP,
             result: LoginModalNotificationResult.FAILURE,
         });
     });

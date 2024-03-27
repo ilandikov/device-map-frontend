@@ -33,7 +33,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return cognitoClient
                         .signUp(authenticationState.email, authenticationState.password)
                         .then(() => {
-                            return loginModalNotification(LoginModalNotificationTypes.SIGNUP_OK);
+                            return loginModalNotification(LoginModalNotificationTypes.SIGNUP);
                         })
                         .catch(() => {
                             return loginModalFailureNotification();
@@ -44,12 +44,12 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
                         .then(() => {
-                            return loginModalNotification(LoginModalNotificationTypes.OTP_OK);
+                            return loginModalNotification(LoginModalNotificationTypes.OTP);
                         })
                         .catch(() => {
                             return {
                                 type: LoginModalActionTypes.NOTIFICATION,
-                                notification: LoginModalNotificationTypes.OTP_OK,
+                                notification: LoginModalNotificationTypes.OTP,
                                 result: LoginModalNotificationResult.FAILURE,
                             };
                         });
