@@ -6,7 +6,7 @@ import { buildState } from './reducer.test';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
-        if (username === 'signMeUp@cognito.com' && password === 'securely') {
+        if (username === 'signMeUp@cognito.com' && password === '%secure1Pass') {
             return Promise.resolve();
         }
 
@@ -20,7 +20,7 @@ describe('sign up epic tests', () => {
             value: {
                 authentication: buildState({
                     email: 'signMeUp@cognito.com',
-                    password: 'securely',
+                    password: '%secure1Pass',
                     passwordError: null,
                 }),
             },
