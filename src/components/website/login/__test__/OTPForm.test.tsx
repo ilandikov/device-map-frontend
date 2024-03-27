@@ -91,8 +91,8 @@ describe('OTP form tests', () => {
         const input1 = getInput(container, 1);
         const input2 = getInput(container, 2);
         const input3 = getInput(container, 3);
-        fireEvent.change(input1, createEvent('1'));
         fireEvent.change(input2, createEvent('2'));
+        fireEvent.change(input1, createEvent('1'));
 
         fireEvent.change(input0, createEvent('1'));
 
@@ -104,10 +104,13 @@ describe('OTP form action tests', () => {
     it('should send OTP code and verification request on next button click', () => {
         const container = renderForActionDispatchTest(<OTPForm />);
 
+        const input0 = getInput(container, 0);
+        fireEvent.change(input0, createEvent('2'));
+
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, ''));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, '2'));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
     });
 });
