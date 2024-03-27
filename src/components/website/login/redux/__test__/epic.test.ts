@@ -35,6 +35,7 @@ describe('sign up epic tests', () => {
             email: 'signMeUp@cognito.com',
             password: '%secure1Pass',
             passwordError: null,
+            emailError: null,
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
@@ -58,6 +59,7 @@ describe('sign up epic tests', () => {
     it('should dispatch no action needed action if password error is present', async () => {
         const initialState = buildAuthenticationStateForEpic({
             passwordError: new Error('ohNoSomethingIsWrongWeCannotSolve'),
+            emailError: new Error('ohNoSomethingIsWrongWeCannotSolve'),
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
