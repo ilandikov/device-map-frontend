@@ -52,19 +52,13 @@ describe('sign up epic tests', () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'notAValidEmail', password: 'softpassword' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        const state$ = signUpEpic(of(sentAction), initialState);
-        const receivedAction = await lastValueFrom(state$);
-
-        expect(receivedAction).toEqual({ type: LoginModalActionTypes.SIGNUP_FAILED });
+        await verifySignUpEpic(sentAction, initialState, { type: LoginModalActionTypes.SIGNUP_FAILED });
     });
 
     it('should dispatch no action needed action if password error is present', async () => {
         const initialState = buildAuthenticationStateForEpic({ passwordError: new Error('ohNoSomethingIsWrong') });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
-        const state$ = signUpEpic(of(sentAction), initialState);
-        const receivedAction = await lastValueFrom(state$);
-
-        expect(receivedAction).toEqual(loginModalNoAction());
+        await verifySignUpEpic(sentAction, initialState, loginModalNoAction());
     });
 });

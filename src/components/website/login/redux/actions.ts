@@ -37,6 +37,10 @@ export interface LoginModalSignUpOk {
     type: LoginModalActionTypes.SIGNUP_OK;
 }
 
+export interface LoginModalSignUpFailed {
+    type: LoginModalActionTypes.SIGNUP_FAILED;
+}
+
 export interface LoginModalVerifyRequest {
     type: LoginModalActionTypes.VERIFY_REQUEST;
     verify: LoginModalVerifyTypes;
@@ -51,6 +55,7 @@ export type LoginModalAction =
     | LoginModalButtonClick
     | LoginModalVerifyRequest
     | LoginModalSignUpOk
+    | LoginModalSignUpFailed
     | LoginModalNoAction;
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
