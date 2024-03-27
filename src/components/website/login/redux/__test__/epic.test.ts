@@ -1,17 +1,7 @@
-import { Observable, lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
-import { signUpEpic } from '../epic';
-import {
-    LoginModalAction,
-    LoginModalActionTypes,
-    LoginModalVerifyRequest,
-    LoginModalVerifyTypes,
-    loginModalNoAction,
-    loginModalVerifyRequest,
-} from '../actions';
-
+import { LoginModalActionTypes, LoginModalVerifyTypes, loginModalNoAction, loginModalVerifyRequest } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
-import { AuthenticationState } from '../state';
+import { verifySignUpEpic } from './epicTestHelpers';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
@@ -23,29 +13,7 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     },
 );
 
-async function verifyEpic(
-    epicToTest: (action$, state$) => Observable<any>,
-    sentAction: LoginModalVerifyRequest,
-    initialState: any,
-    expectedAction: any,
-) {
-    const state$ = epicToTest(of(sentAction), initialState);
-    const receivedAction = await lastValueFrom(state$);
-
-    expect(receivedAction).toEqual(expectedAction);
-}
-
 describe('sign up epic tests', () => {
-    async function verifySignUpEpic(
-        sentAction: LoginModalVerifyRequest,
-        initialState: {
-            value: { authentication: AuthenticationState };
-        },
-        expectedAction: LoginModalAction,
-    ) {
-        await verifyEpic(signUpEpic, sentAction, initialState, expectedAction);
-    }
-
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
         const initialState = buildAuthenticationStateForEpic({
             email: 'signMeUp@cognito.com',
