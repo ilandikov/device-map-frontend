@@ -34,7 +34,7 @@ export function authentication(
             switch (action.verify) {
                 case LoginModalVerifyTypes.USER_EMAIL: {
                     if (isEmailValid(state.email) === false) {
-                        return { ...state, emailError: new Error(MailInputError.NOT_VALID) };
+                        return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
@@ -42,33 +42,36 @@ export function authentication(
                             return {
                                 ...state,
                                 step: AuthenticationStep.LOGIN_OTP,
-                                emailError: null,
+                                error: null,
                             };
                         }
 
-                        return { ...state, emailError: new Error(MailInputError.NOT_REGISTERED) };
+                        return { ...state, error: new Error(MailInputError.NOT_REGISTERED) };
                     }
 
                     if (isEmailRegistered(state.email)) {
-                        return { ...state, emailError: new Error(MailInputError.ALREADY_EXISTS) };
+                        return { ...state, error: new Error(MailInputError.ALREADY_EXISTS) };
                     }
 
                     return {
                         ...state,
                         step: AuthenticationStep.SIGNUP_PASSWORD,
-                        emailError: null,
+                        error: null,
                     };
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     if (state.password !== state.passwordRepeat) {
-                        return { ...state, passwordError: new Error(PasswordError.NOT_MATCHING) };
+                        return {
+                            ...state,
+                            error: new Error(PasswordError.NOT_MATCHING),
+                        };
                     }
                     const passwordError = getPasswordError(state.password);
                     const nextAuthenticationStep = passwordError
                         ? AuthenticationStep.SIGNUP_PASSWORD
                         : AuthenticationStep.SIGNUP_OTP;
 
-                    return { ...state, step: nextAuthenticationStep, passwordError };
+                    return { ...state, step: nextAuthenticationStep, error: passwordError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
                     return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };
@@ -85,7 +88,7 @@ export function authentication(
                 case 'accountRegister':
                     return { ...state, step: AuthenticationStep.MAIL_INPUT };
                 case 'accountLogin':
-                    return { ...state, step: AuthenticationStep.LOGIN, emailError: null };
+                    return { ...state, step: AuthenticationStep.LOGIN, error: null };
                 case 'cancel':
                     return authenticationInitialState;
                 case 'resetPassword':

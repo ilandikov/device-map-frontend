@@ -30,10 +30,9 @@ export function buildAuthenticationState(partialState: Partial<AuthenticationSta
     return {
         step: partialState.step ?? AuthenticationStep.WELCOME,
         email: partialState.email ?? '',
-        emailError: partialState.emailError ?? null,
+        error: partialState.error ?? null,
         password: partialState.password ?? '',
         passwordRepeat: partialState.passwordRepeat ?? '',
-        passwordError: partialState.passwordError ?? null,
         OTP: partialState.OTP ?? '',
     };
 }

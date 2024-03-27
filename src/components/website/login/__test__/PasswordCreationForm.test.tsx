@@ -29,9 +29,7 @@ jest.mock('react-redux', () => ({
 
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockAuthenticationState({
-            passwordError: null,
-        });
+        mockAuthenticationState({});
         const component = renderForSnapshotTest(<PasswordCreationForm />);
 
         expect(component).toMatchSnapshot();
@@ -39,7 +37,7 @@ describe('PasswordCreationForm snapshot tests', () => {
 
     it('should match the snapshot at password not match error', () => {
         mockAuthenticationState({
-            passwordError: new Error(),
+            error: new Error(),
         });
         const component = renderForSnapshotTest(<PasswordCreationForm />);
 
