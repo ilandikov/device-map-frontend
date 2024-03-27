@@ -61,14 +61,18 @@ export function authentication(
                 }
                 case LoginModalVerifyTypes.USER_PASSWORD: {
                     if (state.password !== state.passwordRepeat) {
-                        return { ...state, passwordError: new Error(PasswordError.NOT_MATCHING) };
+                        return {
+                            ...state,
+                            passwordError: new Error(PasswordError.NOT_MATCHING),
+                            emailError: new Error(PasswordError.NOT_MATCHING),
+                        };
                     }
                     const passwordError = getPasswordError(state.password);
                     const nextAuthenticationStep = passwordError
                         ? AuthenticationStep.SIGNUP_PASSWORD
                         : AuthenticationStep.SIGNUP_OTP;
 
-                    return { ...state, step: nextAuthenticationStep, passwordError };
+                    return { ...state, step: nextAuthenticationStep, passwordError, emailError: passwordError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
                     return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };

@@ -196,6 +196,7 @@ describe('user password logic', () => {
             password: 'passwordsMatchAndAreStrong9%',
             passwordRepeat: 'passwordsMatchAndAreStrong9%',
             passwordError: new Error('thisIsSoWrong'),
+            emailError: new Error('thisIsSoWrong'),
         });
 
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
@@ -203,6 +204,7 @@ describe('user password logic', () => {
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.SIGNUP_OTP,
             passwordError: null,
+            emailError: null,
         });
     });
 
@@ -217,6 +219,7 @@ describe('user password logic', () => {
 
         verifyStateChange(initialState, action, {
             passwordError: new Error(PasswordError.NOT_MATCHING),
+            emailError: new Error(PasswordError.NOT_MATCHING),
         });
     });
 });
