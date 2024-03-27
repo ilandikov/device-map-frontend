@@ -30,6 +30,15 @@ jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
     },
 );
 
+describe('epic test not related to a particular service', () => {
+    it('should dispatch no action if there is an error', async () => {
+        const initialState = buildAuthenticationStateForEpic({ error: new Error('oops!!!!!') });
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
+    });
+});
+
 describe('sign up epic tests', () => {
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
         const initialState = buildAuthenticationStateForEpic({

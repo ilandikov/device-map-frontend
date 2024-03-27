@@ -40,6 +40,9 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 }
                 case LoginModalVerifyTypes.OTP: {
                     const authenticationState: AuthenticationState = state$.value.authentication;
+                    if (authenticationState.error !== null) {
+                        return loginModalNoAction();
+                    }
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
                         .then(() => {
