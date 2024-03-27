@@ -89,8 +89,6 @@ export function authentication(
                     return { ...state, step: AuthenticationStep.LOGIN_PASSWORD_RESET, password: '' };
                 case 'next':
                     switch (state.step) {
-                        case AuthenticationStep.SIGNUP_OTP:
-                            return { ...state, step: AuthenticationStep.SIGNUP_OTP_LOADING };
                         case AuthenticationStep.LOGIN_OTP:
                             return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
                         default:
