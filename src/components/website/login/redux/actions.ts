@@ -94,3 +94,7 @@ interface LoginModalNoAction {
 export function loginModalNoAction(): LoginModalNoAction {
     return { type: LoginModalActionTypes.NO_ACTION };
 }
+
+export function loginModalFailureNotification(): LoginModalFailureNotification {
+    return { type: LoginModalActionTypes.SIGNUP_FAILED };
+}
