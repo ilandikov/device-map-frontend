@@ -33,7 +33,6 @@ export function buildAuthenticationState(partialState: Partial<AuthenticationSta
         emailError: partialState.emailError ?? null,
         password: partialState.password ?? '',
         passwordRepeat: partialState.passwordRepeat ?? '',
-        passwordError: partialState.passwordError ?? null,
         OTP: partialState.OTP ?? '',
     };
 }

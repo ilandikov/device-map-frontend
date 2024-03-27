@@ -24,7 +24,6 @@ export const authenticationInitialState: AuthenticationState = {
     emailError: null,
     password: '',
     passwordRepeat: '',
-    passwordError: null,
     OTP: '',
 };
 
@@ -36,7 +35,6 @@ export interface AuthenticationState {
     password: string;
     passwordRepeat: string;
     // TODO make userPasswordError optional
-    passwordError: Error | null;
     OTP: string;
 }
 

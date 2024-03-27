@@ -63,7 +63,6 @@ export function authentication(
                     if (state.password !== state.passwordRepeat) {
                         return {
                             ...state,
-                            passwordError: new Error(PasswordError.NOT_MATCHING),
                             emailError: new Error(PasswordError.NOT_MATCHING),
                         };
                     }
@@ -72,7 +71,7 @@ export function authentication(
                         ? AuthenticationStep.SIGNUP_PASSWORD
                         : AuthenticationStep.SIGNUP_OTP;
 
-                    return { ...state, step: nextAuthenticationStep, passwordError, emailError: passwordError };
+                    return { ...state, step: nextAuthenticationStep, emailError: passwordError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
                     return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };

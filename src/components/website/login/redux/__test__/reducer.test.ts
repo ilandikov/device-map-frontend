@@ -70,7 +70,6 @@ describe('navigation logic', () => {
             emailError: new Error('whack'),
             password: 'authMePls',
             passwordRepeat: 'authMePls',
-            passwordError: new Error('funnyPassword'),
             OTP: '654342',
         });
         const action = loginModalButtonClick('cancel');
@@ -81,7 +80,6 @@ describe('navigation logic', () => {
             emailError: null,
             password: '',
             passwordRepeat: '',
-            passwordError: null,
             OTP: '',
         });
     });
@@ -195,7 +193,6 @@ describe('user password logic', () => {
             step: AuthenticationStep.SIGNUP_PASSWORD,
             password: 'passwordsMatchAndAreStrong9%',
             passwordRepeat: 'passwordsMatchAndAreStrong9%',
-            passwordError: new Error('thisIsSoWrong'),
             emailError: new Error('thisIsSoWrong'),
         });
 
@@ -203,7 +200,6 @@ describe('user password logic', () => {
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.SIGNUP_OTP,
-            passwordError: null,
             emailError: null,
         });
     });
@@ -218,7 +214,6 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            passwordError: new Error(PasswordError.NOT_MATCHING),
             emailError: new Error(PasswordError.NOT_MATCHING),
         });
     });
