@@ -36,3 +36,11 @@ export function buildAuthenticationState(partialState: Partial<AuthenticationSta
         passwordError: partialState.passwordError ?? null,
     };
 }
+
+export function buildAuthenticationStateForEpic(partialState: Partial<AuthenticationState>) {
+    return {
+        value: {
+            authentication: buildAuthenticationState(partialState),
+        },
+    };
+}

@@ -3,8 +3,7 @@ import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
 import { LoginModalActionTypes, LoginModalVerifyTypes, loginModalNoAction, loginModalVerifyRequest } from '../actions';
 
-import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
-import { AuthenticationState } from '../state';
+import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     async (username: string, password: string): Promise<any> => {
@@ -15,14 +14,6 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
         return Promise.reject();
     },
 );
-
-function buildAuthenticationStateForEpic(partialState: Partial<AuthenticationState>) {
-    return {
-        value: {
-            authentication: buildAuthenticationState(partialState),
-        },
-    };
-}
 
 describe('sign up epic tests', () => {
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
