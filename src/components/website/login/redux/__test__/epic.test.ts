@@ -81,7 +81,7 @@ describe('OTP verification epic tests', () => {
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         await verifyCognitoEpic(sentAction, initialState, {
-            type: LoginModalActionTypes.OTP_FAILED,
+            type: LoginModalActionTypes.NOTIFICATION,
             notification: LoginModalNotificationTypes.OTP_OK,
             result: LoginModalNotificationResult.FAILURE,
         });
