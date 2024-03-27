@@ -46,7 +46,10 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             return loginModalNotification(LoginModalNotificationTypes.OTP_OK);
                         })
                         .catch(() => {
-                            return { type: LoginModalActionTypes.OTP_FAILED };
+                            return {
+                                type: LoginModalActionTypes.OTP_FAILED,
+                                notification: LoginModalNotificationTypes.OTP_OK,
+                            };
                         });
                 }
             }

@@ -47,6 +47,7 @@ export interface LoginModalSuccessNotification {
 
 export interface LoginModalFailureNotification {
     type: LoginModalActionTypes.SIGNUP_FAILED | LoginModalActionTypes.OTP_FAILED;
+    notification: LoginModalNotificationTypes;
 }
 
 export interface LoginModalVerifyRequest {
@@ -96,5 +97,5 @@ export function loginModalNoAction(): LoginModalNoAction {
 }
 
 export function loginModalFailureNotification(): LoginModalFailureNotification {
-    return { type: LoginModalActionTypes.SIGNUP_FAILED };
+    return { type: LoginModalActionTypes.SIGNUP_FAILED, notification: LoginModalNotificationTypes.SIGNUP_OK };
 }

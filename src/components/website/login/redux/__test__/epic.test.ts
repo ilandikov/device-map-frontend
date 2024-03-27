@@ -79,6 +79,9 @@ describe('OTP verification epic tests', () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '000000' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, { type: LoginModalActionTypes.OTP_FAILED });
+        await verifyCognitoEpic(sentAction, initialState, {
+            type: LoginModalActionTypes.OTP_FAILED,
+            notification: LoginModalNotificationTypes.OTP_OK,
+        });
     });
 });
