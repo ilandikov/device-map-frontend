@@ -1,4 +1,4 @@
-import { lastValueFrom, of } from 'rxjs';
+import { Observable, lastValueFrom, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { signUpEpic } from '../epic';
 import {
@@ -23,6 +23,18 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     },
 );
 
+async function verifyEpic(
+    epicToTest: (action$, state$) => Observable<any>,
+    sentAction: LoginModalVerifyRequest,
+    initialState: any,
+    expectedAction: any,
+) {
+    const state$ = epicToTest(of(sentAction), initialState);
+    const receivedAction = await lastValueFrom(state$);
+
+    expect(receivedAction).toEqual(expectedAction);
+}
+
 describe('sign up epic tests', () => {
     async function verifySignUpEpic(
         sentAction: LoginModalVerifyRequest,
@@ -31,10 +43,7 @@ describe('sign up epic tests', () => {
         },
         expectedAction: LoginModalAction,
     ) {
-        const state$ = signUpEpic(of(sentAction), initialState);
-        const receivedAction = await lastValueFrom(state$);
-
-        expect(receivedAction).toEqual(expectedAction);
+        await verifyEpic(signUpEpic, sentAction, initialState, expectedAction);
     }
 
     it('should dispatch sign up ok action on sign up if there is no password error', async () => {
