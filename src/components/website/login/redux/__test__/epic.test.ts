@@ -1,7 +1,5 @@
 import CognitoClient from '@mancho.devs/cognito';
 import {
-    LoginModalActionTypes,
-    LoginModalNotificationResult,
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
@@ -88,10 +86,10 @@ describe('OTP verification epic tests', () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '000000' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, {
-            type: LoginModalActionTypes.NOTIFICATION,
-            notification: LoginModalNotificationTypes.OTP,
-            result: LoginModalNotificationResult.FAILURE,
-        });
+        await verifyCognitoEpic(
+            sentAction,
+            initialState,
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP),
+        );
     });
 });

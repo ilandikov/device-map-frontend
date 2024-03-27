@@ -4,7 +4,6 @@ import { ofType } from 'redux-observable';
 import {
     LoginModalAction,
     LoginModalActionTypes,
-    LoginModalNotificationResult,
     LoginModalNotificationTypes,
     LoginModalVerifyRequest,
     LoginModalVerifyTypes,
@@ -47,11 +46,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             return loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
                         })
                         .catch(() => {
-                            return {
-                                type: LoginModalActionTypes.NOTIFICATION,
-                                notification: LoginModalNotificationTypes.OTP,
-                                result: LoginModalNotificationResult.FAILURE,
-                            };
+                            return loginModalFailureNotification(LoginModalNotificationTypes.OTP);
                         });
                 }
             }
