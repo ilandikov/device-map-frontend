@@ -18,7 +18,7 @@ const cognitoClient = new CognitoClient({
     ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
 });
 
-export function buildMessageFromCognitoException(reason) {
+export function buildMessageFromCognitoException(reason: any): string {
     switch (reason.code) {
         case 'UsernameExistsException':
         case 'UserNotFoundException':
