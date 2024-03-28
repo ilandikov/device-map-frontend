@@ -12,21 +12,12 @@ import {
     loginModalSuccessNotification,
 } from './actions';
 import { AuthenticationState } from './state';
+import { buildMessageFromCognitoException } from './epicHelpers';
 
 const cognitoClient = new CognitoClient({
     UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
     ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
 });
-
-export function buildMessageFromCognitoException(reason: any): string {
-    switch (reason.code) {
-        case 'UsernameExistsException':
-        case 'UserNotFoundException':
-            return `remoteAuthService${reason.code}`;
-    }
-
-    return 'remoteAuthServiceUnknownException';
-}
 
 export function cognito(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
