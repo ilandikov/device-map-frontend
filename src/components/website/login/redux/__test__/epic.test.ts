@@ -113,4 +113,10 @@ describe('Cognito exception management', () => {
 
         expect(explanation).toEqual('remoteAuthServiceUnknownException');
     });
+
+    it('should explain an exception with a different format', () => {
+        const explanation = buildMessageFromCognitoException({ nonExistentField: 'thisIsWhatIGotForYou' });
+
+        expect(explanation).toEqual('remoteAuthServiceUnknownException');
+    });
 });
