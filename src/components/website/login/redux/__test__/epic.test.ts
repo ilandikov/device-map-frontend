@@ -16,7 +16,7 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
             return Promise.resolve();
         }
 
-        return Promise.reject();
+        return Promise.reject('');
     },
 );
 
@@ -26,7 +26,7 @@ jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
             return Promise.resolve();
         }
 
-        return Promise.reject();
+        return Promise.reject('');
     },
 );
 
@@ -65,7 +65,7 @@ describe('sign up epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, {}),
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, ''),
         );
     });
 });
@@ -89,7 +89,7 @@ describe('OTP verification epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.OTP, {}),
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP, ''),
         );
     });
 });
