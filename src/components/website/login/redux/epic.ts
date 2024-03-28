@@ -37,7 +37,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         .catch((reason) => {
                             return loginModalFailureNotification(
                                 LoginModalNotificationTypes.SIGNUP,
-                                reason && reason.toString(),
+                                reason && `${reason.code}: ${reason.message}`,
                             );
                         });
                 }
