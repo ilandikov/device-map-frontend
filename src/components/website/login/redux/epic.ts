@@ -18,6 +18,10 @@ const cognitoClient = new CognitoClient({
     ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
 });
 
+function buildMessageFromCognitoException(reason) {
+    return reason && `${reason.code}: ${reason.message}`;
+}
+
 export function cognito(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
@@ -37,7 +41,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         .catch((reason) => {
                             return loginModalFailureNotification(
                                 LoginModalNotificationTypes.SIGNUP,
-                                reason && `${reason.code}: ${reason.message}`,
+                                buildMessageFromCognitoException(reason),
                             );
                         });
                 }
