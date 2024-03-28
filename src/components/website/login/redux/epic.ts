@@ -21,9 +21,8 @@ const cognitoClient = new CognitoClient({
 export function buildMessageFromCognitoException(reason) {
     switch (reason.code) {
         case 'UsernameExistsException':
-            return 'remoteAuthServiceUsernameExists';
         case 'UserNotFoundException':
-            return 'remoteAuthServiceUserNotFound';
+            return `remoteAuthService${reason.code}`;
     }
     return reason && `${reason.code}: ${reason.message}`;
 }

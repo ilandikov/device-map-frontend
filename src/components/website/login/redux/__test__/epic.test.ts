@@ -99,12 +99,12 @@ describe('Cognito exception management', () => {
     it('should explain UsernameExistsException exception', () => {
         const explanation = buildMessageFromCognitoException({ code: 'UsernameExistsException' });
 
-        expect(explanation).toEqual('remoteAuthServiceUsernameExists');
+        expect(explanation).toEqual('remoteAuthServiceUsernameExistsException');
     });
 
     it('should explain UsernameExistsException exception', () => {
         const explanation = buildMessageFromCognitoException({ code: 'UserNotFoundException' });
 
-        expect(explanation).toEqual('remoteAuthServiceUserNotFound');
+        expect(explanation).toEqual('remoteAuthServiceUserNotFoundException');
     });
 });
