@@ -54,7 +54,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         .catch((reason) => {
                             return loginModalFailureNotification(
                                 LoginModalNotificationTypes.OTP,
-                                reason && reason.toString(),
+                                buildMessageFromCognitoException(reason),
                             );
                         });
                 }

@@ -26,7 +26,7 @@ jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
             return Promise.resolve();
         }
 
-        return Promise.reject('');
+        return Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
     },
 );
 
@@ -89,7 +89,7 @@ describe('OTP verification epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.OTP, ''),
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'MockedException: signIn() went wrong'),
         );
     });
 });
