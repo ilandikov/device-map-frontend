@@ -1,4 +1,10 @@
-import { LoginModalAction, LoginModalActionTypes, LoginModalInputTypes, LoginModalVerifyTypes } from './actions';
+import {
+    LoginModalAction,
+    LoginModalActionTypes,
+    LoginModalInputTypes,
+    LoginModalNotificationResult,
+    LoginModalVerifyTypes,
+} from './actions';
 import {
     AuthenticationState,
     AuthenticationStep,
@@ -15,6 +21,9 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
+            if (action.result === LoginModalNotificationResult.FAILURE) {
+                return { ...state, error: new Error(action.reason) };
+            }
             return state;
         }
         case LoginModalActionTypes.INPUT: {
