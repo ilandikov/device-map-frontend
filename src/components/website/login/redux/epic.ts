@@ -24,7 +24,8 @@ export function buildMessageFromCognitoException(reason) {
         case 'UserNotFoundException':
             return `remoteAuthService${reason.code}`;
     }
-    return reason && `${reason.code}: ${reason.message}`;
+
+    return 'remoteAuthServiceUnknownException';
 }
 
 export function cognito(action$, state$): Observable<LoginModalAction> {

@@ -66,7 +66,7 @@ describe('sign up epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'MockedException: signUp() went wrong'),
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
         );
     });
 });
@@ -90,7 +90,7 @@ describe('OTP verification epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'MockedException: signIn() went wrong'),
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
         );
     });
 });
@@ -106,5 +106,11 @@ describe('Cognito exception management', () => {
         const explanation = buildMessageFromCognitoException({ code: 'UserNotFoundException' });
 
         expect(explanation).toEqual('remoteAuthServiceUserNotFoundException');
+    });
+
+    it('should explain an unknown exception', () => {
+        const explanation = buildMessageFromCognitoException({ code: 'omgWhatIsThis?!' });
+
+        expect(explanation).toEqual('remoteAuthServiceUnknownException');
     });
 });
