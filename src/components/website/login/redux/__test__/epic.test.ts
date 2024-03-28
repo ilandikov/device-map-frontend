@@ -8,6 +8,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
+import { buildMessageFromCognitoException } from '../epic';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
@@ -91,5 +92,19 @@ describe('OTP verification epic tests', () => {
             initialState,
             loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'MockedException: signIn() went wrong'),
         );
+    });
+});
+
+describe('Cognito exception management', () => {
+    it('should explain UsernameExistsException exception', () => {
+        const explanation = buildMessageFromCognitoException({ code: 'UsernameExistsException' });
+
+        expect(explanation).toEqual('remoteAuthServiceUsernameExists');
+    });
+
+    it('should explain UsernameExistsException exception', () => {
+        const explanation = buildMessageFromCognitoException({ code: 'UserNotFoundException' });
+
+        expect(explanation).toEqual('remoteAuthServiceUserNotFound');
     });
 });
