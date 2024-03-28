@@ -35,7 +35,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             return loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP);
                         })
                         .catch(() => {
-                            return loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP);
+                            return loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, {});
                         });
                 }
                 case LoginModalVerifyTypes.OTP: {
@@ -45,7 +45,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             return loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
                         })
                         .catch(() => {
-                            return loginModalFailureNotification(LoginModalNotificationTypes.OTP);
+                            return loginModalFailureNotification(LoginModalNotificationTypes.OTP, {});
                         });
                 }
             }

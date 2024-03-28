@@ -70,6 +70,7 @@ export interface LoginModalNotification {
     type: LoginModalActionTypes.NOTIFICATION;
     notification: LoginModalNotificationTypes;
     result: LoginModalNotificationResult;
+    reason?: any;
 }
 
 export enum LoginModalNotificationTypes {
@@ -90,11 +91,15 @@ export function loginModalSuccessNotification(notification: LoginModalNotificati
     };
 }
 
-export function loginModalFailureNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
+export function loginModalFailureNotification(
+    notification: LoginModalNotificationTypes,
+    reason: any,
+): LoginModalNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
         notification: notification,
         result: LoginModalNotificationResult.FAILURE,
+        reason: reason,
     };
 }
 
