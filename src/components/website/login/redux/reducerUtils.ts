@@ -46,7 +46,7 @@ export function getPasswordError(password: string): Error | null {
         return new Error(PasswordError.NO_SPECIAL_CHARS);
     }
 
-    if (password.length < 10) {
+    if (password.length < 8) {
         return new Error(PasswordError.TOO_SHORT);
     }
 
