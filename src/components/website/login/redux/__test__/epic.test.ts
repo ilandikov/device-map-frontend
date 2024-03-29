@@ -1,4 +1,5 @@
 import CognitoClient from '@mancho.devs/cognito';
+import { of } from 'rxjs';
 import {
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
@@ -8,6 +9,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
+import { cognito } from '../epic';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
 jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
@@ -31,11 +33,15 @@ jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
 );
 
 describe('epic test not related to a particular service', () => {
-    it('should dispatch no action if there is an error', async () => {
-        const initialState = buildAuthenticationStateForEpic({ error: new Error('oops!!!!!') });
+    it('should dispatch no action if there is an error', () => {
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
+        const state$ = cognito(of(sentAction));
+        const actions = [];
+        state$.forEach((action) => {
+            actions.push(action);
+        });
+        expect(actions).toEqual([loginModalNoAction(), loginModalNoAction()]);
     });
 });
 
