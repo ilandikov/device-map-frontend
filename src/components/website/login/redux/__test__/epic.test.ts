@@ -16,7 +16,7 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
             return Promise.resolve();
         }
 
-        return Promise.reject();
+        return Promise.reject({ code: 'MockedException', message: 'signUp() went wrong' });
     },
 );
 
@@ -26,7 +26,7 @@ jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
             return Promise.resolve();
         }
 
-        return Promise.reject();
+        return Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
     },
 );
 
@@ -65,7 +65,7 @@ describe('sign up epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP),
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
         );
     });
 });
@@ -89,7 +89,7 @@ describe('OTP verification epic tests', () => {
         await verifyCognitoEpic(
             sentAction,
             initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.OTP),
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
         );
     });
 });

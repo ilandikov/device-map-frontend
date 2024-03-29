@@ -2,8 +2,10 @@ import { authentication } from '../reducer';
 import {
     LoginModalAction,
     LoginModalInputTypes,
+    LoginModalNotificationTypes,
     LoginModalVerifyTypes,
     loginModalButtonClick,
+    loginModalFailureNotification,
     loginModalInput,
     loginModalNoAction,
     loginModalVerifyRequest,
@@ -345,5 +347,16 @@ describe('password reset logic', () => {
         verifyStateChange(initialState, action, {
             error: new Error(MailInputError.NOT_REGISTERED),
         });
+    });
+});
+
+describe('notification logic', () => {
+    it('should set error from failure notification', () => {
+        const initialState = buildAuthenticationState({
+            error: null,
+        });
+        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'thisIsWhy');
+
+        verifyStateChange(initialState, action, { error: new Error('thisIsWhy') });
     });
 });

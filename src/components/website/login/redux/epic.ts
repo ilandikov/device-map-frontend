@@ -12,6 +12,7 @@ import {
     loginModalSuccessNotification,
 } from './actions';
 import { AuthenticationState } from './state';
+import { buildMessageFromCognitoException } from './epicHelpers';
 
 const cognitoClient = new CognitoClient({
     UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
@@ -34,8 +35,11 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         .then(() => {
                             return loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP);
                         })
-                        .catch(() => {
-                            return loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP);
+                        .catch((reason) => {
+                            return loginModalFailureNotification(
+                                LoginModalNotificationTypes.SIGNUP,
+                                buildMessageFromCognitoException(reason),
+                            );
                         });
                 }
                 case LoginModalVerifyTypes.OTP: {
@@ -44,8 +48,11 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         .then(() => {
                             return loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
                         })
-                        .catch(() => {
-                            return loginModalFailureNotification(LoginModalNotificationTypes.OTP);
+                        .catch((reason) => {
+                            return loginModalFailureNotification(
+                                LoginModalNotificationTypes.OTP,
+                                buildMessageFromCognitoException(reason),
+                            );
                         });
                 }
             }
