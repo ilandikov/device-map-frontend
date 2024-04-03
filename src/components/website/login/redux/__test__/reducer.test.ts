@@ -381,7 +381,7 @@ describe('notification logic', () => {
         const initialState = buildAuthenticationState({
             error: null,
         });
-        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'thisIsWhy');
+        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
 
         verifyStateChange(initialState, action, { error: new Error('thisIsWhy') });
     });

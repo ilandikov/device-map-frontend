@@ -33,11 +33,11 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return cognitoClient
                         .signUp(authenticationState.email, authenticationState.password)
                         .then(() => {
-                            return loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP);
+                            return loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
                         })
                         .catch((reason) => {
                             return loginModalFailureNotification(
-                                LoginModalNotificationTypes.SIGNUP,
+                                LoginModalNotificationTypes.SIGN_UP,
                                 buildMessageFromCognitoException(reason),
                             );
                         });

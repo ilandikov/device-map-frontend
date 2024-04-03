@@ -75,7 +75,7 @@ export interface LoginModalNotification {
 }
 
 export enum LoginModalNotificationTypes {
-    SIGNUP = 'signUp',
+    SIGN_UP = 'signUp',
     OTP = 'OTP',
     SIGN_IN = 'signIn',
     FORGOT_PASSWORD = 'forgotPassword',

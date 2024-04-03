@@ -13,10 +13,10 @@ import { verifyCognitoEpic } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP)],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
         [
             Promise.reject(),
-            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'remoteAuthServiceUnknownException'),
         ],
     ])(
         'should dispatch sign up notification when remote answer is: %s',
