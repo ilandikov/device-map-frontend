@@ -77,6 +77,7 @@ export enum LoginModalNotificationTypes {
     SIGNUP = 'signUp',
     OTP = 'OTP',
     SIGN_IN = 'SIGN_IN',
+    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
 }
 
 export enum LoginModalNotificationResult {

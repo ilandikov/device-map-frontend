@@ -11,7 +11,7 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
 } from './actions';
-import { AuthenticationState } from './state';
+import { AuthenticationState, AuthenticationStep } from './state';
 import { buildMessageFromCognitoException } from './epicHelpers';
 
 const cognitoClient = new CognitoClient({
@@ -64,6 +64,23 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         .catch((reason) => {
                             return loginModalFailureNotification(
                                 LoginModalNotificationTypes.OTP,
+                                buildMessageFromCognitoException(reason),
+                            );
+                        });
+                }
+                case LoginModalVerifyTypes.USER_EMAIL: {
+                    if (authenticationState.step === AuthenticationStep.MAIL_INPUT) {
+                        return loginModalNoAction();
+                    }
+
+                    return cognitoClient
+                        .forgotPassword(authenticationState.email)
+                        .then(() => {
+                            return loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
+                        })
+                        .catch((reason) => {
+                            return loginModalFailureNotification(
+                                LoginModalNotificationTypes.FORGOT_PASSWORD,
                                 buildMessageFromCognitoException(reason),
                             );
                         });
