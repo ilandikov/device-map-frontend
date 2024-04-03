@@ -282,17 +282,19 @@ describe('login logic', () => {
         });
     });
 
-    it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
+    it('should transition from login to password reset state on password reset button click, keep the mail, reset the password and the error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
             email: 'writeMe@mail.com',
             password: 'iForgot',
+            error: new Error('triedToInputPasswordButFailed'),
         });
         const action = loginModalButtonClick('resetPassword');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             password: '',
+            error: null,
         });
     });
 

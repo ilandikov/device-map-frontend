@@ -115,7 +115,7 @@ export function authentication(
                 case 'cancel':
                     return authenticationInitialState;
                 case 'resetPassword':
-                    return { ...state, step: AuthenticationStep.LOGIN_PASSWORD_RESET, password: '' };
+                    return { ...state, step: AuthenticationStep.LOGIN_PASSWORD_RESET, password: '', error: null };
                 case 'next':
                     switch (state.step) {
                         case AuthenticationStep.LOGIN_OTP:
