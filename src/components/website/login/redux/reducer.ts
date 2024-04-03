@@ -25,7 +25,9 @@ export function authentication(
                 if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
                     return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
                 }
+            }
 
+            if (action.result === LoginModalNotificationResult.FAILURE) {
                 return { ...state, error: new Error(action.reason) };
             }
 
