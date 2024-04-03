@@ -306,6 +306,18 @@ describe('login logic', () => {
             step: AuthenticationStep.LOGGED_IN,
         });
     });
+
+    it('should transition from loading state back to login step on login failure notification', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'thereHasBeenAnError');
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGIN,
+            error: new Error('thereHasBeenAnError'),
+        });
+    });
 });
 
 describe('password reset logic', () => {
