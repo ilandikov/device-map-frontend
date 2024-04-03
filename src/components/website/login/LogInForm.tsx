@@ -29,7 +29,7 @@ export function LogInForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    emailError={errorWithoutMessage}
+                    error={errorWithoutMessage}
                 />
                 <PasswordInputBox
                     helpText={t('enterPassword')}

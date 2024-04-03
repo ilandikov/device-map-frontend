@@ -6,7 +6,7 @@ export function MailInputBox(props: {
     helpText: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
     email: string;
-    emailError: Error | null;
+    error: Error | null;
 }) {
     const { t } = useI18next();
 
@@ -27,9 +27,7 @@ export function MailInputBox(props: {
                     data-testid="emailInput"
                 />
             </div>
-            {props.emailError && (
-                <p className="login-modal-input-help login-modal-wrong-input">{t(props.emailError.message)}</p>
-            )}
+            {props.error && <p className="login-modal-input-help login-modal-wrong-input">{t(props.error.message)}</p>}
         </>
     );
 }
