@@ -89,14 +89,17 @@ describe('password reset tests', () => {
                 'remoteAuthServiceUnknownException',
             ),
         ],
-    ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
-        jest.spyOn(CognitoClient.prototype, 'forgotPassword').mockImplementation(async (): Promise<any> => {
-            return remoteServiceAnswer;
-        });
+    ])(
+        'should dispatch forgot password notification when remote answer is: %s',
+        async (remoteServiceAnswer, expectedAction) => {
+            jest.spyOn(CognitoClient.prototype, 'forgotPassword').mockImplementation(async (): Promise<any> => {
+                return remoteServiceAnswer;
+            });
 
-        const initialState = buildAuthenticationStateForEpic({});
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+            const initialState = buildAuthenticationStateForEpic({});
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
 
-        await verifyCognitoEpic(sentAction, initialState, expectedAction);
-    });
+            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        },
+    );
 });
