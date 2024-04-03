@@ -35,7 +35,7 @@ describe('OTP verification epic tests', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
         [
-            Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' }),
+            Promise.reject({ code: 'MockedException', message: 'signUpConfirmCode() went wrong' }),
             loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
         ],
     ])(
