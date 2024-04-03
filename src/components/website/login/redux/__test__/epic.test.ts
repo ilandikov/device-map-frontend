@@ -3,10 +3,12 @@ import {
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
+    loginModalNoAction,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
+import { AuthenticationStep } from '../state';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
@@ -67,4 +69,37 @@ describe('user sign in tests', () => {
 
         await verifyCognitoEpic(sentAction, initialState, expectedAction);
     });
+});
+
+describe('password reset tests', () => {
+    it('should not call cognito service on email verification during mail input step', async () => {
+        jest.spyOn(CognitoClient.prototype, 'forgotPassword').mockImplementation(() => Promise.resolve());
+        const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.MAIL_INPUT });
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+
+        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
+    });
+
+    it.each([
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD)],
+        [
+            Promise.reject(),
+            loginModalFailureNotification(
+                LoginModalNotificationTypes.FORGOT_PASSWORD,
+                'remoteAuthServiceUnknownException',
+            ),
+        ],
+    ])(
+        'should dispatch forgot password notification when remote answer is: %s',
+        async (remoteServiceAnswer, expectedAction) => {
+            jest.spyOn(CognitoClient.prototype, 'forgotPassword').mockImplementation(async (): Promise<any> => {
+                return remoteServiceAnswer;
+            });
+
+            const initialState = buildAuthenticationStateForEpic({});
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET);
+
+            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        },
+    );
 });

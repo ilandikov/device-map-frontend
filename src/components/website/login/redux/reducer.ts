@@ -3,6 +3,7 @@ import {
     LoginModalActionTypes,
     LoginModalInputTypes,
     LoginModalNotificationResult,
+    LoginModalNotificationTypes,
     LoginModalVerifyTypes,
 } from './actions';
 import {
@@ -21,6 +22,23 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
+            switch (action.notification) {
+                case LoginModalNotificationTypes.FORGOT_PASSWORD: {
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
+                            error: new Error(action.reason),
+                        };
+                    }
+
+                    return {
+                        ...state,
+                        step: AuthenticationStep.LOGIN_OTP,
+                    };
+                }
+            }
+
             if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
                 if (action.result === LoginModalNotificationResult.FAILURE) {
                     return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
@@ -57,15 +75,11 @@ export function authentication(
                     }
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
-                        if (isEmailRegistered(state.email)) {
-                            return {
-                                ...state,
-                                step: AuthenticationStep.LOGIN_OTP,
-                                error: null,
-                            };
-                        }
-
-                        return { ...state, error: new Error(MailInputError.NOT_REGISTERED) };
+                        return {
+                            ...state,
+                            step: AuthenticationStep.LOGIN_OTP_LOADING,
+                            error: null,
+                        };
                     }
 
                     if (isEmailRegistered(state.email)) {

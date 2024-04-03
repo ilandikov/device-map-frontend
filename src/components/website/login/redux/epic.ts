@@ -68,6 +68,19 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                         });
                 }
+                case LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET: {
+                    return cognitoClient
+                        .forgotPassword(authenticationState.email)
+                        .then(() => {
+                            return loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
+                        })
+                        .catch((reason) => {
+                            return loginModalFailureNotification(
+                                LoginModalNotificationTypes.FORGOT_PASSWORD,
+                                buildMessageFromCognitoException(reason),
+                            );
+                        });
+                }
             }
 
             return loginModalNoAction();

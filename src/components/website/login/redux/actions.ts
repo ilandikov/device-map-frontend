@@ -32,6 +32,7 @@ export enum LoginModalVerifyTypes {
     USER_PASSWORD = 'userPassword',
     USER_EMAIL_AND_PASSWORD = 'userEmailAndPassword',
     OTP = 'OTP',
+    USER_EMAIL_FOR_PASSWORD_RESET = 'userEmailForPasswordReset',
 }
 
 export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginModalVerifyRequest {
@@ -77,6 +78,7 @@ export enum LoginModalNotificationTypes {
     SIGNUP = 'signUp',
     OTP = 'OTP',
     SIGN_IN = 'SIGN_IN',
+    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
 }
 
 export enum LoginModalNotificationResult {
