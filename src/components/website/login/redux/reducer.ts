@@ -84,7 +84,7 @@ export function authentication(
                     return { ...state, step: nextAuthenticationStep, error: passwordError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
-                    return state;
+                    return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
                 }
                 case LoginModalVerifyTypes.OTP: {
                     if (state.OTP.length < 6) {

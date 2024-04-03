@@ -270,15 +270,15 @@ describe('OTP logic', () => {
 });
 
 describe('login logic', () => {
-    it('should stay at login state after correct user credentials have been presented', () => {
+    it('should transition to loading state on user and password verify request', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
-            email: 'user@mail.com',
-            password: 'short',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
-        verifyStateChange(initialState, action, {});
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
     });
 
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
