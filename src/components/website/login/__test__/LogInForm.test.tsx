@@ -30,8 +30,14 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('LogInForm snapshot test', () => {
-    it('should match snapshot', () => {
+    it('should match snapshot without error', () => {
         mockAuthenticationState({ email: 'verify@me.uk' });
+        const component = renderForSnapshotTest(<LogInForm />);
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match snapshot with error', () => {
+        mockAuthenticationState({ error: new Error('somethingIsWrong') });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
