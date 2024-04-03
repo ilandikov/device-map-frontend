@@ -66,7 +66,7 @@ describe('OTP verification epic tests', () => {
             return Promise.resolve();
         });
 
-        const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '849621' });
+        const initialState = buildAuthenticationStateForEpic({});
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         await verifyCognitoEpic(
@@ -81,7 +81,7 @@ describe('OTP verification epic tests', () => {
             return Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
         });
 
-        const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '000000' });
+        const initialState = buildAuthenticationStateForEpic({});
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         await verifyCognitoEpic(
