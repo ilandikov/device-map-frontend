@@ -125,7 +125,7 @@ describe('email input logic', () => {
             email: 'good@email.com',
             error: new Error('omgSomethingIsWrong'),
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.SIGNUP_PASSWORD,
@@ -138,7 +138,7 @@ describe('email input logic', () => {
             step: AuthenticationStep.MAIL_INPUT,
             email: 'this is not an email!',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         verifyStateChange(initialState, action, { error: new Error(MailInputError.NOT_VALID) });
     });
@@ -148,7 +148,7 @@ describe('email input logic', () => {
             step: AuthenticationStep.MAIL_INPUT,
             email: 'already@exists.com',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         verifyStateChange(initialState, action, {
             error: new Error(MailInputError.ALREADY_EXISTS),
@@ -199,7 +199,7 @@ describe('user password logic', () => {
             error: new Error('thisIsSoWrong'),
         });
 
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.SIGNUP_OTP,
@@ -214,7 +214,7 @@ describe('user password logic', () => {
             passwordRepeat: 'likeForSureDontMatch',
         });
 
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
         verifyStateChange(initialState, action, {
             error: new Error(PasswordError.NOT_MATCHING),
@@ -275,7 +275,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_OTP_LOADING,
@@ -329,7 +329,7 @@ describe('password reset logic', () => {
             email: 'valid@mail.com',
             error: new Error(MailInputError.NOT_VALID),
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_OTP_LOADING,
@@ -342,7 +342,7 @@ describe('password reset logic', () => {
             step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             email: '!notAMail',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         verifyStateChange(initialState, action, {
             error: new Error(MailInputError.NOT_VALID),

@@ -36,7 +36,7 @@ export function PasswordCreationForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD));
                     }}
                 >
                     {t('next')}

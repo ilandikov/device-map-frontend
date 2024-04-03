@@ -89,7 +89,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD),
+            loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD),
         );
     });
 

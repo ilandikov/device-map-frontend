@@ -53,7 +53,7 @@ export function LogInForm() {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
-                            dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD));
+                            dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD));
                         }}
                     >
                         {t('next')}

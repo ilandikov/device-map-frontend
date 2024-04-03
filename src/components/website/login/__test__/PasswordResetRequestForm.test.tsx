@@ -51,7 +51,7 @@ describe('PasswordResetRequest form action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET),
+            loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET),
         );
     });
 });

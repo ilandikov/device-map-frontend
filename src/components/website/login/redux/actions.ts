@@ -28,11 +28,11 @@ export interface LoginModalVerifyRequest {
 }
 
 export enum LoginModalVerifyTypes {
-    USER_EMAIL = 'userEmail',
-    USER_PASSWORD = 'userPassword',
-    USER_EMAIL_AND_PASSWORD = 'userEmailAndPassword',
+    EMAIL = 'email',
+    PASSWORD = 'password',
+    EMAIL_AND_PASSWORD = 'emailAndPassword',
     OTP = 'OTP',
-    USER_EMAIL_FOR_PASSWORD_RESET = 'userEmailForPasswordReset',
+    EMAIL_FOR_PASSWORD_RESET = 'emailForPasswordReset',
 }
 
 export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginModalVerifyRequest {

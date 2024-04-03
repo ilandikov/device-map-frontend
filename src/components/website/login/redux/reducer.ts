@@ -69,7 +69,7 @@ export function authentication(
         }
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
-                case LoginModalVerifyTypes.USER_EMAIL: {
+                case LoginModalVerifyTypes.EMAIL: {
                     if (isEmailValid(state.email) === false) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
@@ -92,7 +92,7 @@ export function authentication(
                         error: null,
                     };
                 }
-                case LoginModalVerifyTypes.USER_PASSWORD: {
+                case LoginModalVerifyTypes.PASSWORD: {
                     if (state.password !== state.passwordRepeat) {
                         return {
                             ...state,
@@ -106,7 +106,7 @@ export function authentication(
 
                     return { ...state, step: nextAuthenticationStep, error: passwordError };
                 }
-                case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
+                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
                 }
                 case LoginModalVerifyTypes.OTP: {

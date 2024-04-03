@@ -29,7 +29,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
             }
 
             switch (action.verify) {
-                case LoginModalVerifyTypes.USER_PASSWORD: {
+                case LoginModalVerifyTypes.PASSWORD: {
                     return cognitoClient
                         .signUp(authenticationState.email, authenticationState.password)
                         .then(() => {
@@ -42,7 +42,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                         });
                 }
-                case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
+                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
                     return cognitoClient
                         .signIn(authenticationState.email, authenticationState.password)
                         .then(() => {
@@ -68,7 +68,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                         });
                 }
-                case LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET: {
+                case LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET: {
                     return cognitoClient
                         .forgotPassword(authenticationState.email)
                         .then(() => {
