@@ -20,16 +20,6 @@ jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
     },
 );
 
-jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
-    async (username: string, verificationCode: string): Promise<any> => {
-        if (username === 'verify@code.me' && verificationCode === '849621') {
-            return Promise.resolve();
-        }
-
-        return Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
-    },
-);
-
 describe('epic test not related to a particular service', () => {
     it('should dispatch no action if there is an error', async () => {
         const initialState = buildAuthenticationStateForEpic({ error: new Error('oops!!!!!') });
@@ -71,6 +61,16 @@ describe('sign up epic tests', () => {
 });
 
 describe('OTP verification epic tests', () => {
+    jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(
+        async (username: string, verificationCode: string): Promise<any> => {
+            if (username === 'verify@code.me' && verificationCode === '849621') {
+                return Promise.resolve();
+            }
+
+            return Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
+        },
+    );
+
     it('should dispatch OTP verification ok action if the OTP code is incorrect', async () => {
         const initialState = buildAuthenticationStateForEpic({ email: 'verify@code.me', OTP: '849621' });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
