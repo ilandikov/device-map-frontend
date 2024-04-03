@@ -17,7 +17,8 @@ export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { email } = useAuthentication();
+    const { email, error } = useAuthentication();
+    const errorWithoutMessage = error ? new Error() : null;
 
     return (
         <>
@@ -28,7 +29,7 @@ export function LogInForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
                     }}
-                    emailError={null}
+                    emailError={errorWithoutMessage}
                 />
                 <PasswordInputBox
                     helpText={t('enterPassword')}
@@ -36,7 +37,7 @@ export function LogInForm() {
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
                     }}
-                    error={null}
+                    error={errorWithoutMessage}
                 />
             </div>
             <div className="login-modal-button-container">
