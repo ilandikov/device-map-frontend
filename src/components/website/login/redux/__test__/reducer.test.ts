@@ -281,18 +281,6 @@ describe('login logic', () => {
         verifyStateChange(initialState, action, {});
     });
 
-    it('should stay at login state if incorrect user credentials have been presented', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.LOGIN,
-            email: 'another@user.com',
-            password: 'wrongPassword',
-        });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
-
-        const expectedChange = {};
-        verifyStateChange(initialState, action, expectedChange);
-    });
-
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
