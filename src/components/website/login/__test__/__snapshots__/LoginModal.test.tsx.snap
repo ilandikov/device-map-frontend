@@ -591,7 +591,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
 </div>
 `;
 
-exports[`LoginModal snapshot tests should match the snapshot at password reset stage 1`] = `
+exports[`LoginModal snapshot tests should match the snapshot at password reset request stage 1`] = `
 <div
   className="login-modal-window"
 >
@@ -668,6 +668,36 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
       >
         OTPSendSMS
       </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginModal snapshot tests should match the snapshot at password reset stage 1`] = `
+<div
+  className="login-modal-window"
+>
+  <div
+    className="login-modal-container"
+  >
+    <div
+      className="login-modal-header-container"
+    >
+      <img
+        alt="login-modal-logo"
+        className="login-modal-logo"
+        src="test-file-stub"
+      />
+      <p
+        className="login-modal-header"
+      >
+        brand map
+      </p>
+      <p
+        className="login-modal-header-description"
+      >
+        loginCallToAction
+      </p>
     </div>
   </div>
 </div>
