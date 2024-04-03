@@ -349,6 +349,21 @@ describe('password reset logic', () => {
         });
     });
 
+    it('should transition back to email input for password reset step on failure', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(
+            LoginModalNotificationTypes.FORGOT_PASSWORD,
+            'thereHasBeenAnError',
+        );
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
+            error: new Error('thereHasBeenAnError'),
+        });
+    });
+
     it.failing('should set mail error when such a mail is presented for password reset', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_PASSWORD_RESET,
