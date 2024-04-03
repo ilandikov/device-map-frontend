@@ -24,7 +24,7 @@ export function MailInputForm() {
                     helpText={t('onlyEmail')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
                     }}
                     error={error}
                 />

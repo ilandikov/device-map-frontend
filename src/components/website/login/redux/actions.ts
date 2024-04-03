@@ -51,9 +51,9 @@ export interface LoginModalInput {
 }
 
 export enum LoginModalInputTypes {
-    USER_EMAIL = 'userEmail',
-    USER_PASSWORD = 'userPassword',
-    USER_PASSWORD_REPEAT = 'userPasswordRepeat',
+    EMAIL = 'userEmail',
+    PASSWORD = 'userPassword',
+    PASSWORD_REPEAT = 'userPasswordRepeat',
     OTP = 'OTP',
 }
 

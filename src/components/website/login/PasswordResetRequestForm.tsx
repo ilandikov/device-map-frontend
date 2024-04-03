@@ -19,7 +19,7 @@ export function PasswordResetRequestForm() {
                     helpText={t('mailForPasswordReset')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
                     }}
                     error={error}
                 />

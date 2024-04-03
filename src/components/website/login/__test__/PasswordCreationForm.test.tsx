@@ -58,7 +58,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'verySecurePassword1'),
+            loginModalInput(LoginModalInputTypes.PASSWORD, 'verySecurePassword1'),
         );
     });
 
@@ -70,7 +70,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'evenBetterPassword'),
+            loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, 'evenBetterPassword'),
         );
     });
 

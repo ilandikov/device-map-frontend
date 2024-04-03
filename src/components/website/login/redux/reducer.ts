@@ -55,11 +55,11 @@ export function authentication(
         }
         case LoginModalActionTypes.INPUT: {
             switch (action.input.type) {
-                case LoginModalInputTypes.USER_EMAIL:
+                case LoginModalInputTypes.EMAIL:
                     return { ...state, email: action.input.payload };
-                case LoginModalInputTypes.USER_PASSWORD:
+                case LoginModalInputTypes.PASSWORD:
                     return { ...state, password: action.input.payload };
-                case LoginModalInputTypes.USER_PASSWORD_REPEAT:
+                case LoginModalInputTypes.PASSWORD_REPEAT:
                     return { ...state, passwordRepeat: action.input.payload };
                 case LoginModalInputTypes.OTP:
                     return { ...state, OTP: action.input.payload };

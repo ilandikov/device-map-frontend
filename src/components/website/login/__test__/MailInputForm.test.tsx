@@ -66,10 +66,7 @@ describe('MailInputForm action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
-        );
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.EMAIL, 'new@email.com'));
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {

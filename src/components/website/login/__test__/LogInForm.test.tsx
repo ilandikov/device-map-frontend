@@ -57,7 +57,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'hereIsMyMail@server.com'),
+            loginModalInput(LoginModalInputTypes.EMAIL, 'hereIsMyMail@server.com'),
         );
     });
 
@@ -77,7 +77,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'strongPassword'),
+            loginModalInput(LoginModalInputTypes.PASSWORD, 'strongPassword'),
         );
     });
 

@@ -19,7 +19,7 @@ export function PasswordCreationForm() {
                     helpText={t('enterPassword')}
                     testId="userPassword"
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.PASSWORD, event.target.value));
                     }}
                     error={error}
                 />
@@ -27,7 +27,7 @@ export function PasswordCreationForm() {
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, event.target.value));
                     }}
                     error={error}
                 />
