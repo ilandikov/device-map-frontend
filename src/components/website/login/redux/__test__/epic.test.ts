@@ -61,33 +61,32 @@ describe('sign up epic tests', () => {
 });
 
 describe('OTP verification epic tests', () => {
+    const promiseOk = Promise.resolve();
+    const expectedActionOk = loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
+    const promiseNok = Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
+    const expectedActionNok = loginModalFailureNotification(
+        LoginModalNotificationTypes.OTP,
+        'remoteAuthServiceUnknownException',
+    );
+
     it('should dispatch OTP verification ok action if the OTP code is incorrect', async () => {
         jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
-            return Promise.resolve();
+            return promiseOk;
         });
 
         const initialState = buildAuthenticationStateForEpic({});
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(
-            sentAction,
-            initialState,
-            loginModalSuccessNotification(LoginModalNotificationTypes.OTP),
-        );
+        await verifyCognitoEpic(sentAction, initialState, expectedActionOk);
     });
-
     it('should dispatch OTP verification failed action if the OTP code is incorrect', async () => {
         jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
-            return Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
+            return promiseNok;
         });
 
         const initialState = buildAuthenticationStateForEpic({});
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(
-            sentAction,
-            initialState,
-            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
-        );
+        await verifyCognitoEpic(sentAction, initialState, expectedActionNok);
     });
 });
