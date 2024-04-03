@@ -61,17 +61,12 @@ describe('sign up epic tests', () => {
 });
 
 describe('OTP verification epic tests', () => {
-    const promiseOk = Promise.resolve();
-    const expectedActionOk = loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
-    const promiseNok = Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' });
-    const expectedActionNok = loginModalFailureNotification(
-        LoginModalNotificationTypes.OTP,
-        'remoteAuthServiceUnknownException',
-    );
-
     it.each([
-        [promiseOk, expectedActionOk],
-        [promiseNok, expectedActionNok],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
+        [
+            Promise.reject({ code: 'MockedException', message: 'signIn() went wrong' }),
+            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
+        ],
     ])(
         'should dispatch OTP verification action if the OTP code is incorrect',
         async (remoteServiceAnswer, expectedAction) => {
