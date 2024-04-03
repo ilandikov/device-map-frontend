@@ -34,7 +34,7 @@ export function authentication(
 
                     return {
                         ...state,
-                        step: AuthenticationStep.LOGIN,
+                        step: AuthenticationStep.LOGIN_OTP,
                     };
                 }
             }

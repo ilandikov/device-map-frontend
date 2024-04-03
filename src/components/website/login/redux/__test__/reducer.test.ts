@@ -349,16 +349,14 @@ describe('password reset logic', () => {
         });
     });
 
-    it('should transition to login step after password has been successfully reset and keep the mail and the password', () => {
+    it('should transition to OTP input step after password reset OTP has been successfully sent', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_OTP_LOADING,
-            email: 'keep@this.com',
-            password: 'please!6A',
         });
         const action = loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGIN,
+            step: AuthenticationStep.LOGIN_OTP,
         });
     });
 
