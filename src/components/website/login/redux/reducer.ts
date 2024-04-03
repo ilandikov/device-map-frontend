@@ -24,7 +24,18 @@ export function authentication(
         case LoginModalActionTypes.NOTIFICATION: {
             switch (action.notification) {
                 case LoginModalNotificationTypes.FORGOT_PASSWORD: {
-                    return { ...state, step: AuthenticationStep.LOGIN_PASSWORD_RESET, error: new Error(action.reason) };
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
+                            error: new Error(action.reason),
+                        };
+                    }
+
+                    return {
+                        ...state,
+                        step: AuthenticationStep.LOGIN,
+                    };
                 }
             }
 

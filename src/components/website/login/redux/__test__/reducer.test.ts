@@ -349,6 +349,19 @@ describe('password reset logic', () => {
         });
     });
 
+    it('should transition to login step after password has been successfully reset and keep the mail and the password', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+            email: 'keep@this.com',
+            password: 'please!6A',
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGIN,
+        });
+    });
+
     it('should transition back to email input for password reset step on failure', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_OTP_LOADING,
