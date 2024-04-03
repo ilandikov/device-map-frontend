@@ -21,8 +21,8 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
-            if (action.result === LoginModalNotificationResult.FAILURE) {
-                if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
+            if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
+                if (action.result === LoginModalNotificationResult.FAILURE) {
                     return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
                 }
             }
