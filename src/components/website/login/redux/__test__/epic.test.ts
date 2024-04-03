@@ -13,7 +13,7 @@ describe('user sign up tests', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP)],
         [
-            Promise.reject({ code: 'MockedException', message: 'signUp() went wrong' }),
+            Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
         ],
     ])(
@@ -35,7 +35,7 @@ describe('user sign up OTP code confirmation tests', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
         [
-            Promise.reject({ code: 'MockedException', message: 'signUpConfirmCode() went wrong' }),
+            Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
         ],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
