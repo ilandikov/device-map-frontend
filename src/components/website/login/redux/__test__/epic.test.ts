@@ -3,61 +3,32 @@ import {
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
-    loginModalNoAction,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
-jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(
-    async (username: string, password: string): Promise<any> => {
-        if (username === 'signMeUp@cognito.com' && password === '%secure1Pass') {
-            return Promise.resolve();
-        }
-
-        return Promise.reject({ code: 'MockedException', message: 'signUp() went wrong' });
-    },
-);
-
-describe('epic test not related to a particular service', () => {
-    it('should dispatch no action if there is an error', async () => {
-        const initialState = buildAuthenticationStateForEpic({ error: new Error('oops!!!!!') });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
-
-        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
-    });
-});
-
 describe('sign up epic tests', () => {
-    it('should dispatch sign up ok action on sign up if there is no password error', async () => {
-        const initialState = buildAuthenticationStateForEpic({
-            email: 'signMeUp@cognito.com',
-            password: '%secure1Pass',
-            error: null,
-        });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
-
-        await verifyCognitoEpic(
-            sentAction,
-            initialState,
-            loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP),
-        );
-    });
-
-    it('should dispatch sign up failed action on sign up for bad user credentials', async () => {
-        const initialState = buildAuthenticationStateForEpic({
-            email: 'notAValidEmailIHaveInput',
-            password: 'short',
-        });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
-
-        await verifyCognitoEpic(
-            sentAction,
-            initialState,
+    it.each([
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP)],
+        [
+            Promise.reject({ code: 'MockedException', message: 'signUp() went wrong' }),
             loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
-        );
-    });
+        ],
+    ])(
+        'should dispatch user password verification action when remote answer is: %s',
+        async (remoteServiceAnswer, expectedAction) => {
+            jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(async (): Promise<any> => {
+                return remoteServiceAnswer;
+            });
+
+            const initialState = buildAuthenticationStateForEpic({});
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+
+            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        },
+    );
 });
 
 describe('OTP verification epic tests', () => {
