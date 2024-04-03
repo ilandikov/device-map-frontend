@@ -57,15 +57,11 @@ export function authentication(
                     }
 
                     if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
-                        if (isEmailRegistered(state.email)) {
-                            return {
-                                ...state,
-                                step: AuthenticationStep.LOGIN_OTP,
-                                error: null,
-                            };
-                        }
-
-                        return { ...state, error: new Error(MailInputError.NOT_REGISTERED) };
+                        return {
+                            ...state,
+                            step: AuthenticationStep.LOGIN_OTP_LOADING,
+                            error: null,
+                        };
                     }
 
                     if (isEmailRegistered(state.email)) {
