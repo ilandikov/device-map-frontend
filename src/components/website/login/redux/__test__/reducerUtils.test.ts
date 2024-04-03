@@ -1,11 +1,5 @@
 import { AuthenticationStep, PasswordError } from '../state';
-import {
-    authenticationStepFromOTP,
-    authenticationStepFromUserLogin,
-    getPasswordError,
-    isEmailRegistered,
-    isEmailValid,
-} from '../reducerUtils';
+import { authenticationStepFromOTP, getPasswordError, isEmailRegistered, isEmailValid } from '../reducerUtils';
 
 describe('user email validation tests', () => {
     it('should validate good email', () => {
@@ -72,19 +66,5 @@ describe('OTP logic tests', () => {
         const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.LOGIN_OTP);
 
         expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN_OTP_LOADING);
-    });
-});
-
-describe('User authentication logic tests', () => {
-    it('should move a good user to logged state', () => {
-        const nextUserAuthState = authenticationStepFromUserLogin('user@mail.com', 'short');
-
-        expect(nextUserAuthState).toEqual(AuthenticationStep.LOGGED_IN);
-    });
-
-    it('should keep a bad user at the password input state', () => {
-        const nextUserAuthState = authenticationStepFromUserLogin('bad@user.com', 'badPassword');
-
-        expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN);
     });
 });

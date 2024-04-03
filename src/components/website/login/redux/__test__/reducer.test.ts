@@ -8,6 +8,7 @@ import {
     loginModalFailureNotification,
     loginModalInput,
     loginModalNoAction,
+    loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import {
@@ -270,29 +271,15 @@ describe('OTP logic', () => {
 });
 
 describe('login logic', () => {
-    it('should transition to logged in state after correct user credentials have been presented', () => {
+    it('should transition to loading state on user and password verify request', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
-            email: 'user@mail.com',
-            password: 'short',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGGED_IN,
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
         });
-    });
-
-    it('should stay at login state if incorrect user credentials have been presented', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.LOGIN,
-            email: 'another@user.com',
-            password: 'wrongPassword',
-        });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
-
-        const expectedChange = {};
-        verifyStateChange(initialState, action, expectedChange);
     });
 
     it('should transition from login to password reset state on password reset button click, keep the mail, reset the password', () => {
@@ -306,6 +293,29 @@ describe('login logic', () => {
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             password: '',
+        });
+    });
+
+    it('should transition from loading state to logged in on login success notification', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGGED_IN,
+        });
+    });
+
+    it('should transition from loading state back to login step on login failure notification', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'thereHasBeenAnError');
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGIN,
+            error: new Error('thereHasBeenAnError'),
         });
     });
 });

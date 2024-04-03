@@ -13,7 +13,7 @@ import {
     PasswordError,
     authenticationInitialState,
 } from './state';
-import { authenticationStepFromUserLogin, getPasswordError, isEmailRegistered, isEmailValid } from './reducerUtils';
+import { getPasswordError, isEmailRegistered, isEmailValid } from './reducerUtils';
 
 export function authentication(
     state: AuthenticationState = authenticationInitialState,
@@ -21,9 +21,18 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
+            if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
+                if (action.result === LoginModalNotificationResult.FAILURE) {
+                    return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
+                }
+
+                return { ...state, step: AuthenticationStep.LOGGED_IN };
+            }
+
             if (action.result === LoginModalNotificationResult.FAILURE) {
                 return { ...state, error: new Error(action.reason) };
             }
+
             return state;
         }
         case LoginModalActionTypes.INPUT: {
@@ -84,7 +93,7 @@ export function authentication(
                     return { ...state, step: nextAuthenticationStep, error: passwordError };
                 }
                 case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
-                    return { ...state, step: authenticationStepFromUserLogin(state.email, state.password) };
+                    return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
                 }
                 case LoginModalVerifyTypes.OTP: {
                     if (state.OTP.length < 6) {
