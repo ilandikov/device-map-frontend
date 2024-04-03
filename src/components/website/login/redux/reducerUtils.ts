@@ -1,13 +1,5 @@
 import { AuthenticationStep, PasswordError } from './state';
 
-export function authenticationStepFromUserLogin(email: string, password: string) {
-    if (email === 'user@mail.com' && password === 'short') {
-        return AuthenticationStep.LOGGED_IN;
-    }
-
-    return AuthenticationStep.LOGIN;
-}
-
 export function authenticationStepFromOTP(userAuthState: AuthenticationStep.LOGIN_OTP | AuthenticationStep.SIGNUP_OTP) {
     if (userAuthState === AuthenticationStep.LOGIN_OTP) {
         return AuthenticationStep.LOGIN_OTP_LOADING;
