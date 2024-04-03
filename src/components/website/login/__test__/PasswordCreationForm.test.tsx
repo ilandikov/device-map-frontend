@@ -58,7 +58,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.USER_PASSWORD, 'verySecurePassword1'),
+            loginModalInput(LoginModalInputTypes.PASSWORD, 'verySecurePassword1'),
         );
     });
 
@@ -70,7 +70,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.USER_PASSWORD_REPEAT, 'evenBetterPassword'),
+            loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, 'evenBetterPassword'),
         );
     });
 
@@ -80,6 +80,6 @@ describe('PasswordCreationForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD));
     });
 });

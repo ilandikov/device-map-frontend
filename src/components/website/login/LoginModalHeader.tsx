@@ -24,23 +24,23 @@ function getHeaderDetails(authenticationStep: AuthenticationStep) {
 
     switch (authenticationStep) {
         case AuthenticationStep.MAIL_INPUT:
-        case AuthenticationStep.SIGNUP_OTP:
-        case AuthenticationStep.SIGNUP_OTP_LOADING:
-        case AuthenticationStep.SIGNUP_PASSWORD:
+        case AuthenticationStep.PASSWORD_CREATION_OTP:
+        case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
+        case AuthenticationStep.PASSWORD_CREATION:
             return {
                 header: t('signUp'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
         case AuthenticationStep.LOGIN:
-        case AuthenticationStep.LOGIN_OTP:
-        case AuthenticationStep.LOGIN_OTP_LOADING:
+        case AuthenticationStep.PASSWORD_RESET_OTP:
+        case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
-        case AuthenticationStep.LOGIN_PASSWORD_RESET:
+        case AuthenticationStep.PASSWORD_RESET_REQUEST:
             return {
                 header: t('newPassword'),
                 description: t('finikMapProductDescription'),

@@ -28,11 +28,11 @@ export interface LoginModalVerifyRequest {
 }
 
 export enum LoginModalVerifyTypes {
-    USER_EMAIL = 'userEmail',
-    USER_PASSWORD = 'userPassword',
-    USER_EMAIL_AND_PASSWORD = 'userEmailAndPassword',
+    EMAIL = 'email',
+    PASSWORD = 'password',
+    EMAIL_AND_PASSWORD = 'emailAndPassword',
     OTP = 'OTP',
-    USER_EMAIL_FOR_PASSWORD_RESET = 'userEmailForPasswordReset',
+    EMAIL_FOR_PASSWORD_RESET = 'emailForPasswordReset',
 }
 
 export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginModalVerifyRequest {
@@ -51,9 +51,9 @@ export interface LoginModalInput {
 }
 
 export enum LoginModalInputTypes {
-    USER_EMAIL = 'userEmail',
-    USER_PASSWORD = 'userPassword',
-    USER_PASSWORD_REPEAT = 'userPasswordRepeat',
+    EMAIL = 'userEmail',
+    PASSWORD = 'userPassword',
+    PASSWORD_REPEAT = 'userPasswordRepeat',
     OTP = 'OTP',
 }
 
@@ -75,10 +75,10 @@ export interface LoginModalNotification {
 }
 
 export enum LoginModalNotificationTypes {
-    SIGNUP = 'signUp',
+    SIGN_UP = 'signUp',
     OTP = 'OTP',
-    SIGN_IN = 'SIGN_IN',
-    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
+    SIGN_IN = 'signIn',
+    FORGOT_PASSWORD = 'forgotPassword',
 }
 
 export enum LoginModalNotificationResult {

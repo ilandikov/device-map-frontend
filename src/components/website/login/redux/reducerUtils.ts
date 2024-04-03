@@ -1,11 +1,13 @@
 import { AuthenticationStep, PasswordError } from './state';
 
-export function authenticationStepFromOTP(userAuthState: AuthenticationStep.LOGIN_OTP | AuthenticationStep.SIGNUP_OTP) {
-    if (userAuthState === AuthenticationStep.LOGIN_OTP) {
-        return AuthenticationStep.LOGIN_OTP_LOADING;
+export function authenticationStepFromOTP(
+    userAuthState: AuthenticationStep.PASSWORD_RESET_OTP | AuthenticationStep.PASSWORD_CREATION_OTP,
+) {
+    if (userAuthState === AuthenticationStep.PASSWORD_RESET_OTP) {
+        return AuthenticationStep.PASSWORD_RESET_OTP_LOADING;
     }
 
-    return AuthenticationStep.SIGNUP_OTP_LOADING;
+    return AuthenticationStep.PASSWORD_CREATION_OTP_LOADING;
 }
 
 export function isEmailValid(email: string) {

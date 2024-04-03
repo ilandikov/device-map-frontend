@@ -15,21 +15,21 @@ describe('Login Modal action creator tests', () => {
     });
 
     it('should create verify request action', () => {
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         expect(action).toEqual({
             type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.USER_EMAIL,
+            verify: LoginModalVerifyTypes.EMAIL,
         });
     });
 
     it('should create input action', () => {
-        const action = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'fancy@address.com');
+        const action = loginModalInput(LoginModalInputTypes.EMAIL, 'fancy@address.com');
 
         expect(action).toEqual({
             type: LoginModalActionTypes.INPUT,
             input: {
-                type: LoginModalInputTypes.USER_EMAIL,
+                type: LoginModalInputTypes.EMAIL,
                 payload: 'fancy@address.com',
             },
         });

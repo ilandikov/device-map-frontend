@@ -18,9 +18,9 @@ export function LoginModal() {
     const showShadows = authenticationStep === AuthenticationStep.WELCOME;
     const showNavigationButtons = [
         AuthenticationStep.MAIL_INPUT,
-        AuthenticationStep.SIGNUP_PASSWORD,
+        AuthenticationStep.PASSWORD_CREATION,
         AuthenticationStep.LOGIN,
-        AuthenticationStep.LOGIN_PASSWORD_RESET,
+        AuthenticationStep.PASSWORD_RESET_REQUEST,
     ].includes(authenticationStep);
 
     function getAuthenticationComponent(authenticationStep: AuthenticationStep) {
@@ -29,17 +29,17 @@ export function LoginModal() {
                 return <WelcomeForm />;
             case AuthenticationStep.MAIL_INPUT:
                 return <MailInputForm />;
-            case AuthenticationStep.SIGNUP_PASSWORD:
+            case AuthenticationStep.PASSWORD_CREATION:
                 return <PasswordCreationForm />;
             case AuthenticationStep.LOGIN:
                 return <LogInForm />;
-            case AuthenticationStep.LOGIN_PASSWORD_RESET:
+            case AuthenticationStep.PASSWORD_RESET_REQUEST:
                 return <PasswordResetRequestForm />;
-            case AuthenticationStep.SIGNUP_OTP:
-            case AuthenticationStep.LOGIN_OTP:
+            case AuthenticationStep.PASSWORD_CREATION_OTP:
+            case AuthenticationStep.PASSWORD_RESET_OTP:
                 return <OTPForm />;
-            case AuthenticationStep.SIGNUP_OTP_LOADING:
-            case AuthenticationStep.LOGIN_OTP_LOADING:
+            case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
+            case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
                 return <Loader />;
         }
 

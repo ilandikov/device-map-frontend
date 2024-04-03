@@ -19,7 +19,7 @@ export function PasswordResetRequestForm() {
                     helpText={t('mailForPasswordReset')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
                     }}
                     error={error}
                 />
@@ -28,7 +28,7 @@ export function PasswordResetRequestForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET));
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET));
                     }}
                 >
                     {t('OTPSendSMS')}

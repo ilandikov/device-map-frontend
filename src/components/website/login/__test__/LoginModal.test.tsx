@@ -51,7 +51,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at password reset stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST,
             email: '',
         });
         const component = renderForSnapshotTest(<LoginModal />);
@@ -61,7 +61,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at OTP for login stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.LOGIN_OTP,
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 
@@ -70,7 +70,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at OTP checking for login stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.LOGIN_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 
@@ -79,7 +79,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at password creation stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.SIGNUP_PASSWORD,
+            step: AuthenticationStep.PASSWORD_CREATION,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 
@@ -88,7 +88,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at OTP input stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.SIGNUP_OTP,
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 
@@ -97,7 +97,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at OTP checking for sign up stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.SIGNUP_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 

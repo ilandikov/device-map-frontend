@@ -40,10 +40,7 @@ describe('PasswordResetRequest form action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'new@email.com'),
-        );
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.EMAIL, 'new@email.com'));
     });
 
     it('should transition to login OTP state on OTP button click', () => {
@@ -54,7 +51,7 @@ describe('PasswordResetRequest form action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET),
+            loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET),
         );
     });
 });

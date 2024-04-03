@@ -24,7 +24,7 @@ export function MailInputForm() {
                     helpText={t('onlyEmail')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.USER_EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
                     }}
                     error={error}
                 />
@@ -43,7 +43,7 @@ export function MailInputForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
                     }}
                 >
                     {t('next')}

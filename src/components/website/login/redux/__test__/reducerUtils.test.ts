@@ -57,14 +57,14 @@ describe('user password logic tests', () => {
 
 describe('OTP logic tests', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
-        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.SIGNUP_OTP);
+        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.PASSWORD_CREATION_OTP);
 
-        expect(nextUserAuthState).toEqual(AuthenticationStep.SIGNUP_OTP_LOADING);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.PASSWORD_CREATION_OTP_LOADING);
     });
 
     it('should move from log in OTP to log in OTP loading stage', () => {
-        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.LOGIN_OTP);
+        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.PASSWORD_RESET_OTP);
 
-        expect(nextUserAuthState).toEqual(AuthenticationStep.LOGIN_OTP_LOADING);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.PASSWORD_RESET_OTP_LOADING);
     });
 });

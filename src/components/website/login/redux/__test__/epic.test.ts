@@ -13,10 +13,10 @@ import { verifyCognitoEpic } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP)],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
         [
             Promise.reject(),
-            loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'remoteAuthServiceUnknownException'),
         ],
     ])(
         'should dispatch sign up notification when remote answer is: %s',
@@ -26,7 +26,7 @@ describe('user sign up tests', () => {
             });
 
             const initialState = buildAuthenticationStateForEpic({});
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_PASSWORD);
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
         },
@@ -65,7 +65,7 @@ describe('user sign in tests', () => {
         });
 
         const initialState = buildAuthenticationStateForEpic({});
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
 
         await verifyCognitoEpic(sentAction, initialState, expectedAction);
     });
@@ -75,7 +75,7 @@ describe('password reset tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         jest.spyOn(CognitoClient.prototype, 'forgotPassword').mockImplementation(() => Promise.resolve());
         const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.MAIL_INPUT });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
     });
@@ -97,7 +97,7 @@ describe('password reset tests', () => {
             });
 
             const initialState = buildAuthenticationStateForEpic({});
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET);
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET);
 
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
         },
