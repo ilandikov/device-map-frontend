@@ -1,6 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LogInForm snapshot test should match snapshot 1`] = `
+exports[`LogInForm snapshot test should match snapshot with mail error 1`] = `
+[
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      onlyEmail
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="emailInput"
+        onChange={[Function]}
+        type="email"
+      />
+    </div>
+    <p
+      className="login-modal-input-help"
+    >
+      enterPassword
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="userPasswordLogin"
+        onChange={[Function]}
+        type="password"
+      />
+    </div>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <div
+      className="login-modal-two-buttons-on-one-row"
+    >
+      <button
+        className="login-modal-correct-input"
+        onClick={[Function]}
+      >
+        resetPassword
+      </button>
+      <button
+        className="login-modal-button-black-on-green"
+        onClick={[Function]}
+      >
+        next
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`LogInForm snapshot test should match snapshot with password error 1`] = `
+[
+  <div
+    className="login-modal-input-container"
+  >
+    <p
+      className="login-modal-input-help"
+    >
+      onlyEmail
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="emailInput"
+        onChange={[Function]}
+        type="email"
+      />
+    </div>
+    <p
+      className="login-modal-input-help"
+    >
+      enterPassword
+    </p>
+    <div
+      className="login-modal-input-box-container"
+    >
+      <input
+        className="login-modal-input-text"
+        data-testid="userPasswordLogin"
+        onChange={[Function]}
+        type="password"
+      />
+    </div>
+  </div>,
+  <div
+    className="login-modal-button-container"
+  >
+    <div
+      className="login-modal-two-buttons-on-one-row"
+    >
+      <button
+        className="login-modal-correct-input"
+        onClick={[Function]}
+      >
+        resetPassword
+      </button>
+      <button
+        className="login-modal-button-black-on-green"
+        onClick={[Function]}
+      >
+        next
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`LogInForm snapshot test should match snapshot without error 1`] = `
 [
   <div
     className="login-modal-input-container"
