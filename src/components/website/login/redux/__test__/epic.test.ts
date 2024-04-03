@@ -68,7 +68,7 @@ describe('OTP verification epic tests', () => {
             loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
         ],
     ])(
-        'should dispatch OTP verification action if the OTP code is incorrect',
+        'should dispatch OTP verification action when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
             jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
                 return remoteServiceAnswer;
