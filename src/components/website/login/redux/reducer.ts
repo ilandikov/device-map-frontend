@@ -24,6 +24,11 @@ export function authentication(
             if (action.result === LoginModalNotificationResult.FAILURE) {
                 return { ...state, error: new Error(action.reason) };
             }
+
+            if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
+                return { ...state, step: AuthenticationStep.LOGGED_IN };
+            }
+
             return state;
         }
         case LoginModalActionTypes.INPUT: {

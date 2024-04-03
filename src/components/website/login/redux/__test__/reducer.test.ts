@@ -8,6 +8,7 @@ import {
     loginModalFailureNotification,
     loginModalInput,
     loginModalNoAction,
+    loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import {
@@ -292,6 +293,17 @@ describe('login logic', () => {
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_PASSWORD_RESET,
             password: '',
+        });
+    });
+
+    it('should transition from loading state to logged in on login success notification', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGIN_OTP_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGGED_IN,
         });
     });
 });
