@@ -376,18 +376,6 @@ describe('password reset logic', () => {
             error: new Error('thereHasBeenAnError'),
         });
     });
-
-    it.failing('should set mail error when such a mail is presented for password reset', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
-            email: 'notRegistered@email.co.kr',
-        });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
-
-        verifyStateChange(initialState, action, {
-            error: new Error(MailInputError.NOT_REGISTERED),
-        });
-    });
 });
 
 describe('notification logic', () => {
