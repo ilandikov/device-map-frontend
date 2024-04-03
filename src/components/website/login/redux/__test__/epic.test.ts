@@ -9,7 +9,7 @@ import {
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
-describe('sign up epic tests', () => {
+describe('user sign up tests', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGNUP)],
         [
@@ -17,7 +17,7 @@ describe('sign up epic tests', () => {
             loginModalFailureNotification(LoginModalNotificationTypes.SIGNUP, 'remoteAuthServiceUnknownException'),
         ],
     ])(
-        'should dispatch user password verification action when remote answer is: %s',
+        'should dispatch sign up notification when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
             jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(async (): Promise<any> => {
                 return remoteServiceAnswer;
@@ -31,24 +31,21 @@ describe('sign up epic tests', () => {
     );
 });
 
-describe('OTP verification epic tests', () => {
+describe('user sign up OTP code confirmation tests', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
         [
             Promise.reject({ code: 'MockedException', message: 'signUpConfirmCode() went wrong' }),
             loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'remoteAuthServiceUnknownException'),
         ],
-    ])(
-        'should dispatch OTP verification action when remote answer is: %s',
-        async (remoteServiceAnswer, expectedAction) => {
-            jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
-                return remoteServiceAnswer;
-            });
+    ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
+        jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
+            return remoteServiceAnswer;
+        });
 
-            const initialState = buildAuthenticationStateForEpic({});
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const initialState = buildAuthenticationStateForEpic({});
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-            await verifyCognitoEpic(sentAction, initialState, expectedAction);
-        },
-    );
+        await verifyCognitoEpic(sentAction, initialState, expectedAction);
+    });
 });
