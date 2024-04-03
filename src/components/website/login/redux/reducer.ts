@@ -27,19 +27,19 @@ export function authentication(
                     if (action.result === LoginModalNotificationResult.FAILURE) {
                         return {
                             ...state,
-                            step: AuthenticationStep.LOGIN_PASSWORD_RESET,
+                            step: AuthenticationStep.PASSWORD_RESET_REQUEST,
                             error: new Error(action.reason),
                         };
                     }
 
                     return {
                         ...state,
-                        step: AuthenticationStep.LOGIN_OTP,
+                        step: AuthenticationStep.PASSWORD_RESET_OTP,
                     };
                 }
             }
 
-            if (state.step === AuthenticationStep.LOGIN_OTP_LOADING) {
+            if (state.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {
                 if (action.result === LoginModalNotificationResult.FAILURE) {
                     return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
                 }
@@ -74,10 +74,10 @@ export function authentication(
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
 
-                    if (state.step === AuthenticationStep.LOGIN_PASSWORD_RESET) {
+                    if (state.step === AuthenticationStep.PASSWORD_RESET_REQUEST) {
                         return {
                             ...state,
-                            step: AuthenticationStep.LOGIN_OTP_LOADING,
+                            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
                             error: null,
                         };
                     }
@@ -88,7 +88,7 @@ export function authentication(
 
                     return {
                         ...state,
-                        step: AuthenticationStep.SIGNUP_PASSWORD,
+                        step: AuthenticationStep.PASSWORD_CREATION,
                         error: null,
                     };
                 }
@@ -101,20 +101,20 @@ export function authentication(
                     }
                     const passwordError = getPasswordError(state.password);
                     const nextAuthenticationStep = passwordError
-                        ? AuthenticationStep.SIGNUP_PASSWORD
-                        : AuthenticationStep.SIGNUP_OTP;
+                        ? AuthenticationStep.PASSWORD_CREATION
+                        : AuthenticationStep.PASSWORD_CREATION_OTP;
 
                     return { ...state, step: nextAuthenticationStep, error: passwordError };
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
-                    return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
+                    return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
                 }
                 case LoginModalVerifyTypes.OTP: {
                     if (state.OTP.length < 6) {
                         return { ...state, error: new Error(OTPError.TOO_SHORT) };
                     }
 
-                    return { ...state, step: AuthenticationStep.SIGNUP_OTP_LOADING };
+                    return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
                 }
                 default:
                     return state;
@@ -129,11 +129,11 @@ export function authentication(
                 case 'cancel':
                     return authenticationInitialState;
                 case 'resetPassword':
-                    return { ...state, step: AuthenticationStep.LOGIN_PASSWORD_RESET, password: '', error: null };
+                    return { ...state, step: AuthenticationStep.PASSWORD_RESET_REQUEST, password: '', error: null };
                 case 'next':
                     switch (state.step) {
-                        case AuthenticationStep.LOGIN_OTP:
-                            return { ...state, step: AuthenticationStep.LOGIN_OTP_LOADING };
+                        case AuthenticationStep.PASSWORD_RESET_OTP:
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
                         default:
                             return state;
                     }
@@ -142,9 +142,9 @@ export function authentication(
                         case AuthenticationStep.MAIL_INPUT:
                         case AuthenticationStep.LOGIN:
                             return { ...state, step: AuthenticationStep.WELCOME };
-                        case AuthenticationStep.SIGNUP_PASSWORD:
+                        case AuthenticationStep.PASSWORD_CREATION:
                             return { ...state, step: AuthenticationStep.MAIL_INPUT };
-                        case AuthenticationStep.LOGIN_PASSWORD_RESET:
+                        case AuthenticationStep.PASSWORD_RESET_REQUEST:
                             return { ...state, step: AuthenticationStep.LOGIN };
                     }
             }
