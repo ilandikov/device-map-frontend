@@ -97,7 +97,7 @@ describe('password reset tests', () => {
             });
 
             const initialState = buildAuthenticationStateForEpic({});
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL);
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET);
 
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
         },

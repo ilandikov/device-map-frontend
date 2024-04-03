@@ -52,6 +52,9 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL));
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_FOR_PASSWORD_RESET),
+        );
     });
 });
