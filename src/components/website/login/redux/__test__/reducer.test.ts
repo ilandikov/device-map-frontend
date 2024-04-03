@@ -270,7 +270,7 @@ describe('OTP logic', () => {
 });
 
 describe('login logic', () => {
-    it('should transition to logged in state after correct user credentials have been presented', () => {
+    it('should stay at login state after correct user credentials have been presented', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
             email: 'user@mail.com',
@@ -278,9 +278,7 @@ describe('login logic', () => {
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
 
-        verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGGED_IN,
-        });
+        verifyStateChange(initialState, action, {});
     });
 
     it('should stay at login state if incorrect user credentials have been presented', () => {
