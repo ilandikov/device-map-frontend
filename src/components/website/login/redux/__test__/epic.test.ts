@@ -69,7 +69,10 @@ describe('OTP verification epic tests', () => {
         'remoteAuthServiceUnknownException',
     );
 
-    it.each([[promiseOk, expectedActionOk]])(
+    it.each([
+        [promiseOk, expectedActionOk],
+        [promiseNok, expectedActionNok],
+    ])(
         'should dispatch OTP verification action if the OTP code is incorrect',
         async (remoteServiceAnswer, expectedAction) => {
             jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
@@ -82,14 +85,4 @@ describe('OTP verification epic tests', () => {
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
         },
     );
-    it('should dispatch OTP verification failed action if the OTP code is incorrect', async () => {
-        jest.spyOn(CognitoClient.prototype, 'signUpConfirmCode').mockImplementation(async (): Promise<any> => {
-            return promiseNok;
-        });
-
-        const initialState = buildAuthenticationStateForEpic({});
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
-
-        await verifyCognitoEpic(sentAction, initialState, expectedActionNok);
-    });
 });
