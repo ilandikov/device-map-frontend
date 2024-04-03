@@ -42,6 +42,19 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                         });
                 }
+                case LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD: {
+                    return cognitoClient
+                        .signIn(authenticationState.email, authenticationState.password)
+                        .then(() => {
+                            return loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN);
+                        })
+                        .catch((reason) => {
+                            return loginModalFailureNotification(
+                                LoginModalNotificationTypes.SIGN_IN,
+                                buildMessageFromCognitoException(reason),
+                            );
+                        });
+                }
                 case LoginModalVerifyTypes.OTP: {
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)

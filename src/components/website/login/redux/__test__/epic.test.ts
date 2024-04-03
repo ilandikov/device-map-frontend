@@ -49,3 +49,22 @@ describe('user sign up OTP code confirmation tests', () => {
         await verifyCognitoEpic(sentAction, initialState, expectedAction);
     });
 });
+
+describe('user sign in tests', () => {
+    it.each([
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN)],
+        [
+            Promise.reject(),
+            loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'remoteAuthServiceUnknownException'),
+        ],
+    ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
+        jest.spyOn(CognitoClient.prototype, 'signIn').mockImplementation(async (): Promise<any> => {
+            return remoteServiceAnswer;
+        });
+
+        const initialState = buildAuthenticationStateForEpic({});
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.USER_EMAIL_AND_PASSWORD);
+
+        await verifyCognitoEpic(sentAction, initialState, expectedAction);
+    });
+});
