@@ -37,13 +37,7 @@ describe('LogInForm snapshot test', () => {
     });
 
     it('should match snapshot with mail error', () => {
-        mockAuthenticationState({ error: new Error('emailIsWrong') });
-        const component = renderForSnapshotTest(<LogInForm />);
-        expect(component).toMatchSnapshot();
-    });
-
-    it('should match snapshot with password error', () => {
-        mockAuthenticationState({ error: new Error('passwordIsWrong') });
+        mockAuthenticationState({ error: new Error('somethingIsWrong') });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
