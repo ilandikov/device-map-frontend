@@ -699,6 +699,50 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
         loginCallToAction
       </p>
     </div>
+    <div
+      className="login-modal-input-container"
+    >
+      <p
+        className="login-modal-input-help"
+      >
+        enterPassword
+      </p>
+      <div
+        className="login-modal-input-box-container"
+      >
+        <input
+          className="login-modal-input-text"
+          data-testid="userPassword"
+          onChange={[Function]}
+          type="password"
+        />
+      </div>
+      <p
+        className="login-modal-input-help"
+      >
+        repeatPassword
+      </p>
+      <div
+        className="login-modal-input-box-container"
+      >
+        <input
+          className="login-modal-input-text"
+          data-testid="userPasswordRepeat"
+          onChange={[Function]}
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      className="login-modal-button-container"
+    >
+      <button
+        className="login-modal-button-black-on-green"
+        onClick={[Function]}
+      >
+        next
+      </button>
+    </div>
   </div>
 </div>
 `;

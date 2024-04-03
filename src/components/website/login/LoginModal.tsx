@@ -30,6 +30,7 @@ export function LoginModal() {
             case AuthenticationStep.MAIL_INPUT:
                 return <MailInputForm />;
             case AuthenticationStep.PASSWORD_CREATION:
+            case AuthenticationStep.PASSWORD_RESET:
                 return <PasswordCreationForm />;
             case AuthenticationStep.LOGIN:
                 return <LogInForm />;

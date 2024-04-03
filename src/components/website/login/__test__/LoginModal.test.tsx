@@ -62,8 +62,6 @@ describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at password reset stage', () => {
         mockAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET,
-            password: 'iNeedToReset',
-            passwordRepeat: 'myPassword',
         });
         const component = renderForSnapshotTest(<LoginModal />);
 
