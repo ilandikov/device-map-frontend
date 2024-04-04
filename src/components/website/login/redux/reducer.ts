@@ -48,6 +48,17 @@ export function authentication(
 
                     return { ...state, step: AuthenticationStep.LOGGED_IN };
                 }
+                case LoginModalNotificationTypes.PASSWORD_RESET: {
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.PASSWORD_RESET_OTP,
+                            error: new Error(action.reason),
+                        };
+                    }
+
+                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                }
             }
 
             if (state.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {

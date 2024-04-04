@@ -426,6 +426,32 @@ describe('password reset logic', () => {
             error: new Error('thereHasBeenAnError'),
         });
     });
+
+    it('should transition to logged in state when password has been reset successfully', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGGED_IN,
+        });
+    });
+
+    it('should go back to OTP input when password has not been reset successfully', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(
+            LoginModalNotificationTypes.PASSWORD_RESET,
+            'thisCouldNotGoWorseThanThat',
+        );
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
+            error: new Error('thisCouldNotGoWorseThanThat'),
+        });
+    });
 });
 
 describe('notification logic', () => {
