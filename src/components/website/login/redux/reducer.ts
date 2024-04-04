@@ -37,6 +37,28 @@ export function authentication(
                         step: AuthenticationStep.PASSWORD_RESET_OTP,
                     };
                 }
+                case LoginModalNotificationTypes.OTP: {
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+                            error: new Error(action.reason),
+                        };
+                    }
+
+                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                }
+                case LoginModalNotificationTypes.PASSWORD_RESET: {
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.PASSWORD_RESET_OTP,
+                            error: new Error(action.reason),
+                        };
+                    }
+
+                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                }
             }
 
             if (state.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {
@@ -99,12 +121,20 @@ export function authentication(
                             error: new Error(PasswordError.NOT_MATCHING),
                         };
                     }
-                    const passwordError = getPasswordError(state.password);
-                    const nextAuthenticationStep = passwordError
-                        ? AuthenticationStep.PASSWORD_CREATION
-                        : AuthenticationStep.PASSWORD_CREATION_OTP;
 
-                    return { ...state, step: nextAuthenticationStep, error: passwordError };
+                    const passwordError = getPasswordError(state.password);
+                    if (passwordError) {
+                        return { ...state, error: passwordError };
+                    }
+
+                    switch (state.step) {
+                        case AuthenticationStep.PASSWORD_CREATION:
+                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
+                        case AuthenticationStep.PASSWORD_RESET:
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING, error: null };
+                    }
+
+                    return state;
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
@@ -114,7 +144,16 @@ export function authentication(
                         return { ...state, error: new Error(OTPError.TOO_SHORT) };
                     }
 
-                    return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+                    switch (state.step) {
+                        case AuthenticationStep.PASSWORD_CREATION_OTP: {
+                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+                        }
+                        case AuthenticationStep.PASSWORD_RESET_OTP: {
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET };
+                        }
+                    }
+
+                    return state;
                 }
                 default:
                     return state;

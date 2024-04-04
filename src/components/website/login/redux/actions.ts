@@ -79,6 +79,7 @@ export enum LoginModalNotificationTypes {
     OTP = 'OTP',
     SIGN_IN = 'signIn',
     FORGOT_PASSWORD = 'forgotPassword',
+    PASSWORD_RESET = 'passwordReset',
 }
 
 export enum LoginModalNotificationResult {

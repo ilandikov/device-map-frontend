@@ -191,7 +191,7 @@ describe('user password logic', () => {
         });
     });
 
-    it('should transition to OTP verification if passwords are matching and remove password error', () => {
+    it('should transition to OTP verification after password creation if passwords are matching and remove password error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION,
             password: 'passwordsMatchAndAreStrong9%',
@@ -207,9 +207,24 @@ describe('user password logic', () => {
         });
     });
 
+    it('should transition to loading after password reset if passwords are matching and remove password error', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET,
+            password: '1!veryGoodPassword',
+            passwordRepeat: '1!veryGoodPassword',
+            error: new Error('shouldNotHappen'),
+        });
+
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            error: null,
+        });
+    });
+
     it('should set password error if passwords are not matching', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_CREATION,
             password: 'dontMatch',
             passwordRepeat: 'likeForSureDontMatch',
         });
@@ -222,7 +237,7 @@ describe('user password logic', () => {
     });
 });
 
-describe('OTP logic', () => {
+describe('sign up OTP logic', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
@@ -232,6 +247,18 @@ describe('OTP logic', () => {
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
+    });
+
+    it('should move from password reset OTP to new password input step', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
+            OTP: '781340',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET,
         });
     });
 
@@ -259,13 +286,38 @@ describe('OTP logic', () => {
 
     it('should set error if OTP is less than 6 characters', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP,
             OTP: '51094',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         verifyStateChange(initialState, action, {
             error: new Error(OTPError.TOO_SHORT),
+        });
+    });
+
+    it('should transition to logged in after sign up has been confirmed', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGGED_IN,
+        });
+    });
+
+    it('should transition back to OTP input if a sign up confirmation failed and set an error', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(
+            LoginModalNotificationTypes.OTP,
+            'signUpWasNotConfirmedUnfortunately',
+        );
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            error: new Error('signUpWasNotConfirmedUnfortunately'),
         });
     });
 });
@@ -372,6 +424,32 @@ describe('password reset logic', () => {
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
             error: new Error('thereHasBeenAnError'),
+        });
+    });
+
+    it('should transition to logged in state when password has been reset successfully', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGGED_IN,
+        });
+    });
+
+    it('should go back to OTP input when password has not been reset successfully', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(
+            LoginModalNotificationTypes.PASSWORD_RESET,
+            'thisCouldNotGoWorseThanThat',
+        );
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
+            error: new Error('thisCouldNotGoWorseThanThat'),
         });
     });
 });

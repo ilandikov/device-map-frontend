@@ -25,7 +25,34 @@ describe('user sign up tests', () => {
                 return remoteServiceAnswer;
             });
 
-            const initialState = buildAuthenticationStateForEpic({});
+            const initialState = buildAuthenticationStateForEpic({
+                step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            });
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+
+            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        },
+    );
+
+    it.each([
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET)],
+        [
+            Promise.reject(),
+            loginModalFailureNotification(
+                LoginModalNotificationTypes.PASSWORD_RESET,
+                'remoteAuthServiceUnknownException',
+            ),
+        ],
+    ])(
+        'should dispatch password has been reset notification when remote answer is: %s',
+        async (remoteServiceAnswer, expectedAction) => {
+            jest.spyOn(CognitoClient.prototype, 'confirmPassword').mockImplementation(async (): Promise<any> => {
+                return remoteServiceAnswer;
+            });
+
+            const initialState = buildAuthenticationStateForEpic({
+                step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
@@ -33,7 +60,7 @@ describe('user sign up tests', () => {
     );
 });
 
-describe('user sign up OTP code confirmation tests', () => {
+describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
         [
@@ -45,10 +72,21 @@ describe('user sign up OTP code confirmation tests', () => {
             return remoteServiceAnswer;
         });
 
-        const initialState = buildAuthenticationStateForEpic({});
+        const initialState = buildAuthenticationStateForEpic({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         await verifyCognitoEpic(sentAction, initialState, expectedAction);
+    });
+
+    it('should dispatch no action and not call signUp() from password reset loading step', async () => {
+        const initialState = buildAuthenticationStateForEpic({
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+        });
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
     });
 });
 

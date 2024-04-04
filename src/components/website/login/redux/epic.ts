@@ -11,7 +11,7 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
 } from './actions';
-import { AuthenticationState } from './state';
+import { AuthenticationState, AuthenticationStep } from './state';
 import { buildMessageFromCognitoException } from './epicHelpers';
 
 const cognitoClient = new CognitoClient({
@@ -30,17 +30,39 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
 
             switch (action.verify) {
                 case LoginModalVerifyTypes.PASSWORD: {
-                    return cognitoClient
-                        .signUp(authenticationState.email, authenticationState.password)
-                        .then(() => {
-                            return loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
-                        })
-                        .catch((reason) => {
-                            return loginModalFailureNotification(
-                                LoginModalNotificationTypes.SIGN_UP,
-                                buildMessageFromCognitoException(reason),
-                            );
-                        });
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP) {
+                        return cognitoClient
+                            .signUp(authenticationState.email, authenticationState.password)
+                            .then(() => {
+                                return loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
+                            })
+                            .catch((reason) => {
+                                return loginModalFailureNotification(
+                                    LoginModalNotificationTypes.SIGN_UP,
+                                    buildMessageFromCognitoException(reason),
+                                );
+                            });
+                    }
+
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {
+                        return cognitoClient
+                            .confirmPassword(
+                                authenticationState.email,
+                                authenticationState.OTP,
+                                authenticationState.password,
+                            )
+                            .then(() => {
+                                return loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET);
+                            })
+                            .catch((reason) => {
+                                return loginModalFailureNotification(
+                                    LoginModalNotificationTypes.PASSWORD_RESET,
+                                    buildMessageFromCognitoException(reason),
+                                );
+                            });
+                    }
+
+                    return loginModalNoAction();
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
                     return cognitoClient
@@ -56,6 +78,10 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         });
                 }
                 case LoginModalVerifyTypes.OTP: {
+                    if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
+                        return loginModalNoAction();
+                    }
+
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
                         .then(() => {
