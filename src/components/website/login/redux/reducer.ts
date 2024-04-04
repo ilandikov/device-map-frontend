@@ -82,21 +82,21 @@ export function authentication(
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
 
-                    if (state.step === AuthenticationStep.PASSWORD_RESET_REQUEST) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
-                            error: null,
-                        };
+                    switch (state.step) {
+                        case AuthenticationStep.PASSWORD_RESET_REQUEST:
+                            return {
+                                ...state,
+                                step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+                                error: null,
+                            };
+                        case AuthenticationStep.MAIL_INPUT:
+                            return {
+                                ...state,
+                                step: AuthenticationStep.PASSWORD_CREATION,
+                                error: null,
+                            };
                     }
 
-                    if (state.step === AuthenticationStep.MAIL_INPUT) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_CREATION,
-                            error: null,
-                        };
-                    }
                     return state;
                 }
                 case LoginModalVerifyTypes.PASSWORD: {
