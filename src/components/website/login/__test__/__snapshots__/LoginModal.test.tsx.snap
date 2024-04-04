@@ -18,7 +18,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP checking for
       <p
         className="login-modal-header"
       >
-        logIn
+        newPassword
       </p>
       <p
         className="login-modal-header-description login-modal-opaque-text"
@@ -102,7 +102,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP for login st
       <p
         className="login-modal-header"
       >
-        logIn
+        newPassword
       </p>
       <p
         className="login-modal-header-description login-modal-opaque-text"

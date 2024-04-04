@@ -33,14 +33,14 @@ function getHeaderDetails(authenticationStep: AuthenticationStep) {
                 opaqueDescription: true,
             };
         case AuthenticationStep.LOGIN:
-        case AuthenticationStep.PASSWORD_RESET_OTP:
-        case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),
                 opaqueDescription: true,
             };
         case AuthenticationStep.PASSWORD_RESET_REQUEST:
+        case AuthenticationStep.PASSWORD_RESET_OTP:
+        case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
             return {
                 header: t('newPassword'),
                 description: t('finikMapProductDescription'),
