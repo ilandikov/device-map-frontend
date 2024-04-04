@@ -33,6 +33,31 @@ describe('user sign up tests', () => {
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
         },
     );
+
+    it.each([
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET)],
+        [
+            Promise.reject(),
+            loginModalFailureNotification(
+                LoginModalNotificationTypes.PASSWORD_RESET,
+                'remoteAuthServiceUnknownException',
+            ),
+        ],
+    ])(
+        'should dispatch password has been reset notification when remote answer is: %s',
+        async (remoteServiceAnswer, expectedAction) => {
+            jest.spyOn(CognitoClient.prototype, 'confirmPassword').mockImplementation(async (): Promise<any> => {
+                return remoteServiceAnswer;
+            });
+
+            const initialState = buildAuthenticationStateForEpic({
+                step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            });
+            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+
+            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        },
+    );
 });
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
