@@ -32,7 +32,6 @@ export enum LoginModalVerifyTypes {
     PASSWORD = 'password',
     EMAIL_AND_PASSWORD = 'emailAndPassword',
     OTP = 'OTP',
-    EMAIL_FOR_PASSWORD_RESET = 'emailForPasswordReset',
 }
 
 export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginModalVerifyRequest {
