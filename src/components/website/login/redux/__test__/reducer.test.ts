@@ -320,7 +320,7 @@ describe('login logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.LOGIN_LOADING,
         });
     });
 
@@ -342,7 +342,7 @@ describe('login logic', () => {
 
     it('should transition from loading state to logged in on login success notification', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.LOGIN_LOADING,
         });
         const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN);
 
@@ -353,7 +353,7 @@ describe('login logic', () => {
 
     it('should transition from loading state back to login step on login failure notification', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.LOGIN_LOADING,
         });
         const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'thereHasBeenAnError');
 
