@@ -237,7 +237,7 @@ describe('user password logic', () => {
     });
 });
 
-describe('OTP logic', () => {
+describe('sign up OTP logic', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
