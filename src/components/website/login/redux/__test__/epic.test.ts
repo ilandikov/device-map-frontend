@@ -25,7 +25,9 @@ describe('user sign up tests', () => {
                 return remoteServiceAnswer;
             });
 
-            const initialState = buildAuthenticationStateForEpic({});
+            const initialState = buildAuthenticationStateForEpic({
+                step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
             await verifyCognitoEpic(sentAction, initialState, expectedAction);
