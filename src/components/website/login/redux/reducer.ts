@@ -22,58 +22,44 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
+            let successStep = state.step;
+            let fallbackStep = state.step;
+
             switch (action.notification) {
                 case LoginModalNotificationTypes.FORGOT_PASSWORD: {
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_RESET_REQUEST,
-                            error: new Error(action.reason),
-                        };
-                    }
-
-                    return {
-                        ...state,
-                        step: AuthenticationStep.PASSWORD_RESET_OTP,
-                    };
+                    successStep = AuthenticationStep.PASSWORD_RESET_OTP;
+                    fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
+                    break;
                 }
                 case LoginModalNotificationTypes.OTP: {
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_CREATION_OTP,
-                            error: new Error(action.reason),
-                        };
-                    }
-
-                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                    successStep = AuthenticationStep.LOGGED_IN;
+                    fallbackStep = AuthenticationStep.PASSWORD_CREATION_OTP;
+                    break;
                 }
                 case LoginModalNotificationTypes.PASSWORD_RESET: {
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_RESET_OTP,
-                            error: new Error(action.reason),
-                        };
-                    }
-
-                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                    successStep = AuthenticationStep.LOGGED_IN;
+                    fallbackStep = AuthenticationStep.PASSWORD_RESET_OTP;
+                    break;
                 }
-            }
-
-            if (state.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {
-                if (action.result === LoginModalNotificationResult.FAILURE) {
-                    return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
+                case LoginModalNotificationTypes.SIGN_IN: {
+                    successStep = AuthenticationStep.LOGGED_IN;
+                    fallbackStep = AuthenticationStep.LOGIN;
+                    break;
                 }
-
-                return { ...state, step: AuthenticationStep.LOGGED_IN };
             }
 
             if (action.result === LoginModalNotificationResult.FAILURE) {
-                return { ...state, error: new Error(action.reason) };
+                return {
+                    ...state,
+                    step: fallbackStep,
+                    error: new Error(action.reason),
+                };
             }
 
-            return state;
+            return {
+                ...state,
+                step: successStep,
+            };
         }
         case LoginModalActionTypes.INPUT: {
             switch (action.input.type) {
