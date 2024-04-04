@@ -99,12 +99,13 @@ export function authentication(
                             error: new Error(PasswordError.NOT_MATCHING),
                         };
                     }
-                    const passwordError = getPasswordError(state.password);
-                    const nextAuthenticationStep = passwordError
-                        ? AuthenticationStep.PASSWORD_CREATION
-                        : AuthenticationStep.PASSWORD_CREATION_OTP;
 
-                    return { ...state, step: nextAuthenticationStep, error: passwordError };
+                    const passwordError = getPasswordError(state.password);
+                    if (passwordError) {
+                        return { ...state, error: passwordError };
+                    }
+
+                    return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
