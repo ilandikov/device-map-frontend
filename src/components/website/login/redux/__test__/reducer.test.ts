@@ -238,15 +238,17 @@ describe('sign up OTP logic', () => {
         });
     });
 
-    it('should move from password reset OTP to new password input step', () => {
+    it('should move from password reset OTP to new password input step and reset the error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             OTP: '781340',
+            error: new Error('verifyTheCodeAgain'),
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET,
+            error: null,
         });
     });
 
