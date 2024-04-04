@@ -27,7 +27,7 @@ export function LoginModal() {
         switch (authenticationStep) {
             case AuthenticationStep.WELCOME:
                 return <WelcomeForm />;
-            // New user creation flow
+            // Sign up
             case AuthenticationStep.MAIL_INPUT:
                 return <MailInputForm />;
             case AuthenticationStep.PASSWORD_CREATION:
@@ -36,9 +36,12 @@ export function LoginModal() {
                 return <OTPForm />;
             case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
                 return <Loader />;
-            // Existing user flow
+            // Sign in
             case AuthenticationStep.LOGIN:
                 return <LogInForm />;
+            case AuthenticationStep.LOGIN_LOADING:
+                return <Loader />;
+            // Password reset
             case AuthenticationStep.PASSWORD_RESET_REQUEST:
                 return <PasswordResetRequestForm />;
             case AuthenticationStep.PASSWORD_RESET_OTP:

@@ -122,7 +122,7 @@ export function authentication(
                     return state;
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
-                    return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
+                    return { ...state, step: AuthenticationStep.LOGIN_LOADING };
                 }
                 case LoginModalVerifyTypes.OTP: {
                     if (state.OTP.length < 6) {
