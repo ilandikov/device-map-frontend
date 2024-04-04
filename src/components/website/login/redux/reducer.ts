@@ -14,7 +14,7 @@ import {
     PasswordError,
     authenticationInitialState,
 } from './state';
-import { getPasswordError, isEmailRegistered, isEmailValid } from './reducerUtils';
+import { getPasswordError, isEmailValid } from './reducerUtils';
 
 export function authentication(
     state: AuthenticationState = authenticationInitialState,
@@ -88,10 +88,6 @@ export function authentication(
                             step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
                             error: null,
                         };
-                    }
-
-                    if (isEmailRegistered(state.email)) {
-                        return { ...state, error: new Error(MailInputError.ALREADY_EXISTS) };
                     }
 
                     return {

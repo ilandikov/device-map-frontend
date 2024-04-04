@@ -1,5 +1,5 @@
 import { AuthenticationStep, PasswordError } from '../state';
-import { authenticationStepFromOTP, getPasswordError, isEmailRegistered, isEmailValid } from '../reducerUtils';
+import { authenticationStepFromOTP, getPasswordError, isEmailValid } from '../reducerUtils';
 
 describe('user email validation tests', () => {
     it('should validate good email', () => {
@@ -14,22 +14,6 @@ describe('user email validation tests', () => {
         const email = 'this is not an email!';
 
         const mailInputError = isEmailValid(email);
-
-        expect(mailInputError).toEqual(false);
-    });
-
-    it('should report registered email', () => {
-        const email = 'already@exists.com';
-
-        const mailInputError = isEmailRegistered(email);
-
-        expect(mailInputError).toEqual(true);
-    });
-
-    it('should report not registered email', () => {
-        const email = 'new@user.fr';
-
-        const mailInputError = isEmailRegistered(email);
 
         expect(mailInputError).toEqual(false);
     });

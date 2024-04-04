@@ -143,18 +143,6 @@ describe('email input logic', () => {
         verifyStateChange(initialState, action, { error: new Error(MailInputError.NOT_VALID) });
     });
 
-    it('should set mail error and stay at mail input when already existing mail has been sent to verification', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.MAIL_INPUT,
-            email: 'already@exists.com',
-        });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
-
-        verifyStateChange(initialState, action, {
-            error: new Error(MailInputError.ALREADY_EXISTS),
-        });
-    });
-
     it('should remove mail error and transition to login with an existing mail', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.MAIL_INPUT,
