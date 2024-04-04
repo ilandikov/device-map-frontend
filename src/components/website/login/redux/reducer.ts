@@ -59,14 +59,13 @@ export function authentication(
 
                     return { ...state, step: AuthenticationStep.LOGGED_IN };
                 }
-            }
+                case LoginModalNotificationTypes.SIGN_IN: {
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
+                    }
 
-            if (state.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {
-                if (action.result === LoginModalNotificationResult.FAILURE) {
-                    return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
+                    return { ...state, step: AuthenticationStep.LOGGED_IN };
                 }
-
-                return { ...state, step: AuthenticationStep.LOGGED_IN };
             }
 
             if (action.result === LoginModalNotificationResult.FAILURE) {
