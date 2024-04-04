@@ -33,6 +33,7 @@ function getHeaderDetails(authenticationStep: AuthenticationStep) {
                 opaqueDescription: true,
             };
         case AuthenticationStep.LOGIN:
+        case AuthenticationStep.LOGIN_LOADING:
             return {
                 header: t('logIn'),
                 description: t('finikMapProductDescription'),

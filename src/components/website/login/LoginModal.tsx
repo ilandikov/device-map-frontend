@@ -39,6 +39,8 @@ export function LoginModal() {
             // Sign in
             case AuthenticationStep.LOGIN:
                 return <LogInForm />;
+            case AuthenticationStep.LOGIN_LOADING:
+                return <Loader />;
             // Password reset
             case AuthenticationStep.PASSWORD_RESET_REQUEST:
                 return <PasswordResetRequestForm />;
