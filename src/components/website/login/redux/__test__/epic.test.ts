@@ -33,7 +33,7 @@ describe('user sign up tests', () => {
     );
 });
 
-describe('user sign up OTP code confirmation tests', () => {
+describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
         [
@@ -45,7 +45,9 @@ describe('user sign up OTP code confirmation tests', () => {
             return remoteServiceAnswer;
         });
 
-        const initialState = buildAuthenticationStateForEpic({});
+        const initialState = buildAuthenticationStateForEpic({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
         await verifyCognitoEpic(sentAction, initialState, expectedAction);
