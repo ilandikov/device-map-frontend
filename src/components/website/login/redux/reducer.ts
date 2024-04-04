@@ -24,17 +24,19 @@ export function authentication(
         case LoginModalActionTypes.NOTIFICATION: {
             switch (action.notification) {
                 case LoginModalNotificationTypes.FORGOT_PASSWORD: {
+                    const successStep = AuthenticationStep.PASSWORD_RESET_OTP;
+                    const fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
                     if (action.result === LoginModalNotificationResult.FAILURE) {
                         return {
                             ...state,
-                            step: AuthenticationStep.PASSWORD_RESET_REQUEST,
+                            step: fallbackStep,
                             error: new Error(action.reason),
                         };
                     }
 
                     return {
                         ...state,
-                        step: AuthenticationStep.PASSWORD_RESET_OTP,
+                        step: successStep,
                     };
                 }
                 case LoginModalNotificationTypes.OTP: {
