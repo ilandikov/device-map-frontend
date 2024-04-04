@@ -86,7 +86,7 @@ export function authentication(
                         case AuthenticationStep.PASSWORD_RESET_REQUEST:
                             return {
                                 ...state,
-                                step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+                                step: AuthenticationStep.PASSWORD_RESET_LOADING,
                                 error: null,
                             };
                         case AuthenticationStep.MAIL_INPUT:
@@ -116,7 +116,7 @@ export function authentication(
                         case AuthenticationStep.PASSWORD_CREATION:
                             return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
                         case AuthenticationStep.PASSWORD_RESET:
-                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING, error: null };
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
                     }
 
                     return state;
@@ -157,7 +157,7 @@ export function authentication(
                 case 'next':
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_RESET_OTP:
-                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING };
                         default:
                             return state;
                     }

@@ -49,6 +49,6 @@ describe('OTP logic tests', () => {
     it('should move from log in OTP to log in OTP loading stage', () => {
         const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.PASSWORD_RESET_OTP);
 
-        expect(nextUserAuthState).toEqual(AuthenticationStep.PASSWORD_RESET_OTP_LOADING);
+        expect(nextUserAuthState).toEqual(AuthenticationStep.PASSWORD_RESET_LOADING);
     });
 });

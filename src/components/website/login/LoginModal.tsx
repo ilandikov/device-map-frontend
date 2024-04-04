@@ -48,7 +48,7 @@ export function LoginModal() {
                 return <OTPForm />;
             case AuthenticationStep.PASSWORD_RESET:
                 return <PasswordCreationForm />;
-            case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
+            case AuthenticationStep.PASSWORD_RESET_LOADING:
                 return <Loader />;
         }
 

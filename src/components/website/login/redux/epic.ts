@@ -45,7 +45,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             });
                     }
 
-                    if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return cognitoClient
                             .confirmPassword(
                                 authenticationState.email,

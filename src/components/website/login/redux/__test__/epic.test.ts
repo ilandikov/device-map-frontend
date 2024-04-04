@@ -51,7 +51,7 @@ describe('user sign up tests', () => {
             });
 
             const initialState = buildAuthenticationStateForEpic({
-                step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+                step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
@@ -82,7 +82,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
     it('should dispatch no action and not call signUp() from password reset loading step', async () => {
         const initialState = buildAuthenticationStateForEpic({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 

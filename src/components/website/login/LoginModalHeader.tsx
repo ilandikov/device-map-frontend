@@ -42,7 +42,7 @@ function getHeaderDetails(authenticationStep: AuthenticationStep) {
         case AuthenticationStep.PASSWORD_RESET_REQUEST:
         case AuthenticationStep.PASSWORD_RESET_OTP:
         case AuthenticationStep.PASSWORD_RESET:
-        case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
+        case AuthenticationStep.PASSWORD_RESET_LOADING:
             return {
                 header: t('newPassword'),
                 description: t('finikMapProductDescription'),

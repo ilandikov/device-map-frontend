@@ -88,7 +88,7 @@ describe('LoginModal snapshot tests', () => {
 
     it('should match the snapshot at OTP checking for login stage', () => {
         mockAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 

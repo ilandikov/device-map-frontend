@@ -4,7 +4,7 @@ export function authenticationStepFromOTP(
     userAuthState: AuthenticationStep.PASSWORD_RESET_OTP | AuthenticationStep.PASSWORD_CREATION_OTP,
 ) {
     if (userAuthState === AuthenticationStep.PASSWORD_RESET_OTP) {
-        return AuthenticationStep.PASSWORD_RESET_OTP_LOADING;
+        return AuthenticationStep.PASSWORD_RESET_LOADING;
     }
 
     return AuthenticationStep.PASSWORD_CREATION_OTP_LOADING;

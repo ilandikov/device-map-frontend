@@ -206,7 +206,7 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
             error: null,
         });
     });
@@ -259,7 +259,7 @@ describe('sign up OTP logic', () => {
         const action = loginModalButtonClick('next');
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
     });
 
@@ -374,7 +374,7 @@ describe('password reset logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
             error: null,
         });
     });
@@ -393,7 +393,7 @@ describe('password reset logic', () => {
 
     it('should transition to OTP input step after password reset OTP has been successfully sent', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
 
@@ -404,7 +404,7 @@ describe('password reset logic', () => {
 
     it('should transition back to email input for password reset step on failure', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalFailureNotification(
             LoginModalNotificationTypes.FORGOT_PASSWORD,
@@ -419,7 +419,7 @@ describe('password reset logic', () => {
 
     it('should transition to logged in state when password has been reset successfully', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET);
 
@@ -430,7 +430,7 @@ describe('password reset logic', () => {
 
     it('should go back to OTP input when password has not been reset successfully', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalFailureNotification(
             LoginModalNotificationTypes.PASSWORD_RESET,
