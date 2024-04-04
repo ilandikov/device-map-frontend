@@ -37,6 +37,9 @@ export function authentication(
                         step: AuthenticationStep.PASSWORD_RESET_OTP,
                     };
                 }
+                case LoginModalNotificationTypes.OTP: {
+                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                }
             }
 
             if (state.step === AuthenticationStep.PASSWORD_RESET_OTP_LOADING) {

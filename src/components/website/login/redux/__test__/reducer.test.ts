@@ -294,6 +294,17 @@ describe('sign up OTP logic', () => {
             error: new Error(OTPError.TOO_SHORT),
         });
     });
+
+    it('should transition to logged in after sign up has been confirmed', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.LOGGED_IN,
+        });
+    });
 });
 
 describe('login logic', () => {
