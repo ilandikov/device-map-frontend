@@ -209,7 +209,6 @@ describe('user password logic', () => {
 
     it('should set password error if passwords are not matching', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_CREATION,
             password: 'dontMatch',
             passwordRepeat: 'likeForSureDontMatch',
         });
