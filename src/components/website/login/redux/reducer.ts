@@ -32,33 +32,19 @@ export function authentication(
                     break;
                 }
                 case LoginModalNotificationTypes.OTP: {
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_CREATION_OTP,
-                            error: new Error(action.reason),
-                        };
-                    }
-
-                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                    successStep = AuthenticationStep.LOGGED_IN;
+                    fallbackStep = AuthenticationStep.PASSWORD_CREATION_OTP;
+                    break;
                 }
                 case LoginModalNotificationTypes.PASSWORD_RESET: {
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return {
-                            ...state,
-                            step: AuthenticationStep.PASSWORD_RESET_OTP,
-                            error: new Error(action.reason),
-                        };
-                    }
-
-                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                    successStep = AuthenticationStep.LOGGED_IN;
+                    fallbackStep = AuthenticationStep.PASSWORD_RESET_OTP;
+                    break;
                 }
                 case LoginModalNotificationTypes.SIGN_IN: {
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return { ...state, step: AuthenticationStep.LOGIN, error: new Error(action.reason) };
-                    }
-
-                    return { ...state, step: AuthenticationStep.LOGGED_IN };
+                    successStep = AuthenticationStep.LOGGED_IN;
+                    fallbackStep = AuthenticationStep.LOGIN;
+                    break;
                 }
             }
 
