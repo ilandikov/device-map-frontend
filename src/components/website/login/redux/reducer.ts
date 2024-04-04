@@ -22,22 +22,14 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
+            let successStep = state.step;
+            let fallbackStep = state.step;
+
             switch (action.notification) {
                 case LoginModalNotificationTypes.FORGOT_PASSWORD: {
-                    const successStep = AuthenticationStep.PASSWORD_RESET_OTP;
-                    const fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
-                    if (action.result === LoginModalNotificationResult.FAILURE) {
-                        return {
-                            ...state,
-                            step: fallbackStep,
-                            error: new Error(action.reason),
-                        };
-                    }
-
-                    return {
-                        ...state,
-                        step: successStep,
-                    };
+                    successStep = AuthenticationStep.PASSWORD_RESET_OTP;
+                    fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
+                    break;
                 }
                 case LoginModalNotificationTypes.OTP: {
                     if (action.result === LoginModalNotificationResult.FAILURE) {
@@ -71,10 +63,17 @@ export function authentication(
             }
 
             if (action.result === LoginModalNotificationResult.FAILURE) {
-                return { ...state, error: new Error(action.reason) };
+                return {
+                    ...state,
+                    step: fallbackStep,
+                    error: new Error(action.reason),
+                };
             }
 
-            return state;
+            return {
+                ...state,
+                step: successStep,
+            };
         }
         case LoginModalActionTypes.INPUT: {
             switch (action.input.type) {
