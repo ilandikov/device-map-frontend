@@ -105,7 +105,12 @@ export function authentication(
                         return { ...state, error: passwordError };
                     }
 
-                    return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
+                    switch (state.step) {
+                        case AuthenticationStep.PASSWORD_CREATION:
+                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
+                    }
+
+                    return state;
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING };
