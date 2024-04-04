@@ -114,7 +114,13 @@ export function authentication(
                         return { ...state, error: new Error(OTPError.TOO_SHORT) };
                     }
 
-                    return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+                    switch (state.step) {
+                        case AuthenticationStep.PASSWORD_CREATION_OTP: {
+                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+                        }
+                    }
+
+                    return state;
                 }
                 default:
                     return state;
