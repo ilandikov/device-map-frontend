@@ -11,7 +11,7 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
 } from './actions';
-import { AuthenticationState } from './state';
+import { AuthenticationState, AuthenticationStep } from './state';
 import { buildMessageFromCognitoException } from './epicHelpers';
 
 const cognitoClient = new CognitoClient({
@@ -56,6 +56,10 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         });
                 }
                 case LoginModalVerifyTypes.OTP: {
+                    if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
+                        return loginModalNoAction();
+                    }
+
                     return cognitoClient
                         .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
                         .then(() => {
