@@ -691,12 +691,12 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
       <p
         className="login-modal-header"
       >
-        brand map
+        newPassword
       </p>
       <p
-        className="login-modal-header-description"
+        className="login-modal-header-description login-modal-opaque-text"
       >
-        loginCallToAction
+        finikMapProductDescription
       </p>
     </div>
     <div
