@@ -27,19 +27,24 @@ export function LoginModal() {
         switch (authenticationStep) {
             case AuthenticationStep.WELCOME:
                 return <WelcomeForm />;
+            // New user creation flow
             case AuthenticationStep.MAIL_INPUT:
                 return <MailInputForm />;
             case AuthenticationStep.PASSWORD_CREATION:
-            case AuthenticationStep.PASSWORD_RESET:
                 return <PasswordCreationForm />;
+            case AuthenticationStep.PASSWORD_CREATION_OTP:
+                return <OTPForm />;
+            case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
+                return <Loader />;
+            // Existing user flow
             case AuthenticationStep.LOGIN:
                 return <LogInForm />;
             case AuthenticationStep.PASSWORD_RESET_REQUEST:
                 return <PasswordResetRequestForm />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP:
             case AuthenticationStep.PASSWORD_RESET_OTP:
                 return <OTPForm />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
+            case AuthenticationStep.PASSWORD_RESET:
+                return <PasswordCreationForm />;
             case AuthenticationStep.PASSWORD_RESET_OTP_LOADING:
                 return <Loader />;
         }
