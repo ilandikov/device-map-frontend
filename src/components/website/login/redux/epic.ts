@@ -94,6 +94,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                         });
                 }
+                case LoginModalVerifyTypes.EMAIL:
                 case LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return loginModalNoAction();
