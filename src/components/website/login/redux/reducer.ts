@@ -118,6 +118,9 @@ export function authentication(
                         case AuthenticationStep.PASSWORD_CREATION_OTP: {
                             return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
                         }
+                        case AuthenticationStep.PASSWORD_RESET_OTP: {
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET };
+                        }
                     }
 
                     return state;

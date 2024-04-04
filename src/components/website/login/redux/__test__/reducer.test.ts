@@ -235,6 +235,18 @@ describe('OTP logic', () => {
         });
     });
 
+    it('should move from password reset OTP to new password input step', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
+            OTP: '781340',
+        });
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET,
+        });
+    });
+
     it('should move from log in OTP to log in OTP loading stage', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,
