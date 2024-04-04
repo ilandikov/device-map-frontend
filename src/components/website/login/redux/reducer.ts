@@ -108,6 +108,8 @@ export function authentication(
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_CREATION:
                             return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
+                        case AuthenticationStep.PASSWORD_RESET:
+                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING, error: null };
                     }
 
                     return state;

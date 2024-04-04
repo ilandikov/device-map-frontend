@@ -207,6 +207,22 @@ describe('user password logic', () => {
         });
     });
 
+    it('should transition to loading after password reset if passwords are matching and remove password error', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET,
+            password: '1!veryGoodPassword',
+            passwordRepeat: '1!veryGoodPassword',
+            error: new Error('shouldNotHappen'),
+        });
+
+        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET_OTP_LOADING,
+            error: null,
+        });
+    });
+
     it('should set password error if passwords are not matching', () => {
         const initialState = buildAuthenticationState({
             password: 'dontMatch',
