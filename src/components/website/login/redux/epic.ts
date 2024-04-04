@@ -24,7 +24,8 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
         switchMap(async (action: LoginModalVerifyRequest) => {
             const authenticationState: AuthenticationState = state$.value.authentication;
-            if (authenticationState.error !== null) {
+            const skipRequest = authenticationState.error !== null;
+            if (skipRequest) {
                 return loginModalNoAction();
             }
 
