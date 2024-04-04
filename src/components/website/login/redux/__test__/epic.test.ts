@@ -97,12 +97,12 @@ describe('user sign in tests', () => {
             Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'remoteAuthServiceUnknownException'),
         ],
-    ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
+    ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         jest.spyOn(CognitoClient.prototype, 'signIn').mockImplementation(async (): Promise<any> => {
             return remoteServiceAnswer;
         });
 
-        const initialState = buildAuthenticationStateForEpic({});
+        const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.LOGIN_LOADING });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
 
         await verifyCognitoEpic(sentAction, initialState, expectedAction);
