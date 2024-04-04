@@ -259,7 +259,6 @@ describe('OTP logic', () => {
 
     it('should set error if OTP is less than 6 characters', () => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP,
             OTP: '51094',
         });
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
