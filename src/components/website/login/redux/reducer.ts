@@ -90,11 +90,14 @@ export function authentication(
                         };
                     }
 
-                    return {
-                        ...state,
-                        step: AuthenticationStep.PASSWORD_CREATION,
-                        error: null,
-                    };
+                    if (state.step === AuthenticationStep.MAIL_INPUT) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.PASSWORD_CREATION,
+                            error: null,
+                        };
+                    }
+                    return state;
                 }
                 case LoginModalVerifyTypes.PASSWORD: {
                     if (state.password !== state.passwordRepeat) {
