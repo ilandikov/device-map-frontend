@@ -305,6 +305,21 @@ describe('sign up OTP logic', () => {
             step: AuthenticationStep.LOGGED_IN,
         });
     });
+
+    it('should transition back to OTP input if a sign up confirmation failed and set an error', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
+        const action = loginModalFailureNotification(
+            LoginModalNotificationTypes.OTP,
+            'signUpWasNotConfirmedUnfortunately',
+        );
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            error: new Error('signUpWasNotConfirmedUnfortunately'),
+        });
+    });
 });
 
 describe('login logic', () => {

@@ -38,6 +38,14 @@ export function authentication(
                     };
                 }
                 case LoginModalNotificationTypes.OTP: {
+                    if (action.result === LoginModalNotificationResult.FAILURE) {
+                        return {
+                            ...state,
+                            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+                            error: new Error(action.reason),
+                        };
+                    }
+
                     return { ...state, step: AuthenticationStep.LOGGED_IN };
                 }
             }
