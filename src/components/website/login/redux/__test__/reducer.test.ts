@@ -191,7 +191,7 @@ describe('user password logic', () => {
         });
     });
 
-    it('should transition to OTP verification if passwords are matching and remove password error', () => {
+    it('should transition to OTP verification after password creation if passwords are matching and remove password error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION,
             password: 'passwordsMatchAndAreStrong9%',
