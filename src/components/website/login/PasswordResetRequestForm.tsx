@@ -28,7 +28,7 @@ export function PasswordResetRequestForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_FOR_PASSWORD_RESET));
+                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
                     }}
                 >
                     {t('OTPSendSMS')}
