@@ -45,8 +45,8 @@ export enum MailInputError {
 }
 
 export enum PasswordError {
-    NO_UPPERCASE = 'NO_UPPERCASE',
-    NOT_MATCHING = 'passwordsNotMatching',
+    NO_UPPERCASE = 'passwordNoUppercase',
+    NOT_MATCHING = 'passwordNotMatching',
     EMPTY = 'passwordEmpty',
     NO_LOWERCASE = 'passwordHasNoLowercaseChars',
     NO_DIGITS = 'passwordHasNoDigit',
