@@ -48,6 +48,14 @@ export function OTPForm() {
         return inputRefs[nextInputIndex];
     }
 
+    function collectOTPValue() {
+        let OTPCode = '';
+        inputRefs.forEach((input) => {
+            OTPCode += input.current.value;
+        });
+        return OTPCode;
+    }
+
     return (
         <>
             <div className="login-modal-input-container">
@@ -62,10 +70,7 @@ export function OTPForm() {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
-                        let OTPCode = '';
-                        inputRefs.forEach((input) => {
-                            OTPCode += input.current.value;
-                        });
+                        const OTPCode = collectOTPValue();
                         dispatch(loginModalInput(LoginModalInputTypes.OTP, OTPCode));
 
                         dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
