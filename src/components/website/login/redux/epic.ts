@@ -56,14 +56,14 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         LoginModalNotificationTypes.SIGN_IN,
                     );
                 case LoginModalVerifyTypes.OTP: {
-                    if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
+                        return observeEndpoint(
+                            cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+                            LoginModalNotificationTypes.OTP,
+                        );
+                    } else {
                         return of(loginModalNoAction());
                     }
-
-                    return observeEndpoint(
-                        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-                        LoginModalNotificationTypes.OTP,
-                    );
                 }
                 case LoginModalVerifyTypes.EMAIL: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
