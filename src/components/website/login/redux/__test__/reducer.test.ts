@@ -236,6 +236,19 @@ describe('sign up logic', () => {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
         });
     });
+
+    it.failing('should transition to mail input if sign up failed', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+            error: null,
+        });
+        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.MAIL_INPUT,
+            error: new Error('thisIsWhy'),
+        });
+    });
 });
 
 describe('sign up OTP logic', () => {
@@ -453,21 +466,6 @@ describe('password reset logic', () => {
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thisCouldNotGoWorseThanThat'),
-        });
-    });
-});
-
-describe('notification logic', () => {
-    it.failing('should transition to mail input if sign up failed', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
-            error: null,
-        });
-        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
-
-        verifyStateChange(initialState, action, {
-            step: AuthenticationStep.MAIL_INPUT,
-            error: new Error('thisIsWhy'),
         });
     });
 });
