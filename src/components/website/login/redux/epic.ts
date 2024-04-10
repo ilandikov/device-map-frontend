@@ -49,13 +49,14 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                                 }),
                             );
                         case AuthenticationStep.PASSWORD_RESET_LOADING: {
-                            const promise = cognitoClient.confirmPassword(
-                                authenticationState.email,
-                                authenticationState.OTP,
-                                authenticationState.password,
+                            return callEndpointAndNotify(
+                                cognitoClient.confirmPassword(
+                                    authenticationState.email,
+                                    authenticationState.OTP,
+                                    authenticationState.password,
+                                ),
+                                LoginModalNotificationTypes.PASSWORD_RESET,
                             );
-                            const notification = LoginModalNotificationTypes.PASSWORD_RESET;
-                            return callEndpointAndNotify(promise, notification);
                         }
                     }
 
