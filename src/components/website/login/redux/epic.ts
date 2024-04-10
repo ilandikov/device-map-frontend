@@ -48,7 +48,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                     }
 
-                    return of(loginModalNoAction());
+                    break;
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD:
                     return observeEndpoint(
