@@ -55,19 +55,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                                 authenticationState.password,
                             );
                             const notification = LoginModalNotificationTypes.PASSWORD_RESET;
-                            return fromPromise(promise).pipe(
-                                mergeMap(() => {
-                                    return of(loginModalSuccessNotification(notification));
-                                }),
-                                catchError((reason) => {
-                                    return of(
-                                        loginModalFailureNotification(
-                                            notification,
-                                            buildMessageFromCognitoException(reason),
-                                        ),
-                                    );
-                                }),
-                            );
+                            return callEndpointAndNotify(promise, notification);
                         }
                     }
 
@@ -133,6 +121,20 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
             }
 
             return of(loginModalNoAction());
+        }),
+    );
+}
+
+function callEndpointAndNotify(
+    endpoint: Promise<unknown>,
+    notification: LoginModalNotificationTypes,
+): Observable<LoginModalAction> {
+    return fromPromise(endpoint).pipe(
+        mergeMap(() => {
+            return of(loginModalSuccessNotification(notification));
+        }),
+        catchError((reason) => {
+            return of(loginModalFailureNotification(notification, buildMessageFromCognitoException(reason)));
         }),
     );
 }
