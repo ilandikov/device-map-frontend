@@ -10,6 +10,7 @@ import {
 import {
     LoginModalInputTypes,
     LoginModalVerifyTypes,
+    loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
@@ -115,7 +116,12 @@ function inputOTPDigit(container: HTMLElement, inputIndex: number, OTPDigit: str
 }
 
 describe('OTP form action tests', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it('should send OTP code and verification request on next button click', () => {
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         inputOTPDigit(container, 0, '2');
@@ -130,5 +136,15 @@ describe('OTP form action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, '208473'));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
+    });
+
+    it('should request the OTP code again on resend OTP button click', () => {
+        mockAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const resendOTPButton = getByText(container, 'OTPSendAgain');
+        fireEvent.click(resendOTPButton);
+
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('OTPSendAgain'));
     });
 });

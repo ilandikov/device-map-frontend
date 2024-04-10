@@ -67,11 +67,12 @@ exports[`OTPForm snapshot tests should match snapshot with error 1`] = `
     >
       OTPExplanation
     </p>
-    <p
+    <button
       className="login-modal-input-help login-modal-correct-input"
+      onClick={[Function]}
     >
       OTPSendAgain
-    </p>
+    </button>
     <p
       className="login-modal-input-help login-modal-wrong-input"
     >
@@ -158,11 +159,12 @@ exports[`OTPForm snapshot tests should match snapshot without error 1`] = `
     >
       OTPExplanation
     </p>
-    <p
+    <button
       className="login-modal-input-help login-modal-correct-input"
+      onClick={[Function]}
     >
       OTPSendAgain
-    </p>
+    </button>
   </div>,
   <div
     className="login-modal-button-container"
