@@ -30,7 +30,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 return of(loginModalNoAction());
             }
             switch (action.verify) {
-                case LoginModalVerifyTypes.PASSWORD: {
+                case LoginModalVerifyTypes.PASSWORD:
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
                             return observeEndpoint(
@@ -49,13 +49,12 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     }
 
                     break;
-                }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD:
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
                     );
-                case LoginModalVerifyTypes.OTP: {
+                case LoginModalVerifyTypes.OTP:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                         return observeEndpoint(
                             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
@@ -63,8 +62,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         );
                     }
                     break;
-                }
-                case LoginModalVerifyTypes.EMAIL: {
+                case LoginModalVerifyTypes.EMAIL:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return observeEndpoint(
                             cognitoClient.forgotPassword(authenticationState.email),
@@ -72,7 +70,6 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         );
                     }
                     break;
-                }
             }
 
             return of(loginModalNoAction());
