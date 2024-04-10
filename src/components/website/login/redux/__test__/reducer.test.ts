@@ -179,7 +179,7 @@ describe('user password logic', () => {
         });
     });
 
-    it('should transition to OTP verification after password creation if passwords are matching and remove password error', () => {
+    it('should transition to loading step after password creation if passwords are matching and remove password error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION,
             password: 'passwordsMatchAndAreStrong9%',
@@ -190,7 +190,7 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
         });
     });
@@ -221,6 +221,32 @@ describe('user password logic', () => {
 
         verifyStateChange(initialState, action, {
             error: new Error(PasswordError.NOT_MATCHING),
+        });
+    });
+});
+
+describe('sign up logic', () => {
+    it('should transition to OTP input if sign up succeeded', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+        });
+    });
+
+    it('should transition to mail input if sign up failed', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+            error: null,
+        });
+        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.MAIL_INPUT,
+            error: new Error('thisIsWhy'),
         });
     });
 });
@@ -441,16 +467,5 @@ describe('password reset logic', () => {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thisCouldNotGoWorseThanThat'),
         });
-    });
-});
-
-describe('notification logic', () => {
-    it('should set error from failure notification', () => {
-        const initialState = buildAuthenticationState({
-            error: null,
-        });
-        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
-
-        verifyStateChange(initialState, action, { error: new Error('thisIsWhy') });
     });
 });

@@ -104,6 +104,15 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
+    it('should match the snapshot at password creation loading stage', () => {
+        mockAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+        });
+        const component = renderForSnapshotTest(<LoginModal />);
+
+        expect(component).toMatchSnapshot();
+    });
+
     it('should match the snapshot at OTP input stage', () => {
         mockAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP,

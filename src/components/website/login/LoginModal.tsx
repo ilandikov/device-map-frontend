@@ -32,6 +32,8 @@ export function LoginModal() {
                 return <MailInputForm />;
             case AuthenticationStep.PASSWORD_CREATION:
                 return <PasswordCreationForm />;
+            case AuthenticationStep.PASSWORD_CREATION_LOADING:
+                return <Loader />;
             case AuthenticationStep.PASSWORD_CREATION_OTP:
                 return <OTPForm />;
             case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:

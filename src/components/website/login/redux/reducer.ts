@@ -26,6 +26,11 @@ export function authentication(
             let fallbackStep = state.step;
 
             switch (action.notification) {
+                case LoginModalNotificationTypes.SIGN_UP: {
+                    successStep = AuthenticationStep.PASSWORD_CREATION_OTP;
+                    fallbackStep = AuthenticationStep.MAIL_INPUT;
+                    break;
+                }
                 case LoginModalNotificationTypes.FORGOT_PASSWORD: {
                     successStep = AuthenticationStep.PASSWORD_RESET_OTP;
                     fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
@@ -114,7 +119,7 @@ export function authentication(
 
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_CREATION:
-                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null };
+                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_LOADING, error: null };
                         case AuthenticationStep.PASSWORD_RESET:
                             return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
                     }

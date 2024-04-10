@@ -32,7 +32,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
             switch (action.verify) {
                 case LoginModalVerifyTypes.PASSWORD: {
                     switch (authenticationState.step) {
-                        case AuthenticationStep.PASSWORD_CREATION_OTP:
+                        case AuthenticationStep.PASSWORD_CREATION_LOADING:
                             return cognitoClient
                                 .signUp(authenticationState.email, authenticationState.password)
                                 .then(() => {
