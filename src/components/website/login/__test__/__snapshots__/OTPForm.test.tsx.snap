@@ -69,6 +69,7 @@ exports[`OTPForm snapshot tests should match snapshot with error 1`] = `
     </p>
     <button
       className="login-modal-input-help login-modal-correct-input"
+      onClick={[Function]}
     >
       OTPSendAgain
     </button>
@@ -160,6 +161,7 @@ exports[`OTPForm snapshot tests should match snapshot without error 1`] = `
     </p>
     <button
       className="login-modal-input-help login-modal-correct-input"
+      onClick={[Function]}
     >
       OTPSendAgain
     </button>

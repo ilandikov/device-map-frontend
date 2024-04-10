@@ -2,7 +2,13 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
-import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from './redux/actions';
 import { useAuthentication } from './redux/state';
 
 export function OTPForm() {
@@ -62,7 +68,12 @@ export function OTPForm() {
                 <p className="login-modal-input-help">{t('OTPEnter')}</p>
                 <div className="login-modal-input-otp-container">{inputs}</div>
                 <p className="login-modal-input-help login-modal-opaque-text">{t('OTPExplanation')}</p>
-                <button className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</button>
+                <button
+                    className="login-modal-input-help login-modal-correct-input"
+                    onClick={() => dispatch(loginModalButtonClick('OTPSendAgain'))}
+                >
+                    {t('OTPSendAgain')}
+                </button>
                 {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
             </div>
             <div className="login-modal-button-container">

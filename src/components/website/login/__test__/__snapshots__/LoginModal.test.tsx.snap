@@ -177,6 +177,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP for login st
       </p>
       <button
         className="login-modal-input-help login-modal-correct-input"
+        onClick={[Function]}
       >
         OTPSendAgain
       </button>
@@ -288,6 +289,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       </p>
       <button
         className="login-modal-input-help login-modal-correct-input"
+        onClick={[Function]}
       >
         OTPSendAgain
       </button>
