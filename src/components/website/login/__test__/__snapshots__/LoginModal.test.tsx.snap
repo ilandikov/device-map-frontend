@@ -175,11 +175,11 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP for login st
       >
         OTPExplanation
       </p>
-      <p
+      <button
         className="login-modal-input-help login-modal-correct-input"
       >
         OTPSendAgain
-      </p>
+      </button>
     </div>
     <div
       className="login-modal-button-container"
@@ -286,11 +286,11 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       >
         OTPExplanation
       </p>
-      <p
+      <button
         className="login-modal-input-help login-modal-correct-input"
       >
         OTPSendAgain
-      </p>
+      </button>
     </div>
     <div
       className="login-modal-button-container"

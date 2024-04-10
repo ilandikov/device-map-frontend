@@ -62,7 +62,7 @@ export function OTPForm() {
                 <p className="login-modal-input-help">{t('OTPEnter')}</p>
                 <div className="login-modal-input-otp-container">{inputs}</div>
                 <p className="login-modal-input-help login-modal-opaque-text">{t('OTPExplanation')}</p>
-                <p className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</p>
+                <button className="login-modal-input-help login-modal-correct-input">{t('OTPSendAgain')}</button>
                 {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
             </div>
             <div className="login-modal-button-container">
