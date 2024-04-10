@@ -33,20 +33,9 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 case LoginModalVerifyTypes.PASSWORD: {
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                            return fromPromise(
+                            return callEndpointAndNotify(
                                 cognitoClient.signUp(authenticationState.email, authenticationState.password),
-                            ).pipe(
-                                mergeMap(() => {
-                                    return of(loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP));
-                                }),
-                                catchError((reason) => {
-                                    return of(
-                                        loginModalFailureNotification(
-                                            LoginModalNotificationTypes.SIGN_UP,
-                                            buildMessageFromCognitoException(reason),
-                                        ),
-                                    );
-                                }),
+                                LoginModalNotificationTypes.SIGN_UP,
                             );
                         case AuthenticationStep.PASSWORD_RESET_LOADING: {
                             return callEndpointAndNotify(
@@ -63,20 +52,9 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return of(loginModalNoAction());
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
-                    return fromPromise(
+                    return callEndpointAndNotify(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
-                    ).pipe(
-                        mergeMap(() => {
-                            return of(loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN));
-                        }),
-                        catchError((reason) => {
-                            return of(
-                                loginModalFailureNotification(
-                                    LoginModalNotificationTypes.SIGN_IN,
-                                    buildMessageFromCognitoException(reason),
-                                ),
-                            );
-                        }),
+                        LoginModalNotificationTypes.SIGN_IN,
                     );
                 }
                 case LoginModalVerifyTypes.OTP: {
@@ -84,20 +62,9 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         return of(loginModalNoAction());
                     }
 
-                    return fromPromise(
+                    return callEndpointAndNotify(
                         cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-                    ).pipe(
-                        mergeMap(() => {
-                            return of(loginModalSuccessNotification(LoginModalNotificationTypes.OTP));
-                        }),
-                        catchError((reason) => {
-                            return of(
-                                loginModalFailureNotification(
-                                    LoginModalNotificationTypes.OTP,
-                                    buildMessageFromCognitoException(reason),
-                                ),
-                            );
-                        }),
+                        LoginModalNotificationTypes.OTP,
                     );
                 }
                 case LoginModalVerifyTypes.EMAIL: {
@@ -105,18 +72,9 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         return of(loginModalNoAction());
                     }
 
-                    return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
-                        mergeMap(() => {
-                            return of(loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD));
-                        }),
-                        catchError((reason) => {
-                            return of(
-                                loginModalFailureNotification(
-                                    LoginModalNotificationTypes.FORGOT_PASSWORD,
-                                    buildMessageFromCognitoException(reason),
-                                ),
-                            );
-                        }),
+                    return callEndpointAndNotify(
+                        cognitoClient.forgotPassword(authenticationState.email),
+                        LoginModalNotificationTypes.FORGOT_PASSWORD,
                     );
                 }
             }
