@@ -18,6 +18,7 @@ export enum AuthenticationStep {
     PASSWORD_RESET_OTP = 'PASSWORD_RESET_OTP',
     PASSWORD_RESET_LOADING = 'PASSWORD_RESET_LOADING',
     LOGGED_IN = 'LOGGED_IN',
+    PASSWORD_CREATION_LOADING = 'PASSWORD_CREATION_LOADING',
 }
 
 export const authenticationInitialState: AuthenticationState = {
