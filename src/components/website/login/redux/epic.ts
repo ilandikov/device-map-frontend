@@ -62,7 +62,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             LoginModalNotificationTypes.OTP,
                         );
                     }
-                    return of(loginModalNoAction());
+                    break;
                 }
                 case LoginModalVerifyTypes.EMAIL: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
