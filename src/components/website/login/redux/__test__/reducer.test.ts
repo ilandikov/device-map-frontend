@@ -226,7 +226,7 @@ describe('user password logic', () => {
 });
 
 describe('sign up logic', () => {
-    it.failing('should transition to OTP input if sign up succeeded', () => {
+    it('should transition to OTP input if sign up succeeded', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
         });
@@ -237,7 +237,7 @@ describe('sign up logic', () => {
         });
     });
 
-    it.failing('should transition to mail input if sign up failed', () => {
+    it('should transition to mail input if sign up failed', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
