@@ -65,14 +65,13 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     break;
                 }
                 case LoginModalVerifyTypes.EMAIL: {
-                    if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
-                        return of(loginModalNoAction());
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
+                        return observeEndpoint(
+                            cognitoClient.forgotPassword(authenticationState.email),
+                            LoginModalNotificationTypes.FORGOT_PASSWORD,
+                        );
                     }
-
-                    return observeEndpoint(
-                        cognitoClient.forgotPassword(authenticationState.email),
-                        LoginModalNotificationTypes.FORGOT_PASSWORD,
-                    );
+                    break;
                 }
             }
 
