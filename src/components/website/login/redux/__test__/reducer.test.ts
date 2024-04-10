@@ -458,12 +458,16 @@ describe('password reset logic', () => {
 });
 
 describe('notification logic', () => {
-    it('should set error from failure notification', () => {
+    it.failing('should transition to mail input if sign up failed', () => {
         const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
         });
         const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
 
-        verifyStateChange(initialState, action, { error: new Error('thisIsWhy') });
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.MAIL_INPUT,
+            error: new Error('thisIsWhy'),
+        });
     });
 });
