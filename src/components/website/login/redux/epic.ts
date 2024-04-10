@@ -48,28 +48,27 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                                     );
                                 }),
                             );
-                        case AuthenticationStep.PASSWORD_RESET_LOADING:
-                            return fromPromise(
-                                cognitoClient.confirmPassword(
-                                    authenticationState.email,
-                                    authenticationState.OTP,
-                                    authenticationState.password,
-                                ),
-                            ).pipe(
+                        case AuthenticationStep.PASSWORD_RESET_LOADING: {
+                            const promise = cognitoClient.confirmPassword(
+                                authenticationState.email,
+                                authenticationState.OTP,
+                                authenticationState.password,
+                            );
+                            const notification = LoginModalNotificationTypes.PASSWORD_RESET;
+                            return fromPromise(promise).pipe(
                                 mergeMap(() => {
-                                    return of(
-                                        loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET),
-                                    );
+                                    return of(loginModalSuccessNotification(notification));
                                 }),
                                 catchError((reason) => {
                                     return of(
                                         loginModalFailureNotification(
-                                            LoginModalNotificationTypes.PASSWORD_RESET,
+                                            notification,
                                             buildMessageFromCognitoException(reason),
                                         ),
                                     );
                                 }),
                             );
+                        }
                     }
 
                     return of(loginModalNoAction());
