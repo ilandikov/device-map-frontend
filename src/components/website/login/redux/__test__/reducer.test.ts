@@ -225,6 +225,19 @@ describe('user password logic', () => {
     });
 });
 
+describe('sign up logic', () => {
+    it.failing('should transition to OTP input if sign up succeeded', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+        });
+        const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+        });
+    });
+});
+
 describe('sign up OTP logic', () => {
     it('should move from sign up OTP to sign up OTP loading stage', () => {
         const initialState = buildAuthenticationState({
