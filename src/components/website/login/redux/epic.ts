@@ -1,6 +1,7 @@
-import { Observable, switchMap } from 'rxjs';
+import { Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { ofType } from 'redux-observable';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     LoginModalAction,
     LoginModalActionTypes,
@@ -22,98 +23,117 @@ const cognitoClient = new CognitoClient({
 export function cognito(action$, state$): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
-        switchMap(async (action: LoginModalVerifyRequest) => {
+        switchMap((action: LoginModalVerifyRequest) => {
             const authenticationState: AuthenticationState = state$.value.authentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
-                return loginModalNoAction();
+                return of(loginModalNoAction());
             }
-
             switch (action.verify) {
                 case LoginModalVerifyTypes.PASSWORD: {
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                            return cognitoClient
-                                .signUp(authenticationState.email, authenticationState.password)
-                                .then(() => {
-                                    return loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
-                                })
-                                .catch((reason) => {
-                                    return loginModalFailureNotification(
-                                        LoginModalNotificationTypes.SIGN_UP,
-                                        buildMessageFromCognitoException(reason),
+                            return fromPromise(
+                                cognitoClient.signUp(authenticationState.email, authenticationState.password),
+                            ).pipe(
+                                mergeMap(() => {
+                                    return of(loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP));
+                                }),
+                                catchError((reason) => {
+                                    return of(
+                                        loginModalFailureNotification(
+                                            LoginModalNotificationTypes.SIGN_UP,
+                                            buildMessageFromCognitoException(reason),
+                                        ),
                                     );
-                                });
+                                }),
+                            );
                         case AuthenticationStep.PASSWORD_RESET_LOADING:
-                            return cognitoClient
-                                .confirmPassword(
+                            return fromPromise(
+                                cognitoClient.confirmPassword(
                                     authenticationState.email,
                                     authenticationState.OTP,
                                     authenticationState.password,
-                                )
-                                .then(() => {
-                                    return loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET);
-                                })
-                                .catch((reason) => {
-                                    return loginModalFailureNotification(
-                                        LoginModalNotificationTypes.PASSWORD_RESET,
-                                        buildMessageFromCognitoException(reason),
+                                ),
+                            ).pipe(
+                                mergeMap(() => {
+                                    return of(
+                                        loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET),
                                     );
-                                });
+                                }),
+                                catchError((reason) => {
+                                    return of(
+                                        loginModalFailureNotification(
+                                            LoginModalNotificationTypes.PASSWORD_RESET,
+                                            buildMessageFromCognitoException(reason),
+                                        ),
+                                    );
+                                }),
+                            );
                     }
 
-                    return loginModalNoAction();
+                    return of(loginModalNoAction());
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
-                    return cognitoClient
-                        .signIn(authenticationState.email, authenticationState.password)
-                        .then(() => {
-                            return loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN);
-                        })
-                        .catch((reason) => {
-                            return loginModalFailureNotification(
-                                LoginModalNotificationTypes.SIGN_IN,
-                                buildMessageFromCognitoException(reason),
+                    return fromPromise(
+                        cognitoClient.signIn(authenticationState.email, authenticationState.password),
+                    ).pipe(
+                        mergeMap(() => {
+                            return of(loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN));
+                        }),
+                        catchError((reason) => {
+                            return of(
+                                loginModalFailureNotification(
+                                    LoginModalNotificationTypes.SIGN_IN,
+                                    buildMessageFromCognitoException(reason),
+                                ),
                             );
-                        });
+                        }),
+                    );
                 }
                 case LoginModalVerifyTypes.OTP: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
-                        return loginModalNoAction();
+                        return of(loginModalNoAction());
                     }
 
-                    return cognitoClient
-                        .signUpConfirmCode(authenticationState.email, authenticationState.OTP)
-                        .then(() => {
-                            return loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
-                        })
-                        .catch((reason) => {
-                            return loginModalFailureNotification(
-                                LoginModalNotificationTypes.OTP,
-                                buildMessageFromCognitoException(reason),
+                    return fromPromise(
+                        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+                    ).pipe(
+                        mergeMap(() => {
+                            return of(loginModalSuccessNotification(LoginModalNotificationTypes.OTP));
+                        }),
+                        catchError((reason) => {
+                            return of(
+                                loginModalFailureNotification(
+                                    LoginModalNotificationTypes.OTP,
+                                    buildMessageFromCognitoException(reason),
+                                ),
                             );
-                        });
+                        }),
+                    );
                 }
                 case LoginModalVerifyTypes.EMAIL: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
-                        return loginModalNoAction();
+                        return of(loginModalNoAction());
                     }
 
-                    return cognitoClient
-                        .forgotPassword(authenticationState.email)
-                        .then(() => {
-                            return loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
-                        })
-                        .catch((reason) => {
-                            return loginModalFailureNotification(
-                                LoginModalNotificationTypes.FORGOT_PASSWORD,
-                                buildMessageFromCognitoException(reason),
+                    return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
+                        mergeMap(() => {
+                            return of(loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD));
+                        }),
+                        catchError((reason) => {
+                            return of(
+                                loginModalFailureNotification(
+                                    LoginModalNotificationTypes.FORGOT_PASSWORD,
+                                    buildMessageFromCognitoException(reason),
+                                ),
                             );
-                        });
+                        }),
+                    );
                 }
             }
 
-            return loginModalNoAction();
+            return of(loginModalNoAction());
         }),
     );
 }
