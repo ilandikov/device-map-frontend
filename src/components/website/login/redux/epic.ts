@@ -37,7 +37,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                                 cognitoClient.signUp(authenticationState.email, authenticationState.password),
                                 LoginModalNotificationTypes.SIGN_UP,
                             );
-                        case AuthenticationStep.PASSWORD_RESET_LOADING: {
+                        case AuthenticationStep.PASSWORD_RESET_LOADING:
                             return callEndpointAndNotify(
                                 cognitoClient.confirmPassword(
                                     authenticationState.email,
@@ -46,17 +46,15 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                                 ),
                                 LoginModalNotificationTypes.PASSWORD_RESET,
                             );
-                        }
                     }
 
                     return of(loginModalNoAction());
                 }
-                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
+                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD:
                     return callEndpointAndNotify(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
                     );
-                }
                 case LoginModalVerifyTypes.OTP: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                         return of(loginModalNoAction());
