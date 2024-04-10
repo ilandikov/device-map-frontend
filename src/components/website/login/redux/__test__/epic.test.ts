@@ -26,7 +26,7 @@ describe('user sign up tests', () => {
             });
 
             const initialState = buildAuthenticationStateForEpic({
-                step: AuthenticationStep.PASSWORD_CREATION_OTP,
+                step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
