@@ -30,7 +30,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 return of(loginModalNoAction());
             }
             switch (action.verify) {
-                case LoginModalVerifyTypes.PASSWORD: {
+                case LoginModalVerifyTypes.PASSWORD:
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
                             return observeEndpoint(
@@ -48,33 +48,28 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             );
                     }
 
-                    return of(loginModalNoAction());
-                }
+                    break;
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD:
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
                     );
-                case LoginModalVerifyTypes.OTP: {
-                    if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
-                        return of(loginModalNoAction());
+                case LoginModalVerifyTypes.OTP:
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
+                        return observeEndpoint(
+                            cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+                            LoginModalNotificationTypes.OTP,
+                        );
                     }
-
-                    return observeEndpoint(
-                        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-                        LoginModalNotificationTypes.OTP,
-                    );
-                }
-                case LoginModalVerifyTypes.EMAIL: {
-                    if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
-                        return of(loginModalNoAction());
+                    break;
+                case LoginModalVerifyTypes.EMAIL:
+                    if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
+                        return observeEndpoint(
+                            cognitoClient.forgotPassword(authenticationState.email),
+                            LoginModalNotificationTypes.FORGOT_PASSWORD,
+                        );
                     }
-
-                    return observeEndpoint(
-                        cognitoClient.forgotPassword(authenticationState.email),
-                        LoginModalNotificationTypes.FORGOT_PASSWORD,
-                    );
-                }
+                    break;
             }
 
             return of(loginModalNoAction());
