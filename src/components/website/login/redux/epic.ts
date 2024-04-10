@@ -61,9 +61,8 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
                             LoginModalNotificationTypes.OTP,
                         );
-                    } else {
-                        return of(loginModalNoAction());
                     }
+                    return of(loginModalNoAction());
                 }
                 case LoginModalVerifyTypes.EMAIL: {
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
