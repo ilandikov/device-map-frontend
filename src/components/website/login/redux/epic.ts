@@ -33,12 +33,12 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                 case LoginModalVerifyTypes.PASSWORD: {
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                            return callEndpointAndNotify(
+                            return observeEndpoint(
                                 cognitoClient.signUp(authenticationState.email, authenticationState.password),
                                 LoginModalNotificationTypes.SIGN_UP,
                             );
                         case AuthenticationStep.PASSWORD_RESET_LOADING:
-                            return callEndpointAndNotify(
+                            return observeEndpoint(
                                 cognitoClient.confirmPassword(
                                     authenticationState.email,
                                     authenticationState.OTP,
@@ -51,7 +51,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                     return of(loginModalNoAction());
                 }
                 case LoginModalVerifyTypes.EMAIL_AND_PASSWORD:
-                    return callEndpointAndNotify(
+                    return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
                     );
@@ -60,7 +60,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         return of(loginModalNoAction());
                     }
 
-                    return callEndpointAndNotify(
+                    return observeEndpoint(
                         cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
                         LoginModalNotificationTypes.OTP,
                     );
@@ -70,7 +70,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
                         return of(loginModalNoAction());
                     }
 
-                    return callEndpointAndNotify(
+                    return observeEndpoint(
                         cognitoClient.forgotPassword(authenticationState.email),
                         LoginModalNotificationTypes.FORGOT_PASSWORD,
                     );
@@ -82,7 +82,7 @@ export function cognito(action$, state$): Observable<LoginModalAction> {
     );
 }
 
-function callEndpointAndNotify(
+function observeEndpoint(
     endpoint: Promise<unknown>,
     notification: LoginModalNotificationTypes,
 ): Observable<LoginModalAction> {
