@@ -179,7 +179,7 @@ describe('user password logic', () => {
         });
     });
 
-    it('should transition to OTP verification after password creation if passwords are matching and remove password error', () => {
+    it('should transition to loading step after password creation if passwords are matching and remove password error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION,
             password: 'passwordsMatchAndAreStrong9%',
@@ -190,7 +190,7 @@ describe('user password logic', () => {
         const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
         });
     });
