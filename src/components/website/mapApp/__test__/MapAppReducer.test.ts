@@ -13,7 +13,7 @@ describe('MapApp reducer tests', () => {
         expect(initialState).toEqual(expectedInitialState);
     });
 
-    it('should move to user authentication step on login click action', () => {
+    it('should move to user authentication step on user button click', () => {
         const action = mapAppUserButtonClick();
 
         const resultingState = MapAppReducer(undefined, action);
