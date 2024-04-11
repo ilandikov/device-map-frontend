@@ -1,74 +1,13 @@
-import { lastValueFrom, of } from 'rxjs';
 import {
-    LoginModalAction,
     LoginModalNotificationTypes,
-    LoginModalVerifyRequest,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
-    loginModalNoAction,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
-import { AuthenticationState, AuthenticationStep } from '../state';
-import { cognito } from '../epic';
-
-enum PromiseResult {
-    RESOLVE = 'RESOLVE',
-    REJECT = 'REJECT',
-}
-
-class cognitoTestClient {
-    private _mockedResult: PromiseResult;
-
-    constructor(mockedResult: PromiseResult) {
-        this._mockedResult = mockedResult;
-    }
-
-    signUp() {
-        return this.mockedPromise();
-    }
-    signUpConfirmCode() {
-        return this.mockedPromise();
-    }
-    confirmPassword() {
-        return this.mockedPromise();
-    }
-    signIn() {
-        return this.mockedPromise();
-    }
-    forgotPassword() {
-        return this.mockedPromise();
-    }
-
-    private mockedPromise() {
-        if (this._mockedResult === PromiseResult.REJECT) {
-            return Promise.reject();
-        }
-        return Promise.resolve();
-    }
-}
-
-async function verifyCognitoEpic2(
-    sentAction: LoginModalVerifyRequest,
-    initialState: AuthenticationState,
-    remoteServiceAnswer: PromiseResult,
-    expectedAction: LoginModalAction,
-) {
-    const output$ = cognito(
-        of(sentAction),
-        {
-            value: {
-                authentication: initialState,
-            },
-        },
-        {
-            cognitoClient: new cognitoTestClient(remoteServiceAnswer),
-        },
-    );
-    const receivedAction = await lastValueFrom(output$);
-    expect(receivedAction).toEqual(expectedAction);
-}
+import { AuthenticationStep } from '../state';
+import { PromiseResult, verifyCognitoEpic2, verifyCognitoEpicNoAction } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
@@ -148,20 +87,6 @@ describe('user sign in tests', () => {
         await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
 });
-
-async function verifyCognitoEpicNoAction(sentAction: LoginModalVerifyRequest, initialState: AuthenticationState) {
-    const output = cognito(
-        of(sentAction),
-        {
-            value: {
-                authentication: initialState,
-            },
-        },
-        { cognitoClient: {} },
-    );
-    const receivedAction = await lastValueFrom(output);
-    expect(receivedAction).toEqual(loginModalNoAction());
-}
 
 describe('password reset tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
