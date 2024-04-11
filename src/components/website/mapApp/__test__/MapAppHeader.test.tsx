@@ -1,10 +1,11 @@
 import React from 'react';
 import { fireEvent, getByTestId } from '@testing-library/react';
 import { MapAppHeader } from '../MapAppHeader';
-import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../redux/__mocks__/MapAppState';
+import { mockMapAppState, mockPrepareSelector } from '../redux/__mocks__/MapAppState';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppLoginModalOpen } from '../redux/actions';
 import { MapAppUsageStep } from '../redux/MapAppReducer';
+import { mockDispatch } from '../../login/redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
