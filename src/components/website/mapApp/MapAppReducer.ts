@@ -23,7 +23,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                 ...state,
                 usageStep: MapAppUsageStep.HOME_SCREEN,
             };
+        default:
+            return state;
     }
-
-    return state;
 }
