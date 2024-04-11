@@ -15,10 +15,6 @@ export const mapAppInitialState: MapAppState = {
 };
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction) {
-    if (!action) {
-        return state;
-    }
-
     switch (action.type) {
         case MapAppActionTypes.LOGIN_MODAL_OPEN:
             return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
