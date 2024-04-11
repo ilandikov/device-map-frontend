@@ -1,4 +1,5 @@
 import CognitoClient from '@mancho.devs/cognito';
+import { lastValueFrom, of } from 'rxjs';
 import {
     LoginModalAction,
     LoginModalNotificationTypes,
@@ -11,6 +12,7 @@ import {
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
 import { AuthenticationState, AuthenticationStep } from '../state';
+import { cognito } from '../epic';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
 const cognitoClient = new CognitoClient({
@@ -44,9 +46,11 @@ async function verifyCognitoEpic2(
     remoteServiceAnswer: PromiseResult,
     expectedAction: LoginModalAction,
 ) {
-    await verifyCognitoEpic(sentAction, initialState, expectedAction, {
+    const output$ = cognito(of(sentAction), initialState, {
         cognitoClient: new cognitoTestClient(remoteServiceAnswer),
     });
+    const receivedAction = await lastValueFrom(output$);
+    expect(receivedAction).toEqual(expectedAction);
 }
 
 describe('user sign up tests', () => {
