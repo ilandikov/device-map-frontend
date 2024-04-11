@@ -4,18 +4,15 @@ import React from 'react';
 import './MapAppHeader.scss';
 
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import { useAppDispatch } from '../../../redux/store';
 import { AuthenticationStep, useAuthentication } from '../login/redux/state';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
-import { mapAppLoginModalOpen } from './redux/actions';
+import { UserButton } from './UserButton';
 
 export function MapAppHeader() {
     const { t } = useI18next();
-    const useDispatch = useAppDispatch();
 
     const { step } = useAuthentication();
     const isUserLoggedIn = step === AuthenticationStep.LOGGED_IN;
@@ -32,16 +29,7 @@ export function MapAppHeader() {
             <div className="map-app-header-block-container">
                 {isUserLoggedIn && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
-                    <button
-                        className="map-app-header-login-button"
-                        data-testid="loginButton"
-                        onClick={() => {
-                            useDispatch(mapAppLoginModalOpen());
-                        }}
-                    >
-                        <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
-                        <p className="map-app-header-account-text">{t('loginAction')}</p>
-                    </button>
+                    <UserButton />
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
                     <img src={AppStore} alt="map-app-header-apps-app-store" />
                 </div>
