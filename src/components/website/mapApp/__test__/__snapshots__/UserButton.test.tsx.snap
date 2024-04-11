@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserButton snapshot tests should match the snapshot at the initial state 1`] = `
+<button
+  className="map-app-header-user-button"
+  data-testid="loginButton"
+  onClick={[Function]}
+>
+  <img
+    alt="login-header-account"
+    className="map-app-header-account-image"
+    src="test-file-stub"
+  />
+  <p
+    className="map-app-header-account-text"
+  >
+    loginAction
+  </p>
+</button>
+`;
+
+exports[`UserButton snapshot tests should match the snapshot at user authenticated state 1`] = `
+<button
+  className="map-app-header-user-button"
+  data-testid="loginButton"
+  onClick={[Function]}
+>
+  <img
+    alt="login-header-account"
+    className="map-app-header-account-image"
+    src="test-file-stub"
+  />
+  <p
+    className="map-app-header-account-text"
+  >
+    loginAction
+  </p>
+</button>
+`;
