@@ -1,5 +1,5 @@
 import { MapAppReducer, MapAppState, MapAppUsageStep } from '../redux/MapAppReducer';
-import { mapAppLoginModalClose, mapAppLoginModalOpen } from '../redux/actions';
+import { mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
@@ -14,7 +14,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should move to user authentication step on login click action', () => {
-        const action = mapAppLoginModalOpen();
+        const action = mapAppUserButtonClick();
 
         const resultingState = MapAppReducer(undefined, action);
 

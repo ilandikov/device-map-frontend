@@ -6,7 +6,7 @@ import {
     mockDispatch,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
-import { mapAppLoginModalOpen } from '../redux/actions';
+import { mapAppUserButtonClick } from '../redux/actions';
 import { UserButton } from '../UserButton';
 import { AuthenticationStep } from '../../login/redux/state';
 
@@ -43,6 +43,6 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLoginModalOpen());
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppUserButtonClick());
     });
 });
