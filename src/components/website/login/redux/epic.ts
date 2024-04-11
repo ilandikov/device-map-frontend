@@ -1,6 +1,7 @@
-import { Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
+import { Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { MapAppAction, mapAppLoginModalClose } from '../../mapApp/redux/actions';
 import {
     LoginModalAction,
     LoginModalActionTypes,
@@ -53,6 +54,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         return observeEndpoint(
                             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
                             LoginModalNotificationTypes.OTP,
+                            mapAppLoginModalClose(),
                         );
                     }
                     break;
@@ -74,9 +76,14 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
 function observeEndpoint(
     endpoint: Promise<unknown>,
     notification: LoginModalNotificationTypes,
-): Observable<LoginModalAction> {
+    mapAppAdditionalAction: MapAppAction | null = null,
+): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(endpoint).pipe(
         mergeMap(() => {
+            if (mapAppAdditionalAction !== null) {
+                return from([loginModalSuccessNotification(notification), mapAppAdditionalAction]);
+            }
+
             return of(loginModalSuccessNotification(notification));
         }),
         catchError((reason) => {
