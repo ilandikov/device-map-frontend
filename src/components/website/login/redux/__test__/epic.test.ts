@@ -156,22 +156,26 @@ describe('user sign in tests', () => {
     });
 });
 
+async function verifyCognitoEpicNoAction(sentAction: LoginModalVerifyRequest, initialState: AuthenticationState) {
+    const output = cognito(
+        of(sentAction),
+        {
+            value: {
+                authentication: initialState,
+            },
+        },
+        { cognitoClient: {} },
+    );
+    const receivedAction = await lastValueFrom(output);
+    expect(receivedAction).toEqual(loginModalNoAction());
+}
+
 describe('password reset tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
-        const output = cognito(
-            of(sentAction),
-            {
-                value: {
-                    authentication: initialState,
-                },
-            },
-            { cognitoClient: {} },
-        );
-        const receivedAction = await lastValueFrom(output);
-        expect(receivedAction).toEqual(loginModalNoAction());
+        await verifyCognitoEpicNoAction(sentAction, initialState);
     });
 
     it.each([
