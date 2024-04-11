@@ -29,7 +29,7 @@ exports[`MapAppHeader snapshot tests should match the snapshot at the initial st
       className="map-app-header-block"
     >
       <button
-        className="map-app-header-login-button"
+        className="map-app-header-user-button"
         data-testid="loginButton"
         onClick={[Function]}
       >
@@ -118,7 +118,7 @@ exports[`MapAppHeader snapshot tests should match the snapshot at user authentic
       className="map-app-header-block"
     >
       <button
-        className="map-app-header-login-button"
+        className="map-app-header-user-button"
         data-testid="loginButton"
         onClick={[Function]}
       >

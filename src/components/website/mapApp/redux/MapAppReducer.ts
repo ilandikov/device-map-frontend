@@ -16,7 +16,7 @@ export const mapAppInitialState: MapAppState = {
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction) {
     switch (action.type) {
-        case MapAppActionTypes.LOGIN_MODAL_OPEN:
+        case MapAppActionTypes.USER_BUTTON_CLICK:
             return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
         case MapAppActionTypes.LOGIN_MODAL_CLOSE:
             return {
