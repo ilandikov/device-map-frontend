@@ -10,7 +10,7 @@ import {
     loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
-import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
+import { buildAuthenticationState, buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
 import { AuthenticationState, AuthenticationStep } from '../state';
 import { cognito } from '../epic';
 import { verifyCognitoEpic } from './epicTestHelpers';
@@ -42,13 +42,21 @@ class cognitoTestClient {
 
 async function verifyCognitoEpic2(
     sentAction: LoginModalVerifyRequest,
-    initialState: { value: { authentication: AuthenticationState } },
+    initialState: AuthenticationState,
     remoteServiceAnswer: PromiseResult,
     expectedAction: LoginModalAction,
 ) {
-    const output$ = cognito(of(sentAction), initialState, {
-        cognitoClient: new cognitoTestClient(remoteServiceAnswer),
-    });
+    const output$ = cognito(
+        of(sentAction),
+        {
+            value: {
+                authentication: initialState,
+            },
+        },
+        {
+            cognitoClient: new cognitoTestClient(remoteServiceAnswer),
+        },
+    );
     const receivedAction = await lastValueFrom(output$);
     expect(receivedAction).toEqual(expectedAction);
 }
@@ -63,7 +71,7 @@ describe('user sign up tests', () => {
     ])(
         'should dispatch sign up notification when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
-            const initialState = buildAuthenticationStateForEpic({
+            const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
