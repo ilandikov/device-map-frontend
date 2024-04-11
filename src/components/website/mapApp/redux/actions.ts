@@ -4,6 +4,6 @@ export interface MapAppAction {
     type: MapAppActionTypes;
 }
 
-export function mapAppLoginModalClose(): MapAppAction {
+export function mapAppLoginModalOpen(): MapAppAction {
     return { type: MapAppActionTypes.LOGIN_MODAL_OPEN };
 }

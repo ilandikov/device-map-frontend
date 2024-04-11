@@ -12,7 +12,7 @@ import { RootState, useAppDispatch } from '../../../redux/store';
 import { MapAppUsageStep } from './MapAppReducer';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
-import { mapAppLoginModalClose } from './redux/actions';
+import { mapAppLoginModalOpen } from './redux/actions';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -36,7 +36,7 @@ export function MapAppHeader() {
                         className="map-app-header-login-button"
                         data-testid="loginButton"
                         onClick={() => {
-                            useDispatch(mapAppLoginModalClose());
+                            useDispatch(mapAppLoginModalOpen());
                         }}
                     >
                         <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
