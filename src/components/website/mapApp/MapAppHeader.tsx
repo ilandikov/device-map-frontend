@@ -18,7 +18,7 @@ export function MapAppHeader() {
     const useDispatch = useAppDispatch();
 
     const { step } = useAuthentication();
-    const isUserAuthenticated = step === AuthenticationStep.LOGGED_IN;
+    const isUserLoggedIn = step === AuthenticationStep.LOGGED_IN;
 
     return (
         <header className="map-app-header">
@@ -27,10 +27,10 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {isUserAuthenticated && <TerminalSearch className="map-app-header-block" />}
+                {isUserLoggedIn && <TerminalSearch className="map-app-header-block" />}
             </div>
             <div className="map-app-header-block-container">
-                {isUserAuthenticated && <UserPoints className="map-app-header-block" />}
+                {isUserLoggedIn && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
                     <button
                         className="map-app-header-login-button"
