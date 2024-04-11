@@ -58,3 +58,14 @@ export enum PasswordError {
 export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
+
+export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
+    return {
+        step: partialState.step ?? AuthenticationStep.WELCOME,
+        email: partialState.email ?? '',
+        error: partialState.error ?? null,
+        password: partialState.password ?? '',
+        passwordRepeat: partialState.passwordRepeat ?? '',
+        OTP: partialState.OTP ?? '',
+    };
+}

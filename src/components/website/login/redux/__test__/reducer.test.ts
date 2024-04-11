@@ -18,9 +18,8 @@ import {
     OTPError,
     PasswordError,
     authenticationInitialState,
+    buildAuthenticationState,
 } from '../state';
-
-import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
 
 function verifyStateChange(
     initialState: AuthenticationState,

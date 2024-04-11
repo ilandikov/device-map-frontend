@@ -7,9 +7,8 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
-import { MapAppUsageStep } from './redux/MapAppReducer';
+import { useAppDispatch } from '../../../redux/store';
+import { AuthenticationStep, useAuthentication } from '../login/redux/state';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
 import { mapAppLoginModalOpen } from './redux/actions';
@@ -17,8 +16,9 @@ import { mapAppLoginModalOpen } from './redux/actions';
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
-    const { usageStep } = useSelector((state: RootState) => state.mapAppState);
-    const isUserAuthenticated = usageStep === MapAppUsageStep.AUTHENTICATED_USER;
+
+    const { step } = useAuthentication();
+    const isUserLoggedIn = step === AuthenticationStep.LOGGED_IN;
 
     return (
         <header className="map-app-header">
@@ -27,10 +27,10 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {isUserAuthenticated && <TerminalSearch className="map-app-header-block" />}
+                {isUserLoggedIn && <TerminalSearch className="map-app-header-block" />}
             </div>
             <div className="map-app-header-block-container">
-                {isUserAuthenticated && <UserPoints className="map-app-header-block" />}
+                {isUserLoggedIn && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
                     <button
                         className="map-app-header-login-button"

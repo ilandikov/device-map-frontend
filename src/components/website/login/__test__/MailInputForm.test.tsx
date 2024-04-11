@@ -13,7 +13,11 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
+import {
+    mockAuthenticationState,
+    mockDispatch,
+    mockPrepareSelector,
+} from '../../../../redux/__mocks__/AuthenticationState';
 import { MailInputError } from '../redux/state';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({

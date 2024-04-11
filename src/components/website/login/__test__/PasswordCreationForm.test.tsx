@@ -12,7 +12,11 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
+import {
+    mockAuthenticationState,
+    mockDispatch,
+    mockPrepareSelector,
+} from '../../../../redux/__mocks__/AuthenticationState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),

@@ -5,8 +5,7 @@ import {
     loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../actions';
-import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
-import { AuthenticationStep } from '../state';
+import { AuthenticationStep, buildAuthenticationState } from '../state';
 import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './epicTestHelpers';
 
 const cognitoReason = 'cognitoUnknownException';
