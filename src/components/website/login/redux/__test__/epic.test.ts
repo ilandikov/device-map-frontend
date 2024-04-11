@@ -7,13 +7,13 @@ import {
 } from '../actions';
 import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
 import { AuthenticationStep } from '../state';
-import { PromiseResult, verifyCognitoEpic2, verifyCognitoEpicNoAction } from './epicTestHelpers';
+import { verifyCognitoEpic2, verifyCognitoEpicNoAction } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
-        [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
         [
-            PromiseResult.REJECT,
+            Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'cognitoUnknownException'),
         ],
     ])(
@@ -29,9 +29,9 @@ describe('user sign up tests', () => {
     );
 
     it.each([
-        [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET)],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET)],
         [
-            PromiseResult.REJECT,
+            Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.PASSWORD_RESET, 'cognitoUnknownException'),
         ],
     ])(
@@ -49,11 +49,8 @@ describe('user sign up tests', () => {
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
-        [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
-        [
-            PromiseResult.REJECT,
-            loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'cognitoUnknownException'),
-        ],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.OTP)],
+        [Promise.reject(), loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'cognitoUnknownException')],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
@@ -75,9 +72,9 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
 describe('user sign in tests', () => {
     it.each([
-        [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN)],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN)],
         [
-            PromiseResult.REJECT,
+            Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'cognitoUnknownException'),
         ],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
@@ -97,9 +94,9 @@ describe('password reset tests', () => {
     });
 
     it.each([
-        [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD)],
+        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD)],
         [
-            PromiseResult.REJECT,
+            Promise.reject(),
             loginModalFailureNotification(LoginModalNotificationTypes.FORGOT_PASSWORD, 'cognitoUnknownException'),
         ],
     ])(

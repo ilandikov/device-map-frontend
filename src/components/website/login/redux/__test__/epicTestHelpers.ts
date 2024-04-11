@@ -3,50 +3,38 @@ import { LoginModalAction, LoginModalVerifyRequest, loginModalNoAction } from '.
 import { AuthenticationState } from '../state';
 import { cognito } from '../epic';
 
-export enum PromiseResult {
-    RESOLVE = 'RESOLVE',
-    REJECT = 'REJECT',
-}
-
 class cognitoTestClient {
-    private _mockedResult: PromiseResult;
+    private _mockedResult: Promise<void>;
 
-    constructor(mockedResult: PromiseResult) {
+    constructor(mockedResult: Promise<void>) {
         this._mockedResult = mockedResult;
     }
 
     signUp() {
-        return this.mockedPromise();
+        return this._mockedResult;
     }
 
     signUpConfirmCode() {
-        return this.mockedPromise();
+        return this._mockedResult;
     }
 
     confirmPassword() {
-        return this.mockedPromise();
+        return this._mockedResult;
     }
 
     signIn() {
-        return this.mockedPromise();
+        return this._mockedResult;
     }
 
     forgotPassword() {
-        return this.mockedPromise();
-    }
-
-    private mockedPromise() {
-        if (this._mockedResult === PromiseResult.REJECT) {
-            return Promise.reject();
-        }
-        return Promise.resolve();
+        return this._mockedResult;
     }
 }
 
 export async function verifyCognitoEpic2(
     sentAction: LoginModalVerifyRequest,
     initialState: AuthenticationState,
-    remoteServiceAnswer: PromiseResult,
+    remoteServiceAnswer: Promise<void>,
     expectedAction: LoginModalAction,
 ) {
     const output$ = cognito(
