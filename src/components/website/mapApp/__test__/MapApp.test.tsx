@@ -1,9 +1,8 @@
 import React from 'react';
 import MapApp from '../MapApp';
-import { mockMapAppState, mockPrepareSelector } from '../redux/__mocks__/MapAppState';
 import { MapAppUsageStep } from '../redux/MapAppReducer';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mockDispatch } from '../../login/redux/__mocks__/AuthenticationState';
+import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../login/redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

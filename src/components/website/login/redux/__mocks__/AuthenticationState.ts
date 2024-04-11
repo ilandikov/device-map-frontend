@@ -1,4 +1,5 @@
 import { AuthenticationState, AuthenticationStep } from '../state';
+import { MapAppState } from '../../../mapApp/redux/MapAppReducer';
 
 /* To mock the react-redux functionalities in regard to {@link LoginModalState}
  * add the following code to the test:
@@ -21,6 +22,12 @@ export const mockDispatch = jest.fn();
 
 export let mockPrepareSelector: () => any;
 export function mockAuthenticationState(mockState: Partial<AuthenticationState>) {
+    mockPrepareSelector = () => {
+        return mockState;
+    };
+}
+
+export function mockMapAppState(mockState: Partial<MapAppState>) {
     mockPrepareSelector = () => {
         return mockState;
     };
