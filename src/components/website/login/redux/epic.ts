@@ -48,6 +48,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
+                        mapAppLoginModalClose(),
                     );
                 case LoginModalVerifyTypes.OTP:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {

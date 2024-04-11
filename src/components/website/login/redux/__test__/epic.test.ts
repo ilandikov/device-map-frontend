@@ -68,7 +68,10 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
 describe('user sign in tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN)]],
+        [
+            Promise.resolve(),
+            [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN), mapAppLoginModalClose()],
+        ],
         [Promise.reject(), [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, cognitoReason)]],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
