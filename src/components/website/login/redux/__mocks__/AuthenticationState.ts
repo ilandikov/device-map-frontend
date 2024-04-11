@@ -36,11 +36,3 @@ export function buildAuthenticationState(partialState: Partial<AuthenticationSta
         OTP: partialState.OTP ?? '',
     };
 }
-
-export function buildAuthenticationStateForEpic(partialState: Partial<AuthenticationState>) {
-    return {
-        value: {
-            authentication: buildAuthenticationState(partialState),
-        },
-    };
-}
