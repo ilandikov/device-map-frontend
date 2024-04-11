@@ -9,9 +9,10 @@ import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
-import { MapAppActionTypes, MapAppUsageStep } from './MapAppReducer';
+import { MapAppUsageStep } from './MapAppReducer';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
+import { mapAppLoginModalClose } from './redux/actions';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -35,7 +36,7 @@ export function MapAppHeader() {
                         className="map-app-header-login-button"
                         data-testid="loginButton"
                         onClick={() => {
-                            useDispatch({ type: MapAppActionTypes.LOGIN_MODAL_OPEN });
+                            useDispatch(mapAppLoginModalClose());
                         }}
                     >
                         <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
