@@ -1,3 +1,5 @@
+import { MapAppAction } from './redux/actions';
+
 export interface MapAppState {
     usageStep: MapAppUsageStep;
 }
@@ -17,7 +19,7 @@ export enum MapAppActionTypes {
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
 }
 
-export function MapAppReducer(state: MapAppState = mapAppInitialState, action = undefined) {
+export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction) {
     if (!action) {
         return state;
     }

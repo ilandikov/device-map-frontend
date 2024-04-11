@@ -1,6 +1,6 @@
 import { MapAppActionTypes } from '../MapAppReducer';
 
-interface MapAppAction {
+export interface MapAppAction {
     type: MapAppActionTypes;
 }
 

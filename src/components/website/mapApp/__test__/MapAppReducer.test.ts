@@ -3,7 +3,8 @@ import { mapAppLoginModalClose } from '../redux/actions';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
-        const initialState = MapAppReducer();
+        // @ts-ignore
+        const initialState = MapAppReducer(undefined, { type: 'DUMMY_ACTION' });
 
         const expectedInitialState: MapAppState = {
             usageStep: MapAppUsageStep.HOME_SCREEN,
