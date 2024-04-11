@@ -11,6 +11,11 @@ import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationStat
 import { AuthenticationStep } from '../state';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
+const cognitoClient = new CognitoClient({
+    UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
+    ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
+});
+
 describe('user sign up tests', () => {
     it.each([
         [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
@@ -30,7 +35,7 @@ describe('user sign up tests', () => {
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
-            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+            await verifyCognitoEpic(sentAction, initialState, expectedAction, { cognitoClient });
         },
     );
 
@@ -52,7 +57,7 @@ describe('user sign up tests', () => {
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
-            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+            await verifyCognitoEpic(sentAction, initialState, expectedAction, { cognitoClient });
         },
     );
 });
@@ -71,7 +76,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        await verifyCognitoEpic(sentAction, initialState, expectedAction, { cognitoClient });
     });
 
     it('should dispatch no action and not call signUp() from password reset loading step', async () => {
@@ -80,7 +85,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
+        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction(), { cognitoClient });
     });
 });
 
@@ -99,7 +104,7 @@ describe('user sign in tests', () => {
         const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.LOGIN_LOADING });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
 
-        await verifyCognitoEpic(sentAction, initialState, expectedAction);
+        await verifyCognitoEpic(sentAction, initialState, expectedAction, { cognitoClient });
     });
 });
 
@@ -109,7 +114,7 @@ describe('password reset tests', () => {
         const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.MAIL_INPUT });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
-        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction());
+        await verifyCognitoEpic(sentAction, initialState, loginModalNoAction(), { cognitoClient });
     });
 
     it.each([
@@ -128,7 +133,7 @@ describe('password reset tests', () => {
             const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.PASSWORD_RESET_LOADING });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
-            await verifyCognitoEpic(sentAction, initialState, expectedAction);
+            await verifyCognitoEpic(sentAction, initialState, expectedAction, { cognitoClient });
         },
     );
 });

@@ -4,12 +4,13 @@ import { AuthenticationState } from '../state';
 import { cognito } from '../epic';
 
 export async function verifyEpic(
-    epicToTest: (action$, state$) => Observable<any>,
+    epicToTest: (action$, state$, dependencies) => Observable<any>,
     sentAction: LoginModalVerifyRequest,
     initialState: any,
     expectedAction: any,
+    dependencies: any,
 ) {
-    const state$ = epicToTest(of(sentAction), initialState);
+    const state$ = epicToTest(of(sentAction), initialState, dependencies);
     const receivedAction = await lastValueFrom(state$);
 
     expect(receivedAction).toEqual(expectedAction);
@@ -21,6 +22,7 @@ export async function verifyCognitoEpic(
         value: { authentication: AuthenticationState };
     },
     expectedAction: LoginModalAction,
+    dependencies: any,
 ) {
-    await verifyEpic(cognito, sentAction, initialState, expectedAction);
+    await verifyEpic(cognito, sentAction, initialState, expectedAction, dependencies);
 }
