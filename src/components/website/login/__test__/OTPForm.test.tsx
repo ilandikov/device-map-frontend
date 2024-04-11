@@ -14,7 +14,11 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from '../redux/actions';
-import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
+import {
+    mockAuthenticationState,
+    mockDispatch,
+    mockPrepareSelector,
+} from '../../../../redux/__mocks__/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

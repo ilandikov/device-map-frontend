@@ -1,7 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { LoginModal } from '../LoginModal';
-import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../redux/__mocks__/AuthenticationState';
+import {
+    mockAuthenticationState,
+    mockDispatch,
+    mockPrepareSelector,
+} from '../../../../redux/__mocks__/AuthenticationState';
 import { AuthenticationStep } from '../redux/state';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
