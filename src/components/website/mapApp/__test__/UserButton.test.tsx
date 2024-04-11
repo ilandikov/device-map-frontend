@@ -25,7 +25,7 @@ describe('UserButton snapshot tests', () => {
     });
 
     it('should match the snapshot at user authenticated state', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN });
+        mockAuthenticationState({ email: 'logged@in.kr', step: AuthenticationStep.LOGGED_IN });
         const component = renderForSnapshotTest(<UserButton />);
 
         expect(component).toMatchSnapshot();

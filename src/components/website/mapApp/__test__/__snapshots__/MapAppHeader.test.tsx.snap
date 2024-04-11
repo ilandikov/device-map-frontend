@@ -129,9 +129,7 @@ exports[`MapAppHeader snapshot tests should match the snapshot at user authentic
         />
         <p
           className="map-app-header-account-text"
-        >
-          loginAction
-        </p>
+        />
       </button>
       <img
         alt="map-app-header-apps-google-play"

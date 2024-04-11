@@ -33,7 +33,7 @@ exports[`UserButton snapshot tests should match the snapshot at user authenticat
   <p
     className="map-app-header-account-text"
   >
-    loginAction
+    logged@in.kr
   </p>
 </button>
 `;
