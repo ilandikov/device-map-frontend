@@ -7,3 +7,7 @@ export interface MapAppAction {
 export function mapAppLoginModalOpen(): MapAppAction {
     return { type: MapAppActionTypes.LOGIN_MODAL_OPEN };
 }
+
+export function mapAppLoginModalClose(): MapAppAction {
+    return { type: MapAppActionTypes.LOGIN_MODAL_CLOSE };
+}
