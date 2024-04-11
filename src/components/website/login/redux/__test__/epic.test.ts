@@ -1,6 +1,8 @@
 import CognitoClient from '@mancho.devs/cognito';
 import {
+    LoginModalAction,
     LoginModalNotificationTypes,
+    LoginModalVerifyRequest,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
     loginModalNoAction,
@@ -8,7 +10,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { buildAuthenticationStateForEpic } from '../__mocks__/AuthenticationState';
-import { AuthenticationStep } from '../state';
+import { AuthenticationState, AuthenticationStep } from '../state';
 import { verifyCognitoEpic } from './epicTestHelpers';
 
 const cognitoClient = new CognitoClient({
@@ -36,6 +38,17 @@ class cognitoTestClient {
     }
 }
 
+async function verifyCognitoEpic2(
+    sentAction: LoginModalVerifyRequest,
+    initialState: { value: { authentication: AuthenticationState } },
+    remoteServiceAnswer: PromiseResult,
+    expectedAction: LoginModalAction,
+) {
+    await verifyCognitoEpic(sentAction, initialState, expectedAction, {
+        cognitoClient: new cognitoTestClient(remoteServiceAnswer),
+    });
+}
+
 describe('user sign up tests', () => {
     it.each([
         [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
@@ -51,9 +64,7 @@ describe('user sign up tests', () => {
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
-            await verifyCognitoEpic(sentAction, initialState, expectedAction, {
-                cognitoClient: new cognitoTestClient(remoteServiceAnswer),
-            });
+            await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
     );
 
