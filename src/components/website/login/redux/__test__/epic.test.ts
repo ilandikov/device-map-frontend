@@ -33,6 +33,10 @@ class cognitoTestClient {
     }
 
     signUp() {
+        return this.mockedPromise();
+    }
+
+    private mockedPromise() {
         if (this._mockedResult === PromiseResult.REJECT) {
             return Promise.reject();
         }
