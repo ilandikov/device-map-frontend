@@ -22,7 +22,7 @@ export function NavigationButtons() {
             <button
                 data-testid="cancelButton"
                 onClick={() => {
-                    dispatch({ type: MapAppActionTypes.LOGIN_MODAL_CLOSED });
+                    dispatch({ type: MapAppActionTypes.LOGIN_MODAL_CLOSE });
                     dispatch(loginModalButtonClick('cancel'));
                 }}
             >

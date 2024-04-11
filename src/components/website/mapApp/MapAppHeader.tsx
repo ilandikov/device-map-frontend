@@ -35,7 +35,7 @@ export function MapAppHeader() {
                         className="map-app-header-login-button"
                         data-testid="loginButton"
                         onClick={() => {
-                            useDispatch({ type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
+                            useDispatch({ type: MapAppActionTypes.LOGIN_MODAL_OPEN });
                         }}
                     >
                         <img className="map-app-header-account-image" src={Account} alt="login-header-account" />

@@ -21,6 +21,6 @@ describe('MapAppHeader action tests', () => {
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: MapAppActionTypes.LOGIN_BUTTON_CLICK });
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: MapAppActionTypes.LOGIN_MODAL_OPEN });
     });
 });

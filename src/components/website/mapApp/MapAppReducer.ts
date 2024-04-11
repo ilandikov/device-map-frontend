@@ -13,8 +13,8 @@ export const mapAppInitialState: MapAppState = {
 };
 
 export enum MapAppActionTypes {
-    LOGIN_BUTTON_CLICK = 'SHOW_LOGIN_MODAL',
-    LOGIN_MODAL_CLOSED = 'LOGIN_MODAL_CLOSED',
+    LOGIN_MODAL_OPEN = 'LOGIN_MODAL_OPEN',
+    LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
 }
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action = undefined) {
@@ -23,9 +23,9 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action = 
     }
 
     switch (action.type) {
-        case MapAppActionTypes.LOGIN_BUTTON_CLICK:
+        case MapAppActionTypes.LOGIN_MODAL_OPEN:
             return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
-        case MapAppActionTypes.LOGIN_MODAL_CLOSED:
+        case MapAppActionTypes.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
                 usageStep: MapAppUsageStep.HOME_SCREEN,

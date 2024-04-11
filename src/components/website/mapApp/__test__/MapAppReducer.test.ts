@@ -12,7 +12,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should move to user authentication step on login click action', () => {
-        const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
+        const action = { type: MapAppActionTypes.LOGIN_MODAL_OPEN };
 
         const resultingState = MapAppReducer(undefined, action);
 
@@ -26,7 +26,7 @@ describe('MapApp reducer tests', () => {
         const initialState: MapAppState = {
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         };
-        const action = { type: MapAppActionTypes.LOGIN_MODAL_CLOSED };
+        const action = { type: MapAppActionTypes.LOGIN_MODAL_CLOSE };
 
         const resultingState = MapAppReducer(initialState, action);
 
