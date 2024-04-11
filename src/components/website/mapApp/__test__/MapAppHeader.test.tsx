@@ -7,7 +7,6 @@ import { AuthenticationStep } from '../../login/redux/state';
 import {
     mockAuthenticationState,
     mockDispatch,
-    mockMapAppState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
 
@@ -19,7 +18,7 @@ jest.mock('react-redux', () => ({
 
 describe('MapAppHeader snapshot tests', () => {
     it('should match the snapshot at the initial state', () => {
-        mockMapAppState({});
+        mockAuthenticationState({ step: AuthenticationStep.WELCOME });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();
