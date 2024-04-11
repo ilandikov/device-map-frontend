@@ -161,7 +161,7 @@ describe('password reset tests', () => {
         const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.MAIL_INPUT });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
-        const output = cognito(of(sentAction), initialState, { cognitoClient });
+        const output = cognito(of(sentAction), initialState, { cognitoClient: {} });
         const receivedAction = await lastValueFrom(output);
         expect(receivedAction).toEqual(loginModalNoAction());
     });
