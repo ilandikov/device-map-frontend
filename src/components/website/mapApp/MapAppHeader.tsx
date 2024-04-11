@@ -7,9 +7,8 @@ import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import Account from '/src/assets/images/Account.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
-import { MapAppUsageStep } from './redux/MapAppReducer';
+import { useAppDispatch } from '../../../redux/store';
+import { AuthenticationStep, useAuthentication } from '../login/redux/state';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
 import { mapAppLoginModalOpen } from './redux/actions';
@@ -17,8 +16,9 @@ import { mapAppLoginModalOpen } from './redux/actions';
 export function MapAppHeader() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
-    const { usageStep } = useSelector((state: RootState) => state.mapAppState);
-    const isUserAuthenticated = usageStep === MapAppUsageStep.AUTHENTICATED_USER;
+
+    const { step } = useAuthentication();
+    const isUserAuthenticated = step === AuthenticationStep.LOGGED_IN;
 
     return (
         <header className="map-app-header">
