@@ -1,4 +1,7 @@
-import { MapAppActionTypes } from '../MapAppReducer';
+export enum MapAppActionTypes {
+    LOGIN_MODAL_OPEN = 'LOGIN_MODAL_OPEN',
+    LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
+}
 
 export interface MapAppAction {
     type: MapAppActionTypes;

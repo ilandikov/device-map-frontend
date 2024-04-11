@@ -1,9 +1,9 @@
 import React from 'react';
 import { fireEvent, getByTestId } from '@testing-library/react';
 import { MapAppHeader } from '../MapAppHeader';
-import { MapAppActionTypes } from '../MapAppReducer';
 import { mockDispatch } from '../redux/__mocks__/MapAppState';
 import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
+import { MapAppActionTypes } from '../redux/actions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
