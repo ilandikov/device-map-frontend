@@ -158,10 +158,18 @@ describe('user sign in tests', () => {
 
 describe('password reset tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
-        const initialState = buildAuthenticationStateForEpic({ step: AuthenticationStep.MAIL_INPUT });
+        const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
-        const output = cognito(of(sentAction), initialState, { cognitoClient: {} });
+        const output = cognito(
+            of(sentAction),
+            {
+                value: {
+                    authentication: initialState,
+                },
+            },
+            { cognitoClient: {} },
+        );
         const receivedAction = await lastValueFrom(output);
         expect(receivedAction).toEqual(loginModalNoAction());
     });
