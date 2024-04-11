@@ -1,7 +1,7 @@
 import React from 'react';
 import MapApp from '../MapApp';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../redux/__mocks__/MapAppState';
-import { MapAppUsageStep } from '../MapAppReducer';
+import { MapAppUsageStep } from '../redux/MapAppReducer';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('react-redux', () => ({

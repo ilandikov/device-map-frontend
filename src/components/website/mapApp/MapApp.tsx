@@ -9,7 +9,7 @@ import { RootState } from '../../../redux/store';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
-import { MapAppState, MapAppUsageStep } from './MapAppReducer';
+import { MapAppState, MapAppUsageStep } from './redux/MapAppReducer';
 
 export default function MapApp() {
     const mapAppState: MapAppState = useSelector((state: RootState) => state.mapAppState);

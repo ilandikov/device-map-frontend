@@ -1,4 +1,4 @@
-import { MapAppReducer, MapAppState, MapAppUsageStep } from '../MapAppReducer';
+import { MapAppReducer, MapAppState, MapAppUsageStep } from '../redux/MapAppReducer';
 import { mapAppLoginModalClose, mapAppLoginModalOpen } from '../redux/actions';
 
 describe('MapApp reducer tests', () => {

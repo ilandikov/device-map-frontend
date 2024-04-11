@@ -1,4 +1,4 @@
-import { MapAppAction, MapAppActionTypes } from './redux/actions';
+import { MapAppAction, MapAppActionTypes } from './actions';
 
 export interface MapAppState {
     usageStep: MapAppUsageStep;

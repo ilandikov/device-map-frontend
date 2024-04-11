@@ -1,4 +1,4 @@
-import { MapAppState } from '../../MapAppReducer';
+import { MapAppState } from '../MapAppReducer';
 
 export const mockDispatch = jest.fn();
 

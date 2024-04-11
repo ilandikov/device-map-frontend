@@ -9,7 +9,7 @@ import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../redux/store';
-import { MapAppUsageStep } from './MapAppReducer';
+import { MapAppUsageStep } from './redux/MapAppReducer';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
 import { mapAppLoginModalOpen } from './redux/actions';
