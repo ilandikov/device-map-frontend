@@ -1,8 +1,10 @@
-import { MapAppActionTypes, MapAppReducer, MapAppState, MapAppUsageStep } from '../MapAppReducer';
+import { MapAppReducer, MapAppState, MapAppUsageStep } from '../redux/MapAppReducer';
+import { mapAppLoginModalClose, mapAppLoginModalOpen } from '../redux/actions';
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
-        const initialState = MapAppReducer();
+        // @ts-ignore
+        const initialState = MapAppReducer(undefined, { type: 'DUMMY_ACTION' });
 
         const expectedInitialState: MapAppState = {
             usageStep: MapAppUsageStep.HOME_SCREEN,
@@ -12,7 +14,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should move to user authentication step on login click action', () => {
-        const action = { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
+        const action = mapAppLoginModalOpen();
 
         const resultingState = MapAppReducer(undefined, action);
 
@@ -26,7 +28,7 @@ describe('MapApp reducer tests', () => {
         const initialState: MapAppState = {
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         };
-        const action = { type: MapAppActionTypes.LOGIN_MODAL_CLOSED };
+        const action = mapAppLoginModalClose();
 
         const resultingState = MapAppReducer(initialState, action);
 
