@@ -7,7 +7,7 @@ import {
 } from '../actions';
 import { buildAuthenticationState } from '../__mocks__/AuthenticationState';
 import { AuthenticationStep } from '../state';
-import { verifyCognitoEpic2, verifyCognitoEpicNoAction } from './epicTestHelpers';
+import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
@@ -24,7 +24,7 @@ describe('user sign up tests', () => {
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
-            await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
+            await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
     );
 
@@ -42,7 +42,7 @@ describe('user sign up tests', () => {
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
-            await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
+            await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
     );
 });
@@ -57,7 +57,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
 
-        await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
+        await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
 
     it('should dispatch no action and not call signUp() from password reset loading step', async () => {
@@ -81,7 +81,7 @@ describe('user sign in tests', () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
 
-        await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
+        await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
 });
 
@@ -105,7 +105,7 @@ describe('password reset tests', () => {
             const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_RESET_LOADING });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
-            await verifyCognitoEpic2(sentAction, initialState, remoteServiceAnswer, expectedAction);
+            await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
     );
 });

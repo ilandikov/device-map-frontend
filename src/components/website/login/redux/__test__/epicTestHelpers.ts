@@ -31,7 +31,7 @@ class cognitoTestClient {
     }
 }
 
-export async function verifyCognitoEpic2(
+export async function verifyCognitoEpicAction(
     sentAction: LoginModalVerifyRequest,
     initialState: AuthenticationState,
     remoteServiceAnswer: Promise<void>,
