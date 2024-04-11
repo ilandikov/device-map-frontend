@@ -28,7 +28,10 @@ describe('user sign up tests', () => {
     );
 
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET)]],
+        [
+            Promise.resolve(),
+            [loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET), mapAppLoginModalClose()],
+        ],
         [Promise.reject(), [loginModalFailureNotification(LoginModalNotificationTypes.PASSWORD_RESET, cognitoReason)]],
     ])(
         'should dispatch password has been reset notification when remote answer is: %s',

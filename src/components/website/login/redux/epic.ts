@@ -40,6 +40,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                                     authenticationState.password,
                                 ),
                                 LoginModalNotificationTypes.PASSWORD_RESET,
+                                mapAppLoginModalClose(),
                             );
                     }
 
