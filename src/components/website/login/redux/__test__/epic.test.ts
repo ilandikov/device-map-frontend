@@ -16,26 +16,44 @@ const cognitoClient = new CognitoClient({
     ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
 });
 
+enum PromiseResult {
+    RESOLVE = 'RESOLVE',
+    REJECT = 'REJECT',
+}
+
+class cognitoTestClient {
+    private _mockedResult: PromiseResult;
+
+    constructor(mockedResult: PromiseResult) {
+        this._mockedResult = mockedResult;
+    }
+
+    signUp() {
+        if (this._mockedResult === PromiseResult.REJECT) {
+            return Promise.reject();
+        }
+        return Promise.resolve();
+    }
+}
+
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(), loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
+        [PromiseResult.RESOLVE, loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)],
         [
-            Promise.reject(),
+            PromiseResult.REJECT,
             loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'cognitoUnknownException'),
         ],
     ])(
         'should dispatch sign up notification when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
-            jest.spyOn(CognitoClient.prototype, 'signUp').mockImplementation(async (): Promise<any> => {
-                return remoteServiceAnswer;
-            });
-
             const initialState = buildAuthenticationStateForEpic({
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
 
-            await verifyCognitoEpic(sentAction, initialState, expectedAction, { cognitoClient });
+            await verifyCognitoEpic(sentAction, initialState, expectedAction, {
+                cognitoClient: new cognitoTestClient(remoteServiceAnswer),
+            });
         },
     );
 
