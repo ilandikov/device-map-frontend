@@ -5,6 +5,7 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
+import CognitoClient from '@mancho.devs/cognito';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/MapAppReducer';
 import { authentication } from '../components/website/login/redux/reducer';
@@ -21,7 +22,14 @@ const rootReducer = combineReducers({
 let store;
 
 export function createStore(): Store {
-    const epicMiddleware = createEpicMiddleware();
+    const epicMiddleware = createEpicMiddleware({
+        dependencies: {
+            cognitoClient: new CognitoClient({
+                UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
+                ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
+            }),
+        },
+    });
     // @ts-ignore
     store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
 

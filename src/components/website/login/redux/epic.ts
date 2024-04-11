@@ -1,5 +1,4 @@
 import { Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
-import CognitoClient from '@mancho.devs/cognito';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
@@ -15,12 +14,7 @@ import {
 import { AuthenticationState, AuthenticationStep } from './state';
 import { buildMessageFromCognitoException } from './epicHelpers';
 
-const cognitoClient = new CognitoClient({
-    UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
-    ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
-});
-
-export function cognito(action$, state$): Observable<LoginModalAction> {
+export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
         switchMap((action: LoginModalVerifyRequest) => {

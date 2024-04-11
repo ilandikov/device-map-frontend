@@ -1,26 +1,70 @@
-import { Observable, lastValueFrom, of } from 'rxjs';
-import { LoginModalAction, LoginModalVerifyRequest } from '../actions';
+import { lastValueFrom, of } from 'rxjs';
+import { LoginModalAction, LoginModalVerifyRequest, loginModalNoAction } from '../actions';
 import { AuthenticationState } from '../state';
 import { cognito } from '../epic';
 
-export async function verifyEpic(
-    epicToTest: (action$, state$) => Observable<any>,
-    sentAction: LoginModalVerifyRequest,
-    initialState: any,
-    expectedAction: any,
-) {
-    const state$ = epicToTest(of(sentAction), initialState);
-    const receivedAction = await lastValueFrom(state$);
+class cognitoTestClient {
+    private _mockedResult: Promise<void>;
 
+    constructor(mockedResult: Promise<void>) {
+        this._mockedResult = mockedResult;
+    }
+
+    signUp() {
+        return this._mockedResult;
+    }
+
+    signUpConfirmCode() {
+        return this._mockedResult;
+    }
+
+    confirmPassword() {
+        return this._mockedResult;
+    }
+
+    signIn() {
+        return this._mockedResult;
+    }
+
+    forgotPassword() {
+        return this._mockedResult;
+    }
+}
+
+export async function verifyCognitoEpicAction(
+    sentAction: LoginModalVerifyRequest,
+    initialState: AuthenticationState,
+    remoteServiceAnswer: Promise<void>,
+    expectedAction: LoginModalAction,
+) {
+    const output$ = cognito(
+        of(sentAction),
+        {
+            value: {
+                authentication: initialState,
+            },
+        },
+        {
+            cognitoClient: new cognitoTestClient(remoteServiceAnswer),
+        },
+    );
+    const receivedAction = await lastValueFrom(output$);
     expect(receivedAction).toEqual(expectedAction);
 }
 
-export async function verifyCognitoEpic(
+export async function verifyCognitoEpicNoAction(
     sentAction: LoginModalVerifyRequest,
-    initialState: {
-        value: { authentication: AuthenticationState };
-    },
-    expectedAction: LoginModalAction,
+    initialState: AuthenticationState,
 ) {
-    await verifyEpic(cognito, sentAction, initialState, expectedAction);
+    const output = cognito(
+        of(sentAction),
+        {
+            value: {
+                authentication: initialState,
+            },
+        },
+        { cognitoClient: {} },
+    );
+    const receivedAction = await lastValueFrom(output);
+    expect(receivedAction).toEqual(loginModalNoAction());
 }
