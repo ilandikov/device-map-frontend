@@ -1,4 +1,4 @@
-import { loginModalAuthentication } from '../reducer';
+import { loginModalAuthentication } from '../LoginModalAuthentication';
 import {
     LoginModalAction,
     LoginModalInputTypes,

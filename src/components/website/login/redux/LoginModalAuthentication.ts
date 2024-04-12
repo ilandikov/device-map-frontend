@@ -14,7 +14,7 @@ import {
     PasswordError,
     authenticationInitialState,
 } from './state';
-import { getPasswordError, isEmailValid } from './reducerUtils';
+import { getPasswordError, isEmailValid } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
     state: AuthenticationState = authenticationInitialState,
