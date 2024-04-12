@@ -6,7 +6,7 @@ import {
     mockDispatch,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
-import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/actions';
+import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import { LoginModalVerifyTypes, loginModalButtonClick, loginModalVerifyRequest } from '../../login/redux/actions';
 

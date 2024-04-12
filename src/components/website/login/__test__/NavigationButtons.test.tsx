@@ -4,7 +4,7 @@ import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../../../../redux/__mocks__/AuthenticationState';
 import { loginModalButtonClick } from '../redux/actions';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppLoginModalClose } from '../../mapApp/redux/actions';
+import { mapAppLoginModalClose } from '../../mapApp/redux/MapAppAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

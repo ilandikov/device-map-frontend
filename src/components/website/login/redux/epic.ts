@@ -1,7 +1,7 @@
 import { Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/actions';
+import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import {
     LoginModalAction,
     LoginModalActionTypes,

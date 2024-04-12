@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { useAuthentication } from '../login/redux/state';
 import { LoginModalVerifyTypes, loginModalButtonClick, loginModalVerifyRequest } from '../login/redux/actions';
-import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from './redux/actions';
+import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from './redux/MapAppAction';
 import Account from '/src/assets/images/Account.svg';
 
 function UserButton(props: { caption: string; onClick: () => void }) {

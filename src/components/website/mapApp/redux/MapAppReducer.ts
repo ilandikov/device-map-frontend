@@ -1,4 +1,4 @@
-import { MapAppAction, MapAppActionTypes } from './actions';
+import { MapAppAction, MapAppActionTypes } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction) {
