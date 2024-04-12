@@ -11,7 +11,7 @@ import {
     loginModalFailureNotification,
     loginModalNoAction,
     loginModalSuccessNotification,
-} from './actions';
+} from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './state';
 import { buildMessageFromCognitoException } from './epicHelpers';
 

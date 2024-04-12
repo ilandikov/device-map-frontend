@@ -10,7 +10,7 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
-} from '../actions';
+} from '../LoginModalAction';
 import {
     AuthenticationState,
     AuthenticationStep,

@@ -5,7 +5,7 @@ import {
     LoginModalNotificationResult,
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
-} from './actions';
+} from './LoginModalAction';
 import {
     AuthenticationState,
     AuthenticationStep,

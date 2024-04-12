@@ -13,7 +13,7 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from '../redux/actions';
+} from '../redux/LoginModalAction';
 import {
     mockAuthenticationState,
     mockDispatch,

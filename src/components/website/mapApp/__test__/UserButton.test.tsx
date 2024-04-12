@@ -8,7 +8,11 @@ import {
 } from '../../../../redux/__mocks__/AuthenticationState';
 import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
-import { LoginModalVerifyTypes, loginModalButtonClick, loginModalVerifyRequest } from '../../login/redux/actions';
+import {
+    LoginModalVerifyTypes,
+    loginModalButtonClick,
+    loginModalVerifyRequest,
+} from '../../login/redux/LoginModalAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

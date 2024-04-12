@@ -8,7 +8,7 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from './redux/actions';
+} from './redux/LoginModalAction';
 import { MailInputError, useAuthentication } from './redux/state';
 
 export function MailInputForm() {

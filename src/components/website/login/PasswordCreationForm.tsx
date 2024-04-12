@@ -2,7 +2,12 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
-import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from './redux/LoginModalAction';
 
 import { useAuthentication } from './redux/state';
 

@@ -2,7 +2,7 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../../../../redux/__mocks__/AuthenticationState';
-import { loginModalButtonClick } from '../redux/actions';
+import { loginModalButtonClick } from '../redux/LoginModalAction';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppLoginModalClose } from '../../mapApp/redux/MapAppAction';
 

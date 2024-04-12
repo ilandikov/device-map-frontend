@@ -9,7 +9,7 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from './redux/actions';
+} from './redux/LoginModalAction';
 
 import { useAuthentication } from './redux/state';
 

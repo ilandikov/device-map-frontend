@@ -4,7 +4,7 @@ import {
     loginModalFailureNotification,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
-} from '../actions';
+} from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../state';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './epicTestHelpers';
