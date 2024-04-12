@@ -21,7 +21,7 @@ export function loginModalAuthentication(
     action: LoginModalAction,
 ): LoginModalAuthenticationState {
     switch (action.type) {
-        case LoginModalActionType.NOTIFICATION: {
+        case LoginModalActionType.REMOTE_ANSWER: {
             let successStep = state.step;
             let fallbackStep = state.step;
 

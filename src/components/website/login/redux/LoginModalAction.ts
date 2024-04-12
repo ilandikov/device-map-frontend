@@ -2,13 +2,13 @@ export type LoginModalAction =
     | LoginModalInput
     | LoginModalButtonClick
     | LoginModalRemoteRequest
-    | LoginModalNotification;
+    | LoginModalRemoteAnswer;
 
 export enum LoginModalActionType {
     BUTTON_CLICKED = 'BUTTON_CLICKED',
     INPUT = 'INPUT',
     REMOTE_REQUEST = 'REMOTE_REQUEST',
-    NOTIFICATION = 'NOTIFICATION',
+    REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
 export interface LoginModalButtonClick {
@@ -65,8 +65,8 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
     };
 }
 
-export interface LoginModalNotification {
-    type: LoginModalActionType.NOTIFICATION;
+export interface LoginModalRemoteAnswer {
+    type: LoginModalActionType.REMOTE_ANSWER;
     answer: LoginModalRemoteAnswerType;
     result: LoginModalRemoteAnswerResult;
     reason?: string;
@@ -86,9 +86,9 @@ export enum LoginModalRemoteAnswerResult {
     FAILURE = 'failure',
 }
 
-export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalNotification {
+export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionType.NOTIFICATION,
+        type: LoginModalActionType.REMOTE_ANSWER,
         answer: answer,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
@@ -97,9 +97,9 @@ export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType
 export function loginModalRemoteAnswerFailure(
     answer: LoginModalRemoteAnswerType,
     reason: string,
-): LoginModalNotification {
+): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionType.NOTIFICATION,
+        type: LoginModalActionType.REMOTE_ANSWER,
         answer: answer,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
