@@ -36,6 +36,7 @@ describe('MapApp reducer tests', () => {
 
         const expectedState: MapAppState = {
             usageStep: MapAppUsageStep.HOME_SCREEN,
+            ...initialState,
         };
         expect(resultingState).toEqual(expectedState);
     });
