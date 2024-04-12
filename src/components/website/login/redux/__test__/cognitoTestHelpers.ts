@@ -1,7 +1,7 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { LoginModalAction, LoginModalVerifyRequest, loginModalNoAction } from '../LoginModalAction';
 import { AuthenticationState } from '../state';
-import { cognito } from '../epic';
+import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
 class cognitoTestClient {

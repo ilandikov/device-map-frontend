@@ -7,7 +7,7 @@ import {
 } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../state';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
-import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './epicTestHelpers';
+import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([

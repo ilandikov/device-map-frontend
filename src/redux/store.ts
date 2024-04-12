@@ -9,7 +9,7 @@ import CognitoClient from '@mancho.devs/cognito';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/reducer';
-import { cognito } from '../components/website/login/redux/epic';
+import { cognito } from '../components/website/login/redux/cognito';
 
 const rootEpic = combineEpics(cognito);
 

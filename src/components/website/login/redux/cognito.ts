@@ -13,7 +13,7 @@ import {
     loginModalSuccessNotification,
 } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './state';
-import { buildMessageFromCognitoException } from './epicHelpers';
+import { buildMessageFromCognitoException } from './cognitoHelpers';
 
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
