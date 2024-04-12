@@ -12,7 +12,6 @@ export interface MapAppState {
 export enum MapAppUsageStep {
     HOME_SCREEN = 'HOME_SCREEN',
     USER_AUTHENTICATION = 'USER_AUTHENTICATION',
-    AUTHENTICATED_USER = 'AUTHENTICATED_USER',
 }
 
 export const mapAppInitialState: MapAppState = {
