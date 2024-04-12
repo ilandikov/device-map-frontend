@@ -17,12 +17,11 @@ function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
+        const initialState = buildMapAppState({});
+        const action = { type: 'DUMMY_ACTION' };
+
         // @ts-ignore
-        const initialState = MapAppReducer(undefined, { type: 'DUMMY_ACTION' });
-
-        const expectedInitialState = buildMapAppState({});
-
-        expect(initialState).toEqual(expectedInitialState);
+        verifyMapAppStateChange(initialState, action, {});
     });
 
     it('should move to user authentication step on user button click', () => {
