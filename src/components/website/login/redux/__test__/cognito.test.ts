@@ -27,7 +27,9 @@ describe('user sign up tests', () => {
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
     );
+});
 
+describe('user password reset tests', () => {
     it.each([
         [
             Promise.resolve(),
@@ -97,7 +99,7 @@ describe('user sign in tests', () => {
     });
 });
 
-describe('password reset tests', () => {
+describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
