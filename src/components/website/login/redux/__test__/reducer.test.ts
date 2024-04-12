@@ -468,3 +468,19 @@ describe('password reset logic', () => {
         });
     });
 });
+
+describe('logout logic', () => {
+    it('should reset the whole state on user button click', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.LOGGED_IN,
+            email: 'reset@me.com',
+            error: new Error('meToo!'),
+            password: 'andMe',
+            passwordRepeat: 'thisAsWell',
+            OTP: '457674',
+        });
+        const action = loginModalButtonClick('userButton');
+
+        verifyStateChange(initialState, action, authenticationInitialState);
+    });
+});

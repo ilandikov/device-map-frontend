@@ -1,12 +1,8 @@
 import React from 'react';
 import { MapAppHeader } from '../MapAppHeader';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { AuthenticationStep } from '../../login/redux/state';
-import {
-    mockAuthenticationState,
-    mockDispatch,
-    mockPrepareSelector,
-} from '../../../../redux/__mocks__/AuthenticationState';
+import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../redux/__mocks__/AuthenticationState';
+import { MapAppUsageStep } from '../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -16,14 +12,14 @@ jest.mock('react-redux', () => ({
 
 describe('MapAppHeader snapshot tests', () => {
     it('should match the snapshot at the initial state', () => {
-        mockAuthenticationState({ step: AuthenticationStep.WELCOME });
+        mockMapAppState({});
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at user authenticated state', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN });
+    it('should match the snapshot at device management step', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();

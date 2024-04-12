@@ -159,6 +159,8 @@ export function authentication(
                     return authenticationInitialState;
                 case 'resetPassword':
                     return { ...state, step: AuthenticationStep.PASSWORD_RESET_REQUEST, password: '', error: null };
+                case 'userButton':
+                    return authenticationInitialState;
                 case 'next':
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_RESET_OTP:

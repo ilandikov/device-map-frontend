@@ -6,16 +6,16 @@ import './MapAppHeader.scss';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import GooglePlay from '/src/assets/images/GooglePlay.svg';
 import AppStore from '/src/assets/images/AppStore.svg';
-import { AuthenticationStep, useAuthentication } from '../login/redux/state';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
 import { LoginButton, LogoutButton } from './UserButton';
+import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 
 export function MapAppHeader() {
     const { t } = useI18next();
 
-    const { step } = useAuthentication();
-    const isUserLoggedIn = step === AuthenticationStep.LOGGED_IN;
+    const { usageStep } = useMapAppState();
+    const isUserLoggedIn = usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
 
     return (
         <header className="map-app-header">

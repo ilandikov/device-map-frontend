@@ -1,7 +1,7 @@
 import { Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { MapAppAction, mapAppLoginModalClose } from '../../mapApp/redux/actions';
+import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/actions';
 import {
     LoginModalAction,
     LoginModalActionTypes,
@@ -40,7 +40,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                                     authenticationState.password,
                                 ),
                                 LoginModalNotificationTypes.PASSWORD_RESET,
-                                mapAppLoginModalClose(),
+                                mapAppAuthenticationCompleted(),
                             );
                     }
 
@@ -49,14 +49,14 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
-                        mapAppLoginModalClose(),
+                        mapAppAuthenticationCompleted(),
                     );
                 case LoginModalVerifyTypes.OTP:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                         return observeEndpoint(
                             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
                             LoginModalNotificationTypes.OTP,
-                            mapAppLoginModalClose(),
+                            mapAppAuthenticationCompleted(),
                         );
                     }
                     break;

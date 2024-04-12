@@ -6,7 +6,7 @@ import {
     loginModalVerifyRequest,
 } from '../actions';
 import { AuthenticationStep, buildAuthenticationState } from '../state';
-import { mapAppLoginModalClose } from '../../../mapApp/redux/actions';
+import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/actions';
 import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './epicTestHelpers';
 
 describe('user sign up tests', () => {
@@ -31,7 +31,10 @@ describe('user sign up tests', () => {
     it.each([
         [
             Promise.resolve(),
-            [loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET), mapAppLoginModalClose()],
+            [
+                loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET),
+                mapAppAuthenticationCompleted(),
+            ],
         ],
         [
             Promise.reject(),
@@ -52,7 +55,10 @@ describe('user sign up tests', () => {
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.OTP), mapAppLoginModalClose()]],
+        [
+            Promise.resolve(),
+            [loginModalSuccessNotification(LoginModalNotificationTypes.OTP), mapAppAuthenticationCompleted()],
+        ],
         [Promise.reject(), [loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'cognitoUnknownException')]],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
@@ -77,7 +83,7 @@ describe('user sign in tests', () => {
     it.each([
         [
             Promise.resolve(),
-            [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN), mapAppLoginModalClose()],
+            [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN), mapAppAuthenticationCompleted()],
         ],
         [
             Promise.reject(),
