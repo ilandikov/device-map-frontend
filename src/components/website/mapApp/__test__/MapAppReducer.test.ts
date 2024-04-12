@@ -1,5 +1,5 @@
 import { MapAppReducer } from '../redux/MapAppReducer';
-import { MapAppAction, mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
+import { MapAppAction, mapAppLoginButtonClick, mapAppLoginModalClose } from '../redux/actions';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
 function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
@@ -23,7 +23,7 @@ describe('MapApp reducer tests', () => {
 
     it('should move to user authentication step on user button click', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppUserButtonClick();
+        const action = mapAppLoginButtonClick();
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
