@@ -26,4 +26,13 @@ describe('MapApp snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at device management state', () => {
+        mockMapAppState({
+            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+        });
+        const component = renderForSnapshotTest(<MapApp />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
