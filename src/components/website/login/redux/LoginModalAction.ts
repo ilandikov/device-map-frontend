@@ -2,8 +2,7 @@ export type LoginModalAction =
     | LoginModalInput
     | LoginModalButtonClick
     | LoginModalVerifyRequest
-    | LoginModalNotification
-    | LoginModalNoAction;
+    | LoginModalNotification;
 
 export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'buttonClicked',
@@ -106,12 +105,4 @@ export function loginModalFailureNotification(
         result: LoginModalNotificationResult.FAILURE,
         reason: reason,
     };
-}
-
-interface LoginModalNoAction {
-    type: LoginModalActionTypes.NO_ACTION;
-}
-
-export function loginModalNoAction(): LoginModalNoAction {
-    return { type: LoginModalActionTypes.NO_ACTION };
 }
