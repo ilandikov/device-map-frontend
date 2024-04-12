@@ -8,7 +8,7 @@ import {
 } from '../../../../redux/__mocks__/AuthenticationState';
 import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/actions';
 import { LoginButton, LogoutButton } from '../UserButton';
-import { loginModalButtonClick } from '../../login/redux/actions';
+import { LoginModalVerifyTypes, loginModalButtonClick, loginModalVerifyRequest } from '../../login/redux/actions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -53,5 +53,6 @@ describe('UserButton action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLogoutButtonClick());
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick('userButton'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT));
     });
 });

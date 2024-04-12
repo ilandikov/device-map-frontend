@@ -121,3 +121,18 @@ describe('password reset tests', () => {
         },
     );
 });
+
+describe('user sign out tests', () => {
+    it.each([
+        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_OUT)]],
+        [
+            Promise.reject(),
+            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_OUT, 'cognitoUnknownException')],
+        ],
+    ])('should sign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
+        const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_RESET_LOADING });
+        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT);
+
+        await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
+    });
+});

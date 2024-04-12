@@ -68,6 +68,8 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         );
                     }
                     break;
+                case LoginModalVerifyTypes.SIGN_OUT:
+                    return observeEndpoint(cognitoClient.signOut(), LoginModalNotificationTypes.SIGN_OUT);
             }
 
             return of(loginModalNoAction());

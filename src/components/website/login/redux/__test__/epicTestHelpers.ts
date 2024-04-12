@@ -30,6 +30,10 @@ class cognitoTestClient {
     forgotPassword() {
         return this._mockedResult;
     }
+
+    signOut() {
+        return this._mockedResult;
+    }
 }
 
 export async function verifyCognitoEpicAction(
