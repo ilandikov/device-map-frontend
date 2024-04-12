@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
-export function useLoginModalAuthentication(): AuthenticationState {
+export function useLoginModalAuthentication(): LoginModalAuthenticationState {
     return useSelector((state: RootState) => state.loginModalAuthentication);
 }
 
@@ -21,7 +21,7 @@ export enum AuthenticationStep {
     LOGGED_IN = 'LOGGED_IN',
 }
 
-export const authenticationInitialState: AuthenticationState = {
+export const authenticationInitialState: LoginModalAuthenticationState = {
     step: AuthenticationStep.WELCOME,
     email: '',
     error: null,
@@ -30,7 +30,7 @@ export const authenticationInitialState: AuthenticationState = {
     OTP: '',
 };
 
-export interface AuthenticationState {
+export interface LoginModalAuthenticationState {
     step: AuthenticationStep;
     email: string;
     error: Error | null;
@@ -59,7 +59,9 @@ export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
 
-export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
+export function buildAuthenticationState(
+    partialState: Partial<LoginModalAuthenticationState>,
+): LoginModalAuthenticationState {
     return {
         step: partialState.step ?? AuthenticationStep.WELCOME,
         email: partialState.email ?? '',

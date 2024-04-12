@@ -15,8 +15,8 @@ import {
     loginModalVerifyRequest,
 } from '../redux/LoginModalAction';
 import {
-    mockAuthenticationState,
     mockDispatch,
+    mockLoginModalAuthenticationState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
 
@@ -32,14 +32,14 @@ function getInput(container: HTMLElement, inputIndex: number) {
 
 describe('OTPForm snapshot tests', () => {
     it('should match snapshot without error', () => {
-        mockAuthenticationState({ error: null });
+        mockLoginModalAuthenticationState({ error: null });
         const component = renderForSnapshotTest(<OTPForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot with error', () => {
-        mockAuthenticationState({ error: new Error('thisShouldNotHappen') });
+        mockLoginModalAuthenticationState({ error: new Error('thisShouldNotHappen') });
         const component = renderForSnapshotTest(<OTPForm />);
 
         expect(component).toMatchSnapshot();
@@ -125,7 +125,7 @@ describe('OTP form action tests', () => {
     });
 
     it('should send OTP code and verification request on next button click', () => {
-        mockAuthenticationState({});
+        mockLoginModalAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         inputOTPDigit(container, 0, '2');
@@ -143,7 +143,7 @@ describe('OTP form action tests', () => {
     });
 
     it('should request the OTP code again on resend OTP button click', () => {
-        mockAuthenticationState({});
+        mockLoginModalAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const resendOTPButton = getByText(container, 'OTPSendAgain');

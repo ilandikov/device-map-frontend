@@ -12,14 +12,14 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
 } from './LoginModalAction';
-import { AuthenticationState, AuthenticationStep } from './state';
+import { AuthenticationStep, LoginModalAuthenticationState } from './state';
 import { buildMessageFromCognitoException } from './cognitoHelpers';
 
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
         switchMap((action: LoginModalVerifyRequest) => {
-            const authenticationState: AuthenticationState = state$.value.loginModalAuthentication;
+            const authenticationState: LoginModalAuthenticationState = state$.value.loginModalAuthentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
                 return of(loginModalNoAction());

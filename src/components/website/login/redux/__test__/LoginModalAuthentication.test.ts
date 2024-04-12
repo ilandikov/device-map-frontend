@@ -12,8 +12,8 @@ import {
     loginModalVerifyRequest,
 } from '../LoginModalAction';
 import {
-    AuthenticationState,
     AuthenticationStep,
+    LoginModalAuthenticationState,
     MailInputError,
     OTPError,
     PasswordError,
@@ -22,13 +22,13 @@ import {
 } from '../state';
 
 function verifyStateChange(
-    initialState: AuthenticationState,
+    initialState: LoginModalAuthenticationState,
     action: LoginModalAction,
-    expectedChange: Partial<AuthenticationState>,
+    expectedChange: Partial<LoginModalAuthenticationState>,
 ) {
     const nextState = loginModalAuthentication(initialState, action);
 
-    const expectedState: AuthenticationState = {
+    const expectedState: LoginModalAuthenticationState = {
         ...initialState,
         ...expectedChange,
     };

@@ -14,8 +14,8 @@ import {
     loginModalVerifyRequest,
 } from '../redux/LoginModalAction';
 import {
-    mockAuthenticationState,
     mockDispatch,
+    mockLoginModalAuthenticationState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
 import { AuthenticationStep } from '../redux/state';
@@ -35,13 +35,13 @@ jest.mock('react-redux', () => ({
 
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
-        mockAuthenticationState({ email: 'verify@me.uk' });
+        mockLoginModalAuthenticationState({ email: 'verify@me.uk' });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot with error', () => {
-        mockAuthenticationState({ error: new Error('somethingIsWrong') });
+        mockLoginModalAuthenticationState({ error: new Error('somethingIsWrong') });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
@@ -53,7 +53,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGIN });
+        mockLoginModalAuthenticationState({ step: AuthenticationStep.LOGIN });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -66,7 +66,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        mockAuthenticationState({ email: 'here_is_my@email.com' });
+        mockLoginModalAuthenticationState({ email: 'here_is_my@email.com' });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;

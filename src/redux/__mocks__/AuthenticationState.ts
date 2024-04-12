@@ -1,4 +1,4 @@
-import { AuthenticationState } from '../../components/website/login/redux/state';
+import { LoginModalAuthenticationState } from '../../components/website/login/redux/state';
 
 import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
 
@@ -22,7 +22,7 @@ mockLoginModalState({
 export const mockDispatch = jest.fn();
 export let mockPrepareSelector: () => any;
 
-export function mockAuthenticationState(mockState: Partial<AuthenticationState>) {
+export function mockLoginModalAuthenticationState(mockState: Partial<LoginModalAuthenticationState>) {
     mockPrepareSelector = () => {
         return mockState;
     };
