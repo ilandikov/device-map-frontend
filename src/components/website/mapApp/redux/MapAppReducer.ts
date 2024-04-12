@@ -5,6 +5,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
     switch (action.type) {
         case MapAppActionTypes.LOGIN_BUTTON_CLICK:
             return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
+        case MapAppActionTypes.LOGOUT_BUTTON_CLICK:
+            return { ...state, usageStep: MapAppUsageStep.HOME_SCREEN };
         case MapAppActionTypes.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
