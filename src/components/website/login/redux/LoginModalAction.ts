@@ -73,17 +73,17 @@ export interface LoginModalRemoteAnswer {
 }
 
 export enum LoginModalRemoteAnswerType {
-    SIGN_UP = 'signUp',
+    SIGN_UP = 'SIGN_UP',
     OTP = 'OTP',
-    SIGN_IN = 'signIn',
-    FORGOT_PASSWORD = 'forgotPassword',
-    PASSWORD_RESET = 'passwordReset',
-    SIGN_OUT = 'signOut',
+    SIGN_IN = 'SIGN_IN',
+    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
+    PASSWORD_RESET = 'PASSWORD_RESET',
+    SIGN_OUT = 'SIGN_OUT',
 }
 
 export enum LoginModalRemoteAnswerResult {
-    SUCCESS = 'success',
-    FAILURE = 'failure',
+    SUCCESS = 'SUCCESS',
+    FAILURE = 'FAILURE',
 }
 
 export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalRemoteAnswer {
