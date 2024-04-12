@@ -5,21 +5,26 @@ import { useAuthentication } from '../login/redux/state';
 import { mapAppUserButtonClick } from './redux/actions';
 import Account from '/src/assets/images/Account.svg';
 
+function UserButton(props: { caption: string; onClick: () => void }) {
+    return (
+        <button className="map-app-header-user-button" data-testid="loginButton" onClick={props.onClick}>
+            <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
+            <p className="map-app-header-account-text">{props.caption}</p>
+        </button>
+    );
+}
+
 export function LogoutButton() {
     const useDispatch = useAppDispatch();
     const { email } = useAuthentication();
 
     return (
-        <button
-            className="map-app-header-user-button"
-            data-testid="loginButton"
+        <UserButton
+            caption={email}
             onClick={() => {
                 useDispatch(mapAppUserButtonClick());
             }}
-        >
-            <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
-            <p className="map-app-header-account-text">{email}</p>
-        </button>
+        />
     );
 }
 
