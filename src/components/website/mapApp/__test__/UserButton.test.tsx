@@ -43,4 +43,13 @@ describe('UserButton action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppUserButtonClick());
     });
+
+    it('should dispatch click action on login button click', () => {
+        const container = renderForActionDispatchTest(<LogoutButton />);
+
+        const loginButton = getByTestId(container, 'userButton');
+        fireEvent.click(loginButton);
+
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppUserButtonClick());
+    });
 });
