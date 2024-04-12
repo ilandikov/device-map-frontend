@@ -6,7 +6,7 @@ import {
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
-import { AuthenticationStep } from '../redux/state';
+import { AuthenticationStep } from '../redux/LoginModalAuthenticationState';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({

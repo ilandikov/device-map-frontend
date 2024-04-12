@@ -1,6 +1,6 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { LoginModalAction, LoginModalVerifyRequest, loginModalNoAction } from '../LoginModalAction';
-import { LoginModalAuthenticationState } from '../state';
+import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 

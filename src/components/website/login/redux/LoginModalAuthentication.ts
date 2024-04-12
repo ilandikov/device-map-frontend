@@ -13,7 +13,7 @@ import {
     OTPError,
     PasswordError,
     authenticationInitialState,
-} from './state';
+} from './LoginModalAuthenticationState';
 import { getPasswordError, isEmailValid } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(

@@ -1,4 +1,4 @@
-import { AuthenticationStep, PasswordError } from '../state';
+import { AuthenticationStep, PasswordError } from '../LoginModalAuthenticationState';
 import { authenticationStepFromOTP, getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
 
 describe('user email validation tests', () => {

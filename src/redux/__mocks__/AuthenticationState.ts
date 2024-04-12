@@ -1,4 +1,4 @@
-import { LoginModalAuthenticationState } from '../../components/website/login/redux/state';
+import { LoginModalAuthenticationState } from '../../components/website/login/redux/LoginModalAuthenticationState';
 
 import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
 

@@ -9,7 +9,7 @@ import {
     loginModalInput,
     loginModalVerifyRequest,
 } from './redux/LoginModalAction';
-import { MailInputError, useLoginModalAuthentication } from './redux/state';
+import { MailInputError, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function MailInputForm() {
     const { t } = useI18next();

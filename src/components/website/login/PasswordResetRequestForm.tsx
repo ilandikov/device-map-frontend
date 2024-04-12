@@ -9,7 +9,7 @@ import {
     loginModalVerifyRequest,
 } from './redux/LoginModalAction';
 
-import { useLoginModalAuthentication } from './redux/state';
+import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function PasswordResetRequestForm() {
     const { t } = useI18next();

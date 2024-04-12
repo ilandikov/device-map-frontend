@@ -8,7 +8,7 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-import { AuthenticationStep, useLoginModalAuthentication } from './redux/state';
+import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 

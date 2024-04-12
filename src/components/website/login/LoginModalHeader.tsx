@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
-import { AuthenticationStep, useLoginModalAuthentication } from './redux/state';
+import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function LoginModalHeader() {
     const { step: authenticationStep } = useLoginModalAuthentication();

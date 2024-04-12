@@ -12,7 +12,7 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
 } from './LoginModalAction';
-import { AuthenticationStep, LoginModalAuthenticationState } from './state';
+import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
 import { buildMessageFromCognitoException } from './cognitoHelpers';
 
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {

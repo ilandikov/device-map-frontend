@@ -19,7 +19,7 @@ import {
     PasswordError,
     authenticationInitialState,
     buildAuthenticationState,
-} from '../state';
+} from '../LoginModalAuthenticationState';
 
 function verifyStateChange(
     initialState: LoginModalAuthenticationState,
