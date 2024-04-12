@@ -32,10 +32,12 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppLoginModalClose();
 
+        const stateChange: Partial<MapAppState> = { usageStep: MapAppUsageStep.HOME_SCREEN };
+
         const resultingState = MapAppReducer(initialState, action);
 
         const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.HOME_SCREEN,
+            ...stateChange,
             ...initialState,
         };
         expect(resultingState).toEqual(expectedState);
