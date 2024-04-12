@@ -7,7 +7,7 @@ import Account from '/src/assets/images/Account.svg';
 
 function UserButton(props: { caption: string; onClick: () => void }) {
     return (
-        <button className="map-app-header-user-button" data-testid="loginButton" onClick={props.onClick}>
+        <button className="map-app-header-user-button" data-testid="userButton" onClick={props.onClick}>
             <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
             <p className="map-app-header-account-text">{props.caption}</p>
         </button>

@@ -3,7 +3,7 @@
 exports[`UserButton snapshot tests Login button should match the snapshot 1`] = `
 <button
   className="map-app-header-user-button"
-  data-testid="loginButton"
+  data-testid="userButton"
   onClick={[Function]}
 >
   <img
@@ -22,7 +22,7 @@ exports[`UserButton snapshot tests Login button should match the snapshot 1`] = 
 exports[`UserButton snapshot tests Logout button should match the snapshot 1`] = `
 <button
   className="map-app-header-user-button"
-  data-testid="loginButton"
+  data-testid="userButton"
   onClick={[Function]}
 >
   <img

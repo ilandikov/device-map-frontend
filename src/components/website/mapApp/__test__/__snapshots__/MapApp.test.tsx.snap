@@ -33,7 +33,7 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
       >
         <button
           className="map-app-header-user-button"
-          data-testid="loginButton"
+          data-testid="userButton"
           onClick={[Function]}
         >
           <img
@@ -124,7 +124,7 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
       >
         <button
           className="map-app-header-user-button"
-          data-testid="loginButton"
+          data-testid="userButton"
           onClick={[Function]}
         >
           <img
