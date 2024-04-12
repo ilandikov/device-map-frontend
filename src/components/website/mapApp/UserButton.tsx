@@ -33,15 +33,11 @@ export function LoginButton() {
     const useDispatch = useAppDispatch();
 
     return (
-        <button
-            className="map-app-header-user-button"
-            data-testid="loginButton"
+        <UserButton
+            caption={t('loginAction')}
             onClick={() => {
                 useDispatch(mapAppUserButtonClick());
             }}
-        >
-            <img className="map-app-header-account-image" src={Account} alt="login-header-account" />
-            <p className="map-app-header-account-text">{t('loginAction')}</p>
-        </button>
+        />
     );
 }
