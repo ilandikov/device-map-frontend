@@ -1,14 +1,4 @@
-import { AuthenticationStep, PasswordError } from './LoginModalAuthenticationState';
-
-export function authenticationStepFromOTP(
-    userAuthState: AuthenticationStep.PASSWORD_RESET_OTP | AuthenticationStep.PASSWORD_CREATION_OTP,
-) {
-    if (userAuthState === AuthenticationStep.PASSWORD_RESET_OTP) {
-        return AuthenticationStep.PASSWORD_RESET_LOADING;
-    }
-
-    return AuthenticationStep.PASSWORD_CREATION_OTP_LOADING;
-}
+import { PasswordError } from './LoginModalAuthenticationState';
 
 export function isEmailValid(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

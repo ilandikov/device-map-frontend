@@ -1,5 +1,5 @@
-import { AuthenticationStep, PasswordError } from '../LoginModalAuthenticationState';
-import { authenticationStepFromOTP, getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
+import { PasswordError } from '../LoginModalAuthenticationState';
+import { getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
 
 describe('user email validation tests', () => {
     it('should validate good email', () => {
@@ -36,19 +36,5 @@ describe('user password logic tests', () => {
     ])('should return error for password "%s"', (password, expectedErrorMessage) => {
         const passwordInputError = getPasswordError(password);
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
-    });
-});
-
-describe('OTP logic tests', () => {
-    it('should move from sign up OTP to sign up OTP loading stage', () => {
-        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.PASSWORD_CREATION_OTP);
-
-        expect(nextUserAuthState).toEqual(AuthenticationStep.PASSWORD_CREATION_OTP_LOADING);
-    });
-
-    it('should move from log in OTP to log in OTP loading stage', () => {
-        const nextUserAuthState = authenticationStepFromOTP(AuthenticationStep.PASSWORD_RESET_OTP);
-
-        expect(nextUserAuthState).toEqual(AuthenticationStep.PASSWORD_RESET_LOADING);
     });
 });
