@@ -4,7 +4,7 @@ import {
     LoginModalInputTypes,
     LoginModalNotificationResult,
     LoginModalNotificationTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
 } from './LoginModalAction';
 import {
     AuthenticationStep,
@@ -82,7 +82,7 @@ export function loginModalAuthentication(
         }
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
-                case LoginModalVerifyTypes.EMAIL: {
+                case LoginModalRemoteRequestType.EMAIL: {
                     if (isEmailValid(state.email) === false) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
@@ -104,7 +104,7 @@ export function loginModalAuthentication(
 
                     return state;
                 }
-                case LoginModalVerifyTypes.PASSWORD: {
+                case LoginModalRemoteRequestType.PASSWORD: {
                     if (state.password !== state.passwordRepeat) {
                         return {
                             ...state,
@@ -130,10 +130,10 @@ export function loginModalAuthentication(
 
                     return state;
                 }
-                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
+                case LoginModalRemoteRequestType.EMAIL_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING };
                 }
-                case LoginModalVerifyTypes.OTP: {
+                case LoginModalRemoteRequestType.OTP: {
                     if (state.OTP.length < 6) {
                         return { ...state, error: new Error(OTPError.TOO_SHORT) };
                     }

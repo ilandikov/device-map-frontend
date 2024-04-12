@@ -8,9 +8,9 @@ import {
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -84,6 +84,6 @@ describe('PasswordCreationForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD));
     });
 });

@@ -4,9 +4,9 @@ import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
@@ -41,7 +41,7 @@ export function PasswordCreationForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD));
+                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD));
                     }}
                 >
                     {t('next')}

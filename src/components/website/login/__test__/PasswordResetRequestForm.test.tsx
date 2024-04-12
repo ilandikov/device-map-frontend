@@ -8,9 +8,9 @@ import {
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -53,6 +53,6 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL));
     });
 });

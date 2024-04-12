@@ -6,8 +6,8 @@ import {
     LoginModalAction,
     LoginModalActionTypes,
     LoginModalNotificationTypes,
-    LoginModalVerifyRequest,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequest,
+    LoginModalRemoteRequestType,
     loginModalFailureNotification,
     loginModalSuccessNotification,
 } from './LoginModalAction';
@@ -17,14 +17,14 @@ import { buildMessageFromCognitoException } from './cognitoHelpers';
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
         ofType(LoginModalActionTypes.VERIFY_REQUEST),
-        switchMap((action: LoginModalVerifyRequest) => {
+        switchMap((action: LoginModalRemoteRequest) => {
             const authenticationState: LoginModalAuthenticationState = state$.value.loginModalAuthentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
                 return EMPTY;
             }
             switch (action.verify) {
-                case LoginModalVerifyTypes.PASSWORD:
+                case LoginModalRemoteRequestType.PASSWORD:
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
                             return observeEndpoint(
@@ -44,13 +44,13 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                     }
 
                     break;
-                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD:
+                case LoginModalRemoteRequestType.EMAIL_AND_PASSWORD:
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
                         mapAppAuthenticationCompleted(),
                     );
-                case LoginModalVerifyTypes.OTP:
+                case LoginModalRemoteRequestType.OTP:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                         return observeEndpoint(
                             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
@@ -59,7 +59,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         );
                     }
                     break;
-                case LoginModalVerifyTypes.EMAIL:
+                case LoginModalRemoteRequestType.EMAIL:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return observeEndpoint(
                             cognitoClient.forgotPassword(authenticationState.email),
@@ -67,7 +67,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         );
                     }
                     break;
-                case LoginModalVerifyTypes.SIGN_OUT:
+                case LoginModalRemoteRequestType.SIGN_OUT:
                     return observeEndpoint(cognitoClient.signOut(), LoginModalNotificationTypes.SIGN_OUT);
             }
 

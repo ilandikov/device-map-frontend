@@ -2,7 +2,11 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { useLoginModalAuthentication } from '../login/redux/LoginModalAuthenticationState';
-import { LoginModalVerifyTypes, loginModalButtonClick, loginModalVerifyRequest } from '../login/redux/LoginModalAction';
+import {
+    LoginModalRemoteRequestType,
+    loginModalButtonClick,
+    loginModalRemoteRequest,
+} from '../login/redux/LoginModalAction';
 import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from './redux/MapAppAction';
 import Account from '/src/assets/images/Account.svg';
 
@@ -25,7 +29,7 @@ export function LogoutButton() {
             onClick={() => {
                 useDispatch(mapAppLogoutButtonClick());
                 useDispatch(loginModalButtonClick('userButton'));
-                useDispatch(loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT));
+                useDispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT));
             }}
         />
     );

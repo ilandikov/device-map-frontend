@@ -4,10 +4,10 @@ import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
@@ -84,7 +84,7 @@ export function OTPForm() {
                         const OTPCode = collectOTPValue();
                         dispatch(loginModalInput(LoginModalInputTypes.OTP, OTPCode));
 
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.OTP));
+                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
                     }}
                 >
                     {t('next')}

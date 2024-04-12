@@ -8,10 +8,10 @@ import {
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -79,7 +79,7 @@ describe('MailInputForm action tests', () => {
         const tryVerifyEmailButton = getByText(container, 'next');
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL));
     });
 
     it('should move from mail already exists to password verification stage', () => {

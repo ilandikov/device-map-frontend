@@ -1,5 +1,5 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { LoginModalAction, LoginModalVerifyRequest } from '../LoginModalAction';
+import { LoginModalAction, LoginModalRemoteRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
@@ -37,7 +37,7 @@ class cognitoTestClient {
 }
 
 export async function verifyCognitoEpicAction(
-    sentAction: LoginModalVerifyRequest,
+    sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
     remoteServiceAnswer: Promise<void>,
     expectedActions: (LoginModalAction | MapAppAction)[],
@@ -58,7 +58,7 @@ export async function verifyCognitoEpicAction(
 }
 
 export async function verifyCognitoEpicNoAction(
-    sentAction: LoginModalVerifyRequest,
+    sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
 ) {
     const output$ = cognito(

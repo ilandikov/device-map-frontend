@@ -1,10 +1,10 @@
 import {
     LoginModalActionTypes,
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../LoginModalAction';
 
 describe('Login Modal action creator tests', () => {
@@ -15,11 +15,11 @@ describe('Login Modal action creator tests', () => {
     });
 
     it('should create verify request action', () => {
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
 
         expect(action).toEqual({
             type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalVerifyTypes.EMAIL,
+            verify: LoginModalRemoteRequestType.EMAIL,
         });
     });
 

@@ -8,10 +8,10 @@ import {
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -93,7 +93,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD),
+            loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL_AND_PASSWORD),
         );
     });
 

@@ -1,9 +1,9 @@
 import {
     LoginModalNotificationTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalFailureNotification,
+    loginModalRemoteRequest,
     loginModalSuccessNotification,
-    loginModalVerifyRequest,
 } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
@@ -22,7 +22,7 @@ describe('user sign up tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -48,7 +48,7 @@ describe('user password reset tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -66,7 +66,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
@@ -75,7 +75,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         await verifyCognitoEpicNoAction(sentAction, initialState);
     });
@@ -93,7 +93,7 @@ describe('user sign in tests', () => {
         ],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL_AND_PASSWORD);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
@@ -102,7 +102,7 @@ describe('user sign in tests', () => {
 describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
 
         await verifyCognitoEpicNoAction(sentAction, initialState);
     });
@@ -119,7 +119,7 @@ describe('password reset request tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -137,7 +137,7 @@ describe('user sign out tests', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });

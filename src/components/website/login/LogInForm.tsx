@@ -5,10 +5,10 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
     LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
@@ -53,7 +53,7 @@ export function LogInForm() {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
-                            dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD));
+                            dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL_AND_PASSWORD));
                         }}
                     >
                         {t('next')}
