@@ -16,14 +16,14 @@ import { buildMessageFromCognitoException } from './cognitoHelpers';
 
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
-        ofType(LoginModalActionTypes.VERIFY_REQUEST),
+        ofType(LoginModalActionTypes.REMOTE_REQUEST),
         switchMap((action: LoginModalRemoteRequest) => {
             const authenticationState: LoginModalAuthenticationState = state$.value.loginModalAuthentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
                 return EMPTY;
             }
-            switch (action.verify) {
+            switch (action.request) {
                 case LoginModalRemoteRequestType.PASSWORD:
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:

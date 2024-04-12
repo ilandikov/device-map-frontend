@@ -80,8 +80,8 @@ export function loginModalAuthentication(
                     return state;
             }
         }
-        case LoginModalActionTypes.VERIFY_REQUEST: {
-            switch (action.verify) {
+        case LoginModalActionTypes.REMOTE_REQUEST: {
+            switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME: {
                     if (isEmailValid(state.email) === false) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };

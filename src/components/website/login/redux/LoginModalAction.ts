@@ -7,7 +7,7 @@ export type LoginModalAction =
 export enum LoginModalActionTypes {
     BUTTON_CLICKED = 'BUTTON_CLICKED',
     INPUT = 'INPUT',
-    VERIFY_REQUEST = 'VERIFY_REQUEST',
+    REMOTE_REQUEST = 'REMOTE_REQUEST',
     NOTIFICATION = 'NOTIFICATION',
 }
 
@@ -21,8 +21,8 @@ export function loginModalButtonClick(button: string): LoginModalButtonClick {
 }
 
 export interface LoginModalRemoteRequest {
-    type: LoginModalActionTypes.VERIFY_REQUEST;
-    verify: LoginModalRemoteRequestType;
+    type: LoginModalActionTypes.REMOTE_REQUEST;
+    request: LoginModalRemoteRequestType;
 }
 
 export enum LoginModalRemoteRequestType {
@@ -35,8 +35,8 @@ export enum LoginModalRemoteRequestType {
 
 export function loginModalRemoteRequest(verify: LoginModalRemoteRequestType): LoginModalRemoteRequest {
     return {
-        type: LoginModalActionTypes.VERIFY_REQUEST,
-        verify: verify,
+        type: LoginModalActionTypes.REMOTE_REQUEST,
+        request: verify,
     };
 }
 
