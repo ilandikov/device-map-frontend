@@ -3,10 +3,10 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
@@ -24,7 +24,7 @@ export function PasswordResetRequestForm() {
                     helpText={t('mailForPasswordReset')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.EMAIL, event.target.value));
                     }}
                     error={error}
                 />
@@ -33,7 +33,7 @@ export function PasswordResetRequestForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
+                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
                     }}
                 >
                     {t('OTPSendSMS')}

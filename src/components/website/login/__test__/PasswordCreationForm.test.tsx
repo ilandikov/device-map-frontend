@@ -7,10 +7,10 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -62,7 +62,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.PASSWORD, 'verySecurePassword1'),
+            loginModalInput(LoginModalInputType.PASSWORD, 'verySecurePassword1'),
         );
     });
 
@@ -74,7 +74,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, 'evenBetterPassword'),
+            loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'evenBetterPassword'),
         );
     });
 
@@ -84,6 +84,6 @@ describe('PasswordCreationForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD));
     });
 });

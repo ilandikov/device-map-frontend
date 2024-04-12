@@ -3,11 +3,11 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 import { MailInputError, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
@@ -24,7 +24,7 @@ export function MailInputForm() {
                     helpText={t('onlyEmail')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.EMAIL, event.target.value));
                     }}
                     error={error}
                 />
@@ -43,7 +43,7 @@ export function MailInputForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
+                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
                     }}
                 >
                     {t('next')}

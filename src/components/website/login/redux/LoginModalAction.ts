@@ -1,64 +1,63 @@
 export type LoginModalAction =
     | LoginModalInput
     | LoginModalButtonClick
-    | LoginModalVerifyRequest
-    | LoginModalNotification;
+    | LoginModalRemoteRequest
+    | LoginModalRemoteAnswer;
 
-export enum LoginModalActionTypes {
-    BUTTON_CLICKED = 'buttonClicked',
-    INPUT = 'input',
-    VERIFY_REQUEST = 'verifyRequest',
-    NOTIFICATION = 'notification',
-    NO_ACTION = 'noAction',
+export enum LoginModalActionType {
+    BUTTON_CLICKED = 'BUTTON_CLICKED',
+    INPUT = 'INPUT',
+    REMOTE_REQUEST = 'REMOTE_REQUEST',
+    REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
 export interface LoginModalButtonClick {
-    type: LoginModalActionTypes.BUTTON_CLICKED;
+    type: LoginModalActionType.BUTTON_CLICKED;
     button: string;
 }
 
 export function loginModalButtonClick(button: string): LoginModalButtonClick {
-    return { type: LoginModalActionTypes.BUTTON_CLICKED, button: button };
+    return { type: LoginModalActionType.BUTTON_CLICKED, button: button };
 }
 
-export interface LoginModalVerifyRequest {
-    type: LoginModalActionTypes.VERIFY_REQUEST;
-    verify: LoginModalVerifyTypes;
+export interface LoginModalRemoteRequest {
+    type: LoginModalActionType.REMOTE_REQUEST;
+    request: LoginModalRemoteRequestType;
 }
 
-export enum LoginModalVerifyTypes {
-    EMAIL = 'email',
-    PASSWORD = 'password',
-    EMAIL_AND_PASSWORD = 'emailAndPassword',
+export enum LoginModalRemoteRequestType {
+    USERNAME = 'USERNAME',
+    PASSWORD = 'PASSWORD',
+    USERNAME_AND_PASSWORD = 'USERNAME_AND_PASSWORD',
     OTP = 'OTP',
-    SIGN_OUT = 'signOut',
+    SIGN_OUT = 'SIGN_OUT',
 }
 
-export function loginModalVerifyRequest(verify: LoginModalVerifyTypes): LoginModalVerifyRequest {
+export function loginModalRemoteRequest(verify: LoginModalRemoteRequestType): LoginModalRemoteRequest {
     return {
-        type: LoginModalActionTypes.VERIFY_REQUEST,
-        verify: verify,
+        type: LoginModalActionType.REMOTE_REQUEST,
+        request: verify,
     };
 }
 
 export interface LoginModalInput {
-    type: LoginModalActionTypes.INPUT;
+    type: LoginModalActionType.INPUT;
     input: {
-        type: LoginModalInputTypes;
+        type: LoginModalInputType;
         payload: string;
     };
 }
 
-export enum LoginModalInputTypes {
-    EMAIL = 'userEmail',
-    PASSWORD = 'userPassword',
-    PASSWORD_REPEAT = 'userPasswordRepeat',
+export enum LoginModalInputType {
+    EMAIL = 'EMAIL',
+    PASSWORD = 'PASSWORD',
+    PASSWORD_REPEAT = 'PASSWORD_REPEAT',
     OTP = 'OTP',
 }
 
-export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: string): LoginModalInput {
+export function loginModalInput(inputType: LoginModalInputType, inputPayload: string): LoginModalInput {
     return {
-        type: LoginModalActionTypes.INPUT,
+        type: LoginModalActionType.INPUT,
         input: {
             type: inputType,
             payload: inputPayload,
@@ -66,43 +65,43 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
     };
 }
 
-export interface LoginModalNotification {
-    type: LoginModalActionTypes.NOTIFICATION;
-    notification: LoginModalNotificationTypes;
-    result: LoginModalNotificationResult;
+export interface LoginModalRemoteAnswer {
+    type: LoginModalActionType.REMOTE_ANSWER;
+    answer: LoginModalRemoteAnswerType;
+    result: LoginModalRemoteAnswerResult;
     reason?: string;
 }
 
-export enum LoginModalNotificationTypes {
-    SIGN_UP = 'signUp',
+export enum LoginModalRemoteAnswerType {
+    SIGN_UP = 'SIGN_UP',
     OTP = 'OTP',
-    SIGN_IN = 'signIn',
-    FORGOT_PASSWORD = 'forgotPassword',
-    PASSWORD_RESET = 'passwordReset',
-    SIGN_OUT = 'signOut',
+    SIGN_IN = 'SIGN_IN',
+    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
+    PASSWORD_RESET = 'PASSWORD_RESET',
+    SIGN_OUT = 'SIGN_OUT',
 }
 
-export enum LoginModalNotificationResult {
-    SUCCESS = 'success',
-    FAILURE = 'failure',
+export enum LoginModalRemoteAnswerResult {
+    SUCCESS = 'SUCCESS',
+    FAILURE = 'FAILURE',
 }
 
-export function loginModalSuccessNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
+export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionTypes.NOTIFICATION,
-        notification: notification,
-        result: LoginModalNotificationResult.SUCCESS,
+        type: LoginModalActionType.REMOTE_ANSWER,
+        answer: answer,
+        result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
 
-export function loginModalFailureNotification(
-    notification: LoginModalNotificationTypes,
+export function loginModalRemoteAnswerFailure(
+    answer: LoginModalRemoteAnswerType,
     reason: string,
-): LoginModalNotification {
+): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionTypes.NOTIFICATION,
-        notification: notification,
-        result: LoginModalNotificationResult.FAILURE,
+        type: LoginModalActionType.REMOTE_ANSWER,
+        answer: answer,
+        result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };
 }

@@ -7,11 +7,11 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -61,7 +61,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.EMAIL, 'hereIsMyMail@server.com'),
+            loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'),
         );
     });
 
@@ -81,7 +81,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.PASSWORD, 'strongPassword'),
+            loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'),
         );
     });
 
@@ -93,7 +93,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD),
+            loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD),
         );
     });
 

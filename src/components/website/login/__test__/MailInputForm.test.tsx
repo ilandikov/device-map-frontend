@@ -7,11 +7,11 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -70,7 +70,7 @@ describe('MailInputForm action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.EMAIL, 'new@email.com'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
@@ -79,7 +79,7 @@ describe('MailInputForm action tests', () => {
         const tryVerifyEmailButton = getByText(container, 'next');
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
     });
 
     it('should move from mail already exists to password verification stage', () => {

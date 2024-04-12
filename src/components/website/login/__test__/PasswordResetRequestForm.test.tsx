@@ -7,10 +7,10 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import {
     mockDispatch,
@@ -44,7 +44,7 @@ describe('PasswordResetRequest form action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.EMAIL, 'new@email.com'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
     it('should transition to login OTP state on OTP button click', () => {
@@ -53,6 +53,6 @@ describe('PasswordResetRequest form action tests', () => {
         const requestOTPButton = getByText(container, 'OTPSendSMS');
         fireEvent.click(requestOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
     });
 });

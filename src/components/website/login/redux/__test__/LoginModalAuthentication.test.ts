@@ -1,14 +1,14 @@
 import { loginModalAuthentication } from '../LoginModalAuthentication';
 import {
     LoginModalAction,
-    LoginModalInputTypes,
-    LoginModalNotificationTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteAnswerType,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
-    loginModalFailureNotification,
     loginModalInput,
-    loginModalSuccessNotification,
-    loginModalVerifyRequest,
+    loginModalRemoteAnswerFailure,
+    loginModalRemoteAnswerSuccess,
+    loginModalRemoteRequest,
 } from '../LoginModalAction';
 import {
     AuthenticationStep,
@@ -108,7 +108,7 @@ describe('navigation logic', () => {
 describe('email input logic', () => {
     it('should update user email', () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
-        const action = loginModalInput(LoginModalInputTypes.EMAIL, 'myMail@myServer.xyz');
+        const action = loginModalInput(LoginModalInputType.EMAIL, 'myMail@myServer.xyz');
 
         verifyStateChange(initialState, action, {
             email: 'myMail@myServer.xyz',
@@ -121,7 +121,7 @@ describe('email input logic', () => {
             email: 'good@email.com',
             error: new Error('omgSomethingIsWrong'),
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION,
@@ -134,7 +134,7 @@ describe('email input logic', () => {
             step: AuthenticationStep.MAIL_INPUT,
             email: 'this is not an email!',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, { error: new Error(MailInputError.NOT_VALID) });
     });
@@ -158,7 +158,7 @@ describe('user password logic', () => {
     it('should set user password', () => {
         const initialState = buildAuthenticationState({});
 
-        const action = loginModalInput(LoginModalInputTypes.PASSWORD, 'haha!!11');
+        const action = loginModalInput(LoginModalInputType.PASSWORD, 'haha!!11');
 
         verifyStateChange(initialState, action, {
             password: 'haha!!11',
@@ -168,7 +168,7 @@ describe('user password logic', () => {
     it('should set user password repeat', () => {
         const initialState = buildAuthenticationState({});
 
-        const action = loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, 'lmao!rofl!');
+        const action = loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'lmao!rofl!');
 
         verifyStateChange(initialState, action, {
             passwordRepeat: 'lmao!rofl!',
@@ -183,7 +183,7 @@ describe('user password logic', () => {
             error: new Error('thisIsSoWrong'),
         });
 
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
@@ -199,7 +199,7 @@ describe('user password logic', () => {
             error: new Error('shouldNotHappen'),
         });
 
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
@@ -213,7 +213,7 @@ describe('user password logic', () => {
             passwordRepeat: 'likeForSureDontMatch',
         });
 
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
         verifyStateChange(initialState, action, {
             error: new Error(PasswordError.NOT_MATCHING),
@@ -226,7 +226,7 @@ describe('sign up logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
         });
-        const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP);
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
@@ -238,7 +238,7 @@ describe('sign up logic', () => {
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
         });
-        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'thisIsWhy');
+        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'thisIsWhy');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.MAIL_INPUT,
@@ -253,7 +253,7 @@ describe('sign up OTP logic', () => {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
             OTP: '451035',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
@@ -266,7 +266,7 @@ describe('sign up OTP logic', () => {
             OTP: '781340',
             error: new Error('verifyTheCodeAgain'),
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET,
@@ -289,7 +289,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,
         });
-        const action = loginModalInput(LoginModalInputTypes.OTP, '9832');
+        const action = loginModalInput(LoginModalInputType.OTP, '9832');
 
         verifyStateChange(initialState, action, {
             OTP: '9832',
@@ -300,7 +300,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             OTP: '51094',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         verifyStateChange(initialState, action, {
             error: new Error(OTPError.TOO_SHORT),
@@ -311,7 +311,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const action = loginModalSuccessNotification(LoginModalNotificationTypes.OTP);
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -322,8 +322,8 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const action = loginModalFailureNotification(
-            LoginModalNotificationTypes.OTP,
+        const action = loginModalRemoteAnswerFailure(
+            LoginModalRemoteAnswerType.OTP,
             'signUpWasNotConfirmedUnfortunately',
         );
 
@@ -339,7 +339,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_LOADING,
@@ -366,7 +366,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_LOADING,
         });
-        const action = loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN);
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -377,7 +377,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_LOADING,
         });
-        const action = loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'thereHasBeenAnError');
+        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, 'thereHasBeenAnError');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN,
@@ -393,7 +393,7 @@ describe('password reset logic', () => {
             email: 'valid@mail.com',
             error: new Error(MailInputError.NOT_VALID),
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
@@ -406,7 +406,7 @@ describe('password reset logic', () => {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
             email: '!notAMail',
         });
-        const action = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
             error: new Error(MailInputError.NOT_VALID),
@@ -417,7 +417,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD);
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
@@ -428,10 +428,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalFailureNotification(
-            LoginModalNotificationTypes.FORGOT_PASSWORD,
-            'thereHasBeenAnError',
-        );
+        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'thereHasBeenAnError');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
@@ -443,7 +440,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET);
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -454,8 +451,8 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalFailureNotification(
-            LoginModalNotificationTypes.PASSWORD_RESET,
+        const action = loginModalRemoteAnswerFailure(
+            LoginModalRemoteAnswerType.PASSWORD_RESET,
             'thisCouldNotGoWorseThanThat',
         );
 

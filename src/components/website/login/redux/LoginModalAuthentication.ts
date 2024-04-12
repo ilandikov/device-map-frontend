@@ -1,10 +1,10 @@
 import {
     LoginModalAction,
-    LoginModalActionTypes,
-    LoginModalInputTypes,
-    LoginModalNotificationResult,
-    LoginModalNotificationTypes,
-    LoginModalVerifyTypes,
+    LoginModalActionType,
+    LoginModalInputType,
+    LoginModalRemoteAnswerResult,
+    LoginModalRemoteAnswerType,
+    LoginModalRemoteRequestType,
 } from './LoginModalAction';
 import {
     AuthenticationStep,
@@ -21,39 +21,39 @@ export function loginModalAuthentication(
     action: LoginModalAction,
 ): LoginModalAuthenticationState {
     switch (action.type) {
-        case LoginModalActionTypes.NOTIFICATION: {
+        case LoginModalActionType.REMOTE_ANSWER: {
             let successStep = state.step;
             let fallbackStep = state.step;
 
-            switch (action.notification) {
-                case LoginModalNotificationTypes.SIGN_UP: {
+            switch (action.answer) {
+                case LoginModalRemoteAnswerType.SIGN_UP: {
                     successStep = AuthenticationStep.PASSWORD_CREATION_OTP;
                     fallbackStep = AuthenticationStep.MAIL_INPUT;
                     break;
                 }
-                case LoginModalNotificationTypes.FORGOT_PASSWORD: {
+                case LoginModalRemoteAnswerType.FORGOT_PASSWORD: {
                     successStep = AuthenticationStep.PASSWORD_RESET_OTP;
                     fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
                     break;
                 }
-                case LoginModalNotificationTypes.OTP: {
+                case LoginModalRemoteAnswerType.OTP: {
                     successStep = AuthenticationStep.LOGGED_IN;
                     fallbackStep = AuthenticationStep.PASSWORD_CREATION_OTP;
                     break;
                 }
-                case LoginModalNotificationTypes.PASSWORD_RESET: {
+                case LoginModalRemoteAnswerType.PASSWORD_RESET: {
                     successStep = AuthenticationStep.LOGGED_IN;
                     fallbackStep = AuthenticationStep.PASSWORD_RESET_OTP;
                     break;
                 }
-                case LoginModalNotificationTypes.SIGN_IN: {
+                case LoginModalRemoteAnswerType.SIGN_IN: {
                     successStep = AuthenticationStep.LOGGED_IN;
                     fallbackStep = AuthenticationStep.LOGIN;
                     break;
                 }
             }
 
-            if (action.result === LoginModalNotificationResult.FAILURE) {
+            if (action.result === LoginModalRemoteAnswerResult.FAILURE) {
                 return {
                     ...state,
                     step: fallbackStep,
@@ -66,23 +66,23 @@ export function loginModalAuthentication(
                 step: successStep,
             };
         }
-        case LoginModalActionTypes.INPUT: {
+        case LoginModalActionType.INPUT: {
             switch (action.input.type) {
-                case LoginModalInputTypes.EMAIL:
+                case LoginModalInputType.EMAIL:
                     return { ...state, email: action.input.payload };
-                case LoginModalInputTypes.PASSWORD:
+                case LoginModalInputType.PASSWORD:
                     return { ...state, password: action.input.payload };
-                case LoginModalInputTypes.PASSWORD_REPEAT:
+                case LoginModalInputType.PASSWORD_REPEAT:
                     return { ...state, passwordRepeat: action.input.payload };
-                case LoginModalInputTypes.OTP:
+                case LoginModalInputType.OTP:
                     return { ...state, OTP: action.input.payload };
                 default:
                     return state;
             }
         }
-        case LoginModalActionTypes.VERIFY_REQUEST: {
-            switch (action.verify) {
-                case LoginModalVerifyTypes.EMAIL: {
+        case LoginModalActionType.REMOTE_REQUEST: {
+            switch (action.request) {
+                case LoginModalRemoteRequestType.USERNAME: {
                     if (isEmailValid(state.email) === false) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
@@ -104,7 +104,7 @@ export function loginModalAuthentication(
 
                     return state;
                 }
-                case LoginModalVerifyTypes.PASSWORD: {
+                case LoginModalRemoteRequestType.PASSWORD: {
                     if (state.password !== state.passwordRepeat) {
                         return {
                             ...state,
@@ -130,10 +130,10 @@ export function loginModalAuthentication(
 
                     return state;
                 }
-                case LoginModalVerifyTypes.EMAIL_AND_PASSWORD: {
+                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING };
                 }
-                case LoginModalVerifyTypes.OTP: {
+                case LoginModalRemoteRequestType.OTP: {
                     if (state.OTP.length < 6) {
                         return { ...state, error: new Error(OTPError.TOO_SHORT) };
                     }
@@ -153,7 +153,7 @@ export function loginModalAuthentication(
                     return state;
             }
         }
-        case LoginModalActionTypes.BUTTON_CLICKED:
+        case LoginModalActionType.BUTTON_CLICKED:
             switch (action.button) {
                 case 'accountRegister':
                     return { ...state, step: AuthenticationStep.MAIL_INPUT };

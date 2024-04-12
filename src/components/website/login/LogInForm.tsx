@@ -4,11 +4,11 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
-    LoginModalInputTypes,
-    LoginModalVerifyTypes,
+    LoginModalInputType,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
@@ -27,7 +27,7 @@ export function LogInForm() {
                     helpText={t('onlyEmail')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.EMAIL, event.target.value));
                     }}
                     error={errorWithoutMessage}
                 />
@@ -35,7 +35,7 @@ export function LogInForm() {
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.PASSWORD, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
                     }}
                     error={errorWithoutMessage}
                 />
@@ -53,7 +53,7 @@ export function LogInForm() {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
-                            dispatch(loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD));
+                            dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD));
                         }}
                     >
                         {t('next')}

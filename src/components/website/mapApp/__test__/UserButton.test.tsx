@@ -9,9 +9,9 @@ import {
 import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
-    LoginModalVerifyTypes,
+    LoginModalRemoteRequestType,
     loginModalButtonClick,
-    loginModalVerifyRequest,
+    loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
 
 jest.mock('react-redux', () => ({
@@ -57,6 +57,6 @@ describe('UserButton action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLogoutButtonClick());
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick('userButton'));
-        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT));
+        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT));
     });
 });

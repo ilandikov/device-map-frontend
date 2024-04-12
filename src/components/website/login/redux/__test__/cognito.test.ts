@@ -1,9 +1,9 @@
 import {
-    LoginModalNotificationTypes,
-    LoginModalVerifyTypes,
-    loginModalFailureNotification,
-    loginModalSuccessNotification,
-    loginModalVerifyRequest,
+    LoginModalRemoteAnswerType,
+    LoginModalRemoteRequestType,
+    loginModalRemoteAnswerFailure,
+    loginModalRemoteAnswerSuccess,
+    loginModalRemoteRequest,
 } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
@@ -11,10 +11,10 @@ import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './cognitoTes
 
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'cognitoUnknownException')],
         ],
     ])(
         'should dispatch sign up notification when remote answer is: %s',
@@ -22,7 +22,7 @@ describe('user sign up tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -33,14 +33,11 @@ describe('user password reset tests', () => {
     it.each([
         [
             Promise.resolve(),
-            [
-                loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET),
-                mapAppAuthenticationCompleted(),
-            ],
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET), mapAppAuthenticationCompleted()],
         ],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.PASSWORD_RESET, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, 'cognitoUnknownException')],
         ],
     ])(
         'should dispatch password has been reset notification when remote answer is: %s',
@@ -48,7 +45,7 @@ describe('user password reset tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.PASSWORD);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.PASSWORD);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -59,14 +56,14 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
     it.each([
         [
             Promise.resolve(),
-            [loginModalSuccessNotification(LoginModalNotificationTypes.OTP), mapAppAuthenticationCompleted()],
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()],
         ],
-        [Promise.reject(), [loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'cognitoUnknownException')]],
+        [Promise.reject(), [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, 'cognitoUnknownException')]],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
@@ -75,7 +72,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.OTP);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         await verifyCognitoEpicNoAction(sentAction, initialState);
     });
@@ -85,15 +82,15 @@ describe('user sign in tests', () => {
     it.each([
         [
             Promise.resolve(),
-            [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN), mapAppAuthenticationCompleted()],
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()],
         ],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, 'cognitoUnknownException')],
         ],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL_AND_PASSWORD);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
@@ -102,16 +99,16 @@ describe('user sign in tests', () => {
 describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         await verifyCognitoEpicNoAction(sentAction, initialState);
     });
 
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.FORGOT_PASSWORD, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'cognitoUnknownException')],
         ],
     ])(
         'should dispatch forgot password notification when remote answer is: %s',
@@ -119,7 +116,7 @@ describe('password reset request tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
-            const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -128,16 +125,16 @@ describe('password reset request tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_OUT)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_OUT, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, 'cognitoUnknownException')],
         ],
     ])('should sign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
