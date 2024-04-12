@@ -19,5 +19,5 @@ export const mapAppInitialState: MapAppState = {
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
-    return { ...partialState, ...mapAppInitialState };
+    return { ...mapAppInitialState, ...partialState };
 }
