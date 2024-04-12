@@ -27,11 +27,11 @@ export interface LoginModalRemoteRequest {
 }
 
 export enum LoginModalRemoteRequestType {
-    EMAIL = 'email',
-    PASSWORD = 'password',
-    EMAIL_AND_PASSWORD = 'emailAndPassword',
+    USERNAME = 'USERNAME',
+    PASSWORD = 'PASSWORD',
+    USERNAME_AND_PASSWORD = 'USERNAME_AND_PASSWORD',
     OTP = 'OTP',
-    SIGN_OUT = 'signOut',
+    SIGN_OUT = 'SIGN_OUT',
 }
 
 export function loginModalRemoteRequest(verify: LoginModalRemoteRequestType): LoginModalRemoteRequest {

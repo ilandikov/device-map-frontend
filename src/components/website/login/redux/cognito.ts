@@ -44,7 +44,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                     }
 
                     break;
-                case LoginModalRemoteRequestType.EMAIL_AND_PASSWORD:
+                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                         LoginModalNotificationTypes.SIGN_IN,
@@ -59,7 +59,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         );
                     }
                     break;
-                case LoginModalRemoteRequestType.EMAIL:
+                case LoginModalRemoteRequestType.USERNAME:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return observeEndpoint(
                             cognitoClient.forgotPassword(authenticationState.email),

@@ -33,7 +33,7 @@ export function PasswordResetRequestForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL));
+                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
                     }}
                 >
                     {t('OTPSendSMS')}

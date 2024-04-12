@@ -53,7 +53,7 @@ export function LogInForm() {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
-                            dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL_AND_PASSWORD));
+                            dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD));
                         }}
                     >
                         {t('next')}

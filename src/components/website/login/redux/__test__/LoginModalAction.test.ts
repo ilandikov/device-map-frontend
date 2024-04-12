@@ -15,11 +15,11 @@ describe('Login Modal action creator tests', () => {
     });
 
     it('should create verify request action', () => {
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         expect(action).toEqual({
             type: LoginModalActionTypes.VERIFY_REQUEST,
-            verify: LoginModalRemoteRequestType.EMAIL,
+            verify: LoginModalRemoteRequestType.USERNAME,
         });
     });
 

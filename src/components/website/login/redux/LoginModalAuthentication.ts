@@ -82,7 +82,7 @@ export function loginModalAuthentication(
         }
         case LoginModalActionTypes.VERIFY_REQUEST: {
             switch (action.verify) {
-                case LoginModalRemoteRequestType.EMAIL: {
+                case LoginModalRemoteRequestType.USERNAME: {
                     if (isEmailValid(state.email) === false) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
@@ -130,7 +130,7 @@ export function loginModalAuthentication(
 
                     return state;
                 }
-                case LoginModalRemoteRequestType.EMAIL_AND_PASSWORD: {
+                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING };
                 }
                 case LoginModalRemoteRequestType.OTP: {

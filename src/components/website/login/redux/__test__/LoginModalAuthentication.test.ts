@@ -121,7 +121,7 @@ describe('email input logic', () => {
             email: 'good@email.com',
             error: new Error('omgSomethingIsWrong'),
         });
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION,
@@ -134,7 +134,7 @@ describe('email input logic', () => {
             step: AuthenticationStep.MAIL_INPUT,
             email: 'this is not an email!',
         });
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, { error: new Error(MailInputError.NOT_VALID) });
     });
@@ -339,7 +339,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
         });
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL_AND_PASSWORD);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_LOADING,
@@ -393,7 +393,7 @@ describe('password reset logic', () => {
             email: 'valid@mail.com',
             error: new Error(MailInputError.NOT_VALID),
         });
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
@@ -406,7 +406,7 @@ describe('password reset logic', () => {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
             email: '!notAMail',
         });
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
             error: new Error(MailInputError.NOT_VALID),

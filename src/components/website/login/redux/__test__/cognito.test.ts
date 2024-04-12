@@ -93,7 +93,7 @@ describe('user sign in tests', () => {
         ],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
-        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL_AND_PASSWORD);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
@@ -102,7 +102,7 @@ describe('user sign in tests', () => {
 describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
-        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         await verifyCognitoEpicNoAction(sentAction, initialState);
     });
@@ -119,7 +119,7 @@ describe('password reset request tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
-            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL);
+            const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },

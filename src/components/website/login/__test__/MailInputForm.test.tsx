@@ -79,7 +79,7 @@ describe('MailInputForm action tests', () => {
         const tryVerifyEmailButton = getByText(container, 'next');
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.EMAIL));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
     });
 
     it('should move from mail already exists to password verification stage', () => {
