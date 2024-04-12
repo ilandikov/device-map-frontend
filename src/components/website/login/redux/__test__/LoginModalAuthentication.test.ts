@@ -7,7 +7,6 @@ import {
     loginModalButtonClick,
     loginModalFailureNotification,
     loginModalInput,
-    loginModalNoAction,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
 } from '../LoginModalAction';
@@ -36,11 +35,9 @@ function verifyStateChange(
 }
 
 describe('LoginModal reducer tests', () => {
-    it('should not change the initial state', () => {
-        const initialState = authenticationInitialState;
-        const action = loginModalNoAction();
-
-        verifyStateChange(initialState, action, {});
+    it('should not change the initial state on a dummy action', () => {
+        // @ts-ignore
+        verifyStateChange(authenticationInitialState, { type: 'DUMMY_ACTION' }, {});
     });
 });
 
