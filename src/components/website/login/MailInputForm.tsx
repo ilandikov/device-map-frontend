@@ -8,14 +8,14 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from './redux/actions';
-import { MailInputError, useAuthentication } from './redux/state';
+} from './redux/LoginModalAction';
+import { MailInputError, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function MailInputForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { email, error } = useAuthentication();
+    const { email, error } = useLoginModalAuthentication();
 
     return (
         <>

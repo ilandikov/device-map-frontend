@@ -8,15 +8,15 @@ import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
-import { authentication } from '../components/website/login/redux/reducer';
-import { cognito } from '../components/website/login/redux/epic';
+import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
+import { cognito } from '../components/website/login/redux/cognito';
 
 const rootEpic = combineEpics(cognito);
 
 const rootReducer = combineReducers({
     getDevices,
     mapAppState: MapAppReducer,
-    authentication,
+    loginModalAuthentication,
 });
 
 let store;

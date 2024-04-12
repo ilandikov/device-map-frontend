@@ -4,10 +4,10 @@ import {
     loginModalFailureNotification,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
-} from '../actions';
-import { AuthenticationStep, buildAuthenticationState } from '../state';
-import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/actions';
-import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './epicTestHelpers';
+} from '../LoginModalAction';
+import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthenticationState';
+import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
+import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
@@ -114,7 +114,9 @@ describe('password reset tests', () => {
     ])(
         'should dispatch forgot password notification when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
-            const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_RESET_LOADING });
+            const initialState = buildAuthenticationState({
+                step: AuthenticationStep.PASSWORD_RESET_LOADING,
+            });
             const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.EMAIL);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
@@ -130,7 +132,9 @@ describe('user sign out tests', () => {
             [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_OUT, 'cognitoUnknownException')],
         ],
     ])('should sign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
-        const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_RESET_LOADING });
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_LOADING,
+        });
         const sentAction = loginModalVerifyRequest(LoginModalVerifyTypes.SIGN_OUT);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);

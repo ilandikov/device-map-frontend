@@ -1,4 +1,4 @@
-import { AuthenticationStep, PasswordError } from './state';
+import { AuthenticationStep, PasswordError } from './LoginModalAuthenticationState';
 
 export function authenticationStepFromOTP(
     userAuthState: AuthenticationStep.PASSWORD_RESET_OTP | AuthenticationStep.PASSWORD_CREATION_OTP,

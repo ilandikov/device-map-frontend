@@ -5,21 +5,21 @@ import {
     LoginModalNotificationResult,
     LoginModalNotificationTypes,
     LoginModalVerifyTypes,
-} from './actions';
+} from './LoginModalAction';
 import {
-    AuthenticationState,
     AuthenticationStep,
+    LoginModalAuthenticationState,
     MailInputError,
     OTPError,
     PasswordError,
     authenticationInitialState,
-} from './state';
-import { getPasswordError, isEmailValid } from './reducerUtils';
+} from './LoginModalAuthenticationState';
+import { getPasswordError, isEmailValid } from './LoginModalAuthenticationHelpers';
 
-export function authentication(
-    state: AuthenticationState = authenticationInitialState,
+export function loginModalAuthentication(
+    state: LoginModalAuthenticationState = authenticationInitialState,
     action: LoginModalAction,
-): AuthenticationState {
+): LoginModalAuthenticationState {
     switch (action.type) {
         case LoginModalActionTypes.NOTIFICATION: {
             let successStep = state.step;
@@ -119,7 +119,11 @@ export function authentication(
 
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_CREATION:
-                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_LOADING, error: null };
+                            return {
+                                ...state,
+                                step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+                                error: null,
+                            };
                         case AuthenticationStep.PASSWORD_RESET:
                             return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
                     }
@@ -158,7 +162,12 @@ export function authentication(
                 case 'cancel':
                     return authenticationInitialState;
                 case 'resetPassword':
-                    return { ...state, step: AuthenticationStep.PASSWORD_RESET_REQUEST, password: '', error: null };
+                    return {
+                        ...state,
+                        step: AuthenticationStep.PASSWORD_RESET_REQUEST,
+                        password: '',
+                        error: null,
+                    };
                 case 'userButton':
                     return authenticationInitialState;
                 case 'next':

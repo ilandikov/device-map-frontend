@@ -1,5 +1,5 @@
-import { AuthenticationStep, PasswordError } from '../state';
-import { authenticationStepFromOTP, getPasswordError, isEmailValid } from '../reducerUtils';
+import { AuthenticationStep, PasswordError } from '../LoginModalAuthenticationState';
+import { authenticationStepFromOTP, getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
 
 describe('user email validation tests', () => {
     it('should validate good email', () => {

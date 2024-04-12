@@ -8,14 +8,14 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from './redux/actions';
-import { useAuthentication } from './redux/state';
+} from './redux/LoginModalAction';
+import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function OTPForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { error } = useAuthentication();
+    const { error } = useLoginModalAuthentication();
 
     const nextButton = useRef(null);
 

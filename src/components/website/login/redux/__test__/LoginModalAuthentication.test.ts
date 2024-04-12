@@ -1,4 +1,4 @@
-import { authentication } from '../reducer';
+import { loginModalAuthentication } from '../LoginModalAuthentication';
 import {
     LoginModalAction,
     LoginModalInputTypes,
@@ -10,25 +10,25 @@ import {
     loginModalNoAction,
     loginModalSuccessNotification,
     loginModalVerifyRequest,
-} from '../actions';
+} from '../LoginModalAction';
 import {
-    AuthenticationState,
     AuthenticationStep,
+    LoginModalAuthenticationState,
     MailInputError,
     OTPError,
     PasswordError,
     authenticationInitialState,
     buildAuthenticationState,
-} from '../state';
+} from '../LoginModalAuthenticationState';
 
 function verifyStateChange(
-    initialState: AuthenticationState,
+    initialState: LoginModalAuthenticationState,
     action: LoginModalAction,
-    expectedChange: Partial<AuthenticationState>,
+    expectedChange: Partial<LoginModalAuthenticationState>,
 ) {
-    const nextState = authentication(initialState, action);
+    const nextState = loginModalAuthentication(initialState, action);
 
-    const expectedState: AuthenticationState = {
+    const expectedState: LoginModalAuthenticationState = {
         ...initialState,
         ...expectedChange,
     };

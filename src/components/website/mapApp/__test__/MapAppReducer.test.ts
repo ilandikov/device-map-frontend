@@ -5,7 +5,7 @@ import {
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
-} from '../redux/actions';
+} from '../redux/MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
 function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
@@ -34,14 +34,14 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
 
-    it('should move to home screen step on logout button click', () => {
+    it('should move to mainPage screen step on logout button click', () => {
         const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
         const action = mapAppLogoutButtonClick();
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
     });
 
-    it('should move to home screen on navigation cancel action', () => {
+    it('should move to mainPage screen on navigation cancel action', () => {
         const initialState = buildMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         });

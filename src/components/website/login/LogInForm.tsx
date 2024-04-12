@@ -9,15 +9,15 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from './redux/actions';
+} from './redux/LoginModalAction';
 
-import { useAuthentication } from './redux/state';
+import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { email, error } = useAuthentication();
+    const { email, error } = useLoginModalAuthentication();
     const errorWithoutMessage = error ? new Error() : null;
 
     return (

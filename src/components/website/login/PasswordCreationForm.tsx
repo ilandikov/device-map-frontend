@@ -2,15 +2,20 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
-import { LoginModalInputTypes, LoginModalVerifyTypes, loginModalInput, loginModalVerifyRequest } from './redux/actions';
+import {
+    LoginModalInputTypes,
+    LoginModalVerifyTypes,
+    loginModalInput,
+    loginModalVerifyRequest,
+} from './redux/LoginModalAction';
 
-import { useAuthentication } from './redux/state';
+import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { error } = useAuthentication();
+    const { error } = useLoginModalAuthentication();
 
     return (
         <>

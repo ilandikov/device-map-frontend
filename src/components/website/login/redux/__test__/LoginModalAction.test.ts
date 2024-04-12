@@ -5,7 +5,7 @@ import {
     loginModalButtonClick,
     loginModalInput,
     loginModalVerifyRequest,
-} from '../actions';
+} from '../LoginModalAction';
 
 describe('Login Modal action creator tests', () => {
     it('should create button click action', () => {
