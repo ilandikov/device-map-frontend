@@ -8,12 +8,12 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-import { AuthenticationStep, useAuthentication } from './redux/state';
+import { AuthenticationStep, useLoginModalAuthentication } from './redux/state';
 import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 
 export function LoginModal() {
-    const { step: authenticationStep } = useAuthentication();
+    const { step: authenticationStep } = useLoginModalAuthentication();
 
     const showShadows = authenticationStep === AuthenticationStep.WELCOME;
     const showNavigationButtons = [

@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { useAuthentication } from '../login/redux/state';
+import { useLoginModalAuthentication } from '../login/redux/state';
 import { LoginModalVerifyTypes, loginModalButtonClick, loginModalVerifyRequest } from '../login/redux/LoginModalAction';
 import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from './redux/MapAppAction';
 import Account from '/src/assets/images/Account.svg';
@@ -17,7 +17,7 @@ function UserButton(props: { caption: string; onClick: () => void }) {
 
 export function LogoutButton() {
     const useDispatch = useAppDispatch();
-    const { email } = useAuthentication();
+    const { email } = useLoginModalAuthentication();
 
     return (
         <UserButton

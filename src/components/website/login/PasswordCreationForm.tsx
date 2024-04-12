@@ -9,13 +9,13 @@ import {
     loginModalVerifyRequest,
 } from './redux/LoginModalAction';
 
-import { useAuthentication } from './redux/state';
+import { useLoginModalAuthentication } from './redux/state';
 
 export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { error } = useAuthentication();
+    const { error } = useLoginModalAuthentication();
 
     return (
         <>

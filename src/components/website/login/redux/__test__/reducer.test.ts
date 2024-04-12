@@ -1,4 +1,4 @@
-import { authentication } from '../reducer';
+import { loginModalAuthentication } from '../reducer';
 import {
     LoginModalAction,
     LoginModalInputTypes,
@@ -26,7 +26,7 @@ function verifyStateChange(
     action: LoginModalAction,
     expectedChange: Partial<AuthenticationState>,
 ) {
-    const nextState = authentication(initialState, action);
+    const nextState = loginModalAuthentication(initialState, action);
 
     const expectedState: AuthenticationState = {
         ...initialState,

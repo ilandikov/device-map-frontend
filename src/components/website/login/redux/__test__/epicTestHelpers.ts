@@ -46,7 +46,7 @@ export async function verifyCognitoEpicAction(
         of(sentAction),
         {
             value: {
-                authentication: initialState,
+                loginModalAuthentication: initialState,
             },
         },
         {
@@ -65,7 +65,7 @@ export async function verifyCognitoEpicNoAction(
         of(sentAction),
         {
             value: {
-                authentication: initialState,
+                loginModalAuthentication: initialState,
             },
         },
         { cognitoClient: {} },
