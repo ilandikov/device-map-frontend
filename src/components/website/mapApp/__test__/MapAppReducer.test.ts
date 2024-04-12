@@ -1,8 +1,18 @@
 import { MapAppReducer, MapAppState, MapAppUsageStep, mapAppInitialState } from '../redux/MapAppReducer';
-import { mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
+import { MapAppAction, mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
 
 function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
     return { ...partialState, ...mapAppInitialState };
+}
+
+function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
+    const resultingState = MapAppReducer(initialState, action);
+
+    const expectedState: MapAppState = {
+        ...stateChange,
+        ...initialState,
+    };
+    expect(resultingState).toEqual(expectedState);
 }
 
 describe('MapApp reducer tests', () => {
@@ -34,12 +44,6 @@ describe('MapApp reducer tests', () => {
 
         const stateChange: Partial<MapAppState> = { usageStep: MapAppUsageStep.HOME_SCREEN };
 
-        const resultingState = MapAppReducer(initialState, action);
-
-        const expectedState: MapAppState = {
-            ...stateChange,
-            ...initialState,
-        };
-        expect(resultingState).toEqual(expectedState);
+        verifyMapAppStateChange(initialState, action, stateChange);
     });
 });
