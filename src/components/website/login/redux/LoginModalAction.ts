@@ -5,11 +5,11 @@ export type LoginModalAction =
     | LoginModalNotification;
 
 export enum LoginModalActionTypes {
-    BUTTON_CLICKED = 'buttonClicked',
-    INPUT = 'input',
-    VERIFY_REQUEST = 'verifyRequest',
-    NOTIFICATION = 'notification',
-    NO_ACTION = 'noAction',
+    BUTTON_CLICKED = 'BUTTON_CLICKED',
+    INPUT = 'INPUT',
+    VERIFY_REQUEST = 'VERIFY_REQUEST',
+    NOTIFICATION = 'NOTIFICATION',
+    NO_ACTION = 'NO_ACTION',
 }
 
 export interface LoginModalButtonClick {
@@ -50,9 +50,9 @@ export interface LoginModalInput {
 }
 
 export enum LoginModalInputTypes {
-    EMAIL = 'userEmail',
-    PASSWORD = 'userPassword',
-    PASSWORD_REPEAT = 'userPasswordRepeat',
+    EMAIL = 'EMAIL',
+    PASSWORD = 'PASSWORD',
+    PASSWORD_REPEAT = 'PASSWORD_REPEAT',
     OTP = 'OTP',
 }
 
