@@ -1,40 +1,42 @@
-import { MapAppReducer, MapAppState, MapAppUsageStep } from '../redux/MapAppReducer';
-import { mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
+import { MapAppReducer, MapAppState, MapAppUsageStep, mapAppInitialState } from '../redux/MapAppReducer';
+import { MapAppAction, mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
+
+function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
+    return { ...partialState, ...mapAppInitialState };
+}
+
+function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
+    const resultingState = MapAppReducer(initialState, action);
+
+    const expectedState: MapAppState = {
+        ...initialState,
+        ...stateChange,
+    };
+    expect(resultingState).toEqual(expectedState);
+}
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
+        const initialState = buildMapAppState({});
+        const action = { type: 'DUMMY_ACTION' };
+
         // @ts-ignore
-        const initialState = MapAppReducer(undefined, { type: 'DUMMY_ACTION' });
-
-        const expectedInitialState: MapAppState = {
-            usageStep: MapAppUsageStep.HOME_SCREEN,
-        };
-
-        expect(initialState).toEqual(expectedInitialState);
+        verifyMapAppStateChange(initialState, action, {});
     });
 
     it('should move to user authentication step on user button click', () => {
+        const initialState = buildMapAppState({});
         const action = mapAppUserButtonClick();
 
-        const resultingState = MapAppReducer(undefined, action);
-
-        const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
-        };
-        expect(resultingState).toEqual(expectedState);
+        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
 
-    it('should move to homescreen on navigation cancel action', () => {
-        const initialState: MapAppState = {
+    it('should move to home screen on navigation cancel action', () => {
+        const initialState = buildMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
-        };
+        });
         const action = mapAppLoginModalClose();
 
-        const resultingState = MapAppReducer(initialState, action);
-
-        const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.HOME_SCREEN,
-        };
-        expect(resultingState).toEqual(expectedState);
+        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
     });
 });
