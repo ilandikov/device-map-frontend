@@ -1,18 +1,5 @@
 import { MapAppAction, MapAppActionTypes } from './actions';
-
-export interface MapAppState {
-    usageStep: MapAppUsageStep;
-}
-
-export enum MapAppUsageStep {
-    HOME_SCREEN = 'HOME_SCREEN',
-    USER_AUTHENTICATION = 'USER_AUTHENTICATION',
-    AUTHENTICATED_USER = 'AUTHENTICATED_USER',
-}
-
-export const mapAppInitialState: MapAppState = {
-    usageStep: MapAppUsageStep.HOME_SCREEN,
-};
+import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction) {
     switch (action.type) {

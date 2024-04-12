@@ -1,5 +1,6 @@
 import { AuthenticationState } from '../../components/website/login/redux/state';
-import { MapAppState } from '../../components/website/mapApp/redux/MapAppReducer';
+
+import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
 
 /* To mock the react-redux functionalities in regard to {@link LoginModalState}
  * add the following code to the test:

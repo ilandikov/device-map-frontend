@@ -1,9 +1,6 @@
-import { MapAppReducer, MapAppState, MapAppUsageStep, mapAppInitialState } from '../redux/MapAppReducer';
+import { MapAppReducer } from '../redux/MapAppReducer';
 import { MapAppAction, mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
-
-function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
-    return { ...partialState, ...mapAppInitialState };
-}
+import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
 function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);
