@@ -2,7 +2,7 @@ import React from 'react';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
-import { LoginModalShadows } from './LoginModalShadows/LoginModalShadows';
+import { LoginModalShadows } from './LoginModalShadows';
 import './LoginModal.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
