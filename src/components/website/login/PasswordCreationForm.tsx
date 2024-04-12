@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
@@ -24,7 +24,7 @@ export function PasswordCreationForm() {
                     helpText={t('enterPassword')}
                     testId="userPassword"
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.PASSWORD, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
                     }}
                     error={error}
                 />
@@ -32,7 +32,7 @@ export function PasswordCreationForm() {
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.PASSWORD_REPEAT, event.target.value));
                     }}
                     error={error}
                 />

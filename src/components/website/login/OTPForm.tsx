@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
@@ -82,7 +82,7 @@ export function OTPForm() {
                     ref={nextButton}
                     onClick={() => {
                         const OTPCode = collectOTPValue();
-                        dispatch(loginModalInput(LoginModalInputTypes.OTP, OTPCode));
+                        dispatch(loginModalInput(LoginModalInputType.OTP, OTPCode));
 
                         dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
                     }}

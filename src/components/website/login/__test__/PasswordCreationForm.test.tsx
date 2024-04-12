@@ -7,7 +7,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
@@ -62,7 +62,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.PASSWORD, 'verySecurePassword1'),
+            loginModalInput(LoginModalInputType.PASSWORD, 'verySecurePassword1'),
         );
     });
 
@@ -74,7 +74,7 @@ describe('PasswordCreationForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, 'evenBetterPassword'),
+            loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'evenBetterPassword'),
         );
     });
 

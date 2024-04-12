@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
@@ -24,7 +24,7 @@ export function PasswordResetRequestForm() {
                     helpText={t('mailForPasswordReset')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.EMAIL, event.target.value));
                     }}
                     error={error}
                 />

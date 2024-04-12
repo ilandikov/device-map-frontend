@@ -7,7 +7,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
@@ -61,7 +61,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.EMAIL, 'hereIsMyMail@server.com'),
+            loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'),
         );
     });
 
@@ -81,7 +81,7 @@ describe('LogInForm action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
-            loginModalInput(LoginModalInputTypes.PASSWORD, 'strongPassword'),
+            loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'),
         );
     });
 

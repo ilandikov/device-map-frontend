@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
@@ -24,7 +24,7 @@ export function MailInputForm() {
                     helpText={t('onlyEmail')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.EMAIL, event.target.value));
                     }}
                     error={error}
                 />

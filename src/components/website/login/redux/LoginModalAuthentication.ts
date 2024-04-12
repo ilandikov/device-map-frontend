@@ -1,7 +1,7 @@
 import {
     LoginModalAction,
-    LoginModalActionTypes,
-    LoginModalInputTypes,
+    LoginModalActionType,
+    LoginModalInputType,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
@@ -21,7 +21,7 @@ export function loginModalAuthentication(
     action: LoginModalAction,
 ): LoginModalAuthenticationState {
     switch (action.type) {
-        case LoginModalActionTypes.NOTIFICATION: {
+        case LoginModalActionType.NOTIFICATION: {
             let successStep = state.step;
             let fallbackStep = state.step;
 
@@ -66,21 +66,21 @@ export function loginModalAuthentication(
                 step: successStep,
             };
         }
-        case LoginModalActionTypes.INPUT: {
+        case LoginModalActionType.INPUT: {
             switch (action.input.type) {
-                case LoginModalInputTypes.EMAIL:
+                case LoginModalInputType.EMAIL:
                     return { ...state, email: action.input.payload };
-                case LoginModalInputTypes.PASSWORD:
+                case LoginModalInputType.PASSWORD:
                     return { ...state, password: action.input.payload };
-                case LoginModalInputTypes.PASSWORD_REPEAT:
+                case LoginModalInputType.PASSWORD_REPEAT:
                     return { ...state, passwordRepeat: action.input.payload };
-                case LoginModalInputTypes.OTP:
+                case LoginModalInputType.OTP:
                     return { ...state, OTP: action.input.payload };
                 default:
                     return state;
             }
         }
-        case LoginModalActionTypes.REMOTE_REQUEST: {
+        case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME: {
                     if (isEmailValid(state.email) === false) {
@@ -153,7 +153,7 @@ export function loginModalAuthentication(
                     return state;
             }
         }
-        case LoginModalActionTypes.BUTTON_CLICKED:
+        case LoginModalActionType.BUTTON_CLICKED:
             switch (action.button) {
                 case 'accountRegister':
                     return { ...state, step: AuthenticationStep.MAIL_INPUT };

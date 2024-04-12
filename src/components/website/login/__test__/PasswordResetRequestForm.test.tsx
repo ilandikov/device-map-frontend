@@ -7,7 +7,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
@@ -44,7 +44,7 @@ describe('PasswordResetRequest form action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('new@email.com'));
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.EMAIL, 'new@email.com'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
     it('should transition to login OTP state on OTP button click', () => {

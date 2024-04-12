@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
@@ -27,7 +27,7 @@ export function LogInForm() {
                     helpText={t('onlyEmail')}
                     email={email}
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.EMAIL, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.EMAIL, event.target.value));
                     }}
                     error={errorWithoutMessage}
                 />
@@ -35,7 +35,7 @@ export function LogInForm() {
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
                     onChange={(event) => {
-                        dispatch(loginModalInput(LoginModalInputTypes.PASSWORD, event.target.value));
+                        dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
                     }}
                     error={errorWithoutMessage}
                 />

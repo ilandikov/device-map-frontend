@@ -1,7 +1,7 @@
 import { loginModalAuthentication } from '../LoginModalAuthentication';
 import {
     LoginModalAction,
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
@@ -108,7 +108,7 @@ describe('navigation logic', () => {
 describe('email input logic', () => {
     it('should update user email', () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
-        const action = loginModalInput(LoginModalInputTypes.EMAIL, 'myMail@myServer.xyz');
+        const action = loginModalInput(LoginModalInputType.EMAIL, 'myMail@myServer.xyz');
 
         verifyStateChange(initialState, action, {
             email: 'myMail@myServer.xyz',
@@ -158,7 +158,7 @@ describe('user password logic', () => {
     it('should set user password', () => {
         const initialState = buildAuthenticationState({});
 
-        const action = loginModalInput(LoginModalInputTypes.PASSWORD, 'haha!!11');
+        const action = loginModalInput(LoginModalInputType.PASSWORD, 'haha!!11');
 
         verifyStateChange(initialState, action, {
             password: 'haha!!11',
@@ -168,7 +168,7 @@ describe('user password logic', () => {
     it('should set user password repeat', () => {
         const initialState = buildAuthenticationState({});
 
-        const action = loginModalInput(LoginModalInputTypes.PASSWORD_REPEAT, 'lmao!rofl!');
+        const action = loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'lmao!rofl!');
 
         verifyStateChange(initialState, action, {
             passwordRepeat: 'lmao!rofl!',
@@ -289,7 +289,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,
         });
-        const action = loginModalInput(LoginModalInputTypes.OTP, '9832');
+        const action = loginModalInput(LoginModalInputType.OTP, '9832');
 
         verifyStateChange(initialState, action, {
             OTP: '9832',

@@ -4,7 +4,7 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import {
     LoginModalAction,
-    LoginModalActionTypes,
+    LoginModalActionType,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequest,
     LoginModalRemoteRequestType,
@@ -16,7 +16,7 @@ import { buildMessageFromCognitoException } from './cognitoHelpers';
 
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
-        ofType(LoginModalActionTypes.REMOTE_REQUEST),
+        ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap((action: LoginModalRemoteRequest) => {
             const authenticationState: LoginModalAuthenticationState = state$.value.loginModalAuthentication;
             const skipRequest = authenticationState.error !== null;

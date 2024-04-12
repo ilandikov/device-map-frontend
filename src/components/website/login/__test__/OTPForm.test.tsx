@@ -8,7 +8,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalInputTypes,
+    LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
@@ -138,7 +138,7 @@ describe('OTP form action tests', () => {
         const nextButton = getByText(container, 'next');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputTypes.OTP, '208473'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.OTP, '208473'));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
     });
 
