@@ -26,10 +26,10 @@ describe('MapApp reducer tests', () => {
         expect(resultingState).toEqual(expectedState);
     });
 
-    it('should move to homescreen on navigation cancel action', () => {
-        const initialState: MapAppState = {
+    it('should move to home screen on navigation cancel action', () => {
+        const initialState = buildMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
-        };
+        });
         const action = mapAppLoginModalClose();
 
         const resultingState = MapAppReducer(initialState, action);
