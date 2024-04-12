@@ -42,8 +42,6 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppLoginModalClose();
 
-        const stateChange: Partial<MapAppState> = { usageStep: MapAppUsageStep.HOME_SCREEN };
-
-        verifyMapAppStateChange(initialState, action, stateChange);
+        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
     });
 });
