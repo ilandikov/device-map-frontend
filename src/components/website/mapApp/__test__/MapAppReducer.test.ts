@@ -1,5 +1,11 @@
 import { MapAppReducer } from '../redux/MapAppReducer';
-import { MapAppAction, mapAppLoginButtonClick, mapAppLoginModalClose, mapAppLogoutButtonClick } from '../redux/actions';
+import {
+    MapAppAction,
+    mapAppAuthenticationCompleted,
+    mapAppLoginButtonClick,
+    mapAppLoginModalClose,
+    mapAppLogoutButtonClick,
+} from '../redux/actions';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
 function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
@@ -42,5 +48,14 @@ describe('MapApp reducer tests', () => {
         const action = mapAppLoginModalClose();
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
+    });
+
+    it('should move to device management when authentication has been completed', () => {
+        const initialState = buildMapAppState({
+            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
+        });
+        const action = mapAppAuthenticationCompleted();
+
+        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
 });

@@ -12,6 +12,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                 ...state,
                 usageStep: MapAppUsageStep.HOME_SCREEN,
             };
+        case MapAppActionTypes.AUTHENTICATION_COMPLETED:
+            return { ...state, usageStep: MapAppUsageStep.DEVICE_MANAGEMENT };
         default:
             return state;
     }
