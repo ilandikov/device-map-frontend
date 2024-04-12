@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+
+export function useMapAppState(): MapAppState {
+    return useSelector((state: RootState) => state.mapAppState);
+}
+
 export interface MapAppState {
     usageStep: MapAppUsageStep;
-    showProductDescription: boolean;
-    showLoginModal: boolean;
-    showLoggedInUserHeader: boolean;
 }
 
 export enum MapAppUsageStep {
@@ -13,9 +17,6 @@ export enum MapAppUsageStep {
 
 export const mapAppInitialState: MapAppState = {
     usageStep: MapAppUsageStep.HOME_SCREEN,
-    showProductDescription: true,
-    showLoginModal: false,
-    showLoggedInUserHeader: false,
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
