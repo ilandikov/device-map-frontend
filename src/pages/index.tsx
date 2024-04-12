@@ -4,7 +4,7 @@ import React from 'react';
 
 /* Local dependencies */
 import Layout from '../components/layout';
-import MainPage from '../components/website/home/MainPage';
+import MainPage from '../components/website/mainPage/MainPage';
 import SEO from '../components/layout/seo';
 
 export default function HomePage({ data }) {
