@@ -6,7 +6,7 @@ import {
     mockDispatch,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
-import { mapAppLoginButtonClick } from '../redux/actions';
+import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/actions';
 import { LoginButton, LogoutButton } from '../UserButton';
 
 jest.mock('react-redux', () => ({
@@ -50,6 +50,6 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLoginButtonClick());
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLogoutButtonClick());
     });
 });
