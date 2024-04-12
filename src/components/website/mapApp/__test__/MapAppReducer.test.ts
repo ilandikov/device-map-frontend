@@ -9,8 +9,8 @@ function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction
     const resultingState = MapAppReducer(initialState, action);
 
     const expectedState: MapAppState = {
-        ...stateChange,
         ...initialState,
+        ...stateChange,
     };
     expect(resultingState).toEqual(expectedState);
 }
@@ -26,14 +26,10 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should move to user authentication step on user button click', () => {
+        const initialState = buildMapAppState({});
         const action = mapAppUserButtonClick();
 
-        const resultingState = MapAppReducer(undefined, action);
-
-        const expectedState: MapAppState = {
-            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
-        };
-        expect(resultingState).toEqual(expectedState);
+        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
 
     it('should move to home screen on navigation cancel action', () => {
