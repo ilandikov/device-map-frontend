@@ -9,7 +9,6 @@ export enum LoginModalActionTypes {
     INPUT = 'INPUT',
     VERIFY_REQUEST = 'VERIFY_REQUEST',
     NOTIFICATION = 'NOTIFICATION',
-    NO_ACTION = 'NO_ACTION',
 }
 
 export interface LoginModalButtonClick {
