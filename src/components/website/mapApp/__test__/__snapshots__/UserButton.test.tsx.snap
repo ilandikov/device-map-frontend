@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserButton snapshot tests should match the snapshot at the initial state 1`] = `
+exports[`UserButton snapshot tests Login button should match the snapshot 1`] = `
 <button
   className="map-app-header-user-button"
   data-testid="loginButton"
@@ -19,7 +19,7 @@ exports[`UserButton snapshot tests should match the snapshot at the initial stat
 </button>
 `;
 
-exports[`UserButton snapshot tests should match the snapshot at user authenticated state 1`] = `
+exports[`UserButton snapshot tests Logout button should match the snapshot 1`] = `
 <button
   className="map-app-header-user-button"
   data-testid="loginButton"

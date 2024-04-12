@@ -9,7 +9,7 @@ import AppStore from '/src/assets/images/AppStore.svg';
 import { AuthenticationStep, useAuthentication } from '../login/redux/state';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
-import { UserButton } from './UserButton';
+import { LoginButton, LogoutButton } from './UserButton';
 
 export function MapAppHeader() {
     const { t } = useI18next();
@@ -29,7 +29,7 @@ export function MapAppHeader() {
             <div className="map-app-header-block-container">
                 {isUserLoggedIn && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
-                    <UserButton />
+                    {isUserLoggedIn ? <LogoutButton /> : <LoginButton />}
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
                     <img src={AppStore} alt="map-app-header-apps-app-store" />
                 </div>

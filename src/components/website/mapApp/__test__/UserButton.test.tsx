@@ -7,8 +7,7 @@ import {
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/AuthenticationState';
 import { mapAppUserButtonClick } from '../redux/actions';
-import { UserButton } from '../UserButton';
-import { AuthenticationStep } from '../../login/redux/state';
+import { LoginButton, LogoutButton } from '../UserButton';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -17,16 +16,15 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('UserButton snapshot tests', () => {
-    it('should match the snapshot at the initial state', () => {
-        mockAuthenticationState({ step: AuthenticationStep.WELCOME });
-        const component = renderForSnapshotTest(<UserButton />);
+    it('Login button should match the snapshot', () => {
+        const component = renderForSnapshotTest(<LoginButton />);
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at user authenticated state', () => {
-        mockAuthenticationState({ email: 'logged@in.kr', step: AuthenticationStep.LOGGED_IN });
-        const component = renderForSnapshotTest(<UserButton />);
+    it('Logout button should match the snapshot', () => {
+        mockAuthenticationState({ email: 'logged@in.kr' });
+        const component = renderForSnapshotTest(<LogoutButton />);
 
         expect(component).toMatchSnapshot();
     });
@@ -38,7 +36,7 @@ describe('UserButton action tests', () => {
     });
 
     it('should dispatch click action on login button click', () => {
-        const container = renderForActionDispatchTest(<UserButton />);
+        const container = renderForActionDispatchTest(<LoginButton />);
 
         const loginButton = getByTestId(container, 'loginButton');
         fireEvent.click(loginButton);

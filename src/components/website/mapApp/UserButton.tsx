@@ -1,22 +1,11 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { AuthenticationStep, useAuthentication } from '../login/redux/state';
+import { useAuthentication } from '../login/redux/state';
 import { mapAppUserButtonClick } from './redux/actions';
 import Account from '/src/assets/images/Account.svg';
 
-export function UserButton() {
-    const { step } = useAuthentication();
-    const isUserLoggedIn = step === AuthenticationStep.LOGGED_IN;
-
-    if (isUserLoggedIn) {
-        return <LogoutButton />;
-    }
-
-    return <LoginButton />;
-}
-
-function LogoutButton() {
+export function LogoutButton() {
     const useDispatch = useAppDispatch();
     const { email } = useAuthentication();
 
@@ -34,7 +23,7 @@ function LogoutButton() {
     );
 }
 
-function LoginButton() {
+export function LoginButton() {
     const { t } = useI18next();
     const useDispatch = useAppDispatch();
 
