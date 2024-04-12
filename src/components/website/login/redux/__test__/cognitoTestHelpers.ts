@@ -1,5 +1,5 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { LoginModalAction, LoginModalVerifyRequest, loginModalNoAction } from '../LoginModalAction';
+import { LoginModalAction, LoginModalVerifyRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
@@ -71,5 +71,5 @@ export async function verifyCognitoEpicNoAction(
         { cognitoClient: {} },
     );
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedAction).toEqual([loginModalNoAction()]);
+    expect(receivedAction).toEqual([]);
 }

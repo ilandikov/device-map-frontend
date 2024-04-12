@@ -1,4 +1,4 @@
-import { Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
@@ -9,7 +9,6 @@ import {
     LoginModalVerifyRequest,
     LoginModalVerifyTypes,
     loginModalFailureNotification,
-    loginModalNoAction,
     loginModalSuccessNotification,
 } from './LoginModalAction';
 import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
@@ -22,7 +21,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
             const authenticationState: LoginModalAuthenticationState = state$.value.loginModalAuthentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
-                return of(loginModalNoAction());
+                return EMPTY;
             }
             switch (action.verify) {
                 case LoginModalVerifyTypes.PASSWORD:
@@ -72,7 +71,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                     return observeEndpoint(cognitoClient.signOut(), LoginModalNotificationTypes.SIGN_OUT);
             }
 
-            return of(loginModalNoAction());
+            return EMPTY;
         }),
     );
 }
