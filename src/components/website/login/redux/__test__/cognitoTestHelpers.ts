@@ -61,7 +61,7 @@ export async function verifyCognitoEpicNoAction(
     sentAction: LoginModalVerifyRequest,
     initialState: LoginModalAuthenticationState,
 ) {
-    const output = cognito(
+    const output$ = cognito(
         of(sentAction),
         {
             value: {
@@ -70,6 +70,6 @@ export async function verifyCognitoEpicNoAction(
         },
         { cognitoClient: {} },
     );
-    const receivedAction = await lastValueFrom(output.pipe(toArray()));
+    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([loginModalNoAction()]);
 }
