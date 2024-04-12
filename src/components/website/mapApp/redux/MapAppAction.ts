@@ -1,4 +1,4 @@
-export enum MapAppActionTypes {
+export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
     LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
@@ -6,21 +6,21 @@ export enum MapAppActionTypes {
 }
 
 export interface MapAppAction {
-    type: MapAppActionTypes;
+    type: MapAppActionType;
 }
 
 export function mapAppLoginButtonClick(): MapAppAction {
-    return { type: MapAppActionTypes.LOGIN_BUTTON_CLICK };
+    return { type: MapAppActionType.LOGIN_BUTTON_CLICK };
 }
 
 export function mapAppLogoutButtonClick(): MapAppAction {
-    return { type: MapAppActionTypes.LOGOUT_BUTTON_CLICK };
+    return { type: MapAppActionType.LOGOUT_BUTTON_CLICK };
 }
 
 export function mapAppLoginModalClose(): MapAppAction {
-    return { type: MapAppActionTypes.LOGIN_MODAL_CLOSE };
+    return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }
 
 export function mapAppAuthenticationCompleted(): MapAppAction {
-    return { type: MapAppActionTypes.AUTHENTICATION_COMPLETED };
+    return { type: MapAppActionType.AUTHENTICATION_COMPLETED };
 }
