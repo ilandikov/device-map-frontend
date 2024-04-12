@@ -1,9 +1,9 @@
 import {
-    LoginModalNotificationTypes,
+    LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
-    loginModalFailureNotification,
+    loginModalRemoteAnswerFailure,
+    loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
-    loginModalSuccessNotification,
 } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
@@ -11,10 +11,10 @@ import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './cognitoTes
 
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_UP)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_UP, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'cognitoUnknownException')],
         ],
     ])(
         'should dispatch sign up notification when remote answer is: %s',
@@ -33,14 +33,11 @@ describe('user password reset tests', () => {
     it.each([
         [
             Promise.resolve(),
-            [
-                loginModalSuccessNotification(LoginModalNotificationTypes.PASSWORD_RESET),
-                mapAppAuthenticationCompleted(),
-            ],
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET), mapAppAuthenticationCompleted()],
         ],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.PASSWORD_RESET, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, 'cognitoUnknownException')],
         ],
     ])(
         'should dispatch password has been reset notification when remote answer is: %s',
@@ -59,9 +56,9 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
     it.each([
         [
             Promise.resolve(),
-            [loginModalSuccessNotification(LoginModalNotificationTypes.OTP), mapAppAuthenticationCompleted()],
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()],
         ],
-        [Promise.reject(), [loginModalFailureNotification(LoginModalNotificationTypes.OTP, 'cognitoUnknownException')]],
+        [Promise.reject(), [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, 'cognitoUnknownException')]],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
@@ -85,11 +82,11 @@ describe('user sign in tests', () => {
     it.each([
         [
             Promise.resolve(),
-            [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_IN), mapAppAuthenticationCompleted()],
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()],
         ],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_IN, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, 'cognitoUnknownException')],
         ],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
@@ -108,10 +105,10 @@ describe('password reset request tests', () => {
     });
 
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.FORGOT_PASSWORD)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.FORGOT_PASSWORD, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'cognitoUnknownException')],
         ],
     ])(
         'should dispatch forgot password notification when remote answer is: %s',
@@ -128,10 +125,10 @@ describe('password reset request tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalSuccessNotification(LoginModalNotificationTypes.SIGN_OUT)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
         [
             Promise.reject(),
-            [loginModalFailureNotification(LoginModalNotificationTypes.SIGN_OUT, 'cognitoUnknownException')],
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, 'cognitoUnknownException')],
         ],
     ])('should sign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({

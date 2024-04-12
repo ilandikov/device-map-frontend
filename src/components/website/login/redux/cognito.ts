@@ -5,11 +5,11 @@ import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/
 import {
     LoginModalAction,
     LoginModalActionTypes,
-    LoginModalNotificationTypes,
+    LoginModalRemoteAnswerType,
     LoginModalRemoteRequest,
     LoginModalRemoteRequestType,
-    loginModalFailureNotification,
-    loginModalSuccessNotification,
+    loginModalRemoteAnswerFailure,
+    loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
 import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
 import { buildMessageFromCognitoException } from './cognitoHelpers';
@@ -29,7 +29,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
                             return observeEndpoint(
                                 cognitoClient.signUp(authenticationState.email, authenticationState.password),
-                                LoginModalNotificationTypes.SIGN_UP,
+                                LoginModalRemoteAnswerType.SIGN_UP,
                             );
                         case AuthenticationStep.PASSWORD_RESET_LOADING:
                             return observeEndpoint(
@@ -38,7 +38,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                                     authenticationState.OTP,
                                     authenticationState.password,
                                 ),
-                                LoginModalNotificationTypes.PASSWORD_RESET,
+                                LoginModalRemoteAnswerType.PASSWORD_RESET,
                                 mapAppAuthenticationCompleted(),
                             );
                     }
@@ -47,14 +47,14 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
                     return observeEndpoint(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
-                        LoginModalNotificationTypes.SIGN_IN,
+                        LoginModalRemoteAnswerType.SIGN_IN,
                         mapAppAuthenticationCompleted(),
                     );
                 case LoginModalRemoteRequestType.OTP:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                         return observeEndpoint(
                             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-                            LoginModalNotificationTypes.OTP,
+                            LoginModalRemoteAnswerType.OTP,
                             mapAppAuthenticationCompleted(),
                         );
                     }
@@ -63,12 +63,12 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                     if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return observeEndpoint(
                             cognitoClient.forgotPassword(authenticationState.email),
-                            LoginModalNotificationTypes.FORGOT_PASSWORD,
+                            LoginModalRemoteAnswerType.FORGOT_PASSWORD,
                         );
                     }
                     break;
                 case LoginModalRemoteRequestType.SIGN_OUT:
-                    return observeEndpoint(cognitoClient.signOut(), LoginModalNotificationTypes.SIGN_OUT);
+                    return observeEndpoint(cognitoClient.signOut(), LoginModalRemoteAnswerType.SIGN_OUT);
             }
 
             return EMPTY;
@@ -78,19 +78,19 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
 
 function observeEndpoint(
     endpoint: Promise<unknown>,
-    notification: LoginModalNotificationTypes,
+    notification: LoginModalRemoteAnswerType,
     mapAppAdditionalAction: MapAppAction | null = null,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(endpoint).pipe(
         mergeMap(() => {
             if (mapAppAdditionalAction !== null) {
-                return from([loginModalSuccessNotification(notification), mapAppAdditionalAction]);
+                return from([loginModalRemoteAnswerSuccess(notification), mapAppAdditionalAction]);
             }
 
-            return of(loginModalSuccessNotification(notification));
+            return of(loginModalRemoteAnswerSuccess(notification));
         }),
         catchError((reason) => {
-            return of(loginModalFailureNotification(notification, buildMessageFromCognitoException(reason)));
+            return of(loginModalRemoteAnswerFailure(notification, buildMessageFromCognitoException(reason)));
         }),
     );
 }

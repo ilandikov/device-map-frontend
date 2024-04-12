@@ -67,12 +67,12 @@ export function loginModalInput(inputType: LoginModalInputTypes, inputPayload: s
 
 export interface LoginModalNotification {
     type: LoginModalActionTypes.NOTIFICATION;
-    notification: LoginModalNotificationTypes;
-    result: LoginModalNotificationResult;
+    answer: LoginModalRemoteAnswerType;
+    result: LoginModalRemoteAnswerResult;
     reason?: string;
 }
 
-export enum LoginModalNotificationTypes {
+export enum LoginModalRemoteAnswerType {
     SIGN_UP = 'signUp',
     OTP = 'OTP',
     SIGN_IN = 'signIn',
@@ -81,27 +81,27 @@ export enum LoginModalNotificationTypes {
     SIGN_OUT = 'signOut',
 }
 
-export enum LoginModalNotificationResult {
+export enum LoginModalRemoteAnswerResult {
     SUCCESS = 'success',
     FAILURE = 'failure',
 }
 
-export function loginModalSuccessNotification(notification: LoginModalNotificationTypes): LoginModalNotification {
+export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
-        notification: notification,
-        result: LoginModalNotificationResult.SUCCESS,
+        answer: answer,
+        result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
 
-export function loginModalFailureNotification(
-    notification: LoginModalNotificationTypes,
+export function loginModalRemoteAnswerFailure(
+    answer: LoginModalRemoteAnswerType,
     reason: string,
 ): LoginModalNotification {
     return {
         type: LoginModalActionTypes.NOTIFICATION,
-        notification: notification,
-        result: LoginModalNotificationResult.FAILURE,
+        answer: answer,
+        result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };
 }

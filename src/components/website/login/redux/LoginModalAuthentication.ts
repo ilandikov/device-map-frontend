@@ -2,8 +2,8 @@ import {
     LoginModalAction,
     LoginModalActionTypes,
     LoginModalInputTypes,
-    LoginModalNotificationResult,
-    LoginModalNotificationTypes,
+    LoginModalRemoteAnswerResult,
+    LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
 } from './LoginModalAction';
 import {
@@ -25,35 +25,35 @@ export function loginModalAuthentication(
             let successStep = state.step;
             let fallbackStep = state.step;
 
-            switch (action.notification) {
-                case LoginModalNotificationTypes.SIGN_UP: {
+            switch (action.answer) {
+                case LoginModalRemoteAnswerType.SIGN_UP: {
                     successStep = AuthenticationStep.PASSWORD_CREATION_OTP;
                     fallbackStep = AuthenticationStep.MAIL_INPUT;
                     break;
                 }
-                case LoginModalNotificationTypes.FORGOT_PASSWORD: {
+                case LoginModalRemoteAnswerType.FORGOT_PASSWORD: {
                     successStep = AuthenticationStep.PASSWORD_RESET_OTP;
                     fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
                     break;
                 }
-                case LoginModalNotificationTypes.OTP: {
+                case LoginModalRemoteAnswerType.OTP: {
                     successStep = AuthenticationStep.LOGGED_IN;
                     fallbackStep = AuthenticationStep.PASSWORD_CREATION_OTP;
                     break;
                 }
-                case LoginModalNotificationTypes.PASSWORD_RESET: {
+                case LoginModalRemoteAnswerType.PASSWORD_RESET: {
                     successStep = AuthenticationStep.LOGGED_IN;
                     fallbackStep = AuthenticationStep.PASSWORD_RESET_OTP;
                     break;
                 }
-                case LoginModalNotificationTypes.SIGN_IN: {
+                case LoginModalRemoteAnswerType.SIGN_IN: {
                     successStep = AuthenticationStep.LOGGED_IN;
                     fallbackStep = AuthenticationStep.LOGIN;
                     break;
                 }
             }
 
-            if (action.result === LoginModalNotificationResult.FAILURE) {
+            if (action.result === LoginModalRemoteAnswerResult.FAILURE) {
                 return {
                     ...state,
                     step: fallbackStep,
