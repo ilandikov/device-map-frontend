@@ -1,14 +1,16 @@
-import { MapAppReducer, MapAppState, MapAppUsageStep } from '../redux/MapAppReducer';
+import { MapAppReducer, MapAppState, MapAppUsageStep, mapAppInitialState } from '../redux/MapAppReducer';
 import { mapAppLoginModalClose, mapAppUserButtonClick } from '../redux/actions';
+
+function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
+    return { ...partialState, ...mapAppInitialState };
+}
 
 describe('MapApp reducer tests', () => {
     it('should return initial state: user is not logged in', () => {
         // @ts-ignore
         const initialState = MapAppReducer(undefined, { type: 'DUMMY_ACTION' });
 
-        const expectedInitialState: MapAppState = {
-            usageStep: MapAppUsageStep.HOME_SCREEN,
-        };
+        const expectedInitialState = buildMapAppState({});
 
         expect(initialState).toEqual(expectedInitialState);
     });
