@@ -10,6 +10,7 @@ import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import 'leaflet/dist/leaflet.css';
+import { UserLocationMarker } from './UserLocationMarker';
 
 export default function MapApp() {
     const mapAppState = useMapAppState();
@@ -28,6 +29,7 @@ export default function MapApp() {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <ZoomControl position="bottomright" />
+                <UserLocationMarker />
             </MapContainer>
         </div>
     );
