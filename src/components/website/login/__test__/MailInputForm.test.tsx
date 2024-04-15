@@ -7,6 +7,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
+    LoginModalAction,
     LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
@@ -60,18 +61,28 @@ describe('MailInputForm snapshot tests', () => {
     });
 });
 
+function verifyDispatchedAction(expectedAction: LoginModalAction) {
+    expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAction);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+}
+
+function doUserInput(component: React.JSX.Element, inputTestId: string, inputValue: string) {
+    const container = renderForActionDispatchTest(component);
+    const emailInput = getByTestId(container, inputTestId);
+    fireEvent.change(emailInput, createEvent(inputValue));
+}
+
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
 
     it('should call email setter from email input', () => {
-        const container = renderForActionDispatchTest(<MailInputForm />);
+        mockLoginModalAuthenticationState({});
 
-        const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, createEvent('new@email.com'));
+        doUserInput(<MailInputForm />, 'emailInput', 'new@email.com');
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
+        verifyDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
