@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
-import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { fireEvent, getByTestId, getByText, render } from '@testing-library/react';
 import { LoginModalAction } from '../../src/components/website/login/redux/LoginModalAction';
 import { mockDispatch } from '../../src/redux/__mocks__/mocks';
 import { configureTestStore } from './index';
@@ -38,4 +38,10 @@ export function doUserInput(component: React.JSX.Element, inputTestId: string, i
 export function verifyDispatchedAction(expectedAction: LoginModalAction) {
     expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAction);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
+}
+
+export function doUserButtonClick(component: React.JSX.Element, buttonText: string) {
+    const container = renderForActionDispatchTest(component);
+    const button = getByText(container, buttonText);
+    fireEvent.click(button);
 }

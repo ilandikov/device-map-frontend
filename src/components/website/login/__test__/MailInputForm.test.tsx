@@ -2,6 +2,7 @@ import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
 import { MailInputForm } from '../MailInputForm';
 import {
+    doUserButtonClick,
     doUserInput,
     renderForActionDispatchTest,
     renderForSnapshotTest,
@@ -76,10 +77,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        const container = renderForActionDispatchTest(<MailInputForm />);
-
-        const tryVerifyEmailButton = getByText(container, 'next');
-        fireEvent.click(tryVerifyEmailButton);
+        doUserButtonClick(<MailInputForm />, 'next');
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
     });
