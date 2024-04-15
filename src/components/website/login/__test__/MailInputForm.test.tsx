@@ -74,13 +74,13 @@ describe('MailInputForm action tests', () => {
         verifyDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
-    it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
+    it('should dispatch email verification, on next button click', () => {
         doUserButtonClick(<MailInputForm />, 'next');
 
         verifyDispatchedAction(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
     });
 
-    it('should move from mail already exists to password verification stage', () => {
+    it('should be able to click account login button when mail already exists error is present', () => {
         mockLoginModalAuthenticationState({ error: new Error(CognitoErrors.USERNAME_EXISTS) });
 
         doUserButtonClick(<MailInputForm />, 'accountLogin');
