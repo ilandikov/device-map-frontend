@@ -3,7 +3,7 @@ import React from 'react';
 
 /* Local dependencies */
 import './MapApp.scss';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
 import { LatLng } from 'leaflet';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
@@ -27,6 +27,7 @@ export default function MapApp() {
                     attribution='&copy; <a href="https://www.openstreetmap.com/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <ZoomControl position="bottomright" />
             </MapContainer>
         </div>
     );
