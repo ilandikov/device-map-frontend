@@ -1,14 +1,13 @@
 .map-app-header {
     width: 100%;
 
-    padding-bottom: 20px;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     .map-app-header-block-container {
-        width: 100%;
+        position: absolute;
+        top: 20px;
 
         display: flex;
         flex-direction: row;
@@ -17,19 +16,21 @@
     }
 
     .map-app-header-block-container:first-of-type {
+        left: 20px;
         justify-content: flex-start;
     }
 
     .map-app-header-block-container:last-of-type {
+        right: 20px;
         justify-content: flex-end;
     }
 
     .map-app-header-block {
-        max-height: 46px;
+        height: 46px;
 
         background-color: #000000;
 
-        padding: 11px 20px;
+        padding: 0 20px;
 
         border: 1px solid #454545;
         border-radius: 10px;
