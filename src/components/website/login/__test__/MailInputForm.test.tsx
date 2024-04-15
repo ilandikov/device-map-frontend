@@ -18,6 +18,7 @@ import {
     mockDispatch,
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
+    resetMocks,
 } from '../../../../redux/__mocks__/mocks';
 import { CognitoErrors } from '../redux/cognitoHelpers';
 import { MailInputError } from '../redux/LoginModalAuthenticationHelpers';
@@ -63,7 +64,7 @@ describe('MailInputForm snapshot tests', () => {
 
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
-        mockDispatch.mockReset();
+        resetMocks();
     });
 
     it('should call email setter from email input', () => {

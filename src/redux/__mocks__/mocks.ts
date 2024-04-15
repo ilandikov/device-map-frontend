@@ -33,3 +33,7 @@ export function mockMapAppState(mockState: Partial<MapAppState>) {
         return mockState;
     };
 }
+
+export function resetMocks() {
+    mockDispatch.mockReset();
+}
