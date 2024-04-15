@@ -1,7 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
-import { render } from '@testing-library/react';
+import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { LoginModalAction } from '../../src/components/website/login/redux/LoginModalAction';
+import { mockDispatch } from '../../src/redux/__mocks__/mocks';
 import { configureTestStore } from './index';
 
 export function createEvent(value: any) {
@@ -25,4 +27,15 @@ export function renderForSnapshotTest(component: React.JSX.Element) {
 export function renderForActionDispatchTest(component: React.JSX.Element) {
     const { container } = render(componentWithStoreProvider(component));
     return container;
+}
+
+export function doUserInput(component: React.JSX.Element, inputTestId: string, inputValue: string) {
+    const container = renderForActionDispatchTest(component);
+    const emailInput = getByTestId(container, inputTestId);
+    fireEvent.change(emailInput, createEvent(inputValue));
+}
+
+export function verifyDispatchedAction(expectedAction: LoginModalAction) {
+    expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAction);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
 }

@@ -1,13 +1,13 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
+import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
 import { MailInputForm } from '../MailInputForm';
 import {
-    createEvent,
+    doUserInput,
     renderForActionDispatchTest,
     renderForSnapshotTest,
+    verifyDispatchedAction,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
-    LoginModalAction,
     LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
@@ -60,17 +60,6 @@ describe('MailInputForm snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 });
-
-function verifyDispatchedAction(expectedAction: LoginModalAction) {
-    expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAction);
-    expect(mockDispatch).toHaveBeenCalledTimes(1);
-}
-
-function doUserInput(component: React.JSX.Element, inputTestId: string, inputValue: string) {
-    const container = renderForActionDispatchTest(component);
-    const emailInput = getByTestId(container, inputTestId);
-    fireEvent.change(emailInput, createEvent(inputValue));
-}
 
 describe('MailInputForm action tests', () => {
     beforeEach(() => {
