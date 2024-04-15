@@ -75,6 +75,8 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should dispatch email verification, on next button click', () => {
+        mockLoginModalAuthenticationState({});
+
         doUserButtonClick(<MailInputForm />, 'next');
 
         verifyDispatchedAction(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
