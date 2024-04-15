@@ -88,10 +88,8 @@ exports[`MapApp snapshot tests should match the snapshot at device management st
       </div>
     </div>
   </header>
-  <img
-    alt="map"
-    className="map-app-map-image"
-    src="test-file-stub"
+  <div
+    className="map-app-map"
   />
 </div>
 `;
@@ -179,10 +177,8 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
       />
     </div>
   </div>
-  <img
-    alt="map"
-    className="map-app-map-image"
-    src="test-file-stub"
+  <div
+    className="map-app-map"
   />
 </div>
 `;
@@ -272,10 +268,8 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
       </div>
     </div>
   </div>
-  <img
-    alt="map"
-    className="map-app-map-image"
-    src="test-file-stub"
+  <div
+    className="map-app-map"
   />
 </div>
 `;

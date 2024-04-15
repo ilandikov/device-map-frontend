@@ -3,11 +3,13 @@ import React from 'react';
 
 /* Local dependencies */
 import './MapApp.scss';
-import mapImage from '../../../assets/images/GoogleMaps.png';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import { LatLng } from 'leaflet';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
+import 'leaflet/dist/leaflet.css';
 
 export default function MapApp() {
     const mapAppState = useMapAppState();
@@ -20,7 +22,12 @@ export default function MapApp() {
             <MapAppHeader />
             {showProductDescription && <ProductDescription />}
             {showLoginModal && <LoginModal />}
-            <img className="map-app-map-image" src={mapImage} alt="map" />
+            <MapContainer className="map-app-map" center={new LatLng(42.876, 74.603)} scrollWheelZoom={false} zoom={17}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.com/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+            </MapContainer>
         </div>
     );
 }
