@@ -31,8 +31,8 @@ export function renderForActionDispatchTest(component: React.JSX.Element) {
 
 export function doUserInput(component: React.JSX.Element, inputTestId: string, inputValue: string) {
     const container = renderForActionDispatchTest(component);
-    const emailInput = getByTestId(container, inputTestId);
-    fireEvent.change(emailInput, createEvent(inputValue));
+    const input = getByTestId(container, inputTestId);
+    fireEvent.change(input, createEvent(inputValue));
 }
 
 export function verifyDispatchedAction(expectedAction: LoginModalAction) {
