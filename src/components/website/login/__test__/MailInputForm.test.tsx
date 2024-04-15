@@ -77,7 +77,7 @@ describe('MailInputForm action tests', () => {
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
         doUserButtonClick(<MailInputForm />, 'next');
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
+        verifyDispatchedAction(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
     });
 
     it('should move from mail already exists to password verification stage', () => {
@@ -85,6 +85,6 @@ describe('MailInputForm action tests', () => {
 
         doUserButtonClick(<MailInputForm />, 'accountLogin');
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
+        verifyDispatchedAction(loginModalButtonClick('accountLogin'));
     });
 });
