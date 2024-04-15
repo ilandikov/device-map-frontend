@@ -6,6 +6,9 @@
     justify-content: space-between;
 
     .map-app-header-block-container {
+        position: absolute;
+        top: 20px;
+
         width: 100%;
 
         display: flex;
@@ -15,10 +18,12 @@
     }
 
     .map-app-header-block-container:first-of-type {
+        left: 20px;
         justify-content: flex-start;
     }
 
     .map-app-header-block-container:last-of-type {
+        right: 20px;
         justify-content: flex-end;
     }
 
