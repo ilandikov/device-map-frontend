@@ -1,10 +1,8 @@
-import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
 import { MailInputForm } from '../MailInputForm';
 import {
     doUserButtonClick,
     doUserInput,
-    renderForActionDispatchTest,
     renderForSnapshotTest,
     verifyDispatchedAction,
 } from '../../../../../tests/utils/RenderingHelpers';
@@ -84,10 +82,8 @@ describe('MailInputForm action tests', () => {
 
     it('should move from mail already exists to password verification stage', () => {
         mockLoginModalAuthenticationState({ error: new Error(CognitoErrors.USERNAME_EXISTS) });
-        const container = renderForActionDispatchTest(<MailInputForm />);
 
-        const loginButton = getByText(container, 'accountLogin');
-        fireEvent.click(loginButton);
+        doUserButtonClick(<MailInputForm />, 'accountLogin');
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
     });
