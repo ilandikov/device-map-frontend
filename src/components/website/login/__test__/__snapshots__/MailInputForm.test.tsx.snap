@@ -21,6 +21,11 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail exists e
         value="existing@mail.ru"
       />
     </div>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      cognitoUsernameExistsException
+    </p>
   </div>,
   <div
     className="login-modal-button-container"
@@ -62,6 +67,11 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail not vali
         value="notAMailAddress"
       />
     </div>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      mailNotValid
+    </p>
   </div>,
   <div
     className="login-modal-button-container"
