@@ -1,3 +1,7 @@
+export enum CognitoErrors {
+    USERNAME_EXISTS = 'cognitoUsernameExistsException',
+}
+
 export function buildMessageFromCognitoException(reason: any): string {
     if (!reason || !reason.code) {
         return 'cognitoUnknownException';

@@ -43,10 +43,6 @@ export enum MailInputError {
     NOT_VALID = 'mailNotValid',
 }
 
-export enum CognitoErrors {
-    USERNAME_EXISTS = 'cognitoUsernameExistsException',
-}
-
 export enum PasswordError {
     NO_UPPERCASE = 'passwordNoUppercase',
     NOT_MATCHING = 'passwordNotMatching',

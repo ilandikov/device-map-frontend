@@ -9,7 +9,8 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
-import { CognitoErrors, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { CognitoErrors } from './redux/cognitoHelpers';
 
 export function MailInputForm() {
     const { t } = useI18next();

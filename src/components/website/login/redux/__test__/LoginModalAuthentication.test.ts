@@ -12,7 +12,6 @@ import {
 } from '../LoginModalAction';
 import {
     AuthenticationStep,
-    CognitoErrors,
     LoginModalAuthenticationState,
     MailInputError,
     OTPError,
@@ -20,6 +19,7 @@ import {
     authenticationInitialState,
     buildAuthenticationState,
 } from '../LoginModalAuthenticationState';
+import { CognitoErrors } from '../cognitoHelpers';
 
 function verifyStateChange(
     initialState: LoginModalAuthenticationState,

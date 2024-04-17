@@ -18,7 +18,8 @@ import {
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/mocks';
-import { CognitoErrors, MailInputError } from '../redux/LoginModalAuthenticationState';
+import { MailInputError } from '../redux/LoginModalAuthenticationState';
+import { CognitoErrors } from '../redux/cognitoHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
