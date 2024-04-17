@@ -87,7 +87,7 @@ export function loginModalAuthentication(
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME: {
                     const emailError = isEmailValid(state.email);
-                    if (emailError === false) {
+                    if (emailError !== null) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
 
