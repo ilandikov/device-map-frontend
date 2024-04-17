@@ -1,5 +1,4 @@
-import { PasswordError } from '../LoginModalAuthenticationState';
-import { getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
+import { PasswordError, getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
 
 describe('user email validation tests', () => {
     it('should validate good email', () => {

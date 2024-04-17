@@ -9,12 +9,15 @@ import {
 import {
     AuthenticationStep,
     LoginModalAuthenticationState,
+    authenticationInitialState,
+} from './LoginModalAuthenticationState';
+import {
     MailInputError,
     OTPError,
     PasswordError,
-    authenticationInitialState,
-} from './LoginModalAuthenticationState';
-import { getPasswordError, isEmailValid } from './LoginModalAuthenticationHelpers';
+    getPasswordError,
+    isEmailValid,
+} from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
     state: LoginModalAuthenticationState = authenticationInitialState,

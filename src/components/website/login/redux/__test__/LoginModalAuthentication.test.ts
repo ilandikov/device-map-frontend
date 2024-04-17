@@ -13,13 +13,11 @@ import {
 import {
     AuthenticationStep,
     LoginModalAuthenticationState,
-    MailInputError,
-    OTPError,
-    PasswordError,
     authenticationInitialState,
     buildAuthenticationState,
 } from '../LoginModalAuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
+import { MailInputError, OTPError, PasswordError } from '../LoginModalAuthenticationHelpers';
 
 function verifyStateChange(
     initialState: LoginModalAuthenticationState,
