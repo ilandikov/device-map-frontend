@@ -38,6 +38,16 @@ describe('LoginModal reducer tests', () => {
         // @ts-ignore
         verifyStateChange(authenticationInitialState, { type: 'DUMMY_ACTION' }, {});
     });
+
+    it('any input shall reset the error', () => {
+        const initialState = buildAuthenticationState({ error: new Error('shouldDisappear') });
+        // @ts-ignore
+        const action = loginModalInput('wrongType', '');
+
+        verifyStateChange(initialState, action, {
+            error: null,
+        });
+    });
 });
 
 describe('welcome screen buttons', () => {

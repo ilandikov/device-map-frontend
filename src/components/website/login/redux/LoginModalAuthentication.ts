@@ -1,7 +1,6 @@
 import {
     LoginModalAction,
     LoginModalActionType,
-    LoginModalInputType,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
@@ -11,7 +10,13 @@ import {
     LoginModalAuthenticationState,
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
-import { OTPError, PasswordError, getEmailError, getPasswordError } from './LoginModalAuthenticationHelpers';
+import {
+    OTPError,
+    PasswordError,
+    getEmailError,
+    getPasswordError,
+    partialStateWithPayload,
+} from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
     state: LoginModalAuthenticationState = authenticationInitialState,
@@ -64,18 +69,7 @@ export function loginModalAuthentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            switch (action.input.type) {
-                case LoginModalInputType.EMAIL:
-                    return { ...state, email: action.input.payload };
-                case LoginModalInputType.PASSWORD:
-                    return { ...state, password: action.input.payload };
-                case LoginModalInputType.PASSWORD_REPEAT:
-                    return { ...state, passwordRepeat: action.input.payload };
-                case LoginModalInputType.OTP:
-                    return { ...state, OTP: action.input.payload };
-                default:
-                    return state;
-            }
+            return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
