@@ -9,7 +9,7 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
-import { MailInputError, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { CognitoErrors, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 
 export function MailInputForm() {
     const { t } = useI18next();
@@ -30,7 +30,7 @@ export function MailInputForm() {
                 />
             </div>
             <div className="login-modal-button-container">
-                {error && error.message === MailInputError.ALREADY_EXISTS && (
+                {error && error.message === CognitoErrors.USERNAME_EXISTS && (
                     <button
                         className="login-modal-button-green-on-black"
                         onClick={() => {

@@ -12,6 +12,7 @@ import {
 } from '../LoginModalAction';
 import {
     AuthenticationStep,
+    CognitoErrors,
     LoginModalAuthenticationState,
     MailInputError,
     OTPError,
@@ -143,7 +144,7 @@ describe('email input logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.MAIL_INPUT,
             email: 'already@exists.com',
-            error: new Error(MailInputError.ALREADY_EXISTS),
+            error: new Error(CognitoErrors.USERNAME_EXISTS),
         });
         const action = loginModalButtonClick('accountLogin');
 

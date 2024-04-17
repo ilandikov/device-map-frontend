@@ -41,7 +41,10 @@ export interface LoginModalAuthenticationState {
 
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
-    ALREADY_EXISTS = 'cognitoUsernameExistsException',
+}
+
+export enum CognitoErrors {
+    USERNAME_EXISTS = 'cognitoUsernameExistsException',
 }
 
 export enum PasswordError {
