@@ -13,7 +13,7 @@ import {
 } from './LoginModalAuthenticationState';
 import { OTPError, PasswordError, getEmailError, getPasswordError } from './LoginModalAuthenticationHelpers';
 
-function appleSauce(type: LoginModalInputType, payload: string): Partial<LoginModalAuthenticationState> {
+function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<LoginModalAuthenticationState> {
     switch (type) {
         case LoginModalInputType.EMAIL:
             return { email: payload };
@@ -79,7 +79,7 @@ export function loginModalAuthentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return { ...state, ...appleSauce(action.input.type, action.input.payload) };
+            return { ...state, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
