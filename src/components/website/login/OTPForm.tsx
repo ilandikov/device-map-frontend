@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../../redux/store';
 import {
     LoginModalInputType,
     LoginModalRemoteRequestType,
-    loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
@@ -59,7 +58,9 @@ export function OTPForm() {
                 <p className="login-modal-input-help login-modal-opaque-text">{t('OTPExplanation')}</p>
                 <button
                     className="login-modal-input-help login-modal-correct-input"
-                    onClick={() => dispatch(loginModalButtonClick('OTPSendAgain'))}
+                    onClick={() => {
+                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND));
+                    }}
                 >
                     {t('OTPSendAgain')}
                 </button>

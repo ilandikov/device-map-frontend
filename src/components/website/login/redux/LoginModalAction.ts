@@ -31,6 +31,7 @@ export enum LoginModalRemoteRequestType {
     USERNAME_AND_PASSWORD = 'USERNAME_AND_PASSWORD',
     OTP = 'OTP',
     SIGN_OUT = 'SIGN_OUT',
+    OTP_RESEND = 'OTP_RESEND',
 }
 
 export function loginModalRemoteRequest(verify: LoginModalRemoteRequestType): LoginModalRemoteRequest {
@@ -79,6 +80,7 @@ export enum LoginModalRemoteAnswerType {
     FORGOT_PASSWORD = 'FORGOT_PASSWORD',
     PASSWORD_RESET = 'PASSWORD_RESET',
     SIGN_OUT = 'SIGN_OUT',
+    OTP_RESEND = 'OTP_RESEND',
 }
 
 export enum LoginModalRemoteAnswerResult {
