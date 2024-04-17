@@ -28,6 +28,7 @@ export function PasswordResetRequestForm() {
                     }}
                     error={error}
                 />
+                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
             </div>
             <div className="login-modal-button-container">
                 <button

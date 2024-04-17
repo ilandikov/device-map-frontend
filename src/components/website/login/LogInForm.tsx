@@ -39,6 +39,7 @@ export function LogInForm() {
                     }}
                     error={errorWithoutMessage}
                 />
+                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
             </div>
             <div className="login-modal-button-container">
                 <div className="login-modal-two-buttons-on-one-row">
