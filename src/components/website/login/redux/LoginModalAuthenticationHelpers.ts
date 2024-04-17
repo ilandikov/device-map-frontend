@@ -16,7 +16,7 @@ export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
 
-export function isEmailValid(email: string) {
+export function getEmailError(email: string): Error | null {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isMailValid = emailRegexp.test(email);
 

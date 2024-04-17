@@ -15,8 +15,8 @@ import {
     MailInputError,
     OTPError,
     PasswordError,
+    getEmailError,
     getPasswordError,
-    isEmailValid,
 } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
@@ -86,7 +86,7 @@ export function loginModalAuthentication(
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME: {
-                    const emailError = isEmailValid(state.email);
+                    const emailError = getEmailError(state.email);
                     if (emailError !== null) {
                         return { ...state, error: new Error(MailInputError.NOT_VALID) };
                     }
