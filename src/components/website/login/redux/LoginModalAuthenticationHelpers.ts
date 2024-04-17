@@ -18,7 +18,8 @@ export enum OTPError {
 
 export function isEmailValid(email: string) {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegexp.test(email);
+    const isMailValid = emailRegexp.test(email);
+    return isMailValid;
 }
 
 export function getPasswordError(password: string): Error | null {
