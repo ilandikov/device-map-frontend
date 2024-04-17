@@ -69,7 +69,7 @@ export function loginModalAuthentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return { ...state, ...partialStateWithPayload(action.input.type, action.input.payload) };
+            return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
