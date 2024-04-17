@@ -42,7 +42,6 @@ export interface LoginModalAuthenticationState {
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
     ALREADY_EXISTS = 'mailAlreadyExists',
-    NOT_REGISTERED = 'mailNotRegistered',
 }
 
 export enum PasswordError {
