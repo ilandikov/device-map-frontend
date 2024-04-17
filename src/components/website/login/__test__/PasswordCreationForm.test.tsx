@@ -41,7 +41,7 @@ describe('PasswordCreationForm snapshot tests', () => {
 
     it('should match the snapshot at password not match error', () => {
         mockLoginModalAuthenticationState({
-            error: new Error(),
+            error: new Error('renderMeToo'),
         });
         const component = renderForSnapshotTest(<PasswordCreationForm />);
 
