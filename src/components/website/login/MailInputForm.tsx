@@ -29,6 +29,7 @@ export function MailInputForm() {
                     }}
                     error={error}
                 />
+                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
             </div>
             <div className="login-modal-button-container">
                 {error && error.message === CognitoErrors.USERNAME_EXISTS && (

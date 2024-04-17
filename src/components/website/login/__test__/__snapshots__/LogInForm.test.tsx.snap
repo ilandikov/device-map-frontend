@@ -11,7 +11,7 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
       onlyEmail
     </p>
     <div
-      className="login-modal-input-box-container"
+      className="login-modal-input-box-container login-modal-wrong-input-border"
     >
       <input
         className="login-modal-input-text"
@@ -20,9 +20,6 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
         type="email"
       />
     </div>
-    <p
-      className="login-modal-input-help login-modal-wrong-input"
-    />
     <p
       className="login-modal-input-help"
     >
@@ -38,6 +35,11 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
         type="password"
       />
     </div>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      somethingIsWrong
+    </p>
   </div>,
   <div
     className="login-modal-button-container"

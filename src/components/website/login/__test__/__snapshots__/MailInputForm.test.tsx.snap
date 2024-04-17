@@ -11,7 +11,7 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail exists e
       onlyEmail
     </p>
     <div
-      className="login-modal-input-box-container"
+      className="login-modal-input-box-container login-modal-wrong-input-border"
     >
       <input
         className="login-modal-input-text"
@@ -57,7 +57,7 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail not vali
       onlyEmail
     </p>
     <div
-      className="login-modal-input-box-container"
+      className="login-modal-input-box-container login-modal-wrong-input-border"
     >
       <input
         className="login-modal-input-text"
