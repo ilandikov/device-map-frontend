@@ -11,13 +11,7 @@ import {
     LoginModalAuthenticationState,
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
-import {
-    MailInputError,
-    OTPError,
-    PasswordError,
-    getEmailError,
-    getPasswordError,
-} from './LoginModalAuthenticationHelpers';
+import { OTPError, PasswordError, getEmailError, getPasswordError } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
     state: LoginModalAuthenticationState = authenticationInitialState,
@@ -88,7 +82,7 @@ export function loginModalAuthentication(
                 case LoginModalRemoteRequestType.USERNAME: {
                     const emailError = getEmailError(state.email);
                     if (emailError !== null) {
-                        return { ...state, error: new Error(MailInputError.NOT_VALID) };
+                        return { ...state, error: emailError };
                     }
 
                     switch (state.step) {
