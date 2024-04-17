@@ -10,7 +10,7 @@ export function MailInputBox(props: {
     return (
         <>
             <p className="login-modal-input-help">{props.helpText}</p>
-            <div className="login-modal-input-box-container">
+            <div className={`login-modal-input-box-container${props.error ? ' login-modal-wrong-input-border' : ''}`}>
                 <StaticImage
                     className="login-modal-input-envelope-image"
                     src="../../../assets/images/Envelope.svg"

@@ -11,7 +11,7 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
       onlyEmail
     </p>
     <div
-      className="login-modal-input-box-container"
+      className="login-modal-input-box-container login-modal-wrong-input-border"
     >
       <input
         className="login-modal-input-text"
