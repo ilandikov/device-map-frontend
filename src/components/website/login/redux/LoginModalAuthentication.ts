@@ -13,18 +13,18 @@ import {
 } from './LoginModalAuthenticationState';
 import { OTPError, PasswordError, getEmailError, getPasswordError } from './LoginModalAuthenticationHelpers';
 
-function appleSauce(type: LoginModalInputType, state: LoginModalAuthenticationState, payload: string) {
+function appleSauce(type: LoginModalInputType, payload: string): Partial<LoginModalAuthenticationState> {
     switch (type) {
         case LoginModalInputType.EMAIL:
-            return { ...state, email: payload };
+            return { email: payload };
         case LoginModalInputType.PASSWORD:
-            return { ...state, password: payload };
+            return { password: payload };
         case LoginModalInputType.PASSWORD_REPEAT:
-            return { ...state, passwordRepeat: payload };
+            return { passwordRepeat: payload };
         case LoginModalInputType.OTP:
-            return { ...state, OTP: payload };
+            return { OTP: payload };
         default:
-            return state;
+            return {};
     }
 }
 
@@ -79,7 +79,7 @@ export function loginModalAuthentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return appleSauce(action.input.type, state, action.input.payload);
+            return { ...state, ...appleSauce(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
