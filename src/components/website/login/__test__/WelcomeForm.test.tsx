@@ -1,6 +1,6 @@
 import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
-import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/AuthenticationState';
+import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { loginModalButtonClick } from '../redux/LoginModalAction';
 import { WelcomeForm } from '../WelcomeForm';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';

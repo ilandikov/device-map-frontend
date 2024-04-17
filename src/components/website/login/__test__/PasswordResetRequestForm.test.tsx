@@ -16,7 +16,7 @@ import {
     mockDispatch,
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
-} from '../../../../redux/__mocks__/AuthenticationState';
+} from '../../../../redux/__mocks__/mocks';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

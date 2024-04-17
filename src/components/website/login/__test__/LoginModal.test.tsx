@@ -5,7 +5,7 @@ import {
     mockDispatch,
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
-} from '../../../../redux/__mocks__/AuthenticationState';
+} from '../../../../redux/__mocks__/mocks';
 import { AuthenticationStep } from '../redux/LoginModalAuthenticationState';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 

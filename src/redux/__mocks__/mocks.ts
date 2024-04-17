@@ -13,7 +13,7 @@ jest.mock('react-redux', () => ({
 
  * and then use the following to set the state in each test:
 
-mockLoginModalState({
+mockLoginModalAuthenticationState({
     field: value,
         });
 
