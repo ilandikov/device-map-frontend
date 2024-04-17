@@ -24,7 +24,7 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail exists e
     <p
       className="login-modal-input-help login-modal-wrong-input"
     >
-      mailAlreadyExists
+      cognitoUsernameExistsException
     </p>
   </div>,
   <div

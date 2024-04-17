@@ -1,21 +1,20 @@
-import { PasswordError } from '../LoginModalAuthenticationState';
-import { getPasswordError, isEmailValid } from '../LoginModalAuthenticationHelpers';
+import { MailInputError, PasswordError, getEmailError, getPasswordError } from '../LoginModalAuthenticationHelpers';
 
 describe('user email validation tests', () => {
-    it('should validate good email', () => {
+    it('should report no error for a valid email', () => {
         const email = 'good@email.com';
 
-        const mailInputError = isEmailValid(email);
+        const mailInputError = getEmailError(email);
 
-        expect(mailInputError).toEqual(true);
+        expect(mailInputError).toEqual(null);
     });
 
-    it('should not validate bad email', () => {
+    it('should report a not valid error for a not valid email', () => {
         const email = 'this is not an email!';
 
-        const mailInputError = isEmailValid(email);
+        const mailInputError = getEmailError(email);
 
-        expect(mailInputError).toEqual(false);
+        expect(mailInputError).toEqual(new Error(MailInputError.NOT_VALID));
     });
 });
 

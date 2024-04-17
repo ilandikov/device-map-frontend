@@ -1,8 +1,30 @@
-import { PasswordError } from './LoginModalAuthenticationState';
+export enum MailInputError {
+    NOT_VALID = 'mailNotValid',
+}
 
-export function isEmailValid(email: string) {
+export enum PasswordError {
+    NO_UPPERCASE = 'passwordNoUppercase',
+    NOT_MATCHING = 'passwordNotMatching',
+    EMPTY = 'passwordEmpty',
+    NO_LOWERCASE = 'passwordHasNoLowercaseChars',
+    NO_DIGITS = 'passwordHasNoDigit',
+    NO_SPECIAL_CHARS = 'passwordHasNoSpecialCharacters',
+    TOO_SHORT = 'passwordTooShort',
+}
+
+export enum OTPError {
+    TOO_SHORT = 'OTPTooShort',
+}
+
+export function getEmailError(email: string): Error | null {
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegexp.test(email);
+    const isMailValid = emailRegexp.test(email);
+
+    if (isMailValid === false) {
+        return new Error(MailInputError.NOT_VALID);
+    }
+
+    return null;
 }
 
 export function getPasswordError(password: string): Error | null {

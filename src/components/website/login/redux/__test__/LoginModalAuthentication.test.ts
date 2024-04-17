@@ -13,12 +13,11 @@ import {
 import {
     AuthenticationStep,
     LoginModalAuthenticationState,
-    MailInputError,
-    OTPError,
-    PasswordError,
     authenticationInitialState,
     buildAuthenticationState,
 } from '../LoginModalAuthenticationState';
+import { CognitoErrors } from '../cognitoHelpers';
+import { MailInputError, OTPError, PasswordError } from '../LoginModalAuthenticationHelpers';
 
 function verifyStateChange(
     initialState: LoginModalAuthenticationState,
@@ -143,7 +142,7 @@ describe('email input logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.MAIL_INPUT,
             email: 'already@exists.com',
-            error: new Error(MailInputError.ALREADY_EXISTS),
+            error: new Error(CognitoErrors.USERNAME_EXISTS),
         });
         const action = loginModalButtonClick('accountLogin');
 

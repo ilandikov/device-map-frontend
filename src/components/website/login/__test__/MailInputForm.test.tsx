@@ -18,7 +18,8 @@ import {
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/mocks';
-import { MailInputError } from '../redux/LoginModalAuthenticationState';
+import { CognitoErrors } from '../redux/cognitoHelpers';
+import { MailInputError } from '../redux/LoginModalAuthenticationHelpers';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -44,7 +45,7 @@ describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot at mail exists error', () => {
         mockLoginModalAuthenticationState({
             email: 'existing@mail.ru',
-            error: new Error(MailInputError.ALREADY_EXISTS),
+            error: new Error(CognitoErrors.USERNAME_EXISTS),
         });
         const component = renderForSnapshotTest(<MailInputForm />);
 
@@ -83,7 +84,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockLoginModalAuthenticationState({ error: new Error(MailInputError.ALREADY_EXISTS) });
+        mockLoginModalAuthenticationState({ error: new Error(CognitoErrors.USERNAME_EXISTS) });
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const loginButton = getByText(container, 'accountLogin');

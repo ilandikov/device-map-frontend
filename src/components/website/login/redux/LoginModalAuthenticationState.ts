@@ -39,26 +39,6 @@ export interface LoginModalAuthenticationState {
     OTP: string;
 }
 
-export enum MailInputError {
-    NOT_VALID = 'mailNotValid',
-    ALREADY_EXISTS = 'mailAlreadyExists',
-    NOT_REGISTERED = 'mailNotRegistered',
-}
-
-export enum PasswordError {
-    NO_UPPERCASE = 'passwordNoUppercase',
-    NOT_MATCHING = 'passwordNotMatching',
-    EMPTY = 'passwordEmpty',
-    NO_LOWERCASE = 'passwordHasNoLowercaseChars',
-    NO_DIGITS = 'passwordHasNoDigit',
-    NO_SPECIAL_CHARS = 'passwordHasNoSpecialCharacters',
-    TOO_SHORT = 'passwordTooShort',
-}
-
-export enum OTPError {
-    TOO_SHORT = 'OTPTooShort',
-}
-
 export function buildAuthenticationState(
     partialState: Partial<LoginModalAuthenticationState>,
 ): LoginModalAuthenticationState {

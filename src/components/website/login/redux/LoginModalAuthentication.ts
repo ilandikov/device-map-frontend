@@ -9,12 +9,9 @@ import {
 import {
     AuthenticationStep,
     LoginModalAuthenticationState,
-    MailInputError,
-    OTPError,
-    PasswordError,
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
-import { getPasswordError, isEmailValid } from './LoginModalAuthenticationHelpers';
+import { OTPError, PasswordError, getEmailError, getPasswordError } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
     state: LoginModalAuthenticationState = authenticationInitialState,
@@ -83,8 +80,9 @@ export function loginModalAuthentication(
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME: {
-                    if (isEmailValid(state.email) === false) {
-                        return { ...state, error: new Error(MailInputError.NOT_VALID) };
+                    const emailError = getEmailError(state.email);
+                    if (emailError) {
+                        return { ...state, error: emailError };
                     }
 
                     switch (state.step) {
