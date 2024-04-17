@@ -141,6 +141,8 @@ export function loginModalAuthentication(
 
                     return state;
                 }
+                case LoginModalRemoteRequestType.OTP_RESEND:
+                    return { ...state, error: null };
                 default:
                     return state;
             }
