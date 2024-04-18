@@ -36,11 +36,13 @@ export function OTPForm() {
                     const restOfTheInput = event.target.value.slice(1);
                     event.target.value = firstCharacter;
 
-                    if (restOfTheInput.length > 0) {
-                        const nextInput = index + 1;
-                        if (nextInput < inputRefs.length) {
-                            inputRefs[nextInput].current.value = restOfTheInput;
+                    for (const [remainingCharIndex, remainingChar] of Array.from(restOfTheInput).entries()) {
+                        const currentInputIndex = index + remainingCharIndex + 1;
+                        if (currentInputIndex === inputRefs.length) {
+                            break;
                         }
+
+                        inputRefs[currentInputIndex].current.value = remainingChar;
                     }
 
                     const nextElementToFocus = getNextElementForFocus(index);

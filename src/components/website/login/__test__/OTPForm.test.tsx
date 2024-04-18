@@ -114,18 +114,20 @@ describe('OTP form tests', () => {
 });
 
 describe('OTP form paste tests', () => {
-    it('should dispatch 2 digit value over 2 inputs', () => {
+    it('should dispatch 3 digit value over 3 inputs', () => {
         mockLoginModalAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const input0 = getInput(container, 0);
         const input1 = getInput(container, 1);
         const input2 = getInput(container, 2);
-        fireEvent.change(input0, createEvent('64'));
+        const input3 = getInput(container, 3);
+        fireEvent.change(input0, createEvent('649'));
 
         expect(input0.value).toEqual('6');
         expect(input1.value).toEqual('4');
-        expect(input2).toHaveFocus();
+        expect(input2.value).toEqual('9');
+        expect(input3).toHaveFocus();
     });
 });
 
