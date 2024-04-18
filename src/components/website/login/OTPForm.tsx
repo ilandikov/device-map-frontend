@@ -31,7 +31,9 @@ export function OTPForm() {
                 data-testid={`OTPInput${index}`}
                 ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
-                onChange={() => {
+                onChange={(event) => {
+                    event.target.value = Array.from(event.target.value)[0];
+
                     const nextElementToFocus = getNextElementForFocus(index);
                     nextElementToFocus.current.focus();
                 }}

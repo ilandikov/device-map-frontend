@@ -114,6 +114,18 @@ describe('OTP form tests', () => {
     });
 });
 
+describe('OTP form paste tests', () => {
+    it('should take into the value only the first digit', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input0 = getInput(container, 0);
+        fireEvent.change(input0, createEvent('64'));
+
+        expect(input0.value).toEqual('6');
+    });
+});
+
 function inputOTPDigit(container: HTMLElement, inputIndex: number, OTPDigit: string) {
     const input0 = getInput(container, inputIndex);
     fireEvent.change(input0, createEvent(OTPDigit));
