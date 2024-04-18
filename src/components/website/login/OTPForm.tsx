@@ -33,7 +33,15 @@ export function OTPForm() {
                 onFocus={(event) => (event.target.value = '')}
                 onChange={(event) => {
                     const firstCharacter = event.target.value.slice(0, 1);
+                    const restOfTheInput = event.target.value.slice(1);
                     event.target.value = firstCharacter;
+
+                    if (restOfTheInput.length > 0) {
+                        const nextInput = index + 1;
+                        if (nextInput < inputRefs.length) {
+                            inputRefs[nextInput].current.value = restOfTheInput;
+                        }
+                    }
 
                     const nextElementToFocus = getNextElementForFocus(index);
                     nextElementToFocus.current.focus();
