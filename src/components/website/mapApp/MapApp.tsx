@@ -18,12 +18,14 @@ export default function MapApp() {
     const showProductDescription = mapAppState.usageStep === MapAppUsageStep.HOME_SCREEN;
     const showLoginModal = mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION;
 
+    const latLng = typeof window !== 'undefined' ? new LatLng(42.876, 74.603) : undefined;
+
     return (
         <div className="map-app-container">
             <MapAppHeader />
             {showProductDescription && <ProductDescription />}
             {showLoginModal && <LoginModal />}
-            <MapContainer className="map-app-map" center={new LatLng(42.876, 74.603)} scrollWheelZoom={false} zoom={17}>
+            <MapContainer className="map-app-map" center={latLng} scrollWheelZoom={false} zoom={17}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.com/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
