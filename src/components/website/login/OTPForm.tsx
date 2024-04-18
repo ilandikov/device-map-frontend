@@ -32,12 +32,10 @@ export function OTPForm() {
                 ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
                 onChange={(event) => {
-                    const firstCharacter = event.target.value.slice(0, 1);
-                    const restOfTheInput = event.target.value.slice(1);
-                    event.target.value = firstCharacter;
+                    const restOfTheInput = event.target.value;
 
                     for (const [remainingCharIndex, remainingChar] of Array.from(restOfTheInput).entries()) {
-                        const currentInputIndex = index + remainingCharIndex + 1;
+                        const currentInputIndex = index + remainingCharIndex;
                         if (currentInputIndex === inputRefs.length) {
                             break;
                         }
