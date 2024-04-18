@@ -129,6 +129,23 @@ describe('OTP form paste tests', () => {
         expect(input2.value).toEqual('9');
         expect(input3).toHaveFocus();
     });
+
+    it('should not overflow the inputs and focus on the button', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input3 = getInput(container, 3);
+        const input4 = getInput(container, 4);
+        const input5 = getInput(container, 5);
+        const nextButton = getByText(container, 'next');
+        fireEvent.change(input3, createEvent('0574'));
+
+        expect(input3.value).toEqual('0');
+        expect(input4.value).toEqual('5');
+        expect(input5.value).toEqual('7');
+
+        expect(nextButton).toHaveFocus();
+    });
 });
 
 function inputOTPDigit(container: HTMLElement, inputIndex: number, OTPDigit: string) {
