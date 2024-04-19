@@ -45,10 +45,6 @@ export function OTPForm() {
         );
     });
 
-    function collectOTPValue() {
-        return collectOTPValue2(inputRefs);
-    }
-
     return (
         <>
             <div className="login-modal-input-container">
@@ -68,7 +64,7 @@ export function OTPForm() {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
-                        const OTPCode = collectOTPValue();
+                        const OTPCode = collectOTPValue2(inputRefs);
                         dispatch(loginModalInput(LoginModalInputType.OTP, OTPCode));
 
                         dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
