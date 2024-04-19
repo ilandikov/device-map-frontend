@@ -111,25 +111,16 @@ function focusOnNextInputOrNextButton(
     inputRefs: React.MutableRefObject<HTMLInputElement>[],
     nextButton: React.MutableRefObject<HTMLButtonElement>,
 ) {
-    const nextElementToFocus = getNextElementForFocus(startInputIndex, inputRefs, nextButton);
-    nextElementToFocus.current.focus();
-}
-
-function getNextElementForFocus(
-    startInputIndex: number,
-    inputRefs: React.MutableRefObject<HTMLInputElement>[],
-    nextButton: React.MutableRefObject<HTMLButtonElement>,
-) {
     const nextInputIndex = startInputIndex + 1;
 
     if (nextInputIndex === inputRefs.length) {
-        return nextButton;
+        return nextButton.current.focus();
     }
 
     const valueInNextInput = inputRefs[nextInputIndex].current.value;
     if (valueInNextInput !== '') {
-        return getNextElementForFocus(nextInputIndex, inputRefs, nextButton);
+        return focusOnNextInputOrNextButton(nextInputIndex, inputRefs, nextButton);
     }
 
-    return inputRefs[nextInputIndex];
+    return inputRefs[nextInputIndex].current.focus();
 }
