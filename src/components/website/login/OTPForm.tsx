@@ -32,8 +32,7 @@ export function OTPForm() {
                 ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
                 onChange={(event) => {
-                    const upToSixDigitsRegExp = /^\d{1,6}$/;
-                    const firstSixCharactersAreDigits = upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
+                    const firstSixCharactersAreDigits = isOTPInputValid(event);
                     if (firstSixCharactersAreDigits === false) {
                         inputRef.current.value = '';
                         return;
@@ -109,4 +108,10 @@ export function OTPForm() {
             </div>
         </>
     );
+}
+
+function isOTPInputValid(event: React.ChangeEvent<HTMLInputElement>) {
+    const upToSixDigitsRegExp = /^\d{1,6}$/;
+    const firstSixCharactersAreDigits = upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
+    return firstSixCharactersAreDigits;
 }
