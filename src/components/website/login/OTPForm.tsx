@@ -39,16 +39,12 @@ export function OTPForm() {
 
                     fillInputsFromInputEvent(event, index, inputRefs);
 
-                    const nextElementToFocus = getNextElementForFocus(index);
+                    const nextElementToFocus = getNextElementForFocus2(index, inputRefs, nextButton);
                     nextElementToFocus.current.focus();
                 }}
             />
         );
     });
-
-    function getNextElementForFocus(index: number) {
-        return getNextElementForFocus2(index, inputRefs, nextButton);
-    }
 
     function collectOTPValue() {
         let OTPCode = '';
