@@ -39,8 +39,7 @@ export function OTPForm() {
 
                     fillInputsFromInputEvent(event, index, inputRefs);
 
-                    const nextElementToFocus = getNextElementForFocus(index, inputRefs, nextButton);
-                    nextElementToFocus.current.focus();
+                    focusOnNextInputOrNextButton(index, inputRefs, nextButton);
                 }}
             />
         );
@@ -105,6 +104,15 @@ function fillInputsFromInputEvent(
 
         inputElementRefs[currentInputIndex].current.value = inputChar;
     }
+}
+
+function focusOnNextInputOrNextButton(
+    startInputIndex: number,
+    inputRefs: React.MutableRefObject<HTMLInputElement>[],
+    nextButton: React.MutableRefObject<HTMLButtonElement>,
+) {
+    const nextElementToFocus = getNextElementForFocus(startInputIndex, inputRefs, nextButton);
+    nextElementToFocus.current.focus();
 }
 
 function getNextElementForFocus(
