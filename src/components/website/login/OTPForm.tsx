@@ -64,7 +64,7 @@ export function OTPForm() {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
-                        const OTPCode = collectOTPValue2(inputRefs);
+                        const OTPCode = collectOTPValue(inputRefs);
                         dispatch(loginModalInput(LoginModalInputType.OTP, OTPCode));
 
                         dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
@@ -77,7 +77,7 @@ export function OTPForm() {
     );
 }
 
-function collectOTPValue2(inputRefs: React.MutableRefObject<HTMLInputElement>[]) {
+function collectOTPValue(inputRefs: React.MutableRefObject<HTMLInputElement>[]) {
     let OTPCode = '';
     inputRefs.forEach((input) => {
         OTPCode += input.current.value;
