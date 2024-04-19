@@ -37,7 +37,7 @@ export function OTPForm() {
                         return;
                     }
 
-                    fillInputsFromInputEvent2(event, index, inputRefs);
+                    fillInputsFromInputEvent(event, index, inputRefs);
 
                     const nextElementToFocus = getNextElementForFocus(index);
                     nextElementToFocus.current.focus();
@@ -106,7 +106,7 @@ function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>) {
     return upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
 }
 
-function fillInputsFromInputEvent2(
+function fillInputsFromInputEvent(
     event: React.ChangeEvent<HTMLInputElement>,
     startInputIndex: number,
     inputElementRefs: React.MutableRefObject<HTMLInputElement>[],
