@@ -47,7 +47,7 @@ export function OTPForm() {
     });
 
     function getNextElementForFocus(index: number) {
-        return getNextElementForFocus2(index, inputRefs, nextButton, getNextElementForFocus);
+        return getNextElementForFocus2(index, inputRefs, nextButton);
     }
 
     function collectOTPValue() {
@@ -115,7 +115,6 @@ function getNextElementForFocus2(
     startInputIndex: number,
     inputRefs: React.MutableRefObject<HTMLInputElement>[],
     nextButton: React.MutableRefObject<HTMLButtonElement>,
-    _getNextElementForFocus: (index: number) => React.MutableRefObject<HTMLInputElement | HTMLButtonElement>,
 ) {
     const nextInputIndex = startInputIndex + 1;
 
@@ -125,7 +124,7 @@ function getNextElementForFocus2(
 
     const valueInNextInput = inputRefs[nextInputIndex].current.value;
     if (valueInNextInput !== '') {
-        return getNextElementForFocus2(nextInputIndex, inputRefs, nextButton, _getNextElementForFocus);
+        return getNextElementForFocus2(nextInputIndex, inputRefs, nextButton);
     }
 
     return inputRefs[nextInputIndex];
