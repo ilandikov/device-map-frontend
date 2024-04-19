@@ -21,6 +21,18 @@ export function OTPForm() {
 
     const inputRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
+    function fillInputsFromInputEvent(event: React.ChangeEvent<HTMLInputElement>, startInputIndex: number) {
+        const inputCharArray = Array.from(event.target.value);
+        for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
+            const currentInputIndex = startInputIndex + inputCharIndex;
+            if (currentInputIndex === inputRefs.length) {
+                break;
+            }
+
+            inputRefs[currentInputIndex].current.value = inputChar;
+        }
+    }
+
     const inputs = inputRefs.map((inputRef, index) => {
         return (
             <input
@@ -37,15 +49,7 @@ export function OTPForm() {
                         return;
                     }
 
-                    const inputCharArray = Array.from(event.target.value);
-                    for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
-                        const currentInputIndex = index + inputCharIndex;
-                        if (currentInputIndex === inputRefs.length) {
-                            break;
-                        }
-
-                        inputRefs[currentInputIndex].current.value = inputChar;
-                    }
+                    fillInputsFromInputEvent(event, index);
 
                     const nextElementToFocus = getNextElementForFocus(index);
                     nextElementToFocus.current.focus();
