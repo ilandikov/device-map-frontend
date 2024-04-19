@@ -109,8 +109,80 @@ describe('OTP form tests', () => {
         fireEvent.change(input1, createEvent('1'));
 
         fireEvent.change(input0, createEvent('1'));
-
         expect(input3).toHaveFocus();
+    });
+});
+
+describe('OTP form paste tests', () => {
+    it('should dispatch 3 digit value over 3 inputs', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input0 = getInput(container, 0);
+        const input1 = getInput(container, 1);
+        const input2 = getInput(container, 2);
+        const input3 = getInput(container, 3);
+        fireEvent.change(input0, createEvent('649'));
+
+        expect(input0.value).toEqual('6');
+        expect(input1.value).toEqual('4');
+        expect(input2.value).toEqual('9');
+        expect(input3).toHaveFocus();
+    });
+
+    it('should not overflow the inputs and focus on the button', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input3 = getInput(container, 3);
+        const input4 = getInput(container, 4);
+        const input5 = getInput(container, 5);
+        const nextButton = getByText(container, 'next');
+        fireEvent.change(input3, createEvent('0574'));
+
+        expect(input3.value).toEqual('0');
+        expect(input4.value).toEqual('5');
+        expect(input5.value).toEqual('7');
+
+        expect(nextButton).toHaveFocus();
+    });
+
+    it('should not input anything if input contains a non numerical character', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input2 = getInput(container, 2);
+        const input3 = getInput(container, 3);
+        const input4 = getInput(container, 4);
+        input2.focus();
+        fireEvent.change(input2, createEvent('3e4'));
+
+        expect(input2.value).toEqual('');
+        expect(input3.value).toEqual('');
+        expect(input4.value).toEqual('');
+
+        expect(input2).toHaveFocus();
+    });
+
+    it('should overwrite existing values in multiple inputs', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input1 = getInput(container, 1);
+        const input2 = getInput(container, 2);
+        const input3 = getInput(container, 3);
+        const input4 = getInput(container, 4);
+        const input5 = getInput(container, 5);
+
+        fireEvent.change(input1, createEvent('6103'));
+        fireEvent.change(input1, createEvent('974'));
+
+        expect(input1.value).toEqual('9');
+        expect(input2.value).toEqual('7');
+        expect(input3.value).toEqual('4');
+        expect(input4.value).toEqual('3');
+
+        expect(input5).toHaveFocus();
     });
 });
 
