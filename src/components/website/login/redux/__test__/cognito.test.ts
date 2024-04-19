@@ -7,11 +7,23 @@ import {
 } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
-import { verifyCognitoEpicAction, verifyCognitoEpicNoAction } from './cognitoTestHelpers';
+import {
+    cognitoPasswordResetConfirmationResult,
+    cognitoPasswordResetRequestResult,
+    cognitoSignInResult,
+    cognitoSignOutResult,
+    cognitoSignUpConfirmationResult,
+    cognitoSignUpRequestResult,
+    verifyCognitoEpicAction,
+    verifyCognitoEpicNoAction,
+} from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]],
+        [
+            Promise.resolve(cognitoSignUpRequestResult),
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)],
+        ],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'cognitoUnknownException')],
@@ -32,7 +44,7 @@ describe('user sign up tests', () => {
 describe('user password reset tests', () => {
     it.each([
         [
-            Promise.resolve(),
+            Promise.resolve(cognitoPasswordResetConfirmationResult),
             [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET), mapAppAuthenticationCompleted()],
         ],
         [
@@ -55,7 +67,7 @@ describe('user password reset tests', () => {
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
         [
-            Promise.resolve(),
+            Promise.resolve(cognitoSignUpConfirmationResult),
             [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()],
         ],
         [Promise.reject(), [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, 'cognitoUnknownException')]],
@@ -81,7 +93,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 describe('user sign in tests', () => {
     it.each([
         [
-            Promise.resolve(),
+            Promise.resolve(cognitoSignInResult),
             [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()],
         ],
         [
@@ -105,7 +117,10 @@ describe('password reset request tests', () => {
     });
 
     it.each([
-        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]],
+        [
+            Promise.resolve(cognitoPasswordResetRequestResult),
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)],
+        ],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'cognitoUnknownException')],
@@ -125,7 +140,7 @@ describe('password reset request tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
+        [Promise.resolve(cognitoSignOutResult), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, 'cognitoUnknownException')],
