@@ -32,6 +32,13 @@ export function OTPForm() {
                 ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
                 onChange={(event) => {
+                    const upToSixDigitsRegExp = /^\d{1,6}$/;
+                    const firstSixCharactersAreDigits = upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
+                    if (firstSixCharactersAreDigits === false) {
+                        inputRef.current.value = '';
+                        return;
+                    }
+
                     const inputCharArray = Array.from(event.target.value);
                     for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
                         const currentInputIndex = index + inputCharIndex;

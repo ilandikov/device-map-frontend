@@ -146,6 +146,23 @@ describe('OTP form paste tests', () => {
 
         expect(nextButton).toHaveFocus();
     });
+
+    it('should not input anything if input contains a non numerical character', () => {
+        mockLoginModalAuthenticationState({});
+        const container = renderForActionDispatchTest(<OTPForm />);
+
+        const input2 = getInput(container, 2);
+        const input3 = getInput(container, 3);
+        const input4 = getInput(container, 4);
+        input2.focus();
+        fireEvent.change(input2, createEvent('3e4'));
+
+        expect(input2.value).toEqual('');
+        expect(input3.value).toEqual('');
+        expect(input4.value).toEqual('');
+
+        expect(input2).toHaveFocus();
+    });
 });
 
 function inputOTPDigit(container: HTMLElement, inputIndex: number, OTPDigit: string) {
