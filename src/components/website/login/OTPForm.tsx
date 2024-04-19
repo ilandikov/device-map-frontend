@@ -10,6 +10,12 @@ import {
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import {
+    collectOTPValue,
+    fillInputsFromInputEvent,
+    focusOnNextInputOrNextButton,
+    isOTPInputEventValid,
+} from './OTPFormHelpers';
 
 export function OTPForm() {
     const { t } = useI18next();
@@ -32,52 +38,18 @@ export function OTPForm() {
                 ref={inputRef}
                 onFocus={(event) => (event.target.value = '')}
                 onChange={(event) => {
-                    const upToSixDigitsRegExp = /^\d{1,6}$/;
-                    const firstSixCharactersAreDigits = upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
-                    if (firstSixCharactersAreDigits === false) {
+                    if (isOTPInputEventValid(event) === false) {
                         inputRef.current.value = '';
                         return;
                     }
 
-                    const inputCharArray = Array.from(event.target.value);
-                    for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
-                        const currentInputIndex = index + inputCharIndex;
-                        if (currentInputIndex === inputRefs.length) {
-                            break;
-                        }
+                    fillInputsFromInputEvent(event, index, inputRefs);
 
-                        inputRefs[currentInputIndex].current.value = inputChar;
-                    }
-
-                    const nextElementToFocus = getNextElementForFocus(index);
-                    nextElementToFocus.current.focus();
+                    focusOnNextInputOrNextButton(index, inputRefs, nextButton);
                 }}
             />
         );
     });
-
-    function getNextElementForFocus(index: number) {
-        const nextInputIndex = index + 1;
-
-        if (nextInputIndex === inputRefs.length) {
-            return nextButton;
-        }
-
-        const valueInNextInput = inputRefs[nextInputIndex].current.value;
-        if (valueInNextInput !== '') {
-            return getNextElementForFocus(nextInputIndex);
-        }
-
-        return inputRefs[nextInputIndex];
-    }
-
-    function collectOTPValue() {
-        let OTPCode = '';
-        inputRefs.forEach((input) => {
-            OTPCode += input.current.value;
-        });
-        return OTPCode;
-    }
 
     return (
         <>
@@ -98,7 +70,7 @@ export function OTPForm() {
                     className="login-modal-button-black-on-green"
                     ref={nextButton}
                     onClick={() => {
-                        const OTPCode = collectOTPValue();
+                        const OTPCode = collectOTPValue(inputRefs);
                         dispatch(loginModalInput(LoginModalInputType.OTP, OTPCode));
 
                         dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
