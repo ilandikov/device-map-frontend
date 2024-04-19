@@ -9,15 +9,21 @@ import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthe
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import {
     cognitoPasswordResetConfirmationResult,
+    cognitoPasswordResetRequestResult,
+    cognitoSignInResult,
+    cognitoSignOutResult,
     cognitoSignUpConfirmationResult,
-    cognitoSignUpResult,
+    cognitoSignUpRequestResult,
     verifyCognitoEpicAction,
     verifyCognitoEpicNoAction,
 } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
-        [Promise.resolve(cognitoSignUpResult), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]],
+        [
+            Promise.resolve(cognitoSignUpRequestResult),
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)],
+        ],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'cognitoUnknownException')],
@@ -87,7 +93,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 describe('user sign in tests', () => {
     it.each([
         [
-            Promise.resolve(),
+            Promise.resolve(cognitoSignInResult),
             [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()],
         ],
         [
@@ -111,7 +117,10 @@ describe('password reset request tests', () => {
     });
 
     it.each([
-        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]],
+        [
+            Promise.resolve(cognitoPasswordResetRequestResult),
+            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)],
+        ],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'cognitoUnknownException')],
@@ -131,7 +140,7 @@ describe('password reset request tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
+        [Promise.resolve(cognitoSignOutResult), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, 'cognitoUnknownException')],
