@@ -77,7 +77,7 @@ export function OTPForm() {
     );
 }
 
-function collectOTPValue(inputRefs: React.MutableRefObject<HTMLInputElement>[]) {
+function collectOTPValue(inputRefs: React.MutableRefObject<HTMLInputElement>[]): string {
     let OTPCode = '';
     inputRefs.forEach((input) => {
         OTPCode += input.current.value;
@@ -85,7 +85,7 @@ function collectOTPValue(inputRefs: React.MutableRefObject<HTMLInputElement>[]) 
     return OTPCode;
 }
 
-function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>) {
+function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>): boolean {
     const upToSixDigitsRegExp = /^\d{1,6}$/;
     return upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
 }
@@ -94,7 +94,7 @@ function fillInputsFromInputEvent(
     event: React.ChangeEvent<HTMLInputElement>,
     startInputIndex: number,
     inputElementRefs: React.MutableRefObject<HTMLInputElement>[],
-) {
+): void {
     const inputCharArray = Array.from(event.target.value);
     for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
         const currentInputIndex = startInputIndex + inputCharIndex;
@@ -110,7 +110,7 @@ function focusOnNextInputOrNextButton(
     startInputIndex: number,
     inputRefs: React.MutableRefObject<HTMLInputElement>[],
     nextButton: React.MutableRefObject<HTMLButtonElement>,
-) {
+): void {
     const nextInputIndex = startInputIndex + 1;
 
     if (nextInputIndex === inputRefs.length) {
