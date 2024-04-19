@@ -47,18 +47,7 @@ export function OTPForm() {
     });
 
     function getNextElementForFocus(index: number) {
-        const nextInputIndex = index + 1;
-
-        if (nextInputIndex === inputRefs.length) {
-            return nextButton;
-        }
-
-        const valueInNextInput = inputRefs[nextInputIndex].current.value;
-        if (valueInNextInput !== '') {
-            return getNextElementForFocus(nextInputIndex);
-        }
-
-        return inputRefs[nextInputIndex];
+        return getNextElementForFocus2(index, inputRefs, nextButton, getNextElementForFocus);
     }
 
     function collectOTPValue() {
@@ -120,4 +109,24 @@ function fillInputsFromInputEvent(
 
         inputElementRefs[currentInputIndex].current.value = inputChar;
     }
+}
+
+function getNextElementForFocus2(
+    startInputIndex: number,
+    inputRefs: React.MutableRefObject<HTMLInputElement>[],
+    nextButton: React.MutableRefObject<HTMLButtonElement>,
+    getNextElementForFocus: (index: number) => React.MutableRefObject<HTMLInputElement | HTMLButtonElement>,
+) {
+    const nextInputIndex = startInputIndex + 1;
+
+    if (nextInputIndex === inputRefs.length) {
+        return nextButton;
+    }
+
+    const valueInNextInput = inputRefs[nextInputIndex].current.value;
+    if (valueInNextInput !== '') {
+        return getNextElementForFocus(nextInputIndex);
+    }
+
+    return inputRefs[nextInputIndex];
 }
