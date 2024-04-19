@@ -5,7 +5,7 @@ import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
 class cognitoTestClient {
-    private _mockedResult: Promise<void>;
+    private readonly _mockedResult: Promise<void>;
 
     constructor(mockedResult: Promise<void>) {
         this._mockedResult = mockedResult;
