@@ -10,6 +10,12 @@ import {
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import {
+    collectOTPValue,
+    fillInputsFromInputEvent,
+    focusOnNextInputOrNextButton,
+    isOTPInputEventValid,
+} from './OTPFormHelpers';
 
 export function OTPForm() {
     const { t } = useI18next();
@@ -75,52 +81,4 @@ export function OTPForm() {
             </div>
         </>
     );
-}
-
-function collectOTPValue(inputRefs: React.MutableRefObject<HTMLInputElement>[]): string {
-    let OTPCode = '';
-    inputRefs.forEach((input) => {
-        OTPCode += input.current.value;
-    });
-    return OTPCode;
-}
-
-function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>): boolean {
-    const upToSixDigitsRegExp = /^\d{1,6}$/;
-    return upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
-}
-
-function fillInputsFromInputEvent(
-    event: React.ChangeEvent<HTMLInputElement>,
-    startInputIndex: number,
-    inputElementRefs: React.MutableRefObject<HTMLInputElement>[],
-): void {
-    const inputCharArray = Array.from(event.target.value);
-    for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
-        const currentInputIndex = startInputIndex + inputCharIndex;
-        if (currentInputIndex === inputElementRefs.length) {
-            break;
-        }
-
-        inputElementRefs[currentInputIndex].current.value = inputChar;
-    }
-}
-
-function focusOnNextInputOrNextButton(
-    startInputIndex: number,
-    inputRefs: React.MutableRefObject<HTMLInputElement>[],
-    nextButton: React.MutableRefObject<HTMLButtonElement>,
-): void {
-    const nextInputIndex = startInputIndex + 1;
-
-    if (nextInputIndex === inputRefs.length) {
-        return nextButton.current.focus();
-    }
-
-    const valueInNextInput = inputRefs[nextInputIndex].current.value;
-    if (valueInNextInput !== '') {
-        return focusOnNextInputOrNextButton(nextInputIndex, inputRefs, nextButton);
-    }
-
-    return inputRefs[nextInputIndex].current.focus();
 }
