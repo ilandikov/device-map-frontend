@@ -9,8 +9,8 @@ export function collectOTPValue(inputRefs: React.MutableRefObject<HTMLInputEleme
 }
 
 export function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>): boolean {
-    const upToSixDigitsRegExp = /^\d{1,6}$/;
-    return upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
+    const oneToSixDigitsRegExp = /^\d{1,6}$/;
+    return oneToSixDigitsRegExp.test(event.target.value.slice(0, 6));
 }
 
 export function fillInputsFromInputEvent(
