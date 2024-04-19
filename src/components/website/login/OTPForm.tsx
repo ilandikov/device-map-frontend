@@ -22,15 +22,7 @@ export function OTPForm() {
     const inputRefs = [0, 1, 2, 3, 4, 5].map(() => useRef(null));
 
     function fillInputsFromInputEvent(event: React.ChangeEvent<HTMLInputElement>, startInputIndex: number) {
-        const inputCharArray = Array.from(event.target.value);
-        for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
-            const currentInputIndex = startInputIndex + inputCharIndex;
-            if (currentInputIndex === inputRefs.length) {
-                break;
-            }
-
-            inputRefs[currentInputIndex].current.value = inputChar;
-        }
+        fillInputsFromInputEvent2(event, startInputIndex, inputRefs);
     }
 
     const inputs = inputRefs.map((inputRef, index) => {
@@ -116,4 +108,20 @@ export function OTPForm() {
 function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>) {
     const upToSixDigitsRegExp = /^\d{1,6}$/;
     return upToSixDigitsRegExp.test(event.target.value.slice(0, 6));
+}
+
+function fillInputsFromInputEvent2(
+    event: React.ChangeEvent<HTMLInputElement>,
+    startInputIndex: number,
+    inputElementRefs: React.MutableRefObject<HTMLInputElement>[],
+) {
+    const inputCharArray = Array.from(event.target.value);
+    for (const [inputCharIndex, inputChar] of inputCharArray.entries()) {
+        const currentInputIndex = startInputIndex + inputCharIndex;
+        if (currentInputIndex === inputElementRefs.length) {
+            break;
+        }
+
+        inputElementRefs[currentInputIndex].current.value = inputChar;
+    }
 }
