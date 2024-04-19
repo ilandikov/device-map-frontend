@@ -115,7 +115,7 @@ function getNextElementForFocus2(
     startInputIndex: number,
     inputRefs: React.MutableRefObject<HTMLInputElement>[],
     nextButton: React.MutableRefObject<HTMLButtonElement>,
-    getNextElementForFocus: (index: number) => React.MutableRefObject<HTMLInputElement | HTMLButtonElement>,
+    _getNextElementForFocus: (index: number) => React.MutableRefObject<HTMLInputElement | HTMLButtonElement>,
 ) {
     const nextInputIndex = startInputIndex + 1;
 
@@ -125,7 +125,7 @@ function getNextElementForFocus2(
 
     const valueInNextInput = inputRefs[nextInputIndex].current.value;
     if (valueInNextInput !== '') {
-        return getNextElementForFocus(nextInputIndex);
+        return getNextElementForFocus2(nextInputIndex, inputRefs, nextButton, _getNextElementForFocus);
     }
 
     return inputRefs[nextInputIndex];
