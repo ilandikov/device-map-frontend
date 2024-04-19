@@ -39,7 +39,7 @@ class cognitoTestClient {
 export async function verifyCognitoEpicAction(
     sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
-    remoteServiceAnswer: Promise<void>,
+    remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
     const output$ = cognito(
