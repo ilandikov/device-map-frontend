@@ -46,11 +46,7 @@ export function OTPForm() {
     });
 
     function collectOTPValue() {
-        let OTPCode = '';
-        inputRefs.forEach((input) => {
-            OTPCode += input.current.value;
-        });
-        return OTPCode;
+        return collectOTPValue2(inputRefs);
     }
 
     return (
@@ -83,6 +79,14 @@ export function OTPForm() {
             </div>
         </>
     );
+}
+
+function collectOTPValue2(inputRefs: React.MutableRefObject<HTMLInputElement>[]) {
+    let OTPCode = '';
+    inputRefs.forEach((input) => {
+        OTPCode += input.current.value;
+    });
+    return OTPCode;
 }
 
 function isOTPInputEventValid(event: React.ChangeEvent<HTMLInputElement>) {
