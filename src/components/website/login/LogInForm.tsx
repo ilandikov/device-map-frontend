@@ -12,6 +12,7 @@ import {
 } from './redux/LoginModalAction';
 
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { ErrorMessage } from './ErrorMessage';
 
 export function LogInForm() {
     const { t } = useI18next();
@@ -38,7 +39,7 @@ export function LogInForm() {
                     }}
                     error={error}
                 />
-                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
+                <ErrorMessage error={error} />
             </div>
             <div className="login-modal-button-container">
                 <div className="login-modal-two-buttons-on-one-row">
