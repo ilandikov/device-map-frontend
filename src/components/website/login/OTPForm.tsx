@@ -8,7 +8,7 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
-import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 import {
     collectOTPValue,
     fillInputsFromInputEvent,
@@ -20,7 +20,8 @@ export function OTPForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { error } = useLoginModalAuthentication();
+    const { step, error } = useLoginModalAuthentication();
+    const showOTPCodeResendButton = step === AuthenticationStep.PASSWORD_CREATION_OTP;
 
     const nextButton = useRef(null);
 
@@ -64,7 +65,9 @@ export function OTPForm() {
                 >
                     {t('OTPSendAgain')}
                 </button>
-                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
+                {showOTPCodeResendButton && error && (
+                    <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>
+                )}
             </div>
             <div className="login-modal-button-container">
                 <button
