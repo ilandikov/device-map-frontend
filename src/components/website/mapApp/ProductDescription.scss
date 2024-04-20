@@ -2,11 +2,10 @@
   width: 335px;
   height: 545px;
 
-  top: 86px;
-  left: 20px;
-
   position: absolute;
   overflow: hidden;
+
+  animation-fill-mode: forwards;
 
   background: linear-gradient(360deg, rgb(30 30 30 / 100%) 0%, rgb(46 46 46 / 100%) 100%);
   border-radius: 10px;
@@ -49,5 +48,39 @@
         line-height: 20px;
       }
     }
+  }
+}
+
+.product-description-window-appears {
+  animation-name: keyframe-product-description-slide-in;
+  animation-duration: 1s;
+}
+
+@keyframes keyframe-product-description-slide-in {
+  from {
+    top: 86px;
+    left: -355px;
+  }
+
+  to {
+    top: 86px;
+    left: 20px;
+  }
+}
+
+.product-description-window-disappears {
+  animation-name: keyframe-product-description-slide-out;
+  animation-duration: 1s;
+}
+
+@keyframes keyframe-product-description-slide-out {
+  from {
+    top: 86px;
+    left: 20px;
+  }
+
+  to {
+    top: 86px;
+    left: -355px;
   }
 }

@@ -7,7 +7,10 @@
 
     .map-app-header-block-container {
         position: absolute;
-        top: 20px;
+
+        animation-fill-mode: forwards;
+        animation-name: keyframe-map-app-header-block-slide-in;
+        animation-duration: 1s;
 
         display: flex;
         flex-direction: row;
@@ -113,5 +116,15 @@
 
     .user-points:first-of-type {
         color: #FFFFFF;
+    }
+}
+
+@keyframes keyframe-map-app-header-block-slide-in {
+    from {
+        top: -100px
+    }
+
+    to {
+        top: 20px;
     }
 }

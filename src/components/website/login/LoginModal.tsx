@@ -11,8 +11,13 @@ import { Loader } from './Loader';
 import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
 import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
+import { MapAppUsageStep, useMapAppState } from '../mapApp/redux/MapAppState';
 
 export function LoginModal() {
+    const mapAppState = useMapAppState();
+    const showLoginModal = mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION;
+    const animationClass = showLoginModal ? 'login-modal-window-appears' : 'login-modal-window-disappears';
+
     const { step: authenticationStep } = useLoginModalAuthentication();
 
     const showShadows = authenticationStep === AuthenticationStep.WELCOME;
@@ -58,7 +63,7 @@ export function LoginModal() {
     }
 
     return (
-        <div className="login-modal-window">
+        <div className={`login-modal-window ${animationClass}`}>
             <div className="login-modal-container">
                 {showShadows && <LoginModalShadows />}
                 {showNavigationButtons && <NavigationButtons />}
