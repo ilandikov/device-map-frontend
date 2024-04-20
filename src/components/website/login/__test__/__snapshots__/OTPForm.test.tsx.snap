@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OTPForm snapshot tests should match snapshot with error 1`] = `
+exports[`OTPForm snapshot tests should match snapshot at OTP for password reset step with error 1`] = `
 [
   <div
     className="login-modal-input-container"
@@ -92,7 +92,7 @@ exports[`OTPForm snapshot tests should match snapshot with error 1`] = `
 ]
 `;
 
-exports[`OTPForm snapshot tests should match snapshot without error 1`] = `
+exports[`OTPForm snapshot tests should match snapshot at OTP for user creation step without error 1`] = `
 [
   <div
     className="login-modal-input-container"

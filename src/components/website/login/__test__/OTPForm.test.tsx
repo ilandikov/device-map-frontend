@@ -18,6 +18,7 @@ import {
     mockLoginModalAuthenticationState,
     mockPrepareSelector,
 } from '../../../../redux/__mocks__/mocks';
+import { AuthenticationStep } from '../redux/LoginModalAuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -30,15 +31,18 @@ function getInput(container: HTMLElement, inputIndex: number) {
 }
 
 describe('OTPForm snapshot tests', () => {
-    it('should match snapshot without error', () => {
-        mockLoginModalAuthenticationState({ error: null });
+    it('should match snapshot at OTP for user creation step without error', () => {
+        mockLoginModalAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null });
         const component = renderForSnapshotTest(<OTPForm />);
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match snapshot with error', () => {
-        mockLoginModalAuthenticationState({ error: new Error('thisShouldNotHappen') });
+    it('should match snapshot at OTP for password reset step with error', () => {
+        mockLoginModalAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
+            error: new Error('thisShouldNotHappen'),
+        });
         const component = renderForSnapshotTest(<OTPForm />);
 
         expect(component).toMatchSnapshot();
