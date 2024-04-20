@@ -15,6 +15,7 @@ import {
     focusOnNextInputOrNextButton,
     isOTPInputEventValid,
 } from './OTPFormHelpers';
+import { ErrorMessage } from './ErrorMessage';
 
 export function OTPForm() {
     const { t } = useI18next();
@@ -65,9 +66,7 @@ export function OTPForm() {
                 >
                     {t('OTPSendAgain')}
                 </button>
-                {showOTPCodeResendButton && error && (
-                    <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>
-                )}
+                {showOTPCodeResendButton && <ErrorMessage error={error} />}
             </div>
             <div className="login-modal-button-container">
                 <button

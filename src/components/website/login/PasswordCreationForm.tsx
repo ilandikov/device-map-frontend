@@ -10,6 +10,7 @@ import {
 } from './redux/LoginModalAction';
 
 import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { ErrorMessage } from './ErrorMessage';
 
 export function PasswordCreationForm() {
     const { t } = useI18next();
@@ -36,7 +37,7 @@ export function PasswordCreationForm() {
                     }}
                     error={error}
                 />
-                {error && <p className="login-modal-input-help login-modal-wrong-input">{t(error.message)}</p>}
+                <ErrorMessage error={error} />
             </div>
             <div className="login-modal-button-container">
                 <button
