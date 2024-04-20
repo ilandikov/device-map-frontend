@@ -25,7 +25,7 @@ export default function MapApp() {
             <MapAppHeader />
             {showProductDescription && <ProductDescription />}
             {showLoginModal && <LoginModal />}
-            <MapContainer className="map-app-map" center={latLng} scrollWheelZoom={false} zoom={17}>
+            <MapContainer className="map-app-map" center={latLng} scrollWheelZoom={false} zoom={17} zoomControl={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.com/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
