@@ -472,6 +472,17 @@ describe('password reset logic', () => {
     });
 });
 
+describe('OTP code resend logic', () => {
+    it('should reset the error when OTP is sent again', () => {
+        const initialState = buildAuthenticationState({
+            error: new Error('thisShouldDisappear'),
+        });
+        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
+
+        verifyStateChange(initialState, action, { error: null });
+    });
+});
+
 describe('logout logic', () => {
     it('should reset the whole state on user button click', () => {
         const initialState = buildAuthenticationState({

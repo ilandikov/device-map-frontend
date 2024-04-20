@@ -138,6 +138,21 @@ describe('password reset request tests', () => {
     );
 });
 
+describe('OTP code resend tests', () => {
+    it.each([
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)]],
+        [
+            Promise.reject(),
+            [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'cognitoUnknownException')],
+        ],
+    ])('should resign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
+        const initialState = buildAuthenticationState({});
+        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
+
+        await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
+    });
+});
+
 describe('user sign out tests', () => {
     it.each([
         [Promise.resolve(cognitoSignOutResult), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],

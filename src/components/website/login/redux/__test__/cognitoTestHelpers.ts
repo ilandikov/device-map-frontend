@@ -31,6 +31,10 @@ class cognitoTestClient {
         return this._mockedResult;
     }
 
+    resendConfirmCode() {
+        return this._mockedResult;
+    }
+
     signOut() {
         return this._mockedResult;
     }

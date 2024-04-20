@@ -10,7 +10,6 @@ import {
 import {
     LoginModalInputType,
     LoginModalRemoteRequestType,
-    loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
@@ -221,6 +220,9 @@ describe('OTP form action tests', () => {
         const resendOTPButton = getByText(container, 'OTPSendAgain');
         fireEvent.click(resendOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('OTPSendAgain'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(
+            1,
+            loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND),
+        );
     });
 });

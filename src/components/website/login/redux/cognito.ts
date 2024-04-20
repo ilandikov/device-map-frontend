@@ -59,6 +59,11 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         );
                     }
                     break;
+                case LoginModalRemoteRequestType.OTP_RESEND:
+                    return observeEndpoint(
+                        cognitoClient.resendConfirmCode(authenticationState.email),
+                        LoginModalRemoteAnswerType.OTP_RESEND,
+                    );
                 case LoginModalRemoteRequestType.USERNAME:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
                         return observeEndpoint(
