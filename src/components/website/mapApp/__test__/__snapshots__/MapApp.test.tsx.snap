@@ -91,6 +91,16 @@ exports[`MapApp snapshot tests should match the snapshot at device management st
   <div
     className="device-map"
   />
+  <div
+    className="map-app-location-loader-container"
+  >
+    <p>
+      Loading location
+    </p>
+    <div
+      className="map-app-location-loader"
+    />
+  </div>
 </div>
 `;
 
@@ -180,6 +190,16 @@ exports[`MapApp snapshot tests should match the snapshot at home screen step 1`]
   <div
     className="device-map"
   />
+  <div
+    className="map-app-location-loader-container"
+  >
+    <p>
+      Loading location
+    </p>
+    <div
+      className="map-app-location-loader"
+    />
+  </div>
 </div>
 `;
 
@@ -271,5 +291,15 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
   <div
     className="device-map"
   />
+  <div
+    className="map-app-location-loader-container"
+  >
+    <p>
+      Loading location
+    </p>
+    <div
+      className="map-app-location-loader"
+    />
+  </div>
 </div>
 `;

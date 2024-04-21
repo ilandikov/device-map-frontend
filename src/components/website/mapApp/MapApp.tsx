@@ -21,6 +21,10 @@ export default function MapApp() {
             {showProductDescription && <ProductDescription />}
             {showLoginModal && <LoginModal />}
             <DeviceMap />
+            <div className="map-app-location-loader-container">
+                <p>Loading location</p>
+                <div className="map-app-location-loader"></div>
+            </div>
         </div>
     );
 }
