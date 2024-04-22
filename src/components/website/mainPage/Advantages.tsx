@@ -4,17 +4,16 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 /* Local dependencies */
 import './Advantages.scss';
+import { AdvantageFullBlock, AdvantageFullBlockProperties } from './AdvantageFullBlock';
+import { AdvantageSplitBlock, AdvantageSplitBlockProperties } from './AdvantageSplitBlock';
 
-type AdvantageBlockProperties = {
+export type AdvantageBlockProperties = {
     header: string;
     description: string;
     textColor: string;
     backgroundColor: string;
     image: ReactElement;
 };
-
-type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle: string };
-type AdvantageSplitBlockProperties = AdvantageBlockProperties & { imageFirst: boolean };
 
 export default function Advantages() {
     const phoneOnGreen: AdvantageFullBlockProperties = {
@@ -81,54 +80,4 @@ export default function Advantages() {
             </div>
         </section>
     );
-}
-
-function AdvantageFullBlock({ props }: { props: AdvantageFullBlockProperties }) {
-    const fullBlockColors = {
-        backgroundColor: props.backgroundColor,
-        color: props.textColor,
-    };
-
-    return (
-        <div className="advantage-block advantage-block-radius" style={fullBlockColors}>
-            <div className="advantage-block-half">
-                <div className={props.imageContainerStyle}>{props.image}</div>
-            </div>
-            <div className="advantage-block-half">
-                <div className="advantage-block-text advantage-block-half-text-container">
-                    <p>{props.header}.</p>
-                    <p>{props.description}</p>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function AdvantageSplitBlock({ props }: { props: AdvantageSplitBlockProperties }) {
-    const halfBlockColors = {
-        color: props.textColor,
-        backgroundColor: props.backgroundColor,
-    };
-
-    const advantageBlocks = [
-        <div
-            className="advantage-block-half advantage-block-radius"
-            style={halfBlockColors}
-            key="advantageSplitBlock_Text"
-        >
-            <div className="advantage-block-text advantage-block-half-text-container">
-                <p>{props.header}.</p>
-                <p>{props.description}</p>
-            </div>
-        </div>,
-        <div className="advantage-block-half" key="advantageSplitBlock_Image">
-            {props.image}
-        </div>,
-    ];
-
-    if (props.imageFirst) {
-        advantageBlocks.reverse();
-    }
-
-    return <div className="advantage-block">{advantageBlocks}</div>;
 }
