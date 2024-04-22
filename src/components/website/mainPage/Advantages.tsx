@@ -1,67 +1,13 @@
 /* External dependencies */
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 
 /* Local dependencies */
 import './Advantages.scss';
-
-type AdvantageBlockProperties = {
-    header: string;
-    description: string;
-    textColor: string;
-    backgroundColor: string;
-    image: ReactElement;
-};
-
-type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle: string };
-type AdvantageSplitBlockProperties = AdvantageBlockProperties & { imageFirst: boolean };
+import { AdvantageFullBlock, AdvantageFullBlockProperties } from './AdvantageFullBlock';
+import { AdvantageSplitBlock, AdvantageSplitBlockProperties } from './AdvantageSplitBlock';
 
 export default function Advantages() {
-    const phoneOnGreen: AdvantageFullBlockProperties = {
-        header: 'Играй',
-        description: 'Увлекательная игра',
-        textColor: '#000000',
-        backgroundColor: '#CBEA5E',
-        image: <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />,
-        imageContainerStyle: '',
-    };
-
-    const giftRight: AdvantageSplitBlockProperties = {
-        header: 'Обменивай',
-        description: 'Получай подарки',
-        textColor: '#000000',
-        backgroundColor: '#FFFFFF',
-        image: <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />,
-        imageFirst: false,
-    };
-
-    const notebookOnBlue: AdvantageFullBlockProperties = {
-        header: 'Везде',
-        description: 'На всех платформах',
-        textColor: '#FFFFFF',
-        backgroundColor: '#0066FF',
-        image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
-        imageContainerStyle: '',
-    };
-
-    const terminalOnWhite: AdvantageFullBlockProperties = {
-        header: 'Оглянись',
-        description: 'Терминалы везде',
-        textColor: '#000000',
-        backgroundColor: '#FFFFFF',
-        image: <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />,
-        imageContainerStyle: 'advantage-block-terminal-image-container',
-    };
-
-    const locationLeft: AdvantageSplitBlockProperties = {
-        header: 'Отмечай',
-        description: 'Мы поставим терминал',
-        textColor: '#000000',
-        backgroundColor: '#FFFFFF',
-        image: <StaticImage src="../../../assets/images/Location.png" alt="advantage" />,
-        imageFirst: true,
-    };
-
     return (
         <section className="advantages-container">
             <AdvantageFullBlock props={phoneOnGreen} />
@@ -83,52 +29,47 @@ export default function Advantages() {
     );
 }
 
-function AdvantageFullBlock({ props }: { props: AdvantageFullBlockProperties }) {
-    const fullBlockColors = {
-        backgroundColor: props.backgroundColor,
-        color: props.textColor,
-    };
+const phoneOnGreen: AdvantageFullBlockProperties = {
+    header: 'Играй',
+    description: 'Увлекательная игра',
+    textColor: '#000000',
+    backgroundColor: '#CBEA5E',
+    image: <StaticImage src="../../../assets/images/iPhone 14.png" alt="advantage" />,
+    imageContainerStyle: '',
+};
 
-    return (
-        <div className="advantage-block advantage-block-radius" style={fullBlockColors}>
-            <div className="advantage-block-half">
-                <div className={props.imageContainerStyle}>{props.image}</div>
-            </div>
-            <div className="advantage-block-half">
-                <div className="advantage-block-text advantage-block-half-text-container">
-                    <p>{props.header}.</p>
-                    <p>{props.description}</p>
-                </div>
-            </div>
-        </div>
-    );
-}
+const giftRight: AdvantageSplitBlockProperties = {
+    header: 'Обменивай',
+    description: 'Получай подарки',
+    textColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    image: <StaticImage src="../../../assets/images/Gift.png" alt="advantage" />,
+    imageFirst: false,
+};
 
-function AdvantageSplitBlock({ props }: { props: AdvantageSplitBlockProperties }) {
-    const halfBlockColors = {
-        color: props.textColor,
-        backgroundColor: props.backgroundColor,
-    };
+const notebookOnBlue: AdvantageFullBlockProperties = {
+    header: 'Везде',
+    description: 'На всех платформах',
+    textColor: '#FFFFFF',
+    backgroundColor: '#0066FF',
+    image: <StaticImage src="../../../assets/images/MacBook Pro 16.png" alt="advantage" />,
+    imageContainerStyle: '',
+};
 
-    const advantageBlocks = [
-        <div
-            className="advantage-block-half advantage-block-radius"
-            style={halfBlockColors}
-            key="advantageSplitBlock_Text"
-        >
-            <div className="advantage-block-text advantage-block-half-text-container">
-                <p>{props.header}.</p>
-                <p>{props.description}</p>
-            </div>
-        </div>,
-        <div className="advantage-block-half" key="advantageSplitBlock_Image">
-            {props.image}
-        </div>,
-    ];
+const terminalOnWhite: AdvantageFullBlockProperties = {
+    header: 'Оглянись',
+    description: 'Терминалы везде',
+    textColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    image: <StaticImage src="../../../assets/images/Terminal.png" alt="advantage" />,
+    imageContainerStyle: 'advantage-block-terminal-image-container',
+};
 
-    if (props.imageFirst) {
-        advantageBlocks.reverse();
-    }
-
-    return <div className="advantage-block">{advantageBlocks}</div>;
-}
+const locationLeft: AdvantageSplitBlockProperties = {
+    header: 'Отмечай',
+    description: 'Мы поставим терминал',
+    textColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    image: <StaticImage src="../../../assets/images/Location.png" alt="advantage" />,
+    imageFirst: true,
+};

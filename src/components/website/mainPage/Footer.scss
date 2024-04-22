@@ -5,85 +5,85 @@
     height: auto;
     padding: 32px 0;
 
-    display: flex;
-    justify-content: center;
-}
+    .footer-inner-container {
+        max-width: 1200px;
+        width: 100%;
 
-.footer-inner-container {
-    max-width: 1200px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
+        margin: 0 auto;
 
-.footer-brand {
-    max-width: 374px;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
-
-    .footer-brand-logo {
         display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 8px;
+        justify-content: space-between;
 
-        p {
-            font-family: Tektur, sans-serif;
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 23px;
+        .footer-brand {
+            max-width: 374px;
+            width: 100%;
 
-            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+
+            .footer-brand-logo {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 8px;
+
+                p {
+                    font-family: Tektur, sans-serif;
+                    font-size: 64px;
+                    font-weight: 700;
+                    line-height: 23px;
+
+                    color: #FFFFFF;
+                }
+            }
+
+            .footer-brand-description {
+                color: #FFFFFF;
+                opacity: 0.5;
+
+                p {
+                    font-size: 12px;
+                    font-weight: 500;
+                    line-height: 15px;
+                }
+
+                p:first-child {
+                    font-family: Tektur, sans-serif;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 23px;
+                }
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 16px;
+
+            li {
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 17px;
+                color: #FFFFFF;
+            }
+
+            li:first-child {
+                opacity: 0.5;
+            }
+        }
+
+        .footer-contacts {
+            height: 24px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 16px;
         }
     }
-
-    .footer-brand-description {
-        color: #FFFFFF;
-        opacity: 0.5;
-
-        p {
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 15px;
-        }
-
-        p:first-child {
-            font-family: Tektur, sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 23px;
-        }
-    }
-}
-
-.footer-links {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 16px;
-
-    li {
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 17px;
-        color: #FFFFFF;
-    }
-
-    li:first-child {
-        opacity: 0.5;
-    }
-}
-
-.footer-contacts {
-    height: 24px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 16px;
 }

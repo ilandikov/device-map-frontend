@@ -15,10 +15,10 @@ exports[`MainPage component should match the snapshot 1`] = `
     </div>
   </header>
   <section
-    className="map-background"
+    className="hero-container"
   >
     <div
-      className="map-background-video"
+      className="hero-background-video"
     >
       <video
         autoPlay={true}
@@ -26,101 +26,86 @@ exports[`MainPage component should match the snapshot 1`] = `
         muted={true}
       >
         <source
-          className="map-background-video-source"
           src="test-file-stub"
           type="video/mp4"
         />
       </video>
     </div>
     <div
-      className="map-content-container"
+      className="hero-content-container"
     >
       <div
-        className="map-brand"
+        className="hero-brand"
       >
         <img
           alt="logo-with-brand"
           src="test-file-stub"
         />
-        <p
-          className="map-brand-text"
-        >
+        <p>
           Карта
         </p>
       </div>
       <p
-        className="map-text"
+        className="hero-text"
       >
         Карта терминалов от Finik, исследуйте,
         <br />
          отмечайте и зарабатывайте баллы
       </p>
       <div
-        className="map-links"
+        className="hero-links"
       >
         <a
           href="/webapp"
         >
           <img
-            alt="map-links-webapp"
+            alt="hero-links-webapp"
             src="test-file-stub"
           />
         </a>
         <img
-          alt="map-links-google-play"
+          alt="hero-links-google-play"
           src="test-file-stub"
         />
         <img
-          alt="map-links-apple-store"
+          alt="hero-links-apple-store"
           src="test-file-stub"
         />
       </div>
     </div>
   </section>
   <section
-    className="phone-background phone-text-blocks"
+    className="phone-text-blocks"
   >
     <div
-      className="phone-header-and-description"
+      className="phone-text-block"
     >
-      <p
-        className="header"
-      >
+      <p>
         Исследуйте
       </p>
-      <p
-        className="description"
-      >
+      <span>
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-      </p>
+      </span>
     </div>
     <div
-      className="phone-header-and-description"
+      className="phone-text-block"
     >
-      <p
-        className="header"
-      >
+      <p>
         Отмечайте
       </p>
-      <p
-        className="description"
-      >
+      <span>
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-      </p>
+      </span>
     </div>
     <div
-      className="phone-header-and-description"
+      className="phone-text-block"
     >
-      <p
-        className="header"
-      >
+      <p>
         Зарабатывай баллы
       </p>
-      <p
-        className="description"
-      >
+      <span>
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-      </p>
+      </span>
     </div>
   </section>
   <section
