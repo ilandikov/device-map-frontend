@@ -78,7 +78,7 @@ exports[`MainPage component should match the snapshot 1`] = `
     </div>
   </section>
   <section
-    className="phone-background phone-text-blocks"
+    className="phone-text-blocks"
   >
     <div
       className="phone-header-and-description"

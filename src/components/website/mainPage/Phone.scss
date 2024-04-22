@@ -16,19 +16,16 @@
     color: rgb(255 255 255 / 60%);
 }
 
-.phone-background {
-    min-width: 1342px;
-    width: 100%;
-    height: 1082px;
-    background-image: url("../../../assets/images/Phone.png");
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-}
-
 .phone-text-blocks {
+    width: 1342px;
+    height: 1082px;
+
+    background-image: url("../../../assets/images/Phone.png");
+    background-position: right;
+
     padding-top: 110px;
     padding-left: 120px;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
