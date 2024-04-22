@@ -2,6 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import LogoGreen from '/src/assets/images/LogoGreen.svg';
 import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import './LoginModalHeader.scss';
 
 export function LoginModalHeader() {
     const { step: authenticationStep } = useLoginModalAuthentication();
@@ -10,7 +11,7 @@ export function LoginModalHeader() {
 
     return (
         <div className="login-modal-header-container">
-            <img className="login-modal-logo" src={LogoGreen} alt="login-modal-logo" />
+            <img className="login-modal-header-logo" src={LogoGreen} alt="login-modal-header-logo" />
             <p className="login-modal-header">{header}</p>
             <p className={`login-modal-header-description${opaqueDescription ? ' login-modal-opaque-text' : ''}`}>
                 {description}

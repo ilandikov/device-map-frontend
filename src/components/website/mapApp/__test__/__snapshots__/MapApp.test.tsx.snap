@@ -251,8 +251,8 @@ exports[`MapApp snapshot tests should match the snapshot at user authentication 
         className="login-modal-header-container"
       >
         <img
-          alt="login-modal-logo"
-          className="login-modal-logo"
+          alt="login-modal-header-logo"
+          className="login-modal-header-logo"
           src="test-file-stub"
         />
         <p
