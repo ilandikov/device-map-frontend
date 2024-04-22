@@ -16,23 +16,31 @@ export function UserLocationMarker() {
     });
 
     const [position, setPosition] = React.useState(null);
+    const [loadingPosition, setLoadingPosition] = React.useState(false);
 
     const map = useMapEvents({
         locationfound(locationEvent) {
             setPosition(locationEvent.latlng);
             map.flyTo(locationEvent.latlng, map.getZoom());
+            map.on('zoomend', function () {
+                setLoadingPosition(false);
+            });
         },
     });
 
     useEffect(() => {
         map.locate();
+        setLoadingPosition(true);
     }, []);
 
     return (
-        position && (
-            <Marker icon={markerIcon} position={position}>
-                <Popup>You are here</Popup>
-            </Marker>
-        )
+        <>
+            {loadingPosition && <div className="thisIsTheLoader"></div>}
+            {position && (
+                <Marker icon={markerIcon} position={position}>
+                    <Popup>You are here</Popup>
+                </Marker>
+            )}
+        </>
     );
 }
