@@ -18,6 +18,21 @@ exports[`MainPage component should match the snapshot 1`] = `
     className="map-background"
   >
     <div
+      className="map-background-video"
+    >
+      <video
+        autoPlay={true}
+        loop={true}
+        muted={true}
+      >
+        <source
+          className="map-background-video-source"
+          src="test-file-stub"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div
       className="map-content-container"
     >
       <div

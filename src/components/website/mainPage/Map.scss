@@ -1,14 +1,38 @@
 .map-background {
-    width: 100%;
-    height: 710px;
-    background-image: url("../../../assets/images/Map.png");
-    background-size: auto;
-    background-position: center;
-    background-repeat: no-repeat;
-
     display: flex;
-    align-items: center;
     justify-content: center;
+
+    .map-background-video {
+        width: 100%;
+
+        z-index: -1;
+
+        mask-image: url("../../../assets/images/Map.png");
+        mask-size: 100%;
+        mask-repeat: no-repeat;
+
+        video {
+            width: 100%;
+
+            transform: scale(1.2);
+
+            animation: fade-in-animation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fade-in-animation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+    }
+
+
 }
 
 .map-brand {
@@ -26,12 +50,15 @@
 }
 
 .map-content-container {
+    width: 584px;
+
+    position: absolute;
+    top: 220px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-
-    transform: translateY(-28%);
 }
 
 .map-text {
