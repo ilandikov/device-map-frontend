@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header';
 
 /* Local dependencies */
-import Map from './Map';
+import Hero from './Hero';
 import Phone from './Phone';
 import Advantages from './Advantages';
 import Footer from './Footer';
@@ -13,7 +13,7 @@ export default function MainPage() {
     return (
         <div className="main-page-container">
             <Header />
-            <Map />
+            <Hero />
             <Phone />
             <Advantages />
             <Footer />
