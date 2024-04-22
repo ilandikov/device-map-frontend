@@ -1,7 +1,12 @@
-import React from 'react';
-import { AdvantageBlockProperties } from './Advantages';
+import React, { ReactElement } from 'react';
 
-export type AdvantageFullBlockProperties = AdvantageBlockProperties & { imageContainerStyle: string };
+export type AdvantageFullBlockProperties = {
+    header: string;
+    description: string;
+    textColor: string;
+    backgroundColor: string;
+    image: ReactElement;
+} & { imageContainerStyle: string };
 
 export function AdvantageFullBlock({ props }: { props: AdvantageFullBlockProperties }) {
     const fullBlockColors = {

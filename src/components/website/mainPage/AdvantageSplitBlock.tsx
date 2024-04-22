@@ -1,7 +1,12 @@
-import React from 'react';
-import { AdvantageBlockProperties } from './Advantages';
+import React, { ReactElement } from 'react';
 
-export type AdvantageSplitBlockProperties = AdvantageBlockProperties & { imageFirst: boolean };
+export type AdvantageSplitBlockProperties = {
+    header: string;
+    description: string;
+    textColor: string;
+    backgroundColor: string;
+    image: ReactElement;
+} & { imageFirst: boolean };
 
 export function AdvantageSplitBlock({ props }: { props: AdvantageSplitBlockProperties }) {
     const halfBlockColors = {

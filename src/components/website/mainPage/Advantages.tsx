@@ -1,19 +1,11 @@
 /* External dependencies */
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 
 /* Local dependencies */
 import './Advantages.scss';
 import { AdvantageFullBlock, AdvantageFullBlockProperties } from './AdvantageFullBlock';
 import { AdvantageSplitBlock, AdvantageSplitBlockProperties } from './AdvantageSplitBlock';
-
-export type AdvantageBlockProperties = {
-    header: string;
-    description: string;
-    textColor: string;
-    backgroundColor: string;
-    image: ReactElement;
-};
 
 export default function Advantages() {
     const phoneOnGreen: AdvantageFullBlockProperties = {
