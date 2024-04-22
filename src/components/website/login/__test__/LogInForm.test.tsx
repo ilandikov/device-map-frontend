@@ -1,5 +1,6 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
+import { verifyAll } from 'approvals/lib/Providers/Jest/JestApprovals';
 import { LogInForm } from '../LogInForm';
 import {
     createEvent,
@@ -37,9 +38,26 @@ describe('LogInForm snapshot test', () => {
     });
 });
 
+function runScenario(preformUserAction: (c) => void) {
+    mockAuthenticationState({ step: AuthenticationStep.LOGIN });
+    const container = renderForActionDispatchTest(<LogInForm />);
+
+    preformUserAction(container);
+    const lastCall = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1];
+    return JSON.stringify(lastCall);
+}
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
+    });
+
+    it('should show the already input email on password input stage', () => {
+        mockAuthenticationState({ email: 'here_is_my@email.com' });
+        const container = renderForActionDispatchTest(<LogInForm />);
+
+        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
+        expect(emailInput.value).toEqual('here_is_my@email.com');
     });
 
     it('should update the user email on input on password input stage', () => {
@@ -49,18 +67,9 @@ describe('LogInForm action tests', () => {
         const emailInput = getByTestId(container, 'emailInput');
         fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputTypes.USER_EMAIL, 'hereIsMyMail@server.com'),
-        );
-    });
-
-    it('should show the already input email on password input stage', () => {
-        mockAuthenticationState({ email: 'here_is_my@email.com' });
-        const container = renderForActionDispatchTest(<LogInForm />);
-
-        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
-        expect(emailInput.value).toEqual('here_is_my@email.com');
+        const expect1 = expect(mockDispatch);
+        const loginModalInput1 = loginModalInput(LoginModalInputTypes.USER_EMAIL, 'hereIsMyMail@server.com');
+        expect1.toHaveBeenNthCalledWith(1, loginModalInput1);
     });
 
     it('should update user password when typed', () => {
@@ -94,5 +103,23 @@ describe('LogInForm action tests', () => {
         fireEvent.click(resetPasswordButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('resetPassword'));
+    });
+
+    it('clicks', () => {
+        function doClick(buttonName): (HTMLElement) => void {
+            return (c) => fireEvent.click(getByText(c, buttonName));
+        }
+
+        function typeInInput(inputName, inputValue): (HTMLElement) => void {
+            return (c) => fireEvent.change(getByTestId(c, inputName), createEvent(inputValue));
+        }
+
+        const inputs = [
+            typeInInput('emailInput', 'hereIsMyMail@server.com'),
+            typeInInput('userPasswordLogin', 'strongPassword'),
+            doClick('next'),
+            doClick('resetPassword'),
+        ];
+        verifyAll('clicks', inputs, (i) => runScenario(i));
     });
 });
