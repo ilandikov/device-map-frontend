@@ -11,8 +11,8 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP checking for
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -53,8 +53,8 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP checking for
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -95,8 +95,8 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP for login st
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -207,8 +207,8 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -319,8 +319,8 @@ exports[`LoginModal snapshot tests should match the snapshot at login loading st
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -383,8 +383,8 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -490,8 +490,8 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -550,8 +550,8 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -614,8 +614,8 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -710,8 +710,8 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset r
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -770,8 +770,8 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
@@ -850,8 +850,8 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
       className="login-modal-header-container"
     >
       <img
-        alt="login-modal-logo"
-        className="login-modal-logo"
+        alt="login-modal-header-logo"
+        className="login-modal-header-logo"
         src="test-file-stub"
       />
       <p
