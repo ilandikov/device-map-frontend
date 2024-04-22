@@ -4,6 +4,7 @@ import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
 import { LoginModalShadows } from './LoginModalShadows';
 import './LoginModal.scss';
+import './LoginModalCommon.scss';
 import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';

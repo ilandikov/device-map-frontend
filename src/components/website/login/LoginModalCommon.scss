@@ -1,0 +1,114 @@
+.login-modal-input-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.login-modal-opaque-text {
+  opacity: 0.5;
+}
+
+.login-modal-input-help {
+  margin-right: auto;
+
+  text-align: left;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+
+.login-modal-input-box-container {
+  height: 52px;
+  width: 100%;
+
+  background-color: #222222;
+
+  border: 2px solid #3A3A3A;
+  border-radius: 10px;
+
+  padding: 0 14px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  .login-modal-input-envelope-image {
+    width: 20px;
+    height: 16px;
+  }
+
+  .login-modal-input-text {
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+  }
+}
+
+.login-modal-correct-input {
+  color: #ACF709;
+}
+
+.login-modal-wrong-input {
+  color: #FF5572;
+}
+
+.login-modal-wrong-input-border {
+  border-color: #FF5572;
+}
+
+.login-modal-button-container {
+  width: 100%;
+
+  margin-top: auto;
+  padding-bottom: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+
+  button {
+    height: 52px;
+    width: inherit;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
+
+  .login-modal-button-black-on-green {
+    color: #000000;
+    background-color: #ACF709;
+  }
+
+  .login-modal-button-green-on-black {
+    color: #ACF709;
+    background-color: #000000;
+  }
+
+  .login-modal-two-buttons-on-one-row {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 11px;
+
+    p {
+      white-space: nowrap;
+    }
+  }
+}
