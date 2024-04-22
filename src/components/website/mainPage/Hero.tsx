@@ -21,7 +21,7 @@ export default function Hero() {
             <div className="hero-content-container">
                 <div className="hero-brand">
                     <img src={Logo} alt="logo-with-brand" />
-                    <p className="hero-brand-text">Карта</p>
+                    <p>Карта</p>
                 </div>
                 <p className="hero-text">
                     Карта терминалов от Finik, исследуйте,

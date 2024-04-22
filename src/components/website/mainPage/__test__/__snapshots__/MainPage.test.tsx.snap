@@ -41,9 +41,7 @@ exports[`MainPage component should match the snapshot 1`] = `
           alt="logo-with-brand"
           src="test-file-stub"
         />
-        <p
-          className="hero-brand-text"
-        >
+        <p>
           Карта
         </p>
       </div>
