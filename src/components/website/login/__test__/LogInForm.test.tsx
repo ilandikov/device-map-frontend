@@ -1,6 +1,7 @@
 import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { verifyAll } from 'approvals/lib/Providers/Jest/JestApprovals';
+import { printJson } from 'approvals/lib/Utilities/Printers';
 import { LogInForm } from '../LogInForm';
 import {
     createEvent,
@@ -44,7 +45,7 @@ function runScenario(preformUserAction: (c) => void) {
 
     preformUserAction(container);
     const lastCall = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1];
-    return JSON.stringify(lastCall);
+    return `${preformUserAction[0]} => ${printJson(lastCall)}`;
 }
 
 describe('LogInForm action tests', () => {

@@ -1,7 +1,33 @@
 clicks
 
 
-[{"type":"input","input":{"type":"userEmail","payload":"hereIsMyMail@server.com"}}]
-[{"type":"input","input":{"type":"userPassword","payload":"strongPassword"}}]
-[{"type":"verifyRequest","verify":"userEmailAndPassword"}]
-[{"type":"buttonClicked","button":"resetPassword"}]
+undefined => [
+  {
+    "type": "input",
+    "input": {
+      "type": "userEmail",
+      "payload": "hereIsMyMail@server.com"
+    }
+  }
+]
+undefined => [
+  {
+    "type": "input",
+    "input": {
+      "type": "userPassword",
+      "payload": "strongPassword"
+    }
+  }
+]
+undefined => [
+  {
+    "type": "verifyRequest",
+    "verify": "userEmailAndPassword"
+  }
+]
+undefined => [
+  {
+    "type": "buttonClicked",
+    "button": "resetPassword"
+  }
+]
