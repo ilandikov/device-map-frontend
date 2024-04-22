@@ -15,7 +15,7 @@ export default function Hero() {
         <section className="hero-container">
             <div className="hero-background-video">
                 <video autoPlay loop muted>
-                    <source src={Kyrgyzstan} type="video/mp4" className="map-background-video-source" />
+                    <source src={Kyrgyzstan} type="video/mp4" />
                 </video>
             </div>
             <div className="hero-content-container">

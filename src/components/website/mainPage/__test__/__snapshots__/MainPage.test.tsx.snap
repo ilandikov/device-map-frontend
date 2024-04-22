@@ -26,7 +26,6 @@ exports[`MainPage component should match the snapshot 1`] = `
         muted={true}
       >
         <source
-          className="map-background-video-source"
           src="test-file-stub"
           type="video/mp4"
         />
