@@ -17,21 +17,21 @@
   backdrop-filter: blur(10px);
 
   text-align: center;
-}
 
-.login-modal-container {
-  max-width: 340px;
+  .login-modal-container {
+    max-width: 340px;
 
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 
-  margin: 0 auto;
+    margin: 0 auto;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+  }
 }
 
 .login-modal-input-container {
