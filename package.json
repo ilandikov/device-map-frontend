@@ -30,6 +30,7 @@
     "amazon-cognito-identity-js": "6.3.7",
     "apollo-cache-inmemory": "1.6.6",
     "apollo3-cache-persist": "0.14.1",
+    "approvals": "^6.2.4",
     "atomize": "1.0.28",
     "aws-appsync": "4.1.9",
     "aws-appsync-auth-link": "3.0.7",
