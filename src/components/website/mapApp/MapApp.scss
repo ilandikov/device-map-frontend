@@ -6,22 +6,3 @@
 
     overflow: scroll;
 }
-
-.map-app-map {
-    height: 100vh;
-    width: 100vw;
-
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    position: absolute;
-    z-index: -1000;
-}
-
-.leaflet-layer,
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out,
-.leaflet-control-attribution {
-    filter: invert(85%) hue-rotate(180deg) brightness(95%) contrast(90%);
-}
