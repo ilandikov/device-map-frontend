@@ -81,46 +81,34 @@ exports[`MainPage component should match the snapshot 1`] = `
     className="phone-text-blocks"
   >
     <div
-      className="phone-header-and-description"
+      className="phone-text-block"
     >
-      <p
-        className="header"
-      >
+      <p>
         Исследуйте
       </p>
-      <p
-        className="description"
-      >
+      <span>
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-      </p>
+      </span>
     </div>
     <div
-      className="phone-header-and-description"
+      className="phone-text-block"
     >
-      <p
-        className="header"
-      >
+      <p>
         Отмечайте
       </p>
-      <p
-        className="description"
-      >
+      <span>
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-      </p>
+      </span>
     </div>
     <div
-      className="phone-header-and-description"
+      className="phone-text-block"
     >
-      <p
-        className="header"
-      >
+      <p>
         Зарабатывай баллы
       </p>
-      <p
-        className="description"
-      >
+      <span>
         Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-      </p>
+      </span>
     </div>
   </section>
   <section

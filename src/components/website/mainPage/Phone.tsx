@@ -8,11 +8,9 @@ export default function Phone() {
         <section className="phone-text-blocks">
             {headers.map((header) => {
                 return (
-                    <div className="phone-header-and-description" key={header}>
-                        <p className="header">{header}</p>
-                        <p className="description">
-                            Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
-                        </p>
+                    <div className="phone-text-block" key={header}>
+                        <p>{header}</p>
+                        <span>Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</span>
                     </div>
                 );
             })}
