@@ -12,27 +12,27 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 100px;
-}
 
-.phone-text-block {
-    width: 400px;
-    height: 140px;
+    .phone-text-block {
+        width: 400px;
+        height: 140px;
 
-    p {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 64px;
-        line-height: 77px;
-        text-align: left;
-        color: #FFFFFF;
-        margin-bottom: 16px;
-    }
+        p {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 64px;
+            line-height: 77px;
+            text-align: left;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+        }
 
-    span {
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 24px;
-        text-align: left;
-        color: rgb(255 255 255 / 60%);
+        span {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 24px;
+            text-align: left;
+            color: rgb(255 255 255 / 60%);
+        }
     }
 }
