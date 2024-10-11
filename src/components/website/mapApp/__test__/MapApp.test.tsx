@@ -37,4 +37,17 @@ describe('MapApp snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at when devices list is shown', () => {
+        mockMapAppState({
+            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            selectedDeviceMarker: {
+                lat: 123,
+                lng: 456,
+            },
+        });
+        const component = renderForSnapshotTest(<MapApp />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
