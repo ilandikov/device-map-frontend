@@ -6,7 +6,7 @@ import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
 import { useMapAppState } from './redux/MapAppState';
 
-function devicesShowList(lat: number, lng: number) {}
+function mapAppShowDevicesList(lat: number, lng: number) {}
 
 export function DeviceMarkers() {
     const deviceMarkerIcon = new Icon({
@@ -29,7 +29,7 @@ export function DeviceMarkers() {
                 position={devicePosition}
                 eventHandlers={{
                     click: (event) => {
-                        devicesShowList(event.latlng.lat, event.latlng.lng);
+                        mapAppShowDevicesList(event.latlng.lat, event.latlng.lng);
                     },
                 }}
             />
