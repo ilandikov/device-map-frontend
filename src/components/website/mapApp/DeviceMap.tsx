@@ -25,10 +25,11 @@ export function DeviceMap() {
         { lat: 42.85610049481582, lng: 74.60671663284303 },
     ];
 
-    const deviceMarkers = devices.map((device) => {
+    const deviceMarkers = devices.map((device, index) => {
         const devicePosition = new LatLng(device.lat, device.lng);
         return (
             <Marker
+                key={`DeviceMarker${index}`}
                 icon={deviceMarkerIcon}
                 position={devicePosition}
                 eventHandlers={{
