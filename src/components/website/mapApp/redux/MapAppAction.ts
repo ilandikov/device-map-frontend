@@ -3,6 +3,7 @@ export enum MapAppActionType {
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
     LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
+    SHOW_DEVICES_LIST = 'SHOW_DEVICES_LIST',
 }
 
 export interface MapAppAction {
@@ -25,4 +26,6 @@ export function mapAppAuthenticationCompleted(): MapAppAction {
     return { type: MapAppActionType.AUTHENTICATION_COMPLETED };
 }
 
-export function mapAppShowDevicesList(lat: number, lng: number) {}
+export function mapAppShowDevicesList(lat: number, lng: number) {
+    return { type: MapAppActionType.SHOW_DEVICES_LIST, location: { lat, lng } };
+}
