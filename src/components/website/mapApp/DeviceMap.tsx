@@ -22,7 +22,12 @@ export function DeviceMap() {
         lng: 74.6085298061371,
     };
 
-    const deviceMarkers = <Marker icon={deviceMarkerIcon} position={new LatLng(device1.lat, device1.lng)} />;
+    const devices = [device1];
+
+    const deviceMarkers = devices.map((device) => {
+        const devicePosition = new LatLng(device.lat, device.lng);
+        return <Marker icon={deviceMarkerIcon} position={devicePosition} />;
+    });
 
     return (
         <MapContainer
