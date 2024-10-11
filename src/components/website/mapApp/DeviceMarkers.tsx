@@ -23,7 +23,7 @@ export function DeviceMarkers() {
     const devices = useMapAppState().devices;
 
     return devices.map((device, index) => {
-        const devicePosition = new LatLng(device.lat, device.lng);
+        const devicePosition = new LatLng(device.location.lat, device.location.lng);
         return (
             <Marker
                 key={`DeviceMarker${index}`}
