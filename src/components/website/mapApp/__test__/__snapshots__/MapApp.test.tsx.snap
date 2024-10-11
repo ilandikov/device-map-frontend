@@ -390,7 +390,37 @@ exports[`MapApp snapshot tests should match the snapshot at when devices list is
         className="devices-list-item"
       >
         <p>
-          Terminal name
+          test device 1
+        </p>
+        <button>
+          deviceReportBroken
+        </button>
+      </div>
+      <div
+        className="devices-list-item"
+      >
+        <p>
+          test device 2
+        </p>
+        <button>
+          deviceReportBroken
+        </button>
+      </div>
+      <div
+        className="devices-list-item"
+      >
+        <p>
+          test device 3
+        </p>
+        <button>
+          deviceReportBroken
+        </button>
+      </div>
+      <div
+        className="devices-list-item"
+      >
+        <p>
+          test device 4
         </p>
         <button>
           deviceReportBroken

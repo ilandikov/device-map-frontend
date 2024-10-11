@@ -41,6 +41,12 @@ describe('MapApp snapshot tests', () => {
     it('should match the snapshot at when devices list is shown', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            devices: [
+                { name: 'test device 1', location: { lat: 1, lng: 2 } },
+                { name: 'test device 2', location: { lat: 3, lng: 4 } },
+                { name: 'test device 3', location: { lat: 1, lng: 2 } },
+                { name: 'test device 4', location: { lat: 5, lng: 6 } },
+            ],
             selectedDeviceMarker: {
                 lat: 123,
                 lng: 456,

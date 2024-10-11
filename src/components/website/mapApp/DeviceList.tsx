@@ -1,9 +1,25 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import home from '../../../assets/images/Home.png';
+import { Device, useMapAppState } from './redux/MapAppState';
+
+function DeviceListItem(device: Device) {
+    const { t } = useI18next();
+
+    return (
+        <div className="devices-list-item">
+            <p>{device.name}</p>
+            <button>{t('deviceReportBroken')}</button>
+        </div>
+    );
+}
 
 export function DeviceList() {
-    const { t } = useI18next();
+    const devices = useMapAppState().devices;
+    const deviceListItems = devices.map((device) => {
+        return DeviceListItem(device);
+    });
+
     return (
         <div className="devices-list-window">
             <div className="devices-list-address-container">
@@ -13,12 +29,7 @@ export function DeviceList() {
                     <span>Address2</span>
                 </div>
             </div>
-            <div className="devices-list-container">
-                <div className="devices-list-item">
-                    <p>Terminal name</p>
-                    <button>{t('deviceReportBroken')}</button>
-                </div>
-            </div>
+            <div className="devices-list-container">{deviceListItems}</div>
         </div>
     );
 }
