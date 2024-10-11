@@ -16,9 +16,9 @@ export interface Location {
 }
 
 export interface MapAppState {
-    devices: Device[];
     usageStep: MapAppUsageStep;
     selectedMarkerLocation: Location | null;
+    devices: Device[];
 }
 
 export enum MapAppUsageStep {
