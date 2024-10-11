@@ -1,3 +1,5 @@
+import { Device } from './MapAppState';
+
 export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
@@ -6,26 +8,37 @@ export enum MapAppActionType {
     SHOW_DEVICES_LIST = 'SHOW_DEVICES_LIST',
 }
 
-export interface MapAppAction {
-    type: MapAppActionType;
+export type MapAppAction = MapAppGenericAction | MapAppDeviceMarkerClick;
+
+export interface MapAppGenericAction {
+    type:
+        | MapAppActionType.LOGIN_BUTTON_CLICK
+        | MapAppActionType.LOGOUT_BUTTON_CLICK
+        | MapAppActionType.LOGIN_MODAL_CLOSE
+        | MapAppActionType.AUTHENTICATION_COMPLETED;
 }
 
-export function mapAppLoginButtonClick(): MapAppAction {
+export function mapAppLoginButtonClick(): MapAppGenericAction {
     return { type: MapAppActionType.LOGIN_BUTTON_CLICK };
 }
 
-export function mapAppLogoutButtonClick(): MapAppAction {
+export function mapAppLogoutButtonClick(): MapAppGenericAction {
     return { type: MapAppActionType.LOGOUT_BUTTON_CLICK };
 }
 
-export function mapAppLoginModalClose(): MapAppAction {
+export function mapAppLoginModalClose(): MapAppGenericAction {
     return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }
 
-export function mapAppAuthenticationCompleted(): MapAppAction {
+export function mapAppAuthenticationCompleted(): MapAppGenericAction {
     return { type: MapAppActionType.AUTHENTICATION_COMPLETED };
 }
 
-export function mapAppShowDevicesList(lat: number, lng: number) {
+export interface MapAppDeviceMarkerClick {
+    type: MapAppActionType.SHOW_DEVICES_LIST;
+    location: Device;
+}
+
+export function mapAppShowDevicesList(lat: number, lng: number): MapAppDeviceMarkerClick {
     return { type: MapAppActionType.SHOW_DEVICES_LIST, location: { lat, lng } };
 }
