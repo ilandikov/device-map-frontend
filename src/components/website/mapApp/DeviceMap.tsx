@@ -7,6 +7,8 @@ import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { UserLocationMarker } from './UserLocationMarker';
 
+function devicesShowList(lat: number, lng: number) {}
+
 export function DeviceMap() {
     const deviceMarkerIcon = new Icon({
         className: 'map-marker',
@@ -25,7 +27,17 @@ export function DeviceMap() {
 
     const deviceMarkers = devices.map((device) => {
         const devicePosition = new LatLng(device.lat, device.lng);
-        return <Marker icon={deviceMarkerIcon} position={devicePosition} />;
+        return (
+            <Marker
+                icon={deviceMarkerIcon}
+                position={devicePosition}
+                eventHandlers={{
+                    click: (event) => {
+                        devicesShowList(event.latlng.lat, event.latlng.lng);
+                    },
+                }}
+            />
+        );
     });
 
     return (
