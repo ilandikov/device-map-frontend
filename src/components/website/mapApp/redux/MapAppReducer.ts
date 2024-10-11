@@ -14,6 +14,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
         case MapAppActionType.AUTHENTICATION_COMPLETED:
             return { ...state, usageStep: MapAppUsageStep.DEVICE_MANAGEMENT };
+        case MapAppActionType.SHOW_DEVICES_LIST:
+            return { ...state, selectedDeviceMarker: action.location };
         default:
             return state;
     }

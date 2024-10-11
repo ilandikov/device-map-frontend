@@ -5,7 +5,7 @@ export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state.mapAppState);
 }
 
-interface Device {
+export interface Device {
     lat: number;
     lng: number;
 }

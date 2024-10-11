@@ -5,8 +5,9 @@ import {
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
+    mapAppShowDevicesList,
 } from '../redux/MapAppAction';
-import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
+import { Device, MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
 function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);
@@ -57,5 +58,15 @@ describe('MapApp reducer tests', () => {
         const action = mapAppAuthenticationCompleted();
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+    });
+
+    it('should provide device with the selected location', () => {
+        const device: Device = { lat: 42.85862508449081, lng: 74.6085298061371 };
+        const initialState = buildMapAppState({});
+        const action = mapAppShowDevicesList(device.lat, device.lng);
+
+        verifyMapAppStateChange(initialState, action, {
+            selectedDeviceMarker: { lat: 42.85862508449081, lng: 74.6085298061371 },
+        });
     });
 });
