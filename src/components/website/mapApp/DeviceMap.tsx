@@ -22,6 +22,8 @@ export function DeviceMap() {
         lng: 74.6085298061371,
     };
 
+    const deviceMarkers = <Marker icon={deviceMarkerIcon} position={new LatLng(device1.lat, device1.lng)} />;
+
     return (
         <MapContainer
             className="device-map"
@@ -36,7 +38,7 @@ export function DeviceMap() {
             />
             <ZoomControl position="bottomright" />
             <UserLocationMarker />
-            <Marker icon={deviceMarkerIcon} position={new LatLng(device1.lat, device1.lng)} />
+            {deviceMarkers}
         </MapContainer>
     );
 }
