@@ -4,10 +4,13 @@ import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
+import { useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppShowDevicesList } from './redux/MapAppAction';
 
 export function DeviceMarkers() {
+    const dispatch = useAppDispatch();
+
     const deviceMarkerIcon = new Icon({
         className: 'map-marker',
         iconRetinaUrl: markerRetinaImage,
@@ -28,7 +31,7 @@ export function DeviceMarkers() {
                 position={devicePosition}
                 eventHandlers={{
                     click: (event) => {
-                        mapAppShowDevicesList(event.latlng.lat, event.latlng.lng);
+                        dispatch(mapAppShowDevicesList(event.latlng.lat, event.latlng.lng));
                     },
                 }}
             />
