@@ -3,7 +3,7 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 import { Device } from './redux/MapAppState';
 
-export function DeviceListItem(device: Device) {
+export function DeviceListItem(props: { device: Device }) {
     const { t } = useI18next();
 
     return (
@@ -12,7 +12,7 @@ export function DeviceListItem(device: Device) {
             <div className="devices-list-item-shadow devices-list-item-shadow-right"></div>
             <img src={terminals} className="devices-list-item-image" alt="devices-list-item-image" />
             <div className="devices-list-item">
-                <p>{device.name}</p>
+                <p>{props.device.name}</p>
                 <button>{t('deviceReportBroken')}</button>
             </div>
         </div>

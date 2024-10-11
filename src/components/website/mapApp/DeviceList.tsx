@@ -7,16 +7,17 @@ import { DeviceListItem } from './DeviceListItem';
 export function DeviceList() {
     const mapAppState = useMapAppState();
     const devices = mapAppState.devices;
-    const deviceListItems = devices
-        .filter((device) => {
-            return (
-                device.location.lat === mapAppState.selectedMarkerLocation.lat &&
-                device.location.lng === mapAppState.selectedMarkerLocation.lng
-            );
-        })
-        .map((device) => {
-            return DeviceListItem(device);
-        });
+
+    const devicesAtSelectedMarkerLocation = devices.filter((device) => {
+        return (
+            device.location.lat === mapAppState.selectedMarkerLocation.lat &&
+            device.location.lng === mapAppState.selectedMarkerLocation.lng
+        );
+    });
+
+    const deviceListItems = devicesAtSelectedMarkerLocation.map((device) => {
+        return <DeviceListItem device={device} />;
+    });
 
     return (
         <div className="devices-list-window">
