@@ -31,7 +31,8 @@ export const mapAppInitialState: MapAppState = {
     usageStep: MapAppUsageStep.HOME_SCREEN,
     devices: [
         { name: 'dev1', location: { lat: 42.85862508449081, lng: 74.6085298061371 } },
-        { name: 'dev2', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
+        { name: 'dev2a', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
+        { name: 'dev2b', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
         { name: 'dev3', location: { lat: 42.85610049481582, lng: 74.60671663284303 } },
     ],
     selectedMarkerLocation: null,

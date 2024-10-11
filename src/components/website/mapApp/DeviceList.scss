@@ -48,6 +48,10 @@
   }
 
   .devices-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
     .devices-list-item-container {
       position: relative;
       z-index:0;
