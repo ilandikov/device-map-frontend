@@ -1,10 +1,27 @@
-import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
-import { LatLng } from 'leaflet';
+import { MapContainer, Marker, TileLayer, ZoomControl } from 'react-leaflet';
+import { Icon, LatLng } from 'leaflet';
 import React from 'react';
-import { UserLocationMarker } from './UserLocationMarker';
 import './DeviceMap.scss';
+import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
+import markerImage from 'leaflet/dist/images/marker-icon.png';
+import shadowImage from 'leaflet/dist/images/marker-shadow.png';
+import { UserLocationMarker } from './UserLocationMarker';
 
 export function DeviceMap() {
+    const deviceMarkerIcon = new Icon({
+        className: 'map-marker',
+        iconRetinaUrl: markerRetinaImage,
+        iconSize: [25, 41],
+        iconUrl: markerImage,
+        shadowUrl: shadowImage,
+        shadowSize: [41, 41],
+    });
+
+    const device1 = {
+        lat: 42.85862508449081,
+        lng: 74.6085298061371,
+    };
+
     return (
         <MapContainer
             className="device-map"
@@ -19,6 +36,7 @@ export function DeviceMap() {
             />
             <ZoomControl position="bottomright" />
             <UserLocationMarker />
+            <Marker icon={deviceMarkerIcon} position={new LatLng(device1.lat, device1.lng)} />
         </MapContainer>
     );
 }
