@@ -18,10 +18,9 @@ export function DeviceMap() {
     });
 
     const devices = [
-        {
-            lat: 42.85862508449081,
-            lng: 74.6085298061371,
-        },
+        { lat: 42.85862508449081, lng: 74.6085298061371 },
+        { lat: 42.85883742844907, lng: 74.6039915084839 },
+        { lat: 42.85610049481582, lng: 74.60671663284303 },
     ];
 
     const deviceMarkers = devices.map((device) => {
