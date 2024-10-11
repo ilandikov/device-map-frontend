@@ -7,6 +7,7 @@ import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { UserLocationMarker } from './UserLocationMarker';
 import { useMapAppState } from './redux/MapAppState';
+import { DeviceMarkers } from './DeviceMarkers';
 
 function devicesShowList(lat: number, lng: number) {}
 
@@ -52,7 +53,7 @@ export function DeviceMap() {
             />
             <ZoomControl position="bottomright" />
             <UserLocationMarker />
-            {deviceMarkers}
+            <DeviceMarkers elements={deviceMarkers} />
         </MapContainer>
     );
 }
