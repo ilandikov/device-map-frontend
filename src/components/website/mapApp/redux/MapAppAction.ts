@@ -24,3 +24,5 @@ export function mapAppLoginModalClose(): MapAppAction {
 export function mapAppAuthenticationCompleted(): MapAppAction {
     return { type: MapAppActionType.AUTHENTICATION_COMPLETED };
 }
+
+export function mapAppShowDevicesList(lat: number, lng: number) {}

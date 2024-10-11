@@ -5,8 +5,7 @@ import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
 import { useMapAppState } from './redux/MapAppState';
-
-function mapAppShowDevicesList(lat: number, lng: number) {}
+import { mapAppShowDevicesList } from './redux/MapAppAction';
 
 export function DeviceMarkers() {
     const deviceMarkerIcon = new Icon({
