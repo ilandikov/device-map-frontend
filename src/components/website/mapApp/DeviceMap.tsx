@@ -17,12 +17,12 @@ export function DeviceMap() {
         shadowSize: [41, 41],
     });
 
-    const device1 = {
-        lat: 42.85862508449081,
-        lng: 74.6085298061371,
-    };
-
-    const devices = [device1];
+    const devices = [
+        {
+            lat: 42.85862508449081,
+            lng: 74.6085298061371,
+        },
+    ];
 
     const deviceMarkers = devices.map((device) => {
         const devicePosition = new LatLng(device.lat, device.lng);
