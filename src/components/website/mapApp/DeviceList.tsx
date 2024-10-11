@@ -15,10 +15,18 @@ function DeviceListItem(device: Device) {
 }
 
 export function DeviceList() {
-    const devices = useMapAppState().devices;
-    const deviceListItems = devices.map((device) => {
-        return DeviceListItem(device);
-    });
+    const mapAppState = useMapAppState();
+    const devices = mapAppState.devices;
+    const deviceListItems = devices
+        .filter((device) => {
+            return (
+                device.location.lat === mapAppState.selectedDeviceMarker.lat &&
+                device.location.lng === mapAppState.selectedDeviceMarker.lng
+            );
+        })
+        .map((device) => {
+            return DeviceListItem(device);
+        });
 
     return (
         <div className="devices-list-window">

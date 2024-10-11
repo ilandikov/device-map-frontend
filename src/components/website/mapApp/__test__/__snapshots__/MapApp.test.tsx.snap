@@ -126,27 +126,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         className="devices-list-item"
       >
         <p>
-          test device 2
-        </p>
-        <button>
-          deviceReportBroken
-        </button>
-      </div>
-      <div
-        className="devices-list-item"
-      >
-        <p>
           test device 3
-        </p>
-        <button>
-          deviceReportBroken
-        </button>
-      </div>
-      <div
-        className="devices-list-item"
-      >
-        <p>
-          test device 4
         </p>
         <button>
           deviceReportBroken
