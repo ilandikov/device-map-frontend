@@ -33,6 +33,12 @@ export function UserLocationMarker() {
         setLoadingPosition(true);
     }, []);
 
+    setTimeout(() => {
+        if (loadingPosition === true) {
+            setLoadingPosition(false);
+        }
+    }, 3000);
+
     return (
         <>
             {loadingPosition && <div className="thisIsTheLoader"></div>}
