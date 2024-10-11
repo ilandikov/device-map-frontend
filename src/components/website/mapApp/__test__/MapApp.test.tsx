@@ -38,7 +38,7 @@ describe('MapApp snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at when devices list is shown', () => {
+    it('should list devices matching the selected marker', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             devices: [
@@ -48,8 +48,8 @@ describe('MapApp snapshot tests', () => {
                 { name: 'test device 4', location: { lat: 5, lng: 6 } },
             ],
             selectedDeviceMarker: {
-                lat: 123,
-                lng: 456,
+                lat: 1,
+                lng: 2,
             },
         });
         const component = renderForSnapshotTest(<MapApp />);
