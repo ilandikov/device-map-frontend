@@ -20,8 +20,8 @@ export function DeviceList() {
     const deviceListItems = devices
         .filter((device) => {
             return (
-                device.location.lat === mapAppState.selectedDeviceMarker.lat &&
-                device.location.lng === mapAppState.selectedDeviceMarker.lng
+                device.location.lat === mapAppState.selectedMarkerLocation.lat &&
+                device.location.lng === mapAppState.selectedMarkerLocation.lng
             );
         })
         .map((device) => {

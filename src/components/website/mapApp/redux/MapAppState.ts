@@ -18,7 +18,7 @@ export interface Location {
 export interface MapAppState {
     devices: Device[];
     usageStep: MapAppUsageStep;
-    selectedDeviceMarker: Location | null;
+    selectedMarkerLocation: Location | null;
 }
 
 export enum MapAppUsageStep {
@@ -34,7 +34,7 @@ export const mapAppInitialState: MapAppState = {
         { name: 'dev2', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
         { name: 'dev3', location: { lat: 42.85610049481582, lng: 74.60671663284303 } },
     ],
-    selectedDeviceMarker: null,
+    selectedMarkerLocation: null,
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {

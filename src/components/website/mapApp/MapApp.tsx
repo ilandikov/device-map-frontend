@@ -13,7 +13,7 @@ import { DeviceList } from './DeviceList';
 export default function MapApp() {
     const mapAppState = useMapAppState();
 
-    const deviceMarkerWasSelected = mapAppState.selectedDeviceMarker;
+    const deviceMarkerWasSelected = mapAppState.selectedMarkerLocation;
     const showProductDescription = mapAppState.usageStep === MapAppUsageStep.HOME_SCREEN;
     const showLoginModal = mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION;
 
