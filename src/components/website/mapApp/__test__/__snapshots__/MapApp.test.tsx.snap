@@ -66,14 +66,15 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
     >
       <img
         alt="devices-list-address-image"
+        className="devices-list-address-image"
         src="test-file-stub"
       />
       <div
         className="devices-address"
       >
-        <h2>
+        <p>
           Address1
-        </h2>
+        </p>
         <span>
           Address2
         </span>
@@ -83,24 +84,54 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
       className="devices-list-container"
     >
       <div
-        className="devices-list-item"
+        className="devices-list-item-container"
       >
-        <p>
-          test device 1
-        </p>
-        <button>
-          deviceReportBroken
-        </button>
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-left"
+        />
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-right"
+        />
+        <img
+          alt="devices-list-item-image"
+          className="devices-list-item-image"
+          src="test-file-stub"
+        />
+        <div
+          className="devices-list-item"
+        >
+          <p>
+            test device 1
+          </p>
+          <button>
+            deviceReportBroken
+          </button>
+        </div>
       </div>
       <div
-        className="devices-list-item"
+        className="devices-list-item-container"
       >
-        <p>
-          test device 3
-        </p>
-        <button>
-          deviceReportBroken
-        </button>
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-left"
+        />
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-right"
+        />
+        <img
+          alt="devices-list-item-image"
+          className="devices-list-item-image"
+          src="test-file-stub"
+        />
+        <div
+          className="devices-list-item"
+        >
+          <p>
+            test device 3
+          </p>
+          <button>
+            deviceReportBroken
+          </button>
+        </div>
       </div>
     </div>
   </div>
