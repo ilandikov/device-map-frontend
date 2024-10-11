@@ -6,6 +6,7 @@ import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { UserLocationMarker } from './UserLocationMarker';
+import { useMapAppState } from './redux/MapAppState';
 
 function devicesShowList(lat: number, lng: number) {}
 
@@ -19,11 +20,7 @@ export function DeviceMap() {
         shadowSize: [41, 41],
     });
 
-    const devices = [
-        { lat: 42.85862508449081, lng: 74.6085298061371 },
-        { lat: 42.85883742844907, lng: 74.6039915084839 },
-        { lat: 42.85610049481582, lng: 74.60671663284303 },
-    ];
+    const devices = useMapAppState().devices;
 
     const deviceMarkers = devices.map((device, index) => {
         const devicePosition = new LatLng(device.lat, device.lng);
