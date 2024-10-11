@@ -31,7 +31,7 @@ export function DeviceMarkers() {
                 position={devicePosition}
                 eventHandlers={{
                     click: (event) => {
-                        dispatch(mapAppClickDeviceMarker(event.latlng.lat, event.latlng.lng));
+                        dispatch(mapAppClickDeviceMarker(event.latlng));
                     },
                 }}
             />

@@ -39,6 +39,6 @@ export interface MapAppDeviceMarkerClick {
     markerLocation: Device;
 }
 
-export function mapAppClickDeviceMarker(lat: number, lng: number): MapAppDeviceMarkerClick {
-    return { type: MapAppActionType.DEVICE_MARKER_CLICK, markerLocation: { lat, lng } };
+export function mapAppClickDeviceMarker(markerLocation: Device): MapAppDeviceMarkerClick {
+    return { type: MapAppActionType.DEVICE_MARKER_CLICK, markerLocation };
 }
