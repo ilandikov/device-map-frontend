@@ -1,4 +1,11 @@
 import { GeoApifyResponse, buildMapAppAddress } from '../GeoApifyHelpers';
+import { MapAppAddress } from '../MapAppState';
+
+function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, expectedAddress: MapAppAddress) {
+    const address = buildMapAppAddress(geoApifyResponse);
+    expect(address.addressLine1).toEqual(expectedAddress.addressLine1);
+    expect(address.addressLine2).toEqual(expectedAddress.addressLine2);
+}
 
 describe('GeoApify API helpers - error cases', () => {
     it('should provide an error message if no addresses were provided', () => {
@@ -6,10 +13,10 @@ describe('GeoApify API helpers - error cases', () => {
             features: [],
         };
 
-        const address = buildMapAppAddress(geoApifyResponse);
-
-        expect(address.addressLine1).toEqual('mapAppCoundNotRetrieveAddress');
-        expect(address.addressLine2).toEqual('');
+        testBuildingAddressFromGeoApifyAPI(geoApifyResponse, {
+            addressLine1: 'mapAppCoundNotRetrieveAddress',
+            addressLine2: '',
+        });
     });
 
     it('should get data from the first object', () => {
