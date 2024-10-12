@@ -59,18 +59,18 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
     </div>
   </header>
   <div
-    className="devices-list-window"
+    className="device-marker-description-window"
   >
     <div
-      className="devices-list-address-container"
+      className="marker-address-container"
     >
       <img
-        alt="devices-list-address-image"
-        className="devices-list-address-image"
+        alt="marker-address-image"
+        className="marker-address-image"
         src="test-file-stub"
       />
       <div
-        className="devices-address"
+        className="marker-address"
       >
         <p>
           Street and number
@@ -81,20 +81,20 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
       </div>
     </div>
     <div
-      className="devices-list-container"
+      className="device-list-container"
     >
       <div
-        className="devices-list-item-container"
+        className="device-list-item-container"
       >
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-left"
+          className="device-list-item-shadow device-list-item-shadow-left"
         />
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-right"
+          className="device-list-item-shadow device-list-item-shadow-right"
         />
         <img
-          alt="devices-list-item-image"
-          className="devices-list-item-image"
+          alt="device-list-item-image"
+          className="device-list-item-image"
           src="test-file-stub"
         />
         <div
@@ -109,17 +109,17 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         </div>
       </div>
       <div
-        className="devices-list-item-container"
+        className="device-list-item-container"
       >
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-left"
+          className="device-list-item-shadow device-list-item-shadow-left"
         />
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-right"
+          className="device-list-item-shadow device-list-item-shadow-right"
         />
         <img
-          alt="devices-list-item-image"
-          className="devices-list-item-image"
+          alt="device-list-item-image"
+          className="device-list-item-image"
           src="test-file-stub"
         />
         <div
@@ -200,39 +200,39 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
     </div>
   </header>
   <div
-    className="devices-list-window"
+    className="device-marker-description-window"
   >
     <div
-      className="devices-list-address-container"
+      className="marker-address-container"
     >
       <img
-        alt="devices-list-address-image"
-        className="devices-list-address-image"
+        alt="marker-address-image"
+        className="marker-address-image"
         src="test-file-stub"
       />
       <div
-        className="device-list-address-loader-container"
+        className="marker-address-loader-container"
       >
         <div
-          className="device-list-address-loader"
+          className="marker-address-loader"
         />
       </div>
     </div>
     <div
-      className="devices-list-container"
+      className="device-list-container"
     >
       <div
-        className="devices-list-item-container"
+        className="device-list-item-container"
       >
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-left"
+          className="device-list-item-shadow device-list-item-shadow-left"
         />
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-right"
+          className="device-list-item-shadow device-list-item-shadow-right"
         />
         <img
-          alt="devices-list-item-image"
-          className="devices-list-item-image"
+          alt="device-list-item-image"
+          className="device-list-item-image"
           src="test-file-stub"
         />
         <div
@@ -247,17 +247,17 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         </div>
       </div>
       <div
-        className="devices-list-item-container"
+        className="device-list-item-container"
       >
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-left"
+          className="device-list-item-shadow device-list-item-shadow-left"
         />
         <div
-          className="devices-list-item-shadow devices-list-item-shadow-right"
+          className="device-list-item-shadow device-list-item-shadow-right"
         />
         <img
-          alt="devices-list-item-image"
-          className="devices-list-item-image"
+          alt="device-list-item-image"
+          className="device-list-item-image"
           src="test-file-stub"
         />
         <div

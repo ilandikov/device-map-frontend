@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import home from '../../../assets/images/Home.png';
 import { useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
-import './DeviceList.scss';
+import './DeviceMarkerDescription.scss';
 import { DeviceListItem } from './DeviceListItem';
 import { mapAppGetLocationAddress } from './redux/MapAppAction';
-import { DeviceListAddressLoader } from './DeviceListAddressLoader';
+import { MarkerAddressLoader } from './MarkerAddressLoader';
 import { MarkerAddress } from './MarkerAddress';
 
-export function DeviceList() {
+export function DeviceMarkerDescription() {
     const dispatch = useAppDispatch();
 
     const mapAppState = useMapAppState();
@@ -31,12 +31,12 @@ export function DeviceList() {
     });
 
     return (
-        <div className="devices-list-window">
-            <div className="devices-list-address-container">
-                <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
-                {waitingForAddress ? <DeviceListAddressLoader /> : <MarkerAddress address={selectedMarker.address} />}
+        <div className="device-marker-description-window">
+            <div className="marker-address-container">
+                <img src={home} className="marker-address-image" alt="marker-address-image" />
+                {waitingForAddress ? <MarkerAddressLoader /> : <MarkerAddress address={selectedMarker.address} />}
             </div>
-            <div className="devices-list-container">{deviceListItems}</div>
+            <div className="device-list-container">{deviceListItems}</div>
         </div>
     );
 }

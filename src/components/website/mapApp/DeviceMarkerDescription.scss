@@ -1,4 +1,4 @@
-.devices-list-window {
+.device-marker-description-window {
   position: absolute;
   top: 86px;
   left: 20px;
@@ -15,7 +15,7 @@
 
   color: #FFFFFF;
 
-  .devices-list-address-container {
+  .marker-address-container {
     margin-bottom: 16px;
 
     display: flex;
@@ -23,14 +23,14 @@
     justify-content: flex-start;
     gap: 8px;
 
-    .devices-list-address-image {
+    .marker-address-image {
       width: 36px;
       height: 36px;
 
       margin: 6.5px 0;
     }
 
-    .devices-address {
+    .marker-address {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -49,12 +49,12 @@
     }
   }
 
-  .devices-list-container {
+  .device-list-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
 
-    .devices-list-item-container {
+    .device-list-item-container {
       position: relative;
       z-index:0;
 
@@ -70,7 +70,7 @@
       font-size: 12px;
       font-weight: 500;
 
-      .devices-list-item-shadow {
+      .device-list-item-shadow {
         position: absolute;
         z-index: -100;
 
@@ -82,21 +82,21 @@
         opacity: 0.5;
       }
 
-      .devices-list-item-shadow-left {
+      .device-list-item-shadow-left {
         top: -39px;
         left: 10px;
 
         background-color: #709F0B;
       }
 
-      .devices-list-item-shadow-right {
+      .device-list-item-shadow-right {
         top: -39px;
         left: 193px;
 
         background-color: #26FFF2;
       }
 
-      .devices-list-item-image {
+      .device-list-item-image {
         position: absolute;
         top: 8px;
         left: 205px;
@@ -104,7 +104,6 @@
         width: 180px;
         height: 118px;
       }
-
 
       .devices-list-item {
         padding-left: 16px;
@@ -123,7 +122,7 @@
   }
 }
 
-.device-list-address-loader-container {
+.marker-address-loader-container {
   width: 100%;
 
   display: flex;
@@ -131,7 +130,7 @@
   justify-content: center;
   align-items: center;
 
-  .device-list-address-loader {
+  .marker-address-loader {
     height: 36px;
     width: 36px;
 
@@ -145,7 +144,7 @@
     animation: load 2s linear infinite;
   }
 
-  .device-list-address-loader::before {
+  .marker-address-loader::before {
     width: 75%;
     height: 75%;
     position: absolute;
