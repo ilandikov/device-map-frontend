@@ -3,7 +3,7 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 import { Device } from './redux/MapAppState';
 
-export function DeviceListItem(props: { device: Device }) {
+export function DeviceListItem(props: { device: Device; index: number }) {
     const { t } = useI18next();
 
     const leftShadowColorClass = 'device-list-item-shadow-left-first';
