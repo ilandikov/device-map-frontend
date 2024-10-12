@@ -18,6 +18,10 @@ export interface MapAppLocation {
 export interface MapAppState {
     usageStep: MapAppUsageStep;
     selectedMarkerLocation: MapAppLocation | null;
+    selectedMarkerAddress: {
+        address1: string;
+        address2: string;
+    } | null;
     devices: Device[];
 }
 
@@ -36,6 +40,7 @@ export const mapAppInitialState: MapAppState = {
         { name: 'dev3', location: { lat: 42.85610049481582, lng: 74.60671663284303 } },
     ],
     selectedMarkerLocation: null,
+    selectedMarkerAddress: null,
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
