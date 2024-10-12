@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MapApp snapshot tests should list devices matching the selected marker 1`] = `
+exports[`MapApp snapshot tests should list devices matching the selected marker and show the address 1`] = `
 <div
   className="map-app-container"
 >
@@ -78,6 +78,144 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         <span>
           District and city
         </span>
+      </div>
+    </div>
+    <div
+      className="devices-list-container"
+    >
+      <div
+        className="devices-list-item-container"
+      >
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-left"
+        />
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-right"
+        />
+        <img
+          alt="devices-list-item-image"
+          className="devices-list-item-image"
+          src="test-file-stub"
+        />
+        <div
+          className="devices-list-item"
+        >
+          <p>
+            test device 1
+          </p>
+          <button>
+            deviceReportBroken
+          </button>
+        </div>
+      </div>
+      <div
+        className="devices-list-item-container"
+      >
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-left"
+        />
+        <div
+          className="devices-list-item-shadow devices-list-item-shadow-right"
+        />
+        <img
+          alt="devices-list-item-image"
+          className="devices-list-item-image"
+          src="test-file-stub"
+        />
+        <div
+          className="devices-list-item"
+        >
+          <p>
+            test device 3
+          </p>
+          <button>
+            deviceReportBroken
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="device-map"
+  />
+</div>
+`;
+
+exports[`MapApp snapshot tests should list devices matching the selected marker and show the loader 1`] = `
+<div
+  className="map-app-container"
+>
+  <header
+    className="map-app-header"
+  >
+    <div
+      className="map-app-header-block-container"
+    >
+      <div
+        className="map-app-header-block"
+      >
+        <img
+          alt="logo"
+          className="map-app-header-brand-logo"
+          src="test-file-stub"
+        />
+        <p
+          className="map-app-header-brand-text"
+        >
+          map
+        </p>
+      </div>
+    </div>
+    <div
+      className="map-app-header-block-container"
+    >
+      <div
+        className="map-app-header-block"
+      >
+        <button
+          className="map-app-header-user-button"
+          data-testid="userButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="login-header-account"
+            className="map-app-header-account-image"
+            src="test-file-stub"
+          />
+          <p
+            className="map-app-header-account-text"
+          >
+            loginAction
+          </p>
+        </button>
+        <img
+          alt="map-app-header-apps-google-play"
+          src="test-file-stub"
+        />
+        <img
+          alt="map-app-header-apps-app-store"
+          src="test-file-stub"
+        />
+      </div>
+    </div>
+  </header>
+  <div
+    className="devices-list-window"
+  >
+    <div
+      className="devices-list-address-container"
+    >
+      <img
+        alt="devices-list-address-image"
+        className="devices-list-address-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-address-loader-container"
+      >
+        <div
+          className="device-list-address-loader"
+        />
       </div>
     </div>
     <div

@@ -12,6 +12,7 @@ export function DeviceList() {
     const mapAppState = useMapAppState();
     const devices = mapAppState.devices;
     const selectedMarker = mapAppState.selectedMarker;
+    const waitingForAddress = selectedMarker.address === null;
 
     useEffect(() => {
         dispatch(mapAppGetLocationAddress(selectedMarker.location));
@@ -31,11 +32,18 @@ export function DeviceList() {
         <div className="devices-list-window">
             <div className="devices-list-address-container">
                 <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
-                <div className="devices-address">
-                    <p>{selectedMarker.address?.addressLine1 ?? ''}</p>
-                    <span>{selectedMarker.address?.addressLine2 ?? ''}</span>
-                </div>
+                {waitingForAddress ? (
+                    <div className="device-list-address-loader-container">
+                        <div className="device-list-address-loader"></div>
+                    </div>
+                ) : (
+                    <div className="devices-address">
+                        <p>{selectedMarker.address?.addressLine1}</p>
+                        <span>{selectedMarker.address?.addressLine2}</span>
+                    </div>
+                )}
             </div>
+
             <div className="devices-list-container">{deviceListItems}</div>
         </div>
     );
