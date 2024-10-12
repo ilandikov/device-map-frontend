@@ -5,6 +5,8 @@ import { useMapAppState } from './redux/MapAppState';
 import './DeviceList.scss';
 import { DeviceListItem } from './DeviceListItem';
 import { mapAppGetLocationAddress } from './redux/MapAppAction';
+import { DeviceListAddressLoader } from './DeviceListAddressLoader';
+import { MarkerAddress } from './MarkerAddress';
 
 export function DeviceList() {
     const dispatch = useAppDispatch();
@@ -32,18 +34,8 @@ export function DeviceList() {
         <div className="devices-list-window">
             <div className="devices-list-address-container">
                 <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
-                {waitingForAddress ? (
-                    <div className="device-list-address-loader-container">
-                        <div className="device-list-address-loader"></div>
-                    </div>
-                ) : (
-                    <div className="devices-address">
-                        <p>{selectedMarker.address?.addressLine1}</p>
-                        <span>{selectedMarker.address?.addressLine2}</span>
-                    </div>
-                )}
+                {waitingForAddress ? <DeviceListAddressLoader /> : <MarkerAddress address={selectedMarker.address} />}
             </div>
-
             <div className="devices-list-container">{deviceListItems}</div>
         </div>
     );
