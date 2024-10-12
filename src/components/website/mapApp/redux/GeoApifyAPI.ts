@@ -1,3 +1,13 @@
+import { MapAppAddress } from './MapAppState';
+
+export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
+    const properties = response.features[0].properties;
+    return {
+        addressLine1: `${properties.street}, ${properties.housenumber}`,
+        addressLine2: `${properties.district}, ${properties.city}`,
+    };
+}
+
 export interface GeoApifyFeature {
     properties: {
         housenumber: string;

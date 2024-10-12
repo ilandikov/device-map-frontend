@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import { catchError, map, mergeMap } from 'rxjs';
 import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
-import { GeoApifyResponse } from './GeoApifyAPI';
+import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyAPI';
 
 export function GeoApify(action$, _state$, { cognitoClient }) {
     return action$.pipe(
@@ -17,12 +17,7 @@ export function GeoApify(action$, _state$, { cognitoClient }) {
                 crossDomain: true,
             }).pipe(
                 map((ajaxResponse) => {
-                    const response = ajaxResponse.response;
-                    const properties = response.features[0].properties;
-                    const geoApifyAddress = {
-                        addressLine1: `${properties.street}, ${properties.housenumber}`,
-                        addressLine2: `${properties.district}, ${properties.city}`,
-                    };
+                    const geoApifyAddress = buildMapAppAddress(ajaxResponse.response);
                     return mapAppSetLocationAddress(geoApifyAddress);
                 }),
                 catchError((error) => error),
