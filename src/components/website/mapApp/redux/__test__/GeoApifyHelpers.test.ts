@@ -9,7 +9,7 @@ function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, 
 
 describe('GeoApify API helpers - error cases', () => {
     it('should provide an error message if no addresses were provided', () => {
-        const geoApifyResponse: GeoApifyResponse = {
+        const geoApifyResponse = {
             features: [],
         };
 
@@ -20,7 +20,7 @@ describe('GeoApify API helpers - error cases', () => {
     });
 
     it('should get data from the first object', () => {
-        const geoApifyResponse: GeoApifyResponse = {
+        const geoApifyResponse = {
             features: [
                 {
                     properties: {
@@ -41,9 +41,9 @@ describe('GeoApify API helpers - error cases', () => {
             ],
         };
 
-        const address = buildMapAppAddress(geoApifyResponse);
-
-        expect(address.addressLine1).toEqual('2, 1');
-        expect(address.addressLine2).toEqual('3, 4');
+        testBuildingAddressFromGeoApifyAPI(geoApifyResponse, {
+            addressLine1: '2, 1',
+            addressLine2: '3, 4',
+        });
     });
 });
