@@ -14,7 +14,7 @@ describe('GeoApify API helpers - error cases', () => {
         };
 
         testBuildingAddressFromGeoApifyAPI(geoApifyResponse, {
-            addressLine1: 'mapAppCoundNotRetrieveAddress',
+            addressLine1: 'mapAppCouldNotRetrieveAddress',
             addressLine2: '',
         });
     });

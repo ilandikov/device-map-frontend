@@ -4,7 +4,7 @@ export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
     const geoApifyFeatures = response.features;
 
     if (geoApifyFeatures.length === 0) {
-        return { addressLine1: 'mapAppCoundNotRetrieveAddress', addressLine2: '' };
+        return { addressLine1: 'mapAppCouldNotRetrieveAddress', addressLine2: '' };
     }
 
     const properties = geoApifyFeatures[0].properties;
