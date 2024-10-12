@@ -1,9 +1,15 @@
 import { MapAppAddress } from './MapAppState';
 
 export function convertPropertiesToAddress(properties: GeoApifyProperties) {
+    const street = properties.street.replace(/ улица$/m, '');
+
+    const district = properties.district.replace(/ район$/m, '');
+
+    const city = properties.city.replace(/^город /m, '');
+
     return {
-        addressLine1: `${properties.street}, ${properties.housenumber}`,
-        addressLine2: `${properties.district}, ${properties.city}`,
+        addressLine1: `${street}, ${properties.housenumber}`,
+        addressLine2: `${district}, ${city}`,
     };
 }
 
