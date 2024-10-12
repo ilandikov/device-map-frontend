@@ -24,8 +24,8 @@ export function DeviceList() {
             <div className="devices-list-address-container">
                 <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
                 <div className="devices-address">
-                    <p>Address1</p>
-                    <span>Address2</span>
+                    <p>{mapAppState.selectedMarkerAddress?.address1 ?? ''}</p>
+                    <span>{mapAppState.selectedMarkerAddress?.address2 ?? ''}</span>
                 </div>
             </div>
             <div className="devices-list-container">{deviceListItems}</div>

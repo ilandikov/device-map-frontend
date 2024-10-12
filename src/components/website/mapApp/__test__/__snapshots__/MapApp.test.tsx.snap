@@ -73,10 +73,10 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         className="devices-address"
       >
         <p>
-          Address1
+          Street and number
         </p>
         <span>
-          Address2
+          District and city
         </span>
       </div>
     </div>

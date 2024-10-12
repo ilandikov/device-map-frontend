@@ -51,6 +51,10 @@ describe('MapApp snapshot tests', () => {
                 lat: 1,
                 lng: 2,
             },
+            selectedMarkerAddress: {
+                address1: 'Street and number',
+                address2: 'District and city',
+            },
         });
         const component = renderForSnapshotTest(<MapApp />);
 
