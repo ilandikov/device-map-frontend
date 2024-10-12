@@ -1,5 +1,12 @@
 import { MapAppAddress } from './MapAppState';
 
+export function convertPropertiesToAddress(properties: GeoApifyProperties) {
+    return {
+        addressLine1: `${properties.street}, ${properties.housenumber}`,
+        addressLine2: `${properties.district}, ${properties.city}`,
+    };
+}
+
 export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
     const geoApifyFeatures = response.features;
 
@@ -7,11 +14,7 @@ export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
         return { addressLine1: 'mapAppCouldNotRetrieveAddress', addressLine2: '' };
     }
 
-    const properties = geoApifyFeatures[0].properties;
-    return {
-        addressLine1: `${properties.street}, ${properties.housenumber}`,
-        addressLine2: `${properties.district}, ${properties.city}`,
-    };
+    return convertPropertiesToAddress(geoApifyFeatures[0].properties);
 }
 
 export interface GeoApifyProperties {
