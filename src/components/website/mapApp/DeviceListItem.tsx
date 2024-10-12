@@ -22,8 +22,27 @@ export function DeviceListItem(props: { device: Device; index: number }) {
 }
 
 function getColorClassesForDeviceItemShadows(index: number) {
-    return {
-        leftShadowColorClass: 'device-list-item-shadow-left-first',
-        rightShadowColorClass: 'device-list-item-shadow-right-first',
-    };
+    switch (index % 3) {
+        case 0:
+            return {
+                leftShadowColorClass: 'device-list-item-shadow-left-first',
+                rightShadowColorClass: 'device-list-item-shadow-right-first',
+            };
+        case 1:
+            return {
+                leftShadowColorClass: 'device-list-item-shadow-left-second',
+                rightShadowColorClass: 'device-list-item-shadow-right-second',
+            };
+        case 2:
+            return {
+                leftShadowColorClass: 'device-list-item-shadow-left-third',
+                rightShadowColorClass: 'device-list-item-shadow-right-third',
+            };
+        default:
+            console.warn('DeviceListItem component: index mod 3 has been more than 4. Colors may be wrong.');
+            return {
+                leftShadowColorClass: 'device-list-item-shadow-left-first',
+                rightShadowColorClass: 'device-list-item-shadow-right-first',
+            };
+    }
 }

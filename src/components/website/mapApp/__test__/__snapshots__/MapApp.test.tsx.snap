@@ -112,10 +112,10 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         className="device-list-item-container"
       >
         <div
-          className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+          className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-second"
         />
         <div
-          className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+          className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-second"
         />
         <img
           alt="device-list-item-image"
@@ -250,10 +250,10 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         className="device-list-item-container"
       >
         <div
-          className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+          className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-second"
         />
         <div
-          className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+          className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-second"
         />
         <img
           alt="device-list-item-image"
@@ -275,10 +275,10 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
         className="device-list-item-container"
       >
         <div
-          className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+          className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-third"
         />
         <div
-          className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+          className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-third"
         />
         <img
           alt="device-list-item-image"
