@@ -3,13 +3,16 @@ import { MapAppAddress } from './MapAppState';
 export function convertPropertiesToAddress(properties: GeoApifyProperties) {
     const street = properties.street.replace(/ улица$/m, '');
 
-    const district = properties.district.replace(/ район$/m, '');
+    let district = '';
+    if (properties.district) {
+        district = `${properties.district.replace(/ район$/m, '')}, `;
+    }
 
-    const city = properties.city.replace(/^город /m, '');
+    const city = properties.city?.replace(/^город /m, '') ?? '';
 
     return {
         addressLine1: `${street}, ${properties.housenumber}`,
-        addressLine2: `${district}, ${city}`,
+        addressLine2: `${district}${city}`,
     };
 }
 
@@ -24,10 +27,10 @@ export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
 }
 
 export interface GeoApifyProperties {
-    housenumber: string;
-    street: string;
-    district: string;
-    city: string;
+    housenumber?: string;
+    street?: string;
+    district?: string;
+    city?: string;
 }
 
 export interface GeoApifyFeature {

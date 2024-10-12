@@ -59,6 +59,13 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
             addressLine2: 'Первомайский, Бишкек',
         });
     });
+
+    it('should build address without district', () => {
+        testBuildingAddressFromGeoApifyAPI(zyfara42a, {
+            addressLine1: 'Игембердиева Зыфара, 42а',
+            addressLine2: 'Бишкек',
+        });
+    });
 });
 
 describe('GeoApify properties conversion', () => {
@@ -129,4 +136,57 @@ const chuy120 = {
         },
     ],
     query: { lat: 42.876, lon: 74.603, plus_code: '8JJPVJG3+C6' },
+};
+
+const zyfara42a = {
+    type: 'FeatureCollection',
+    features: [
+        {
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [74.603827, 42.858792],
+            },
+            properties: {
+                country_code: 'kg',
+                housenumber: '42а',
+                street: 'Игембердиева Зыфара улица',
+                country: 'Киргизия',
+                datasource: {
+                    sourcename: 'openstreetmap',
+                    attribution: '© OpenStreetMap contributors',
+                    license: 'Open Database License',
+                    url: 'https://www.openstreetmap.org/copyright',
+                },
+                state: 'Бишкек',
+                city: 'Бишкек',
+                lon: 74.603827,
+                lat: 42.858792,
+                distance: 14.328938605296244,
+                result_type: 'building',
+                postcode: '720053',
+                formatted: 'Киргизия, Бишкек, 720053 Бишкек, Игембердиева Зыфара улица, 42а',
+                address_line1: 'Киргизия',
+                address_line2: 'Бишкек, 720053 Бишкек, Игембердиева Зыфара улица, 42а',
+                timezone: {
+                    name: 'Asia/Bishkek',
+                    offset_STD: '+06:00',
+                    offset_STD_seconds: 21600,
+                    offset_DST: '+06:00',
+                    offset_DST_seconds: 21600,
+                },
+                plus_code: '8JJPVJ53+GG',
+                rank: {
+                    popularity: 5.724998061641535,
+                },
+                place_id:
+                    '51465c001aa5a6524059810871e5ec6d4540f00102f901f01f490b00000000c00203e203236f70656e7374726565746d61703a616464726573733a7761792f313839333431363830',
+            },
+        },
+    ],
+    query: {
+        lat: 42.85883742844907,
+        lon: 74.6039915084839,
+        plus_code: '8JJPVJ53+GH',
+    },
 };
