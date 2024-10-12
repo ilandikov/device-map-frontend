@@ -19,8 +19,8 @@ export interface MapAppState {
     usageStep: MapAppUsageStep;
     selectedMarkerLocation: MapAppLocation | null;
     selectedMarkerAddress: {
-        address1: string;
-        address2: string;
+        addressLine1: string;
+        addressLine2: string;
     } | null;
     devices: Device[];
 }
