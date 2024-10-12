@@ -1,0 +1,33 @@
+.marker-address-container {
+  margin-bottom: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 8px;
+
+  .marker-address-image {
+    width: 36px;
+    height: 36px;
+
+    margin: 6.5px 0;
+  }
+
+  .marker-address {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}

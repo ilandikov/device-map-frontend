@@ -1,6 +1,13 @@
 import { MapAppAddress } from './MapAppState';
 
-export function convertPropertiesToAddress(properties: GeoApifyProperties) {
+export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
+    const geoApifyFeatures = response.features;
+
+    if (geoApifyFeatures.length === 0) {
+        return { addressLine1: 'mapAppCouldNotRetrieveAddress', addressLine2: '' };
+    }
+
+    const properties = geoApifyFeatures[0].properties;
     const street = properties.street.replace(/ улица$/m, '').replace(/ проспект$/m, '');
 
     let housenumber = '';
@@ -18,16 +25,6 @@ export function convertPropertiesToAddress(properties: GeoApifyProperties) {
         addressLine1: `${street}${housenumber}`,
         addressLine2: `${district}${city}`,
     };
-}
-
-export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
-    const geoApifyFeatures = response.features;
-
-    if (geoApifyFeatures.length === 0) {
-        return { addressLine1: 'mapAppCouldNotRetrieveAddress', addressLine2: '' };
-    }
-
-    return convertPropertiesToAddress(geoApifyFeatures[0].properties);
 }
 
 export interface GeoApifyProperties {

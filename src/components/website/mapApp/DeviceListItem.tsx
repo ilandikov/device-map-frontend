@@ -7,11 +7,11 @@ export function DeviceListItem(props: { device: Device }) {
     const { t } = useI18next();
 
     return (
-        <div className="devices-list-item-container">
-            <div className="devices-list-item-shadow devices-list-item-shadow-left"></div>
-            <div className="devices-list-item-shadow devices-list-item-shadow-right"></div>
-            <img src={terminals} className="devices-list-item-image" alt="devices-list-item-image" />
-            <div className="devices-list-item">
+        <div className="device-list-item-container">
+            <div className="device-list-item-shadow device-list-item-shadow-left"></div>
+            <div className="device-list-item-shadow device-list-item-shadow-right"></div>
+            <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
+            <div className="device-list-item">
                 <p>{props.device.name}</p>
                 <button>{t('deviceReportBroken')}</button>
             </div>
