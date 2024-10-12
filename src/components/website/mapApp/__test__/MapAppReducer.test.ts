@@ -60,7 +60,7 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
 
-    it('should provide device with the selected location', () => {
+    it('should set marker at the selected location', () => {
         const initialState = buildMapAppState({});
         const action = mapAppClickDeviceMarker({ lat: 42.85862508449081, lng: 74.6085298061371 });
 
