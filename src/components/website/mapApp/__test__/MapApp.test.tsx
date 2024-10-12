@@ -77,6 +77,8 @@ describe('MapApp snapshot tests', () => {
                 { name: 'test device 2', location: { lat: 3, lng: 4 } },
                 { name: 'test device 3', location: { lat: 1, lng: 2 } },
                 { name: 'test device 4', location: { lat: 5, lng: 6 } },
+                { name: 'test device 5', location: { lat: 1, lng: 2 } },
+                { name: 'test device 6', location: { lat: 1, lng: 2 } },
             ],
             selectedMarker: {
                 location: {
