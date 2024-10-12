@@ -6,10 +6,13 @@ import { Device } from './redux/MapAppState';
 export function DeviceListItem(props: { device: Device }) {
     const { t } = useI18next();
 
+    const leftShadowColorClass = 'device-list-item-shadow-left-first';
+    const rightShadowColorClass = 'device-list-item-shadow-right-first';
+
     return (
         <div className="device-list-item-container">
-            <div className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"></div>
-            <div className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"></div>
+            <div className={`device-list-item-shadow device-list-item-shadow-left ${leftShadowColorClass}`}></div>
+            <div className={`device-list-item-shadow device-list-item-shadow-right ${rightShadowColorClass}`}></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">
                 <p>{props.device.name}</p>
