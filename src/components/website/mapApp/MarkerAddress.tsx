@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapAppAddress } from './redux/MapAppState';
+import './MarkerAddress.scss';
 
 export function MarkerAddress(props: { address: MapAppAddress }) {
     return (
