@@ -1,0 +1,71 @@
+.device-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .device-list-item-container {
+    position: relative;
+    z-index:0;
+
+    height: 87px;
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    .device-list-item-shadow {
+      position: absolute;
+      z-index: -100;
+
+      width: 162px;
+      height: 162px;
+
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.5;
+    }
+
+    .device-list-item-shadow-left {
+      top: -39px;
+      left: 10px;
+
+      background-color: #709F0B;
+    }
+
+    .device-list-item-shadow-right {
+      top: -39px;
+      left: 193px;
+
+      background-color: #26FFF2;
+    }
+
+    .device-list-item-image {
+      position: absolute;
+      top: 8px;
+      left: 205px;
+
+      width: 180px;
+      height: 118px;
+    }
+
+    .devices-list-item {
+      padding-left: 16px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+
+      button {
+        text-decoration: underline;
+        opacity: 0.6;
+      }
+    }
+  }
+}
