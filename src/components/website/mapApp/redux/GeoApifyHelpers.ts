@@ -14,13 +14,15 @@ export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
     };
 }
 
+export interface GeoApifyProperties {
+    housenumber: string;
+    street: string;
+    district: string;
+    city: string;
+}
+
 export interface GeoApifyFeature {
-    properties: {
-        housenumber: string;
-        street: string;
-        district: string;
-        city: string;
-    };
+    properties: GeoApifyProperties;
 }
 
 export interface GeoApifyResponse {
