@@ -66,6 +66,13 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
             addressLine2: 'Бишкек',
         });
     });
+
+    it('should build address without street number', () => {
+        testBuildingAddressFromGeoApifyAPI(akTub, {
+            addressLine1: 'Ак-Тюбинская',
+            addressLine2: 'Первомайский, Бишкек',
+        });
+    });
 });
 
 describe('GeoApify properties conversion', () => {
@@ -188,5 +195,61 @@ const zyfara42a = {
         lat: 42.85883742844907,
         lon: 74.6039915084839,
         plus_code: '8JJPVJ53+GH',
+    },
+};
+
+const akTub = {
+    type: 'FeatureCollection',
+    features: [
+        {
+            type: 'Feature',
+            properties: {
+                datasource: {
+                    sourcename: 'openstreetmap',
+                    attribution: '© OpenStreetMap contributors',
+                    license: 'Open Database License',
+                    url: 'https://www.openstreetmap.org/copyright',
+                },
+                name: 'Футболистан',
+                country: 'Киргизия',
+                country_code: 'kg',
+                city: 'город Бишкек',
+                postcode: '720031',
+                district: 'Первомайский район',
+                street: 'Ак-Тюбинская улица',
+                lon: 74.60680456094337,
+                lat: 42.85586355,
+                distance: 0,
+                result_type: 'amenity',
+                formatted: 'Футболистан, Киргизия, 720031 город Бишкек, Ак-Тюбинская улица',
+                address_line1: 'Футболистан',
+                address_line2: 'Киргизия, 720031 город Бишкек, Ак-Тюбинская улица',
+                category: 'sport.pitch',
+                timezone: {
+                    name: 'Asia/Bishkek',
+                    offset_STD: '+06:00',
+                    offset_STD_seconds: 21600,
+                    offset_DST: '+06:00',
+                    offset_DST_seconds: 21600,
+                },
+                plus_code: '8JJPVJ44+8P',
+                rank: {
+                    importance: 0.00000999999999995449,
+                    popularity: 6.000504219249871,
+                },
+                place_id:
+                    '513014cce2d5a6524059538bd2ef8c6d4540f00102f9011cc2010300000000c00201920316d0a4d183d182d0b1d0bed0bbd0b8d181d182d0b0d0bd',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [74.60680456094337, 42.85586355],
+            },
+            bbox: [74.6063648, 42.855224, 74.6072521, 42.856555],
+        },
+    ],
+    query: {
+        lat: 42.85610049481582,
+        lon: 74.60671663284303,
+        plus_code: '8JJPVJ44+CM',
     },
 };
