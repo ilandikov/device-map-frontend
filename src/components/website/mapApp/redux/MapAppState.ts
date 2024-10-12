@@ -22,8 +22,6 @@ interface MapAppAddress {
 
 export interface MapAppState {
     usageStep: MapAppUsageStep;
-    selectedMarkerLocation: MapAppLocation | null;
-    selectedMarkerAddress: MapAppAddress | null;
     selectedMarker: {
         location: MapAppLocation | null;
         address: MapAppAddress | null;
@@ -45,8 +43,6 @@ export const mapAppInitialState: MapAppState = {
         { name: 'dev2b', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
         { name: 'dev3', location: { lat: 42.85610049481582, lng: 74.60671663284303 } },
     ],
-    selectedMarkerLocation: null,
-    selectedMarkerAddress: null,
     selectedMarker: {
         location: null,
         address: null,

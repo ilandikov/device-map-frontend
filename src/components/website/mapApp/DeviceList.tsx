@@ -10,8 +10,8 @@ export function DeviceList() {
 
     const devicesAtSelectedMarkerLocation = devices.filter((device) => {
         return (
-            device.location.lat === mapAppState.selectedMarkerLocation.lat &&
-            device.location.lng === mapAppState.selectedMarkerLocation.lng
+            device.location.lat === mapAppState.selectedMarker.location.lat &&
+            device.location.lng === mapAppState.selectedMarker.location.lng
         );
     });
 
@@ -24,8 +24,8 @@ export function DeviceList() {
             <div className="devices-list-address-container">
                 <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
                 <div className="devices-address">
-                    <p>{mapAppState.selectedMarkerAddress?.addressLine1 ?? ''}</p>
-                    <span>{mapAppState.selectedMarkerAddress?.addressLine2 ?? ''}</span>
+                    <p>{mapAppState.selectedMarker.address?.addressLine1 ?? ''}</p>
+                    <span>{mapAppState.selectedMarker.address?.addressLine2 ?? ''}</span>
                 </div>
             </div>
             <div className="devices-list-container">{deviceListItems}</div>
