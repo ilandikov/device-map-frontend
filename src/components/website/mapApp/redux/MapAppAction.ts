@@ -6,9 +6,15 @@ export enum MapAppActionType {
     LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
     DEVICE_MARKER_CLICK = 'DEVICE_MARKER_CLICK',
+    GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
+    SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
 }
 
-export type MapAppAction = MapAppGenericAction | MapAppDeviceMarkerClick;
+export type MapAppAction =
+    | MapAppGenericAction
+    | MapAppDeviceMarkerClick
+    | MapAppGetLocationAddress
+    | MapAppSetLocationAddress;
 
 export interface MapAppGenericAction {
     type:
@@ -41,4 +47,23 @@ export interface MapAppDeviceMarkerClick {
 
 export function mapAppClickDeviceMarker(markerLocation: MapAppLocation): MapAppDeviceMarkerClick {
     return { type: MapAppActionType.DEVICE_MARKER_CLICK, markerLocation };
+}
+
+export interface MapAppGetLocationAddress {
+    type: MapAppActionType.GET_LOCATION_ADDRESS;
+    location: MapAppLocation;
+}
+
+export function mapAppGetLocationAddress(location: MapAppLocation): MapAppAction {
+    return { type: MapAppActionType.GET_LOCATION_ADDRESS, location };
+}
+
+export interface MapAppSetLocationAddress {
+    type: MapAppActionType.SET_LOCATION_ADDRESS;
+    address1: string;
+    address2: string;
+}
+
+export function mapAppSetLocationAddress(address1: string, address2: string): MapAppSetLocationAddress {
+    return { type: MapAppActionType.SET_LOCATION_ADDRESS, address1, address2 };
 }
