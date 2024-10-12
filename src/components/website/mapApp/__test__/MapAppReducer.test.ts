@@ -65,7 +65,7 @@ describe('MapApp reducer tests', () => {
         const action = mapAppClickDeviceMarker({ lat: 42.85862508449081, lng: 74.6085298061371 });
 
         verifyMapAppStateChange(initialState, action, {
-            selectedMarkerLocation: { lat: 42.85862508449081, lng: 74.6085298061371 },
+            selectedMarker: { location: { lat: 42.85862508449081, lng: 74.6085298061371 }, address: null },
         });
     });
 });
