@@ -11,11 +11,11 @@ export function DeviceList() {
 
     const mapAppState = useMapAppState();
     const devices = mapAppState.devices;
+    const selectedMarker = mapAppState.selectedMarker;
 
     const devicesAtSelectedMarkerLocation = devices.filter((device) => {
         return (
-            device.location.lat === mapAppState.selectedMarker.location.lat &&
-            device.location.lng === mapAppState.selectedMarker.location.lng
+            device.location.lat === selectedMarker.location.lat && device.location.lng === selectedMarker.location.lng
         );
     });
 
@@ -24,16 +24,16 @@ export function DeviceList() {
     });
 
     useEffect(() => {
-        dispatch(mapAppGetLocationAddress(mapAppState.selectedMarker.location));
-    }, [mapAppState.selectedMarker.location]);
+        dispatch(mapAppGetLocationAddress(selectedMarker.location));
+    }, [selectedMarker.location]);
 
     return (
         <div className="devices-list-window">
             <div className="devices-list-address-container">
                 <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
                 <div className="devices-address">
-                    <p>{mapAppState.selectedMarker.address?.addressLine1 ?? ''}</p>
-                    <span>{mapAppState.selectedMarker.address?.addressLine2 ?? ''}</span>
+                    <p>{selectedMarker.address?.addressLine1 ?? ''}</p>
+                    <span>{selectedMarker.address?.addressLine2 ?? ''}</span>
                 </div>
             </div>
             <div className="devices-list-container">{deviceListItems}</div>
