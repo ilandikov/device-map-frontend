@@ -19,10 +19,11 @@ export function GeoApify(action$, _state$, { cognitoClient }) {
                 map((ajaxResponse) => {
                     const response = ajaxResponse.response;
                     const properties = response.features[0].properties;
-                    return mapAppSetLocationAddress({
+                    const geoApifyAddress = {
                         addressLine1: `${properties.street}, ${properties.housenumber}`,
                         addressLine2: `${properties.district}, ${properties.city}`,
-                    });
+                    };
+                    return mapAppSetLocationAddress(geoApifyAddress);
                 }),
                 catchError((error) => error),
             );
