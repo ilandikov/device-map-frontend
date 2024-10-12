@@ -1,5 +1,10 @@
 import { verify } from 'approvals/lib/Approvals';
-import { GeoApifyResponse, buildMapAppAddress, convertPropertiesToAddress } from '../GeoApifyHelpers';
+import {
+    GeoApifyProperties,
+    GeoApifyResponse,
+    buildMapAppAddress,
+    convertPropertiesToAddress,
+} from '../GeoApifyHelpers';
 import { MapAppAddress } from '../MapAppState';
 
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
@@ -57,9 +62,7 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
 });
 
 describe('GeoApify properties conversion', () => {
-    it('should convert properties (Chuy 120)', () => {
-        const properties = chuy120.features[0].properties;
-
+    function verifyAddress(properties: GeoApifyProperties) {
         const address = convertPropertiesToAddress(properties);
 
         const toVerify = `Received properties:
@@ -72,6 +75,10 @@ Built address:
     ${address.addressLine1}
     ${address.addressLine2}`;
         verify(__dirname, expect.getState().currentTestName, toVerify);
+    }
+
+    it('should convert properties (Chuy 120)', () => {
+        verifyAddress(chuy120.features[0].properties);
     });
 });
 
