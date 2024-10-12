@@ -50,7 +50,7 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
 
     it('should build normal address', () => {
         testBuildingAddressFromGeoApifyAPI(chuy120, {
-            addressLine1: 'Чуй проспект, 120',
+            addressLine1: 'Чуй, 120',
             addressLine2: 'Первомайский, Бишкек',
         });
     });

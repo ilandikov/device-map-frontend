@@ -1,7 +1,7 @@
 import { MapAppAddress } from './MapAppState';
 
 export function convertPropertiesToAddress(properties: GeoApifyProperties) {
-    const street = properties.street.replace(/ улица$/m, '');
+    const street = properties.street.replace(/ улица$/m, '').replace(/ проспект$/m, '');
 
     let housenumber = '';
     if (properties.housenumber) {
