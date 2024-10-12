@@ -15,7 +15,7 @@ export interface MapAppLocation {
     lng: number;
 }
 
-export interface MapAppAddress {
+interface MapAppAddress {
     addressLine1: string;
     addressLine2: string;
 }
