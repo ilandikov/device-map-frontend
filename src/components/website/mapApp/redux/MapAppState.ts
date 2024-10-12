@@ -15,13 +15,15 @@ export interface MapAppLocation {
     lng: number;
 }
 
+interface MapAppAddress {
+    addressLine1: string;
+    addressLine2: string;
+}
+
 export interface MapAppState {
     usageStep: MapAppUsageStep;
     selectedMarkerLocation: MapAppLocation | null;
-    selectedMarkerAddress: {
-        addressLine1: string;
-        addressLine2: string;
-    } | null;
+    selectedMarkerAddress: MapAppAddress | null;
     devices: Device[];
 }
 
