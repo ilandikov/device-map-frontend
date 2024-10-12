@@ -1,5 +1,5 @@
 import { MapAppAction, MapAppActionType } from './MapAppAction';
-import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
+import { MapAppAddress, MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
@@ -16,6 +16,11 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, usageStep: MapAppUsageStep.DEVICE_MANAGEMENT };
         case MapAppActionType.DEVICE_MARKER_CLICK:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
+        case MapAppActionType.SET_LOCATION_ADDRESS: {
+            const addressToSet: MapAppAddress = { addressLine1: action.address1, addressLine2: action.address2 };
+            const newSelectedMarker = { ...state.selectedMarker, address: addressToSet };
+            return { ...state, selectedMarker: newSelectedMarker };
+        }
         default:
             return state;
     }
