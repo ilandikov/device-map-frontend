@@ -98,7 +98,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           src="test-file-stub"
         />
         <div
-          className="devices-list-item"
+          className="device-list-item"
         >
           <p>
             test device 1
@@ -123,7 +123,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           src="test-file-stub"
         />
         <div
-          className="devices-list-item"
+          className="device-list-item"
         >
           <p>
             test device 3
@@ -236,7 +236,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           src="test-file-stub"
         />
         <div
-          className="devices-list-item"
+          className="device-list-item"
         >
           <p>
             test device 1
@@ -261,7 +261,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           src="test-file-stub"
         />
         <div
-          className="devices-list-item"
+          className="device-list-item"
         >
           <p>
             test device 3
