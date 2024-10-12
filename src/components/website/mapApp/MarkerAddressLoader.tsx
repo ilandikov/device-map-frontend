@@ -1,4 +1,5 @@
 import React from 'react';
+import './MarkerAddressLoader.scss';
 
 export function MarkerAddressLoader() {
     return (
