@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import home from '../../../assets/images/Home.png';
+import { useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
 import './DeviceList.scss';
 import { DeviceListItem } from './DeviceListItem';
+import { mapAppGetLocationAddress } from './redux/MapAppAction';
 
 export function DeviceList() {
+    const dispatch = useAppDispatch();
+
     const mapAppState = useMapAppState();
     const devices = mapAppState.devices;
 
@@ -18,6 +22,10 @@ export function DeviceList() {
     const deviceListItems = devicesAtSelectedMarkerLocation.map((device) => {
         return <DeviceListItem device={device} />;
     });
+
+    useEffect(() => {
+        dispatch(mapAppGetLocationAddress(mapAppState.selectedMarker.location));
+    }, [mapAppState.selectedMarker.location]);
 
     return (
         <div className="devices-list-window">
