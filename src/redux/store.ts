@@ -10,8 +10,9 @@ import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
 import { cognito } from '../components/website/login/redux/cognito';
+import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 
-const rootEpic = combineEpics(cognito);
+const rootEpic = combineEpics(cognito, GeoApify);
 
 const rootReducer = combineReducers({
     getDevices,
