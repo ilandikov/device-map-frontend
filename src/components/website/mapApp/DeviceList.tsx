@@ -7,17 +7,13 @@ export function DeviceList() {
     const mapAppState = useMapAppState();
     const selectedMarker = mapAppState.selectedMarker;
 
-    const devicesAtSelectedMarkerLocation = mapAppState.devices.filter((device) => {
-        return (
-            device.location.lat === selectedMarker.location.lat && device.location.lng === selectedMarker.location.lng
-        );
-    });
+    const devicesAtSelectedMarkerLocation = mapAppState.devices
+        .filter(
+            (device) =>
+                device.location.lat === selectedMarker.location.lat &&
+                device.location.lng === selectedMarker.location.lng,
+        )
+        .map((device) => <DeviceListItem device={device} />);
 
-    return (
-        <div className="device-list-container">
-            {devicesAtSelectedMarkerLocation.map((device) => {
-                return <DeviceListItem device={device} />;
-            })}
-        </div>
-    );
+    return <div className="device-list-container">{devicesAtSelectedMarkerLocation}</div>;
 }
