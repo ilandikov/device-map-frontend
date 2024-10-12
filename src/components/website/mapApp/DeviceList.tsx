@@ -13,6 +13,10 @@ export function DeviceList() {
     const devices = mapAppState.devices;
     const selectedMarker = mapAppState.selectedMarker;
 
+    useEffect(() => {
+        dispatch(mapAppGetLocationAddress(selectedMarker.location));
+    }, [selectedMarker.location]);
+
     const devicesAtSelectedMarkerLocation = devices.filter((device) => {
         return (
             device.location.lat === selectedMarker.location.lat && device.location.lng === selectedMarker.location.lng
@@ -22,10 +26,6 @@ export function DeviceList() {
     const deviceListItems = devicesAtSelectedMarkerLocation.map((device) => {
         return <DeviceListItem device={device} />;
     });
-
-    useEffect(() => {
-        dispatch(mapAppGetLocationAddress(selectedMarker.location));
-    }, [selectedMarker.location]);
 
     return (
         <div className="devices-list-window">
