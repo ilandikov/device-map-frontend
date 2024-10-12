@@ -13,7 +13,7 @@ export function DeviceList() {
                 device.location.lat === selectedMarker.location.lat &&
                 device.location.lng === selectedMarker.location.lng,
         )
-        .map((device) => <DeviceListItem device={device} />);
+        .map((device, index) => <DeviceListItem device={device} key={index} />);
 
     return <div className="device-list-container">{devicesAtSelectedMarkerLocation}</div>;
 }
