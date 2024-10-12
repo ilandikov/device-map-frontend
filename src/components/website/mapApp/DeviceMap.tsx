@@ -1,8 +1,9 @@
 import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
 import { LatLng } from 'leaflet';
 import React from 'react';
-import { UserLocationMarker } from './UserLocationMarker';
 import './DeviceMap.scss';
+import { UserLocationMarker } from './UserLocationMarker';
+import { DeviceMarkers } from './DeviceMarkers';
 
 export function DeviceMap() {
     return (
@@ -19,6 +20,7 @@ export function DeviceMap() {
             />
             <ZoomControl position="bottomright" />
             <UserLocationMarker />
+            <DeviceMarkers />
         </MapContainer>
     );
 }

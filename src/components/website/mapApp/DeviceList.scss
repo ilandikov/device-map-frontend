@@ -1,0 +1,124 @@
+.devices-list-window {
+  position: absolute;
+  top: 86px;
+  left: 20px;
+
+  width: 335px;
+
+  overflow: hidden;
+
+  background: linear-gradient(360deg, #1E1E1E 0%, #2E2E2E 100%);
+  border-radius: 10px;
+  border: 1px solid #454545;
+
+  padding: 18px 20px 20px;
+
+  color: #FFFFFF;
+
+  .devices-list-address-container {
+    margin-bottom: 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+
+    .devices-list-address-image {
+      width: 36px;
+      height: 36px;
+
+      margin: 6.5px 0;
+    }
+
+    .devices-address {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      p {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .devices-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .devices-list-item-container {
+      position: relative;
+      z-index:0;
+
+      height: 87px;
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      font-size: 12px;
+      font-weight: 500;
+
+      .devices-list-item-shadow {
+        position: absolute;
+        z-index: -100;
+
+        width: 162px;
+        height: 162px;
+
+        border-radius: 50%;
+        filter: blur(50px);
+        opacity: 0.5;
+      }
+
+      .devices-list-item-shadow-left {
+        top: -39px;
+        left: 10px;
+
+        background-color: #709F0B;
+      }
+
+      .devices-list-item-shadow-right {
+        top: -39px;
+        left: 193px;
+
+        background-color: #26FFF2;
+      }
+
+      .devices-list-item-image {
+        position: absolute;
+        top: 8px;
+        left: 205px;
+
+        width: 180px;
+        height: 118px;
+      }
+
+
+      .devices-list-item {
+        padding-left: 16px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+
+        button {
+          text-decoration: underline;
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+
+
+}
