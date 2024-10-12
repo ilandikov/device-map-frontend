@@ -3,9 +3,11 @@ import {
     MapAppAction,
     mapAppAuthenticationCompleted,
     mapAppClickDeviceMarker,
+    mapAppGetLocationAddress,
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
+    mapAppSetLocationAddress,
 } from '../redux/MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
@@ -60,12 +62,39 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
 
-    it('should provide device with the selected location', () => {
+    it('should set marker at the selected location', () => {
         const initialState = buildMapAppState({});
         const action = mapAppClickDeviceMarker({ lat: 42.85862508449081, lng: 74.6085298061371 });
 
         verifyMapAppStateChange(initialState, action, {
-            selectedMarkerLocation: { lat: 42.85862508449081, lng: 74.6085298061371 },
+            selectedMarker: { location: { lat: 42.85862508449081, lng: 74.6085298061371 }, address: null },
+        });
+    });
+
+    it('should do nothing when getting an address', () => {
+        const initialState = buildMapAppState({});
+        const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lng: 74.6085298061371 });
+
+        verifyMapAppStateChange(initialState, action, {});
+    });
+
+    it('should do nothing when getting an address', () => {
+        const initialState = buildMapAppState({
+            selectedMarker: {
+                location: { lat: 0, lng: 1 },
+                address: null,
+            },
+        });
+        const action = mapAppSetLocationAddress({ addressLine1: 'line1', addressLine2: 'line2' });
+
+        verifyMapAppStateChange(initialState, action, {
+            selectedMarker: {
+                location: { lat: 0, lng: 1 },
+                address: {
+                    addressLine1: 'line1',
+                    addressLine2: 'line2',
+                },
+            },
         });
     });
 });

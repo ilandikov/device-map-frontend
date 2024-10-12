@@ -12,7 +12,11 @@ jest.mock('react-redux', () => ({
 
 describe('MapApp snapshot tests', () => {
     it('should match the snapshot at home screen step', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.HOME_SCREEN, devices: [] });
+        mockMapAppState({
+            usageStep: MapAppUsageStep.HOME_SCREEN,
+            devices: [],
+            selectedMarker: { location: null, address: null },
+        });
         const component = renderForSnapshotTest(<MapApp />);
 
         expect(component).toMatchSnapshot();
@@ -22,6 +26,7 @@ describe('MapApp snapshot tests', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
             devices: [],
+            selectedMarker: { location: null, address: null },
         });
         const component = renderForSnapshotTest(<MapApp />);
 
@@ -32,13 +37,14 @@ describe('MapApp snapshot tests', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             devices: [],
+            selectedMarker: { location: null, address: null },
         });
         const component = renderForSnapshotTest(<MapApp />);
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should list devices matching the selected marker', () => {
+    it('should list devices matching the selected marker and show the address', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.HOME_SCREEN,
             devices: [
@@ -47,9 +53,37 @@ describe('MapApp snapshot tests', () => {
                 { name: 'test device 3', location: { lat: 1, lng: 2 } },
                 { name: 'test device 4', location: { lat: 5, lng: 6 } },
             ],
-            selectedMarkerLocation: {
-                lat: 1,
-                lng: 2,
+            selectedMarker: {
+                location: {
+                    lat: 1,
+                    lng: 2,
+                },
+                address: {
+                    addressLine1: 'Street and number',
+                    addressLine2: 'District and city',
+                },
+            },
+        });
+        const component = renderForSnapshotTest(<MapApp />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should list devices matching the selected marker and show the loader', () => {
+        mockMapAppState({
+            usageStep: MapAppUsageStep.HOME_SCREEN,
+            devices: [
+                { name: 'test device 1', location: { lat: 1, lng: 2 } },
+                { name: 'test device 2', location: { lat: 3, lng: 4 } },
+                { name: 'test device 3', location: { lat: 1, lng: 2 } },
+                { name: 'test device 4', location: { lat: 5, lng: 6 } },
+            ],
+            selectedMarker: {
+                location: {
+                    lat: 1,
+                    lng: 2,
+                },
+                address: null,
             },
         });
         const component = renderForSnapshotTest(<MapApp />);

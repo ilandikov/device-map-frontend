@@ -33,7 +33,9 @@
     .devices-address {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 8px;
 
       p {
         font-size: 20px;
@@ -119,6 +121,42 @@
       }
     }
   }
+}
 
+.device-list-address-loader-container {
+  width: 100%;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .device-list-address-loader {
+    height: 36px;
+    width: 36px;
+
+    background: conic-gradient(transparent, #ACF709);
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: load 2s linear infinite;
+  }
+
+  .device-list-address-loader::before {
+    width: 75%;
+    height: 75%;
+    position: absolute;
+    border-radius: 50%;
+    background-color: #2E2E2E;
+    content: '';
+  }
+
+  @keyframes load {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }

@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import home from '../../../assets/images/Home.png';
+import { useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
 import './DeviceList.scss';
 import { DeviceListItem } from './DeviceListItem';
+import { mapAppGetLocationAddress } from './redux/MapAppAction';
 
 export function DeviceList() {
+    const dispatch = useAppDispatch();
+
     const mapAppState = useMapAppState();
     const devices = mapAppState.devices;
+    const selectedMarker = mapAppState.selectedMarker;
+    const waitingForAddress = selectedMarker.address === null;
+
+    useEffect(() => {
+        dispatch(mapAppGetLocationAddress(selectedMarker.location));
+    }, [selectedMarker.location]);
 
     const devicesAtSelectedMarkerLocation = devices.filter((device) => {
         return (
-            device.location.lat === mapAppState.selectedMarkerLocation.lat &&
-            device.location.lng === mapAppState.selectedMarkerLocation.lng
+            device.location.lat === selectedMarker.location.lat && device.location.lng === selectedMarker.location.lng
         );
     });
 
@@ -23,11 +32,18 @@ export function DeviceList() {
         <div className="devices-list-window">
             <div className="devices-list-address-container">
                 <img src={home} className="devices-list-address-image" alt="devices-list-address-image" />
-                <div className="devices-address">
-                    <p>Address1</p>
-                    <span>Address2</span>
-                </div>
+                {waitingForAddress ? (
+                    <div className="device-list-address-loader-container">
+                        <div className="device-list-address-loader"></div>
+                    </div>
+                ) : (
+                    <div className="devices-address">
+                        <p>{selectedMarker.address?.addressLine1}</p>
+                        <span>{selectedMarker.address?.addressLine2}</span>
+                    </div>
+                )}
             </div>
+
             <div className="devices-list-container">{deviceListItems}</div>
         </div>
     );

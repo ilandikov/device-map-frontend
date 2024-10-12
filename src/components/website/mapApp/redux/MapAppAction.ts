@@ -1,4 +1,4 @@
-import { Location } from './MapAppState';
+import { MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
@@ -6,9 +6,15 @@ export enum MapAppActionType {
     LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
     DEVICE_MARKER_CLICK = 'DEVICE_MARKER_CLICK',
+    GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
+    SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
 }
 
-export type MapAppAction = MapAppGenericAction | MapAppDeviceMarkerClick;
+export type MapAppAction =
+    | MapAppGenericAction
+    | MapAppDeviceMarkerClick
+    | MapAppGetLocationAddress
+    | MapAppSetLocationAddress;
 
 export interface MapAppGenericAction {
     type:
@@ -36,9 +42,27 @@ export function mapAppAuthenticationCompleted(): MapAppGenericAction {
 
 export interface MapAppDeviceMarkerClick {
     type: MapAppActionType.DEVICE_MARKER_CLICK;
-    markerLocation: Location;
+    markerLocation: MapAppLocation;
 }
 
-export function mapAppClickDeviceMarker(markerLocation: Location): MapAppDeviceMarkerClick {
+export function mapAppClickDeviceMarker(markerLocation: MapAppLocation): MapAppDeviceMarkerClick {
     return { type: MapAppActionType.DEVICE_MARKER_CLICK, markerLocation };
+}
+
+export interface MapAppGetLocationAddress {
+    type: MapAppActionType.GET_LOCATION_ADDRESS;
+    location: MapAppLocation;
+}
+
+export function mapAppGetLocationAddress(location: MapAppLocation): MapAppAction {
+    return { type: MapAppActionType.GET_LOCATION_ADDRESS, location };
+}
+
+export interface MapAppSetLocationAddress {
+    type: MapAppActionType.SET_LOCATION_ADDRESS;
+    address: MapAppAddress;
+}
+
+export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
+    return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
 }
