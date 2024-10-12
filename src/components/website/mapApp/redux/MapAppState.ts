@@ -24,6 +24,10 @@ export interface MapAppState {
     usageStep: MapAppUsageStep;
     selectedMarkerLocation: MapAppLocation | null;
     selectedMarkerAddress: MapAppAddress | null;
+    selectedMarker: {
+        location: MapAppLocation | null;
+        address: MapAppAddress | null;
+    };
     devices: Device[];
 }
 
@@ -43,6 +47,10 @@ export const mapAppInitialState: MapAppState = {
     ],
     selectedMarkerLocation: null,
     selectedMarkerAddress: null,
+    selectedMarker: {
+        location: null,
+        address: null,
+    },
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
