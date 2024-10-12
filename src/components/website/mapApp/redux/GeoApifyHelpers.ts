@@ -1,7 +1,13 @@
 import { MapAppAddress } from './MapAppState';
 
 export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
-    const properties = response.features[0].properties;
+    const geoApifyFeatures = response.features;
+
+    if (geoApifyFeatures.length === 0) {
+        return { addressLine1: 'mapAppCoundNotRetrieveAddress', addressLine2: '' };
+    }
+
+    const properties = geoApifyFeatures[0].properties;
     return {
         addressLine1: `${properties.street}, ${properties.housenumber}`,
         addressLine2: `${properties.district}, ${properties.city}`,
