@@ -6,8 +6,7 @@ import { Device } from './redux/MapAppState';
 export function DeviceListItem(props: { device: Device; index: number }) {
     const { t } = useI18next();
 
-    const leftShadowColorClass = 'device-list-item-shadow-left-first';
-    const rightShadowColorClass = 'device-list-item-shadow-right-first';
+    const { leftShadowColorClass, rightShadowColorClass } = getColorClassesForDeviceItemShadows(props.index);
 
     return (
         <div className="device-list-item-container">
@@ -20,4 +19,11 @@ export function DeviceListItem(props: { device: Device; index: number }) {
             </div>
         </div>
     );
+}
+
+function getColorClassesForDeviceItemShadows(index: number) {
+    return {
+        leftShadowColorClass: 'device-list-item-shadow-left-first',
+        rightShadowColorClass: 'device-list-item-shadow-right-first',
+    };
 }
