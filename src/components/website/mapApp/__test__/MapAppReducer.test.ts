@@ -85,7 +85,7 @@ describe('MapApp reducer tests', () => {
                 address: null,
             },
         });
-        const action = mapAppSetLocationAddress('line1', 'line2');
+        const action = mapAppSetLocationAddress({ addressLine1: 'line1', addressLine2: 'line2' });
 
         verifyMapAppStateChange(initialState, action, {
             selectedMarker: {

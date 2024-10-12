@@ -1,4 +1,4 @@
-import { MapAppLocation } from './MapAppState';
+import { MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
@@ -60,10 +60,9 @@ export function mapAppGetLocationAddress(location: MapAppLocation): MapAppAction
 
 export interface MapAppSetLocationAddress {
     type: MapAppActionType.SET_LOCATION_ADDRESS;
-    address1: string;
-    address2: string;
+    address: MapAppAddress;
 }
 
-export function mapAppSetLocationAddress(address1: string, address2: string): MapAppSetLocationAddress {
-    return { type: MapAppActionType.SET_LOCATION_ADDRESS, address1, address2 };
+export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
+    return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
 }

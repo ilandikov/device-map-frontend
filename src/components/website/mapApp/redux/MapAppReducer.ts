@@ -19,10 +19,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
         case MapAppActionType.SET_LOCATION_ADDRESS: {
             const selectedMarkerWithAddress = {
                 ...state.selectedMarker,
-                address: {
-                    addressLine1: action.address1,
-                    addressLine2: action.address2,
-                },
+                address: action.address,
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
