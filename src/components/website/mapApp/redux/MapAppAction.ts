@@ -1,4 +1,4 @@
-import { Location } from './MapAppState';
+import { MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
@@ -36,9 +36,9 @@ export function mapAppAuthenticationCompleted(): MapAppGenericAction {
 
 export interface MapAppDeviceMarkerClick {
     type: MapAppActionType.DEVICE_MARKER_CLICK;
-    markerLocation: Location;
+    markerLocation: MapAppLocation;
 }
 
-export function mapAppClickDeviceMarker(markerLocation: Location): MapAppDeviceMarkerClick {
+export function mapAppClickDeviceMarker(markerLocation: MapAppLocation): MapAppDeviceMarkerClick {
     return { type: MapAppActionType.DEVICE_MARKER_CLICK, markerLocation };
 }

@@ -7,17 +7,17 @@ export function useMapAppState(): MapAppState {
 
 export interface Device {
     name: string;
-    location: Location;
+    location: MapAppLocation;
 }
 
-export interface Location {
+export interface MapAppLocation {
     lat: number;
     lng: number;
 }
 
 export interface MapAppState {
     usageStep: MapAppUsageStep;
-    selectedMarkerLocation: Location | null;
+    selectedMarkerLocation: MapAppLocation | null;
     devices: Device[];
 }
 
