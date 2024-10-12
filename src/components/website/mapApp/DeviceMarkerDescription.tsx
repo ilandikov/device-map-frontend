@@ -11,20 +11,12 @@ import { DeviceList } from './DeviceList';
 export function DeviceMarkerDescription() {
     const dispatch = useAppDispatch();
 
-    const mapAppState = useMapAppState();
-    const devices = mapAppState.devices;
-    const selectedMarker = mapAppState.selectedMarker;
+    const selectedMarker = useMapAppState().selectedMarker;
     const waitingForAddress = selectedMarker.address === null;
 
     useEffect(() => {
         dispatch(mapAppGetLocationAddress(selectedMarker.location));
     }, [selectedMarker.location]);
-
-    const devicesAtSelectedMarkerLocation = devices.filter((device) => {
-        return (
-            device.location.lat === selectedMarker.location.lat && device.location.lng === selectedMarker.location.lng
-        );
-    });
 
     return (
         <div className="device-marker-description-window">
@@ -32,7 +24,7 @@ export function DeviceMarkerDescription() {
                 <img src={home} className="marker-address-image" alt="marker-address-image" />
                 {waitingForAddress ? <MarkerAddressLoader /> : <MarkerAddress address={selectedMarker.address} />}
             </div>
-            <DeviceList devices={devicesAtSelectedMarkerLocation} />
+            <DeviceList />
         </div>
     );
 }
