@@ -80,6 +80,10 @@ Built address:
     it('should convert properties (Chuy 120)', () => {
         verifyAddress(chuy120.features[0].properties);
     });
+
+    it('should strip words `улица, район, город`', () => {
+        verifyAddress({ housenumber: '1', street: 'Большая улица', district: 'Белый район', city: 'город Дефолт' });
+    });
 });
 
 const chuy120 = {

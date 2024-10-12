@@ -1,0 +1,9 @@
+Received properties:
+    housenumber: 1
+    street: Большая улица
+    district: Белый район
+    city: город Дефолт
+
+Built address:
+    Большая улица, 1
+    Белый район, город Дефолт
