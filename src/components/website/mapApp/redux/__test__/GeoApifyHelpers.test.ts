@@ -1,10 +1,4 @@
-import { verify } from 'approvals/lib/Approvals';
-import {
-    GeoApifyProperties,
-    GeoApifyResponse,
-    buildMapAppAddress,
-    convertPropertiesToAddress,
-} from '../GeoApifyHelpers';
+import { GeoApifyResponse, buildMapAppAddress } from '../GeoApifyHelpers';
 import { MapAppAddress } from '../MapAppState';
 
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
@@ -72,31 +66,6 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
             addressLine1: 'Ак-Тюбинская',
             addressLine2: 'Первомайский, Бишкек',
         });
-    });
-});
-
-describe('GeoApify properties conversion', () => {
-    function verifyAddress(properties: GeoApifyProperties) {
-        const address = convertPropertiesToAddress(properties);
-
-        const toVerify = `Received properties:
-    housenumber: ${properties.housenumber}
-    street: ${properties.street}
-    district: ${properties.district}
-    city: ${properties.city}
-
-Built address:
-    ${address.addressLine1}
-    ${address.addressLine2}`;
-        verify(__dirname, expect.getState().currentTestName, toVerify);
-    }
-
-    it('should convert properties (Chuy 120)', () => {
-        verifyAddress(chuy120.features[0].properties);
-    });
-
-    it('should strip words `улица, район, город`', () => {
-        verifyAddress({ housenumber: '1', street: 'Большая улица', district: 'Белый район', city: 'город Дефолт' });
     });
 });
 

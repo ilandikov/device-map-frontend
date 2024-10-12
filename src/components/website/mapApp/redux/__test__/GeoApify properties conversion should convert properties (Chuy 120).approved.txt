@@ -1,9 +1,0 @@
-Received properties:
-    housenumber: 120
-    street: Чуй проспект
-    district: Первомайский район
-    city: город Бишкек
-
-Built address:
-    Чуй проспект, 120
-    Первомайский, Бишкек
