@@ -3,6 +3,7 @@ import {
     MapAppAction,
     mapAppAuthenticationCompleted,
     mapAppClickDeviceMarker,
+    mapAppGetLocationAddress,
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
@@ -67,5 +68,12 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, {
             selectedMarker: { location: { lat: 42.85862508449081, lng: 74.6085298061371 }, address: null },
         });
+    });
+
+    it('should do nothing when getting an address', () => {
+        const initialState = buildMapAppState({});
+        const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lng: 74.6085298061371 });
+
+        verifyMapAppStateChange(initialState, action, {});
     });
 });
