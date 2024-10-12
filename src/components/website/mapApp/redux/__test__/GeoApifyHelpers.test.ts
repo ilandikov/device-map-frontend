@@ -1,13 +1,13 @@
 import { GeoApifyResponse, buildMapAppAddress } from '../GeoApifyHelpers';
 import { MapAppAddress } from '../MapAppState';
 
-function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, expectedAddress: MapAppAddress) {
-    const address = buildMapAppAddress(geoApifyResponse);
-    expect(address.addressLine1).toEqual(expectedAddress.addressLine1);
-    expect(address.addressLine2).toEqual(expectedAddress.addressLine2);
-}
-
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
+    function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, expectedAddress: MapAppAddress) {
+        const address = buildMapAppAddress(geoApifyResponse);
+        expect(address.addressLine1).toEqual(expectedAddress.addressLine1);
+        expect(address.addressLine2).toEqual(expectedAddress.addressLine2);
+    }
+
     it('should provide an error message if no addresses were provided', () => {
         const geoApifyResponse = {
             features: [],
