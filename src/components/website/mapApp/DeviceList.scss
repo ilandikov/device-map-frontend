@@ -34,15 +34,35 @@
     .device-list-item-shadow-left {
       top: -39px;
       left: 10px;
-
-      background-color: #709F0B;
     }
 
     .device-list-item-shadow-right {
       top: -39px;
       left: 193px;
+    }
 
+    .device-list-item-shadow-left-first {
+      background-color: #709F0B;
+    }
+
+    .device-list-item-shadow-right-first {
       background-color: #26FFF2;
+    }
+
+    .device-list-item-shadow-left-second {
+      background-color: #0B469F;
+    }
+
+    .device-list-item-shadow-right-second {
+      background-color: #2663FF;
+    }
+
+    .device-list-item-shadow-left-third {
+      background-color: #FF7246;
+    }
+
+    .device-list-item-shadow-right-third {
+      background-color: #FF2626;
     }
 
     .device-list-item-image {
