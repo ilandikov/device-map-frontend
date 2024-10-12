@@ -1,4 +1,5 @@
-import { GeoApifyResponse, buildMapAppAddress } from '../GeoApifyHelpers';
+import { verify } from 'approvals/lib/Approvals';
+import { GeoApifyResponse, buildMapAppAddress, convertPropertiesToAddress } from '../GeoApifyHelpers';
 import { MapAppAddress } from '../MapAppState';
 
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
@@ -52,6 +53,25 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
             addressLine1: 'Чуй проспект, 120',
             addressLine2: 'Первомайский район, город Бишкек',
         });
+    });
+});
+
+describe('GeoApify properties conversion', () => {
+    it('should convert properties (Chuy 120)', () => {
+        const properties = chuy120.features[0].properties;
+
+        const address = convertPropertiesToAddress(properties);
+
+        const toVerify = `Received properties:
+    housenumber: ${properties.housenumber}
+    street: ${properties.street}
+    district: ${properties.district}
+    city: ${properties.city}
+
+Built address:
+    ${address.addressLine1}
+    ${address.addressLine2}`;
+        verify(__dirname, expect.getState().currentTestName, toVerify);
     });
 });
 
