@@ -5,8 +5,7 @@ import { Provider } from 'react-redux';
 /* Local dependencies */
 import { createStore } from './store';
 
-const store = createStore();
-
 export default ({ element }) => {
+    const store = createStore();
     return <Provider store={store}>{element}</Provider>;
 };
