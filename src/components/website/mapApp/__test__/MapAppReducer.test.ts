@@ -78,7 +78,7 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, {});
     });
 
-    it('should do nothing when getting an address', () => {
+    it('should set location address', () => {
         const initialState = buildMapAppState({
             selectedMarker: {
                 location: { lat: 0, lng: 1 },
