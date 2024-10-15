@@ -12,3 +12,9 @@ export async function testGeoApifyEpic(
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedActions).toEqual([expectedAction]);
 }
+
+export async function testGeoApifyEpicNoAction(mapAppState: MapAppState, sentAction: MapAppAction) {
+    const output$ = GeoApify(of(sentAction), { value: { mapAppState } }, { cognitoClient: {} });
+    const receivedActions = await lastValueFrom(output$.pipe(toArray()));
+    expect(receivedActions).toEqual([]);
+}
