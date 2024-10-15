@@ -1,13 +1,6 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
-import { MapAppAction, mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
-import { GeoApify } from '../GeoApify';
-import { MapAppState, buildMapAppState } from '../MapAppState';
-
-async function testGeoApifyEpic(mapAppState: MapAppState, sentAction: MapAppAction, expectedAction: MapAppAction) {
-    const output$ = GeoApify(of(sentAction), { value: { mapAppState } }, { cognitoClient: {} });
-    const receivedActions = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedActions).toEqual([expectedAction]);
-}
+import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
+import { buildMapAppState } from '../MapAppState';
+import { testGeoApifyEpic } from './GeoApifyTestHelpers';
 
 describe('GeoApify tests', () => {
     it('should get address for a location in Bishkek', async () => {
