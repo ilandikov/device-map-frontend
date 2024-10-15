@@ -20,7 +20,16 @@ export function DeviceMarkers() {
         shadowSize: [41, 41],
     });
 
+    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
     const markerClickHandler = (event: LeafletMouseEvent) => {
+        if (
+            selectedMarkerLocation &&
+            selectedMarkerLocation.lat === event.latlng.lat &&
+            selectedMarkerLocation.lng === event.latlng.lng
+        ) {
+            return;
+        }
+
         dispatch(mapAppSetLocationCoordinates(event.latlng));
     };
 
