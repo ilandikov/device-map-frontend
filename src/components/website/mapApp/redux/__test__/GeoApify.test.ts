@@ -13,7 +13,7 @@ describe('GeoApify tests', () => {
         await testGeoApifyEpic(buildMapAppState({}), sentAction, expectedAction);
     });
 
-    it.failing('should get address for a location in Bishkek', async () => {
+    it('should get address for a location in Bishkek', async () => {
         const theSameLocation = { lat: 42.875352500000005, lng: 74.60261920574811 };
         const sentAction = mapAppGetLocationAddress(theSameLocation);
 

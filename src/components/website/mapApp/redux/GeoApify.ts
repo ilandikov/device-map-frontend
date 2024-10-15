@@ -1,15 +1,26 @@
 import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
-import { catchError, map, mergeMap } from 'rxjs';
-import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
+import { EMPTY, catchError, map, mergeMap } from 'rxjs';
+import { MapAppActionType, MapAppGetLocationAddress, mapAppSetLocationAddress } from './MapAppAction';
 import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
+import { MapAppState } from './MapAppState';
 
-export function GeoApify(action$, _state$, { cognitoClient }) {
+export function GeoApify(action$, state$, { cognitoClient }) {
     return action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
-        mergeMap((action: any) => {
-            const location = action.location;
-            const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lng}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`;
+        mergeMap((action: MapAppGetLocationAddress) => {
+            const mapAppState: MapAppState = state$.value.mapAppState;
+            const alreadySelectedLocation = mapAppState.selectedMarker.location;
+            const locationFromAction = action.location;
+            if (
+                alreadySelectedLocation &&
+                alreadySelectedLocation.lat === locationFromAction.lat &&
+                alreadySelectedLocation.lng === locationFromAction.lng
+            ) {
+                return EMPTY;
+            }
+
+            const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${locationFromAction.lat}&lon=${locationFromAction.lng}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`;
             return ajax<GeoApifyResponse>({
                 url,
                 method: 'GET',
