@@ -12,4 +12,21 @@ describe('GeoApify tests', () => {
 
         await testGeoApifyEpic(buildMapAppState({}), sentAction, expectedAction);
     });
+
+    it('should get address for a location in Bishkek', async () => {
+        const theSameLocation = { lat: 42.875352500000005, lng: 74.60261920574811 };
+        const sentAction = mapAppGetLocationAddress(theSameLocation);
+        const expectedAction = mapAppSetLocationAddress({
+            addressLine1: 'Чуй, 120',
+            addressLine2: 'Первомайский, Бишкек',
+        });
+
+        await testGeoApifyEpic(
+            buildMapAppState({
+                selectedMarker: { location: theSameLocation, address: null },
+            }),
+            sentAction,
+            expectedAction,
+        );
+    });
 });
