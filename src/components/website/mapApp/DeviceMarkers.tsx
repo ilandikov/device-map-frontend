@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, LatLng } from 'leaflet';
+import { Icon, LatLng, LeafletMouseEvent } from 'leaflet';
 import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
@@ -20,19 +20,22 @@ export function DeviceMarkers() {
         shadowSize: [41, 41],
     });
 
+    const markerClickHandler = (event: LeafletMouseEvent) => {
+        dispatch(mapAppClickDeviceMarker(event.latlng));
+    };
+
     const devices = useMapAppState().devices;
 
     return devices.map((device, index) => {
         const devicePosition = new LatLng(device.location.lat, device.location.lng);
+
         return (
             <Marker
                 key={`DeviceMarker${index}`}
                 icon={deviceMarkerIcon}
                 position={devicePosition}
                 eventHandlers={{
-                    click: (event) => {
-                        dispatch(mapAppClickDeviceMarker(event.latlng));
-                    },
+                    click: markerClickHandler,
                 }}
             />
         );
