@@ -6,7 +6,7 @@ import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
 import { useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
-import { mapAppClickDeviceMarker } from './redux/MapAppAction';
+import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
 
 export function DeviceMarkers() {
     const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export function DeviceMarkers() {
     });
 
     const markerClickHandler = (event: LeafletMouseEvent) => {
-        dispatch(mapAppClickDeviceMarker(event.latlng));
+        dispatch(mapAppSetLocationCoordinates(event.latlng));
     };
 
     const devices = useMapAppState().devices;

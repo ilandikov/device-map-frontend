@@ -14,7 +14,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
         case MapAppActionType.AUTHENTICATION_COMPLETED:
             return { ...state, usageStep: MapAppUsageStep.DEVICE_MANAGEMENT };
-        case MapAppActionType.DEVICE_MARKER_CLICK:
+        case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
         case MapAppActionType.SET_LOCATION_ADDRESS: {
             const selectedMarkerWithAddress = {

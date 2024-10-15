@@ -2,12 +2,12 @@ import { MapAppReducer } from '../redux/MapAppReducer';
 import {
     MapAppAction,
     mapAppAuthenticationCompleted,
-    mapAppClickDeviceMarker,
     mapAppGetLocationAddress,
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
     mapAppSetLocationAddress,
+    mapAppSetLocationCoordinates,
 } from '../redux/MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
@@ -62,9 +62,9 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
 
-    it('should set marker at the selected location', () => {
+    it('should set coordinates', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppClickDeviceMarker({ lat: 42.85862508449081, lng: 74.6085298061371 });
+        const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lng: 74.6085298061371 });
 
         verifyMapAppStateChange(initialState, action, {
             selectedMarker: { location: { lat: 42.85862508449081, lng: 74.6085298061371 }, address: null },
