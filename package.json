@@ -64,7 +64,7 @@
     "jest-dom": "^4.0.0",
     "leaflet": "1.9.4",
     "npm-check-updates": "^16.14.12",
-    "puppeteer": "21.7.0",
+    "puppeteer": "23.5.3",
     "react": "18.2.0",
     "react-apollo": "3.1.5",
     "react-dom": "18.2.0",
