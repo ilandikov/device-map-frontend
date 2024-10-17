@@ -22,11 +22,8 @@ export default function Footer() {
                     </div>
                     <div className="footer-brand-description">
                         <p>Удобное и надежное отечественное приложение для оплаты в Кыргызстане</p>
-                        <p>
-                            ©2022 Averspay
-                            <br />
-                            Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
-                        </p>
+                        <p>©2022 Averspay</p>
+                        <p>Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015</p>
                     </div>
                 </div>
                 <ul className="footer-links">

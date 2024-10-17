@@ -23,10 +23,7 @@ export default function Hero() {
                     <img src={Logo} alt="logo-with-brand" />
                     <p>Карта</p>
                 </div>
-                <p className="hero-text">
-                    Карта терминалов от Finik, исследуйте,
-                    <br /> отмечайте и зарабатывайте баллы
-                </p>
+                <p className="hero-text">Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы</p>
                 <div className="hero-links">
                     <Link to="/webapp">
                         <img src={WebApp} alt="hero-links-webapp" />

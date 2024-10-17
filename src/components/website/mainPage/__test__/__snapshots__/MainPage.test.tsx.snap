@@ -48,9 +48,7 @@ exports[`MainPage component should match the snapshot 1`] = `
       <p
         className="hero-text"
       >
-        Карта терминалов от Finik, исследуйте,
-        <br />
-         отмечайте и зарабатывайте баллы
+        Карта терминалов от Finik, исследуйте, отмечайте и зарабатывайте баллы
       </p>
       <div
         className="hero-links"
@@ -309,7 +307,8 @@ exports[`MainPage component should match the snapshot 1`] = `
           </p>
           <p>
             ©2022 Averspay
-            <br />
+          </p>
+          <p>
             Лицензия НБКР № 3006010615, № 2006010615 от 06.02.2015
           </p>
         </div>
