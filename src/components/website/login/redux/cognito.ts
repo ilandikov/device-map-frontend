@@ -62,9 +62,9 @@ function processCognitoRequest(
             return sendForgotPasswordOTP(authenticationState, cognitoClient);
         case LoginModalRemoteRequestType.SIGN_OUT:
             return signOut(cognitoClient);
+        default:
+            return EMPTY;
     }
-
-    return EMPTY;
 }
 
 function signUp(authenticationState: LoginModalAuthenticationState, cognitoClient) {
