@@ -49,12 +49,10 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
                     ).pipe(
                         mergeMap(() => {
-                            return mapAppAuthenticationCompleted()
-                                ? from([
-                                      loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
-                                      mapAppAuthenticationCompleted(),
-                                  ])
-                                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN)]);
+                            return from([
+                                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
+                                mapAppAuthenticationCompleted(),
+                            ]);
                         }),
                         catchError((error) => {
                             return of(
