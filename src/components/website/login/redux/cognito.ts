@@ -112,44 +112,65 @@ function signIn(authenticationState: LoginModalAuthenticationState, cognitoClien
 }
 
 function sendSignUpOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
-    return observeEndpoint(
-        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-        LoginModalRemoteAnswerType.OTP,
-        mapAppAuthenticationCompleted(),
+    return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
+        mergeMap(() => {
+            return mapAppAuthenticationCompleted()
+                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()])
+                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP)]);
+        }),
+        catchError((error) => {
+            return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error)));
+        }),
     );
 }
 
 function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
-    return observeEndpoint(
-        cognitoClient.resendConfirmCode(authenticationState.email),
-        LoginModalRemoteAnswerType.OTP_RESEND,
+    return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
+        mergeMap(() => {
+            // eslint-disable-next-line no-constant-condition
+            return null
+                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND), null])
+                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)]);
+        }),
+        catchError((error) => {
+            return of(
+                loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, reasonFromCognitoError(error)),
+            );
+        }),
     );
 }
 
 function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
-    return observeEndpoint(
-        cognitoClient.forgotPassword(authenticationState.email),
-        LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+    return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
+        mergeMap(() => {
+            // eslint-disable-next-line no-constant-condition
+            return null
+                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD), null])
+                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]);
+        }),
+        catchError((error) => {
+            return of(
+                loginModalRemoteAnswerFailure(
+                    LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+                    reasonFromCognitoError(error),
+                ),
+            );
+        }),
     );
 }
 
 function signOut(cognitoClient) {
-    return observeEndpoint(cognitoClient.signOut(), LoginModalRemoteAnswerType.SIGN_OUT);
-}
-
-function observeEndpoint(
-    endpoint: Promise<unknown>,
-    notification: LoginModalRemoteAnswerType,
-    mapAppAdditionalAction: MapAppAction | null = null,
-): Observable<LoginModalAction | MapAppAction> {
-    return fromPromise(endpoint).pipe(
+    return fromPromise(cognitoClient.signOut()).pipe(
         mergeMap(() => {
-            return mapAppAdditionalAction
-                ? from([loginModalRemoteAnswerSuccess(notification), mapAppAdditionalAction])
-                : from([loginModalRemoteAnswerSuccess(notification)]);
+            // eslint-disable-next-line no-constant-condition
+            return null
+                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT), null])
+                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]);
         }),
         catchError((error) => {
-            return of(loginModalRemoteAnswerFailure(notification, reasonFromCognitoError(error)));
+            return of(
+                loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, reasonFromCognitoError(error)),
+            );
         }),
     );
 }
