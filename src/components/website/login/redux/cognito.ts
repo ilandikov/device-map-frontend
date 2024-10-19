@@ -12,7 +12,7 @@ import {
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
 import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
-import { buildMessageFromCognitoException } from './cognitoHelpers';
+import { reasonFromCognitoError } from './cognitoHelpers';
 
 export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction> {
     return action$.pipe(
@@ -92,8 +92,8 @@ function observeEndpoint(
                 ? from([loginModalRemoteAnswerSuccess(notification), mapAppAdditionalAction])
                 : from([loginModalRemoteAnswerSuccess(notification)]);
         }),
-        catchError((reason) => {
-            return of(loginModalRemoteAnswerFailure(notification, buildMessageFromCognitoException(reason)));
+        catchError((error) => {
+            return of(loginModalRemoteAnswerFailure(notification, reasonFromCognitoError(error)));
         }),
     );
 }

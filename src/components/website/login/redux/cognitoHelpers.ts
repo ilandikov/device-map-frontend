@@ -2,10 +2,10 @@ export enum CognitoErrors {
     USERNAME_EXISTS = 'cognitoUsernameExistsException',
 }
 
-export function buildMessageFromCognitoException(reason: any): string {
-    if (!reason || !reason.code) {
+export function reasonFromCognitoError(error: any): string {
+    if (!error || !error.code) {
         return 'cognitoUnknownException';
     }
 
-    return 'cognito' + reason.code;
+    return 'cognito' + error.code;
 }
