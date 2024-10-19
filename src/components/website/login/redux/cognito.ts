@@ -73,27 +73,29 @@ function processCognitoRequest(
                 }),
             );
         case LoginModalRemoteRequestType.OTP:
-            if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
-                return observeEndpoint(
-                    cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-                    LoginModalRemoteAnswerType.OTP,
-                    mapAppAuthenticationCompleted(),
-                );
+            if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
+                break;
             }
-            break;
+
+            return observeEndpoint(
+                cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+                LoginModalRemoteAnswerType.OTP,
+                mapAppAuthenticationCompleted(),
+            );
         case LoginModalRemoteRequestType.OTP_RESEND:
             return observeEndpoint(
                 cognitoClient.resendConfirmCode(authenticationState.email),
                 LoginModalRemoteAnswerType.OTP_RESEND,
             );
         case LoginModalRemoteRequestType.USERNAME:
-            if (authenticationState.step === AuthenticationStep.PASSWORD_RESET_LOADING) {
-                return observeEndpoint(
-                    cognitoClient.forgotPassword(authenticationState.email),
-                    LoginModalRemoteAnswerType.FORGOT_PASSWORD,
-                );
+            if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
+                break;
             }
-            break;
+
+            return observeEndpoint(
+                cognitoClient.forgotPassword(authenticationState.email),
+                LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+            );
         case LoginModalRemoteRequestType.SIGN_OUT:
             return observeEndpoint(cognitoClient.signOut(), LoginModalRemoteAnswerType.SIGN_OUT);
     }
