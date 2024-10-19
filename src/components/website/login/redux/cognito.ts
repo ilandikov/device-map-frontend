@@ -82,12 +82,10 @@ function confirmPassword(authenticationState: LoginModalAuthenticationState, cog
         cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
     ).pipe(
         mergeMap(() => {
-            return mapAppAuthenticationCompleted()
-                ? from([
-                      loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
-                      mapAppAuthenticationCompleted(),
-                  ])
-                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET)]);
+            return from([
+                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
+                mapAppAuthenticationCompleted(),
+            ]);
         }),
         catchError((error) => {
             return of(
@@ -114,9 +112,10 @@ function signIn(authenticationState: LoginModalAuthenticationState, cognitoClien
 function sendSignUpOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
         mergeMap(() => {
-            return mapAppAuthenticationCompleted()
-                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()])
-                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP)]);
+            return from([
+                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP),
+                mapAppAuthenticationCompleted(),
+            ]);
         }),
         catchError((error) => {
             return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error)));
@@ -127,10 +126,7 @@ function sendSignUpOTP(authenticationState: LoginModalAuthenticationState, cogni
 function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
         mergeMap(() => {
-            // eslint-disable-next-line no-constant-condition
-            return null
-                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND), null])
-                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)]);
+            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)]);
         }),
         catchError((error) => {
             return of(
@@ -143,10 +139,7 @@ function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoCl
 function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
         mergeMap(() => {
-            // eslint-disable-next-line no-constant-condition
-            return null
-                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD), null])
-                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]);
+            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]);
         }),
         catchError((error) => {
             return of(
@@ -162,10 +155,7 @@ function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationStat
 function signOut(cognitoClient) {
     return fromPromise(cognitoClient.signOut()).pipe(
         mergeMap(() => {
-            // eslint-disable-next-line no-constant-condition
-            return null
-                ? from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT), null])
-                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]);
+            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]);
         }),
         catchError((error) => {
             return of(
