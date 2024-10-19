@@ -28,6 +28,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
         }),
     );
 }
+
 function processCognitoRequest(
     action: LoginModalRemoteRequest,
     authenticationState: LoginModalAuthenticationState,
