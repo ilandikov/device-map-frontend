@@ -40,15 +40,7 @@ function processCognitoRequest(
                 case AuthenticationStep.PASSWORD_CREATION_LOADING:
                     return signUp(authenticationState, cognitoClient);
                 case AuthenticationStep.PASSWORD_RESET_LOADING:
-                    return observeEndpoint(
-                        cognitoClient.confirmPassword(
-                            authenticationState.email,
-                            authenticationState.OTP,
-                            authenticationState.password,
-                        ),
-                        LoginModalRemoteAnswerType.PASSWORD_RESET,
-                        mapAppAuthenticationCompleted(),
-                    );
+                    return confirmPassword(authenticationState, cognitoClient);
             }
 
             break;
@@ -108,6 +100,14 @@ function signUp(authenticationState: LoginModalAuthenticationState, cognitoClien
         catchError((error) => {
             return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error)));
         }),
+    );
+}
+
+function confirmPassword(authenticationState: LoginModalAuthenticationState, cognitoClient) {
+    return observeEndpoint(
+        cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
+        LoginModalRemoteAnswerType.PASSWORD_RESET,
+        mapAppAuthenticationCompleted(),
     );
 }
 
