@@ -42,7 +42,7 @@ function processCognitoRequest(
                     return confirmPassword(authenticationState, cognitoClient);
             }
 
-            break;
+            return EMPTY;
         case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
             return signIn(authenticationState, cognitoClient);
         case LoginModalRemoteRequestType.OTP:
