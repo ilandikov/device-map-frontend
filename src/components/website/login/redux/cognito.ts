@@ -88,11 +88,9 @@ function observeEndpoint(
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(endpoint).pipe(
         mergeMap(() => {
-            if (mapAppAdditionalAction !== null) {
-                return from([loginModalRemoteAnswerSuccess(notification), mapAppAdditionalAction]);
-            }
-
-            return of(loginModalRemoteAnswerSuccess(notification));
+            return mapAppAdditionalAction
+                ? from([loginModalRemoteAnswerSuccess(notification), mapAppAdditionalAction])
+                : from([loginModalRemoteAnswerSuccess(notification)]);
         }),
         catchError((reason) => {
             return of(loginModalRemoteAnswerFailure(notification, buildMessageFromCognitoException(reason)));
