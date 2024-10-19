@@ -28,7 +28,6 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
         }),
     );
 }
-
 function processCognitoRequest(
     action: LoginModalRemoteRequest,
     authenticationState: LoginModalAuthenticationState,
@@ -45,48 +44,23 @@ function processCognitoRequest(
 
             break;
         case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-            return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
-                mergeMap(() => {
-                    return from([
-                        loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
-                        mapAppAuthenticationCompleted(),
-                    ]);
-                }),
-                catchError((error) => {
-                    return of(
-                        loginModalRemoteAnswerFailure(
-                            LoginModalRemoteAnswerType.SIGN_IN,
-                            reasonFromCognitoError(error),
-                        ),
-                    );
-                }),
-            );
+            return signIn(authenticationState, cognitoClient);
         case LoginModalRemoteRequestType.OTP:
             if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                 return EMPTY;
             }
 
-            return observeEndpoint(
-                cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-                LoginModalRemoteAnswerType.OTP,
-                mapAppAuthenticationCompleted(),
-            );
+            return sendSignUpOTP(authenticationState, cognitoClient);
         case LoginModalRemoteRequestType.OTP_RESEND:
-            return observeEndpoint(
-                cognitoClient.resendConfirmCode(authenticationState.email),
-                LoginModalRemoteAnswerType.OTP_RESEND,
-            );
+            return resendOTP(authenticationState, cognitoClient);
         case LoginModalRemoteRequestType.USERNAME:
             if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
                 return EMPTY;
             }
 
-            return observeEndpoint(
-                cognitoClient.forgotPassword(authenticationState.email),
-                LoginModalRemoteAnswerType.FORGOT_PASSWORD,
-            );
+            return sendForgotPasswordOTP(authenticationState, cognitoClient);
         case LoginModalRemoteRequestType.SIGN_OUT:
-            return observeEndpoint(cognitoClient.signOut(), LoginModalRemoteAnswerType.SIGN_OUT);
+            return signOut(cognitoClient);
     }
 
     return EMPTY;
@@ -121,6 +95,46 @@ function confirmPassword(authenticationState: LoginModalAuthenticationState, cog
             );
         }),
     );
+}
+
+function signIn(authenticationState: LoginModalAuthenticationState, cognitoClient) {
+    return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
+        mergeMap(() => {
+            return from([
+                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
+                mapAppAuthenticationCompleted(),
+            ]);
+        }),
+        catchError((error) => {
+            return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error)));
+        }),
+    );
+}
+
+function sendSignUpOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
+    return observeEndpoint(
+        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+        LoginModalRemoteAnswerType.OTP,
+        mapAppAuthenticationCompleted(),
+    );
+}
+
+function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
+    return observeEndpoint(
+        cognitoClient.resendConfirmCode(authenticationState.email),
+        LoginModalRemoteAnswerType.OTP_RESEND,
+    );
+}
+
+function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
+    return observeEndpoint(
+        cognitoClient.forgotPassword(authenticationState.email),
+        LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+    );
+}
+
+function signOut(cognitoClient) {
+    return observeEndpoint(cognitoClient.signOut(), LoginModalRemoteAnswerType.SIGN_OUT);
 }
 
 function observeEndpoint(
