@@ -69,7 +69,7 @@ function processCognitoRequest(
 function signUp(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() => {
-            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]);
+            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP));
         }),
         catchError((error) => {
             return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error)));
@@ -126,7 +126,7 @@ function sendSignUpOTP(authenticationState: LoginModalAuthenticationState, cogni
 function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
         mergeMap(() => {
-            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)]);
+            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND));
         }),
         catchError((error) => {
             return of(
@@ -139,7 +139,7 @@ function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoCl
 function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
         mergeMap(() => {
-            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)]);
+            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD));
         }),
         catchError((error) => {
             return of(
@@ -155,7 +155,7 @@ function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationStat
 function signOut(cognitoClient) {
     return fromPromise(cognitoClient.signOut()).pipe(
         mergeMap(() => {
-            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]);
+            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT));
         }),
         catchError((error) => {
             return of(
