@@ -38,21 +38,7 @@ function processCognitoRequest(
         case LoginModalRemoteRequestType.PASSWORD:
             switch (authenticationState.step) {
                 case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                    return fromPromise(
-                        cognitoClient.signUp(authenticationState.email, authenticationState.password),
-                    ).pipe(
-                        mergeMap(() => {
-                            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]);
-                        }),
-                        catchError((error) => {
-                            return of(
-                                loginModalRemoteAnswerFailure(
-                                    LoginModalRemoteAnswerType.SIGN_UP,
-                                    reasonFromCognitoError(error),
-                                ),
-                            );
-                        }),
-                    );
+                    return signUp(authenticationState, cognitoClient);
                 case AuthenticationStep.PASSWORD_RESET_LOADING:
                     return observeEndpoint(
                         cognitoClient.confirmPassword(
@@ -112,6 +98,17 @@ function processCognitoRequest(
     }
 
     return EMPTY;
+}
+
+function signUp(authenticationState: LoginModalAuthenticationState, cognitoClient) {
+    return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
+        mergeMap(() => {
+            return from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)]);
+        }),
+        catchError((error) => {
+            return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error)));
+        }),
+    );
 }
 
 function observeEndpoint(
