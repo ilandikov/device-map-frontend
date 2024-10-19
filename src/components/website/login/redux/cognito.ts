@@ -68,12 +68,10 @@ function processCognitoRequest(
 
 function signUp(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
-        mergeMap(() => {
-            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP));
-        }),
-        catchError((error) => {
-            return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error)));
-        }),
+        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP))),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
+        ),
     );
 }
 
@@ -81,86 +79,68 @@ function confirmPassword(authenticationState: LoginModalAuthenticationState, cog
     return fromPromise(
         cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
     ).pipe(
-        mergeMap(() => {
-            return from([
+        mergeMap(() =>
+            from([
                 loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
                 mapAppAuthenticationCompleted(),
-            ]);
-        }),
-        catchError((error) => {
-            return of(
-                loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error)),
-            );
-        }),
+            ]),
+        ),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
+        ),
     );
 }
 
 function signIn(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
-        mergeMap(() => {
-            return from([
-                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
-                mapAppAuthenticationCompleted(),
-            ]);
-        }),
-        catchError((error) => {
-            return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error)));
-        }),
+        mergeMap(() =>
+            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
+        ),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error))),
+        ),
     );
 }
 
 function sendSignUpOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
-        mergeMap(() => {
-            return from([
-                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP),
-                mapAppAuthenticationCompleted(),
-            ]);
-        }),
-        catchError((error) => {
-            return of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error)));
-        }),
+        mergeMap(() =>
+            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()]),
+        ),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error))),
+        ),
     );
 }
 
 function resendOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
-        mergeMap(() => {
-            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND));
-        }),
-        catchError((error) => {
-            return of(
-                loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, reasonFromCognitoError(error)),
-            );
-        }),
+        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND))),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, reasonFromCognitoError(error))),
+        ),
     );
 }
 
 function sendForgotPasswordOTP(authenticationState: LoginModalAuthenticationState, cognitoClient) {
     return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
-        mergeMap(() => {
-            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD));
-        }),
-        catchError((error) => {
-            return of(
+        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD))),
+        catchError((error) =>
+            of(
                 loginModalRemoteAnswerFailure(
                     LoginModalRemoteAnswerType.FORGOT_PASSWORD,
                     reasonFromCognitoError(error),
                 ),
-            );
-        }),
+            ),
+        ),
     );
 }
 
 function signOut(cognitoClient) {
     return fromPromise(cognitoClient.signOut()).pipe(
-        mergeMap(() => {
-            return of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT));
-        }),
-        catchError((error) => {
-            return of(
-                loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, reasonFromCognitoError(error)),
-            );
-        }),
+        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT))),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, reasonFromCognitoError(error))),
+        ),
     );
 }
