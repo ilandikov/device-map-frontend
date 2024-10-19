@@ -74,7 +74,7 @@ function processCognitoRequest(
             );
         case LoginModalRemoteRequestType.OTP:
             if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
-                break;
+                return EMPTY;
             }
 
             return observeEndpoint(
@@ -89,7 +89,7 @@ function processCognitoRequest(
             );
         case LoginModalRemoteRequestType.USERNAME:
             if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
-                break;
+                return EMPTY;
             }
 
             return observeEndpoint(
