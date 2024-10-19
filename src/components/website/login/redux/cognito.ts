@@ -104,10 +104,22 @@ function signUp(authenticationState: LoginModalAuthenticationState, cognitoClien
 }
 
 function confirmPassword(authenticationState: LoginModalAuthenticationState, cognitoClient) {
-    return observeEndpoint(
+    return fromPromise(
         cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
-        LoginModalRemoteAnswerType.PASSWORD_RESET,
-        mapAppAuthenticationCompleted(),
+    ).pipe(
+        mergeMap(() => {
+            return mapAppAuthenticationCompleted()
+                ? from([
+                      loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
+                      mapAppAuthenticationCompleted(),
+                  ])
+                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET)]);
+        }),
+        catchError((error) => {
+            return of(
+                loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error)),
+            );
+        }),
     );
 }
 
