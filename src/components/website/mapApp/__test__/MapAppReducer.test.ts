@@ -62,8 +62,13 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
 
-    it('should set coordinates', () => {
-        const initialState = buildMapAppState({});
+    it('should update the coordinates and clear the address', () => {
+        const initialState = buildMapAppState({
+            selectedMarker: {
+                location: { lat: 10, lng: 20 },
+                address: { addressLine1: 'street', addressLine2: 'city' },
+            },
+        });
         const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lng: 74.6085298061371 });
 
         verifyMapAppStateChange(initialState, action, {
