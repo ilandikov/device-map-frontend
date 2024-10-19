@@ -45,10 +45,25 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
 
                     break;
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                    return observeEndpoint(
+                    return fromPromise(
                         cognitoClient.signIn(authenticationState.email, authenticationState.password),
-                        LoginModalRemoteAnswerType.SIGN_IN,
-                        mapAppAuthenticationCompleted(),
+                    ).pipe(
+                        mergeMap(() => {
+                            return mapAppAuthenticationCompleted()
+                                ? from([
+                                      loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
+                                      mapAppAuthenticationCompleted(),
+                                  ])
+                                : from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN)]);
+                        }),
+                        catchError((error) => {
+                            return of(
+                                loginModalRemoteAnswerFailure(
+                                    LoginModalRemoteAnswerType.SIGN_IN,
+                                    reasonFromCognitoError(error),
+                                ),
+                            );
+                        }),
                     );
                 case LoginModalRemoteRequestType.OTP:
                     if (authenticationState.step === AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
