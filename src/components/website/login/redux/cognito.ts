@@ -3,6 +3,7 @@ import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import CognitoClient from '@mancho.devs/cognito';
 import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
+import { RootEpic } from '../../../../redux/store';
 import {
     LoginModalAction,
     LoginModalActionType,
@@ -16,11 +17,11 @@ import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalA
 import { reasonFromCognitoError } from './cognitoHelpers';
 import { CognitoTestClient } from './__test__/cognitoTestHelpers';
 
-export function cognito(
+export const cognito: RootEpic = (
     action$,
     state$,
     { cognitoClient }: { cognitoClient: CognitoClient | CognitoTestClient },
-): Observable<LoginModalAction | MapAppAction> {
+) => {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap((action: LoginModalRemoteRequest) => {
@@ -33,7 +34,7 @@ export function cognito(
             return processCognitoRequest(action, authenticationState, cognitoClient);
         }),
     );
-}
+};
 
 function processCognitoRequest(
     action: LoginModalRemoteRequest,
