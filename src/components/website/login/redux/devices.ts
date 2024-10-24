@@ -1,8 +1,9 @@
-import { Observable, of, switchMap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { MapAppAction, MapAppActionType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
+import { MapAppActionType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
+import { RootEpic } from '../../../../redux/store';
 
-export function devices(action$, state$): Observable<MapAppAction> {
+export const devices: RootEpic = (action$) => {
     return action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap(() => {
@@ -18,4 +19,4 @@ export function devices(action$, state$): Observable<MapAppAction> {
             );
         }),
     );
-}
+};
