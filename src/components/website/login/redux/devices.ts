@@ -6,7 +6,7 @@ export function devices(action$, state$, { _cognitoClient }): Observable<MapAppA
     return action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap((action: MapAppRemoteRequest) => {
-            return of({ type: MapAppActionType.REMOTE_ANSWER });
+            return of({ type: MapAppActionType.REMOTE_ANSWER, devices: [] });
         }),
     );
 }

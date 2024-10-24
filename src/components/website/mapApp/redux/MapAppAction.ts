@@ -1,4 +1,4 @@
-import { MapAppAddress, MapAppLocation } from './MapAppState';
+import { Device, MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
@@ -77,4 +77,5 @@ export interface MapAppRemoteRequest {
 
 export interface MapAppRemoteAnswer {
     type: MapAppActionType.REMOTE_ANSWER;
+    devices: Device[];
 }
