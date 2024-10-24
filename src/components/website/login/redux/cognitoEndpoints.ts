@@ -1,21 +1,12 @@
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { Observable, catchError, from, mergeMap, of } from 'rxjs';
-import CognitoClient from '@mancho.devs/cognito';
-import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
+import { catchError, from, mergeMap, of } from 'rxjs';
+import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import {
-    LoginModalAction,
     LoginModalRemoteAnswerType,
     loginModalRemoteAnswerFailure,
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
-import { reasonFromCognitoError } from './cognitoHelpers';
-import { CognitoTestClient } from './__test__/cognitoTestHelpers';
-import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
-
-type CognitoEndpoint = (
-    cognitoClient: CognitoClient | CognitoTestClient,
-    authenticationState: LoginModalAuthenticationState,
-) => Observable<LoginModalAction | MapAppAction>;
+import { CognitoEndpoint, reasonFromCognitoError } from './cognitoHelpers';
 
 export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
     return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(

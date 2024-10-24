@@ -1,6 +1,5 @@
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
-import CognitoClient from '@mancho.devs/cognito';
 import { MapAppAction } from '../../mapApp/redux/MapAppAction';
 import { RootEpic } from '../../../../redux/store';
 import {
@@ -10,7 +9,6 @@ import {
     LoginModalRemoteRequestType,
 } from './LoginModalAction';
 import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
-import { CognitoTestClient } from './__test__/cognitoTestHelpers';
 import {
     confirmPassword,
     resendOTP,
@@ -20,12 +18,9 @@ import {
     signOut,
     signUp,
 } from './cognitoEndpoints';
+import { CognitoClients } from './cognitoHelpers';
 
-export const cognito: RootEpic = (
-    action$,
-    state$,
-    { cognitoClient }: { cognitoClient: CognitoClient | CognitoTestClient },
-) => {
+export const cognito: RootEpic = (action$, state$, { cognitoClient }: { cognitoClient: CognitoClients }) => {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap((action) => {
@@ -43,7 +38,7 @@ export const cognito: RootEpic = (
 function processCognitoRequest(
     action: LoginModalRemoteRequest,
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient: CognitoClient | CognitoTestClient,
+    cognitoClient: CognitoClients,
 ): Observable<LoginModalAction | MapAppAction> {
     switch (action.request) {
         case LoginModalRemoteRequestType.PASSWORD:
