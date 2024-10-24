@@ -24,8 +24,8 @@ export const cognito: RootEpic = (
 ) => {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
-        switchMap((action: LoginModalRemoteRequest) => {
-            const authenticationState: LoginModalAuthenticationState = state$.value.loginModalAuthentication;
+        switchMap((action) => {
+            const authenticationState = state$.value.loginModalAuthentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
                 return EMPTY;
