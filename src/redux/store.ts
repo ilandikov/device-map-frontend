@@ -24,22 +24,15 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export type RootEpic = Epic<
-    LoginModalAction | MapAppAction,
-    LoginModalAction | MapAppAction,
-    RootState,
-    { cognitoClient?: CognitoClients }
->;
+type AllActions = LoginModalAction | MapAppAction;
+type Dependencies = { cognitoClient?: CognitoClients };
+
+export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
 
 export function createStore() {
-    type RootMiddleWare = EpicMiddleware<
-        LoginModalAction | MapAppAction,
-        LoginModalAction | MapAppAction,
-        RootState,
-        { cognitoClient }
-    >;
+    type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
 
     const epicMiddleware: RootMiddleWare = createEpicMiddleware({
         dependencies: {
