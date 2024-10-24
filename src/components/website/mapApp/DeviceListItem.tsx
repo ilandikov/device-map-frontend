@@ -14,7 +14,7 @@ export function DeviceListItem(props: { device: Device; index: number }) {
             <div className={`device-list-item-shadow device-list-item-shadow-right ${rightShadowColorClass}`}></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">
-                <p>{props.device.name}</p>
+                <p>{props.device.id}</p>
                 <button>{t('deviceReportBroken')}</button>
             </div>
         </div>
