@@ -28,7 +28,7 @@ export type RootEpic = Epic<
     LoginModalAction | MapAppAction,
     LoginModalAction | MapAppAction,
     RootState,
-    { cognitoClient: CognitoClients }
+    { cognitoClient?: CognitoClients }
 >;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
