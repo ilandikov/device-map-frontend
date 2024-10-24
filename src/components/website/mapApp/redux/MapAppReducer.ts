@@ -23,6 +23,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
+        case MapAppActionType.REMOTE_ANSWER:
+            return { ...state, devices: action.devices };
         default:
             return state;
     }

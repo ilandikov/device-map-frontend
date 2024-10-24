@@ -11,8 +11,9 @@ import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer'
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
 import { cognito } from '../components/website/login/redux/cognito';
 import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
+import { devices } from '../components/website/login/redux/devices';
 
-const rootEpic = combineEpics(cognito, GeoApify);
+const rootEpic = combineEpics(cognito, GeoApify, devices);
 
 const rootReducer = combineReducers({
     getDevices,

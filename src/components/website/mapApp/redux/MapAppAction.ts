@@ -1,4 +1,4 @@
-import { MapAppAddress, MapAppLocation } from './MapAppState';
+import { Device, MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
     LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
@@ -8,13 +8,17 @@ export enum MapAppActionType {
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
+    REMOTE_REQUEST = 'REMOTE_REQUEST',
+    REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
 export type MapAppAction =
     | MapAppGenericAction
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
-    | MapAppSetLocationAddress;
+    | MapAppSetLocationAddress
+    | MapAppRemoteRequest
+    | MapAppRemoteAnswer;
 
 export interface MapAppGenericAction {
     type:
@@ -65,4 +69,24 @@ export interface MapAppSetLocationAddress {
 
 export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
+}
+
+export interface MapAppRemoteRequest {
+    type: MapAppActionType.REMOTE_REQUEST;
+}
+
+export interface MapAppRemoteAnswer {
+    type: MapAppActionType.REMOTE_ANSWER;
+    devices: Device[];
+}
+
+export function mapAppRemoteAnswer(devices: Device[]): MapAppRemoteAnswer {
+    return {
+        type: MapAppActionType.REMOTE_ANSWER,
+        devices: devices,
+    };
+}
+
+export function mapAppRemoteRequest(): MapAppRemoteRequest {
+    return { type: MapAppActionType.REMOTE_REQUEST };
 }

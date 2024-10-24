@@ -1,11 +1,18 @@
 import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
 import { LatLng } from 'leaflet';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './DeviceMap.scss';
+import { useAppDispatch } from '../../../redux/store';
 import { UserLocationMarker } from './UserLocationMarker';
 import { DeviceMarkers } from './DeviceMarkers';
 
 export function DeviceMap() {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch({ type: 'REMOTE_REQUEST', request: 'LIST_DEVICES' });
+    }, []);
+
     return (
         <MapContainer
             className="device-map"
