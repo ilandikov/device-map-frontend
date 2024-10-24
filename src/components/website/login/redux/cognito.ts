@@ -88,10 +88,7 @@ const signUp: CognitoEndpoint = (authenticationState, cognitoClient) => {
     );
 };
 
-function confirmPassword(
-    authenticationState: LoginModalAuthenticationState,
-    cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> {
+const confirmPassword: CognitoEndpoint = (authenticationState, cognitoClient) => {
     return fromPromise(
         cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
     ).pipe(
@@ -105,12 +102,9 @@ function confirmPassword(
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
         ),
     );
-}
+};
 
-function signIn(
-    authenticationState: LoginModalAuthenticationState,
-    cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> {
+const signIn: CognitoEndpoint = (authenticationState, cognitoClient) => {
     return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() =>
             from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
@@ -119,12 +113,9 @@ function signIn(
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error))),
         ),
     );
-}
+};
 
-function sendSignUpOTP(
-    authenticationState: LoginModalAuthenticationState,
-    cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> {
+const sendSignUpOTP: CognitoEndpoint = (authenticationState, cognitoClient) => {
     return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
         mergeMap(() =>
             from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()]),
@@ -133,24 +124,18 @@ function sendSignUpOTP(
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error))),
         ),
     );
-}
+};
 
-function resendOTP(
-    authenticationState: LoginModalAuthenticationState,
-    cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> {
+const resendOTP: CognitoEndpoint = (authenticationState, cognitoClient) => {
     return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND))),
         catchError((error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, reasonFromCognitoError(error))),
         ),
     );
-}
+};
 
-function sendForgotPasswordOTP(
-    authenticationState: LoginModalAuthenticationState,
-    cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> {
+const sendForgotPasswordOTP: CognitoEndpoint = (authenticationState, cognitoClient) => {
     return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD))),
         catchError((error) =>
@@ -162,7 +147,7 @@ function sendForgotPasswordOTP(
             ),
         ),
     );
-}
+};
 
 function signOut(cognitoClient): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(cognitoClient.signOut()).pipe(
