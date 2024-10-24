@@ -74,17 +74,17 @@ function processCognitoRequest(
     }
 }
 
-function signUp(
+const signUp = (
     authenticationState: LoginModalAuthenticationState,
     cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> {
+): Observable<LoginModalAction | MapAppAction> => {
     return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP))),
         catchError((error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
         ),
     );
-}
+};
 
 function confirmPassword(
     authenticationState: LoginModalAuthenticationState,
