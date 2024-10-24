@@ -79,3 +79,10 @@ export interface MapAppRemoteAnswer {
     type: MapAppActionType.REMOTE_ANSWER;
     devices: Device[];
 }
+
+export function mapAppRemoteAnswer(devices: Device[]): MapAppRemoteAnswer {
+    return {
+        type: MapAppActionType.REMOTE_ANSWER,
+        devices: devices,
+    };
+}
