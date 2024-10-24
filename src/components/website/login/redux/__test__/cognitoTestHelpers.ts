@@ -43,23 +43,27 @@ export class CognitoTestClient {
     }
 }
 
+function buildStateForCognitoTest(initialState: LoginModalAuthenticationState) {
+    return new StateObservable(EMPTY, {
+        loginModalAuthentication: initialState,
+        getDevices: initialGetDevicesState,
+        mapAppState: mapAppInitialState,
+    });
+}
+
 export async function verifyCognitoEpicAction(
     sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
     remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const output$ = cognito(
-        of(sentAction),
-        new StateObservable(EMPTY, {
-            loginModalAuthentication: initialState,
-            getDevices: initialGetDevicesState,
-            mapAppState: mapAppInitialState,
-        }),
-        {
-            cognitoClient: new CognitoTestClient(remoteServiceAnswer),
-        },
-    );
+    const stateForTest = buildStateForCognitoTest(initialState);
+    const dependencies = {
+        cognitoClient: new CognitoTestClient(remoteServiceAnswer),
+    };
+
+    const output$ = cognito(of(sentAction), stateForTest, dependencies);
+
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual(expectedActions);
 }
@@ -68,15 +72,13 @@ export async function verifyCognitoEpicNoAction(
     sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
 ) {
-    const output$ = cognito(
-        of(sentAction),
-        new StateObservable(EMPTY, {
-            loginModalAuthentication: initialState,
-            getDevices: initialGetDevicesState,
-            mapAppState: mapAppInitialState,
-        }),
-        { cognitoClient: new CognitoTestClient(Promise.resolve()) },
-    );
+    const stateForTest = buildStateForCognitoTest(initialState);
+    const dependencies = {
+        cognitoClient: new CognitoTestClient(Promise.resolve()),
+    };
+
+    const output$ = cognito(of(sentAction), stateForTest, dependencies);
+
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([]);
 }
