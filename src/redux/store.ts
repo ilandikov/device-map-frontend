@@ -1,7 +1,7 @@
 /* External dependencies */
-import { Store, applyMiddleware, combineReducers, createStore as createReduxStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore as createReduxStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
-import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-observable';
 
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
@@ -12,8 +12,8 @@ import { loginModalAuthentication } from '../components/website/login/redux/Logi
 import { cognito } from '../components/website/login/redux/cognito';
 import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
-
-const rootEpic = combineEpics(cognito, GeoApify, devices);
+import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
+import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -21,10 +21,26 @@ const rootReducer = combineReducers({
     loginModalAuthentication,
 });
 
-let store;
+export type RootState = ReturnType<typeof rootReducer>;
 
-export function createStore(): Store {
-    const epicMiddleware = createEpicMiddleware({
+export type RootEpic = Epic<
+    LoginModalAction | MapAppAction,
+    LoginModalAction | MapAppAction,
+    RootState,
+    { cognitoClient }
+>;
+
+const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
+
+export function createStore() {
+    type RootMiddleWare = EpicMiddleware<
+        LoginModalAction | MapAppAction,
+        LoginModalAction | MapAppAction,
+        RootState,
+        { cognitoClient }
+    >;
+
+    const epicMiddleware: RootMiddleWare = createEpicMiddleware({
         dependencies: {
             cognitoClient: new CognitoClient({
                 UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
@@ -32,15 +48,16 @@ export function createStore(): Store {
             }),
         },
     });
-    // @ts-ignore
-    store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
+
+    // @ts-expect-error
+    const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
 
     epicMiddleware.run(rootEpic);
 
     return store;
 }
 
-export type RootState = ReturnType<typeof store.getState>;
+const store = createStore();
 
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;

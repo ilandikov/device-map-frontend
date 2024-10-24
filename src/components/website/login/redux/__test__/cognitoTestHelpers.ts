@@ -1,13 +1,16 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
+import { EMPTY, lastValueFrom, of, toArray } from 'rxjs';
+import { StateObservable } from 'redux-observable';
 import { LoginModalAction, LoginModalRemoteRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
+import { initialGetDevicesState } from '../../../../devices/getDevices/redux/reducer';
+import { mapAppInitialState } from '../../../mapApp/redux/MapAppState';
 
-class cognitoTestClient {
-    private readonly _mockedResult: Promise<void>;
+export class CognitoTestClient {
+    private readonly _mockedResult: Promise<any>;
 
-    constructor(mockedResult: Promise<void>) {
+    constructor(mockedResult: Promise<any>) {
         this._mockedResult = mockedResult;
     }
 
@@ -40,23 +43,27 @@ class cognitoTestClient {
     }
 }
 
+function buildStateForCognitoTest(initialState: LoginModalAuthenticationState) {
+    return new StateObservable(EMPTY, {
+        loginModalAuthentication: initialState,
+        getDevices: initialGetDevicesState,
+        mapAppState: mapAppInitialState,
+    });
+}
+
 export async function verifyCognitoEpicAction(
     sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
     remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const output$ = cognito(
-        of(sentAction),
-        {
-            value: {
-                loginModalAuthentication: initialState,
-            },
-        },
-        {
-            cognitoClient: new cognitoTestClient(remoteServiceAnswer),
-        },
-    );
+    const stateForTest = buildStateForCognitoTest(initialState);
+    const dependencies = {
+        cognitoClient: new CognitoTestClient(remoteServiceAnswer),
+    };
+
+    const output$ = cognito(of(sentAction), stateForTest, dependencies);
+
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual(expectedActions);
 }
@@ -65,15 +72,13 @@ export async function verifyCognitoEpicNoAction(
     sentAction: LoginModalRemoteRequest,
     initialState: LoginModalAuthenticationState,
 ) {
-    const output$ = cognito(
-        of(sentAction),
-        {
-            value: {
-                loginModalAuthentication: initialState,
-            },
-        },
-        { cognitoClient: {} },
-    );
+    const stateForTest = buildStateForCognitoTest(initialState);
+    const dependencies = {
+        cognitoClient: new CognitoTestClient(Promise.resolve()),
+    };
+
+    const output$ = cognito(of(sentAction), stateForTest, dependencies);
+
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([]);
 }
