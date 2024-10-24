@@ -4,7 +4,7 @@ import { devices } from '../devices';
 import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBuilders';
 
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
-    const output$ = devices(of(sentAction), buildStateForDevicesTest(), { cognitoClient: {} });
+    const output$ = devices(of(sentAction), buildStateForDevicesTest(), { cognitoClient: {} as any });
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 

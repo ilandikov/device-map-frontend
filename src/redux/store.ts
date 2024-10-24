@@ -14,6 +14,7 @@ import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
+import { CognitoClients } from '../components/website/login/redux/cognitoHelpers';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -27,7 +28,7 @@ export type RootEpic = Epic<
     LoginModalAction | MapAppAction,
     LoginModalAction | MapAppAction,
     RootState,
-    { cognitoClient }
+    { cognitoClient: CognitoClients }
 >;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);

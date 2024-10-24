@@ -20,7 +20,7 @@ import {
 } from './cognitoEndpoints';
 import { CognitoClients } from './cognitoHelpers';
 
-export const cognito: RootEpic = (action$, state$, { cognitoClient }: { cognitoClient: CognitoClients }) => {
+export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap((action) => {
