@@ -12,7 +12,7 @@ describe('devices epic test', () => {
 
     it('should get a list of devices', async () => {
         const sentAction: MapAppRemoteRequest = { type: MapAppActionType.REMOTE_REQUEST };
-        const expectedActions = [];
+        const expectedActions = [sentAction];
 
         await testDevicesEpic(sentAction, expectedActions);
     });
