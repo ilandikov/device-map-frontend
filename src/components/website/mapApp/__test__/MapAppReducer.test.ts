@@ -6,6 +6,8 @@ import {
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
+    mapAppRemoteAnswer,
+    mapAppRemoteRequest,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
 } from '../redux/MapAppAction';
@@ -96,5 +98,19 @@ describe('MapApp reducer tests', () => {
                 },
             },
         });
+    });
+
+    it('should not change state on remote request', () => {
+        const initialState = buildMapAppState({});
+        const action = mapAppRemoteRequest();
+
+        verifyMapAppStateChange(initialState, action, {});
+    });
+
+    it('should overwrite devices on remote answer', () => {
+        const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lng: 1 } }] });
+        const action = mapAppRemoteAnswer([{ id: 'received', location: { lat: 10, lng: 11 } }]);
+
+        verifyMapAppStateChange(initialState, action, { devices: [{ id: 'existing', location: { lat: 0, lng: 1 } }] });
     });
 });
