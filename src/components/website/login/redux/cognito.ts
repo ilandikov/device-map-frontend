@@ -1,6 +1,7 @@
 import { EMPTY, Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import CognitoClient from '@mancho.devs/cognito';
 import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import {
     LoginModalAction,
@@ -13,8 +14,13 @@ import {
 } from './LoginModalAction';
 import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
+import { CognitoTestClient } from './__test__/cognitoTestHelpers';
 
-export function cognito(action$, state$, { cognitoClient }): Observable<LoginModalAction | MapAppAction> {
+export function cognito(
+    action$,
+    state$,
+    { cognitoClient }: { cognitoClient: CognitoClient | CognitoTestClient },
+): Observable<LoginModalAction | MapAppAction> {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap((action: LoginModalRemoteRequest) => {
@@ -32,7 +38,7 @@ export function cognito(action$, state$, { cognitoClient }): Observable<LoginMod
 function processCognitoRequest(
     action: LoginModalRemoteRequest,
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     switch (action.request) {
         case LoginModalRemoteRequestType.PASSWORD:
@@ -69,7 +75,7 @@ function processCognitoRequest(
 
 function signUp(
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP))),
@@ -81,7 +87,7 @@ function signUp(
 
 function confirmPassword(
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(
         cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
@@ -100,7 +106,7 @@ function confirmPassword(
 
 function signIn(
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() =>
@@ -114,7 +120,7 @@ function signIn(
 
 function sendSignUpOTP(
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
         mergeMap(() =>
@@ -128,7 +134,7 @@ function sendSignUpOTP(
 
 function resendOTP(
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND))),
@@ -140,7 +146,7 @@ function resendOTP(
 
 function sendForgotPasswordOTP(
     authenticationState: LoginModalAuthenticationState,
-    cognitoClient,
+    cognitoClient: CognitoClient | CognitoTestClient,
 ): Observable<LoginModalAction | MapAppAction> {
     return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD))),

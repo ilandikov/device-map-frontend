@@ -4,10 +4,10 @@ import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState'
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
-class CognitoTestClient {
-    private readonly _mockedResult: Promise<void>;
+export class CognitoTestClient {
+    private readonly _mockedResult: Promise<any>;
 
-    constructor(mockedResult: Promise<void>) {
+    constructor(mockedResult: Promise<any>) {
         this._mockedResult = mockedResult;
     }
 
