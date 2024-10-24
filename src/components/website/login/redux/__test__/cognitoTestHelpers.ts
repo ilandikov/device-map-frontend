@@ -1,10 +1,9 @@
-import { EMPTY, lastValueFrom, of, toArray } from 'rxjs';
-import { StateObservable } from 'redux-observable';
+import { lastValueFrom, of, toArray } from 'rxjs';
 import { LoginModalAction, LoginModalRemoteRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
-import { buildInitialTestState } from '../../../../../redux/__mocks__/stateBuilders';
+import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
 
 export class CognitoTestClient {
     private readonly _mockedResult: Promise<any>;
@@ -40,13 +39,6 @@ export class CognitoTestClient {
     signOut() {
         return this._mockedResult;
     }
-}
-
-function buildStateForCognitoTest(loginModalAuthentication: LoginModalAuthenticationState) {
-    return new StateObservable(EMPTY, {
-        ...buildInitialTestState(),
-        loginModalAuthentication,
-    });
 }
 
 export async function verifyCognitoEpicAction(
