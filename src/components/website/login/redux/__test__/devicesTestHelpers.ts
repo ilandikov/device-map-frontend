@@ -9,7 +9,7 @@ export async function testDevicesEpic(sentAction: MapAppAction, expectedActions:
             value: {},
         },
         {
-            _cognitoClient: {},
+            cognitoClient: {},
         },
     );
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
