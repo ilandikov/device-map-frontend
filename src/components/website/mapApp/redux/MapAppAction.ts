@@ -15,7 +15,8 @@ export type MapAppAction =
     | MapAppGenericAction
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
-    | MapAppSetLocationAddress;
+    | MapAppSetLocationAddress
+    | MapAppRemoteRequest;
 
 export interface MapAppGenericAction {
     type:

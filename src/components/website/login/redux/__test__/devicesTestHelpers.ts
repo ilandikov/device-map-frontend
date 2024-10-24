@@ -1,8 +1,8 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { MapAppRemoteRequest } from '../../../mapApp/redux/MapAppAction';
+import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { devices } from '../devices';
 
-export async function testDevicesEpic(sentAction: MapAppRemoteRequest, expectedActions: any[]) {
+export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: any[]) {
     const output$ = devices(
         of(sentAction),
         {
