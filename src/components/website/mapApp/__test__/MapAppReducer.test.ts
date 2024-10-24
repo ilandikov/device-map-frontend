@@ -111,6 +111,8 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lng: 1 } }] });
         const action = mapAppRemoteAnswer([{ id: 'received', location: { lat: 10, lng: 11 } }]);
 
-        verifyMapAppStateChange(initialState, action, { devices: [{ id: 'existing', location: { lat: 0, lng: 1 } }] });
+        verifyMapAppStateChange(initialState, action, {
+            devices: [{ id: 'received', location: { lat: 10, lng: 11 } }],
+        });
     });
 });
