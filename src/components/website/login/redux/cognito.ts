@@ -1,21 +1,25 @@
-import { EMPTY, Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import CognitoClient from '@mancho.devs/cognito';
-import { MapAppAction, mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
+import { MapAppAction } from '../../mapApp/redux/MapAppAction';
 import { RootEpic } from '../../../../redux/store';
 import {
     LoginModalAction,
     LoginModalActionType,
-    LoginModalRemoteAnswerType,
     LoginModalRemoteRequest,
     LoginModalRemoteRequestType,
-    loginModalRemoteAnswerFailure,
-    loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
 import { AuthenticationStep, LoginModalAuthenticationState } from './LoginModalAuthenticationState';
-import { reasonFromCognitoError } from './cognitoHelpers';
 import { CognitoTestClient } from './__test__/cognitoTestHelpers';
+import {
+    confirmPassword,
+    resendOTP,
+    sendForgotPasswordOTP,
+    sendSignUpOTP,
+    signIn,
+    signOut,
+    signUp,
+} from './cognitoEndpoints';
 
 export const cognito: RootEpic = (
     action$,
@@ -73,87 +77,3 @@ function processCognitoRequest(
             return EMPTY;
     }
 }
-
-type CognitoEndpoint = (
-    cognitoClient: CognitoClient | CognitoTestClient,
-    authenticationState: LoginModalAuthenticationState,
-) => Observable<LoginModalAction | MapAppAction>;
-
-const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP))),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
-        ),
-    );
-};
-
-const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(
-        cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
-    ).pipe(
-        mergeMap(() =>
-            from([
-                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
-                mapAppAuthenticationCompleted(),
-            ]),
-        ),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
-        ),
-    );
-};
-
-const signIn: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
-        mergeMap(() =>
-            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
-        ),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error))),
-        ),
-    );
-};
-
-const sendSignUpOTP: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
-        mergeMap(() =>
-            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()]),
-        ),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error))),
-        ),
-    );
-};
-
-const resendOTP: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.resendConfirmCode(authenticationState.email)).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND))),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, reasonFromCognitoError(error))),
-        ),
-    );
-};
-
-const sendForgotPasswordOTP: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD))),
-        catchError((error) =>
-            of(
-                loginModalRemoteAnswerFailure(
-                    LoginModalRemoteAnswerType.FORGOT_PASSWORD,
-                    reasonFromCognitoError(error),
-                ),
-            ),
-        ),
-    );
-};
-
-const signOut: CognitoEndpoint = (cognitoClient) => {
-    return fromPromise(cognitoClient.signOut()).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT))),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, reasonFromCognitoError(error))),
-        ),
-    );
-};
