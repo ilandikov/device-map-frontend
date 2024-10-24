@@ -17,7 +17,8 @@ export type MapAppAction =
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
-    | MapAppRemoteRequest;
+    | MapAppRemoteRequest
+    | MapAppRemoteAnswer;
 
 export interface MapAppGenericAction {
     type:
@@ -72,4 +73,8 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 
 export interface MapAppRemoteRequest {
     type: MapAppActionType.REMOTE_REQUEST;
+}
+
+export interface MapAppRemoteAnswer {
+    type: MapAppActionType.REMOTE_ANSWER;
 }

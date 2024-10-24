@@ -1,4 +1,4 @@
-import { MapAppActionType, MapAppRemoteRequest } from '../../../mapApp/redux/MapAppAction';
+import { MapAppActionType, MapAppRemoteAnswer, MapAppRemoteRequest } from '../../../mapApp/redux/MapAppAction';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -12,7 +12,7 @@ describe('devices epic test', () => {
 
     it('should get a list of devices', async () => {
         const sentAction: MapAppRemoteRequest = { type: MapAppActionType.REMOTE_REQUEST };
-        const expectedActions = [{ type: MapAppActionType.REMOTE_ANSWER }];
+        const expectedActions: MapAppRemoteAnswer[] = [{ type: MapAppActionType.REMOTE_ANSWER }];
 
         await testDevicesEpic(sentAction, expectedActions);
     });
