@@ -2,7 +2,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { MapAppAction, MapAppActionType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
 
-export function devices(action$, state$, { cognitoClient }): Observable<MapAppAction> {
+export function devices(action$, state$): Observable<MapAppAction> {
     return action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap(() => {
