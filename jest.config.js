@@ -28,6 +28,7 @@ const esModules = [
 ].join('|');
 
 module.exports = {
+    verbose: true,
     reporters: [
         'default',
         [
