@@ -74,10 +74,12 @@ function processCognitoRequest(
     }
 }
 
-const signUp = (
+type CognitoEndpoint = (
     authenticationState: LoginModalAuthenticationState,
     cognitoClient: CognitoClient | CognitoTestClient,
-): Observable<LoginModalAction | MapAppAction> => {
+) => Observable<LoginModalAction | MapAppAction>;
+
+const signUp: CognitoEndpoint = (authenticationState, cognitoClient) => {
     return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP))),
         catchError((error) =>
