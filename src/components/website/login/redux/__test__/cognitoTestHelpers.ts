@@ -42,8 +42,11 @@ export class CognitoTestClient {
     }
 }
 
-function buildStateForCognitoTest(initialState: LoginModalAuthenticationState) {
-    return new StateObservable(EMPTY, { ...buildInitialTestState(), loginModalAuthentication: initialState });
+function buildStateForCognitoTest(loginModalAuthentication: LoginModalAuthenticationState) {
+    return new StateObservable(EMPTY, {
+        ...buildInitialTestState(),
+        loginModalAuthentication,
+    });
 }
 
 export async function verifyCognitoEpicAction(
