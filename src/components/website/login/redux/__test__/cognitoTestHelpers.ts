@@ -4,8 +4,7 @@ import { LoginModalAction, LoginModalRemoteRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
-import { initialGetDevicesState } from '../../../../devices/getDevices/redux/reducer';
-import { mapAppInitialState } from '../../../mapApp/redux/MapAppState';
+import { buildInitialTestState } from './devicesTestHelpers';
 
 export class CognitoTestClient {
     private readonly _mockedResult: Promise<any>;
@@ -44,11 +43,7 @@ export class CognitoTestClient {
 }
 
 function buildStateForCognitoTest(initialState: LoginModalAuthenticationState) {
-    return new StateObservable(EMPTY, {
-        loginModalAuthentication: initialState,
-        getDevices: initialGetDevicesState,
-        mapAppState: mapAppInitialState,
-    });
+    return new StateObservable(EMPTY, { ...buildInitialTestState(), loginModalAuthentication: initialState });
 }
 
 export async function verifyCognitoEpicAction(
