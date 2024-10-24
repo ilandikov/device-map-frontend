@@ -67,3 +67,7 @@ export interface MapAppSetLocationAddress {
 export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
 }
+
+export interface MapAppRemoteRequest {
+    type: MapAppActionType.REMOTE_REQUEST;
+}
