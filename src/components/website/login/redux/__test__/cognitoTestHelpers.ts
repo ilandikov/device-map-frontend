@@ -4,7 +4,7 @@ import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState'
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
-class cognitoTestClient {
+class CognitoTestClient {
     private readonly _mockedResult: Promise<void>;
 
     constructor(mockedResult: Promise<void>) {
@@ -54,7 +54,7 @@ export async function verifyCognitoEpicAction(
             },
         },
         {
-            cognitoClient: new cognitoTestClient(remoteServiceAnswer),
+            cognitoClient: new CognitoTestClient(remoteServiceAnswer),
         },
     );
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
