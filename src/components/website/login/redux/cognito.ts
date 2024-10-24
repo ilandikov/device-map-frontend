@@ -68,7 +68,7 @@ function processCognitoRequest(
 
             return sendForgotPasswordOTP(cognitoClient, authenticationState);
         case LoginModalRemoteRequestType.SIGN_OUT:
-            return signOut(cognitoClient);
+            return signOut(cognitoClient, authenticationState);
         default:
             return EMPTY;
     }
@@ -149,11 +149,11 @@ const sendForgotPasswordOTP: CognitoEndpoint = (cognitoClient, authenticationSta
     );
 };
 
-function signOut(cognitoClient): Observable<LoginModalAction | MapAppAction> {
+const signOut: CognitoEndpoint = (cognitoClient) => {
     return fromPromise(cognitoClient.signOut()).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT))),
         catchError((error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, reasonFromCognitoError(error))),
         ),
     );
-}
+};
