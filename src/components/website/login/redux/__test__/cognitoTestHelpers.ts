@@ -72,7 +72,7 @@ export async function verifyCognitoEpicNoAction(
                 loginModalAuthentication: initialState,
             },
         },
-        { cognitoClient: {} },
+        { cognitoClient: new CognitoTestClient(Promise.resolve()) },
     );
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([]);
