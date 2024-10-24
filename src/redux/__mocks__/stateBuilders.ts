@@ -8,7 +8,7 @@ import {
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
 import { mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
 
-export function buildInitialTestState(): RootState {
+function buildInitialTestState(): RootState {
     return {
         loginModalAuthentication: authenticationInitialState,
         getDevices: initialGetDevicesState,
@@ -21,4 +21,8 @@ export function buildStateForCognitoTest(loginModalAuthentication: LoginModalAut
         ...buildInitialTestState(),
         loginModalAuthentication,
     });
+}
+
+export function buildStateForDevicesTest() {
+    return new StateObservable(EMPTY, buildInitialTestState());
 }
