@@ -2,18 +2,7 @@ import { EMPTY, lastValueFrom, of, toArray } from 'rxjs';
 import { StateObservable } from 'redux-observable';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { devices } from '../devices';
-import { initialGetDevicesState } from '../../../../devices/getDevices/redux/reducer';
-import { mapAppInitialState } from '../../../mapApp/redux/MapAppState';
-import { authenticationInitialState } from '../LoginModalAuthenticationState';
-import { RootState } from '../../../../../redux/store';
-
-export function buildInitialTestState(): RootState {
-    return {
-        loginModalAuthentication: authenticationInitialState,
-        getDevices: initialGetDevicesState,
-        mapAppState: mapAppInitialState,
-    };
-}
+import { buildInitialTestState } from '../../../../../redux/__mocks__/stateBuilders';
 
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
     const initialRootState = buildInitialTestState();

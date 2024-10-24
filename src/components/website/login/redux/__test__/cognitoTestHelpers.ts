@@ -4,7 +4,7 @@ import { LoginModalAction, LoginModalRemoteRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
-import { buildInitialTestState } from './devicesTestHelpers';
+import { buildInitialTestState } from '../../../../../redux/__mocks__/stateBuilders';
 
 export class CognitoTestClient {
     private readonly _mockedResult: Promise<any>;
