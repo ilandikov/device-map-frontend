@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Store, applyMiddleware, combineReducers, createStore as createReduxStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore as createReduxStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
@@ -21,9 +21,7 @@ const rootReducer = combineReducers({
     loginModalAuthentication,
 });
 
-let store;
-
-export function createStore(): Store {
+export function createStore() {
     const epicMiddleware = createEpicMiddleware({
         dependencies: {
             cognitoClient: new CognitoClient({
@@ -32,13 +30,16 @@ export function createStore(): Store {
             }),
         },
     });
-    // @ts-ignore
-    store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
+
+    // @ts-expect-error
+    const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
 
     epicMiddleware.run(rootEpic);
 
     return store;
 }
+
+const store = createStore();
 
 export type RootState = ReturnType<typeof store.getState>;
 
