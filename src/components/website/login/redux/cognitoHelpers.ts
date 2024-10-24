@@ -20,6 +20,6 @@ export function reasonFromCognitoError(error: any): string {
 export type CognitoClients = CognitoClient | CognitoTestClient;
 
 export type CognitoEndpoint = (
-    cognitoClient: CognitoClient | CognitoTestClient,
+    cognitoClient: CognitoClients,
     authenticationState: LoginModalAuthenticationState,
 ) => Observable<LoginModalAction | MapAppAction>;
