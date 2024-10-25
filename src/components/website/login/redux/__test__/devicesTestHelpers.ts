@@ -34,7 +34,7 @@ import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBu
 import { Dependency } from '../../../../../redux/store';
 
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
-    const output$ = devices(of(sentAction), buildStateForDevicesTest(), {});
+    const output$ = devices(of(sentAction), buildStateForDevicesTest(), { apolloClient: new ApolloTestClient() });
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 
