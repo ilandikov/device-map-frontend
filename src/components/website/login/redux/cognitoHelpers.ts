@@ -19,7 +19,7 @@ export function reasonFromCognitoError(error: any): string {
 
 export type CognitoClients = CognitoClient | CognitoTestClient | Like<CognitoClient>;
 
-type Like<T> = { [key in keyof T]: T[key] };
+export type Like<T> = { [key in keyof T]: T[key] };
 
 export type CognitoEndpoint = (
     cognitoClient: CognitoClients,
