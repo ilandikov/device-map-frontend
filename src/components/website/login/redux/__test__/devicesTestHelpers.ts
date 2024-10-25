@@ -32,6 +32,7 @@ import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { devices } from '../devices';
 import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { Dependency } from '../../../../../redux/store';
+import { listDevicesQuery } from '../devicesHelpers';
 
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
     const output$ = devices(of(sentAction), buildStateForDevicesTest(), { apolloClient: new ApolloTestClient() });
@@ -64,9 +65,72 @@ export class ApolloTestClient implements Dependency<ApolloClient<NormalizedCache
         throw new Error('Method not implemented.');
     }
 
-    query<T = any, TVariables extends OperationVariables = OperationVariables>(
-        options: QueryOptions<TVariables, T>,
-    ): Promise<ApolloQueryResult<T>> {
+    query(options: QueryOptions): Promise<ApolloQueryResult<any>> {
+        if (options.query === listDevicesQuery.query) {
+            return Promise.resolve({
+                data: {
+                    T22ListDevices: [
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev1',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85862508449081,
+                                lon: 74.6085298061371,
+                            },
+                        },
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev2a',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85883742844907,
+                                lon: 74.6039915084839,
+                            },
+                        },
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev2b',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85883742844907,
+                                lon: 74.6039915084839,
+                            },
+                        },
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev2c',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85883742844907,
+                                lon: 74.6039915084839,
+                            },
+                        },
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev2d',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85883742844907,
+                                lon: 74.6039915084839,
+                            },
+                        },
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev3',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85610049481582,
+                                lon: 74.60671663284303,
+                            },
+                        },
+                    ],
+                },
+                loading: false,
+                networkStatus: 7,
+            });
+        }
+
         throw new Error('Method not implemented.');
     }
 
