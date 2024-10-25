@@ -17,7 +17,9 @@ export function reasonFromCognitoError(error: any): string {
     return 'cognito' + error.code;
 }
 
-export type CognitoClients = CognitoClient | CognitoTestClient;
+export type CognitoClients = CognitoClient | CognitoTestClient | Like<CognitoClient>;
+
+type Like<T> = { [key in keyof T]: T[key] };
 
 export type CognitoEndpoint = (
     cognitoClient: CognitoClients,
