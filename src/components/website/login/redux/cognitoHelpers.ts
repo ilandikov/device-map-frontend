@@ -1,6 +1,7 @@
 import CognitoClient from '@mancho.devs/cognito';
 import { Observable } from 'rxjs';
 import { MapAppAction } from '../../mapApp/redux/MapAppAction';
+import { Like } from '../../../../redux/store';
 import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
 import { LoginModalAction } from './LoginModalAction';
 
@@ -15,8 +16,6 @@ export function reasonFromCognitoError(error: any): string {
 
     return 'cognito' + error.code;
 }
-
-export type Like<T> = { [key in keyof T]: T[key] };
 
 export type CognitoEndpoint = (
     cognitoClient: Like<CognitoClient>,

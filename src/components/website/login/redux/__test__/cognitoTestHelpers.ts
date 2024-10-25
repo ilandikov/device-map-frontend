@@ -5,7 +5,7 @@ import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState'
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
-import { Like } from '../cognitoHelpers';
+import { Like } from '../../../../../redux/store';
 
 export class CognitoTestClient implements Like<CognitoClient> {
     private readonly _mockedResult: Promise<any>;
