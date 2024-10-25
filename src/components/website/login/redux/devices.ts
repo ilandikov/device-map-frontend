@@ -10,7 +10,8 @@ export const devices: RootEpic = (action$) => {
         switchMap(() => {
             return fromPromise(fakeQueryResponse).pipe(
                 mergeMap((response) => {
-                    return of(mapAppRemoteAnswer(response.data));
+                    const devices = response.data;
+                    return of(mapAppRemoteAnswer(devices));
                 }),
             );
         }),
