@@ -6,7 +6,7 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
@@ -43,6 +43,16 @@ export function createStore() {
             cognitoClient: new CognitoClient({
                 UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
+            }),
+            apolloClient: new ApolloClient({
+                link: new HttpLink({
+                    uri: process.env.APPSYNC_ENDPOINT, // TODO how to test env in live environment on build?
+                    fetch, // TODO why is this needed at all?
+                    headers: {
+                        'x-api-key': process.env.X_API_KEY,
+                    },
+                }),
+                cache: new InMemoryCache(),
             }),
         },
     });
