@@ -1,11 +1,13 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
+import CognitoClient from '@mancho.devs/cognito';
 import { LoginModalAction, LoginModalRemoteRequest } from '../LoginModalAction';
 import { LoginModalAuthenticationState } from '../LoginModalAuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
+import { Dependency } from '../../../../../redux/store';
 
-export class CognitoTestClient {
+export class CognitoTestClient implements Dependency<CognitoClient> {
     private readonly _mockedResult: Promise<any>;
 
     constructor(mockedResult: Promise<any>) {

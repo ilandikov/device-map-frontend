@@ -14,7 +14,6 @@ import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
-import { CognitoClients } from '../components/website/login/redux/cognitoHelpers';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -25,7 +24,9 @@ const rootReducer = combineReducers({
 export type RootState = ReturnType<typeof rootReducer>;
 
 type AllActions = LoginModalAction | MapAppAction;
-type Dependencies = { cognitoClient?: CognitoClients };
+
+export type Dependency<T> = { [key in keyof T]: T[key] };
+type Dependencies = { cognitoClient?: Dependency<CognitoClient> };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
