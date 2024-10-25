@@ -16,11 +16,9 @@ export function reasonFromCognitoError(error: any): string {
     return 'cognito' + error.code;
 }
 
-export type CognitoClients = Like<CognitoClient>;
-
 export type Like<T> = { [key in keyof T]: T[key] };
 
 export type CognitoEndpoint = (
-    cognitoClient: CognitoClients,
+    cognitoClient: Like<CognitoClient>,
     authenticationState: LoginModalAuthenticationState,
 ) => Observable<LoginModalAction | MapAppAction>;
