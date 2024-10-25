@@ -6,7 +6,7 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
@@ -29,7 +29,7 @@ type AllActions = LoginModalAction | MapAppAction;
 export type Dependency<T> = { [key in keyof T]: T[key] };
 type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
-    apolloClient?: Dependency<ApolloClient<InMemoryCache>>;
+    apolloClient?: Dependency<ApolloClient<NormalizedCacheObject>>;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;

@@ -12,8 +12,8 @@ import {
     FetchResult,
     FragmentMatcher,
     GraphQLRequest,
-    InMemoryCache,
     MutationOptions,
+    NormalizedCacheObject,
     Observable,
     ObservableQuery,
     OperationVariables,
@@ -41,9 +41,9 @@ export async function testDevicesEpic(sentAction: MapAppAction, expectedActions:
     expect(receivedAction).toEqual(expectedActions);
 }
 
-export class ApolloTestClient implements Dependency<ApolloClient<InMemoryCache>> {
+export class ApolloTestClient implements Dependency<ApolloClient<NormalizedCacheObject>> {
     link: ApolloLink;
-    cache: ApolloCache<InMemoryCache>;
+    cache: ApolloCache<NormalizedCacheObject>;
     disableNetworkFetches: boolean;
     version: string;
     queryDeduplication: boolean;
@@ -142,7 +142,7 @@ export class ApolloTestClient implements Dependency<ApolloClient<InMemoryCache>>
     }
 
     refetchQueries<
-        TCache extends ApolloCache<any> = ApolloCache<InMemoryCache>,
+        TCache extends ApolloCache<any> = ApolloCache<NormalizedCacheObject>,
         TResult = Promise<ApolloQueryResult<any>>,
     >(options: RefetchQueriesOptions<TCache, TResult>): RefetchQueriesResult<TResult> {
         throw new Error('Method not implemented.');
@@ -152,11 +152,11 @@ export class ApolloTestClient implements Dependency<ApolloClient<InMemoryCache>>
         throw new Error('Method not implemented.');
     }
 
-    extract(optimistic?: boolean): InMemoryCache {
+    extract(optimistic?: boolean): NormalizedCacheObject {
         throw new Error('Method not implemented.');
     }
 
-    restore(serializedState: InMemoryCache): ApolloCache<InMemoryCache> {
+    restore(serializedState: NormalizedCacheObject): ApolloCache<NormalizedCacheObject> {
         throw new Error('Method not implemented.');
     }
 
