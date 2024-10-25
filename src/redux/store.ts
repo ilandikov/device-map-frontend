@@ -25,8 +25,8 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 type AllActions = LoginModalAction | MapAppAction;
 
-export type Like<T> = { [key in keyof T]: T[key] };
-type Dependencies = { cognitoClient?: Like<CognitoClient> };
+export type Dependency<T> = { [key in keyof T]: T[key] };
+type Dependencies = { cognitoClient?: Dependency<CognitoClient> };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
