@@ -46,8 +46,8 @@ export function createStore() {
             }),
             apolloClient: new ApolloClient({
                 link: new HttpLink({
-                    uri: process.env.APPSYNC_ENDPOINT, // TODO how to test env in live environment on build?
-                    fetch, // TODO why is this needed at all?
+                    uri: process.env.APPSYNC_ENDPOINT,
+                    fetch,
                     headers: {
                         'x-api-key': process.env.X_API_KEY,
                     },
