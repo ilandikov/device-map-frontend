@@ -6,7 +6,9 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
+import { createHttpLink } from '@apollo/client/core';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
@@ -45,13 +47,19 @@ export function createStore() {
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
             apolloClient: new ApolloClient({
-                link: new HttpLink({
-                    uri: process.env.APPSYNC_ENDPOINT,
-                    fetch,
-                    headers: {
-                        'x-api-key': process.env.X_API_KEY,
-                    },
-                }),
+                link: ApolloLink.from([
+                    createAuthLink({
+                        url: process.env.APPSYNC_ENDPOINT,
+                        region: process.env.REGION,
+                        auth: {
+                            type: AUTH_TYPE.API_KEY,
+                            apiKey: process.env.X_API_KEY,
+                        },
+                    }),
+                    createHttpLink({
+                        uri: process.env.APPSYNC_ENDPOINT,
+                    }),
+                ]),
                 cache: new InMemoryCache(),
             }),
         },
