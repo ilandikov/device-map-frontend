@@ -9,13 +9,13 @@ import { GeoApifyResponse } from '../GeoApifyHelpers';
 async function testGeoApifyEpic(
     remoteAnswer: Promise<AjaxResponse<GeoApifyResponse>>,
     sentAction: MapAppAction,
-    expectedAction: MapAppAction,
+    expectedActions: MapAppAction[],
 ) {
     const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
         geoApifyClient: () => fromPromise(remoteAnswer),
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedActions).toEqual([expectedAction]);
+    expect(receivedActions).toEqual(expectedActions);
 }
 
 describe('GeoApify tests', () => {
@@ -27,7 +27,7 @@ describe('GeoApify tests', () => {
             addressLine2: 'Первомайский, Бишкек',
         });
 
-        await testGeoApifyEpic(remoteAnswer, sentAction, expectedAction);
+        await testGeoApifyEpic(remoteAnswer, sentAction, [expectedAction]);
     });
 });
 
