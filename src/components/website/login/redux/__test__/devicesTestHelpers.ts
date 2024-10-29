@@ -35,7 +35,28 @@ import { Dependency } from '../../../../../redux/store';
 import { listDevicesQuery } from '../devicesHelpers';
 
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
-    const output$ = devices(of(sentAction), buildStateForDevicesTest(), { apolloClient: new ApolloTestClient() });
+    const output$ = devices(of(sentAction), buildStateForDevicesTest(), {
+        devicesClient: {
+            query: () =>
+                Promise.resolve({
+                    data: {
+                        T22ListDevices: [
+                            {
+                                __typename: 'T22Device',
+                                id: 'dev1',
+                                location: {
+                                    __typename: 'T22Location',
+                                    lat: 42.85862508449081,
+                                    lon: 74.6085298061371,
+                                },
+                            },
+                        ],
+                    },
+                    loading: false,
+                    networkStatus: 7,
+                }),
+        },
+    });
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 

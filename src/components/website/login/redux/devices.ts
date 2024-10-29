@@ -5,13 +5,13 @@ import { ApolloQueryResult } from '@apollo/client';
 import { MapAppActionType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
 import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
-import { T22Device, T22ListDevicesResponse, listDevicesQuery } from './devicesHelpers';
+import { T22Device, T22ListDevicesResponse } from './devicesHelpers';
 
-export const devices: RootEpic = (action$, _, { apolloClient }) =>
+export const devices: RootEpic = (action$, _, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         mergeMap(() => {
-            return listDevices(apolloClient.query(listDevicesQuery));
+            return listDevices(devicesClient.query());
         }),
     );
 
