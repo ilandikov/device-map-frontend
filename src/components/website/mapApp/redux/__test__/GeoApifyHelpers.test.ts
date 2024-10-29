@@ -1,7 +1,6 @@
 import { GeoApifyResponse, buildMapAppAddress } from '../GeoApifyHelpers';
 import { MapAppAddress } from '../MapAppState';
-import { akTub, zyfara42a } from './GeoApifyTestData';
-import { chui120 } from './GeoApifyTestHelpers';
+import { akTub, chui120, zyfara42a } from './GeoApifyTestHelpers';
 
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
     function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, expectedAddress: MapAppAddress) {
