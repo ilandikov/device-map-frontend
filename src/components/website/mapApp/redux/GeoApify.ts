@@ -5,7 +5,7 @@ import { RootEpic } from '../../../../redux/store';
 import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
 import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
 
-export const GeoApify: RootEpic = (action$, _state$, { geoApifyClient }) =>
+export const GeoApify: RootEpic = (action$, _, { geoApifyClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
         mergeMap((action) => {
