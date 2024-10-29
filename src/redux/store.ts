@@ -70,9 +70,10 @@ export function createStore() {
             },
         },
     });
-    // @ts-expect-error
 
+    // @ts-expect-error
     const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
+
     epicMiddleware.run(rootEpic);
 
     return store;
