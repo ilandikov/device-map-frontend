@@ -32,8 +32,7 @@ export function processListDevicesRequest(response: Promise<ApolloQueryResult<T2
     const listDevicesResponse = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
         of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
 
-    return fromPromise(response).pipe(
-        mergeMap(listDevicesResponse),
-        catchError(() => EMPTY),
-    );
+    const doNothing = () => EMPTY;
+
+    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(doNothing));
 }
