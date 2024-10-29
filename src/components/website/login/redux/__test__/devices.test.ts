@@ -1,4 +1,6 @@
+import { lastValueFrom, toArray } from 'rxjs';
 import { mapAppListDevicesRequest, mapAppRemoteAnswer } from '../../../mapApp/redux/MapAppAction';
+import { processListDevicesRequest } from '../devices';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -17,5 +19,35 @@ describe('devices epic test', () => {
         ]);
 
         await testDevicesEpic(request, [answer]);
+    });
+});
+
+describe('list devices', () => {
+    it('should process a resolved promise', async () => {
+        const output$ = processListDevicesRequest(
+            Promise.resolve({
+                data: {
+                    T22ListDevices: [
+                        {
+                            __typename: 'T22Device',
+                            id: 'dev1',
+                            location: {
+                                __typename: 'T22Location',
+                                lat: 42.85862508449081,
+                                lon: 74.6085298061371,
+                            },
+                        },
+                    ],
+                },
+                loading: false,
+                networkStatus: 7,
+            }),
+        );
+
+        const expectedAction = mapAppRemoteAnswer([
+            { id: 'dev1', location: { lat: 42.85862508449081, lng: 74.6085298061371 } },
+        ]);
+        const receivedAction = await lastValueFrom(output$.pipe(toArray()));
+        expect(receivedAction).toEqual([expectedAction]);
     });
 });
