@@ -1,4 +1,4 @@
-import { MapAppAction, MapAppActionType } from './MapAppAction';
+import { MapAppAction, MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
@@ -24,7 +24,12 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
         case MapAppActionType.REMOTE_ANSWER:
-            return { ...state, devices: action.devices };
+            switch (action.answer) {
+                case MapAppRemoteAnswerType.DEVICES_LISTED:
+                    return { ...state, devices: action.devices };
+                default:
+                    return state;
+            }
         default:
             return state;
     }

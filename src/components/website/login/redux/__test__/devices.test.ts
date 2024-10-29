@@ -1,4 +1,4 @@
-import { mapAppRemoteAnswer, mapAppRemoteRequest } from '../../../mapApp/redux/MapAppAction';
+import { mapAppListDevicesRequest, mapAppRemoteAnswer } from '../../../mapApp/redux/MapAppAction';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -11,7 +11,7 @@ describe('devices epic test', () => {
     });
 
     it('should get a list of devices', async () => {
-        const request = mapAppRemoteRequest();
+        const request = mapAppListDevicesRequest();
         const answer = mapAppRemoteAnswer([
             { id: 'dev1', location: { lat: 42.85862508449081, lng: 74.6085298061371 } },
         ]);

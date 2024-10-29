@@ -1,8 +1,8 @@
-import { mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { ApolloQueryResult } from '@apollo/client';
-import { MapAppActionType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
+import { MapAppActionType, MapAppRemoteRequestType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
 import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
 import { T22Device, T22ListDevicesResponse } from './devicesHelpers';
@@ -10,8 +10,13 @@ import { T22Device, T22ListDevicesResponse } from './devicesHelpers';
 export const devices: RootEpic = (action$, _, { apolloClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
-        switchMap(() => {
-            return listDevices(apolloClient.query());
+        switchMap((action) => {
+            switch (action.request) {
+                case MapAppRemoteRequestType.LIST_DEVICES:
+                    return listDevices(apolloClient.query());
+                default:
+                    return EMPTY;
+            }
         }),
     );
 
