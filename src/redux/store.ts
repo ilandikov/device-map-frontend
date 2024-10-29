@@ -32,7 +32,7 @@ export type AllActions = LoginModalAction | MapAppAction;
 export type Dependency<T> = { [key in keyof T]: T[key] };
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
-    devicesClient?: {
+    apolloClient?: {
         query: () => Promise<ApolloQueryResult<T22ListDevicesResponse>>;
     };
 };
@@ -65,7 +65,7 @@ export function createStore() {
                 UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
-            devicesClient: {
+            apolloClient: {
                 query: () => apolloClient.query(listDevicesQuery),
             },
         },

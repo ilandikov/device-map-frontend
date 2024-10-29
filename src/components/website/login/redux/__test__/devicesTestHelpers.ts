@@ -36,7 +36,7 @@ import { listDevicesQuery } from '../devicesHelpers';
 
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
     const output$ = devices(of(sentAction), buildStateForDevicesTest(), {
-        devicesClient: {
+        apolloClient: {
             query: () =>
                 Promise.resolve({
                     data: {

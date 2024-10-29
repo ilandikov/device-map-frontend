@@ -7,11 +7,11 @@ import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
 import { T22Device, T22ListDevicesResponse } from './devicesHelpers';
 
-export const devices: RootEpic = (action$, _, { devicesClient }) =>
+export const devices: RootEpic = (action$, _, { apolloClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         mergeMap(() => {
-            return listDevices(devicesClient.query());
+            return listDevices(apolloClient.query());
         }),
     );
 
