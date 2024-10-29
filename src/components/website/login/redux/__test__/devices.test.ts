@@ -35,6 +35,12 @@ describe('list devices', () => {
             { id: 'dev1', location: { lat: 42.85862508449081, lng: 74.6085298061371 } },
         ]);
 
-        await testListDevicesProcessor(remoteAnswer, expectedAction);
+        await testListDevicesProcessor(remoteAnswer, [expectedAction]);
+    });
+
+    it('should process a rejected promise', async () => {
+        const remoteAnswer = Promise.reject();
+
+        await testListDevicesProcessor(remoteAnswer, []);
     });
 });

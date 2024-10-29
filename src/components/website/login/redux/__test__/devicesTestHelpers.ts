@@ -15,9 +15,9 @@ export async function testDevicesEpic(sentAction: MapAppAction, expectedActions:
 
 export async function testListDevicesProcessor(
     remoteAnswer: Promise<ApolloQueryResult<T22ListDevicesResponse>>,
-    expectedAction: MapAppRemoteAnswer,
+    expectedActions: MapAppRemoteAnswer[],
 ) {
     const receivedAction = await lastValueFrom(processListDevicesRequest(remoteAnswer).pipe(toArray()));
 
-    expect(receivedAction).toEqual([expectedAction]);
+    expect(receivedAction).toEqual(expectedActions);
 }
