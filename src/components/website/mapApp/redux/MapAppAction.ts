@@ -12,6 +12,10 @@ export enum MapAppActionType {
     REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
+export enum MapAppRemoteRequestType {
+    LIST_DEVICES = 'LIST_DEVICES',
+}
+
 export type MapAppAction =
     | MapAppGenericAction
     | MapAppDeviceMarkerClick
@@ -73,6 +77,7 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 
 export interface MapAppRemoteRequest {
     type: MapAppActionType.REMOTE_REQUEST;
+    request: MapAppRemoteRequestType.LIST_DEVICES;
 }
 
 export interface MapAppRemoteAnswer {
@@ -88,5 +93,5 @@ export function mapAppRemoteAnswer(devices: Device[]): MapAppRemoteAnswer {
 }
 
 export function mapAppRemoteRequest(): MapAppRemoteRequest {
-    return { type: MapAppActionType.REMOTE_REQUEST };
+    return { type: MapAppActionType.REMOTE_REQUEST, request: MapAppRemoteRequestType.LIST_DEVICES };
 }
