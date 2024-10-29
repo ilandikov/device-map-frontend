@@ -25,18 +25,18 @@ export function DeviceMarkers() {
         if (
             selectedMarkerLocation &&
             selectedMarkerLocation.lat === event.latlng.lat &&
-            selectedMarkerLocation.lng === event.latlng.lng
+            selectedMarkerLocation.lon === event.latlng.lng
         ) {
             return;
         }
 
-        dispatch(mapAppSetLocationCoordinates(event.latlng));
+        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
     };
 
     const devices = useMapAppState().devices;
 
     return devices.map((device, index) => {
-        const devicePosition = new LatLng(device.location.lat, device.location.lng);
+        const devicePosition = new LatLng(device.location.lat, device.location.lon);
 
         return (
             <Marker

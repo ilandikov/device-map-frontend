@@ -32,7 +32,7 @@ describe('list devices', () => {
         });
 
         const expectedAction = mapAppRemoteAnswer([
-            { id: 'dev1', location: { lat: 42.85862508449081, lng: 74.6085298061371 } },
+            { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
         ]);
 
         await testListDevicesProcessor(remoteAnswer, [expectedAction]);

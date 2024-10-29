@@ -11,7 +11,7 @@ export function DeviceList() {
         .filter(
             (device) =>
                 device.location.lat === selectedMarker.location.lat &&
-                device.location.lng === selectedMarker.location.lng,
+                device.location.lon === selectedMarker.location.lon,
         )
         .map((device, index) => <DeviceListItem device={device} index={index} key={index} />);
 

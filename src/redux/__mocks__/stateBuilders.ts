@@ -26,3 +26,7 @@ export function buildStateForCognitoTest(loginModalAuthentication: LoginModalAut
 export function buildStateForDevicesTest() {
     return new StateObservable(EMPTY, buildInitialTestState());
 }
+
+export function buildStateForGeoApifyTest() {
+    return new StateObservable(EMPTY, buildInitialTestState());
+}
