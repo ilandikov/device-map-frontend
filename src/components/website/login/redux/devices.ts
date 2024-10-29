@@ -1,4 +1,4 @@
-import { mergeMap, of } from 'rxjs';
+import { mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { ApolloQueryResult } from '@apollo/client';
@@ -10,7 +10,7 @@ import { T22Device, T22ListDevicesResponse } from './devicesHelpers';
 export const devices: RootEpic = (action$, _, { apolloClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
-        mergeMap(() => {
+        switchMap(() => {
             return listDevices(apolloClient.query());
         }),
     );
