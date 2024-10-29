@@ -16,18 +16,16 @@ export const devices: RootEpic = (action$, _, { apolloClient }) =>
     );
 
 export function listDevices(deviceListPromise: Promise<ApolloQueryResult<T22ListDevicesResponse>>) {
-    const processAnswer = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
-        of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
-
-    return fromPromise(deviceListPromise).pipe(mergeMap(processAnswer));
-}
-
-export function deviceTransformer(device: T22Device): Device {
-    return {
+    const deviceTransformer = (device: T22Device): Device => ({
         id: device.id,
         location: {
             lat: device.location.lat,
             lng: device.location.lon, // TODO rename lng -> lon in local state
         },
-    };
+    });
+
+    const processAnswer = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
+        of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
+
+    return fromPromise(deviceListPromise).pipe(mergeMap(processAnswer));
 }

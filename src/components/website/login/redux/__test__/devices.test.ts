@@ -1,6 +1,6 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppRemoteRequest, mapAppRemoteAnswer, mapAppRemoteRequest } from '../../../mapApp/redux/MapAppAction';
-import { deviceTransformer, listDevices } from '../devices';
+import { listDevices } from '../devices';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -28,26 +28,6 @@ describe('devices epic test', () => {
 });
 
 describe('Devices - list', () => {
-    it('test transformer', () => {
-        const input = {
-            __typename: 'T22Device',
-            id: 'dev1',
-            location: {
-                __typename: 'T22Location',
-                lat: 42.85862508449081,
-                lon: 74.6085298061371,
-            },
-        };
-
-        expect(deviceTransformer(input)).toEqual({
-            id: 'dev1',
-            location: {
-                lat: 42.85862508449081,
-                lng: 74.6085298061371,
-            },
-        });
-    });
-
     it('test list devices', async () => {
         const devices = {
             data: {
