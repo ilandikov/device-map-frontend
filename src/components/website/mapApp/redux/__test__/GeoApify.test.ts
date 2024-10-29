@@ -6,9 +6,13 @@ import { GeoApify } from '../GeoApify';
 import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { GeoApifyResponse } from '../GeoApifyHelpers';
 
-async function testGeoApifyEpic(sentAction: MapAppAction, expectedAction: MapAppAction) {
+async function testGeoApifyEpic(
+    remoteAnswer: Promise<AjaxResponse<GeoApifyResponse>>,
+    sentAction: MapAppAction,
+    expectedAction: MapAppAction,
+) {
     const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
-        geoApifyClient: () => fromPromise(Promise.resolve(chui120Response)),
+        geoApifyClient: () => fromPromise(remoteAnswer),
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedActions).toEqual([expectedAction]);
@@ -22,7 +26,7 @@ describe('GeoApify tests', () => {
             addressLine2: 'Первомайский, Бишкек',
         });
 
-        await testGeoApifyEpic(sentAction, expectedAction);
+        await testGeoApifyEpic(Promise.resolve(chui120Response), sentAction, expectedAction);
     });
 });
 
