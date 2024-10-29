@@ -92,6 +92,6 @@ export function mapAppRemoteAnswer(devices: Device[]): MapAppRemoteAnswer {
     };
 }
 
-export function mapAppRemoteRequest(): MapAppRemoteRequest {
+export function mapAppListDevicesRequest(): MapAppRemoteRequest {
     return { type: MapAppActionType.REMOTE_REQUEST, request: MapAppRemoteRequestType.LIST_DEVICES };
 }
