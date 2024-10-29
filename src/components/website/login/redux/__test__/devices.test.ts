@@ -1,4 +1,6 @@
+import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppRemoteRequest, mapAppRemoteAnswer, mapAppRemoteRequest } from '../../../mapApp/redux/MapAppAction';
+import { deviceTransformer, listDevices } from '../devices';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -22,5 +24,64 @@ describe('devices epic test', () => {
         ]);
 
         await testDevicesEpic(request, [answer]);
+    });
+});
+
+describe('T22 devices', () => {
+    it('test transformer', () => {
+        const input = {
+            __typename: 'T22Device',
+            id: 'dev1',
+            location: {
+                __typename: 'T22Location',
+                lat: 42.85862508449081,
+                lon: 74.6085298061371,
+            },
+        };
+
+        expect(deviceTransformer(input)).toEqual({
+            id: 'dev1',
+            location: {
+                lat: 42.85862508449081,
+                lng: 74.6085298061371,
+            },
+        });
+    });
+
+    it('test list devices', async () => {
+        const devices = {
+            data: {
+                T22ListDevices: [
+                    {
+                        __typename: 'T22Device',
+                        id: 'dev1',
+                        location: {
+                            __typename: 'T22Location',
+                            lat: 42.85862508449081,
+                            lon: 74.6085298061371,
+                        },
+                    },
+                ],
+            },
+            loading: false,
+            networkStatus: 7,
+        };
+
+        const fakeLoader = () => Promise.resolve(devices);
+
+        const result = listDevices(fakeLoader, of(mapAppRemoteRequest()));
+        const receivedAction = await lastValueFrom(result.pipe(toArray()));
+
+        expect(receivedAction).toEqual([
+            mapAppRemoteAnswer([
+                {
+                    id: 'dev1',
+                    location: {
+                        lat: 42.85862508449081,
+                        lng: 74.6085298061371,
+                    },
+                },
+            ]),
+        ]);
     });
 });

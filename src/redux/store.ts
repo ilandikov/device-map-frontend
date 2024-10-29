@@ -26,10 +26,10 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-type AllActions = LoginModalAction | MapAppAction;
+export type AllActions = LoginModalAction | MapAppAction;
 
 export type Dependency<T> = { [key in keyof T]: T[key] };
-type Dependencies = {
+export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     apolloClient?: Dependency<ApolloClient<NormalizedCacheObject>>;
 };
@@ -39,7 +39,7 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
 
-export function createStore() {
+export function createStore2(rootEpic1: Epic<AllActions, AllActions, RootState, Dependencies>) {
     const epicMiddleware: RootMiddleWare = createEpicMiddleware({
         dependencies: {
             cognitoClient: new CognitoClient({
@@ -64,13 +64,17 @@ export function createStore() {
             }),
         },
     });
-
     // @ts-expect-error
-    const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
 
-    epicMiddleware.run(rootEpic);
+    const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
+    epicMiddleware.run(rootEpic1);
 
     return store;
+}
+
+export function createStore() {
+    const rootEpic1 = rootEpic;
+    return createStore2(rootEpic1);
 }
 
 const store = createStore();
