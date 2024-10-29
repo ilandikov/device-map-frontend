@@ -103,7 +103,7 @@ export const chui120: AjaxResponse<GeoApifyResponse> = {
     total: 0,
 };
 
-export const zyfara42a: GeoApifyResponse = {
+export const igemberdiyeva42: GeoApifyResponse = {
     type: 'FeatureCollection',
     features: [
         {
