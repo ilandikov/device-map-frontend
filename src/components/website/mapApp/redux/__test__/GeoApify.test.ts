@@ -1,9 +1,10 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction, mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
 import { GeoApify } from '../GeoApify';
+import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
 
 async function testGeoApifyEpic(sentAction: MapAppAction, expectedAction: MapAppAction) {
-    const output$ = GeoApify(of(sentAction), {}, { cognitoClient: {} });
+    const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {});
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedActions).toEqual([expectedAction]);
 }

@@ -1,11 +1,12 @@
 import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
-import { catchError, map, mergeMap } from 'rxjs';
+import { catchError, map, mergeMap, of } from 'rxjs';
+import { RootEpic } from '../../../../redux/store';
 import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
 import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
 
-export function GeoApify(action$, _state$, { cognitoClient }) {
-    return action$.pipe(
+export const GeoApify: RootEpic = (action$, _state$, { cognitoClient }) =>
+    action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
         mergeMap((action: any) => {
             const location = action.location;
@@ -20,8 +21,7 @@ export function GeoApify(action$, _state$, { cognitoClient }) {
                     const geoApifyAddress = buildMapAppAddress(ajaxResponse.response);
                     return mapAppSetLocationAddress(geoApifyAddress);
                 }),
-                catchError((error) => error),
+                catchError((error) => of(error)),
             );
         }),
     );
-}
