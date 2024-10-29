@@ -30,7 +30,7 @@ export function DeviceMarkers() {
             return;
         }
 
-        dispatch(mapAppSetLocationCoordinates(event.latlng));
+        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
     };
 
     const devices = useMapAppState().devices;
