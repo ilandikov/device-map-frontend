@@ -12,7 +12,7 @@ export interface Device {
 
 export interface MapAppLocation {
     lat: number;
-    lng: number;
+    lon: number;
 }
 
 export interface MapAppAddress {

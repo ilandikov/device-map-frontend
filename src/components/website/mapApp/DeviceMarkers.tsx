@@ -25,7 +25,7 @@ export function DeviceMarkers() {
         if (
             selectedMarkerLocation &&
             selectedMarkerLocation.lat === event.latlng.lat &&
-            selectedMarkerLocation.lng === event.latlng.lng
+            selectedMarkerLocation.lon === event.latlng.lng
         ) {
             return;
         }
@@ -36,7 +36,7 @@ export function DeviceMarkers() {
     const devices = useMapAppState().devices;
 
     return devices.map((device, index) => {
-        const devicePosition = new LatLng(device.location.lat, device.location.lng);
+        const devicePosition = new LatLng(device.location.lat, device.location.lon);
 
         return (
             <Marker

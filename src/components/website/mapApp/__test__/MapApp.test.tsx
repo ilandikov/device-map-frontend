@@ -48,15 +48,15 @@ describe('MapApp snapshot tests', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.HOME_SCREEN,
             devices: [
-                { id: 'test device 1', location: { lat: 1, lng: 2 } },
-                { id: 'test device 2', location: { lat: 3, lng: 4 } },
-                { id: 'test device 3', location: { lat: 1, lng: 2 } },
-                { id: 'test device 4', location: { lat: 5, lng: 6 } },
+                { id: 'test device 1', location: { lat: 1, lon: 2 } },
+                { id: 'test device 2', location: { lat: 3, lon: 4 } },
+                { id: 'test device 3', location: { lat: 1, lon: 2 } },
+                { id: 'test device 4', location: { lat: 5, lon: 6 } },
             ],
             selectedMarker: {
                 location: {
                     lat: 1,
-                    lng: 2,
+                    lon: 2,
                 },
                 address: {
                     addressLine1: 'Street and number',
@@ -73,17 +73,17 @@ describe('MapApp snapshot tests', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.HOME_SCREEN,
             devices: [
-                { id: 'test device 1', location: { lat: 1, lng: 2 } },
-                { id: 'test device 2', location: { lat: 3, lng: 4 } },
-                { id: 'test device 3', location: { lat: 1, lng: 2 } },
-                { id: 'test device 4', location: { lat: 5, lng: 6 } },
-                { id: 'test device 5', location: { lat: 1, lng: 2 } },
-                { id: 'test device 6', location: { lat: 1, lng: 2 } },
+                { id: 'test device 1', location: { lat: 1, lon: 2 } },
+                { id: 'test device 2', location: { lat: 3, lon: 4 } },
+                { id: 'test device 3', location: { lat: 1, lon: 2 } },
+                { id: 'test device 4', location: { lat: 5, lon: 6 } },
+                { id: 'test device 5', location: { lat: 1, lon: 2 } },
+                { id: 'test device 6', location: { lat: 1, lon: 2 } },
             ],
             selectedMarker: {
                 location: {
                     lat: 1,
-                    lng: 2,
+                    lon: 2,
                 },
                 address: null,
             },

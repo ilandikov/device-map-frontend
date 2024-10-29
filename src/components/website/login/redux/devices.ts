@@ -25,7 +25,7 @@ export function processListDevicesRequest(response: Promise<ApolloQueryResult<T2
         id: device.id,
         location: {
             lat: device.location.lat,
-            lng: device.location.lon, // TODO rename lng -> lon in local state
+            lon: device.location.lon, // TODO rename lng -> lon in local state
         },
     });
 

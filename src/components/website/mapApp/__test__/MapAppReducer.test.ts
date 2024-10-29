@@ -66,16 +66,16 @@ describe('MapApp reducer tests', () => {
 
     it('should set coordinates', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lng: 74.6085298061371 });
+        const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
         verifyMapAppStateChange(initialState, action, {
-            selectedMarker: { location: { lat: 42.85862508449081, lng: 74.6085298061371 }, address: null },
+            selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
         });
     });
 
     it('should do nothing when getting an address', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lng: 74.6085298061371 });
+        const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
         verifyMapAppStateChange(initialState, action, {});
     });
@@ -83,7 +83,7 @@ describe('MapApp reducer tests', () => {
     it('should set location address', () => {
         const initialState = buildMapAppState({
             selectedMarker: {
-                location: { lat: 0, lng: 1 },
+                location: { lat: 0, lon: 1 },
                 address: null,
             },
         });
@@ -91,7 +91,7 @@ describe('MapApp reducer tests', () => {
 
         verifyMapAppStateChange(initialState, action, {
             selectedMarker: {
-                location: { lat: 0, lng: 1 },
+                location: { lat: 0, lon: 1 },
                 address: {
                     addressLine1: 'line1',
                     addressLine2: 'line2',
@@ -108,11 +108,11 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should overwrite devices on remote answer', () => {
-        const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lng: 1 } }] });
-        const action = mapAppRemoteAnswer([{ id: 'received', location: { lat: 10, lng: 11 } }]);
+        const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lon: 1 } }] });
+        const action = mapAppRemoteAnswer([{ id: 'received', location: { lat: 10, lon: 11 } }]);
 
         verifyMapAppStateChange(initialState, action, {
-            devices: [{ id: 'received', location: { lat: 10, lng: 11 } }],
+            devices: [{ id: 'received', location: { lat: 10, lon: 11 } }],
         });
     });
 });

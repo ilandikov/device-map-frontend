@@ -10,7 +10,7 @@ export const GeoApify: RootEpic = (action$, _state$, { cognitoClient }) =>
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
         mergeMap((action) => {
             const location = action.location;
-            const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lng}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`;
+            const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`;
             return ajax<GeoApifyResponse>({
                 url,
                 method: 'GET',

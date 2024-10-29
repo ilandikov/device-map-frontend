@@ -11,7 +11,7 @@ async function testGeoApifyEpic(sentAction: MapAppAction, expectedAction: MapApp
 
 describe('GeoApify tests', () => {
     it('should get address for a location in Bishkek', async () => {
-        const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lng: 74.60261920574811 });
+        const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
         const expectedAction = mapAppSetLocationAddress({
             addressLine1: 'Чуй, 120',
             addressLine2: 'Первомайский, Бишкек',
