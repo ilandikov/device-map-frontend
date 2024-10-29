@@ -1,4 +1,6 @@
-export const chuy120 = {
+import { GeoApifyResponse } from '../GeoApifyHelpers';
+
+export const chuy120: GeoApifyResponse = {
     type: 'FeatureCollection',
     features: [
         {
@@ -42,7 +44,7 @@ export const chuy120 = {
     ],
     query: { lat: 42.876, lon: 74.603, plus_code: '8JJPVJG3+C6' },
 };
-export const zyfara42a = {
+export const zyfara42a: GeoApifyResponse = {
     type: 'FeatureCollection',
     features: [
         {
@@ -94,7 +96,8 @@ export const zyfara42a = {
         plus_code: '8JJPVJ53+GH',
     },
 };
-export const akTub = {
+
+export const akTub: GeoApifyResponse = {
     type: 'FeatureCollection',
     features: [
         {

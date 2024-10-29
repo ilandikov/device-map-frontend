@@ -32,6 +32,8 @@ export interface GeoApifyProperties {
     timezone?: any;
     rank?: any;
 
+    state?: string;
+    name?: string;
     housenumber?: string;
     street?: string;
     district?: string;
