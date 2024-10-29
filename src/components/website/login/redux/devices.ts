@@ -1,21 +1,26 @@
-import { of, switchMap } from 'rxjs';
+import { mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { MapAppActionType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
 import { RootEpic } from '../../../../redux/store';
+import { listDevicesQuery } from './devicesHelpers';
 
-export const devices: RootEpic = (action$) => {
+export const devices: RootEpic = (action$, _, { apolloClient }) => {
     return action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap(() => {
-            return of(
-                mapAppRemoteAnswer([
-                    { id: 'dev1', location: { lat: 42.85862508449081, lng: 74.6085298061371 } },
-                    { id: 'dev2a', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
-                    { id: 'dev2b', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
-                    { id: 'dev2c', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
-                    { id: 'dev2d', location: { lat: 42.85883742844907, lng: 74.6039915084839 } },
-                    { id: 'dev3', location: { lat: 42.85610049481582, lng: 74.60671663284303 } },
-                ]),
+            return fromPromise(apolloClient.query(listDevicesQuery)).pipe(
+                mergeMap((response) => {
+                    const devices = response.data.T22ListDevices.map((device) => ({
+                        id: device.id,
+                        location: {
+                            lat: device.location.lat,
+                            lng: device.location.lon, // TODO rename lng -> lon in local state
+                        },
+                    }));
+
+                    return of(mapAppRemoteAnswer(devices));
+                }),
             );
         }),
     );

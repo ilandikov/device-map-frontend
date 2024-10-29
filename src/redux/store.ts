@@ -6,6 +6,7 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
+import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
@@ -26,7 +27,10 @@ export type RootState = ReturnType<typeof rootReducer>;
 type AllActions = LoginModalAction | MapAppAction;
 
 export type Dependency<T> = { [key in keyof T]: T[key] };
-type Dependencies = { cognitoClient?: Dependency<CognitoClient> };
+type Dependencies = {
+    cognitoClient?: Dependency<CognitoClient>;
+    apolloClient?: Dependency<ApolloClient<NormalizedCacheObject>>;
+};
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
@@ -39,6 +43,16 @@ export function createStore() {
             cognitoClient: new CognitoClient({
                 UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
+            }),
+            apolloClient: new ApolloClient({
+                link: new HttpLink({
+                    uri: process.env.APPSYNC_ENDPOINT, // TODO how to test env in live environment on build?
+                    fetch, // TODO why is this needed at all?
+                    headers: {
+                        'x-api-key': process.env.X_API_KEY,
+                    },
+                }),
+                cache: new InMemoryCache(),
             }),
         },
     });
