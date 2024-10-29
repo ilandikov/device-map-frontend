@@ -16,6 +16,10 @@ export enum MapAppRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
 }
 
+export enum MapAppRemoteAnswerType {
+    DEVICES_LISTED = 'DEVICES_LISTED',
+}
+
 export type MapAppAction =
     | MapAppGenericAction
     | MapAppDeviceMarkerClick
@@ -82,12 +86,14 @@ export interface MapAppRemoteRequest {
 
 export interface MapAppRemoteAnswer {
     type: MapAppActionType.REMOTE_ANSWER;
+    answer: MapAppRemoteAnswerType;
     devices: Device[];
 }
 
 export function mapAppRemoteAnswer(devices: Device[]): MapAppRemoteAnswer {
     return {
         type: MapAppActionType.REMOTE_ANSWER,
+        answer: MapAppRemoteAnswerType.DEVICES_LISTED,
         devices: devices,
     };
 }
