@@ -13,14 +13,14 @@ export const devices: RootEpic = (action$, _, { apolloClient }) =>
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return listDevices(apolloClient.query());
+                    return processListDevicesRequest(apolloClient.listDevices());
                 default:
                     return EMPTY;
             }
         }),
     );
 
-export function listDevices(deviceListPromise: Promise<ApolloQueryResult<T22ListDevicesResponse>>) {
+export function processListDevicesRequest(response: Promise<ApolloQueryResult<T22ListDevicesResponse>>) {
     const deviceTransformer = (device: T22Device): Device => ({
         id: device.id,
         location: {
@@ -29,8 +29,8 @@ export function listDevices(deviceListPromise: Promise<ApolloQueryResult<T22List
         },
     });
 
-    const processAnswer = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
+    const listDevicesResponse = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
         of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
 
-    return fromPromise(deviceListPromise).pipe(mergeMap(processAnswer));
+    return fromPromise(response).pipe(mergeMap(listDevicesResponse));
 }
