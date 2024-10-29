@@ -1,4 +1,4 @@
-import { EMPTY, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { ApolloQueryResult } from '@apollo/client';
@@ -32,5 +32,8 @@ export function processListDevicesRequest(response: Promise<ApolloQueryResult<T2
     const listDevicesResponse = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
         of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
 
-    return fromPromise(response).pipe(mergeMap(listDevicesResponse));
+    return fromPromise(response).pipe(
+        mergeMap(listDevicesResponse),
+        catchError(() => EMPTY),
+    );
 }

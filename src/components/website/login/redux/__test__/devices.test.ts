@@ -37,4 +37,10 @@ describe('list devices', () => {
 
         await testListDevicesProcessor(remoteAnswer, [expectedAction]);
     });
+
+    it('should process a rejected promise', async () => {
+        const remoteAnswer = Promise.reject();
+
+        await testListDevicesProcessor(remoteAnswer, []);
+    });
 });
