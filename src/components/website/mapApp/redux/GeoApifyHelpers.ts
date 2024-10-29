@@ -28,16 +28,42 @@ export function buildMapAppAddress(response: GeoApifyResponse): MapAppAddress {
 }
 
 export interface GeoApifyProperties {
+    datasource?: any;
+    timezone?: any;
+    rank?: any;
+
     housenumber?: string;
     street?: string;
     district?: string;
     city?: string;
+    country?: string;
+    country_code?: string;
+    postcode?: string;
+    lon?: number;
+    lat?: number;
+    distance?: number;
+    result_type?: string;
+    formatted?: string;
+    address_line1?: string;
+    address_line2?: string;
+    category?: string;
+    plus_code?: string;
+    place_id?: string;
 }
 
 export interface GeoApifyFeature {
+    type?: 'Feature';
     properties: GeoApifyProperties;
+    geometry?: any;
+    bbox?: any;
 }
 
 export interface GeoApifyResponse {
+    type?: 'FeatureCollection';
     features: GeoApifyFeature[];
+    query?: {
+        lat?: number;
+        lon?: number;
+        plus_code?: string;
+    };
 }
