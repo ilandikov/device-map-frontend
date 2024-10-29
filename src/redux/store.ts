@@ -42,7 +42,7 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
 
-export function createStore2(rootEpic1: Epic<AllActions, AllActions, RootState, Dependencies>) {
+export function createStore() {
     const apolloClient = new ApolloClient({
         link: ApolloLink.from([
             createAuthLink({
@@ -73,14 +73,9 @@ export function createStore2(rootEpic1: Epic<AllActions, AllActions, RootState, 
     // @ts-expect-error
 
     const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
-    epicMiddleware.run(rootEpic1);
+    epicMiddleware.run(rootEpic);
 
     return store;
-}
-
-export function createStore() {
-    const rootEpic1 = rootEpic;
-    return createStore2(rootEpic1);
 }
 
 const store = createStore();
