@@ -6,7 +6,9 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloLink, ApolloQueryResult, InMemoryCache } from '@apollo/client';
+import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
+import { createHttpLink } from '@apollo/client/core';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
@@ -15,6 +17,7 @@ import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
+import { T22ListDevicesResponse, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -24,12 +27,14 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-type AllActions = LoginModalAction | MapAppAction;
+export type AllActions = LoginModalAction | MapAppAction;
 
 export type Dependency<T> = { [key in keyof T]: T[key] };
-type Dependencies = {
+export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
-    apolloClient?: Dependency<ApolloClient<NormalizedCacheObject>>;
+    apolloClient?: {
+        query: () => Promise<ApolloQueryResult<T22ListDevicesResponse>>;
+    };
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
@@ -38,22 +43,31 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
 
 export function createStore() {
+    const apolloClient = new ApolloClient({
+        link: ApolloLink.from([
+            createAuthLink({
+                url: process.env.APPSYNC_ENDPOINT,
+                region: process.env.REGION,
+                auth: {
+                    type: AUTH_TYPE.API_KEY,
+                    apiKey: process.env.X_API_KEY,
+                },
+            }),
+            createHttpLink({
+                uri: process.env.APPSYNC_ENDPOINT,
+            }),
+        ]),
+        cache: new InMemoryCache(),
+    });
     const epicMiddleware: RootMiddleWare = createEpicMiddleware({
         dependencies: {
             cognitoClient: new CognitoClient({
                 UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
-            apolloClient: new ApolloClient({
-                link: new HttpLink({
-                    uri: process.env.APPSYNC_ENDPOINT, // TODO how to test env in live environment on build?
-                    fetch, // TODO why is this needed at all?
-                    headers: {
-                        'x-api-key': process.env.X_API_KEY,
-                    },
-                }),
-                cache: new InMemoryCache(),
-            }),
+            apolloClient: {
+                query: () => apolloClient.query(listDevicesQuery),
+            },
         },
     });
 
