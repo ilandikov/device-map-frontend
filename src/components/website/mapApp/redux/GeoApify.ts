@@ -12,11 +12,13 @@ export const GeoApify: RootEpic = (action$, _, { geoApifyClient }) =>
     );
 
 function getGeoApifyAddress(sendAddressRequest: Observable<AjaxResponse<GeoApifyResponse>>) {
+    function processResponse(ajaxResponse: AjaxResponse<GeoApifyResponse>) {
+        const address = buildMapAppAddress(ajaxResponse.response);
+        return mapAppSetLocationAddress(address);
+    }
+
     return sendAddressRequest.pipe(
-        map((ajaxResponse) => {
-            const geoApifyAddress = buildMapAppAddress(ajaxResponse.response);
-            return mapAppSetLocationAddress(geoApifyAddress);
-        }),
+        map(processResponse),
         catchError((error) => of(error)),
     );
 }
