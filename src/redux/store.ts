@@ -9,6 +9,9 @@ import CognitoClient from '@mancho.devs/cognito';
 import { ApolloClient, ApolloLink, ApolloQueryResult, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
+import { Observable } from 'rxjs';
+import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
+import { ajax } from 'rxjs/internal/ajax/ajax';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
@@ -18,6 +21,8 @@ import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import { T22ListDevicesResponse, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
+import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
+import { MapAppLocation } from '../components/website/mapApp/redux/MapAppState';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -35,6 +40,7 @@ export type Dependencies = {
     apolloClient?: {
         listDevices: () => Promise<ApolloQueryResult<T22ListDevicesResponse>>;
     };
+    geoApifyClient?: (location: MapAppLocation) => Observable<AjaxResponse<GeoApifyResponse>>;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
@@ -68,6 +74,13 @@ export function createStore() {
             apolloClient: {
                 listDevices: () => apolloClient.query(listDevicesQuery),
             },
+            geoApifyClient: (location) =>
+                ajax({
+                    url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
+                    method: 'GET',
+                    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+                    crossDomain: true,
+                }),
         },
     });
 

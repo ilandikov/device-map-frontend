@@ -1,6 +1,6 @@
 import { GeoApifyResponse, buildMapAppAddress } from '../GeoApifyHelpers';
 import { MapAppAddress } from '../MapAppState';
-import { akTub, chuy120, zyfara42a } from './GeoApifyTestData';
+import { akTub, chui120, igemberdiyeva42 } from './GeoApifyTestHelpers';
 
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
     function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, expectedAddress: MapAppAddress) {
@@ -49,14 +49,14 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
     });
 
     it('should build normal address', () => {
-        testBuildingAddressFromGeoApifyAPI(chuy120, {
+        testBuildingAddressFromGeoApifyAPI(chui120.response, {
             addressLine1: 'Чуй, 120',
             addressLine2: 'Первомайский, Бишкек',
         });
     });
 
     it('should build address without district', () => {
-        testBuildingAddressFromGeoApifyAPI(zyfara42a, {
+        testBuildingAddressFromGeoApifyAPI(igemberdiyeva42, {
             addressLine1: 'Игембердиева Зыфара, 42а',
             addressLine2: 'Бишкек',
         });

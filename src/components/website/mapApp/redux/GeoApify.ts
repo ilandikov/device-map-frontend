@@ -1,27 +1,24 @@
 import { ofType } from 'redux-observable';
-import { ajax } from 'rxjs/ajax';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, map, mergeMap, of } from 'rxjs';
+import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { RootEpic } from '../../../../redux/store';
 import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
 import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
 
-export const GeoApify: RootEpic = (action$, _state$, { cognitoClient }) =>
+export const GeoApify: RootEpic = (action$, _, { geoApifyClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
-        mergeMap((action) => {
-            const location = action.location;
-            const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`;
-            return ajax<GeoApifyResponse>({
-                url,
-                method: 'GET',
-                headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-                crossDomain: true,
-            }).pipe(
-                map((ajaxResponse) => {
-                    const geoApifyAddress = buildMapAppAddress(ajaxResponse.response);
-                    return mapAppSetLocationAddress(geoApifyAddress);
-                }),
-                catchError((error) => of(error)),
-            );
-        }),
+        mergeMap((action) => getGeoApifyAddress(geoApifyClient(action.location))),
     );
+
+function getGeoApifyAddress(sendAddressRequest: Observable<AjaxResponse<GeoApifyResponse>>) {
+    function processResponse(ajaxResponse: AjaxResponse<GeoApifyResponse>) {
+        const address = buildMapAppAddress(ajaxResponse.response);
+        return mapAppSetLocationAddress(address);
+    }
+
+    return sendAddressRequest.pipe(
+        map(processResponse),
+        catchError((error) => of(error)),
+    );
+}
