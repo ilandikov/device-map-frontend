@@ -74,8 +74,8 @@ export function createStore() {
             apolloClient: {
                 listDevices: () => apolloClient.query(listDevicesQuery),
             },
-            geoApifyClient: (location: MapAppLocation) =>
-                ajax<GeoApifyResponse>({
+            geoApifyClient: (location) =>
+                ajax({
                     url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
                     method: 'GET',
                     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
