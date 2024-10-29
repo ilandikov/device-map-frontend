@@ -33,7 +33,7 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     apolloClient?: {
-        query: () => Promise<ApolloQueryResult<T22ListDevicesResponse>>;
+        listDevices: () => Promise<ApolloQueryResult<T22ListDevicesResponse>>;
     };
 };
 
@@ -66,7 +66,7 @@ export function createStore() {
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
             apolloClient: {
-                query: () => apolloClient.query(listDevicesQuery),
+                listDevices: () => apolloClient.query(listDevicesQuery),
             },
         },
     });

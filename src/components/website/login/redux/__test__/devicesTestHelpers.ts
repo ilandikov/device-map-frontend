@@ -6,7 +6,7 @@ import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBu
 export async function testDevicesEpic(sentAction: MapAppAction, expectedActions: MapAppAction[]) {
     const output$ = devices(of(sentAction), buildStateForDevicesTest(), {
         apolloClient: {
-            query: () =>
+            listDevices: () =>
                 Promise.resolve({
                     data: {
                         T22ListDevices: [
