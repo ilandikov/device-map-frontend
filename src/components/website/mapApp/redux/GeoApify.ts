@@ -8,7 +8,8 @@ export const GeoApify: RootEpic = (action$, _state$, { geoApifyClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
         mergeMap((action) => {
-            return geoApifyClient(action.location).pipe(
+            const sendAddressRequest = geoApifyClient(action.location);
+            return sendAddressRequest.pipe(
                 map((ajaxResponse) => {
                     const geoApifyAddress = buildMapAppAddress(ajaxResponse.response);
                     return mapAppSetLocationAddress(geoApifyAddress);
