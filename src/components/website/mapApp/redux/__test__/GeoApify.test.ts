@@ -1,10 +1,21 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
+import { ajax } from 'rxjs/internal/ajax/ajax';
 import { MapAppAction, mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
 import { GeoApify } from '../GeoApify';
 import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
+import { MapAppLocation } from '../MapAppState';
+import { GeoApifyResponse } from '../GeoApifyHelpers';
 
 async function testGeoApifyEpic(sentAction: MapAppAction, expectedAction: MapAppAction) {
-    const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {});
+    const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
+        geoApifyClient: (location: MapAppLocation) =>
+            ajax<GeoApifyResponse>({
+                url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
+                method: 'GET',
+                headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+                crossDomain: true,
+            }),
+    });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedActions).toEqual([expectedAction]);
 }
