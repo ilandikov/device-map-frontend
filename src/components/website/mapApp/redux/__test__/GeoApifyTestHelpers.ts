@@ -18,7 +18,7 @@ export async function testGeoApifyEpic(
     expect(receivedActions).toEqual(expectedActions);
 }
 
-export const chui120Response: AjaxResponse<GeoApifyResponse> = {
+export const chui120: AjaxResponse<GeoApifyResponse> = {
     // @ts-expect-error
     originalEvent: {
         isTrusted: true,

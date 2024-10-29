@@ -1,5 +1,5 @@
 import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
-import { chui120Response, testGeoApifyEpic } from './GeoApifyTestHelpers';
+import { chui120, testGeoApifyEpic } from './GeoApifyTestHelpers';
 
 describe('GeoApify tests', () => {
     it('should not answer to a random action', async () => {
@@ -10,7 +10,7 @@ describe('GeoApify tests', () => {
     });
 
     it('should get address for a location in Bishkek', async () => {
-        const remoteAnswer = Promise.resolve(chui120Response);
+        const remoteAnswer = Promise.resolve(chui120);
         const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
         const expectedAction = mapAppSetLocationAddress({
             addressLine1: 'Чуй, 120',
