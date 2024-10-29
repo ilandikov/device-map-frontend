@@ -20,13 +20,14 @@ async function testGeoApifyEpic(
 
 describe('GeoApify tests', () => {
     it('should get address for a location in Bishkek', async () => {
+        const remoteAnswer = Promise.resolve(chui120Response);
         const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
         const expectedAction = mapAppSetLocationAddress({
             addressLine1: 'Чуй, 120',
             addressLine2: 'Первомайский, Бишкек',
         });
 
-        await testGeoApifyEpic(Promise.resolve(chui120Response), sentAction, expectedAction);
+        await testGeoApifyEpic(remoteAnswer, sentAction, expectedAction);
     });
 });
 
