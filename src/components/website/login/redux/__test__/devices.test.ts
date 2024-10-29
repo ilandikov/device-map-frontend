@@ -27,7 +27,7 @@ describe('devices epic test', () => {
     });
 });
 
-describe('T22 devices', () => {
+describe('Devices - list', () => {
     it('test transformer', () => {
         const input = {
             __typename: 'T22Device',
@@ -67,10 +67,12 @@ describe('T22 devices', () => {
             networkStatus: 7,
         };
 
-        const fakeLoader = () => Promise.resolve(devices);
+        const deviceListLoader = Promise.resolve(devices);
 
-        const result = listDevices(fakeLoader, of(mapAppRemoteRequest()));
-        const receivedAction = await lastValueFrom(result.pipe(toArray()));
+        const incomingAction = {};
+        const receivedAction = await lastValueFrom(
+            of(incomingAction).pipe(() => listDevices(deviceListLoader), toArray()),
+        );
 
         expect(receivedAction).toEqual([
             mapAppRemoteAnswer([
