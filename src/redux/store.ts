@@ -63,7 +63,7 @@ export function createStore() {
                 uri: process.env.APPSYNC_ENDPOINT,
             }),
         ]),
-        cache: new InMemoryCache(),
+        cache: new InMemoryCache({ addTypename: false }),
     });
     const epicMiddleware: RootMiddleWare = createEpicMiddleware({
         dependencies: {
