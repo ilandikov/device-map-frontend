@@ -175,7 +175,7 @@ export function loginModalAuthentication(
                             return state;
                     }
                 case 'goBack': {
-                    return appleSauce(state);
+                    return { ...state, step: from[state.step] };
                 }
             }
     }
@@ -189,7 +189,3 @@ const from: { [key in AuthenticationStep]: AuthenticationStep } = {
     PASSWORD_CREATION: AuthenticationStep.MAIL_INPUT,
     PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
 };
-
-function appleSauce(state: LoginModalAuthenticationState) {
-    return { ...state, step: from[state.step] };
-}
