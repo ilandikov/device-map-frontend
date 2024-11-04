@@ -1,5 +1,6 @@
 import { LoginModalInputType } from './LoginModalAction';
 import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
+import { PreAuthErrorChecker } from './LoginModalAuthentication';
 
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
@@ -94,3 +95,5 @@ export function getOTPError(state: LoginModalAuthenticationState): Error | null 
 
     return null;
 }
+
+export const noErrorCheck: PreAuthErrorChecker = () => null;

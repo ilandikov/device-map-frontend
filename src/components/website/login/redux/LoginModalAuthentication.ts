@@ -14,6 +14,7 @@ import {
     getEmailError,
     getOTPError,
     getPasswordError,
+    noErrorCheck,
     partialStateWithPayload,
 } from './LoginModalAuthenticationHelpers';
 
@@ -77,7 +78,7 @@ export function loginModalAuthentication(
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...nextStateAfterRemoteRequest(state, getPasswordError) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, () => null) };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, noErrorCheck) };
                 case LoginModalRemoteRequestType.OTP:
                     return { ...state, ...nextStateAfterRemoteRequest(state, getOTPError) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
@@ -140,7 +141,7 @@ const fromRemoteStep: StepMap = {
     LOGIN: AuthenticationStep.LOGIN_LOADING,
 };
 
-type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
+export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
 
 function nextStateAfterRemoteRequest(
     state: LoginModalAuthenticationState,
