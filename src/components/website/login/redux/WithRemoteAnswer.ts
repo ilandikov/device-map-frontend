@@ -17,6 +17,7 @@ export function withRemoteAnswer(
     return { step: successStep };
 }
 
+// TODO remove Partial
 const fromRemoteAnswer: Partial<{
     [key in LoginModalRemoteAnswerType]: {
         successStep: AuthenticationStep;
