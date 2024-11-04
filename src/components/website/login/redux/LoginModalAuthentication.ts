@@ -171,17 +171,22 @@ export function loginModalAuthentication(
                         default:
                             return state;
                     }
-                case 'goBack':
-                    switch (state.step) {
-                        case AuthenticationStep.MAIL_INPUT:
-                        case AuthenticationStep.LOGIN:
-                            return { ...state, step: AuthenticationStep.WELCOME };
-                        case AuthenticationStep.PASSWORD_CREATION:
-                            return { ...state, step: AuthenticationStep.MAIL_INPUT };
-                        case AuthenticationStep.PASSWORD_RESET_REQUEST:
-                            return { ...state, step: AuthenticationStep.LOGIN };
-                    }
+                case 'goBack': {
+                    return appleSauce(state);
+                }
             }
     }
     return state;
+}
+
+function appleSauce(state: LoginModalAuthenticationState) {
+    switch (state.step) {
+        case AuthenticationStep.MAIL_INPUT:
+        case AuthenticationStep.LOGIN:
+            return { ...state, step: AuthenticationStep.WELCOME };
+        case AuthenticationStep.PASSWORD_CREATION:
+            return { ...state, step: AuthenticationStep.MAIL_INPUT };
+        case AuthenticationStep.PASSWORD_RESET_REQUEST:
+            return { ...state, step: AuthenticationStep.LOGIN };
+    }
 }
