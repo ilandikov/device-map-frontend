@@ -80,22 +80,8 @@ export function loginModalAuthentication(
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
                 }
-                case LoginModalRemoteRequestType.OTP: {
-                    if (state.OTP.length < 6) {
-                        return { ...state, error: new Error(OTPError.TOO_SHORT) };
-                    }
-
-                    switch (state.step) {
-                        case AuthenticationStep.PASSWORD_CREATION_OTP: {
-                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING, error: null };
-                        }
-                        case AuthenticationStep.PASSWORD_RESET_OTP: {
-                            return { ...state, step: AuthenticationStep.PASSWORD_RESET, error: null };
-                        }
-                    }
-
-                    return state;
-                }
+                case LoginModalRemoteRequestType.OTP:
+                    return afterOTPRemoteRequest(state);
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return { ...state, error: null };
                 default:
@@ -184,4 +170,21 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
     }
 
     return {};
+}
+
+function afterOTPRemoteRequest(state: LoginModalAuthenticationState) {
+    if (state.OTP.length < 6) {
+        return { ...state, error: new Error(OTPError.TOO_SHORT) };
+    }
+
+    switch (state.step) {
+        case AuthenticationStep.PASSWORD_CREATION_OTP: {
+            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING, error: null };
+        }
+        case AuthenticationStep.PASSWORD_RESET_OTP: {
+            return { ...state, step: AuthenticationStep.PASSWORD_RESET, error: null };
+        }
+    }
+
+    return state;
 }
