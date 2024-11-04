@@ -124,6 +124,10 @@ function afterRemoteRequest(
 }
 
 function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
+    return setFieldFromPayload(action);
+}
+
+function setFieldFromPayload(action: LoginModalInput): Partial<AuthenticationState> {
     const input = action.input;
     switch (input.type) {
         case LoginModalInputType.EMAIL:
