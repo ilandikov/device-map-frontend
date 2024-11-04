@@ -20,6 +20,7 @@ export function authentication(
             return { ...state, ...afterRemoteRequest(action, state) };
         case LoginModalActionType.BUTTON_CLICKED:
             return { ...state, ...afterButtonClick(action, state) };
+        default:
+            return state;
     }
-    return state;
 }
