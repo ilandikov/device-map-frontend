@@ -161,9 +161,11 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
     return {};
 }
 
+type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
+
 function afterUsernameRemoteRequest(
     state: LoginModalAuthenticationState,
-    errorChecker: (state: LoginModalAuthenticationState) => Error | null,
+    errorChecker: PreAuthErrorChecker,
 ): Partial<LoginModalAuthenticationState> {
     const emailError = errorChecker(state);
     if (emailError) {
