@@ -158,7 +158,9 @@ export function loginModalAuthentication(
     return state;
 }
 
-const goBackFrom: Partial<{ [key in AuthenticationStep]: AuthenticationStep }> = {
+type StepMap = Partial<{ [key in AuthenticationStep]: AuthenticationStep }>;
+
+const goBackFrom: StepMap = {
     MAIL_INPUT: AuthenticationStep.WELCOME,
     LOGIN: AuthenticationStep.WELCOME,
     PASSWORD_CREATION: AuthenticationStep.MAIL_INPUT,
@@ -175,14 +177,13 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
         return { error: passwordError };
     }
 
-    switch (state.step) {
-        case AuthenticationStep.PASSWORD_CREATION:
-            return {
-                step: AuthenticationStep.PASSWORD_CREATION_LOADING,
-                error: null,
-            };
-        case AuthenticationStep.PASSWORD_RESET:
-            return { step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
+    const from: StepMap = {
+        PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
+        PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
+    };
+
+    if (from[state.step]) {
+        return { step: from[state.step], error: null };
     }
 
     return {};
