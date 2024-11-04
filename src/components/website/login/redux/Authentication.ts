@@ -66,10 +66,10 @@ export function authentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
+            return { ...state, error: null, ...withPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
+            return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request]) };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             // TODO extract button names to enum
@@ -132,7 +132,7 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
     OTP: getOTPError,
 };
 
-function nextStateAfterRemoteRequest(
+function afterRemoteRequest(
     state: AuthenticationState,
     errorChecker: PreAuthErrorChecker | undefined,
 ): Partial<AuthenticationState> {
@@ -150,7 +150,7 @@ function nextStateAfterRemoteRequest(
     return { error: null };
 }
 
-function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<AuthenticationState> {
+function withPayload(type: LoginModalInputType, payload: string): Partial<AuthenticationState> {
     switch (type) {
         case LoginModalInputType.EMAIL:
             return { email: payload };
