@@ -148,6 +148,7 @@ export function loginModalAuthentication(
             }
         }
         case LoginModalActionType.BUTTON_CLICKED:
+            // TODO extract button names to enum
             switch (action.button) {
                 case 'accountRegister':
                     return { ...state, step: AuthenticationStep.MAIL_INPUT };
@@ -164,10 +165,12 @@ export function loginModalAuthentication(
                     };
                 case 'userButton':
                     return authenticationInitialState;
+                // TODO rename this to start auth
                 case 'next':
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_RESET_OTP:
                             return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING };
+                        // TODO remove this case and simplify to one line
                         default:
                             return state;
                     }
