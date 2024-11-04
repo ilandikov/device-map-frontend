@@ -72,9 +72,13 @@ export function loginModalAuthentication(
             return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
+            const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
+                USERNAME: getEmailError,
+            };
+
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, getEmailError) };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...nextStateAfterRemoteRequest(state, getPasswordError) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
