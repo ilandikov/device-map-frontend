@@ -1,4 +1,3 @@
-import { LoginModalInputType } from './LoginModalAction';
 import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
 
 export enum MailInputError {
@@ -70,24 +69,6 @@ export const getPasswordError: PreAuthErrorChecker = (state) => {
 
     return null;
 };
-
-export function partialStateWithPayload(
-    type: LoginModalInputType,
-    payload: string,
-): Partial<LoginModalAuthenticationState> {
-    switch (type) {
-        case LoginModalInputType.EMAIL:
-            return { email: payload };
-        case LoginModalInputType.PASSWORD:
-            return { password: payload };
-        case LoginModalInputType.PASSWORD_REPEAT:
-            return { passwordRepeat: payload };
-        case LoginModalInputType.OTP:
-            return { OTP: payload };
-        default:
-            return {};
-    }
-}
 
 export const getOTPError: PreAuthErrorChecker = (state) => {
     if (state.OTP.length < 6) {

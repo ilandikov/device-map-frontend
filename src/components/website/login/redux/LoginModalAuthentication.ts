@@ -1,6 +1,7 @@
 import {
     LoginModalAction,
     LoginModalActionType,
+    LoginModalInputType,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
@@ -16,7 +17,6 @@ import {
     getOTPError,
     getPasswordError,
     noErrorCheck,
-    partialStateWithPayload,
 } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
@@ -152,4 +152,19 @@ function nextStateAfterRemoteRequest(
     }
 
     return { error: null };
+}
+
+function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<LoginModalAuthenticationState> {
+    switch (type) {
+        case LoginModalInputType.EMAIL:
+            return { email: payload };
+        case LoginModalInputType.PASSWORD:
+            return { password: payload };
+        case LoginModalInputType.PASSWORD_REPEAT:
+            return { passwordRepeat: payload };
+        case LoginModalInputType.OTP:
+            return { OTP: payload };
+        default:
+            return {};
+    }
 }
