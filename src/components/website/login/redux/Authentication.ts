@@ -23,7 +23,7 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionType.REMOTE_ANSWER:
-            return withRemoteAnswer(action, state);
+            return { ...state, ...withRemoteAnswer(action, state) };
         case LoginModalActionType.INPUT: {
             return { ...state, error: null, ...withPayload(action) };
         }
@@ -65,7 +65,7 @@ export function authentication(
     return state;
 }
 
-function withRemoteAnswer(action: LoginModalRemoteAnswer, state: AuthenticationState) {
+function withRemoteAnswer(action: LoginModalRemoteAnswer, state: AuthenticationState): Partial<AuthenticationState> {
     const { successStep, fallbackStep } = fromRemoteAnswer[action.answer] ?? {
         successStep: state.step,
         fallbackStep: state.step,
