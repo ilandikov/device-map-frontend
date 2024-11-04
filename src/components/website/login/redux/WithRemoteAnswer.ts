@@ -17,13 +17,13 @@ export function withRemoteAnswer(
     return { step: successStep };
 }
 
+type nextSteps = {
+    successStep: AuthenticationStep;
+    fallbackStep: AuthenticationStep;
+};
+
 // TODO remove Partial
-const fromRemoteAnswer: Partial<{
-    [key in LoginModalRemoteAnswerType]: {
-        successStep: AuthenticationStep;
-        fallbackStep: AuthenticationStep;
-    };
-}> = {
+const fromRemoteAnswer: Partial<{ [key in LoginModalRemoteAnswerType]: nextSteps }> = {
     SIGN_UP: {
         successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
         fallbackStep: AuthenticationStep.MAIL_INPUT,
