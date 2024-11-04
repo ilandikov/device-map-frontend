@@ -148,6 +148,7 @@ export function loginModalAuthentication(
             }
         }
         case LoginModalActionType.BUTTON_CLICKED:
+            // TODO extract button names to enum
             switch (action.button) {
                 case 'accountRegister':
                     return { ...state, step: AuthenticationStep.MAIL_INPUT };
@@ -164,24 +165,26 @@ export function loginModalAuthentication(
                     };
                 case 'userButton':
                     return authenticationInitialState;
+                // TODO rename this to start auth
                 case 'next':
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_RESET_OTP:
                             return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING };
+                        // TODO remove this case and simplify to one line
                         default:
                             return state;
                     }
-                case 'goBack':
-                    switch (state.step) {
-                        case AuthenticationStep.MAIL_INPUT:
-                        case AuthenticationStep.LOGIN:
-                            return { ...state, step: AuthenticationStep.WELCOME };
-                        case AuthenticationStep.PASSWORD_CREATION:
-                            return { ...state, step: AuthenticationStep.MAIL_INPUT };
-                        case AuthenticationStep.PASSWORD_RESET_REQUEST:
-                            return { ...state, step: AuthenticationStep.LOGIN };
-                    }
+                case 'goBack': {
+                    return { ...state, step: goBackFrom[state.step] };
+                }
             }
     }
     return state;
 }
+
+const goBackFrom: Partial<{ [key in AuthenticationStep]: AuthenticationStep }> = {
+    MAIL_INPUT: AuthenticationStep.WELCOME,
+    LOGIN: AuthenticationStep.WELCOME,
+    PASSWORD_CREATION: AuthenticationStep.MAIL_INPUT,
+    PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
+};
