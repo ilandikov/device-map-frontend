@@ -73,29 +73,8 @@ export function loginModalAuthentication(
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
-                case LoginModalRemoteRequestType.USERNAME: {
-                    const emailError = getEmailError(state.email);
-                    if (emailError) {
-                        return { ...state, error: emailError };
-                    }
-
-                    switch (state.step) {
-                        case AuthenticationStep.PASSWORD_RESET_REQUEST:
-                            return {
-                                ...state,
-                                step: AuthenticationStep.PASSWORD_RESET_LOADING,
-                                error: null,
-                            };
-                        case AuthenticationStep.MAIL_INPUT:
-                            return {
-                                ...state,
-                                step: AuthenticationStep.PASSWORD_CREATION,
-                                error: null,
-                            };
-                    }
-
-                    return state;
-                }
+                case LoginModalRemoteRequestType.USERNAME:
+                    return afterUsernameRemoteRequest(state);
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...afterPasswordRemoteRequest(state) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
@@ -187,4 +166,30 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
     }
 
     return {};
+}
+
+function afterUsernameRemoteRequest(state: LoginModalAuthenticationState) {
+    {
+        const emailError = getEmailError(state.email);
+        if (emailError) {
+            return { ...state, error: emailError };
+        }
+
+        switch (state.step) {
+            case AuthenticationStep.PASSWORD_RESET_REQUEST:
+                return {
+                    ...state,
+                    step: AuthenticationStep.PASSWORD_RESET_LOADING,
+                    error: null,
+                };
+            case AuthenticationStep.MAIL_INPUT:
+                return {
+                    ...state,
+                    step: AuthenticationStep.PASSWORD_CREATION,
+                    error: null,
+                };
+        }
+
+        return state;
+    }
 }
