@@ -66,7 +66,7 @@ export function authentication(
 }
 
 function withRemoteAnswer(action: LoginModalRemoteAnswer, state: AuthenticationState) {
-    const stepMap: Partial<{
+    const fromRemoteAnswer: Partial<{
         [key in LoginModalRemoteAnswerType]: {
             successStep: AuthenticationStep;
             fallbackStep: AuthenticationStep;
@@ -94,7 +94,7 @@ function withRemoteAnswer(action: LoginModalRemoteAnswer, state: AuthenticationS
         },
     };
 
-    const { successStep, fallbackStep } = stepMap[action.answer] ?? {
+    const { successStep, fallbackStep } = fromRemoteAnswer[action.answer] ?? {
         successStep: state.step,
         fallbackStep: state.step,
     };
