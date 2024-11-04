@@ -79,3 +79,11 @@ export function partialStateWithPayload(
             return {};
     }
 }
+
+export function getOTPError(state: LoginModalAuthenticationState): Error | null {
+    if (state.OTP.length < 6) {
+        return new Error(OTPError.TOO_SHORT);
+    }
+
+    return null;
+}

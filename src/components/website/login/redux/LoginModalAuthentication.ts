@@ -11,9 +11,9 @@ import {
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
 import {
-    OTPError,
     PasswordError,
     getEmailError,
+    getOTPError,
     getPasswordError,
     partialStateWithPayload,
 } from './LoginModalAuthenticationHelpers';
@@ -169,14 +169,6 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
     }
 
     return {};
-}
-
-function getOTPError(state: LoginModalAuthenticationState): Error | null {
-    if (state.OTP.length < 6) {
-        return new Error(OTPError.TOO_SHORT);
-    }
-
-    return null;
 }
 
 function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
