@@ -67,7 +67,7 @@ export function authentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return { ...state, error: null, ...withPayload(action.input.payload, action) };
+            return { ...state, error: null, ...withPayload(action) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request]) };
@@ -151,16 +151,16 @@ function afterRemoteRequest(
     return { error: null };
 }
 
-function withPayload(payload: string, action: LoginModalInput): Partial<AuthenticationState> {
+function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
     switch (action.input.type) {
         case LoginModalInputType.EMAIL:
-            return { email: payload };
+            return { email: action.input.payload };
         case LoginModalInputType.PASSWORD:
-            return { password: payload };
+            return { password: action.input.payload };
         case LoginModalInputType.PASSWORD_REPEAT:
-            return { passwordRepeat: payload };
+            return { passwordRepeat: action.input.payload };
         case LoginModalInputType.OTP:
-            return { OTP: payload };
+            return { OTP: action.input.payload };
         default:
             return {};
     }
