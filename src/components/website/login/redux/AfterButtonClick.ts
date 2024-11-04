@@ -30,9 +30,8 @@ export function afterButtonClick(
                 default:
                     return {};
             }
-        case LoginModalButton.GO_BACK: {
+        case LoginModalButton.GO_BACK:
             return { step: goBackFrom[state.step] };
-        }
     }
 
     return {};
