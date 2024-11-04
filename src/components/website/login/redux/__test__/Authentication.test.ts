@@ -286,17 +286,6 @@ describe('sign up OTP logic', () => {
         });
     });
 
-    it('should move from log in OTP to log in OTP loading stage', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_OTP,
-        });
-        const action = loginModalButtonClick(LoginModalButton.NEXT);
-
-        verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
-        });
-    });
-
     it('should set OTP value in the state', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,

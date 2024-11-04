@@ -18,7 +18,6 @@ export enum LoginModalButton {
     RESET_PASSWORD = 'RESET_PASSWORD',
     // TODO rename this button to something account related
     USER_BUTTON = 'USER_BUTTON',
-    NEXT = 'NEXT',
     GO_BACK = 'GO_BACK',
 }
 

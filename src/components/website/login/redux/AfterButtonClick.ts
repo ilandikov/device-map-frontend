@@ -18,16 +18,6 @@ const stateTransformers: { [key in LoginModalButton]: StateTransformer } = {
     CANCEL: () => ({ ...initialAuthenticationState }),
     RESET_PASSWORD: () => ({ step: AuthenticationStep.PASSWORD_RESET_REQUEST, password: '', error: null }),
     USER_BUTTON: () => ({ ...initialAuthenticationState }),
-    // TODO rename this to start auth
-    NEXT: (state) => {
-        switch (state.step) {
-            case AuthenticationStep.PASSWORD_RESET_OTP:
-                return { step: AuthenticationStep.PASSWORD_RESET_LOADING };
-            // TODO remove this case and simplify to one line
-            default:
-                return {};
-        }
-    },
     GO_BACK: (state) => ({ step: goBackFrom[state.step] }),
 };
 
