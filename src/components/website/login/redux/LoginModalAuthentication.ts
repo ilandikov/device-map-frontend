@@ -81,7 +81,7 @@ export function loginModalAuthentication(
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
                 }
                 case LoginModalRemoteRequestType.OTP:
-                    return afterOTPRemoteRequest(state);
+                    return { ...state, ...afterOTPRemoteRequest(state) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return { ...state, error: null };
                 default:
@@ -172,7 +172,7 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
     return {};
 }
 
-function afterOTPRemoteRequest(state: LoginModalAuthenticationState) {
+function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
     if (state.OTP.length < 6) {
         return { ...state, error: new Error(OTPError.TOO_SHORT) };
     }
