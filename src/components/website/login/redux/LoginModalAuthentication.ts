@@ -119,13 +119,13 @@ const goBackFrom: StepMap = {
 };
 
 const fromRemoteStep: StepMap = {
+    MAIL_INPUT: AuthenticationStep.PASSWORD_CREATION,
+    LOGIN: AuthenticationStep.LOGIN_LOADING,
     PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
     PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
     PASSWORD_RESET_REQUEST: AuthenticationStep.PASSWORD_RESET_LOADING,
-    MAIL_INPUT: AuthenticationStep.PASSWORD_CREATION,
     PASSWORD_CREATION_OTP: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
     PASSWORD_RESET_OTP: AuthenticationStep.PASSWORD_RESET,
-    LOGIN: AuthenticationStep.LOGIN_LOADING,
 };
 
 const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
