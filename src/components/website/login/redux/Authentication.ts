@@ -8,6 +8,7 @@ import {
     LoginModalRemoteAnswer,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
+    LoginModalRemoteRequest,
     LoginModalRemoteRequestType,
 } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
@@ -30,7 +31,7 @@ export function authentication(
             return { ...state, ...withPayload(action) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request]) };
+            return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request], action) };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             return { ...state, ...afterButtonClick(action, state) };
@@ -108,6 +109,7 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
 function afterRemoteRequest(
     state: AuthenticationState,
     errorChecker: PreAuthErrorChecker | undefined,
+    action: LoginModalRemoteRequest,
 ): Partial<AuthenticationState> {
     if (errorChecker) {
         const error = errorChecker(state);
