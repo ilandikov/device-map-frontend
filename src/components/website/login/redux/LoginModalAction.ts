@@ -12,14 +12,14 @@ export enum LoginModalActionType {
 }
 
 export enum LoginModalButton {
-    ACCOUNT_REGISTER = 'accountRegister',
-    ACCOUNT_LOGIN = 'accountLogin',
-    CANCEL = 'cancel',
-    RESET_PASSWORD = 'resetPassword',
+    ACCOUNT_REGISTER = 'ACCOUNT_REGISTER',
+    ACCOUNT_LOGIN = 'ACCOUNT_LOGIN',
+    CANCEL = 'CANCEL',
+    RESET_PASSWORD = 'RESET_PASSWORD',
     // TODO rename this button to something account related
-    USER_BUTTON = 'userButton',
-    NEXT = 'next',
-    GO_BACK = 'goBack',
+    USER_BUTTON = 'USER_BUTTON',
+    NEXT = 'NEXT',
+    GO_BACK = 'GO_BACK',
 }
 
 export interface LoginModalButtonClick {
