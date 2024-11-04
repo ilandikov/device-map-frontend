@@ -257,15 +257,17 @@ describe('sign up logic', () => {
 });
 
 describe('sign up OTP logic', () => {
-    it('should move from sign up OTP to sign up OTP loading stage', () => {
+    it('should move from sign up OTP to sign up OTP loading stage and reset the error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
             OTP: '451035',
+            error: new Error('something is wrong with OTP'),
         });
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+            error: null,
         });
     });
 

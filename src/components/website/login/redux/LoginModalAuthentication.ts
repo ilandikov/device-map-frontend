@@ -132,7 +132,7 @@ export function loginModalAuthentication(
 
                     switch (state.step) {
                         case AuthenticationStep.PASSWORD_CREATION_OTP: {
-                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING, error: null };
                         }
                         case AuthenticationStep.PASSWORD_RESET_OTP: {
                             return { ...state, step: AuthenticationStep.PASSWORD_RESET, error: null };
