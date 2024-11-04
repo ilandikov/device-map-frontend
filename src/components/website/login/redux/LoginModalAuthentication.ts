@@ -72,13 +72,6 @@ export function loginModalAuthentication(
             return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
-                USERNAME: getEmailError,
-                PASSWORD: getPasswordError,
-                USERNAME_AND_PASSWORD: noErrorCheck,
-                OTP: getOTPError,
-            };
-
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME:
                 case LoginModalRemoteRequestType.PASSWORD:
@@ -143,6 +136,13 @@ const fromRemoteStep: StepMap = {
     PASSWORD_CREATION_OTP: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
     PASSWORD_RESET_OTP: AuthenticationStep.PASSWORD_RESET,
     LOGIN: AuthenticationStep.LOGIN_LOADING,
+};
+
+const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
+    USERNAME: getEmailError,
+    PASSWORD: getPasswordError,
+    USERNAME_AND_PASSWORD: noErrorCheck,
+    OTP: getOTPError,
 };
 
 export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
