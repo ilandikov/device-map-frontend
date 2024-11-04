@@ -123,7 +123,7 @@ export function loginModalAuthentication(
                     return state;
                 }
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
-                    return { ...state, step: AuthenticationStep.LOGIN_LOADING };
+                    return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
                 }
                 case LoginModalRemoteRequestType.OTP: {
                     if (state.OTP.length < 6) {
