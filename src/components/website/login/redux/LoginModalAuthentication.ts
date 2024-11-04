@@ -73,10 +73,7 @@ export function loginModalAuthentication(
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME:
-                    return {
-                        ...state,
-                        ...nextStateAfterRemoteRequest(state, (state) => getEmailError(state.email)),
-                    };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getEmailError(state.email)) };
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getPasswordError(state)) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
