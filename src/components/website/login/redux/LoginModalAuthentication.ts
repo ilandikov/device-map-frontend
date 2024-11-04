@@ -159,7 +159,8 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
 }
 
 function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
-    const emailError = getEmailError(state.email);
+    const errorChecker = (state: LoginModalAuthenticationState) => getEmailError(state.email);
+    const emailError = errorChecker(state);
     if (emailError) {
         return { error: emailError };
     }
