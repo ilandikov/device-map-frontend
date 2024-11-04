@@ -174,12 +174,12 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
 function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
     const otpError = getOTPError(state);
     if (otpError) {
-        return { ...state, error: otpError };
+        return { error: otpError };
     }
 
     if (fromRemoteStep[state.step]) {
-        return { ...state, step: fromRemoteStep[state.step], error: null };
+        return { step: fromRemoteStep[state.step], error: null };
     }
 
-    return state;
+    return {};
 }
