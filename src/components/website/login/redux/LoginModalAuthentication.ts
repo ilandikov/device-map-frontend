@@ -132,6 +132,11 @@ const goBackFrom: StepMap = {
     PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
 };
 
+const from: StepMap = {
+    PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
+    PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
+};
+
 function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
     if (state.password !== state.passwordRepeat) {
         return { error: new Error(PasswordError.NOT_MATCHING) };
@@ -141,11 +146,6 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
     if (passwordError) {
         return { error: passwordError };
     }
-
-    const from: StepMap = {
-        PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
-        PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
-    };
 
     if (from[state.step]) {
         return { step: from[state.step], error: null };
