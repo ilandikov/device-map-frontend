@@ -142,14 +142,13 @@ function afterButtonClick(action: LoginModalButtonClick, state: AuthenticationSt
     // TODO extract button names to enum
     switch (action.button) {
         case 'accountRegister':
-            return { ...state, step: AuthenticationStep.MAIL_INPUT };
+            return { step: AuthenticationStep.MAIL_INPUT };
         case 'accountLogin':
-            return { ...state, step: AuthenticationStep.LOGIN, error: null };
+            return { step: AuthenticationStep.LOGIN, error: null };
         case 'cancel':
             return initialAuthenticationState;
         case 'resetPassword':
             return {
-                ...state,
                 step: AuthenticationStep.PASSWORD_RESET_REQUEST,
                 password: '',
                 error: null,
@@ -160,13 +159,13 @@ function afterButtonClick(action: LoginModalButtonClick, state: AuthenticationSt
         case 'next':
             switch (state.step) {
                 case AuthenticationStep.PASSWORD_RESET_OTP:
-                    return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING };
+                    return { step: AuthenticationStep.PASSWORD_RESET_LOADING };
                 // TODO remove this case and simplify to one line
                 default:
-                    return state;
+                    return {};
             }
         case 'goBack': {
-            return { ...state, step: goBackFrom[state.step] };
+            return { step: goBackFrom[state.step] };
         }
     }
 
