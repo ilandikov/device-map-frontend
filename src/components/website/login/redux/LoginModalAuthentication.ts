@@ -132,7 +132,7 @@ const goBackFrom: StepMap = {
     PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
 };
 
-const from: StepMap = {
+const fromRemoteStep: StepMap = {
     PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
     PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
     PASSWORD_RESET_REQUEST: AuthenticationStep.PASSWORD_RESET_LOADING,
@@ -151,8 +151,8 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
         return { error: passwordError };
     }
 
-    if (from[state.step]) {
-        return { step: from[state.step], error: null };
+    if (fromRemoteStep[state.step]) {
+        return { step: fromRemoteStep[state.step], error: null };
     }
 
     return {};
@@ -164,8 +164,8 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
         return { error: emailError };
     }
 
-    if (from[state.step]) {
-        return { step: from[state.step], error: null };
+    if (fromRemoteStep[state.step]) {
+        return { step: fromRemoteStep[state.step], error: null };
     }
 
     return {};
@@ -176,8 +176,8 @@ function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<Lo
         return { ...state, error: new Error(OTPError.TOO_SHORT) };
     }
 
-    if (from[state.step]) {
-        return { ...state, step: from[state.step], error: null };
+    if (fromRemoteStep[state.step]) {
+        return { ...state, step: fromRemoteStep[state.step], error: null };
     }
 
     return state;
