@@ -19,7 +19,8 @@ export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
 
-export function getEmailError(email: string): Error | null {
+export function getEmailError(state: LoginModalAuthenticationState): Error | null {
+    const email = state.email;
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isMailValid = emailRegexp.test(email);
 

@@ -5,7 +5,7 @@ describe('user email validation tests', () => {
     it('should report no error for a valid email', () => {
         const email = 'good@email.com';
 
-        const mailInputError = getEmailError(email);
+        const mailInputError = getEmailError(buildAuthenticationState({ email }));
 
         expect(mailInputError).toEqual(null);
     });
@@ -13,7 +13,7 @@ describe('user email validation tests', () => {
     it('should report a not valid error for a not valid email', () => {
         const email = 'this is not an email!';
 
-        const mailInputError = getEmailError(email);
+        const mailInputError = getEmailError(buildAuthenticationState({ email }));
 
         expect(mailInputError).toEqual(new Error(MailInputError.NOT_VALID));
     });
