@@ -182,6 +182,7 @@ export function loginModalAuthentication(
     return state;
 }
 
+// TODO solve the error below (add all keys from AuthenticationStep)
 // @ts-expect-error
 const goBackFrom: { [key in AuthenticationStep]: AuthenticationStep } = {
     MAIL_INPUT: AuthenticationStep.WELCOME,
