@@ -1,4 +1,4 @@
-import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
+import { AuthenticationState } from './AuthenticationState';
 
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
@@ -18,7 +18,7 @@ export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
 
-export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
+export type PreAuthErrorChecker = (state: AuthenticationState) => Error | null;
 
 export const getEmailError: PreAuthErrorChecker = (state) => {
     const email = state.email;

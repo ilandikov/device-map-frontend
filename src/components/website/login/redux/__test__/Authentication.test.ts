@@ -1,4 +1,4 @@
-import { loginModalAuthentication } from '../LoginModalAuthentication';
+import { authentication } from '../Authentication';
 import {
     LoginModalAction,
     LoginModalInputType,
@@ -11,22 +11,22 @@ import {
     loginModalRemoteRequest,
 } from '../LoginModalAction';
 import {
+    AuthenticationState,
     AuthenticationStep,
-    LoginModalAuthenticationState,
-    authenticationInitialState,
     buildAuthenticationState,
-} from '../LoginModalAuthenticationState';
+    initialAuthenticationState,
+} from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
-import { MailInputError, OTPError, PasswordError } from '../LoginModalAuthenticationHelpers';
+import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
 
 function verifyStateChange(
-    initialState: LoginModalAuthenticationState,
+    initialState: AuthenticationState,
     action: LoginModalAction,
-    expectedChange: Partial<LoginModalAuthenticationState>,
+    expectedChange: Partial<AuthenticationState>,
 ) {
-    const nextState = loginModalAuthentication(initialState, action);
+    const nextState = authentication(initialState, action);
 
-    const expectedState: LoginModalAuthenticationState = {
+    const expectedState: AuthenticationState = {
         ...initialState,
         ...expectedChange,
     };
@@ -36,7 +36,7 @@ function verifyStateChange(
 describe('LoginModal reducer tests', () => {
     it('should not change the initial state on a dummy action', () => {
         // @ts-ignore
-        verifyStateChange(authenticationInitialState, { type: 'DUMMY_ACTION' }, {});
+        verifyStateChange(initialAuthenticationState, { type: 'DUMMY_ACTION' }, {});
     });
 
     it('any input shall reset the error', () => {
@@ -499,6 +499,6 @@ describe('logout logic', () => {
         });
         const action = loginModalButtonClick('userButton');
 
-        verifyStateChange(initialState, action, authenticationInitialState);
+        verifyStateChange(initialState, action, initialAuthenticationState);
     });
 });

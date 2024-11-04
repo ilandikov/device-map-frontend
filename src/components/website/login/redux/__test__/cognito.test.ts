@@ -5,7 +5,7 @@ import {
     loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
 } from '../LoginModalAction';
-import { AuthenticationStep, buildAuthenticationState } from '../LoginModalAuthenticationState';
+import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import {
     cognitoPasswordResetConfirmationResult,

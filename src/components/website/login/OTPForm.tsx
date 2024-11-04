@@ -8,7 +8,7 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
-import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { AuthenticationStep, useLoginModalAuthentication } from './redux/AuthenticationState';
 import {
     collectOTPValue,
     fillInputsFromInputEvent,

@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { useLoginModalAuthentication } from '../login/redux/LoginModalAuthenticationState';
+import { useLoginModalAuthentication } from '../login/redux/AuthenticationState';
 import {
     LoginModalRemoteRequestType,
     loginModalButtonClick,

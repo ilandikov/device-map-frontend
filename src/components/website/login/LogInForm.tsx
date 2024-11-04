@@ -11,7 +11,7 @@ import {
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
 
-import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { useLoginModalAuthentication } from './redux/AuthenticationState';
 import { ErrorMessage } from './ErrorMessage';
 
 export function LogInForm() {

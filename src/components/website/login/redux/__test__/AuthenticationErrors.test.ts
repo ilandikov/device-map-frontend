@@ -1,5 +1,5 @@
-import { MailInputError, PasswordError, getEmailError, getPasswordError } from '../LoginModalAuthenticationHelpers';
-import { buildAuthenticationState } from '../LoginModalAuthenticationState';
+import { MailInputError, PasswordError, getEmailError, getPasswordError } from '../AuthenticationErrors';
+import { buildAuthenticationState } from '../AuthenticationState';
 
 describe('user email validation tests', () => {
     it('should report no error for a valid email', () => {

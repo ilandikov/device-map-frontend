@@ -13,12 +13,8 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
-import {
-    mockDispatch,
-    mockLoginModalAuthenticationState,
-    mockPrepareSelector,
-} from '../../../../redux/__mocks__/mocks';
-import { AuthenticationStep } from '../redux/LoginModalAuthenticationState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
+import { AuthenticationStep } from '../redux/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -32,14 +28,14 @@ function getInput(container: HTMLElement, inputIndex: number) {
 
 describe('OTPForm snapshot tests', () => {
     it('should match snapshot at OTP for user creation step without error', () => {
-        mockLoginModalAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null });
+        mockAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null });
         const component = renderForSnapshotTest(<OTPForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot at OTP for password reset step with error', () => {
-        mockLoginModalAuthenticationState({
+        mockAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thisShouldNotHappen'),
         });
@@ -118,7 +114,7 @@ describe('OTP form tests', () => {
 
 describe('OTP form paste tests', () => {
     it('should dispatch 3 digit value over 3 inputs', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const input0 = getInput(container, 0);
@@ -134,7 +130,7 @@ describe('OTP form paste tests', () => {
     });
 
     it('should not overflow the inputs and focus on the button', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const input3 = getInput(container, 3);
@@ -151,7 +147,7 @@ describe('OTP form paste tests', () => {
     });
 
     it('should not input anything if input contains a non numerical character', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const input2 = getInput(container, 2);
@@ -168,7 +164,7 @@ describe('OTP form paste tests', () => {
     });
 
     it('should overwrite existing values in multiple inputs', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const input1 = getInput(container, 1);
@@ -200,7 +196,7 @@ describe('OTP form action tests', () => {
     });
 
     it('should send OTP code and verification request on next button click', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         inputOTPDigit(container, 0, '2');
@@ -218,7 +214,7 @@ describe('OTP form action tests', () => {
     });
 
     it('should request the OTP code again on resend OTP button click', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         const resendOTPButton = getByText(container, 'OTPSendAgain');

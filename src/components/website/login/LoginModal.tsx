@@ -9,7 +9,7 @@ import { LogInForm } from './LogInForm';
 import { NavigationButtons } from './NavigationButtons';
 import { PasswordResetRequestForm } from './PasswordResetRequestForm';
 import { Loader } from './Loader';
-import { AuthenticationStep, useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { AuthenticationStep, useLoginModalAuthentication } from './redux/AuthenticationState';
 import { WelcomeForm } from './WelcomeForm';
 import { LoginModalHeader } from './LoginModalHeader';
 

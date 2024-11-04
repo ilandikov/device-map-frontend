@@ -14,7 +14,7 @@ import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
-import { loginModalAuthentication } from '../components/website/login/redux/LoginModalAuthentication';
+import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
 import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
@@ -27,7 +27,7 @@ import { MapAppLocation } from '../components/website/mapApp/redux/MapAppState';
 const rootReducer = combineReducers({
     getDevices,
     mapAppState: MapAppReducer,
-    loginModalAuthentication,
+    authentication,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

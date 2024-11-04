@@ -13,12 +13,8 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
-import {
-    mockDispatch,
-    mockLoginModalAuthenticationState,
-    mockPrepareSelector,
-} from '../../../../redux/__mocks__/mocks';
-import { AuthenticationStep } from '../redux/LoginModalAuthenticationState';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
+import { AuthenticationStep } from '../redux/AuthenticationState';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -35,13 +31,13 @@ jest.mock('react-redux', () => ({
 
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
-        mockLoginModalAuthenticationState({ email: 'verify@me.uk' });
+        mockAuthenticationState({ email: 'verify@me.uk' });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot with error', () => {
-        mockLoginModalAuthenticationState({ error: new Error('somethingIsWrong') });
+        mockAuthenticationState({ error: new Error('somethingIsWrong') });
         const component = renderForSnapshotTest(<LogInForm />);
         expect(component).toMatchSnapshot();
     });
@@ -53,7 +49,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update the user email on input on password input stage', () => {
-        mockLoginModalAuthenticationState({ step: AuthenticationStep.LOGIN });
+        mockAuthenticationState({ step: AuthenticationStep.LOGIN });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput');
@@ -66,7 +62,7 @@ describe('LogInForm action tests', () => {
     });
 
     it('should show the already input email on password input stage', () => {
-        mockLoginModalAuthenticationState({ email: 'here_is_my@email.com' });
+        mockAuthenticationState({ email: 'here_is_my@email.com' });
         const container = renderForActionDispatchTest(<LogInForm />);
 
         const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
