@@ -2,21 +2,14 @@ import { LoginModalInput, LoginModalInputType } from './LoginModalAction';
 import { AuthenticationState } from './AuthenticationState';
 
 export function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
-    return { error: null, ...setFieldFromPayload(action) };
+    const input = action.input;
+    const stateKey = stateKeyToUpdateWithPayload[input.type];
+    return stateKey ? { error: null, ...{ [stateKey]: input.payload } } : { error: null };
 }
 
-function setFieldFromPayload(action: LoginModalInput): Partial<AuthenticationState> {
-    const input = action.input;
-    switch (input.type) {
-        case LoginModalInputType.EMAIL:
-            return { email: input.payload };
-        case LoginModalInputType.PASSWORD:
-            return { password: input.payload };
-        case LoginModalInputType.PASSWORD_REPEAT:
-            return { passwordRepeat: input.payload };
-        case LoginModalInputType.OTP:
-            return { OTP: input.payload };
-        default:
-            return {};
-    }
-}
+const stateKeyToUpdateWithPayload: { [key in LoginModalInputType]: keyof AuthenticationState } = {
+    EMAIL: 'email',
+    PASSWORD: 'password',
+    PASSWORD_REPEAT: 'passwordRepeat',
+    OTP: 'OTP',
+};
