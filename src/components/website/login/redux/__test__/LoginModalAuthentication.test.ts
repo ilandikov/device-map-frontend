@@ -346,14 +346,16 @@ describe('sign up OTP logic', () => {
 });
 
 describe('login logic', () => {
-    it('should transition to loading state on user and password verify request', () => {
+    it('should transition to loading state on user and password verify request, reset error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN,
+            error: new Error('userNameAndPasswordAreWrong!'),
         });
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_LOADING,
+            error: null,
         });
     });
 
