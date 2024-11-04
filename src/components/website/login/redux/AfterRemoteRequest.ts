@@ -28,11 +28,13 @@ export function afterRemoteRequest(
     return { error: null };
 }
 
-const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
+const errorCheckers: { [key in LoginModalRemoteRequestType]: PreAuthErrorChecker } = {
     USERNAME: getEmailError,
     PASSWORD: getPasswordError,
     USERNAME_AND_PASSWORD: noErrorCheck,
     OTP: getOTPError,
+    OTP_RESEND: noErrorCheck,
+    SIGN_OUT: noErrorCheck,
 };
 
 const fromRemoteStep: StepMap = {
