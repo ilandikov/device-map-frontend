@@ -84,7 +84,7 @@ export function loginModalAuthentication(
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
                 }
                 case LoginModalRemoteRequestType.OTP:
-                    return { ...state, ...afterOTPRemoteRequest(state) };
+                    return { ...state, ...afterUsernameRemoteRequest(state, (state) => getOTPError(state)) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return { ...state, error: null };
                 default:
@@ -170,19 +170,6 @@ function afterUsernameRemoteRequest(
     const emailError = errorChecker(state);
     if (emailError) {
         return { error: emailError };
-    }
-
-    if (fromRemoteStep[state.step]) {
-        return { step: fromRemoteStep[state.step], error: null };
-    }
-
-    return {};
-}
-
-function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
-    const otpError = getOTPError(state);
-    if (otpError) {
-        return { error: otpError };
     }
 
     if (fromRemoteStep[state.step]) {
