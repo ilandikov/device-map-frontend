@@ -175,7 +175,7 @@ export function loginModalAuthentication(
                             return state;
                     }
                 case 'goBack': {
-                    return { ...state, step: from[state.step] };
+                    return { ...state, step: goBackFrom[state.step] };
                 }
             }
     }
@@ -183,7 +183,7 @@ export function loginModalAuthentication(
 }
 
 // @ts-expect-error
-const from: { [key in AuthenticationStep]: AuthenticationStep } = {
+const goBackFrom: { [key in AuthenticationStep]: AuthenticationStep } = {
     MAIL_INPUT: AuthenticationStep.WELCOME,
     LOGIN: AuthenticationStep.WELCOME,
     PASSWORD_CREATION: AuthenticationStep.MAIL_INPUT,
