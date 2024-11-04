@@ -171,8 +171,12 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
     return {};
 }
 
+function getOTPError(state: LoginModalAuthenticationState) {
+    return state.OTP.length < 6;
+}
+
 function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
-    if (state.OTP.length < 6) {
+    if (getOTPError(state)) {
         return { ...state, error: new Error(OTPError.TOO_SHORT) };
     }
 
