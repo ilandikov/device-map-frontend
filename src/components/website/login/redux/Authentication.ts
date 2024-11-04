@@ -72,17 +72,10 @@ function withRemoteAnswer(action: LoginModalRemoteAnswer, state: AuthenticationS
     };
 
     if (action.result === LoginModalRemoteAnswerResult.FAILURE) {
-        return {
-            ...state,
-            step: fallbackStep,
-            error: new Error(action.reason),
-        };
+        return { step: fallbackStep, error: new Error(action.reason) };
     }
 
-    return {
-        ...state,
-        step: successStep,
-    };
+    return { step: successStep };
 }
 
 type StepMap = Partial<{ [key in AuthenticationStep]: AuthenticationStep }>;
