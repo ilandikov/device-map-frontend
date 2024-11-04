@@ -3,6 +3,7 @@ import {
     LoginModalActionType,
     LoginModalInput,
     LoginModalInputType,
+    LoginModalRemoteAnswer,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
@@ -21,53 +22,8 @@ export function authentication(
     action: LoginModalAction,
 ): AuthenticationState {
     switch (action.type) {
-        case LoginModalActionType.REMOTE_ANSWER: {
-            const stepMap: Partial<{
-                [key in LoginModalRemoteAnswerType]: {
-                    successStep: AuthenticationStep;
-                    fallbackStep: AuthenticationStep;
-                };
-            }> = {
-                SIGN_UP: {
-                    successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
-                    fallbackStep: AuthenticationStep.MAIL_INPUT,
-                },
-                FORGOT_PASSWORD: {
-                    successStep: AuthenticationStep.PASSWORD_RESET_OTP,
-                    fallbackStep: AuthenticationStep.PASSWORD_RESET_REQUEST,
-                },
-                OTP: {
-                    successStep: AuthenticationStep.LOGGED_IN,
-                    fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
-                },
-                PASSWORD_RESET: {
-                    successStep: AuthenticationStep.LOGGED_IN,
-                    fallbackStep: AuthenticationStep.PASSWORD_RESET_OTP,
-                },
-                SIGN_IN: {
-                    successStep: AuthenticationStep.LOGGED_IN,
-                    fallbackStep: AuthenticationStep.LOGIN,
-                },
-            };
-
-            const { successStep, fallbackStep } = stepMap[action.answer] ?? {
-                successStep: state.step,
-                fallbackStep: state.step,
-            };
-
-            if (action.result === LoginModalRemoteAnswerResult.FAILURE) {
-                return {
-                    ...state,
-                    step: fallbackStep,
-                    error: new Error(action.reason),
-                };
-            }
-
-            return {
-                ...state,
-                step: successStep,
-            };
-        }
+        case LoginModalActionType.REMOTE_ANSWER:
+            return withRemoteAnswer(action, state);
         case LoginModalActionType.INPUT: {
             return { ...state, error: null, ...withPayload(action) };
         }
@@ -107,6 +63,54 @@ export function authentication(
             }
     }
     return state;
+}
+
+function withRemoteAnswer(action: LoginModalRemoteAnswer, state: AuthenticationState) {
+    const stepMap: Partial<{
+        [key in LoginModalRemoteAnswerType]: {
+            successStep: AuthenticationStep;
+            fallbackStep: AuthenticationStep;
+        };
+    }> = {
+        SIGN_UP: {
+            successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
+            fallbackStep: AuthenticationStep.MAIL_INPUT,
+        },
+        FORGOT_PASSWORD: {
+            successStep: AuthenticationStep.PASSWORD_RESET_OTP,
+            fallbackStep: AuthenticationStep.PASSWORD_RESET_REQUEST,
+        },
+        OTP: {
+            successStep: AuthenticationStep.LOGGED_IN,
+            fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
+        },
+        PASSWORD_RESET: {
+            successStep: AuthenticationStep.LOGGED_IN,
+            fallbackStep: AuthenticationStep.PASSWORD_RESET_OTP,
+        },
+        SIGN_IN: {
+            successStep: AuthenticationStep.LOGGED_IN,
+            fallbackStep: AuthenticationStep.LOGIN,
+        },
+    };
+
+    const { successStep, fallbackStep } = stepMap[action.answer] ?? {
+        successStep: state.step,
+        fallbackStep: state.step,
+    };
+
+    if (action.result === LoginModalRemoteAnswerResult.FAILURE) {
+        return {
+            ...state,
+            step: fallbackStep,
+            error: new Error(action.reason),
+        };
+    }
+
+    return {
+        ...state,
+        step: successStep,
+    };
 }
 
 type StepMap = Partial<{ [key in AuthenticationStep]: AuthenticationStep }>;
