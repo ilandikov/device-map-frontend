@@ -1,4 +1,6 @@
+import { ApolloQueryResult } from '@apollo/client';
 import { mapAppRemoteAnswer } from '../../../mapApp/redux/MapAppAction';
+import { T22ListDevicesResponse } from '../devicesHelpers';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -13,7 +15,7 @@ describe('devices epic test', () => {
 
 describe('list devices', () => {
     it('should process a resolved promise', async () => {
-        const remoteAnswer = Promise.resolve({
+        const remoteAnswer: Promise<ApolloQueryResult<T22ListDevicesResponse>> = Promise.resolve({
             data: {
                 T22ListDevices: [
                     {

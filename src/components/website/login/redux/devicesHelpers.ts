@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 
 export const listDevicesQuery = {
     query: gql`
@@ -14,12 +15,6 @@ export const listDevicesQuery = {
     `,
     variables: {},
 };
-
-export interface T22Device {
-    __typename: string;
-    location: { __typename: string; lon: number; lat: number };
-    id: string;
-}
 
 export interface T22ListDevicesResponse {
     T22ListDevices: T22Device[];
