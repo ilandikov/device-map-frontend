@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
+    LoginModalButton,
     LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
@@ -46,7 +47,7 @@ export function LogInForm() {
                     <button
                         className="login-modal-correct-input"
                         onClick={() => {
-                            dispatch(loginModalButtonClick('resetPassword'));
+                            dispatch(loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
                         }}
                     >
                         {t('resetPassword')}

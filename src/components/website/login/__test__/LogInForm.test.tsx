@@ -7,6 +7,7 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
+    LoginModalButton,
     LoginModalInputType,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
@@ -99,6 +100,6 @@ describe('LogInForm action tests', () => {
         const resetPasswordButton = getByText(container, 'resetPassword');
         fireEvent.click(resetPasswordButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('resetPassword'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
     });
 });

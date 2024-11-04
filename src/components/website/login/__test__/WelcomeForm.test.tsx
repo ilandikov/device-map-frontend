@@ -1,7 +1,7 @@
 import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { loginModalButtonClick } from '../redux/LoginModalAction';
+import { LoginModalButton, loginModalButtonClick } from '../redux/LoginModalAction';
 import { WelcomeForm } from '../WelcomeForm';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 
@@ -30,7 +30,7 @@ describe('WelcomeForm action tests', () => {
         const registerButton = getByText(container, 'accountRegister');
         fireEvent.click(registerButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountRegister'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER));
     });
 
     it('should transition to login from welcome state', () => {
@@ -39,6 +39,6 @@ describe('WelcomeForm action tests', () => {
         const loginButton = getByText(container, 'accountLogin');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('accountLogin'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
     });
 });

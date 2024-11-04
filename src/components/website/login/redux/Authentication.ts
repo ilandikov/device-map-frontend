@@ -1,6 +1,7 @@
 import {
     LoginModalAction,
     LoginModalActionType,
+    LoginModalButton,
     LoginModalButtonClick,
     LoginModalInput,
     LoginModalInputType,
@@ -139,24 +140,23 @@ function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
 }
 
 function afterButtonClick(action: LoginModalButtonClick, state: AuthenticationState): Partial<AuthenticationState> {
-    // TODO extract button names to enum
     switch (action.button) {
-        case 'accountRegister':
+        case LoginModalButton.ACCOUNT_REGISTER:
             return { step: AuthenticationStep.MAIL_INPUT };
-        case 'accountLogin':
+        case LoginModalButton.ACCOUNT_LOGIN:
             return { step: AuthenticationStep.LOGIN, error: null };
-        case 'cancel':
+        case LoginModalButton.CANCEL:
             return initialAuthenticationState;
-        case 'resetPassword':
+        case LoginModalButton.RESET_PASSWORD:
             return {
                 step: AuthenticationStep.PASSWORD_RESET_REQUEST,
                 password: '',
                 error: null,
             };
-        case 'userButton':
+        case LoginModalButton.USER_BUTTON:
             return initialAuthenticationState;
         // TODO rename this to start auth
-        case 'next':
+        case LoginModalButton.NEXT:
             switch (state.step) {
                 case AuthenticationStep.PASSWORD_RESET_OTP:
                     return { step: AuthenticationStep.PASSWORD_RESET_LOADING };
@@ -164,7 +164,7 @@ function afterButtonClick(action: LoginModalButtonClick, state: AuthenticationSt
                 default:
                     return {};
             }
-        case 'goBack': {
+        case LoginModalButton.GO_BACK: {
             return { step: goBackFrom[state.step] };
         }
     }

@@ -1,6 +1,7 @@
 import { authentication } from '../Authentication';
 import {
     LoginModalAction,
+    LoginModalButton,
     LoginModalInputType,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
@@ -53,7 +54,7 @@ describe('LoginModal reducer tests', () => {
 describe('welcome screen buttons', () => {
     it('should transition to email input', () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.WELCOME });
-        const action = loginModalButtonClick('accountRegister');
+        const action = loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.MAIL_INPUT,
@@ -62,7 +63,7 @@ describe('welcome screen buttons', () => {
 
     it('should transition to user login', () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.WELCOME });
-        const action = loginModalButtonClick('accountLogin');
+        const action = loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN,
@@ -80,7 +81,7 @@ describe('navigation logic', () => {
             passwordRepeat: 'authMePls',
             OTP: '654342',
         });
-        const action = loginModalButtonClick('cancel');
+        const action = loginModalButtonClick(LoginModalButton.CANCEL);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.WELCOME,
@@ -106,7 +107,7 @@ describe('navigation logic', () => {
         [AuthenticationStep.PASSWORD_CREATION, AuthenticationStep.MAIL_INPUT],
     ])('go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
         const initialState = buildAuthenticationState({ step: initialUserAuthState });
-        const action = loginModalButtonClick('goBack');
+        const action = loginModalButtonClick(LoginModalButton.GO_BACK);
 
         verifyStateChange(initialState, action, {
             step: expectedUserAuthState,
@@ -154,7 +155,7 @@ describe('email input logic', () => {
             email: 'already@exists.com',
             error: new Error(CognitoErrors.USERNAME_EXISTS),
         });
-        const action = loginModalButtonClick('accountLogin');
+        const action = loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN,
@@ -289,7 +290,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_OTP,
         });
-        const action = loginModalButtonClick('next');
+        const action = loginModalButtonClick(LoginModalButton.NEXT);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
@@ -366,7 +367,7 @@ describe('login logic', () => {
             password: 'iForgot',
             error: new Error('triedToInputPasswordButFailed'),
         });
-        const action = loginModalButtonClick('resetPassword');
+        const action = loginModalButtonClick(LoginModalButton.RESET_PASSWORD);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
@@ -497,7 +498,7 @@ describe('logout logic', () => {
             passwordRepeat: 'thisAsWell',
             OTP: '457674',
         });
-        const action = loginModalButtonClick('userButton');
+        const action = loginModalButtonClick(LoginModalButton.USER_BUTTON);
 
         verifyStateChange(initialState, action, initialAuthenticationState);
     });

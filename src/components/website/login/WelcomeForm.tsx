@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { loginModalButtonClick } from './redux/LoginModalAction';
+import { LoginModalButton, loginModalButtonClick } from './redux/LoginModalAction';
 
 export function WelcomeForm() {
     const { t } = useI18next();
@@ -14,7 +14,7 @@ export function WelcomeForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalButtonClick('accountLogin'));
+                        dispatch(loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
                     }}
                 >
                     {t('accountLogin')}
@@ -22,7 +22,7 @@ export function WelcomeForm() {
                 <button
                     className="login-modal-button-green-on-black"
                     onClick={() => {
-                        dispatch(loginModalButtonClick('accountRegister'));
+                        dispatch(loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER));
                     }}
                 >
                     {t('accountRegister')}

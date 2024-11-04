@@ -2,7 +2,7 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../../../../redux/__mocks__/mocks';
-import { loginModalButtonClick } from '../redux/LoginModalAction';
+import { LoginModalButton, loginModalButtonClick } from '../redux/LoginModalAction';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppLoginModalClose } from '../../mapApp/redux/MapAppAction';
 
@@ -31,7 +31,7 @@ describe('Navigation buttons tests', () => {
         fireEvent.click(cancelButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLoginModalClose());
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick('cancel'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick(LoginModalButton.CANCEL));
     });
 
     it('should go back to a desired go back state on go back button click', () => {
@@ -40,6 +40,6 @@ describe('Navigation buttons tests', () => {
         const goBackButton = getByTestId(container, 'goBackButton');
         fireEvent.click(goBackButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick('goBack'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.GO_BACK));
     });
 });
