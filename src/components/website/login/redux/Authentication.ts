@@ -1,6 +1,7 @@
 import {
     LoginModalAction,
     LoginModalActionType,
+    LoginModalInput,
     LoginModalInputType,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
@@ -66,7 +67,7 @@ export function authentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return { ...state, error: null, ...withPayload(action.input.type, action.input.payload) };
+            return { ...state, error: null, ...withPayload(action.input.type, action.input.payload, action) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request]) };
@@ -150,7 +151,11 @@ function afterRemoteRequest(
     return { error: null };
 }
 
-function withPayload(type: LoginModalInputType, payload: string): Partial<AuthenticationState> {
+function withPayload(
+    type: LoginModalInputType,
+    payload: string,
+    action: LoginModalInput,
+): Partial<AuthenticationState> {
     switch (type) {
         case LoginModalInputType.EMAIL:
             return { email: payload };
