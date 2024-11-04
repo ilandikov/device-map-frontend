@@ -72,11 +72,7 @@ export function loginModalAuthentication(
             return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            if (errorCheckers[action.request]) {
-                return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
-            }
-
-            return { ...state, error: null };
+            return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             // TODO extract button names to enum
@@ -143,16 +139,18 @@ export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Erro
 
 function nextStateAfterRemoteRequest(
     state: LoginModalAuthenticationState,
-    errorChecker: PreAuthErrorChecker,
+    errorChecker: PreAuthErrorChecker | undefined,
 ): Partial<LoginModalAuthenticationState> {
-    const possibleError = errorChecker(state);
-    if (possibleError) {
-        return { error: possibleError };
+    if (errorChecker) {
+        const error = errorChecker(state);
+        if (error) {
+            return { error: error };
+        }
     }
 
     if (fromRemoteStep[state.step]) {
         return { step: fromRemoteStep[state.step], error: null };
     }
 
-    return {};
+    return { error: null };
 }
