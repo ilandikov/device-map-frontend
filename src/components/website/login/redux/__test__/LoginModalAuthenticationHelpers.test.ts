@@ -1,10 +1,11 @@
 import { MailInputError, PasswordError, getEmailError, getPasswordError } from '../LoginModalAuthenticationHelpers';
+import { buildAuthenticationState } from '../LoginModalAuthenticationState';
 
 describe('user email validation tests', () => {
     it('should report no error for a valid email', () => {
         const email = 'good@email.com';
 
-        const mailInputError = getEmailError(email);
+        const mailInputError = getEmailError(buildAuthenticationState({ email }));
 
         expect(mailInputError).toEqual(null);
     });
@@ -12,7 +13,7 @@ describe('user email validation tests', () => {
     it('should report a not valid error for a not valid email', () => {
         const email = 'this is not an email!';
 
-        const mailInputError = getEmailError(email);
+        const mailInputError = getEmailError(buildAuthenticationState({ email }));
 
         expect(mailInputError).toEqual(new Error(MailInputError.NOT_VALID));
     });
@@ -20,7 +21,9 @@ describe('user email validation tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error if a strong password has been input', () => {
-        const passwordInputError = getPasswordError('8Chars_!');
+        const passwordInputError = getPasswordError(
+            buildAuthenticationState({ password: '8Chars_!', passwordRepeat: '8Chars_!' }),
+        );
 
         expect(passwordInputError).toEqual(null);
     });
@@ -33,7 +36,7 @@ describe('user password logic tests', () => {
         ['NO1SpecialCHARS7', PasswordError.NO_SPECIAL_CHARS],
         ['7Chars_', PasswordError.TOO_SHORT],
     ])('should return error for password "%s"', (password, expectedErrorMessage) => {
-        const passwordInputError = getPasswordError(password);
+        const passwordInputError = getPasswordError(buildAuthenticationState({ password, passwordRepeat: password }));
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
     });
 });

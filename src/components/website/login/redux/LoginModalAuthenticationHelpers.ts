@@ -1,4 +1,3 @@
-import { LoginModalInputType } from './LoginModalAction';
 import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
 
 export enum MailInputError {
@@ -19,7 +18,10 @@ export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
 
-export function getEmailError(email: string): Error | null {
+export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
+
+export const getEmailError: PreAuthErrorChecker = (state) => {
+    const email = state.email;
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isMailValid = emailRegexp.test(email);
 
@@ -28,11 +30,17 @@ export function getEmailError(email: string): Error | null {
     }
 
     return null;
-}
+};
 
-export function getPasswordError(password: string): Error | null {
+export const getPasswordError: PreAuthErrorChecker = (state) => {
+    const password = state.password;
+
     if (password === '') {
         return new Error(PasswordError.EMPTY);
+    }
+
+    if (state.password !== state.passwordRepeat) {
+        return new Error(PasswordError.NOT_MATCHING);
     }
 
     const upperCaseRegExp = new RegExp(/[A-Z]/);
@@ -60,22 +68,14 @@ export function getPasswordError(password: string): Error | null {
     }
 
     return null;
-}
+};
 
-export function partialStateWithPayload(
-    type: LoginModalInputType,
-    payload: string,
-): Partial<LoginModalAuthenticationState> {
-    switch (type) {
-        case LoginModalInputType.EMAIL:
-            return { email: payload };
-        case LoginModalInputType.PASSWORD:
-            return { password: payload };
-        case LoginModalInputType.PASSWORD_REPEAT:
-            return { passwordRepeat: payload };
-        case LoginModalInputType.OTP:
-            return { OTP: payload };
-        default:
-            return {};
+export const getOTPError: PreAuthErrorChecker = (state) => {
+    if (state.OTP.length < 6) {
+        return new Error(OTPError.TOO_SHORT);
     }
-}
+
+    return null;
+};
+
+export const noErrorCheck: PreAuthErrorChecker = () => null;

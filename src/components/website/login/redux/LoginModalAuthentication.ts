@@ -1,6 +1,7 @@
 import {
     LoginModalAction,
     LoginModalActionType,
+    LoginModalInputType,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
@@ -11,11 +12,11 @@ import {
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
 import {
-    OTPError,
-    PasswordError,
+    PreAuthErrorChecker,
     getEmailError,
+    getOTPError,
     getPasswordError,
-    partialStateWithPayload,
+    noErrorCheck,
 } from './LoginModalAuthenticationHelpers';
 
 export function loginModalAuthentication(
@@ -72,80 +73,7 @@ export function loginModalAuthentication(
             return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            switch (action.request) {
-                case LoginModalRemoteRequestType.USERNAME: {
-                    const emailError = getEmailError(state.email);
-                    if (emailError) {
-                        return { ...state, error: emailError };
-                    }
-
-                    switch (state.step) {
-                        case AuthenticationStep.PASSWORD_RESET_REQUEST:
-                            return {
-                                ...state,
-                                step: AuthenticationStep.PASSWORD_RESET_LOADING,
-                                error: null,
-                            };
-                        case AuthenticationStep.MAIL_INPUT:
-                            return {
-                                ...state,
-                                step: AuthenticationStep.PASSWORD_CREATION,
-                                error: null,
-                            };
-                    }
-
-                    return state;
-                }
-                case LoginModalRemoteRequestType.PASSWORD: {
-                    if (state.password !== state.passwordRepeat) {
-                        return {
-                            ...state,
-                            error: new Error(PasswordError.NOT_MATCHING),
-                        };
-                    }
-
-                    const passwordError = getPasswordError(state.password);
-                    if (passwordError) {
-                        return { ...state, error: passwordError };
-                    }
-
-                    switch (state.step) {
-                        case AuthenticationStep.PASSWORD_CREATION:
-                            return {
-                                ...state,
-                                step: AuthenticationStep.PASSWORD_CREATION_LOADING,
-                                error: null,
-                            };
-                        case AuthenticationStep.PASSWORD_RESET:
-                            return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
-                    }
-
-                    return state;
-                }
-                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
-                    return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
-                }
-                case LoginModalRemoteRequestType.OTP: {
-                    if (state.OTP.length < 6) {
-                        return { ...state, error: new Error(OTPError.TOO_SHORT) };
-                    }
-
-                    switch (state.step) {
-                        case AuthenticationStep.PASSWORD_CREATION_OTP: {
-                            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING, error: null };
-                        }
-                        case AuthenticationStep.PASSWORD_RESET_OTP: {
-                            return { ...state, step: AuthenticationStep.PASSWORD_RESET, error: null };
-                        }
-                    }
-
-                    return state;
-                }
-                case LoginModalRemoteRequestType.OTP_RESEND:
-                    return { ...state, error: null };
-                default:
-                    return state;
-            }
+            return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             // TODO extract button names to enum
@@ -182,9 +110,61 @@ export function loginModalAuthentication(
     return state;
 }
 
-const goBackFrom: Partial<{ [key in AuthenticationStep]: AuthenticationStep }> = {
+type StepMap = Partial<{ [key in AuthenticationStep]: AuthenticationStep }>;
+
+const goBackFrom: StepMap = {
     MAIL_INPUT: AuthenticationStep.WELCOME,
     LOGIN: AuthenticationStep.WELCOME,
     PASSWORD_CREATION: AuthenticationStep.MAIL_INPUT,
     PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
 };
+
+const fromRemoteStep: StepMap = {
+    MAIL_INPUT: AuthenticationStep.PASSWORD_CREATION,
+    LOGIN: AuthenticationStep.LOGIN_LOADING,
+    PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
+    PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
+    PASSWORD_RESET_REQUEST: AuthenticationStep.PASSWORD_RESET_LOADING,
+    PASSWORD_CREATION_OTP: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+    PASSWORD_RESET_OTP: AuthenticationStep.PASSWORD_RESET,
+};
+
+const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
+    USERNAME: getEmailError,
+    PASSWORD: getPasswordError,
+    USERNAME_AND_PASSWORD: noErrorCheck,
+    OTP: getOTPError,
+};
+
+function nextStateAfterRemoteRequest(
+    state: LoginModalAuthenticationState,
+    errorChecker: PreAuthErrorChecker | undefined,
+): Partial<LoginModalAuthenticationState> {
+    if (errorChecker) {
+        const error = errorChecker(state);
+        if (error) {
+            return { error: error };
+        }
+    }
+
+    if (fromRemoteStep[state.step]) {
+        return { step: fromRemoteStep[state.step], error: null };
+    }
+
+    return { error: null };
+}
+
+function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<LoginModalAuthenticationState> {
+    switch (type) {
+        case LoginModalInputType.EMAIL:
+            return { email: payload };
+        case LoginModalInputType.PASSWORD:
+            return { password: payload };
+        case LoginModalInputType.PASSWORD_REPEAT:
+            return { passwordRepeat: payload };
+        case LoginModalInputType.OTP:
+            return { OTP: payload };
+        default:
+            return {};
+    }
+}
