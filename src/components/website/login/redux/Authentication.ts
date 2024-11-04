@@ -22,36 +22,38 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionType.REMOTE_ANSWER: {
-            let successStep = state.step;
-            let fallbackStep = state.step;
+            const stepMap: Partial<{
+                [key in LoginModalRemoteAnswerType]: {
+                    successStep: AuthenticationStep;
+                    fallbackStep: AuthenticationStep;
+                };
+            }> = {
+                SIGN_UP: {
+                    successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
+                    fallbackStep: AuthenticationStep.MAIL_INPUT,
+                },
+                FORGOT_PASSWORD: {
+                    successStep: AuthenticationStep.PASSWORD_RESET_OTP,
+                    fallbackStep: AuthenticationStep.PASSWORD_RESET_REQUEST,
+                },
+                OTP: {
+                    successStep: AuthenticationStep.LOGGED_IN,
+                    fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
+                },
+                PASSWORD_RESET: {
+                    successStep: AuthenticationStep.LOGGED_IN,
+                    fallbackStep: AuthenticationStep.PASSWORD_RESET_OTP,
+                },
+                SIGN_IN: {
+                    successStep: AuthenticationStep.LOGGED_IN,
+                    fallbackStep: AuthenticationStep.LOGIN,
+                },
+            };
 
-            switch (action.answer) {
-                case LoginModalRemoteAnswerType.SIGN_UP: {
-                    successStep = AuthenticationStep.PASSWORD_CREATION_OTP;
-                    fallbackStep = AuthenticationStep.MAIL_INPUT;
-                    break;
-                }
-                case LoginModalRemoteAnswerType.FORGOT_PASSWORD: {
-                    successStep = AuthenticationStep.PASSWORD_RESET_OTP;
-                    fallbackStep = AuthenticationStep.PASSWORD_RESET_REQUEST;
-                    break;
-                }
-                case LoginModalRemoteAnswerType.OTP: {
-                    successStep = AuthenticationStep.LOGGED_IN;
-                    fallbackStep = AuthenticationStep.PASSWORD_CREATION_OTP;
-                    break;
-                }
-                case LoginModalRemoteAnswerType.PASSWORD_RESET: {
-                    successStep = AuthenticationStep.LOGGED_IN;
-                    fallbackStep = AuthenticationStep.PASSWORD_RESET_OTP;
-                    break;
-                }
-                case LoginModalRemoteAnswerType.SIGN_IN: {
-                    successStep = AuthenticationStep.LOGGED_IN;
-                    fallbackStep = AuthenticationStep.LOGIN;
-                    break;
-                }
-            }
+            const { successStep, fallbackStep } = stepMap[action.answer] ?? {
+                successStep: state.step,
+                fallbackStep: state.step,
+            };
 
             if (action.result === LoginModalRemoteAnswerResult.FAILURE) {
                 return {
