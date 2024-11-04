@@ -72,17 +72,11 @@ export function loginModalAuthentication(
             return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            switch (action.request) {
-                case LoginModalRemoteRequestType.USERNAME:
-                case LoginModalRemoteRequestType.PASSWORD:
-                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                case LoginModalRemoteRequestType.OTP:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
-                case LoginModalRemoteRequestType.OTP_RESEND:
-                    return { ...state, error: null };
-                default:
-                    return state;
+            if (errorCheckers[action.request]) {
+                return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
             }
+
+            return { ...state, error: null };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             // TODO extract button names to enum
