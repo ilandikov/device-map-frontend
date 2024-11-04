@@ -1,11 +1,7 @@
 import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import {
-    mockDispatch,
-    mockLoginModalAuthenticationState,
-    mockPrepareSelector,
-} from '../../../../redux/__mocks__/mocks';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
@@ -28,7 +24,7 @@ describe('UserButton snapshot tests', () => {
     });
 
     it('Logout button should match the snapshot', () => {
-        mockLoginModalAuthenticationState({ email: 'logged@in.kr' });
+        mockAuthenticationState({ email: 'logged@in.kr' });
         const component = renderForSnapshotTest(<LogoutButton />);
 
         expect(component).toMatchSnapshot();

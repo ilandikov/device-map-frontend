@@ -12,11 +12,7 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
-import {
-    mockDispatch,
-    mockLoginModalAuthenticationState,
-    mockPrepareSelector,
-} from '../../../../redux/__mocks__/mocks';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -33,14 +29,14 @@ jest.mock('react-redux', () => ({
 
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockLoginModalAuthenticationState({});
+        mockAuthenticationState({});
         const component = renderForSnapshotTest(<PasswordCreationForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at password not match error', () => {
-        mockLoginModalAuthenticationState({
+        mockAuthenticationState({
             error: new Error('renderMeToo'),
         });
         const component = renderForSnapshotTest(<PasswordCreationForm />);

@@ -13,13 +13,9 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
-import {
-    mockDispatch,
-    mockLoginModalAuthenticationState,
-    mockPrepareSelector,
-} from '../../../../redux/__mocks__/mocks';
+import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { CognitoErrors } from '../redux/cognitoHelpers';
-import { MailInputError } from '../redux/LoginModalAuthenticationHelpers';
+import { MailInputError } from '../redux/AuthenticationErrors';
 
 jest.mock('gatsby-plugin-react-i18next', () => ({
     ...jest.requireActual('gatsby-plugin-react-i18next'),
@@ -36,14 +32,14 @@ jest.mock('react-redux', () => ({
 
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
-        mockLoginModalAuthenticationState({ email: 'enteredMail@form.fr', error: null });
+        mockAuthenticationState({ email: 'enteredMail@form.fr', error: null });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at mail exists error', () => {
-        mockLoginModalAuthenticationState({
+        mockAuthenticationState({
             email: 'existing@mail.ru',
             error: new Error(CognitoErrors.USERNAME_EXISTS),
         });
@@ -53,7 +49,7 @@ describe('MailInputForm snapshot tests', () => {
     });
 
     it('should match the snapshot at mail not valid error', () => {
-        mockLoginModalAuthenticationState({ email: 'notAMailAddress', error: new Error(MailInputError.NOT_VALID) });
+        mockAuthenticationState({ email: 'notAMailAddress', error: new Error(MailInputError.NOT_VALID) });
         const component = renderForSnapshotTest(<MailInputForm />);
 
         expect(component).toMatchSnapshot();
@@ -84,7 +80,7 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should move from mail already exists to password verification stage', () => {
-        mockLoginModalAuthenticationState({ error: new Error(CognitoErrors.USERNAME_EXISTS) });
+        mockAuthenticationState({ error: new Error(CognitoErrors.USERNAME_EXISTS) });
         const container = renderForActionDispatchTest(<MailInputForm />);
 
         const loginButton = getByText(container, 'accountLogin');

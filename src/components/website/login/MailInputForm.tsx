@@ -9,7 +9,7 @@ import {
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
-import { useLoginModalAuthentication } from './redux/LoginModalAuthenticationState';
+import { useLoginModalAuthentication } from './redux/AuthenticationState';
 import { CognitoErrors } from './redux/cognitoHelpers';
 import { ErrorMessage } from './ErrorMessage';
 

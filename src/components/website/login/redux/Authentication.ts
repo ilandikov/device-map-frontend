@@ -6,23 +6,19 @@ import {
     LoginModalRemoteAnswerType,
     LoginModalRemoteRequestType,
 } from './LoginModalAction';
-import {
-    AuthenticationStep,
-    LoginModalAuthenticationState,
-    authenticationInitialState,
-} from './LoginModalAuthenticationState';
+import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
 import {
     PreAuthErrorChecker,
     getEmailError,
     getOTPError,
     getPasswordError,
     noErrorCheck,
-} from './LoginModalAuthenticationHelpers';
+} from './AuthenticationErrors';
 
-export function loginModalAuthentication(
-    state: LoginModalAuthenticationState = authenticationInitialState,
+export function authentication(
+    state: AuthenticationState = initialAuthenticationState,
     action: LoginModalAction,
-): LoginModalAuthenticationState {
+): AuthenticationState {
     switch (action.type) {
         case LoginModalActionType.REMOTE_ANSWER: {
             let successStep = state.step;
@@ -83,7 +79,7 @@ export function loginModalAuthentication(
                 case 'accountLogin':
                     return { ...state, step: AuthenticationStep.LOGIN, error: null };
                 case 'cancel':
-                    return authenticationInitialState;
+                    return initialAuthenticationState;
                 case 'resetPassword':
                     return {
                         ...state,
@@ -92,7 +88,7 @@ export function loginModalAuthentication(
                         error: null,
                     };
                 case 'userButton':
-                    return authenticationInitialState;
+                    return initialAuthenticationState;
                 // TODO rename this to start auth
                 case 'next':
                     switch (state.step) {
@@ -137,9 +133,9 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
 };
 
 function nextStateAfterRemoteRequest(
-    state: LoginModalAuthenticationState,
+    state: AuthenticationState,
     errorChecker: PreAuthErrorChecker | undefined,
-): Partial<LoginModalAuthenticationState> {
+): Partial<AuthenticationState> {
     if (errorChecker) {
         const error = errorChecker(state);
         if (error) {
@@ -154,7 +150,7 @@ function nextStateAfterRemoteRequest(
     return { error: null };
 }
 
-function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<LoginModalAuthenticationState> {
+function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<AuthenticationState> {
     switch (type) {
         case LoginModalInputType.EMAIL:
             return { email: payload };

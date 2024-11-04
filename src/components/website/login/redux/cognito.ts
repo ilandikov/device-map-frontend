@@ -2,7 +2,7 @@ import { EMPTY, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { RootEpic } from '../../../../redux/store';
 import { LoginModalActionType, LoginModalRemoteRequestType } from './LoginModalAction';
-import { AuthenticationStep } from './LoginModalAuthenticationState';
+import { AuthenticationStep } from './AuthenticationState';
 import {
     confirmPassword,
     resendOTP,
@@ -17,7 +17,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap((action) => {
-            const authenticationState = state$.value.loginModalAuthentication;
+            const authenticationState = state$.value.authentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
                 return EMPTY;
