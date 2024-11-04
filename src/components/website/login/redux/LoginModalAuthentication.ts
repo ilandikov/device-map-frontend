@@ -171,13 +171,18 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
     return {};
 }
 
-function getOTPError(state: LoginModalAuthenticationState) {
-    return state.OTP.length < 6;
+function getOTPError(state: LoginModalAuthenticationState): Error | null {
+    if (state.OTP.length < 6) {
+        return new Error(OTPError.TOO_SHORT);
+    }
+
+    return null;
 }
 
 function afterOTPRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
-    if (getOTPError(state)) {
-        return { ...state, error: new Error(OTPError.TOO_SHORT) };
+    const otpError = getOTPError(state);
+    if (otpError) {
+        return { ...state, error: otpError };
     }
 
     if (fromRemoteStep[state.step]) {
