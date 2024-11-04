@@ -31,7 +31,7 @@ export function authentication(
             return { ...state, ...withPayload(action) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request], action) };
+            return { ...state, ...afterRemoteRequest(state, action) };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             return { ...state, ...afterButtonClick(action, state) };
@@ -106,11 +106,7 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
     OTP: getOTPError,
 };
 
-function afterRemoteRequest(
-    state: AuthenticationState,
-    _errorChecker: PreAuthErrorChecker | undefined,
-    action: LoginModalRemoteRequest,
-): Partial<AuthenticationState> {
+function afterRemoteRequest(state: AuthenticationState, action: LoginModalRemoteRequest): Partial<AuthenticationState> {
     const errorChecker = errorCheckers[action.request];
     if (errorChecker) {
         const error = errorChecker(state);
