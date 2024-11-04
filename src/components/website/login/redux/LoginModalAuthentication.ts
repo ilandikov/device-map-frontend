@@ -177,13 +177,13 @@ function afterOTPRemoteRequest(state: LoginModalAuthenticationState) {
         return { ...state, error: new Error(OTPError.TOO_SHORT) };
     }
 
-    switch (state.step) {
-        case AuthenticationStep.PASSWORD_CREATION_OTP: {
-            return { ...state, step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING, error: null };
-        }
-        case AuthenticationStep.PASSWORD_RESET_OTP: {
-            return { ...state, step: AuthenticationStep.PASSWORD_RESET, error: null };
-        }
+    const from: StepMap = {
+        PASSWORD_CREATION_OTP: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        PASSWORD_RESET_OTP: AuthenticationStep.PASSWORD_RESET,
+    };
+
+    if (from[state.step]) {
+        return { ...state, step: from[state.step], error: null };
     }
 
     return state;
