@@ -74,7 +74,10 @@ export function loginModalAuthentication(
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME:
-                    return { ...state, ...afterUsernameRemoteRequest(state) };
+                    return {
+                        ...state,
+                        ...afterUsernameRemoteRequest(state, (state) => getEmailError(state.email)),
+                    };
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...afterPasswordRemoteRequest(state) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
@@ -158,8 +161,10 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
     return {};
 }
 
-function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
-    const errorChecker = (state: LoginModalAuthenticationState) => getEmailError(state.email);
+function afterUsernameRemoteRequest(
+    state: LoginModalAuthenticationState,
+    errorChecker: (state: LoginModalAuthenticationState) => Error | null,
+): Partial<LoginModalAuthenticationState> {
     const emailError = errorChecker(state);
     if (emailError) {
         return { error: emailError };
