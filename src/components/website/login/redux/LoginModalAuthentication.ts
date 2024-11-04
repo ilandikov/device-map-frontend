@@ -97,7 +97,7 @@ export function loginModalAuthentication(
                     return state;
                 }
                 case LoginModalRemoteRequestType.PASSWORD:
-                    return afterPasswordRemoteRequest(state);
+                    return { ...state, ...afterPasswordRemoteRequest(state) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
                 }
@@ -165,29 +165,25 @@ const goBackFrom: Partial<{ [key in AuthenticationStep]: AuthenticationStep }> =
     PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
 };
 
-function afterPasswordRemoteRequest(state: LoginModalAuthenticationState) {
+function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
     if (state.password !== state.passwordRepeat) {
-        return {
-            ...state,
-            error: new Error(PasswordError.NOT_MATCHING),
-        };
+        return { error: new Error(PasswordError.NOT_MATCHING) };
     }
 
     const passwordError = getPasswordError(state.password);
     if (passwordError) {
-        return { ...state, error: passwordError };
+        return { error: passwordError };
     }
 
     switch (state.step) {
         case AuthenticationStep.PASSWORD_CREATION:
             return {
-                ...state,
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
                 error: null,
             };
         case AuthenticationStep.PASSWORD_RESET:
-            return { ...state, step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
+            return { step: AuthenticationStep.PASSWORD_RESET_LOADING, error: null };
     }
 
-    return state;
+    return {};
 }
