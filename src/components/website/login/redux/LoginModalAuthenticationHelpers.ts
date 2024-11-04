@@ -30,7 +30,7 @@ export function getEmailError(email: string): Error | null {
     return null;
 }
 
-export function getPasswordError(password: string): Error | null {
+export function getPasswordError(password: string, state: LoginModalAuthenticationState): Error | null {
     if (password === '') {
         return new Error(PasswordError.EMPTY);
     }
