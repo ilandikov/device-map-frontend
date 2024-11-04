@@ -174,17 +174,13 @@ function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Parti
         return { error: emailError };
     }
 
-    switch (state.step) {
-        case AuthenticationStep.PASSWORD_RESET_REQUEST:
-            return {
-                step: AuthenticationStep.PASSWORD_RESET_LOADING,
-                error: null,
-            };
-        case AuthenticationStep.MAIL_INPUT:
-            return {
-                step: AuthenticationStep.PASSWORD_CREATION,
-                error: null,
-            };
+    const from: StepMap = {
+        PASSWORD_RESET_REQUEST: AuthenticationStep.PASSWORD_RESET_LOADING,
+        MAIL_INPUT: AuthenticationStep.PASSWORD_CREATION,
+    };
+
+    if (from[state.step]) {
+        return { step: from[state.step], error: null };
     }
 
     return {};
