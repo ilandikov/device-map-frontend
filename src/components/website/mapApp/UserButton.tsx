@@ -3,6 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { useLoginModalAuthentication } from '../login/redux/AuthenticationState';
 import {
+    LoginModalButton,
     LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalRemoteRequest,
@@ -28,7 +29,7 @@ export function LogoutButton() {
             caption={email}
             onClick={() => {
                 useDispatch(mapAppLogoutButtonClick());
-                useDispatch(loginModalButtonClick('userButton'));
+                useDispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
                 useDispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT));
             }}
         />

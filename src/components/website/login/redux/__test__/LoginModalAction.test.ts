@@ -9,6 +9,7 @@ import {
 
 describe('Login Modal action creator tests', () => {
     it('should create button click action', () => {
+        // @ts-expect-error
         const action = loginModalButtonClick('fancyButton');
 
         expect(action).toEqual({ type: LoginModalActionType.BUTTON_CLICKED, button: 'fancyButton' });

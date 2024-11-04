@@ -4,7 +4,7 @@ import GoBack from '/src/assets/images/GoBack.svg';
 import Cancel from '/src/assets/images/Cancel.svg';
 import { useAppDispatch } from '../../../redux/store';
 import { mapAppLoginModalClose } from '../mapApp/redux/MapAppAction';
-import { loginModalButtonClick } from './redux/LoginModalAction';
+import { LoginModalButton, loginModalButtonClick } from './redux/LoginModalAction';
 
 export function NavigationButtons() {
     const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export function NavigationButtons() {
             <button
                 data-testid="goBackButton"
                 onClick={() => {
-                    dispatch(loginModalButtonClick('goBack'));
+                    dispatch(loginModalButtonClick(LoginModalButton.GO_BACK));
                 }}
             >
                 <img src={GoBack} alt="login-modal-navigation-go-back" />
@@ -23,7 +23,7 @@ export function NavigationButtons() {
                 data-testid="cancelButton"
                 onClick={() => {
                     dispatch(mapAppLoginModalClose());
-                    dispatch(loginModalButtonClick('cancel'));
+                    dispatch(loginModalButtonClick(LoginModalButton.CANCEL));
                 }}
             >
                 <img src={Cancel} alt="login-modal-navigation-cancel" />

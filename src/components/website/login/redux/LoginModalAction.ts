@@ -11,12 +11,22 @@ export enum LoginModalActionType {
     REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
-export interface LoginModalButtonClick {
-    type: LoginModalActionType.BUTTON_CLICKED;
-    button: string;
+export enum LoginModalButton {
+    ACCOUNT_REGISTER = 'ACCOUNT_REGISTER',
+    ACCOUNT_LOGIN = 'ACCOUNT_LOGIN',
+    CANCEL = 'CANCEL',
+    RESET_PASSWORD = 'RESET_PASSWORD',
+    // TODO rename this button to something account related
+    USER_BUTTON = 'USER_BUTTON',
+    GO_BACK = 'GO_BACK',
 }
 
-export function loginModalButtonClick(button: string): LoginModalButtonClick {
+export interface LoginModalButtonClick {
+    type: LoginModalActionType.BUTTON_CLICKED;
+    button: LoginModalButton;
+}
+
+export function loginModalButtonClick(button: LoginModalButton): LoginModalButtonClick {
     return { type: LoginModalActionType.BUTTON_CLICKED, button: button };
 }
 
