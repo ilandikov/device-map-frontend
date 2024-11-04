@@ -1,6 +1,7 @@
 import {
     LoginModalAction,
     LoginModalActionType,
+    LoginModalInput,
     LoginModalInputType,
     LoginModalRemoteAnswerResult,
     LoginModalRemoteAnswerType,
@@ -66,10 +67,10 @@ export function authentication(
             };
         }
         case LoginModalActionType.INPUT: {
-            return { ...state, error: null, ...partialStateWithPayload(action.input.type, action.input.payload) };
+            return { ...state, error: null, ...withPayload(action) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
-            return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
+            return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request]) };
         }
         case LoginModalActionType.BUTTON_CLICKED:
             // TODO extract button names to enum
@@ -132,7 +133,7 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
     OTP: getOTPError,
 };
 
-function nextStateAfterRemoteRequest(
+function afterRemoteRequest(
     state: AuthenticationState,
     errorChecker: PreAuthErrorChecker | undefined,
 ): Partial<AuthenticationState> {
@@ -150,16 +151,17 @@ function nextStateAfterRemoteRequest(
     return { error: null };
 }
 
-function partialStateWithPayload(type: LoginModalInputType, payload: string): Partial<AuthenticationState> {
-    switch (type) {
+function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
+    const input = action.input;
+    switch (input.type) {
         case LoginModalInputType.EMAIL:
-            return { email: payload };
+            return { email: input.payload };
         case LoginModalInputType.PASSWORD:
-            return { password: payload };
+            return { password: input.payload };
         case LoginModalInputType.PASSWORD_REPEAT:
-            return { passwordRepeat: payload };
+            return { passwordRepeat: input.payload };
         case LoginModalInputType.OTP:
-            return { OTP: payload };
+            return { OTP: input.payload };
         default:
             return {};
     }
