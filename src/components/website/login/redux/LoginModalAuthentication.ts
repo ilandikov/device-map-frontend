@@ -73,13 +73,13 @@ export function loginModalAuthentication(
         case LoginModalActionType.REMOTE_REQUEST: {
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getEmailError(state)) };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, getEmailError) };
                 case LoginModalRemoteRequestType.PASSWORD:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getPasswordError(state)) };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, getPasswordError) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
                     return { ...state, ...nextStateAfterRemoteRequest(state, () => null) };
                 case LoginModalRemoteRequestType.OTP:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getOTPError(state)) };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, getOTPError) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return { ...state, error: null };
                 default:
