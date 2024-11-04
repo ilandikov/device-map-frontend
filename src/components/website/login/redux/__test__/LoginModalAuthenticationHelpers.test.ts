@@ -21,7 +21,7 @@ describe('user email validation tests', () => {
 
 describe('user password logic tests', () => {
     it('should return no error if a strong password has been input', () => {
-        const passwordInputError = getPasswordError('8Chars_!', buildAuthenticationState({ password: '8Chars_!' }));
+        const passwordInputError = getPasswordError(buildAuthenticationState({ password: '8Chars_!' }));
 
         expect(passwordInputError).toEqual(null);
     });
@@ -34,7 +34,7 @@ describe('user password logic tests', () => {
         ['NO1SpecialCHARS7', PasswordError.NO_SPECIAL_CHARS],
         ['7Chars_', PasswordError.TOO_SHORT],
     ])('should return error for password "%s"', (password, expectedErrorMessage) => {
-        const passwordInputError = getPasswordError(password, buildAuthenticationState({ password }));
+        const passwordInputError = getPasswordError(buildAuthenticationState({ password }));
         expect(passwordInputError).toEqual(new Error(expectedErrorMessage));
     });
 });

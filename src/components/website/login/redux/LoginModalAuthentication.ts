@@ -149,7 +149,7 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
         return { error: new Error(PasswordError.NOT_MATCHING) };
     }
 
-    const passwordError = getPasswordError(state.password, state);
+    const passwordError = getPasswordError(state);
     if (passwordError) {
         return { error: passwordError };
     }
