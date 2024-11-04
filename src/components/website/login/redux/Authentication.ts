@@ -152,15 +152,16 @@ function afterRemoteRequest(
 }
 
 function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
-    switch (action.input.type) {
+    const input = action.input;
+    switch (input.type) {
         case LoginModalInputType.EMAIL:
-            return { email: action.input.payload };
+            return { email: input.payload };
         case LoginModalInputType.PASSWORD:
-            return { password: action.input.payload };
+            return { password: input.payload };
         case LoginModalInputType.PASSWORD_REPEAT:
-            return { passwordRepeat: action.input.payload };
+            return { passwordRepeat: input.payload };
         case LoginModalInputType.OTP:
-            return { OTP: action.input.payload };
+            return { OTP: input.payload };
         default:
             return {};
     }
