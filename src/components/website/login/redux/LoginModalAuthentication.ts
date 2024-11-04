@@ -76,9 +76,8 @@ export function loginModalAuthentication(
                     return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getEmailError(state.email)) };
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getPasswordError(state)) };
-                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD: {
+                case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
                     return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
-                }
                 case LoginModalRemoteRequestType.OTP:
                     return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getOTPError(state)) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
