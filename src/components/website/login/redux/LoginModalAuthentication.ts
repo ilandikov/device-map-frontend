@@ -74,17 +74,17 @@ export function loginModalAuthentication(
         case LoginModalActionType.REMOTE_REQUEST: {
             const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErrorChecker }> = {
                 USERNAME: getEmailError,
+                PASSWORD: getPasswordError,
+                USERNAME_AND_PASSWORD: noErrorCheck,
+                OTP: getOTPError,
             };
 
             switch (action.request) {
                 case LoginModalRemoteRequestType.USERNAME:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
                 case LoginModalRemoteRequestType.PASSWORD:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, getPasswordError) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, noErrorCheck) };
                 case LoginModalRemoteRequestType.OTP:
-                    return { ...state, ...nextStateAfterRemoteRequest(state, getOTPError) };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, errorCheckers[action.request]) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return { ...state, error: null };
                 default:
