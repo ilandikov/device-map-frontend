@@ -183,13 +183,18 @@ export function loginModalAuthentication(
 }
 
 function appleSauce(state: LoginModalAuthenticationState) {
+    // @ts-expect-error
+    const from: { [key in AuthenticationStep]: AuthenticationStep } = {
+        MAIL_INPUT: AuthenticationStep.WELCOME,
+        LOGIN: AuthenticationStep.WELCOME,
+        PASSWORD_CREATION: AuthenticationStep.MAIL_INPUT,
+        PASSWORD_RESET_REQUEST: AuthenticationStep.LOGIN,
+    };
     switch (state.step) {
         case AuthenticationStep.MAIL_INPUT:
         case AuthenticationStep.LOGIN:
-            return { ...state, step: AuthenticationStep.WELCOME };
         case AuthenticationStep.PASSWORD_CREATION:
-            return { ...state, step: AuthenticationStep.MAIL_INPUT };
         case AuthenticationStep.PASSWORD_RESET_REQUEST:
-            return { ...state, step: AuthenticationStep.LOGIN };
+            return { ...state, step: from[state.step] };
     }
 }
