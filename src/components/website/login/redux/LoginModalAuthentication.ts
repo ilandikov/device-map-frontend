@@ -11,6 +11,7 @@ import {
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
 import {
+    PreAuthErrorChecker,
     getEmailError,
     getOTPError,
     getPasswordError,
@@ -134,8 +135,6 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
     USERNAME_AND_PASSWORD: noErrorCheck,
     OTP: getOTPError,
 };
-
-export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
 
 function nextStateAfterRemoteRequest(
     state: LoginModalAuthenticationState,

@@ -1,6 +1,5 @@
 import { LoginModalInputType } from './LoginModalAction';
 import { LoginModalAuthenticationState } from './LoginModalAuthenticationState';
-import { PreAuthErrorChecker } from './LoginModalAuthentication';
 
 export enum MailInputError {
     NOT_VALID = 'mailNotValid',
@@ -20,7 +19,9 @@ export enum OTPError {
     TOO_SHORT = 'OTPTooShort',
 }
 
-export function getEmailError(state: LoginModalAuthenticationState): Error | null {
+export type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
+
+export const getEmailError: PreAuthErrorChecker = (state) => {
     const email = state.email;
     const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isMailValid = emailRegexp.test(email);
@@ -30,9 +31,9 @@ export function getEmailError(state: LoginModalAuthenticationState): Error | nul
     }
 
     return null;
-}
+};
 
-export function getPasswordError(state: LoginModalAuthenticationState): Error | null {
+export const getPasswordError: PreAuthErrorChecker = (state) => {
     const password = state.password;
 
     if (password === '') {
@@ -68,7 +69,7 @@ export function getPasswordError(state: LoginModalAuthenticationState): Error | 
     }
 
     return null;
-}
+};
 
 export function partialStateWithPayload(
     type: LoginModalInputType,
@@ -88,12 +89,12 @@ export function partialStateWithPayload(
     }
 }
 
-export function getOTPError(state: LoginModalAuthenticationState): Error | null {
+export const getOTPError: PreAuthErrorChecker = (state) => {
     if (state.OTP.length < 6) {
         return new Error(OTPError.TOO_SHORT);
     }
 
     return null;
-}
+};
 
 export const noErrorCheck: PreAuthErrorChecker = () => null;
