@@ -27,7 +27,7 @@ export function authentication(
         case LoginModalActionType.REMOTE_ANSWER:
             return { ...state, ...withRemoteAnswer(action, state) };
         case LoginModalActionType.INPUT: {
-            return { ...state, error: null, ...withPayload(action) };
+            return { ...state, ...withPayload(action) };
         }
         case LoginModalActionType.REMOTE_REQUEST: {
             return { ...state, ...afterRemoteRequest(state, errorCheckers[action.request]) };
@@ -124,7 +124,7 @@ function afterRemoteRequest(
 }
 
 function withPayload(action: LoginModalInput): Partial<AuthenticationState> {
-    return setFieldFromPayload(action);
+    return { error: null, ...setFieldFromPayload(action) };
 }
 
 function setFieldFromPayload(action: LoginModalInput): Partial<AuthenticationState> {
