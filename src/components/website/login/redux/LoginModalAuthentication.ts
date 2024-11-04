@@ -77,7 +77,7 @@ export function loginModalAuthentication(
                 case LoginModalRemoteRequestType.PASSWORD:
                     return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getPasswordError(state)) };
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                    return { ...state, step: AuthenticationStep.LOGIN_LOADING, error: null };
+                    return { ...state, ...nextStateAfterRemoteRequest(state, () => null) };
                 case LoginModalRemoteRequestType.OTP:
                     return { ...state, ...nextStateAfterRemoteRequest(state, (state) => getOTPError(state)) };
                 case LoginModalRemoteRequestType.OTP_RESEND:
@@ -137,6 +137,7 @@ const fromRemoteStep: StepMap = {
     MAIL_INPUT: AuthenticationStep.PASSWORD_CREATION,
     PASSWORD_CREATION_OTP: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
     PASSWORD_RESET_OTP: AuthenticationStep.PASSWORD_RESET,
+    LOGIN: AuthenticationStep.LOGIN_LOADING,
 };
 
 type PreAuthErrorChecker = (state: LoginModalAuthenticationState) => Error | null;
