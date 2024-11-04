@@ -108,9 +108,10 @@ const errorCheckers: Partial<{ [key in LoginModalRemoteRequestType]: PreAuthErro
 
 function afterRemoteRequest(
     state: AuthenticationState,
-    errorChecker: PreAuthErrorChecker | undefined,
+    _errorChecker: PreAuthErrorChecker | undefined,
     action: LoginModalRemoteRequest,
 ): Partial<AuthenticationState> {
+    const errorChecker = errorCheckers[action.request];
     if (errorChecker) {
         const error = errorChecker(state);
         if (error) {
