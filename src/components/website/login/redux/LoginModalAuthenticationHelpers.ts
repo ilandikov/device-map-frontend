@@ -37,6 +37,10 @@ export function getPasswordError(state: LoginModalAuthenticationState): Error | 
         return new Error(PasswordError.EMPTY);
     }
 
+    if (state.password !== state.passwordRepeat) {
+        return new Error(PasswordError.NOT_MATCHING);
+    }
+
     const upperCaseRegExp = new RegExp(/[A-Z]/);
     if (upperCaseRegExp.test(password) === false) {
         return new Error(PasswordError.NO_UPPERCASE);

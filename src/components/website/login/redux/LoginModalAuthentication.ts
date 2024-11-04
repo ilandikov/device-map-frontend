@@ -11,7 +11,6 @@ import {
     authenticationInitialState,
 } from './LoginModalAuthenticationState';
 import {
-    PasswordError,
     getEmailError,
     getOTPError,
     getPasswordError,
@@ -145,10 +144,6 @@ const fromRemoteStep: StepMap = {
 };
 
 function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
-    if (state.password !== state.passwordRepeat) {
-        return { error: new Error(PasswordError.NOT_MATCHING) };
-    }
-
     const passwordError = getPasswordError(state);
     if (passwordError) {
         return { error: passwordError };
