@@ -171,23 +171,21 @@ function afterPasswordRemoteRequest(state: LoginModalAuthenticationState): Parti
 function afterUsernameRemoteRequest(state: LoginModalAuthenticationState): Partial<LoginModalAuthenticationState> {
     const emailError = getEmailError(state.email);
     if (emailError) {
-        return { ...state, error: emailError };
+        return { error: emailError };
     }
 
     switch (state.step) {
         case AuthenticationStep.PASSWORD_RESET_REQUEST:
             return {
-                ...state,
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
                 error: null,
             };
         case AuthenticationStep.MAIL_INPUT:
             return {
-                ...state,
                 step: AuthenticationStep.PASSWORD_CREATION,
                 error: null,
             };
     }
 
-    return state;
+    return {};
 }
