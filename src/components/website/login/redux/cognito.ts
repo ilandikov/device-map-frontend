@@ -20,20 +20,32 @@ function processAuthMethod(authenticationState: AuthenticationState, cognitoClie
         return EMPTY;
     }
 
-    const method = authenticationMethods[authenticationState.step];
+    const currentStep = authenticationState.step;
+    const method = authenticationMethods[currentStep];
     if (!method) {
         return EMPTY;
     }
 
-    const successActions: AllActions[] = [loginModalRemoteAnswerSuccess()];
-    if (method.completesAuthentication) {
-        successActions.push(mapAppAuthenticationCompleted());
-    }
+    const successActions = getSuccessActions(currentStep);
 
     return fromPromise(method.call(cognitoClient, authenticationState)).pipe(
         mergeMap(() => from(successActions)),
         catchError((error) => of(loginModalRemoteAnswerFailure(reasonFromCognitoError(error)))),
     );
+}
+
+function getSuccessActions(step: AuthenticationStep): AllActions[] {
+    const stepsCompletingAuthentication: AuthenticationStep[] = [
+        AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        AuthenticationStep.LOGIN_LOADING,
+        AuthenticationStep.PASSWORD_RESET_LOADING,
+    ];
+
+    if (stepsCompletingAuthentication.includes(step)) {
+        return [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()];
+    }
+
+    return [loginModalRemoteAnswerSuccess()];
 }
 
 type AuthenticationMethod = {
