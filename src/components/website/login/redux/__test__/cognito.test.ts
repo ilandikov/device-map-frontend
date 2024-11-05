@@ -166,10 +166,12 @@ describe('user sign out tests', () => {
 describe('state tests', () => {
     const allRemoteRequests: LoginModalRemoteRequestType[] = Object.values(LoginModalRemoteRequestType);
     it.each(allRemoteRequests)('should not process request %s when there is an error', async (request) => {
-        const initialState = buildAuthenticationState({ error: new Error('something is wrong') });
+        for (const step of Object.values(AuthenticationStep)) {
+            const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
 
-        const sentAction = loginModalRemoteRequest(request);
+            const sentAction = loginModalRemoteRequest(request);
 
-        await verifyCognitoEpicNoAction(sentAction, initialState);
+            await verifyCognitoEpicNoAction(sentAction, initialState);
+        }
     });
 });
