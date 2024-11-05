@@ -1,11 +1,11 @@
-import { LoginModalRemoteAnswer, LoginModalRemoteAnswerResult, LoginModalRemoteAnswerType } from './LoginModalAction';
+import { LoginModalRemoteAnswer, LoginModalRemoteAnswerResult } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 
 export function withRemoteAnswer(
     action: LoginModalRemoteAnswer,
     state: AuthenticationState,
 ): Partial<AuthenticationState> {
-    const { successStep, fallbackStep } = fromRemoteAnswer[action.answer] ?? {
+    const { successStep, fallbackStep } = fromLoadingStep[state.step] ?? {
         successStep: state.step,
         fallbackStep: state.step,
     };
@@ -22,29 +22,28 @@ type nextSteps = {
     fallbackStep: AuthenticationStep;
 };
 
-// TODO remove Partial
-const fromRemoteAnswer: Partial<{ [key in LoginModalRemoteAnswerType]: nextSteps }> = {
-    SIGN_UP: {
+const fromLoadingStep: Partial<{ [key in AuthenticationStep]: nextSteps }> = {
+    PASSWORD_CREATION_LOADING: {
         successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
         fallbackStep: AuthenticationStep.MAIL_INPUT,
     },
-    FORGOT_PASSWORD: {
+    PASSWORD_RESET_REQUEST_LOADING: {
         successStep: AuthenticationStep.PASSWORD_RESET_OTP,
         fallbackStep: AuthenticationStep.PASSWORD_RESET_REQUEST,
     },
-    OTP: {
+    PASSWORD_CREATION_OTP_LOADING: {
         successStep: AuthenticationStep.LOGGED_IN,
         fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
     },
-    OTP_RESEND: {
+    PASSWORD_CREATION_OTP_RESEND_LOADING: {
         successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
         fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
     },
-    PASSWORD_RESET: {
+    PASSWORD_RESET_LOADING: {
         successStep: AuthenticationStep.LOGGED_IN,
         fallbackStep: AuthenticationStep.PASSWORD_RESET_OTP,
     },
-    SIGN_IN: {
+    LOGIN_LOADING: {
         successStep: AuthenticationStep.LOGGED_IN,
         fallbackStep: AuthenticationStep.LOGIN,
     },

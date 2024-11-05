@@ -76,19 +76,8 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
 
 export interface LoginModalRemoteAnswer {
     type: LoginModalActionType.REMOTE_ANSWER;
-    answer: LoginModalRemoteAnswerType;
     result: LoginModalRemoteAnswerResult;
     reason?: string;
-}
-
-export enum LoginModalRemoteAnswerType {
-    SIGN_UP = 'SIGN_UP',
-    OTP = 'OTP',
-    OTP_RESEND = 'OTP_RESEND',
-    SIGN_IN = 'SIGN_IN',
-    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
-    PASSWORD_RESET = 'PASSWORD_RESET',
-    SIGN_OUT = 'SIGN_OUT',
 }
 
 export enum LoginModalRemoteAnswerResult {
@@ -96,21 +85,16 @@ export enum LoginModalRemoteAnswerResult {
     FAILURE = 'FAILURE',
 }
 
-export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalRemoteAnswer {
+export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
-        answer: answer,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
 
-export function loginModalRemoteAnswerFailure(
-    answer: LoginModalRemoteAnswerType,
-    reason: string,
-): LoginModalRemoteAnswer {
+export function loginModalRemoteAnswerFailure(reason: string): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
-        answer: answer,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };
