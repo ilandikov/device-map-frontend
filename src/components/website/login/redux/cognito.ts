@@ -19,10 +19,9 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
             }
 
             return processAuthMethod(
-                `${action.request}.${authenticationState.step}`,
+                authenticationMethods[`${action.request}.${authenticationState.step}`],
                 cognitoClient,
                 authenticationState,
-                authenticationMethods[`${action.request}.${authenticationState.step}`],
             );
         }),
     );

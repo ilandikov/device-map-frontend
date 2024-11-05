@@ -71,10 +71,9 @@ export const authenticationMethods: Partial<{ [key in RemoteRequestAuthStep]: Au
 };
 
 export function processAuthMethod(
-    name: RemoteRequestAuthStep,
+    authenticationMethod: AuthenticationMethod,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
-    authenticationMethod: AuthenticationMethod,
 ) {
     const method = authenticationMethod;
     if (method.availableStep !== authenticationState.step) {
