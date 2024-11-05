@@ -4,7 +4,6 @@ import {
     LoginModalButton,
     LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteAnswerType,
     loginModalButtonClick,
     loginModalInput,
     loginModalRemoteAnswerFailure,
@@ -248,7 +247,7 @@ describe('sign up logic', () => {
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
         });
-        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'thisIsWhy');
+        const action = loginModalRemoteAnswerFailure('thisIsWhy');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.MAIL_INPUT,
@@ -323,10 +322,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const action = loginModalRemoteAnswerFailure(
-            LoginModalRemoteAnswerType.OTP,
-            'signUpWasNotConfirmedUnfortunately',
-        );
+        const action = loginModalRemoteAnswerFailure('signUpWasNotConfirmedUnfortunately');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
@@ -380,7 +376,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_LOADING,
         });
-        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, 'thereHasBeenAnError');
+        const action = loginModalRemoteAnswerFailure('thereHasBeenAnError');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN,
@@ -431,7 +427,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'thereHasBeenAnError');
+        const action = loginModalRemoteAnswerFailure('thereHasBeenAnError');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
@@ -454,10 +450,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalRemoteAnswerFailure(
-            LoginModalRemoteAnswerType.PASSWORD_RESET,
-            'thisCouldNotGoWorseThanThat',
-        );
+        const action = loginModalRemoteAnswerFailure('thisCouldNotGoWorseThanThat');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
@@ -482,7 +475,7 @@ describe('password reset logic', () => {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
         });
 
-        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'couldNotRequest');
+        const action = loginModalRemoteAnswerFailure('couldNotRequest');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
@@ -520,7 +513,7 @@ describe('OTP code resend logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
-        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'couldNotResendOTP');
+        const action = loginModalRemoteAnswerFailure('couldNotResendOTP');
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,

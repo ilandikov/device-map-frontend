@@ -37,7 +37,7 @@ function processAuthMethod(authenticationState: AuthenticationState, cognitoClie
 
     return fromPromise(method.call(cognitoClient, authenticationState)).pipe(
         mergeMap(() => from(successActions)),
-        catchError((error) => of(loginModalRemoteAnswerFailure(method.answerType, reasonFromCognitoError(error)))),
+        catchError((error) => of(loginModalRemoteAnswerFailure(reasonFromCognitoError(error)))),
     );
 }
 

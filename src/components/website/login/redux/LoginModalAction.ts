@@ -105,13 +105,10 @@ export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     };
 }
 
-export function loginModalRemoteAnswerFailure(
-    answer: LoginModalRemoteAnswerType,
-    reason: string,
-): LoginModalRemoteAnswer {
+export function loginModalRemoteAnswerFailure(reason: string): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
-        answer: answer,
+        answer: LoginModalRemoteAnswerType.NONE,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };
