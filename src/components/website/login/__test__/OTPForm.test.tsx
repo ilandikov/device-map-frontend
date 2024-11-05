@@ -8,8 +8,8 @@ import {
     renderForSnapshotTest,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
@@ -210,7 +210,7 @@ describe('OTP form action tests', () => {
         fireEvent.click(nextButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.OTP, '208473'));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalRemoteRequest(LoginModalCheck.OTP));
     });
 
     it('should request the OTP code again on resend OTP button click', () => {
@@ -220,9 +220,6 @@ describe('OTP form action tests', () => {
         const resendOTPButton = getByText(container, 'OTPSendAgain');
         fireEvent.click(resendOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND),
-        );
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.OTP_RESEND));
     });
 });

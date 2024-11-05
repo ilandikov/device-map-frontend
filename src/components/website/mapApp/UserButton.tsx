@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { useLoginModalAuthentication } from '../login/redux/AuthenticationState';
 import {
     LoginModalButton,
-    LoginModalRemoteRequestType,
+    LoginModalCheck,
     loginModalButtonClick,
     loginModalRemoteRequest,
 } from '../login/redux/LoginModalAction';
@@ -30,7 +30,7 @@ export function LogoutButton() {
             onClick={() => {
                 useDispatch(mapAppLogoutButtonClick());
                 useDispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
-                useDispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT));
+                useDispatch(loginModalRemoteRequest(LoginModalCheck.SIGN_OUT));
             }}
         />
     );

@@ -32,10 +32,10 @@ export function loginModalButtonClick(button: LoginModalButton): LoginModalButto
 
 export interface LoginModalRemoteRequest {
     type: LoginModalActionType.REMOTE_REQUEST;
-    request: LoginModalRemoteRequestType;
+    check: LoginModalCheck;
 }
 
-export enum LoginModalRemoteRequestType {
+export enum LoginModalCheck {
     USERNAME = 'USERNAME',
     PASSWORD = 'PASSWORD',
     USERNAME_AND_PASSWORD = 'USERNAME_AND_PASSWORD',
@@ -44,10 +44,10 @@ export enum LoginModalRemoteRequestType {
     SIGN_OUT = 'SIGN_OUT',
 }
 
-export function loginModalRemoteRequest(verify: LoginModalRemoteRequestType): LoginModalRemoteRequest {
+export function loginModalRemoteRequest(verify: LoginModalCheck): LoginModalRemoteRequest {
     return {
         type: LoginModalActionType.REMOTE_REQUEST,
-        request: verify,
+        check: verify,
     };
 }
 

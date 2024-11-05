@@ -3,8 +3,8 @@ import React, { useRef } from 'react';
 import './OTPInput.scss';
 import { useAppDispatch } from '../../../redux/store';
 import {
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
@@ -61,7 +61,7 @@ export function OTPForm() {
                 <button
                     className="login-modal-input-help login-modal-correct-input"
                     onClick={() => {
-                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND));
+                        dispatch(loginModalRemoteRequest(LoginModalCheck.OTP_RESEND));
                     }}
                 >
                     {t('OTPSendAgain')}
@@ -76,7 +76,7 @@ export function OTPForm() {
                         const OTPCode = collectOTPValue(inputRefs);
                         dispatch(loginModalInput(LoginModalInputType.OTP, OTPCode));
 
-                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.OTP));
+                        dispatch(loginModalRemoteRequest(LoginModalCheck.OTP));
                     }}
                 >
                     {t('next')}
