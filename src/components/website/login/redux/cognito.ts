@@ -9,7 +9,6 @@ import {
     resendOTP,
     sendForgotPasswordOTP,
     sendSignUpOTP,
-    signIn,
     signOut,
 } from './cognitoEndpoints';
 
@@ -42,7 +41,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
 
                     return EMPTY;
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                    return signIn(cognitoClient, authenticationState);
+                    return clientMethodProcessor(newCognitoClient['signIn'], cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.OTP:
                     if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
                         return EMPTY;

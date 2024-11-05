@@ -43,6 +43,14 @@ export const newCognitoClient: NewCognitoClient = {
         error: (error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
     },
+    signIn: {
+        call: (cognitoClient, authenticationState) =>
+            cognitoClient.signIn(authenticationState.email, authenticationState.password),
+        answer: () =>
+            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
+        error: (error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error))),
+    },
 };
 
 export function clientMethodProcessor(
@@ -60,16 +68,6 @@ export function clientMethodProcessor(
     );
 }
 
-export const signIn: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
-        mergeMap(() =>
-            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
-        ),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error))),
-        ),
-    );
-};
 export const sendSignUpOTP: CognitoEndpoint = (cognitoClient, authenticationState) => {
     return fromPromise(cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP)).pipe(
         mergeMap(() =>
