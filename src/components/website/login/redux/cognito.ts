@@ -13,8 +13,8 @@ import {
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
 
-export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
-    return action$.pipe(
+export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
+    action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap(() => {
             const authenticationState = state$.value.authentication;
@@ -26,7 +26,6 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
             return processAuthMethod(authenticationMethod, cognitoClient, authenticationState);
         }),
     );
-};
 
 type AuthenticationMethod = {
     call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
