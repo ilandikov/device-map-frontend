@@ -38,7 +38,7 @@
     "aws-appsync-react": "4.0.15",
     "aws-appsync-subscription-link": "3.1.2",
     "aws-sdk": "2.1539.0",
-    "axios": "1.6.5",
+    "axios": "1.7.4",
     "codeceptjs": "3.5.11",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
