@@ -4,12 +4,7 @@ import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, Dependency, RootEpic } from '../../../../redux/store';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
-import {
-    LoginModalActionType,
-    LoginModalRemoteAnswerType,
-    loginModalRemoteAnswerFailure,
-    loginModalRemoteAnswerSuccess,
-} from './LoginModalAction';
+import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
 
@@ -43,7 +38,6 @@ function processAuthMethod(authenticationState: AuthenticationState, cognitoClie
 
 type AuthenticationMethod = {
     call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
-    answerType: LoginModalRemoteAnswerType;
     completesAuthentication?: boolean;
 };
 
@@ -51,27 +45,22 @@ const authenticationMethods: Partial<{ [key in AuthenticationStep]: Authenticati
     PASSWORD_CREATION_LOADING: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
-        answerType: LoginModalRemoteAnswerType.SIGN_UP,
     },
     PASSWORD_CREATION_OTP_LOADING: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-        answerType: LoginModalRemoteAnswerType.OTP,
         completesAuthentication: true,
     },
     PASSWORD_CREATION_OTP_RESEND_LOADING: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
-        answerType: LoginModalRemoteAnswerType.OTP_RESEND,
     },
     LOGIN_LOADING: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
-        answerType: LoginModalRemoteAnswerType.SIGN_IN,
         completesAuthentication: true,
     },
     PASSWORD_RESET_REQUEST_LOADING: {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
-        answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
     },
     PASSWORD_RESET_LOADING: {
         call: (cognitoClient, authenticationState) =>
@@ -80,11 +69,9 @@ const authenticationMethods: Partial<{ [key in AuthenticationStep]: Authenticati
                 authenticationState.OTP,
                 authenticationState.password,
             ),
-        answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
         completesAuthentication: true,
     },
     LOGGED_IN: {
         call: (cognitoClient, _) => cognitoClient.signOut(),
-        answerType: LoginModalRemoteAnswerType.SIGN_OUT,
     },
 };
