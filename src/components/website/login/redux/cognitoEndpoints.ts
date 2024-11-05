@@ -23,6 +23,7 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
         answerType: LoginModalRemoteAnswerType.SIGN_UP,
+        availableOnlyOnStep: AuthenticationStep.PASSWORD_CREATION_LOADING,
     },
     confirmPassword: {
         call: (cognitoClient, authenticationState) =>
@@ -33,6 +34,7 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
             ),
         answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
         completesAuthentication: true,
+        availableOnlyOnStep: AuthenticationStep.PASSWORD_RESET_LOADING,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
