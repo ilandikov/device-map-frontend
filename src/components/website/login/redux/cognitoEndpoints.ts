@@ -12,7 +12,7 @@ import { reasonFromCognitoError } from './cognitoHelpers';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 
 type AuthenticationMethod = {
-    call: (cognitoClient, authenticationState) => Promise<any>;
+    call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
     answerType: LoginModalRemoteAnswerType;
     successCompletesAuthentication?: boolean;
     availableOnlyOnStep?: AuthenticationStep;
