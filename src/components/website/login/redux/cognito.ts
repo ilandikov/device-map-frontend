@@ -30,7 +30,7 @@ function processAuthMethod(authenticationState: AuthenticationState, cognitoClie
         return EMPTY;
     }
 
-    const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(method.answerType)];
+    const successActions: AllActions[] = [loginModalRemoteAnswerSuccess()];
     if (method.completesAuthentication) {
         successActions.push(mapAppAuthenticationCompleted());
     }

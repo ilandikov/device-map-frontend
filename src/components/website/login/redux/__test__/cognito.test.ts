@@ -19,10 +19,7 @@ import {
 
 describe('user sign up tests', () => {
     it.each([
-        [
-            Promise.resolve(cognitoSignUpRequestResult),
-            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)],
-        ],
+        [Promise.resolve(cognitoSignUpRequestResult), [loginModalRemoteAnswerSuccess()]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, 'cognitoUnknownException')],
@@ -43,7 +40,7 @@ describe('user password reset tests', () => {
     it.each([
         [
             Promise.resolve(cognitoPasswordResetConfirmationResult),
-            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET), mapAppAuthenticationCompleted()],
+            [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()],
         ],
         [
             Promise.reject(),
@@ -65,7 +62,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
     it.each([
         [
             Promise.resolve(cognitoSignUpConfirmationResult),
-            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()],
+            [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()],
         ],
         [Promise.reject(), [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, 'cognitoUnknownException')]],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
@@ -79,10 +76,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
 describe('user sign in tests', () => {
     it.each([
-        [
-            Promise.resolve(cognitoSignInResult),
-            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()],
-        ],
+        [Promise.resolve(cognitoSignInResult), [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, 'cognitoUnknownException')],
@@ -102,10 +96,7 @@ describe('password reset request tests', () => {
     });
 
     it.each([
-        [
-            Promise.resolve(cognitoPasswordResetRequestResult),
-            [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD)],
-        ],
+        [Promise.resolve(cognitoPasswordResetRequestResult), [loginModalRemoteAnswerSuccess()]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'cognitoUnknownException')],
@@ -124,7 +115,7 @@ describe('password reset request tests', () => {
 
 describe('OTP code resend tests', () => {
     it.each([
-        [Promise.resolve(), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)]],
+        [Promise.resolve(), [loginModalRemoteAnswerSuccess()]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'cognitoUnknownException')],
@@ -140,7 +131,7 @@ describe('OTP code resend tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [Promise.resolve(cognitoSignOutResult), [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT)]],
+        [Promise.resolve(cognitoSignOutResult), [loginModalRemoteAnswerSuccess()]],
         [
             Promise.reject(),
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, 'cognitoUnknownException')],

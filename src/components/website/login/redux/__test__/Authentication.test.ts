@@ -236,7 +236,7 @@ describe('sign up logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
         });
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
@@ -312,7 +312,7 @@ describe('sign up OTP logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -369,7 +369,7 @@ describe('login logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGIN_LOADING,
         });
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -420,7 +420,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -443,7 +443,7 @@ describe('password reset logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
@@ -470,7 +470,7 @@ describe('password reset logic', () => {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
         });
 
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
@@ -509,7 +509,7 @@ describe('OTP code resend logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
-        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND);
+        const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,

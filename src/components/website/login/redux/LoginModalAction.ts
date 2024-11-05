@@ -89,6 +89,7 @@ export enum LoginModalRemoteAnswerType {
     FORGOT_PASSWORD = 'FORGOT_PASSWORD',
     PASSWORD_RESET = 'PASSWORD_RESET',
     SIGN_OUT = 'SIGN_OUT',
+    NONE = 'NONE',
 }
 
 export enum LoginModalRemoteAnswerResult {
@@ -96,10 +97,10 @@ export enum LoginModalRemoteAnswerResult {
     FAILURE = 'FAILURE',
 }
 
-export function loginModalRemoteAnswerSuccess(answer: LoginModalRemoteAnswerType): LoginModalRemoteAnswer {
+export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
-        answer: answer,
+        answer: LoginModalRemoteAnswerType.NONE,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
