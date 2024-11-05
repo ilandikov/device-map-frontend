@@ -464,6 +464,31 @@ describe('password reset logic', () => {
             error: new Error('thisCouldNotGoWorseThanThat'),
         });
     });
+
+    it('should advance to OTP request', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
+        });
+
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
+        });
+    });
+
+    it('should fallback to reset request form', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
+        });
+
+        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'couldNotRequest');
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST,
+            error: new Error('couldNotRequest'),
+        });
+    });
 });
 
 describe('OTP code resend logic', () => {
