@@ -18,11 +18,7 @@ type AuthenticationMethod = {
     availableOnlyOnStep?: AuthenticationStep;
 };
 
-type NewCognitoClient = {
-    [key: string]: AuthenticationMethod;
-};
-
-const newCognitoClient: NewCognitoClient = {
+const newCognitoClient: { [key: string]: AuthenticationMethod } = {
     signUp: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
