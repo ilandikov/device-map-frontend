@@ -11,13 +11,15 @@ import {
 import { CognitoEndpoint, reasonFromCognitoError } from './cognitoHelpers';
 import { AuthenticationState } from './AuthenticationState';
 
+type anotherSauce = {
+    call: (cognitoClient, authenticationState) => Promise<any>;
+    successActions: AllActions[];
+    errorType: LoginModalRemoteAnswerType;
+    successCompletesAuthentication?: boolean;
+};
+
 type NewCognitoClient = {
-    [berrySauce: string]: {
-        call: (cognitoClient, authenticationState) => Promise<any>;
-        successActions: AllActions[];
-        errorType: LoginModalRemoteAnswerType;
-        successCompletesAuthentication?: boolean;
-    };
+    [berrySauce: string]: anotherSauce;
 };
 
 export const newCognitoClient: NewCognitoClient = {
@@ -60,12 +62,7 @@ export const newCognitoClient: NewCognitoClient = {
 };
 
 export function clientMethodProcessor(
-    clientMethod: {
-        call: (cognitoClient, authenticationState) => Promise<any>;
-        successActions: AllActions[];
-        errorType: LoginModalRemoteAnswerType;
-        successCompletesAuthentication?: boolean;
-    },
+    clientMethod: anotherSauce,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
