@@ -37,12 +37,9 @@ const errorCheckers: { [key in LoginModalRemoteRequestType]: PreAuthErrorChecker
     SIGN_OUT: noErrorCheck,
 };
 
-const updaters: Partial<{
-    [key in AuthenticationStep]: (
-        action: LoginModalRemoteRequest,
-        state: AuthenticationState,
-    ) => Partial<AuthenticationState>;
-}> = {
+type StateUpdater = (action: LoginModalRemoteRequest, state: AuthenticationState) => Partial<AuthenticationState>;
+
+const updaters: Partial<{ [key in AuthenticationStep]: StateUpdater }> = {
     MAIL_INPUT: () => ({ step: AuthenticationStep.PASSWORD_CREATION }),
     LOGIN: () => ({ step: AuthenticationStep.LOGIN_LOADING }),
     PASSWORD_CREATION: () => ({ step: AuthenticationStep.PASSWORD_CREATION_LOADING }),
