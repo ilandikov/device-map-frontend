@@ -16,7 +16,6 @@ export enum LoginModalButton {
     ACCOUNT_LOGIN = 'ACCOUNT_LOGIN',
     CANCEL = 'CANCEL',
     RESET_PASSWORD = 'RESET_PASSWORD',
-    // TODO rename this button to something account related
     USER_BUTTON = 'USER_BUTTON',
     GO_BACK = 'GO_BACK',
 }
