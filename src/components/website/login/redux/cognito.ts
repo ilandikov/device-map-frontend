@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { RootEpic } from '../../../../redux/store';
 import { LoginModalActionType, LoginModalRemoteRequestType } from './LoginModalAction';
 import { AuthenticationStep } from './AuthenticationState';
-import { clientMethodProcessor, newCognitoClient, signOut } from './cognitoEndpoints';
+import { clientMethodProcessor, newCognitoClient } from './cognitoEndpoints';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
     return action$.pipe(
@@ -54,7 +54,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                         authenticationState,
                     );
                 case LoginModalRemoteRequestType.SIGN_OUT:
-                    return signOut(cognitoClient, authenticationState);
+                    return clientMethodProcessor(newCognitoClient['signOut'], cognitoClient, authenticationState);
                 default:
                     return EMPTY;
             }

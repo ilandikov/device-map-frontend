@@ -8,7 +8,7 @@ import {
     loginModalRemoteAnswerFailure,
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
-import { CognitoEndpoint, reasonFromCognitoError } from './cognitoHelpers';
+import { reasonFromCognitoError } from './cognitoHelpers';
 import { AuthenticationState } from './AuthenticationState';
 
 type anotherSauce = {
@@ -57,6 +57,10 @@ export const newCognitoClient: NewCognitoClient = {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
         answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
     },
+    signOut: {
+        call: (cognitoClient, _) => cognitoClient.signOut(),
+        answerType: LoginModalRemoteAnswerType.SIGN_OUT,
+    },
 };
 
 export function clientMethodProcessor(
@@ -76,12 +80,3 @@ export function clientMethodProcessor(
         ),
     );
 }
-
-export const signOut: CognitoEndpoint = (cognitoClient) => {
-    return fromPromise(cognitoClient.signOut()).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT))),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_OUT, reasonFromCognitoError(error))),
-        ),
-    );
-};
