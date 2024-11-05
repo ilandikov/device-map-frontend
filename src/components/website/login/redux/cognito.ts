@@ -14,15 +14,12 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                 return EMPTY;
             }
 
-            if (!authenticationMethods[`${action.request}.${authenticationState.step}`]) {
+            const authenticationMethod = authenticationMethods[`${action.request}.${authenticationState.step}`];
+            if (!authenticationMethod) {
                 return EMPTY;
             }
 
-            return processAuthMethod(
-                authenticationMethods[`${action.request}.${authenticationState.step}`],
-                cognitoClient,
-                authenticationState,
-            );
+            return processAuthMethod(authenticationMethod, cognitoClient, authenticationState);
         }),
     );
 };
