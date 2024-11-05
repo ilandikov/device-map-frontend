@@ -74,8 +74,9 @@ export function processAuthMethod(
     name: RemoteRequestAuthStep,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
+    authenticationMethod: AuthenticationMethod,
 ) {
-    const method = authenticationMethods[name];
+    const method = authenticationMethod;
     if (method.availableStep !== authenticationState.step) {
         return EMPTY;
     }
