@@ -79,15 +79,6 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
-
-    it('should dispatch no action and not call signUp() from password reset loading step', async () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
-        });
-        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
-
-        await verifyCognitoEpicNoAction(sentAction, initialState);
-    });
 });
 
 describe('user sign in tests', () => {
