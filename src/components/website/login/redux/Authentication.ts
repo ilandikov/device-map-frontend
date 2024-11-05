@@ -12,14 +12,14 @@ export function authentication(
     action: LoginModalAction,
 ): AuthenticationState {
     switch (action.type) {
-        case LoginModalActionType.REMOTE_ANSWER:
-            return { ...state, ...beforeRemoteAnswer(action, state) };
         case LoginModalActionType.INPUT:
             return { ...state, ...withPayload(action) };
-        case LoginModalActionType.REMOTE_REQUEST:
-            return { ...state, ...afterRemoteRequest(action, state) };
         case LoginModalActionType.BUTTON_CLICKED:
             return { ...state, ...afterButtonClick(action, state) };
+        case LoginModalActionType.REMOTE_REQUEST:
+            return { ...state, ...afterRemoteRequest(action, state) };
+        case LoginModalActionType.REMOTE_ANSWER:
+            return { ...state, ...beforeRemoteAnswer(action, state) };
         default:
             return state;
     }
