@@ -4,13 +4,14 @@ import { RootEpic } from '../../../../redux/store';
 import { LoginModalActionType, LoginModalRemoteRequestType } from './LoginModalAction';
 import { AuthenticationStep } from './AuthenticationState';
 import {
+    clientMethodProcessor,
     confirmPassword,
+    newCognitoClient,
     resendOTP,
     sendForgotPasswordOTP,
     sendSignUpOTP,
     signIn,
     signOut,
-    signUp,
 } from './cognitoEndpoints';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
@@ -27,7 +28,11 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                 case LoginModalRemoteRequestType.PASSWORD:
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                            return signUp(cognitoClient, authenticationState);
+                            return clientMethodProcessor(
+                                newCognitoClient['signUp'],
+                                cognitoClient,
+                                authenticationState,
+                            );
                         case AuthenticationStep.PASSWORD_RESET_LOADING:
                             return confirmPassword(cognitoClient, authenticationState);
                     }

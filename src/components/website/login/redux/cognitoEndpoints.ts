@@ -20,7 +20,7 @@ type NewCognitoClient = {
     };
 };
 
-const newCognitoClient: NewCognitoClient = {
+export const newCognitoClient: NewCognitoClient = {
     signUp: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
@@ -45,7 +45,7 @@ const newCognitoClient: NewCognitoClient = {
     },
 };
 
-function clientMethodProcessor(
+export function clientMethodProcessor(
     clientMethod: {
         call: (cognitoClient, authenticationState) => Promise<any>;
         answer: () => Observable<AllActions>;
@@ -60,9 +60,6 @@ function clientMethodProcessor(
     );
 }
 
-export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return clientMethodProcessor(newCognitoClient['signUp'], cognitoClient, authenticationState);
-};
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
     const berrySauce = 'confirmPassword';
     return fromPromise(newCognitoClient[berrySauce].call(cognitoClient, authenticationState)).pipe(
