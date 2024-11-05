@@ -14,6 +14,7 @@ import { AuthenticationState } from './AuthenticationState';
 type NewCognitoClient = {
     [berrySauce: string]: {
         call: (cognitoClient, authenticationState) => Promise<any>;
+        successCompletesAuthentication?: boolean;
         successActions: AllActions[];
         errorType: LoginModalRemoteAnswerType;
     };
@@ -33,6 +34,7 @@ export const newCognitoClient: NewCognitoClient = {
                 authenticationState.OTP,
                 authenticationState.password,
             ),
+        successCompletesAuthentication: true,
         successActions: [
             loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
             mapAppAuthenticationCompleted(),
@@ -42,6 +44,7 @@ export const newCognitoClient: NewCognitoClient = {
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
+        successCompletesAuthentication: true,
         successActions: [
             loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
             mapAppAuthenticationCompleted(),
@@ -51,6 +54,7 @@ export const newCognitoClient: NewCognitoClient = {
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+        successCompletesAuthentication: true,
         successActions: [
             loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP),
             mapAppAuthenticationCompleted(),
