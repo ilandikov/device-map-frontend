@@ -1,6 +1,6 @@
 import { LoginModalAction, LoginModalActionType } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
-import { withRemoteAnswer } from './WithRemoteAnswer';
+import { beforeRemoteAnswer } from './BeforeRemoteAnswer';
 import { afterRemoteRequest } from './AfterRemoteRequest';
 import { afterButtonClick } from './AfterButtonClick';
 import { withPayload } from './WithPayload';
@@ -13,7 +13,7 @@ export function authentication(
 ): AuthenticationState {
     switch (action.type) {
         case LoginModalActionType.REMOTE_ANSWER:
-            return { ...state, ...withRemoteAnswer(action, state) };
+            return { ...state, ...beforeRemoteAnswer(action, state) };
         case LoginModalActionType.INPUT:
             return { ...state, ...withPayload(action) };
         case LoginModalActionType.REMOTE_REQUEST:
