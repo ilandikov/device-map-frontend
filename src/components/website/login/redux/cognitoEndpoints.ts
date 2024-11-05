@@ -1,19 +1,37 @@
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { catchError, from, mergeMap, of } from 'rxjs';
+import { Observable, catchError, from, mergeMap, of } from 'rxjs';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
+import { AllActions } from '../../../../redux/store';
 import {
+    LoginModalRemoteAnswer,
     LoginModalRemoteAnswerType,
     loginModalRemoteAnswerFailure,
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
 import { CognitoEndpoint, reasonFromCognitoError } from './cognitoHelpers';
 
-export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.signUp(authenticationState.email, authenticationState.password)).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP))),
-        catchError((error) =>
+type AppleSauce = {
+    [berrySauce: string]: {
+        method: (cognitoClient, authenticationState) => Promise<any>;
+        answer: () => Observable<AllActions>;
+        error: (error) => Observable<LoginModalRemoteAnswer>;
+    };
+};
+
+const appleSauce: AppleSauce = {
+    signUp: {
+        method: (cognitoClient, authenticationState) =>
+            cognitoClient.signUp(authenticationState.email, authenticationState.password),
+        answer: () => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)),
+        error: (error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
-        ),
+    },
+};
+
+export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
+    return fromPromise(appleSauce['signUp'].method(cognitoClient, authenticationState)).pipe(
+        mergeMap(appleSauce['signUp'].answer),
+        catchError(appleSauce['signUp'].error),
     );
 };
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
