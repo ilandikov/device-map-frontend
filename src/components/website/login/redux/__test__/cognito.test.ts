@@ -146,7 +146,7 @@ describe('OTP code resend tests', () => {
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'cognitoUnknownException')],
         ],
     ])('should resign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
-        const initialState = buildAuthenticationState({});
+        const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING });
         const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
@@ -162,10 +162,21 @@ describe('user sign out tests', () => {
         ],
     ])('should sign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
+            step: AuthenticationStep.LOGGED_IN,
         });
         const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
+    });
+});
+
+describe('state tests', () => {
+    const allRemoteRequests: LoginModalRemoteRequestType[] = Object.values(LoginModalRemoteRequestType);
+    it.each(allRemoteRequests)('should not process request %s when there is an error', async (request) => {
+        const initialState = buildAuthenticationState({ error: new Error('something is wrong') });
+
+        const sentAction = loginModalRemoteRequest(request);
+
+        await verifyCognitoEpicNoAction(sentAction, initialState);
     });
 });
