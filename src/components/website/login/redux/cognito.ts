@@ -17,9 +17,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap(() => {
-            const authenticationState = state$.value.authentication;
-
-            return processAuthMethod(cognitoClient, authenticationState);
+            return processAuthMethod(cognitoClient, state$.value.authentication);
         }),
     );
 
