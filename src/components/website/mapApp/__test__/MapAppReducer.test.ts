@@ -28,7 +28,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({});
         const action = { type: 'DUMMY_ACTION' };
 
-        // @ts-ignore
+        // @ts-expect-error
         verifyMapAppStateChange(initialState, action, {});
     });
 

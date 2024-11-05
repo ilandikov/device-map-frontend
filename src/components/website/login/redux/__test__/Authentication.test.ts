@@ -35,13 +35,13 @@ function verifyStateChange(
 
 describe('LoginModal reducer tests', () => {
     it('should not change the initial state on a dummy action', () => {
-        // @ts-ignore
+        // @ts-expect-error
         verifyStateChange(initialAuthenticationState, { type: 'DUMMY_ACTION' }, {});
     });
 
     it('any input shall reset the error', () => {
         const initialState = buildAuthenticationState({ error: new Error('shouldDisappear') });
-        // @ts-ignore
+        // @ts-expect-error
         const action = loginModalInput('wrongType', '');
 
         verifyStateChange(initialState, action, {
