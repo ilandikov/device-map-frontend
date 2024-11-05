@@ -20,9 +20,9 @@ export function afterRemoteRequest(
         }
     }
 
-    const nextStepCalculator = fromRemoteStep[state.step];
-    if (nextStepCalculator) {
-        return { error: null, ...nextStepCalculator(action, state) };
+    const updater = updaters[state.step];
+    if (updater) {
+        return { error: null, ...updater(action, state) };
     }
 
     return { error: null };
@@ -37,7 +37,7 @@ const errorCheckers: { [key in LoginModalRemoteRequestType]: PreAuthErrorChecker
     SIGN_OUT: noErrorCheck,
 };
 
-const fromRemoteStep: Partial<{
+const updaters: Partial<{
     [key in AuthenticationStep]: (
         action: LoginModalRemoteRequest,
         state: AuthenticationState,
