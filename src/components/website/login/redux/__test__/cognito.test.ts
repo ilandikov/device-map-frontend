@@ -79,15 +79,6 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
-
-    it('should dispatch no action and not call signUp() from password reset loading step', async () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
-        });
-        const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP);
-
-        await verifyCognitoEpicNoAction(sentAction, initialState);
-    });
 });
 
 describe('user sign in tests', () => {
@@ -175,10 +166,12 @@ describe('user sign out tests', () => {
 describe('state tests', () => {
     const allRemoteRequests: LoginModalRemoteRequestType[] = Object.values(LoginModalRemoteRequestType);
     it.each(allRemoteRequests)('should not process request %s when there is an error', async (request) => {
-        const initialState = buildAuthenticationState({ error: new Error('something is wrong') });
+        for (const step of Object.values(AuthenticationStep)) {
+            const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
 
-        const sentAction = loginModalRemoteRequest(request);
+            const sentAction = loginModalRemoteRequest(request);
 
-        await verifyCognitoEpicNoAction(sentAction, initialState);
+            await verifyCognitoEpicNoAction(sentAction, initialState);
+        }
     });
 });
