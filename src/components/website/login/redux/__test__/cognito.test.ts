@@ -162,7 +162,7 @@ describe('user sign out tests', () => {
         ],
     ])('should sign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
+            step: AuthenticationStep.LOGGED_IN,
         });
         const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT);
 

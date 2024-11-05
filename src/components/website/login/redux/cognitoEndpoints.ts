@@ -40,6 +40,7 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
         answerType: LoginModalRemoteAnswerType.SIGN_IN,
+        availableOnlyOnStep: AuthenticationStep.LOGIN_LOADING,
         completesAuthentication: true,
     },
     signUpOTP: {
@@ -60,6 +61,7 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
     },
     signOut: {
         call: (cognitoClient, _) => cognitoClient.signOut(),
+        availableOnlyOnStep: AuthenticationStep.LOGGED_IN,
         answerType: LoginModalRemoteAnswerType.SIGN_OUT,
     },
 };
