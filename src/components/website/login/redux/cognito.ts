@@ -17,7 +17,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
         switchMap(() => {
-            return processAuthMethod(cognitoClient, state$.value.authentication);
+            return processAuthMethod(state$.value.authentication, cognitoClient);
         }),
     );
 
@@ -27,7 +27,7 @@ type AuthenticationMethod = {
     completesAuthentication?: boolean;
 };
 
-function processAuthMethod(cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) {
+function processAuthMethod(authenticationState: AuthenticationState, cognitoClient: Dependency<CognitoClient>) {
     const skipRequest = authenticationState.error !== null;
     if (skipRequest) {
         return EMPTY;
