@@ -90,10 +90,10 @@ const authenticationMethods: Partial<{ [key in RemoteRequestAuthStep]: Authentic
         availableStep: AuthenticationStep.LOGIN_LOADING,
         completesAuthentication: true,
     },
-    'USERNAME.PASSWORD_RESET_LOADING': {
+    'USERNAME.PASSWORD_RESET_REQUEST_LOADING': {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
         answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
-        availableStep: AuthenticationStep.PASSWORD_RESET_LOADING,
+        availableStep: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
     },
     'PASSWORD.PASSWORD_RESET_LOADING': {
         call: (cognitoClient, authenticationState) =>

@@ -129,7 +129,7 @@ describe('password reset request tests', () => {
         'should dispatch forgot password notification when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
             const initialState = buildAuthenticationState({
-                step: AuthenticationStep.PASSWORD_RESET_LOADING,
+                step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             });
             const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
