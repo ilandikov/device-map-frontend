@@ -14,21 +14,21 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
-function processAuthMethod(authenticationState: AuthenticationState, cognitoClient: Dependency<CognitoClient>) {
-    const skipRequest = authenticationState.error !== null;
+function processAuthMethod(state: AuthenticationState, client: Dependency<CognitoClient>) {
+    const skipRequest = state.error !== null;
     if (skipRequest) {
         return EMPTY;
     }
 
-    const currentStep = authenticationState.step;
-    const method = authenticationMethods[currentStep];
-    if (!method) {
+    const currentStep = state.step;
+    const authenticationMethod = authenticationMethods[currentStep];
+    if (!authenticationMethod) {
         return EMPTY;
     }
 
     const successActions = getSuccessActions(currentStep);
 
-    return fromPromise(method(cognitoClient, authenticationState)).pipe(
+    return fromPromise(authenticationMethod(client, state)).pipe(
         mergeMap(() => from(successActions)),
         catchError((error) => of(loginModalRemoteAnswerFailure(reasonFromCognitoError(error)))),
     );
@@ -48,10 +48,7 @@ function getSuccessActions(step: AuthenticationStep): AllActions[] {
     return [loginModalRemoteAnswerSuccess()];
 }
 
-type AuthenticationMethod = (
-    cognitoClient: Dependency<CognitoClient>,
-    authenticationState: AuthenticationState,
-) => Promise<any>;
+type AuthenticationMethod = (client: Dependency<CognitoClient>, state: AuthenticationState) => Promise<any>;
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
     PASSWORD_CREATION_LOADING: (client, state) => client.signUp(state.email, state.password),
