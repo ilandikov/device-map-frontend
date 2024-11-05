@@ -14,7 +14,7 @@ import { AuthenticationState } from './AuthenticationState';
 type anotherSauce = {
     call: (cognitoClient, authenticationState) => Promise<any>;
     successActions: AllActions[];
-    errorType: LoginModalRemoteAnswerType;
+    answerType: LoginModalRemoteAnswerType;
     successCompletesAuthentication?: boolean;
 };
 
@@ -27,7 +27,7 @@ export const newCognitoClient: NewCognitoClient = {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
         successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)],
-        errorType: LoginModalRemoteAnswerType.SIGN_UP,
+        answerType: LoginModalRemoteAnswerType.SIGN_UP,
     },
     confirmPassword: {
         call: (cognitoClient, authenticationState) =>
@@ -37,27 +37,27 @@ export const newCognitoClient: NewCognitoClient = {
                 authenticationState.password,
             ),
         successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET)],
-        errorType: LoginModalRemoteAnswerType.PASSWORD_RESET,
+        answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
         successCompletesAuthentication: true,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
         successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN)],
-        errorType: LoginModalRemoteAnswerType.SIGN_IN,
+        answerType: LoginModalRemoteAnswerType.SIGN_IN,
         successCompletesAuthentication: true,
     },
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
         successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP)],
-        errorType: LoginModalRemoteAnswerType.OTP,
+        answerType: LoginModalRemoteAnswerType.OTP,
         successCompletesAuthentication: true,
     },
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
         successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)],
-        errorType: LoginModalRemoteAnswerType.OTP_RESEND,
+        answerType: LoginModalRemoteAnswerType.OTP_RESEND,
     },
 };
 
@@ -73,7 +73,9 @@ export function clientMethodProcessor(
 
     return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
         mergeMap(() => from(successActions)),
-        catchError((error) => of(loginModalRemoteAnswerFailure(clientMethod.errorType, reasonFromCognitoError(error)))),
+        catchError((error) =>
+            of(loginModalRemoteAnswerFailure(clientMethod.answerType, reasonFromCognitoError(error))),
+        ),
     );
 }
 
