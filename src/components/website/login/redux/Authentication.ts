@@ -1,11 +1,9 @@
 import { LoginModalAction, LoginModalActionType } from './LoginModalAction';
-import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
+import { AuthenticationState, initialAuthenticationState } from './AuthenticationState';
 import { afterRemoteAnswer } from './AfterRemoteAnswer';
 import { beforeRemoteRequest } from './BeforeRemoteRequest';
 import { afterButtonClick } from './AfterButtonClick';
 import { withPayload } from './WithPayload';
-
-export type StepMap = Partial<{ [key in AuthenticationStep]: AuthenticationStep }>;
 
 export function authentication(
     state: AuthenticationState = initialAuthenticationState,
