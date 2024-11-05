@@ -140,7 +140,7 @@ describe('OTP code resend tests', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
-        const sentAction = loginModalRemoteRequest(LoginModalCheck.OTP_RESEND);
+        const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });

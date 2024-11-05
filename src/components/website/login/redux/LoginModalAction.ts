@@ -40,7 +40,7 @@ export enum LoginModalCheck {
     PASSWORD = 'PASSWORD',
     USERNAME_AND_PASSWORD = 'USERNAME_AND_PASSWORD',
     OTP = 'OTP',
-    OTP_RESEND = 'OTP_RESEND',
+    NONE = 'NONE',
     SIGN_OUT = 'SIGN_OUT',
 }
 

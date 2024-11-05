@@ -61,7 +61,7 @@ export function OTPForm() {
                 <button
                     className="login-modal-input-help login-modal-correct-input"
                     onClick={() => {
-                        dispatch(loginModalRemoteRequest(LoginModalCheck.OTP_RESEND));
+                        dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
                     }}
                 >
                     {t('OTPSendAgain')}

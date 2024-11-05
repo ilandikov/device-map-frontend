@@ -220,6 +220,6 @@ describe('OTP form action tests', () => {
         const resendOTPButton = getByText(container, 'OTPSendAgain');
         fireEvent.click(resendOTPButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.OTP_RESEND));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 });
