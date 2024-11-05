@@ -399,7 +399,7 @@ describe('password reset logic', () => {
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             error: null,
         });
     });

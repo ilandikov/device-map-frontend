@@ -52,7 +52,7 @@ const updaters: Partial<{ [key in AuthenticationStep]: StateUpdater }> = {
     LOGIN: () => ({ step: AuthenticationStep.LOGIN_LOADING }),
     PASSWORD_CREATION: () => ({ step: AuthenticationStep.PASSWORD_CREATION_LOADING }),
     PASSWORD_RESET: () => ({ step: AuthenticationStep.PASSWORD_RESET_LOADING }),
-    PASSWORD_RESET_REQUEST: () => ({ step: AuthenticationStep.PASSWORD_RESET_LOADING }),
+    PASSWORD_RESET_REQUEST: () => ({ step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING }),
     PASSWORD_CREATION_OTP: fromPasswordCreationOTP,
     PASSWORD_RESET_OTP: () => ({ step: AuthenticationStep.PASSWORD_RESET }),
 };
