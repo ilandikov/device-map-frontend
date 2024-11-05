@@ -80,17 +80,6 @@ export interface LoginModalRemoteAnswer {
     reason?: string;
 }
 
-export enum LoginModalRemoteAnswerType {
-    SIGN_UP = 'SIGN_UP',
-    OTP = 'OTP',
-    OTP_RESEND = 'OTP_RESEND',
-    SIGN_IN = 'SIGN_IN',
-    FORGOT_PASSWORD = 'FORGOT_PASSWORD',
-    PASSWORD_RESET = 'PASSWORD_RESET',
-    SIGN_OUT = 'SIGN_OUT',
-    NONE = 'NONE',
-}
-
 export enum LoginModalRemoteAnswerResult {
     SUCCESS = 'SUCCESS',
     FAILURE = 'FAILURE',
