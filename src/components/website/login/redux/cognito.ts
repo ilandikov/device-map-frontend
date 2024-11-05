@@ -41,12 +41,10 @@ type AuthenticationMethod = {
 };
 
 function processAuthMethod(
-    authenticationMethod: AuthenticationMethod,
+    method: AuthenticationMethod,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
-    const method = authenticationMethod;
-
     const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(method.answerType)];
     if (method.completesAuthentication) {
         successActions.push(mapAppAuthenticationCompleted());
