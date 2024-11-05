@@ -39,6 +39,8 @@ export function LoginModal() {
                 return <OTPForm />;
             case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
                 return <Loader />;
+            case AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING:
+                return <Loader />;
             // Sign in
             case AuthenticationStep.LOGIN:
                 return <LogInForm />;

@@ -130,4 +130,13 @@ describe('LoginModal snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at OTP resending for sign up stage', () => {
+        mockAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
+        });
+        const component = renderForSnapshotTest(<LoginModal />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
