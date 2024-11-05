@@ -3,14 +3,7 @@ import { ofType } from 'redux-observable';
 import { RootEpic } from '../../../../redux/store';
 import { LoginModalActionType, LoginModalRemoteRequestType } from './LoginModalAction';
 import { AuthenticationStep } from './AuthenticationState';
-import {
-    clientMethodProcessor,
-    newCognitoClient,
-    resendOTP,
-    sendForgotPasswordOTP,
-    sendSignUpOTP,
-    signOut,
-} from './cognitoEndpoints';
+import { clientMethodProcessor, newCognitoClient, resendOTP, sendForgotPasswordOTP, signOut } from './cognitoEndpoints';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
     return action$.pipe(
@@ -47,7 +40,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                         return EMPTY;
                     }
 
-                    return sendSignUpOTP(cognitoClient, authenticationState);
+                    return clientMethodProcessor(newCognitoClient['signUpOTP'], cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return resendOTP(cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.USERNAME:
