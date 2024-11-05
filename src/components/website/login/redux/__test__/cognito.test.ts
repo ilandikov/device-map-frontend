@@ -34,7 +34,7 @@ describe('user sign up tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
-            const sentAction = loginModalRemoteRequest(LoginModalCheck.PASSWORD);
+            const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -57,7 +57,7 @@ describe('user password reset tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
-            const sentAction = loginModalRemoteRequest(LoginModalCheck.PASSWORD);
+            const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
@@ -75,7 +75,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
-        const sentAction = loginModalRemoteRequest(LoginModalCheck.OTP);
+        const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
@@ -102,7 +102,7 @@ describe('user sign in tests', () => {
 describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
-        const sentAction = loginModalRemoteRequest(LoginModalCheck.USERNAME);
+        const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
         await verifyCognitoEpicNoAction(sentAction, initialState);
     });
@@ -122,7 +122,7 @@ describe('password reset request tests', () => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             });
-            const sentAction = loginModalRemoteRequest(LoginModalCheck.USERNAME);
+            const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
             await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
         },
