@@ -48,6 +48,13 @@ const fromRemoteStep: Partial<{
     PASSWORD_CREATION: () => ({ step: AuthenticationStep.PASSWORD_CREATION_LOADING }),
     PASSWORD_RESET: () => ({ step: AuthenticationStep.PASSWORD_RESET_LOADING }),
     PASSWORD_RESET_REQUEST: () => ({ step: AuthenticationStep.PASSWORD_RESET_LOADING }),
-    PASSWORD_CREATION_OTP: () => ({ step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING }),
+    PASSWORD_CREATION_OTP: fromPasswordCreationOTP,
     PASSWORD_RESET_OTP: () => ({ step: AuthenticationStep.PASSWORD_RESET }),
 };
+
+function fromPasswordCreationOTP(
+    action: LoginModalRemoteRequest,
+    state: AuthenticationState,
+): Partial<AuthenticationState> {
+    return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+}
