@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { RootEpic } from '../../../../redux/store';
 import { LoginModalActionType, LoginModalRemoteRequestType } from './LoginModalAction';
 import { AuthenticationStep } from './AuthenticationState';
-import { clientMethodProcessor, newCognitoClient } from './cognitoEndpoints';
+import { clientMethodProcessor } from './cognitoEndpoints';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
     return action$.pipe(
@@ -19,34 +19,22 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                 case LoginModalRemoteRequestType.PASSWORD:
                     switch (authenticationState.step) {
                         case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                            return clientMethodProcessor(
-                                newCognitoClient['signUp'],
-                                cognitoClient,
-                                authenticationState,
-                            );
+                            return clientMethodProcessor('signUp', cognitoClient, authenticationState);
                         case AuthenticationStep.PASSWORD_RESET_LOADING:
-                            return clientMethodProcessor(
-                                newCognitoClient['confirmPassword'],
-                                cognitoClient,
-                                authenticationState,
-                            );
+                            return clientMethodProcessor('confirmPassword', cognitoClient, authenticationState);
                     }
 
                     return EMPTY;
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
-                    return clientMethodProcessor(newCognitoClient['signIn'], cognitoClient, authenticationState);
+                    return clientMethodProcessor('signIn', cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.OTP:
-                    return clientMethodProcessor(newCognitoClient['signUpOTP'], cognitoClient, authenticationState);
+                    return clientMethodProcessor('signUpOTP', cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.OTP_RESEND:
-                    return clientMethodProcessor(newCognitoClient['resendOTP'], cognitoClient, authenticationState);
+                    return clientMethodProcessor('resendOTP', cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.USERNAME:
-                    return clientMethodProcessor(
-                        newCognitoClient['forgotPasswordOTP'],
-                        cognitoClient,
-                        authenticationState,
-                    );
+                    return clientMethodProcessor('forgotPasswordOTP', cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.SIGN_OUT:
-                    return clientMethodProcessor(newCognitoClient['signOut'], cognitoClient, authenticationState);
+                    return clientMethodProcessor('signOut', cognitoClient, authenticationState);
                 default:
                     return EMPTY;
             }

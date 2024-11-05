@@ -22,7 +22,7 @@ type NewCognitoClient = {
     [berrySauce: string]: anotherSauce;
 };
 
-export const newCognitoClient: NewCognitoClient = {
+const newCognitoClient: NewCognitoClient = {
     signUp: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
@@ -67,10 +67,11 @@ export const newCognitoClient: NewCognitoClient = {
 };
 
 export function clientMethodProcessor(
-    clientMethod: anotherSauce,
+    clientMethodKey: string,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
+    const clientMethod = newCognitoClient[clientMethodKey];
     if (clientMethod.availableOnlyOnStep && clientMethod.availableOnlyOnStep !== authenticationState.step) {
         return EMPTY;
     }
