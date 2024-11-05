@@ -19,9 +19,6 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
         switchMap(() => {
             const authenticationState = state$.value.authentication;
             const authenticationMethod = authenticationMethods[authenticationState.step];
-            if (!authenticationMethod) {
-                return EMPTY;
-            }
 
             return processAuthMethod(authenticationMethod, cognitoClient, authenticationState);
         }),
@@ -34,12 +31,17 @@ type AuthenticationMethod = {
 };
 
 function processAuthMethod(
-    method: AuthenticationMethod,
+    _method: AuthenticationMethod,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
     const skipRequest = authenticationState.error !== null;
     if (skipRequest) {
+        return EMPTY;
+    }
+
+    const method = authenticationMethods[authenticationState.step];
+    if (!method) {
         return EMPTY;
     }
 
