@@ -71,6 +71,30 @@ const authenticationMethods: Partial<{ [key in RemoteRequestAuthStep]: Authentic
         answerType: LoginModalRemoteAnswerType.SIGN_UP,
         availableStep: AuthenticationStep.PASSWORD_CREATION_LOADING,
     },
+    'OTP.PASSWORD_CREATION_OTP_LOADING': {
+        call: (cognitoClient, authenticationState) =>
+            cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+        answerType: LoginModalRemoteAnswerType.OTP,
+        availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        completesAuthentication: true,
+    },
+    'OTP_RESEND.PASSWORD_CREATION_OTP_RESEND_LOADING': {
+        call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
+        answerType: LoginModalRemoteAnswerType.OTP_RESEND,
+        availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
+    },
+    'USERNAME_AND_PASSWORD.LOGIN_LOADING': {
+        call: (cognitoClient, authenticationState) =>
+            cognitoClient.signIn(authenticationState.email, authenticationState.password),
+        answerType: LoginModalRemoteAnswerType.SIGN_IN,
+        availableStep: AuthenticationStep.LOGIN_LOADING,
+        completesAuthentication: true,
+    },
+    'USERNAME.PASSWORD_RESET_REQUEST_LOADING': {
+        call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
+        answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+        availableStep: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
+    },
     'PASSWORD.PASSWORD_RESET_LOADING': {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.confirmPassword(
@@ -81,30 +105,6 @@ const authenticationMethods: Partial<{ [key in RemoteRequestAuthStep]: Authentic
         answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
         availableStep: AuthenticationStep.PASSWORD_RESET_LOADING,
         completesAuthentication: true,
-    },
-    'USERNAME_AND_PASSWORD.LOGIN_LOADING': {
-        call: (cognitoClient, authenticationState) =>
-            cognitoClient.signIn(authenticationState.email, authenticationState.password),
-        answerType: LoginModalRemoteAnswerType.SIGN_IN,
-        availableStep: AuthenticationStep.LOGIN_LOADING,
-        completesAuthentication: true,
-    },
-    'OTP.PASSWORD_CREATION_OTP_LOADING': {
-        call: (cognitoClient, authenticationState) =>
-            cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-        answerType: LoginModalRemoteAnswerType.OTP,
-        availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
-        completesAuthentication: true,
-    },
-    'OTP_RESEND.PASSWORD_CREATION_OTP_LOADING': {
-        call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
-        answerType: LoginModalRemoteAnswerType.OTP_RESEND,
-        availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
-    },
-    'USERNAME.PASSWORD_RESET_LOADING': {
-        call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
-        answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
-        availableStep: AuthenticationStep.PASSWORD_RESET_LOADING,
     },
     'SIGN_OUT.LOGGED_IN': {
         call: (cognitoClient, _) => cognitoClient.signOut(),

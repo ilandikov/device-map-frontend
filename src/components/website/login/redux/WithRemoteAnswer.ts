@@ -36,6 +36,10 @@ const fromRemoteAnswer: Partial<{ [key in LoginModalRemoteAnswerType]: nextSteps
         successStep: AuthenticationStep.LOGGED_IN,
         fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
     },
+    OTP_RESEND: {
+        successStep: AuthenticationStep.PASSWORD_CREATION_OTP,
+        fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
+    },
     PASSWORD_RESET: {
         successStep: AuthenticationStep.LOGGED_IN,
         fallbackStep: AuthenticationStep.PASSWORD_RESET_OTP,

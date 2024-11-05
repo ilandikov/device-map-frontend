@@ -7,7 +7,6 @@ import {
     getPasswordError,
     noErrorCheck,
 } from './AuthenticationErrors';
-import { StepMap } from './Authentication';
 
 export function afterRemoteRequest(
     action: LoginModalRemoteRequest,
@@ -21,8 +20,9 @@ export function afterRemoteRequest(
         }
     }
 
-    if (fromRemoteStep[state.step]) {
-        return { step: fromRemoteStep[state.step], error: null };
+    const updater = updaters[state.step];
+    if (updater) {
+        return { error: null, ...updater(action, state) };
     }
 
     return { error: null };
@@ -37,12 +37,22 @@ const errorCheckers: { [key in LoginModalRemoteRequestType]: PreAuthErrorChecker
     SIGN_OUT: noErrorCheck,
 };
 
-const fromRemoteStep: StepMap = {
-    MAIL_INPUT: AuthenticationStep.PASSWORD_CREATION,
-    LOGIN: AuthenticationStep.LOGIN_LOADING,
-    PASSWORD_CREATION: AuthenticationStep.PASSWORD_CREATION_LOADING,
-    PASSWORD_RESET: AuthenticationStep.PASSWORD_RESET_LOADING,
-    PASSWORD_RESET_REQUEST: AuthenticationStep.PASSWORD_RESET_LOADING,
-    PASSWORD_CREATION_OTP: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
-    PASSWORD_RESET_OTP: AuthenticationStep.PASSWORD_RESET,
+type StateUpdater = (action: LoginModalRemoteRequest, state: AuthenticationState) => Partial<AuthenticationState>;
+
+const fromPasswordCreationOTP: StateUpdater = (action) => {
+    if (action.request === LoginModalRemoteRequestType.OTP_RESEND) {
+        return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
+    }
+
+    return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+};
+
+const updaters: Partial<{ [key in AuthenticationStep]: StateUpdater }> = {
+    MAIL_INPUT: () => ({ step: AuthenticationStep.PASSWORD_CREATION }),
+    LOGIN: () => ({ step: AuthenticationStep.LOGIN_LOADING }),
+    PASSWORD_CREATION: () => ({ step: AuthenticationStep.PASSWORD_CREATION_LOADING }),
+    PASSWORD_RESET: () => ({ step: AuthenticationStep.PASSWORD_RESET_LOADING }),
+    PASSWORD_RESET_REQUEST: () => ({ step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING }),
+    PASSWORD_CREATION_OTP: fromPasswordCreationOTP,
+    PASSWORD_RESET_OTP: () => ({ step: AuthenticationStep.PASSWORD_RESET }),
 };

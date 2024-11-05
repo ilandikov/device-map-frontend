@@ -399,7 +399,7 @@ describe('password reset logic', () => {
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             error: null,
         });
     });
@@ -469,11 +469,38 @@ describe('password reset logic', () => {
 describe('OTP code resend logic', () => {
     it('should reset the error when OTP is sent again', () => {
         const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
             error: new Error('thisShouldDisappear'),
         });
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
 
-        verifyStateChange(initialState, action, { error: null });
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
+            error: null,
+        });
+    });
+
+    it('should move to OTP input after OTP has been resent', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
+        });
+        const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND);
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+        });
+    });
+
+    it('should move to OTP input after OTP could not have been resent', () => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
+        });
+        const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'couldNotResendOTP');
+
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
+            error: new Error('couldNotResendOTP'),
+        });
     });
 });
 

@@ -129,7 +129,7 @@ describe('password reset request tests', () => {
         'should dispatch forgot password notification when remote answer is: %s',
         async (remoteServiceAnswer, expectedAction) => {
             const initialState = buildAuthenticationState({
-                step: AuthenticationStep.PASSWORD_RESET_LOADING,
+                step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             });
             const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
 
@@ -146,7 +146,9 @@ describe('OTP code resend tests', () => {
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'cognitoUnknownException')],
         ],
     ])('should resign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
-        const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING });
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
+        });
         const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);

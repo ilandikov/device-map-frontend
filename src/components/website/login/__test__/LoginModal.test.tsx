@@ -68,6 +68,15 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
+    it('should match the snapshot at password reset request loading stage', () => {
+        mockAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
+        });
+        const component = renderForSnapshotTest(<LoginModal />);
+
+        expect(component).toMatchSnapshot();
+    });
+
     it('should match the snapshot at password reset stage', () => {
         mockAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET,
@@ -125,6 +134,15 @@ describe('LoginModal snapshot tests', () => {
     it('should match the snapshot at OTP checking for sign up stage', () => {
         mockAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
+        const component = renderForSnapshotTest(<LoginModal />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at OTP resending for sign up stage', () => {
+        mockAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
         const component = renderForSnapshotTest(<LoginModal />);
 
