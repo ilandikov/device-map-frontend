@@ -16,30 +16,17 @@ import { reasonFromCognitoError } from './cognitoHelpers';
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
-        switchMap(() => {
-            const authenticationState = state$.value.authentication;
-            const authenticationMethod = authenticationMethods[authenticationState.step];
-            if (!authenticationMethod) {
-                return EMPTY;
-            }
-
-            return processAuthMethod(authenticationMethod, cognitoClient, authenticationState);
-        }),
+        switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
-type AuthenticationMethod = {
-    call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
-    answerType: LoginModalRemoteAnswerType;
-    completesAuthentication?: boolean;
-};
-
-function processAuthMethod(
-    method: AuthenticationMethod,
-    cognitoClient: Dependency<CognitoClient>,
-    authenticationState: AuthenticationState,
-) {
+function processAuthMethod(authenticationState: AuthenticationState, cognitoClient: Dependency<CognitoClient>) {
     const skipRequest = authenticationState.error !== null;
     if (skipRequest) {
+        return EMPTY;
+    }
+
+    const method = authenticationMethods[authenticationState.step];
+    if (!method) {
         return EMPTY;
     }
 
@@ -53,6 +40,12 @@ function processAuthMethod(
         catchError((error) => of(loginModalRemoteAnswerFailure(method.answerType, reasonFromCognitoError(error)))),
     );
 }
+
+type AuthenticationMethod = {
+    call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
+    answerType: LoginModalRemoteAnswerType;
+    completesAuthentication?: boolean;
+};
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
     PASSWORD_CREATION_LOADING: {
