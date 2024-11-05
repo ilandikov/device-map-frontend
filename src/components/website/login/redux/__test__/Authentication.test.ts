@@ -469,11 +469,15 @@ describe('password reset logic', () => {
 describe('OTP code resend logic', () => {
     it('should reset the error when OTP is sent again', () => {
         const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP,
             error: new Error('thisShouldDisappear'),
         });
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
 
-        verifyStateChange(initialState, action, { error: null });
+        verifyStateChange(initialState, action, {
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+            error: null,
+        });
     });
 });
 
