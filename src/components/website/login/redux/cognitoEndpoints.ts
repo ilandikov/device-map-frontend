@@ -4,7 +4,6 @@ import CognitoClient from '@mancho.devs/cognito';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import { AllActions, Dependency } from '../../../../redux/store';
 import {
-    LoginModalRemoteAnswer,
     LoginModalRemoteAnswerType,
     loginModalRemoteAnswerFailure,
     loginModalRemoteAnswerSuccess,
@@ -16,7 +15,7 @@ type NewCognitoClient = {
     [berrySauce: string]: {
         call: (cognitoClient, authenticationState) => Promise<any>;
         answer: () => Observable<AllActions>;
-        error: (error) => Observable<LoginModalRemoteAnswer>;
+        errorType: LoginModalRemoteAnswerType;
     };
 };
 
@@ -25,8 +24,7 @@ export const newCognitoClient: NewCognitoClient = {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
         answer: () => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)),
-        error: (error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
+        errorType: LoginModalRemoteAnswerType.SIGN_UP,
     },
     confirmPassword: {
         call: (cognitoClient, authenticationState) =>
@@ -40,30 +38,26 @@ export const newCognitoClient: NewCognitoClient = {
                 loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
                 mapAppAuthenticationCompleted(),
             ]),
-        error: (error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
+        errorType: LoginModalRemoteAnswerType.PASSWORD_RESET,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
         answer: () =>
             from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
-        error: (error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_IN, reasonFromCognitoError(error))),
+        errorType: LoginModalRemoteAnswerType.SIGN_IN,
     },
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
         answer: () =>
             from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()]),
-        error: (error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP, reasonFromCognitoError(error))),
+        errorType: LoginModalRemoteAnswerType.OTP,
     },
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
         answer: () => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)),
-        error: (error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, reasonFromCognitoError(error))),
+        errorType: LoginModalRemoteAnswerType.OTP_RESEND,
     },
 };
 
@@ -71,14 +65,14 @@ export function clientMethodProcessor(
     clientMethod: {
         call: (cognitoClient, authenticationState) => Promise<any>;
         answer: () => Observable<AllActions>;
-        error: (error) => Observable<LoginModalRemoteAnswer>;
+        errorType: LoginModalRemoteAnswerType;
     },
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
     return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
         mergeMap(clientMethod.answer),
-        catchError(clientMethod.error),
+        catchError((error) => of(loginModalRemoteAnswerFailure(clientMethod.errorType, reasonFromCognitoError(error)))),
     );
 }
 
