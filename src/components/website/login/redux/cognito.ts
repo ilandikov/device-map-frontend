@@ -96,10 +96,10 @@ const authenticationMethods: Partial<{ [key in RemoteRequestAuthStep]: Authentic
         availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         completesAuthentication: true,
     },
-    'OTP_RESEND.PASSWORD_CREATION_OTP_LOADING': {
+    'OTP_RESEND.PASSWORD_CREATION_OTP_RESEND_LOADING': {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
         answerType: LoginModalRemoteAnswerType.OTP_RESEND,
-        availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        availableStep: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
     },
     'USERNAME.PASSWORD_RESET_LOADING': {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
