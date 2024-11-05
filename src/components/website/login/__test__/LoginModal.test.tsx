@@ -68,6 +68,15 @@ describe('LoginModal snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
+    it('should match the snapshot at password reset request loading stage', () => {
+        mockAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
+        });
+        const component = renderForSnapshotTest(<LoginModal />);
+
+        expect(component).toMatchSnapshot();
+    });
+
     it('should match the snapshot at password reset stage', () => {
         mockAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET,

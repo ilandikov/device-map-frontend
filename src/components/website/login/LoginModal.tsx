@@ -49,6 +49,8 @@ export function LoginModal() {
             // Password reset
             case AuthenticationStep.PASSWORD_RESET_REQUEST:
                 return <PasswordResetRequestForm />;
+            case AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING:
+                return <Loader />;
             case AuthenticationStep.PASSWORD_RESET_OTP:
                 return <OTPForm />;
             case AuthenticationStep.PASSWORD_RESET:
