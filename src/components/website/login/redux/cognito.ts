@@ -46,9 +46,6 @@ function processAuthMethod(
     authenticationState: AuthenticationState,
 ) {
     const method = authenticationMethod;
-    if (method.availableStep !== authenticationState.step) {
-        return EMPTY;
-    }
 
     const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(method.answerType)];
     if (method.completesAuthentication) {
