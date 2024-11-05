@@ -28,7 +28,7 @@ function processAuthMethod(authenticationState: AuthenticationState, cognitoClie
 
     const successActions = getSuccessActions(currentStep);
 
-    return fromPromise(method.call(cognitoClient, authenticationState)).pipe(
+    return fromPromise(method(cognitoClient, authenticationState)).pipe(
         mergeMap(() => from(successActions)),
         catchError((error) => of(loginModalRemoteAnswerFailure(reasonFromCognitoError(error)))),
     );
@@ -48,38 +48,23 @@ function getSuccessActions(step: AuthenticationStep): AllActions[] {
     return [loginModalRemoteAnswerSuccess()];
 }
 
-type AuthenticationMethod = {
-    call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
-};
+type AuthenticationMethod = (
+    cognitoClient: Dependency<CognitoClient>,
+    authenticationState: AuthenticationState,
+) => Promise<any>;
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
-    PASSWORD_CREATION_LOADING: {
-        call: (cognitoClient, authenticationState) =>
-            cognitoClient.signUp(authenticationState.email, authenticationState.password),
-    },
-    PASSWORD_CREATION_OTP_LOADING: {
-        call: (cognitoClient, authenticationState) =>
-            cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-    },
-    PASSWORD_CREATION_OTP_RESEND_LOADING: {
-        call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
-    },
-    LOGIN_LOADING: {
-        call: (cognitoClient, authenticationState) =>
-            cognitoClient.signIn(authenticationState.email, authenticationState.password),
-    },
-    PASSWORD_RESET_REQUEST_LOADING: {
-        call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
-    },
-    PASSWORD_RESET_LOADING: {
-        call: (cognitoClient, authenticationState) =>
-            cognitoClient.confirmPassword(
-                authenticationState.email,
-                authenticationState.OTP,
-                authenticationState.password,
-            ),
-    },
-    LOGGED_IN: {
-        call: (cognitoClient, _) => cognitoClient.signOut(),
-    },
+    PASSWORD_CREATION_LOADING: (cognitoClient, authenticationState) =>
+        cognitoClient.signUp(authenticationState.email, authenticationState.password),
+    PASSWORD_CREATION_OTP_LOADING: (cognitoClient, authenticationState) =>
+        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
+    PASSWORD_CREATION_OTP_RESEND_LOADING: (cognitoClient, authenticationState) =>
+        cognitoClient.resendConfirmCode(authenticationState.email),
+    LOGIN_LOADING: (cognitoClient, authenticationState) =>
+        cognitoClient.signIn(authenticationState.email, authenticationState.password),
+    PASSWORD_RESET_REQUEST_LOADING: (cognitoClient, authenticationState) =>
+        cognitoClient.forgotPassword(authenticationState.email),
+    PASSWORD_RESET_LOADING: (cognitoClient, authenticationState) =>
+        cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
+    LOGGED_IN: (cognitoClient, _) => cognitoClient.signOut(),
 };
