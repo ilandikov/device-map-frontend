@@ -8,7 +8,7 @@ import {
     noErrorCheck,
 } from './AuthenticationErrors';
 
-export function afterRemoteRequest(
+export function beforeRemoteRequest(
     action: LoginModalRemoteRequest,
     state: AuthenticationState,
 ): Partial<AuthenticationState> {

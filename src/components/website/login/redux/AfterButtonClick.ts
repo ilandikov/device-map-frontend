@@ -1,6 +1,5 @@
 import { LoginModalButton, LoginModalButtonClick } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
-import { StepMap } from './Authentication';
 
 export function afterButtonClick(
     action: LoginModalButtonClick,
@@ -20,6 +19,8 @@ const stateTransformers: { [key in LoginModalButton]: StateTransformer } = {
     USER_BUTTON: () => ({ ...initialAuthenticationState }),
     GO_BACK: (state) => ({ step: goBackFrom[state.step] }),
 };
+
+type StepMap = Partial<{ [key in AuthenticationStep]: AuthenticationStep }>;
 
 const goBackFrom: StepMap = {
     MAIL_INPUT: AuthenticationStep.WELCOME,

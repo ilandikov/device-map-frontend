@@ -1,4 +1,4 @@
-import { LoginModalCheck, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
+import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import {
@@ -123,12 +123,10 @@ describe('user sign out tests', () => {
 });
 
 describe('state tests', () => {
-    const allRemoteRequests: LoginModalCheck[] = Object.values(LoginModalCheck);
-    it.each(allRemoteRequests)('should not process request %s when there is an error', async (request) => {
-        for (const step of Object.values(AuthenticationStep)) {
-            const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
+    const allSteps = Object.values(AuthenticationStep);
+    it.each(allSteps)('should not process request at %s step when there is an error', async (step) => {
+        const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
 
-            await testCognitoNoOutput(initialState);
-        }
+        await testCognitoNoOutput(initialState);
     });
 });
