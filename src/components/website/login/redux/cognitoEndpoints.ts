@@ -1,7 +1,8 @@
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { Observable, catchError, from, mergeMap, of } from 'rxjs';
+import CognitoClient from '@mancho.devs/cognito';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
-import { AllActions } from '../../../../redux/store';
+import { AllActions, Dependency } from '../../../../redux/store';
 import {
     LoginModalRemoteAnswer,
     LoginModalRemoteAnswerType,
@@ -9,6 +10,7 @@ import {
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
 import { CognitoEndpoint, reasonFromCognitoError } from './cognitoHelpers';
+import { AuthenticationState } from './AuthenticationState';
 
 type NewCognitoClient = {
     [berrySauce: string]: {
@@ -43,12 +45,23 @@ const newCognitoClient: NewCognitoClient = {
     },
 };
 
-export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    const clientMethod = newCognitoClient['signUp'];
+function clientMethodProcessor(
+    clientMethod: {
+        call: (cognitoClient, authenticationState) => Promise<any>;
+        answer: () => Observable<AllActions>;
+        error: (error) => Observable<LoginModalRemoteAnswer>;
+    },
+    cognitoClient: Dependency<CognitoClient>,
+    authenticationState: AuthenticationState,
+) {
     return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
         mergeMap(clientMethod.answer),
         catchError(clientMethod.error),
     );
+}
+
+export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
+    return clientMethodProcessor(newCognitoClient['signUp'], cognitoClient, authenticationState);
 };
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
     const berrySauce = 'confirmPassword';
