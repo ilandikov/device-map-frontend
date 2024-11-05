@@ -11,7 +11,7 @@ import {
 import { reasonFromCognitoError } from './cognitoHelpers';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 
-type anotherSauce = {
+type AuthenticationMethod = {
     call: (cognitoClient, authenticationState) => Promise<any>;
     answerType: LoginModalRemoteAnswerType;
     successCompletesAuthentication?: boolean;
@@ -19,7 +19,7 @@ type anotherSauce = {
 };
 
 type NewCognitoClient = {
-    [berrySauce: string]: anotherSauce;
+    [key: string]: AuthenticationMethod;
 };
 
 const newCognitoClient: NewCognitoClient = {
@@ -66,25 +66,23 @@ const newCognitoClient: NewCognitoClient = {
     },
 };
 
-export function clientMethodProcessor(
-    clientMethodKey: string,
+export function processAuthMethod(
+    methodKey: string,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
-    const clientMethod = newCognitoClient[clientMethodKey];
-    if (clientMethod.availableOnlyOnStep && clientMethod.availableOnlyOnStep !== authenticationState.step) {
+    const method = newCognitoClient[methodKey];
+    if (method.availableOnlyOnStep && method.availableOnlyOnStep !== authenticationState.step) {
         return EMPTY;
     }
 
-    const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(clientMethod.answerType)];
-    if (clientMethod.successCompletesAuthentication) {
+    const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(method.answerType)];
+    if (method.successCompletesAuthentication) {
         successActions.push(mapAppAuthenticationCompleted());
     }
 
-    return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
+    return fromPromise(method.call(cognitoClient, authenticationState)).pipe(
         mergeMap(() => from(successActions)),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(clientMethod.answerType, reasonFromCognitoError(error))),
-        ),
+        catchError((error) => of(loginModalRemoteAnswerFailure(method.answerType, reasonFromCognitoError(error)))),
     );
 }
