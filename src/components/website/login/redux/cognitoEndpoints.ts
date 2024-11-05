@@ -44,11 +44,10 @@ const newCognitoClient: NewCognitoClient = {
 };
 
 export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    const method = 'signUp';
-    const clientCall = newCognitoClient[method].call(cognitoClient, authenticationState);
-    return fromPromise(clientCall).pipe(
-        mergeMap(newCognitoClient[method].answer),
-        catchError(newCognitoClient[method].error),
+    const clientMethod = newCognitoClient['signUp'];
+    return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
+        mergeMap(clientMethod.answer),
+        catchError(clientMethod.error),
     );
 };
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
