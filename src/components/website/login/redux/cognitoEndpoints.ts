@@ -53,6 +53,10 @@ export const newCognitoClient: NewCognitoClient = {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
         answerType: LoginModalRemoteAnswerType.OTP_RESEND,
     },
+    forgotPasswordOTP: {
+        call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
+        answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+    },
 };
 
 export function clientMethodProcessor(
@@ -73,19 +77,6 @@ export function clientMethodProcessor(
     );
 }
 
-export const sendForgotPasswordOTP: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(cognitoClient.forgotPassword(authenticationState.email)).pipe(
-        mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD))),
-        catchError((error) =>
-            of(
-                loginModalRemoteAnswerFailure(
-                    LoginModalRemoteAnswerType.FORGOT_PASSWORD,
-                    reasonFromCognitoError(error),
-                ),
-            ),
-        ),
-    );
-};
 export const signOut: CognitoEndpoint = (cognitoClient) => {
     return fromPromise(cognitoClient.signOut()).pipe(
         mergeMap(() => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_OUT))),
