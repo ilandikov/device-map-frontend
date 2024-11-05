@@ -1,7 +1,7 @@
 import { LoginModalAction, LoginModalActionType } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
-import { beforeRemoteAnswer } from './BeforeRemoteAnswer';
-import { afterRemoteRequest } from './AfterRemoteRequest';
+import { afterRemoteAnswer } from './AfterRemoteAnswer';
+import { beforeRemoteRequest } from './BeforeRemoteRequest';
 import { afterButtonClick } from './AfterButtonClick';
 import { withPayload } from './WithPayload';
 
@@ -17,9 +17,9 @@ export function authentication(
         case LoginModalActionType.BUTTON_CLICKED:
             return { ...state, ...afterButtonClick(action, state) };
         case LoginModalActionType.REMOTE_REQUEST:
-            return { ...state, ...afterRemoteRequest(action, state) };
+            return { ...state, ...beforeRemoteRequest(action, state) };
         case LoginModalActionType.REMOTE_ANSWER:
-            return { ...state, ...beforeRemoteAnswer(action, state) };
+            return { ...state, ...afterRemoteAnswer(action, state) };
         default:
             return state;
     }

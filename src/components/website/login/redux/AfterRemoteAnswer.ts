@@ -1,7 +1,7 @@
 import { LoginModalRemoteAnswer, LoginModalRemoteAnswerResult } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 
-export function beforeRemoteAnswer(
+export function afterRemoteAnswer(
     action: LoginModalRemoteAnswer,
     state: AuthenticationState,
 ): Partial<AuthenticationState> {
