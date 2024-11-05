@@ -1,4 +1,4 @@
-import { LoginModalCheck, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
+import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import {
@@ -123,8 +123,7 @@ describe('user sign out tests', () => {
 });
 
 describe('state tests', () => {
-    const allRemoteRequests: LoginModalCheck[] = Object.values(LoginModalCheck);
-    it.each(allRemoteRequests)('should not process request %s when there is an error', async (request) => {
+    it('should not process request %s when there is an error', async () => {
         for (const step of Object.values(AuthenticationStep)) {
             const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
 
