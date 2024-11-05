@@ -341,7 +341,7 @@ describe('login logic', () => {
             step: AuthenticationStep.LOGIN,
             error: new Error('userNameAndPasswordAreWrong!'),
         });
-        const action = loginModalRemoteRequest(LoginModalCheck.USERNAME_AND_PASSWORD);
+        const action = loginModalRemoteRequest(LoginModalCheck.NONE);
 
         verifyStateChange(initialState, action, {
             step: AuthenticationStep.LOGIN_LOADING,

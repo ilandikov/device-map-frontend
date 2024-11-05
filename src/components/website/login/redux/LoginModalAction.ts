@@ -38,7 +38,6 @@ export interface LoginModalRemoteRequest {
 export enum LoginModalCheck {
     USERNAME = 'USERNAME',
     PASSWORD = 'PASSWORD',
-    USERNAME_AND_PASSWORD = 'USERNAME_AND_PASSWORD',
     OTP = 'OTP',
     NONE = 'NONE',
     SIGN_OUT = 'SIGN_OUT',

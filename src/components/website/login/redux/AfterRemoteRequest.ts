@@ -31,7 +31,6 @@ export function afterRemoteRequest(
 const errorCheckers: { [key in LoginModalCheck]: PreAuthErrorChecker } = {
     USERNAME: getEmailError,
     PASSWORD: getPasswordError,
-    USERNAME_AND_PASSWORD: noErrorCheck,
     OTP: getOTPError,
     NONE: noErrorCheck,
     SIGN_OUT: noErrorCheck,

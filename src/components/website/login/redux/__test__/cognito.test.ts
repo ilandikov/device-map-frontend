@@ -93,7 +93,7 @@ describe('user sign in tests', () => {
         ],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
-        const sentAction = loginModalRemoteRequest(LoginModalCheck.USERNAME_AND_PASSWORD);
+        const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });
