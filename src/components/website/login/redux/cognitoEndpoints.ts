@@ -10,24 +10,24 @@ import {
 } from './LoginModalAction';
 import { CognitoEndpoint, reasonFromCognitoError } from './cognitoHelpers';
 
-type AppleSauce = {
+type NewCognitoClient = {
     [berrySauce: string]: {
-        method: (cognitoClient, authenticationState) => Promise<any>;
+        call: (cognitoClient, authenticationState) => Promise<any>;
         answer: () => Observable<AllActions>;
         error: (error) => Observable<LoginModalRemoteAnswer>;
     };
 };
 
-const appleSauce: AppleSauce = {
+const newCognitoClient: NewCognitoClient = {
     signUp: {
-        method: (cognitoClient, authenticationState) =>
+        call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
         answer: () => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)),
         error: (error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
     },
     confirmPassword: {
-        method: (cognitoClient, authenticationState) =>
+        call: (cognitoClient, authenticationState) =>
             cognitoClient.confirmPassword(
                 authenticationState.email,
                 authenticationState.OTP,
@@ -44,17 +44,18 @@ const appleSauce: AppleSauce = {
 };
 
 export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    const berrySauce = 'signUp';
-    return fromPromise(appleSauce[berrySauce].method(cognitoClient, authenticationState)).pipe(
-        mergeMap(appleSauce[berrySauce].answer),
-        catchError(appleSauce[berrySauce].error),
+    const method = 'signUp';
+    const clientCall = newCognitoClient[method].call(cognitoClient, authenticationState);
+    return fromPromise(clientCall).pipe(
+        mergeMap(newCognitoClient[method].answer),
+        catchError(newCognitoClient[method].error),
     );
 };
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
     const berrySauce = 'confirmPassword';
-    return fromPromise(appleSauce[berrySauce].method(cognitoClient, authenticationState)).pipe(
-        mergeMap(appleSauce[berrySauce].answer),
-        catchError(appleSauce[berrySauce].error),
+    return fromPromise(newCognitoClient[berrySauce].call(cognitoClient, authenticationState)).pipe(
+        mergeMap(newCognitoClient[berrySauce].answer),
+        catchError(newCognitoClient[berrySauce].error),
     );
 };
 export const signIn: CognitoEndpoint = (cognitoClient, authenticationState) => {
