@@ -38,11 +38,14 @@ const errorCheckers: { [key in LoginModalCheck]: PreAuthErrorChecker } = {
 type StateUpdater = (action: LoginModalRemoteRequest, state: AuthenticationState) => Partial<AuthenticationState>;
 
 const fromPasswordCreationOTP: StateUpdater = (action) => {
-    if (action.check === LoginModalCheck.NONE) {
-        return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
+    switch (action.check) {
+        case LoginModalCheck.NONE:
+            return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
+        case LoginModalCheck.OTP:
+            return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+        default:
+            return {};
     }
-
-    return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
 };
 
 const updaters: Partial<{ [key in AuthenticationStep]: StateUpdater }> = {
