@@ -416,25 +416,25 @@ describe('password reset logic', () => {
         });
     });
 
-    it('should transition to OTP input step after password reset OTP has been successfully sent', () => {
+    it('should transition to logged in state after new password has been set', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.FORGOT_PASSWORD);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_OTP,
+            step: AuthenticationStep.LOGGED_IN,
         });
     });
 
-    it('should transition back to email input for password reset step on failure', () => {
+    it('should transition back to password reset OTP input and show error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.FORGOT_PASSWORD, 'thereHasBeenAnError');
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_RESET_REQUEST,
+            step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thereHasBeenAnError'),
         });
     });
