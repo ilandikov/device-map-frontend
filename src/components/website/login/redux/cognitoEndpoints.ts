@@ -35,30 +35,21 @@ export const newCognitoClient: NewCognitoClient = {
                 authenticationState.password,
             ),
         successCompletesAuthentication: true,
-        successActions: [
-            loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
-            mapAppAuthenticationCompleted(),
-        ],
+        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET)],
         errorType: LoginModalRemoteAnswerType.PASSWORD_RESET,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
         successCompletesAuthentication: true,
-        successActions: [
-            loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
-            mapAppAuthenticationCompleted(),
-        ],
+        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN)],
         errorType: LoginModalRemoteAnswerType.SIGN_IN,
     },
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
         successCompletesAuthentication: true,
-        successActions: [
-            loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP),
-            mapAppAuthenticationCompleted(),
-        ],
+        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP)],
         errorType: LoginModalRemoteAnswerType.OTP,
     },
     resendOTP: {
@@ -73,12 +64,18 @@ export function clientMethodProcessor(
         call: (cognitoClient, authenticationState) => Promise<any>;
         successActions: AllActions[];
         errorType: LoginModalRemoteAnswerType;
+        successCompletesAuthentication?: boolean;
     },
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
+    const successActions = clientMethod.successActions;
+    if (clientMethod.successCompletesAuthentication) {
+        successActions.push(mapAppAuthenticationCompleted());
+    }
+
     return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
-        mergeMap(() => from(clientMethod.successActions)),
+        mergeMap(() => from(successActions)),
         catchError((error) => of(loginModalRemoteAnswerFailure(clientMethod.errorType, reasonFromCognitoError(error)))),
     );
 }
