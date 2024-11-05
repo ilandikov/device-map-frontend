@@ -475,7 +475,7 @@ describe('OTP code resend logic', () => {
         const action = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
             error: null,
         });
     });

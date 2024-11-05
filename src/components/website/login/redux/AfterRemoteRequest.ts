@@ -54,7 +54,11 @@ const fromRemoteStep: Partial<{
 
 function fromPasswordCreationOTP(
     action: LoginModalRemoteRequest,
-    state: AuthenticationState,
+    _: AuthenticationState,
 ): Partial<AuthenticationState> {
+    if (action.request === LoginModalRemoteRequestType.OTP_RESEND) {
+        return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
+    }
+
     return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
 }
