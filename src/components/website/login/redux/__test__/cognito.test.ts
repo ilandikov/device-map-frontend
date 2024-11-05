@@ -123,11 +123,10 @@ describe('user sign out tests', () => {
 });
 
 describe('state tests', () => {
-    it('should not process request %s when there is an error', async () => {
-        for (const step of Object.values(AuthenticationStep)) {
-            const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
+    const allSteps = Object.values(AuthenticationStep);
+    it.each(allSteps)('should not process request at %s step when there is an error', async (step) => {
+        const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
 
-            await testCognitoNoOutput(initialState);
-        }
+        await testCognitoNoOutput(initialState);
     });
 });
