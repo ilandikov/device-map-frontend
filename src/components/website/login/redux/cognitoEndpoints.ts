@@ -1,5 +1,5 @@
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { catchError, from, mergeMap, of } from 'rxjs';
+import { EMPTY, catchError, from, mergeMap, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import { AllActions, Dependency } from '../../../../redux/store';
@@ -9,12 +9,13 @@ import {
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
 import { reasonFromCognitoError } from './cognitoHelpers';
-import { AuthenticationState } from './AuthenticationState';
+import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 
 type anotherSauce = {
     call: (cognitoClient, authenticationState) => Promise<any>;
     answerType: LoginModalRemoteAnswerType;
     successCompletesAuthentication?: boolean;
+    availableOnlyOnStep?: AuthenticationStep;
 };
 
 type NewCognitoClient = {
@@ -48,6 +49,7 @@ export const newCognitoClient: NewCognitoClient = {
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
         answerType: LoginModalRemoteAnswerType.OTP,
         successCompletesAuthentication: true,
+        availableOnlyOnStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
     },
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
@@ -56,6 +58,7 @@ export const newCognitoClient: NewCognitoClient = {
     forgotPasswordOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
         answerType: LoginModalRemoteAnswerType.FORGOT_PASSWORD,
+        availableOnlyOnStep: AuthenticationStep.PASSWORD_RESET_LOADING,
     },
     signOut: {
         call: (cognitoClient, _) => cognitoClient.signOut(),
@@ -68,6 +71,10 @@ export function clientMethodProcessor(
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
+    if (clientMethod.availableOnlyOnStep && clientMethod.availableOnlyOnStep !== authenticationState.step) {
+        return EMPTY;
+    }
+
     const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(clientMethod.answerType)];
     if (clientMethod.successCompletesAuthentication) {
         successActions.push(mapAppAuthenticationCompleted());

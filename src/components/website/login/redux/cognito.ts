@@ -36,18 +36,10 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                 case LoginModalRemoteRequestType.USERNAME_AND_PASSWORD:
                     return clientMethodProcessor(newCognitoClient['signIn'], cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.OTP:
-                    if (authenticationState.step !== AuthenticationStep.PASSWORD_CREATION_OTP_LOADING) {
-                        return EMPTY;
-                    }
-
                     return clientMethodProcessor(newCognitoClient['signUpOTP'], cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.OTP_RESEND:
                     return clientMethodProcessor(newCognitoClient['resendOTP'], cognitoClient, authenticationState);
                 case LoginModalRemoteRequestType.USERNAME:
-                    if (authenticationState.step !== AuthenticationStep.PASSWORD_RESET_LOADING) {
-                        return EMPTY;
-                    }
-
                     return clientMethodProcessor(
                         newCognitoClient['forgotPasswordOTP'],
                         cognitoClient,
