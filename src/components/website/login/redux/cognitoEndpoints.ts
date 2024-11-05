@@ -14,11 +14,11 @@ import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 type AuthenticationMethod = {
     call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
     answerType: LoginModalRemoteAnswerType;
-    successCompletesAuthentication?: boolean;
+    completesAuthentication?: boolean;
     availableOnlyOnStep?: AuthenticationStep;
 };
 
-const newCognitoClient: { [key: string]: AuthenticationMethod } = {
+const authenticationMethods: { [name: string]: AuthenticationMethod } = {
     signUp: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
@@ -32,19 +32,19 @@ const newCognitoClient: { [key: string]: AuthenticationMethod } = {
                 authenticationState.password,
             ),
         answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
-        successCompletesAuthentication: true,
+        completesAuthentication: true,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
         answerType: LoginModalRemoteAnswerType.SIGN_IN,
-        successCompletesAuthentication: true,
+        completesAuthentication: true,
     },
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
         answerType: LoginModalRemoteAnswerType.OTP,
-        successCompletesAuthentication: true,
+        completesAuthentication: true,
         availableOnlyOnStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
     },
     resendOTP: {
@@ -63,17 +63,17 @@ const newCognitoClient: { [key: string]: AuthenticationMethod } = {
 };
 
 export function processAuthMethod(
-    methodKey: string,
+    name: string,
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
-    const method = newCognitoClient[methodKey];
+    const method = authenticationMethods[name];
     if (method.availableOnlyOnStep && method.availableOnlyOnStep !== authenticationState.step) {
         return EMPTY;
     }
 
     const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(method.answerType)];
-    if (method.successCompletesAuthentication) {
+    if (method.completesAuthentication) {
         successActions.push(mapAppAuthenticationCompleted());
     }
 
