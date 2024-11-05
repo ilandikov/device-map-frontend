@@ -39,6 +39,14 @@ const errorCheckers: { [key in LoginModalRemoteRequestType]: PreAuthErrorChecker
 
 type StateUpdater = (action: LoginModalRemoteRequest, state: AuthenticationState) => Partial<AuthenticationState>;
 
+const fromPasswordCreationOTP: StateUpdater = (action) => {
+    if (action.request === LoginModalRemoteRequestType.OTP_RESEND) {
+        return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
+    }
+
+    return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
+};
+
 const updaters: Partial<{ [key in AuthenticationStep]: StateUpdater }> = {
     MAIL_INPUT: () => ({ step: AuthenticationStep.PASSWORD_CREATION }),
     LOGIN: () => ({ step: AuthenticationStep.LOGIN_LOADING }),
@@ -48,14 +56,3 @@ const updaters: Partial<{ [key in AuthenticationStep]: StateUpdater }> = {
     PASSWORD_CREATION_OTP: fromPasswordCreationOTP,
     PASSWORD_RESET_OTP: () => ({ step: AuthenticationStep.PASSWORD_RESET }),
 };
-
-function fromPasswordCreationOTP(
-    action: LoginModalRemoteRequest,
-    _: AuthenticationState,
-): Partial<AuthenticationState> {
-    if (action.request === LoginModalRemoteRequestType.OTP_RESEND) {
-        return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
-    }
-
-    return { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
-}
