@@ -16,7 +16,7 @@ import { reasonFromCognitoError } from './cognitoHelpers';
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
     return action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
-        switchMap((action) => {
+        switchMap(() => {
             const authenticationState = state$.value.authentication;
             const skipRequest = authenticationState.error !== null;
             if (skipRequest) {
