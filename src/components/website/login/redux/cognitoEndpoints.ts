@@ -26,6 +26,21 @@ const appleSauce: AppleSauce = {
         error: (error) =>
             of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.SIGN_UP, reasonFromCognitoError(error))),
     },
+    confirmPassword: {
+        method: (cognitoClient, authenticationState) =>
+            cognitoClient.confirmPassword(
+                authenticationState.email,
+                authenticationState.OTP,
+                authenticationState.password,
+            ),
+        answer: () =>
+            from([
+                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
+                mapAppAuthenticationCompleted(),
+            ]),
+        error: (error) =>
+            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
+    },
 };
 
 export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
@@ -36,18 +51,10 @@ export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
     );
 };
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(
-        cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
-    ).pipe(
-        mergeMap(() =>
-            from([
-                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
-                mapAppAuthenticationCompleted(),
-            ]),
-        ),
-        catchError((error) =>
-            of(loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.PASSWORD_RESET, reasonFromCognitoError(error))),
-        ),
+    const berrySauce = 'confirmPassword';
+    return fromPromise(appleSauce[berrySauce].method(cognitoClient, authenticationState)).pipe(
+        mergeMap(appleSauce[berrySauce].answer),
+        catchError(appleSauce[berrySauce].error),
     );
 };
 export const signIn: CognitoEndpoint = (cognitoClient, authenticationState) => {
