@@ -13,7 +13,6 @@ import { AuthenticationState } from './AuthenticationState';
 
 type anotherSauce = {
     call: (cognitoClient, authenticationState) => Promise<any>;
-    successActions: AllActions[];
     answerType: LoginModalRemoteAnswerType;
     successCompletesAuthentication?: boolean;
 };
@@ -26,7 +25,6 @@ export const newCognitoClient: NewCognitoClient = {
     signUp: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
-        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)],
         answerType: LoginModalRemoteAnswerType.SIGN_UP,
     },
     confirmPassword: {
@@ -36,27 +34,23 @@ export const newCognitoClient: NewCognitoClient = {
                 authenticationState.OTP,
                 authenticationState.password,
             ),
-        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET)],
         answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
         successCompletesAuthentication: true,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
-        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN)],
         answerType: LoginModalRemoteAnswerType.SIGN_IN,
         successCompletesAuthentication: true,
     },
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP)],
         answerType: LoginModalRemoteAnswerType.OTP,
         successCompletesAuthentication: true,
     },
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
-        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)],
         answerType: LoginModalRemoteAnswerType.OTP_RESEND,
     },
 };
