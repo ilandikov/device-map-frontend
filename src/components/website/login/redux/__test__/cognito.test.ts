@@ -13,8 +13,8 @@ import {
     cognitoSignOutResult,
     cognitoSignUpConfirmationResult,
     cognitoSignUpRequestResult,
-    verifyCognitoEpicAction,
-    verifyCognitoEpicNoAction,
+    testCognitoNoOutput,
+    testCognitoOutputAction,
 } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
@@ -34,7 +34,7 @@ describe('user sign up tests', () => {
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
 
-            await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+            await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
         },
     );
 });
@@ -56,7 +56,7 @@ describe('user password reset tests', () => {
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
 
-            await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+            await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
         },
     );
 });
@@ -73,7 +73,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
 
-        await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
     });
 });
 
@@ -90,7 +90,7 @@ describe('user sign in tests', () => {
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
 
-        await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
     });
 });
 
@@ -98,7 +98,7 @@ describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
 
-        await verifyCognitoEpicNoAction(initialState);
+        await testCognitoNoOutput(initialState);
     });
 
     it.each([
@@ -117,7 +117,7 @@ describe('password reset request tests', () => {
                 step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             });
 
-            await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+            await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
         },
     );
 });
@@ -134,7 +134,7 @@ describe('OTP code resend tests', () => {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
 
-        await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
     });
 });
 
@@ -150,7 +150,7 @@ describe('user sign out tests', () => {
             step: AuthenticationStep.LOGGED_IN,
         });
 
-        await verifyCognitoEpicAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
     });
 });
 
@@ -160,7 +160,7 @@ describe('state tests', () => {
         for (const step of Object.values(AuthenticationStep)) {
             const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
 
-            await verifyCognitoEpicNoAction(initialState);
+            await testCognitoNoOutput(initialState);
         }
     });
 });

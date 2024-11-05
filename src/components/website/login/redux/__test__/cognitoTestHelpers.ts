@@ -43,7 +43,7 @@ export class CognitoTestClient implements Dependency<CognitoClient> {
     }
 }
 
-export async function verifyCognitoEpicAction(
+export async function testCognitoOutputAction(
     initialState: AuthenticationState,
     remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
@@ -60,7 +60,7 @@ export async function verifyCognitoEpicAction(
     expect(receivedAction).toEqual(expectedActions);
 }
 
-export async function verifyCognitoEpicNoAction(initialState: AuthenticationState) {
+export async function testCognitoNoOutput(initialState: AuthenticationState) {
     const stateForTest = buildStateForCognitoTest(initialState);
     const dependencies = {
         cognitoClient: new CognitoTestClient(Promise.resolve()),
