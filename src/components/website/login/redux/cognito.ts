@@ -19,12 +19,6 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
-type AuthenticationMethod = {
-    call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
-    answerType: LoginModalRemoteAnswerType;
-    completesAuthentication?: boolean;
-};
-
 function processAuthMethod(authenticationState: AuthenticationState, cognitoClient: Dependency<CognitoClient>) {
     const skipRequest = authenticationState.error !== null;
     if (skipRequest) {
@@ -46,6 +40,12 @@ function processAuthMethod(authenticationState: AuthenticationState, cognitoClie
         catchError((error) => of(loginModalRemoteAnswerFailure(method.answerType, reasonFromCognitoError(error)))),
     );
 }
+
+type AuthenticationMethod = {
+    call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
+    answerType: LoginModalRemoteAnswerType;
+    completesAuthentication?: boolean;
+};
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
     PASSWORD_CREATION_LOADING: {
