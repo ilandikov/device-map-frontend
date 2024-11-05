@@ -60,13 +60,6 @@ export function clientMethodProcessor(
     );
 }
 
-export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    const berrySauce = 'confirmPassword';
-    return fromPromise(newCognitoClient[berrySauce].call(cognitoClient, authenticationState)).pipe(
-        mergeMap(newCognitoClient[berrySauce].answer),
-        catchError(newCognitoClient[berrySauce].error),
-    );
-};
 export const signIn: CognitoEndpoint = (cognitoClient, authenticationState) => {
     return fromPromise(cognitoClient.signIn(authenticationState.email, authenticationState.password)).pipe(
         mergeMap(() =>

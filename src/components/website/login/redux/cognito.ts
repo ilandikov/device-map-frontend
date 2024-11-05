@@ -5,7 +5,6 @@ import { LoginModalActionType, LoginModalRemoteRequestType } from './LoginModalA
 import { AuthenticationStep } from './AuthenticationState';
 import {
     clientMethodProcessor,
-    confirmPassword,
     newCognitoClient,
     resendOTP,
     sendForgotPasswordOTP,
@@ -34,7 +33,11 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) => {
                                 authenticationState,
                             );
                         case AuthenticationStep.PASSWORD_RESET_LOADING:
-                            return confirmPassword(cognitoClient, authenticationState);
+                            return clientMethodProcessor(
+                                newCognitoClient['confirmPassword'],
+                                cognitoClient,
+                                authenticationState,
+                            );
                     }
 
                     return EMPTY;
