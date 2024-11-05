@@ -3,8 +3,8 @@ import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import {
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalInput,
     loginModalRemoteRequest,
 } from './redux/LoginModalAction';
@@ -35,7 +35,7 @@ export function PasswordResetRequestForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
+                        dispatch(loginModalRemoteRequest(LoginModalCheck.USERNAME));
                     }}
                 >
                     {t('OTPSendSMS')}

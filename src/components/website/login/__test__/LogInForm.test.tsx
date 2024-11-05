@@ -8,8 +8,8 @@ import {
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
@@ -88,10 +88,7 @@ describe('LogInForm action tests', () => {
         const tryVerifyPasswordsButton = getByText(container, 'next');
         fireEvent.click(tryVerifyPasswordsButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD),
-        );
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 
     it('should transition to password reset state when reset button was clicked', () => {

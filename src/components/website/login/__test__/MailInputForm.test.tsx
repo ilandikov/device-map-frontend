@@ -8,8 +8,8 @@ import {
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
@@ -77,7 +77,7 @@ describe('MailInputForm action tests', () => {
         const tryVerifyEmailButton = getByText(container, 'next');
         fireEvent.click(tryVerifyEmailButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.USERNAME));
     });
 
     it('should move from mail already exists to password verification stage', () => {

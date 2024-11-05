@@ -5,8 +5,8 @@ import { MailInputBox } from './MailInputBox';
 import { PasswordInputBox } from './PasswordInputBox';
 import {
     LoginModalButton,
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
@@ -55,7 +55,7 @@ export function LogInForm() {
                     <button
                         className="login-modal-button-black-on-green"
                         onClick={() => {
-                            dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME_AND_PASSWORD));
+                            dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
                         }}
                     >
                         {t('next')}

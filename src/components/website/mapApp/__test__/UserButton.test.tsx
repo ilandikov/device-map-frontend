@@ -6,7 +6,7 @@ import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/MapApp
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
     LoginModalButton,
-    LoginModalRemoteRequestType,
+    LoginModalCheck,
     loginModalButtonClick,
     loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
@@ -54,6 +54,6 @@ describe('UserButton action tests', () => {
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLogoutButtonClick());
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick(LoginModalButton.USER_BUTTON));
-        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalRemoteRequest(LoginModalRemoteRequestType.SIGN_OUT));
+        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 });

@@ -4,8 +4,8 @@ import { useAppDispatch } from '../../../redux/store';
 import { MailInputBox } from './MailInputBox';
 import {
     LoginModalButton,
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
@@ -47,7 +47,7 @@ export function MailInputForm() {
                 <button
                     className="login-modal-button-black-on-green"
                     onClick={() => {
-                        dispatch(loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME));
+                        dispatch(loginModalRemoteRequest(LoginModalCheck.USERNAME));
                     }}
                 >
                     {t('next')}

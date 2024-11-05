@@ -1,7 +1,7 @@
 import {
     LoginModalActionType,
+    LoginModalCheck,
     LoginModalInputType,
-    LoginModalRemoteRequestType,
     loginModalButtonClick,
     loginModalInput,
     loginModalRemoteRequest,
@@ -16,11 +16,11 @@ describe('Login Modal action creator tests', () => {
     });
 
     it('should create verify request action', () => {
-        const action = loginModalRemoteRequest(LoginModalRemoteRequestType.USERNAME);
+        const action = loginModalRemoteRequest(LoginModalCheck.USERNAME);
 
         expect(action).toEqual({
             type: LoginModalActionType.REMOTE_REQUEST,
-            request: LoginModalRemoteRequestType.USERNAME,
+            check: LoginModalCheck.USERNAME,
         });
     });
 
