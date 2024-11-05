@@ -1,5 +1,5 @@
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { Observable, catchError, from, mergeMap, of } from 'rxjs';
+import { catchError, from, mergeMap, of } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import { AllActions, Dependency } from '../../../../redux/store';
@@ -14,7 +14,7 @@ import { AuthenticationState } from './AuthenticationState';
 type NewCognitoClient = {
     [berrySauce: string]: {
         call: (cognitoClient, authenticationState) => Promise<any>;
-        answer: () => Observable<AllActions>;
+        successActions: AllActions[];
         errorType: LoginModalRemoteAnswerType;
     };
 };
@@ -23,7 +23,7 @@ export const newCognitoClient: NewCognitoClient = {
     signUp: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUp(authenticationState.email, authenticationState.password),
-        answer: () => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)),
+        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_UP)],
         errorType: LoginModalRemoteAnswerType.SIGN_UP,
     },
     confirmPassword: {
@@ -33,30 +33,33 @@ export const newCognitoClient: NewCognitoClient = {
                 authenticationState.OTP,
                 authenticationState.password,
             ),
-        answer: () =>
-            from([
-                loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
-                mapAppAuthenticationCompleted(),
-            ]),
+        successActions: [
+            loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.PASSWORD_RESET),
+            mapAppAuthenticationCompleted(),
+        ],
         errorType: LoginModalRemoteAnswerType.PASSWORD_RESET,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
-        answer: () =>
-            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN), mapAppAuthenticationCompleted()]),
+        successActions: [
+            loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.SIGN_IN),
+            mapAppAuthenticationCompleted(),
+        ],
         errorType: LoginModalRemoteAnswerType.SIGN_IN,
     },
     signUpOTP: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-        answer: () =>
-            from([loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP), mapAppAuthenticationCompleted()]),
+        successActions: [
+            loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP),
+            mapAppAuthenticationCompleted(),
+        ],
         errorType: LoginModalRemoteAnswerType.OTP,
     },
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
-        answer: () => of(loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)),
+        successActions: [loginModalRemoteAnswerSuccess(LoginModalRemoteAnswerType.OTP_RESEND)],
         errorType: LoginModalRemoteAnswerType.OTP_RESEND,
     },
 };
@@ -64,14 +67,14 @@ export const newCognitoClient: NewCognitoClient = {
 export function clientMethodProcessor(
     clientMethod: {
         call: (cognitoClient, authenticationState) => Promise<any>;
-        answer: () => Observable<AllActions>;
+        successActions: AllActions[];
         errorType: LoginModalRemoteAnswerType;
     },
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
     return fromPromise(clientMethod.call(cognitoClient, authenticationState)).pipe(
-        mergeMap(clientMethod.answer),
+        mergeMap(() => from(clientMethod.successActions)),
         catchError((error) => of(loginModalRemoteAnswerFailure(clientMethod.errorType, reasonFromCognitoError(error)))),
     );
 }
