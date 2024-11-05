@@ -50,7 +50,6 @@ function getSuccessActions(step: AuthenticationStep): AllActions[] {
 
 type AuthenticationMethod = {
     call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
-    completesAuthentication?: boolean;
 };
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
@@ -61,7 +60,6 @@ const authenticationMethods: Partial<{ [key in AuthenticationStep]: Authenticati
     PASSWORD_CREATION_OTP_LOADING: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-        completesAuthentication: true,
     },
     PASSWORD_CREATION_OTP_RESEND_LOADING: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
@@ -69,7 +67,6 @@ const authenticationMethods: Partial<{ [key in AuthenticationStep]: Authenticati
     LOGIN_LOADING: {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signIn(authenticationState.email, authenticationState.password),
-        completesAuthentication: true,
     },
     PASSWORD_RESET_REQUEST_LOADING: {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),
@@ -81,7 +78,6 @@ const authenticationMethods: Partial<{ [key in AuthenticationStep]: Authenticati
                 authenticationState.OTP,
                 authenticationState.password,
             ),
-        completesAuthentication: true,
     },
     LOGGED_IN: {
         call: (cognitoClient, _) => cognitoClient.signOut(),
