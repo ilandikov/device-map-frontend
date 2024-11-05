@@ -66,7 +66,7 @@ export function clientMethodProcessor(
     cognitoClient: Dependency<CognitoClient>,
     authenticationState: AuthenticationState,
 ) {
-    const successActions = clientMethod.successActions;
+    const successActions: AllActions[] = [loginModalRemoteAnswerSuccess(clientMethod.answerType)];
     if (clientMethod.successCompletesAuthentication) {
         successActions.push(mapAppAuthenticationCompleted());
     }
