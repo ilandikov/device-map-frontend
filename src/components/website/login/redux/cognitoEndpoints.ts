@@ -29,9 +29,10 @@ const appleSauce: AppleSauce = {
 };
 
 export const signUp: CognitoEndpoint = (cognitoClient, authenticationState) => {
-    return fromPromise(appleSauce['signUp'].method(cognitoClient, authenticationState)).pipe(
-        mergeMap(appleSauce['signUp'].answer),
-        catchError(appleSauce['signUp'].error),
+    const berrySauce = 'signUp';
+    return fromPromise(appleSauce[berrySauce].method(cognitoClient, authenticationState)).pipe(
+        mergeMap(appleSauce[berrySauce].answer),
+        catchError(appleSauce[berrySauce].error),
     );
 };
 export const confirmPassword: CognitoEndpoint = (cognitoClient, authenticationState) => {
