@@ -53,6 +53,7 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
         answerType: LoginModalRemoteAnswerType.OTP_RESEND,
+        availableOnlyOnStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
     },
     forgotPasswordOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.forgotPassword(authenticationState.email),

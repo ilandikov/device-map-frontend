@@ -146,7 +146,7 @@ describe('OTP code resend tests', () => {
             [loginModalRemoteAnswerFailure(LoginModalRemoteAnswerType.OTP_RESEND, 'cognitoUnknownException')],
         ],
     ])('should resign out user when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
-        const initialState = buildAuthenticationState({});
+        const initialState = buildAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING });
         const sentAction = loginModalRemoteRequest(LoginModalRemoteRequestType.OTP_RESEND);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
