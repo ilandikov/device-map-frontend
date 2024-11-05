@@ -54,17 +54,11 @@ type AuthenticationMethod = (
 ) => Promise<any>;
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
-    PASSWORD_CREATION_LOADING: (cognitoClient, authenticationState) =>
-        cognitoClient.signUp(authenticationState.email, authenticationState.password),
-    PASSWORD_CREATION_OTP_LOADING: (cognitoClient, authenticationState) =>
-        cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
-    PASSWORD_CREATION_OTP_RESEND_LOADING: (cognitoClient, authenticationState) =>
-        cognitoClient.resendConfirmCode(authenticationState.email),
-    LOGIN_LOADING: (cognitoClient, authenticationState) =>
-        cognitoClient.signIn(authenticationState.email, authenticationState.password),
-    PASSWORD_RESET_REQUEST_LOADING: (cognitoClient, authenticationState) =>
-        cognitoClient.forgotPassword(authenticationState.email),
-    PASSWORD_RESET_LOADING: (cognitoClient, authenticationState) =>
-        cognitoClient.confirmPassword(authenticationState.email, authenticationState.OTP, authenticationState.password),
-    LOGGED_IN: (cognitoClient, _) => cognitoClient.signOut(),
+    PASSWORD_CREATION_LOADING: (client, state) => client.signUp(state.email, state.password),
+    PASSWORD_CREATION_OTP_LOADING: (client, state) => client.signUpConfirmCode(state.email, state.OTP),
+    PASSWORD_CREATION_OTP_RESEND_LOADING: (client, state) => client.resendConfirmCode(state.email),
+    LOGIN_LOADING: (client, state) => client.signIn(state.email, state.password),
+    PASSWORD_RESET_REQUEST_LOADING: (client, state) => client.forgotPassword(state.email),
+    PASSWORD_RESET_LOADING: (client, state) => client.confirmPassword(state.email, state.OTP, state.password),
+    LOGGED_IN: (client, _) => client.signOut(),
 };
