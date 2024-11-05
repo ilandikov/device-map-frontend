@@ -76,7 +76,6 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
 
 export interface LoginModalRemoteAnswer {
     type: LoginModalActionType.REMOTE_ANSWER;
-    answer: LoginModalRemoteAnswerType;
     result: LoginModalRemoteAnswerResult;
     reason?: string;
 }
@@ -100,7 +99,6 @@ export enum LoginModalRemoteAnswerResult {
 export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
-        answer: LoginModalRemoteAnswerType.NONE,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
@@ -108,7 +106,6 @@ export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
 export function loginModalRemoteAnswerFailure(reason: string): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
-        answer: LoginModalRemoteAnswerType.NONE,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };
