@@ -14,8 +14,8 @@ import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 type AuthenticationMethod = {
     call: (cognitoClient: Dependency<CognitoClient>, authenticationState: AuthenticationState) => Promise<any>;
     answerType: LoginModalRemoteAnswerType;
-    completesAuthentication?: boolean;
     availableOnlyOnStep?: AuthenticationStep;
+    completesAuthentication?: boolean;
 };
 
 const authenticationMethods: { [name: string]: AuthenticationMethod } = {
@@ -33,8 +33,8 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
                 authenticationState.password,
             ),
         answerType: LoginModalRemoteAnswerType.PASSWORD_RESET,
-        completesAuthentication: true,
         availableOnlyOnStep: AuthenticationStep.PASSWORD_RESET_LOADING,
+        completesAuthentication: true,
     },
     signIn: {
         call: (cognitoClient, authenticationState) =>
@@ -46,8 +46,8 @@ const authenticationMethods: { [name: string]: AuthenticationMethod } = {
         call: (cognitoClient, authenticationState) =>
             cognitoClient.signUpConfirmCode(authenticationState.email, authenticationState.OTP),
         answerType: LoginModalRemoteAnswerType.OTP,
-        completesAuthentication: true,
         availableOnlyOnStep: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        completesAuthentication: true,
     },
     resendOTP: {
         call: (cognitoClient, authenticationState) => cognitoClient.resendConfirmCode(authenticationState.email),
