@@ -73,6 +73,11 @@ exports[`OTPForm snapshot tests should match snapshot at OTP for password reset 
     >
       OTPSendAgain
     </button>
+    <p
+      className="login-modal-input-help login-modal-wrong-input"
+    >
+      thisShouldNotHappen
+    </p>
   </div>,
   <div
     className="login-modal-button-container"
