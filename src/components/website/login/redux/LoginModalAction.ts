@@ -40,7 +40,6 @@ export enum LoginModalCheck {
     PASSWORD = 'PASSWORD',
     OTP = 'OTP',
     NONE = 'NONE',
-    SIGN_OUT = 'SIGN_OUT',
 }
 
 export function loginModalRemoteRequest(verify: LoginModalCheck): LoginModalRemoteRequest {

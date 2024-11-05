@@ -157,7 +157,7 @@ describe('user sign out tests', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGGED_IN,
         });
-        const sentAction = loginModalRemoteRequest(LoginModalCheck.SIGN_OUT);
+        const sentAction = loginModalRemoteRequest(LoginModalCheck.NONE);
 
         await verifyCognitoEpicAction(sentAction, initialState, remoteServiceAnswer, expectedAction);
     });

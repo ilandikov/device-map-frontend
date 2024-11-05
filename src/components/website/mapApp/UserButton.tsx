@@ -30,7 +30,7 @@ export function LogoutButton() {
             onClick={() => {
                 useDispatch(mapAppLogoutButtonClick());
                 useDispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
-                useDispatch(loginModalRemoteRequest(LoginModalCheck.SIGN_OUT));
+                useDispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
             }}
         />
     );

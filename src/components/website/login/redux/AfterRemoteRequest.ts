@@ -33,7 +33,6 @@ const errorCheckers: { [key in LoginModalCheck]: PreAuthErrorChecker } = {
     PASSWORD: getPasswordError,
     OTP: getOTPError,
     NONE: noErrorCheck,
-    SIGN_OUT: noErrorCheck,
 };
 
 type StateUpdater = (action: LoginModalRemoteRequest, state: AuthenticationState) => Partial<AuthenticationState>;
