@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const listDevicesQuery = {
     query: gql`
-        query T22ListDevices {
+        query {
             T22ListDevices {
                 id
                 location {
