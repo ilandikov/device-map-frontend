@@ -2,10 +2,10 @@ import { EMPTY, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { ApolloQueryResult } from '@apollo/client';
+import { Query, T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppActionType, MapAppRemoteRequestType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
 import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
-import { T22Device, T22ListDevicesResponse } from './devicesHelpers';
 
 export const devices: RootEpic = (action$, _, { apolloClient }) =>
     action$.pipe(
@@ -20,7 +20,7 @@ export const devices: RootEpic = (action$, _, { apolloClient }) =>
         }),
     );
 
-export function processListDevicesRequest(response: Promise<ApolloQueryResult<T22ListDevicesResponse>>) {
+export function processListDevicesRequest(response: Promise<ApolloQueryResult<Query>>) {
     const deviceTransformer = (device: T22Device): Device => ({
         id: device.id,
         location: {
@@ -29,7 +29,7 @@ export function processListDevicesRequest(response: Promise<ApolloQueryResult<T2
         },
     });
 
-    const listDevicesResponse = (response: ApolloQueryResult<T22ListDevicesResponse>) =>
+    const listDevicesResponse = (response: ApolloQueryResult<Query>) =>
         of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
 
     const doNothing = () => EMPTY;
