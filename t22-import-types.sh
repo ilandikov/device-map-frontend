@@ -34,9 +34,13 @@ fi
 echo "Navigating to $IMPORTER_DIR..."
 cd "$IMPORTER_DIR" || { echo "Error: Could not navigate to $IMPORTER_DIR."; exit 1; }
 
+# Copy package to importer directory
+echo "Copying $PACKAGE_NAME to $IMPORTER_DIR..."
+cp "$EXPORTER_DIR/$PACKAGE_NAME" . || { echo "Error: Could not copy $PACKAGE_NAME to $IMPORTER_DIR."; exit 1; }
+
 # Install the package from the exporter repository
-echo "Installing package from $EXPORTER_DIR/$PACKAGE_NAME..."
-npm install "$EXPORTER_DIR/$PACKAGE_NAME"
+echo "Installing package $PACKAGE_NAME..."
+npm install "$PACKAGE_NAME"
 
 # Check if the installation was successful
 if [ $? -eq 0 ]; then
