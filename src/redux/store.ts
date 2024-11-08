@@ -50,20 +50,20 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
 
 export function createStore() {
-    console.log(process.env.APPSYNC_ENDPOINT);
-    console.log(process.env.X_API_KEY);
+    console.log(process.env.GATSBY_APPSYNC_ENDPOINT);
+    console.log(process.env.GATSBY_X_API_KEY);
     const apolloClient = new ApolloClient({
         link: ApolloLink.from([
             createAuthLink({
-                url: process.env.APPSYNC_ENDPOINT,
-                region: process.env.REGION,
+                url: process.env.GATSBY_APPSYNC_ENDPOINT,
+                region: process.env.GATSBY_REGION,
                 auth: {
                     type: AUTH_TYPE.API_KEY,
-                    apiKey: process.env.X_API_KEY,
+                    apiKey: process.env.GATSBY_X_API_KEY,
                 },
             }),
             createHttpLink({
-                uri: process.env.APPSYNC_ENDPOINT,
+                uri: process.env.GATSBY_APPSYNC_ENDPOINT,
             }),
         ]),
         cache: new InMemoryCache({ addTypename: false }),
