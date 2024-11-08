@@ -12,6 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
+import { Query } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -20,7 +21,7 @@ import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
-import { T22ListDevicesResponse, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
+import { listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { MapAppLocation } from '../components/website/mapApp/redux/MapAppState';
 
@@ -38,7 +39,7 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     apolloClient?: {
-        listDevices: () => Promise<ApolloQueryResult<T22ListDevicesResponse>>;
+        listDevices: () => Promise<ApolloQueryResult<Query>>;
     };
     geoApifyClient?: (location: MapAppLocation) => Observable<AjaxResponse<GeoApifyResponse>>;
 };
