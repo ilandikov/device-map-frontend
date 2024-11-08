@@ -15,8 +15,9 @@ if [ -z "$1" ]; then
 fi
 
 # Set the package name with the provided version
+PACKAGE_NAME="mancho-school-t22-graphql-types"
 PACKAGE_VERSION="$1"
-PACKAGE_NAME="mancho-school-t22-graphql-types-$PACKAGE_VERSION.tgz"  # Adjust to your actual package format
+PACKAGE_FILE="$PACKAGE_NAME-$PACKAGE_VERSION.tgz"  # Adjust to your actual package format
 
 # Check if the exporter directory exists
 if [ ! -d "$EXPORTER_DIR" ]; then
@@ -25,8 +26,8 @@ if [ ! -d "$EXPORTER_DIR" ]; then
 fi
 
 # Check if the package file exists
-if [ ! -f "$EXPORTER_DIR/$PACKAGE_NAME" ]; then
-    echo "Error: Package $PACKAGE_NAME not found in $EXPORTER_DIR."
+if [ ! -f "$EXPORTER_DIR/$PACKAGE_FILE" ]; then
+    echo "Error: Package $PACKAGE_FILE not found in $EXPORTER_DIR."
     exit 1
 fi
 
@@ -34,18 +35,21 @@ fi
 echo "Navigating to $IMPORTER_DIR..."
 cd "$IMPORTER_DIR" || { echo "Error: Could not navigate to $IMPORTER_DIR."; exit 1; }
 
+echo "Cleaning existing versions of $PACKAGE_NAME..."
+rm -f "${PACKAGE_NAME}-"*.tgz
+
 # Copy package to importer directory
-echo "Copying $PACKAGE_NAME to $IMPORTER_DIR..."
-cp "$EXPORTER_DIR/$PACKAGE_NAME" . || { echo "Error: Could not copy $PACKAGE_NAME to $IMPORTER_DIR."; exit 1; }
+echo "Copying $PACKAGE_FILE to $IMPORTER_DIR..."
+cp "$EXPORTER_DIR/$PACKAGE_FILE" . || { echo "Error: Could not copy $PACKAGE_FILE to $IMPORTER_DIR."; exit 1; }
 
 # Install the package from the exporter repository
-echo "Installing package $PACKAGE_NAME..."
-npm install "$PACKAGE_NAME"
+echo "Installing package $PACKAGE_FILE..."
+npm install "$PACKAGE_FILE"
 
 # Check if the installation was successful
 if [ $? -eq 0 ]; then
-    echo "Package $PACKAGE_NAME installed successfully in $IMPORTER_DIR!"
+    echo "Package $PACKAGE_FILE installed successfully in $IMPORTER_DIR!"
 else
-  echo "Error: Failed to install package $PACKAGE_NAME."
+  echo "Error: Failed to install package $PACKAGE_FILE."
   exit 1
 fi
