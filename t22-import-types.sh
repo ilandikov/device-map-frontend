@@ -18,6 +18,12 @@ fi
 PACKAGE_VERSION="$1"
 PACKAGE_NAME="mancho-school-t22-graphql-types-$PACKAGE_VERSION.tgz"  # Adjust to your actual package format
 
+# Check if the exporter directory exists
+if [ ! -d "$EXPORTER_DIR" ]; then
+    echo "Error: Exporter folder $EXPORTER_DIR not found."
+    exit 1
+fi
+
 # Check if the package file exists
 if [ ! -f "$EXPORTER_DIR/$PACKAGE_NAME" ]; then
     echo "Error: Package $PACKAGE_NAME not found in $EXPORTER_DIR."
