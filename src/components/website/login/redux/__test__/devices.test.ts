@@ -6,12 +6,12 @@ import {
     mapAppRemoteRequest,
     mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppAction';
-import { MapAppState, mapAppInitialState } from '../../../mapApp/redux/MapAppState';
+import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
-        const mapAppState = mapAppInitialState;
+        const mapAppState = buildMapAppState({});
         const sentAction = { type: 'notAMapAppAction' };
         const expectedActions = [];
 
@@ -56,10 +56,12 @@ describe('list devices', () => {
 
 describe('devices - create device', () => {
     it('should send action with the new device', async () => {
-        const mapAppState: MapAppState = {
-            ...mapAppInitialState,
-            selectedMarker: { location: { lat: 2, lon: 3 }, address: null },
-        };
+        const mapAppState = buildMapAppState({
+            selectedMarker: {
+                location: { lat: 2, lon: 3 },
+                address: null,
+            },
+        });
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedActions = [mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } })];
 
