@@ -9,7 +9,12 @@ export function DeviceListItem(props: {
     };
     children: React.ReactNode;
 }) {
-    const { leftShadowColorClass, rightShadowColorClass } = props.colorClassesForItemShadows(props.index);
+    let { leftShadowColorClass, rightShadowColorClass } = props.colorClassesForItemShadows(props.index);
+
+    if (props.index === null) {
+        leftShadowColorClass = 'device-list-create-device-item-shadow-left';
+        rightShadowColorClass = 'device-list-create-device-item-shadow-right';
+    }
 
     return (
         <div className="device-list-item-container">
