@@ -3,7 +3,7 @@ import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState'
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
-        case MapAppActionType.LOGIN_BUTTON_CLICK:
+        case MapAppActionType.BUTTON_CLICKED:
             return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
         case MapAppActionType.LOGOUT_BUTTON_CLICK:
             return { ...state, usageStep: MapAppUsageStep.HOME_SCREEN };
