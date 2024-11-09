@@ -1,4 +1,3 @@
-import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 import { Device } from './redux/MapAppState';
@@ -10,9 +9,8 @@ export function DeviceListItem(props: {
         rightShadowColorClass: string;
         leftShadowColorClass: string;
     };
+    children: React.ReactNode;
 }) {
-    const { t } = useI18next();
-
     const { leftShadowColorClass, rightShadowColorClass } = props.colorClassesForItemShadows(props.index);
 
     return (
@@ -20,10 +18,7 @@ export function DeviceListItem(props: {
             <div className={`device-list-item-shadow device-list-item-shadow-left ${leftShadowColorClass}`}></div>
             <div className={`device-list-item-shadow device-list-item-shadow-right ${rightShadowColorClass}`}></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
-            <div className="device-list-item">
-                <p>{props.device.id}</p>
-                <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            </div>
+            <div className="device-list-item">{props.children}</div>
         </div>
     );
 }

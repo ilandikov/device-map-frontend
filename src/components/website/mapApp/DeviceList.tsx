@@ -1,10 +1,13 @@
 import React from 'react';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 import { useMapAppState } from './redux/MapAppState';
 import { DeviceListItem, getColorClassesForDeviceItemShadows } from './DeviceListItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 
 export function DeviceList() {
+    const { t } = useI18next();
+
     const mapAppState = useMapAppState();
     const selectedMarker = mapAppState.selectedMarker;
 
@@ -20,7 +23,10 @@ export function DeviceList() {
                 index={index}
                 key={index}
                 colorClassesForItemShadows={getColorClassesForDeviceItemShadows}
-            />
+            >
+                <p>{device.id}</p>
+                <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
+            </DeviceListItem>
         ));
 
     devicesAtSelectedMarkerLocation.push(<CreateDeviceItem />);
