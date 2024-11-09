@@ -1,13 +1,14 @@
 import { MapAppReducer } from '../redux/MapAppReducer';
 import {
     MapAppAction,
+    MapAppRemoteRequestType,
     mapAppAuthenticationCompleted,
     mapAppGetLocationAddress,
-    mapAppListDevicesRequest,
     mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
     mapAppRemoteAnswer,
+    mapAppRemoteRequest,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
 } from '../redux/MapAppAction';
@@ -102,7 +103,7 @@ describe('MapApp reducer tests', () => {
 
     it('should not change state on remote request', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppListDevicesRequest();
+        const action = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
 
         verifyMapAppStateChange(initialState, action, {});
     });
