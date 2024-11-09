@@ -5,7 +5,7 @@ import { afterButtonClicked } from './AfterButtonClicked';
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.BUTTON_CLICK:
-            return afterButtonClicked(action, state);
+            return { ...state, ...afterButtonClicked(action) };
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
