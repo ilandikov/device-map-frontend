@@ -6,7 +6,7 @@ export function CreateDeviceItem() {
     const { t } = useI18next();
 
     return (
-        <DeviceListItemWrapper index={null}>
+        <DeviceListItemWrapper colorIndex={null}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
             <button>{t('deviceAddDevice')}</button>
         </DeviceListItemWrapper>
