@@ -14,6 +14,7 @@ export enum MapAppActionType {
 
 export enum MapAppButton {
     LOGIN = 'LOGIN',
+    LOGOUT = 'LOGOUT',
 }
 
 export enum MapAppRemoteRequestType {
@@ -50,8 +51,8 @@ export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
     return { type: MapAppActionType.BUTTON_CLICK, button };
 }
 
-export function mapAppLogoutButtonClick(): MapAppGenericAction {
-    return { type: MapAppActionType.LOGOUT_BUTTON_CLICK };
+export function mapAppLogoutButtonClick(): MapAppButtonClick {
+    return mapAppButtonClick(MapAppButton.LOGOUT);
 }
 
 export function mapAppLoginModalClose(): MapAppGenericAction {
