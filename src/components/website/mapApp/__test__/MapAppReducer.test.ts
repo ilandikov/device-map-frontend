@@ -4,8 +4,8 @@ import {
     MapAppButton,
     MapAppRemoteRequestType,
     mapAppAuthenticationCompleted,
+    mapAppButtonClick,
     mapAppGetLocationAddress,
-    mapAppLoginButtonClick,
     mapAppLoginModalClose,
     mapAppLogoutButtonClick,
     mapAppRemoteAnswer,
@@ -36,7 +36,7 @@ describe('MapApp reducer tests', () => {
 
     it('should move to user authentication step on user button click', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppLoginButtonClick(MapAppButton.LOGIN);
+        const action = mapAppButtonClick(MapAppButton.LOGIN);
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });

@@ -36,7 +36,6 @@ export type MapAppAction =
 
 export interface MapAppGenericAction {
     type:
-        | MapAppActionType.BUTTON_CLICKED
         | MapAppActionType.LOGOUT_BUTTON_CLICK
         | MapAppActionType.LOGIN_MODAL_CLOSE
         | MapAppActionType.AUTHENTICATION_COMPLETED;
@@ -47,7 +46,7 @@ interface MapAppButtonClick {
     button: MapAppButton;
 }
 
-export function mapAppLoginButtonClick(button: MapAppButton): MapAppButtonClick {
+export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
     return { type: MapAppActionType.BUTTON_CLICKED, button };
 }
 
