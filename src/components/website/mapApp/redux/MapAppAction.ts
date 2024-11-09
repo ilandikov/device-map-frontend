@@ -1,15 +1,19 @@
 import { Device, MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
-    LOGIN_BUTTON_CLICK = 'LOGIN_BUTTON_CLICK',
+    BUTTON_CLICK = 'BUTTON_CLICK',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
-    LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     REMOTE_REQUEST = 'REMOTE_REQUEST',
     REMOTE_ANSWER = 'REMOTE_ANSWER',
+}
+
+export enum MapAppButton {
+    LOGIN = 'LOGIN',
+    LOGOUT = 'LOGOUT',
 }
 
 export enum MapAppRemoteRequestType {
@@ -23,6 +27,7 @@ export enum MapAppRemoteAnswerType {
 
 export type MapAppAction =
     | MapAppGenericAction
+    | MapAppButtonClick
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
@@ -30,19 +35,16 @@ export type MapAppAction =
     | MapAppRemoteAnswer;
 
 export interface MapAppGenericAction {
-    type:
-        | MapAppActionType.LOGIN_BUTTON_CLICK
-        | MapAppActionType.LOGOUT_BUTTON_CLICK
-        | MapAppActionType.LOGIN_MODAL_CLOSE
-        | MapAppActionType.AUTHENTICATION_COMPLETED;
+    type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
 }
 
-export function mapAppLoginButtonClick(): MapAppGenericAction {
-    return { type: MapAppActionType.LOGIN_BUTTON_CLICK };
+export interface MapAppButtonClick {
+    type: MapAppActionType.BUTTON_CLICK;
+    button: MapAppButton;
 }
 
-export function mapAppLogoutButtonClick(): MapAppGenericAction {
-    return { type: MapAppActionType.LOGOUT_BUTTON_CLICK };
+export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
+    return { type: MapAppActionType.BUTTON_CLICK, button };
 }
 
 export function mapAppLoginModalClose(): MapAppGenericAction {

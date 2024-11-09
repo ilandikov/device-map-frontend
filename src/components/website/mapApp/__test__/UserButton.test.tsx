@@ -2,7 +2,7 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { mapAppLoginButtonClick, mapAppLogoutButtonClick } from '../redux/MapAppAction';
+import { MapAppButton, mapAppButtonClick } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
     LoginModalButton,
@@ -43,7 +43,7 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLoginButtonClick());
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppButtonClick(MapAppButton.LOGIN));
     });
 
     it('should dispatch click action on login button click', () => {
@@ -52,7 +52,7 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLogoutButtonClick());
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppButtonClick(MapAppButton.LOGOUT));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick(LoginModalButton.USER_BUTTON));
         expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalRemoteRequest(LoginModalCheck.NONE));
     });

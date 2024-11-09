@@ -1,12 +1,12 @@
 import { MapAppReducer } from '../redux/MapAppReducer';
 import {
     MapAppAction,
+    MapAppButton,
     MapAppRemoteRequestType,
     mapAppAuthenticationCompleted,
+    mapAppButtonClick,
     mapAppGetLocationAddress,
-    mapAppLoginButtonClick,
     mapAppLoginModalClose,
-    mapAppLogoutButtonClick,
     mapAppRemoteAnswer,
     mapAppRemoteRequest,
     mapAppSetLocationAddress,
@@ -35,14 +35,14 @@ describe('MapApp reducer tests', () => {
 
     it('should move to user authentication step on user button click', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppLoginButtonClick();
+        const action = mapAppButtonClick(MapAppButton.LOGIN);
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
 
     it('should move to mainPage screen step on logout button click', () => {
         const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
-        const action = mapAppLogoutButtonClick();
+        const action = mapAppButtonClick(MapAppButton.LOGOUT);
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
     });
