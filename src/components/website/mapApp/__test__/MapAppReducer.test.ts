@@ -109,7 +109,7 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, {});
     });
 
-    it('should overwrite devices on remote answer', () => {
+    it('should overwrite devices', () => {
         const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lon: 1 } }] });
         const action = mapAppSetDevices([{ id: 'received', location: { lat: 10, lon: 11 } }]);
 
