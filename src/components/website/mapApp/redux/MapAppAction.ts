@@ -51,10 +51,6 @@ export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
     return { type: MapAppActionType.BUTTON_CLICK, button };
 }
 
-export function mapAppLogoutButtonClick(): MapAppButtonClick {
-    return mapAppButtonClick(MapAppButton.LOGOUT);
-}
-
 export function mapAppLoginModalClose(): MapAppGenericAction {
     return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }

@@ -7,7 +7,6 @@ import {
     mapAppButtonClick,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
-    mapAppLogoutButtonClick,
     mapAppRemoteAnswer,
     mapAppRemoteRequest,
     mapAppSetLocationAddress,
@@ -43,7 +42,7 @@ describe('MapApp reducer tests', () => {
 
     it('should move to mainPage screen step on logout button click', () => {
         const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
-        const action = mapAppLogoutButtonClick();
+        const action = mapAppButtonClick(MapAppButton.LOGOUT);
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
     });
