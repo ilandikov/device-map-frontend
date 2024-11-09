@@ -8,7 +8,7 @@ export function CreateDeviceItem() {
     return (
         <DeviceListItemWrapper colorIndex={null}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            <button>{t('deviceAddDevice')}</button>
+            <button data-testid="createDeviceButton">{t('deviceAddDevice')}</button>
         </DeviceListItemWrapper>
     );
 }

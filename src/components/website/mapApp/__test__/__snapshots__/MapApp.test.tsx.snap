@@ -159,7 +159,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           >
             deviceNoDeviceHere
           </p>
-          <button>
+          <button
+            data-testid="createDeviceButton"
+          >
             deviceAddDevice
           </button>
         </div>
@@ -382,7 +384,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           >
             deviceNoDeviceHere
           </p>
-          <button>
+          <button
+            data-testid="createDeviceButton"
+          >
             deviceAddDevice
           </button>
         </div>
