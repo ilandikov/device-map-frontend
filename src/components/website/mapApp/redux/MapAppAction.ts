@@ -91,7 +91,7 @@ export interface MapAppRemoteRequest {
 
 export interface MapAppSetDevices {
     type: MapAppActionType.REMOTE_ANSWER;
-    answer: MapAppRemoteAnswerType;
+    answer: MapAppRemoteAnswerType.DEVICES_LISTED;
     devices: Device[];
 }
 

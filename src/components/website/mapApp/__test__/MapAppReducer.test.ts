@@ -3,6 +3,7 @@ import {
     MapAppAction,
     MapAppButton,
     MapAppRemoteRequestType,
+    mapAppAddDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
     mapAppGetLocationAddress,
@@ -114,6 +115,18 @@ describe('MapApp reducer tests', () => {
 
         verifyMapAppStateChange(initialState, action, {
             devices: [{ id: 'received', location: { lat: 10, lon: 11 } }],
+        });
+    });
+
+    it('should add device', () => {
+        const initialState = buildMapAppState({ devices: [{ id: 'number1', location: { lat: 78, lon: 34 } }] });
+        const action = mapAppAddDevice({ id: 'number2', location: { lat: 9, lon: 31 } });
+
+        verifyMapAppStateChange(initialState, action, {
+            devices: [
+                { id: 'number1', location: { lat: 78, lon: 34 } },
+                { id: 'number2', location: { lat: 9, lon: 31 } },
+            ],
         });
     });
 });
