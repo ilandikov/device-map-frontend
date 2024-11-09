@@ -3,10 +3,17 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 import { Device } from './redux/MapAppState';
 
-export function DeviceListItem(props: { device: Device; index: number }) {
+export function DeviceListItem(props: {
+    device: Device;
+    index: number;
+    colorClassesForItemShadows: (index: number) => {
+        rightShadowColorClass: string;
+        leftShadowColorClass: string;
+    };
+}) {
     const { t } = useI18next();
 
-    const { leftShadowColorClass, rightShadowColorClass } = getColorClassesForDeviceItemShadows(props.index);
+    const { leftShadowColorClass, rightShadowColorClass } = props.colorClassesForItemShadows(props.index);
 
     return (
         <div className="device-list-item-container">
@@ -21,7 +28,7 @@ export function DeviceListItem(props: { device: Device; index: number }) {
     );
 }
 
-function getColorClassesForDeviceItemShadows(index: number) {
+export function getColorClassesForDeviceItemShadows(index: number) {
     switch (index % 3) {
         case 0:
             return {

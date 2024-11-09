@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMapAppState } from './redux/MapAppState';
-import { DeviceListItem } from './DeviceListItem';
+import { DeviceListItem, getColorClassesForDeviceItemShadows } from './DeviceListItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 
@@ -14,7 +14,14 @@ export function DeviceList() {
                 device.location.lat === selectedMarker.location.lat &&
                 device.location.lon === selectedMarker.location.lon,
         )
-        .map((device, index) => <DeviceListItem device={device} index={index} key={index} />);
+        .map((device, index) => (
+            <DeviceListItem
+                device={device}
+                index={index}
+                key={index}
+                colorClassesForItemShadows={getColorClassesForDeviceItemShadows}
+            />
+        ));
 
     devicesAtSelectedMarkerLocation.push(<CreateDeviceItem />);
 
