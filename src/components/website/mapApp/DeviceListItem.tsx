@@ -1,10 +1,8 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
-import { Device } from './redux/MapAppState';
 
 export function DeviceListItem(props: {
-    device: Device;
-    index: number;
+    index: number | null;
     colorClassesForItemShadows: (index: number) => {
         rightShadowColorClass: string;
         leftShadowColorClass: string;

@@ -18,12 +18,7 @@ export function DeviceList() {
                 device.location.lon === selectedMarker.location.lon,
         )
         .map((device, index) => (
-            <DeviceListItem
-                device={device}
-                index={index}
-                key={index}
-                colorClassesForItemShadows={getColorClassesForDeviceItemShadows}
-            >
+            <DeviceListItem index={index} key={index} colorClassesForItemShadows={getColorClassesForDeviceItemShadows}>
                 <p>{device.id}</p>
                 <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             </DeviceListItem>
