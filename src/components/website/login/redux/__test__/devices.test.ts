@@ -1,15 +1,17 @@
 import { ApolloQueryResult } from '@apollo/client';
 import { Query } from '@mancho-school-t22/graphql-types';
 import { mapAppSetDevices } from '../../../mapApp/redux/MapAppAction';
+import { mapAppInitialState } from '../../../mapApp/redux/MapAppState';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
+        const mapAppState = mapAppInitialState;
         const sentAction = { type: 'notAMapAppAction' };
         const expectedActions = [];
 
         // @ts-expect-error
-        await testDevicesEpic(sentAction, expectedActions);
+        await testDevicesEpic(sentAction, mapAppState, expectedActions);
     });
 });
 
