@@ -2,12 +2,7 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
 export function DeviceListItem(props: { index: number | null; children: React.ReactNode }) {
-    let { leftShadowColorClass, rightShadowColorClass } = getColorClassesForDeviceItemShadows(props.index);
-
-    if (props.index === null) {
-        leftShadowColorClass = 'device-list-create-device-item-shadow-left';
-        rightShadowColorClass = 'device-list-create-device-item-shadow-right';
-    }
+    const { leftShadowColorClass, rightShadowColorClass } = getColorClassesForDeviceItemShadows(props.index);
 
     return (
         <div className="device-list-item-container">
@@ -19,7 +14,14 @@ export function DeviceListItem(props: { index: number | null; children: React.Re
     );
 }
 
-function getColorClassesForDeviceItemShadows(index: number) {
+function getColorClassesForDeviceItemShadows(index: number | null) {
+    if (index === null) {
+        return {
+            leftShadowColorClass: 'device-list-create-device-item-shadow-left',
+            rightShadowColorClass: 'device-list-create-device-item-shadow-right',
+        };
+    }
+
     switch (index % 3) {
         case 0:
             return {
@@ -39,8 +41,8 @@ function getColorClassesForDeviceItemShadows(index: number) {
         default:
             console.warn('DeviceListItem component: index mod 3 has been more than 4. Colors may be wrong.');
             return {
-                leftShadowColorClass: 'device-list-item-shadow-left-first',
-                rightShadowColorClass: 'device-list-item-shadow-right-first',
+                leftShadowColorClass: 'device-list-create-device-item-shadow-left',
+                rightShadowColorClass: 'device-list-create-device-item-shadow-right',
             };
     }
 }
