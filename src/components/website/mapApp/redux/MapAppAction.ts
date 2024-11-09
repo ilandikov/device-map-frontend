@@ -1,7 +1,7 @@
 import { Device, MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
-    BUTTON_CLICKED = 'BUTTON_CLICKED',
+    BUTTON_CLICK = 'BUTTON_CLICK',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
     LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
@@ -42,12 +42,12 @@ export interface MapAppGenericAction {
 }
 
 interface MapAppButtonClick {
-    type: MapAppActionType.BUTTON_CLICKED;
+    type: MapAppActionType.BUTTON_CLICK;
     button: MapAppButton;
 }
 
 export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
-    return { type: MapAppActionType.BUTTON_CLICKED, button };
+    return { type: MapAppActionType.BUTTON_CLICK, button };
 }
 
 export function mapAppLogoutButtonClick(): MapAppGenericAction {
