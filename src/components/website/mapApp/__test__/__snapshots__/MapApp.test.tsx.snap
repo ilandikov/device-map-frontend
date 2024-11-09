@@ -161,6 +161,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           </p>
           <button
             data-testid="createDeviceButton"
+            onClick={[Function]}
           >
             deviceAddDevice
           </button>
@@ -386,6 +387,7 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           </p>
           <button
             data-testid="createDeviceButton"
+            onClick={[Function]}
           >
             deviceAddDevice
           </button>
