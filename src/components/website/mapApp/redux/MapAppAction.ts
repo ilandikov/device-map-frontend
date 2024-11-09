@@ -3,7 +3,6 @@ import { Device, MapAppAddress, MapAppLocation } from './MapAppState';
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
-    LOGOUT_BUTTON_CLICK = 'LOGOUT_BUTTON_CLICK',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
@@ -36,10 +35,7 @@ export type MapAppAction =
     | MapAppRemoteAnswer;
 
 export interface MapAppGenericAction {
-    type:
-        | MapAppActionType.LOGOUT_BUTTON_CLICK
-        | MapAppActionType.LOGIN_MODAL_CLOSE
-        | MapAppActionType.AUTHENTICATION_COMPLETED;
+    type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
 }
 
 interface MapAppButtonClick {
