@@ -32,7 +32,7 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppRemoteRequest
-    | MapAppRemoteAnswer;
+    | MapAppSetDevices;
 
 export interface MapAppGenericAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
@@ -87,13 +87,13 @@ export interface MapAppRemoteRequest {
     request: MapAppRemoteRequestType;
 }
 
-export interface MapAppRemoteAnswer {
+export interface MapAppSetDevices {
     type: MapAppActionType.REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType;
     devices: Device[];
 }
 
-export function mapAppRemoteAnswer(devices: Device[]): MapAppRemoteAnswer {
+export function mapAppSetDevices(devices: Device[]): MapAppSetDevices {
     return {
         type: MapAppActionType.REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICES_LISTED,

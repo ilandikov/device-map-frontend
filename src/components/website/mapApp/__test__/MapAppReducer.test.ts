@@ -7,8 +7,8 @@ import {
     mapAppButtonClick,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
-    mapAppRemoteAnswer,
     mapAppRemoteRequest,
+    mapAppSetDevices,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
 } from '../redux/MapAppAction';
@@ -110,7 +110,7 @@ describe('MapApp reducer tests', () => {
 
     it('should overwrite devices on remote answer', () => {
         const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lon: 1 } }] });
-        const action = mapAppRemoteAnswer([{ id: 'received', location: { lat: 10, lon: 11 } }]);
+        const action = mapAppSetDevices([{ id: 'received', location: { lat: 10, lon: 11 } }]);
 
         verifyMapAppStateChange(initialState, action, {
             devices: [{ id: 'received', location: { lat: 10, lon: 11 } }],

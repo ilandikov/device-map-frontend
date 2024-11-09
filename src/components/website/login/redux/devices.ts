@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { ApolloQueryResult } from '@apollo/client';
 import { Query, T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppActionType, MapAppRemoteRequestType, mapAppRemoteAnswer } from '../../mapApp/redux/MapAppAction';
+import { MapAppActionType, MapAppRemoteRequestType, mapAppSetDevices } from '../../mapApp/redux/MapAppAction';
 import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
 
@@ -30,7 +30,7 @@ export function processListDevicesRequest(response: Promise<ApolloQueryResult<Qu
     });
 
     const listDevicesResponse = (response: ApolloQueryResult<Query>) =>
-        of(mapAppRemoteAnswer(response.data.T22ListDevices.map(deviceTransformer)));
+        of(mapAppSetDevices(response.data.T22ListDevices.map(deviceTransformer)));
 
     const doNothing = () => EMPTY;
 

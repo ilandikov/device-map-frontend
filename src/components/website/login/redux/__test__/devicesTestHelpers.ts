@@ -1,7 +1,7 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { ApolloQueryResult } from '@apollo/client';
 import { Query } from '@mancho-school-t22/graphql-types';
-import { MapAppAction, MapAppRemoteAnswer } from '../../../mapApp/redux/MapAppAction';
+import { MapAppAction, MapAppSetDevices } from '../../../mapApp/redux/MapAppAction';
 import { devices, processListDevicesRequest } from '../devices';
 import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBuilders';
 
@@ -15,7 +15,7 @@ export async function testDevicesEpic(sentAction: MapAppAction, expectedActions:
 
 export async function testListDevicesProcessor(
     remoteAnswer: Promise<ApolloQueryResult<Query>>,
-    expectedActions: MapAppRemoteAnswer[],
+    expectedActions: MapAppSetDevices[],
 ) {
     const receivedAction = await lastValueFrom(processListDevicesRequest(remoteAnswer).pipe(toArray()));
 

@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from '@apollo/client';
 import { Query } from '@mancho-school-t22/graphql-types';
-import { mapAppRemoteAnswer } from '../../../mapApp/redux/MapAppAction';
+import { mapAppSetDevices } from '../../../mapApp/redux/MapAppAction';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
 describe('devices epic test', () => {
@@ -33,7 +33,7 @@ describe('list devices', () => {
             networkStatus: 7,
         });
 
-        const expectedAction = mapAppRemoteAnswer([
+        const expectedAction = mapAppSetDevices([
             { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
         ]);
 
