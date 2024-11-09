@@ -1,18 +1,11 @@
-import { MapAppAction, MapAppActionType, MapAppButton, MapAppRemoteAnswerType } from './MapAppAction';
+import { MapAppAction, MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
+import { afterButtonClicked } from './AfterButtonClicked';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.BUTTON_CLICK:
-            switch (action.button) {
-                case MapAppButton.LOGIN:
-                    return { ...state, usageStep: MapAppUsageStep.USER_AUTHENTICATION };
-                case MapAppButton.LOGOUT: {
-                    return { ...state, usageStep: MapAppUsageStep.HOME_SCREEN };
-                }
-                default:
-                    return state;
-            }
+            return afterButtonClicked(action, state);
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,

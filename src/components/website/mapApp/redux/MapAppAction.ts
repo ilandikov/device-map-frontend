@@ -38,7 +38,7 @@ export interface MapAppGenericAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
 }
 
-interface MapAppButtonClick {
+export interface MapAppButtonClick {
     type: MapAppActionType.BUTTON_CLICK;
     button: MapAppButton;
 }
