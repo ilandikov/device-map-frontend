@@ -23,6 +23,7 @@ export enum MapAppRemoteRequestType {
 
 export enum MapAppRemoteAnswerType {
     DEVICES_LISTED = 'DEVICES_LISTED',
+    DEVICE_CREATED = 'DEVICE_CREATED',
 }
 
 export type MapAppAction =
@@ -32,7 +33,8 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppRemoteRequest
-    | MapAppSetDevices;
+    | MapAppSetDevices
+    | MapAppAddDevice;
 
 export interface MapAppGenericAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
@@ -98,6 +100,20 @@ export function mapAppSetDevices(devices: Device[]): MapAppSetDevices {
         type: MapAppActionType.REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICES_LISTED,
         devices: devices,
+    };
+}
+
+interface MapAppAddDevice {
+    type: MapAppActionType.REMOTE_ANSWER;
+    answer: MapAppRemoteAnswerType.DEVICE_CREATED;
+    device: Device;
+}
+
+export function mapAppAddDevice(device: Device): MapAppAddDevice {
+    return {
+        type: MapAppActionType.REMOTE_ANSWER,
+        answer: MapAppRemoteAnswerType.DEVICE_CREATED,
+        device,
     };
 }
 
