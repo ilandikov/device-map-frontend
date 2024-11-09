@@ -1,15 +1,8 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
-export function DeviceListItem(props: {
-    index: number | null;
-    colorClassesForItemShadows: (index: number) => {
-        rightShadowColorClass: string;
-        leftShadowColorClass: string;
-    };
-    children: React.ReactNode;
-}) {
-    let { leftShadowColorClass, rightShadowColorClass } = props.colorClassesForItemShadows(props.index);
+export function DeviceListItem(props: { index: number | null; children: React.ReactNode }) {
+    let { leftShadowColorClass, rightShadowColorClass } = getColorClassesForDeviceItemShadows(props.index);
 
     if (props.index === null) {
         leftShadowColorClass = 'device-list-create-device-item-shadow-left';
@@ -26,7 +19,7 @@ export function DeviceListItem(props: {
     );
 }
 
-export function getColorClassesForDeviceItemShadows(index: number) {
+function getColorClassesForDeviceItemShadows(index: number) {
     switch (index % 3) {
         case 0:
             return {
