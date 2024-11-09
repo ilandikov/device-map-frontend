@@ -12,6 +12,10 @@ export enum MapAppActionType {
     REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
+export enum MapAppButton {
+    LOGIN = 'LOGIN',
+}
+
 export enum MapAppRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
     CREATE_DEVICE = 'CREATE_DEVICE',
@@ -23,6 +27,7 @@ export enum MapAppRemoteAnswerType {
 
 export type MapAppAction =
     | MapAppGenericAction
+    | MapAppButtonClick
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
@@ -37,8 +42,13 @@ export interface MapAppGenericAction {
         | MapAppActionType.AUTHENTICATION_COMPLETED;
 }
 
-export function mapAppLoginButtonClick(): MapAppGenericAction {
-    return { type: MapAppActionType.BUTTON_CLICKED };
+interface MapAppButtonClick {
+    type: MapAppActionType.BUTTON_CLICKED;
+    button: MapAppButton;
+}
+
+export function mapAppLoginButtonClick(): MapAppButtonClick {
+    return { type: MapAppActionType.BUTTON_CLICKED, button: MapAppButton.LOGIN };
 }
 
 export function mapAppLogoutButtonClick(): MapAppGenericAction {
