@@ -1,7 +1,7 @@
 import React from 'react';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { useMapAppState } from './redux/MapAppState';
-import { DeviceListItem } from './DeviceListItem';
+import { DeviceListItemWrapper } from './DeviceListItemWrapper';
 import './DeviceList.scss';
 
 export function DeviceList() {
@@ -17,17 +17,17 @@ export function DeviceList() {
                 device.location.lon === selectedMarker.location.lon,
         )
         .map((device, index) => (
-            <DeviceListItem index={index} key={index}>
+            <DeviceListItemWrapper index={index} key={index}>
                 <p>{device.id}</p>
                 <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            </DeviceListItem>
+            </DeviceListItemWrapper>
         ));
 
     devicesAtSelectedMarkerLocation.push(
-        <DeviceListItem index={null}>
+        <DeviceListItemWrapper index={null}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
             <button>{t('deviceAddDevice')}</button>
-        </DeviceListItem>,
+        </DeviceListItemWrapper>,
     );
 
     return <div className="device-list-container">{devicesAtSelectedMarkerLocation}</div>;

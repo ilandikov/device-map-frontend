@@ -1,7 +1,7 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
-export function DeviceListItem(props: { index: number | null; children: React.ReactNode }) {
+export function DeviceListItemWrapper(props: { index: number | null; children: React.ReactNode }) {
     const { leftShadowColorClass, rightShadowColorClass } = getColorClassesForDeviceItemShadows(props.index);
 
     return (
