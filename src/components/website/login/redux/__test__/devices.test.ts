@@ -55,7 +55,7 @@ describe('list devices', () => {
 });
 
 describe('devices - create device', () => {
-    it.failing('should send action with the new device', async () => {
+    it('should send action with the new device', async () => {
         const mapAppState: MapAppState = {
             ...mapAppInitialState,
             selectedMarker: { location: { lat: 2, lon: 3 }, address: null },
