@@ -103,7 +103,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p>
             test device 1
           </p>
-          <button>
+          <button
+            className="device-list-item-opaque-text"
+          >
             deviceReportBroken
           </button>
         </div>
@@ -128,7 +130,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p>
             test device 3
           </p>
-          <button>
+          <button
+            className="device-list-item-opaque-text"
+          >
             deviceReportBroken
           </button>
         </div>
@@ -241,7 +245,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p>
             test device 1
           </p>
-          <button>
+          <button
+            className="device-list-item-opaque-text"
+          >
             deviceReportBroken
           </button>
         </div>
@@ -266,7 +272,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p>
             test device 3
           </p>
-          <button>
+          <button
+            className="device-list-item-opaque-text"
+          >
             deviceReportBroken
           </button>
         </div>
@@ -291,7 +299,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p>
             test device 5
           </p>
-          <button>
+          <button
+            className="device-list-item-opaque-text"
+          >
             deviceReportBroken
           </button>
         </div>
@@ -316,7 +326,9 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p>
             test device 6
           </p>
-          <button>
+          <button
+            className="device-list-item-opaque-text"
+          >
             deviceReportBroken
           </button>
         </div>

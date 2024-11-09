@@ -15,7 +15,7 @@ export function DeviceListItem(props: { device: Device; index: number }) {
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">
                 <p>{props.device.id}</p>
-                <button>{t('deviceReportBroken')}</button>
+                <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             </div>
         </div>
     );
