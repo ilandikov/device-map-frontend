@@ -101,7 +101,7 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should not change state on remote request', () => {
+    it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
         const action = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
 
