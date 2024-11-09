@@ -157,10 +157,10 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p
             className="device-list-item-opaque-text"
           >
-            Тут пока нет терминала
+            deviceNoDeviceHere
           </p>
           <button>
-            Добавить терминал
+            deviceAddDevice
           </button>
         </div>
       </div>
@@ -380,10 +380,10 @@ exports[`MapApp snapshot tests should list devices matching the selected marker 
           <p
             className="device-list-item-opaque-text"
           >
-            Тут пока нет терминала
+            deviceNoDeviceHere
           </p>
           <button>
-            Добавить терминал
+            deviceAddDevice
           </button>
         </div>
       </div>
