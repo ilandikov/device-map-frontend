@@ -1,6 +1,7 @@
 import { MapAppReducer } from '../redux/MapAppReducer';
 import {
     MapAppAction,
+    MapAppButton,
     MapAppRemoteRequestType,
     mapAppAuthenticationCompleted,
     mapAppGetLocationAddress,
@@ -35,7 +36,7 @@ describe('MapApp reducer tests', () => {
 
     it('should move to user authentication step on user button click', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppLoginButtonClick();
+        const action = mapAppLoginButtonClick(MapAppButton.LOGIN);
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });

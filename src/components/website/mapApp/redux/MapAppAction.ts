@@ -47,8 +47,8 @@ interface MapAppButtonClick {
     button: MapAppButton;
 }
 
-export function mapAppLoginButtonClick(): MapAppButtonClick {
-    return { type: MapAppActionType.BUTTON_CLICKED, button: MapAppButton.LOGIN };
+export function mapAppLoginButtonClick(button: MapAppButton): MapAppButtonClick {
+    return { type: MapAppActionType.BUTTON_CLICKED, button };
 }
 
 export function mapAppLogoutButtonClick(): MapAppGenericAction {
