@@ -2,13 +2,15 @@ import { MapAppButton, MapAppButtonClick } from './MapAppAction';
 import { MapAppState, MapAppUsageStep } from './MapAppState';
 
 export function afterButtonClicked(action: MapAppButtonClick): Partial<MapAppState> {
-    switch (action.button) {
-        case MapAppButton.LOGIN:
-            return { usageStep: MapAppUsageStep.USER_AUTHENTICATION };
-        case MapAppButton.LOGOUT: {
-            return { usageStep: MapAppUsageStep.HOME_SCREEN };
-        }
-        default:
-            return {};
+    const nextStep = stepAfterButtonClick[action.button];
+    if (nextStep) {
+        return { usageStep: nextStep };
     }
+
+    return {};
 }
+
+const stepAfterButtonClick: { [key in MapAppButton]: MapAppUsageStep } = {
+    LOGIN: MapAppUsageStep.USER_AUTHENTICATION,
+    LOGOUT: MapAppUsageStep.HOME_SCREEN,
+};
