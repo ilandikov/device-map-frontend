@@ -6,7 +6,7 @@ import {
     initialAuthenticationState,
 } from '../../components/website/login/redux/AuthenticationState';
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
-import { mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
+import { MapAppState, mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
 
 function buildInitialTestState(): RootState {
     return {
@@ -23,8 +23,8 @@ export function buildStateForCognitoTest(authentication: AuthenticationState): S
     });
 }
 
-export function buildStateForDevicesTest(): StateObservable<RootState> {
-    return new StateObservable(EMPTY, buildInitialTestState());
+export function buildStateForDevicesTest(mapAppState: MapAppState): StateObservable<RootState> {
+    return new StateObservable(EMPTY, { ...buildInitialTestState(), mapAppState });
 }
 
 export function buildStateForGeoApifyTest(): StateObservable<RootState> {

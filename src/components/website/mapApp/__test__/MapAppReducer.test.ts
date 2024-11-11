@@ -3,12 +3,13 @@ import {
     MapAppAction,
     MapAppButton,
     MapAppRemoteRequestType,
+    mapAppAddDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
-    mapAppRemoteAnswer,
     mapAppRemoteRequest,
+    mapAppSetDevices,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
 } from '../redux/MapAppAction';
@@ -101,19 +102,31 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should not change state on remote request', () => {
+    it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
         const action = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
 
         verifyMapAppStateChange(initialState, action, {});
     });
 
-    it('should overwrite devices on remote answer', () => {
+    it('should overwrite devices', () => {
         const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lon: 1 } }] });
-        const action = mapAppRemoteAnswer([{ id: 'received', location: { lat: 10, lon: 11 } }]);
+        const action = mapAppSetDevices([{ id: 'received', location: { lat: 10, lon: 11 } }]);
 
         verifyMapAppStateChange(initialState, action, {
             devices: [{ id: 'received', location: { lat: 10, lon: 11 } }],
+        });
+    });
+
+    it('should add device', () => {
+        const initialState = buildMapAppState({ devices: [{ id: 'number1', location: { lat: 78, lon: 34 } }] });
+        const action = mapAppAddDevice({ id: 'number2', location: { lat: 9, lon: 31 } });
+
+        verifyMapAppStateChange(initialState, action, {
+            devices: [
+                { id: 'number1', location: { lat: 78, lon: 34 } },
+                { id: 'number2', location: { lat: 9, lon: 31 } },
+            ],
         });
     });
 });

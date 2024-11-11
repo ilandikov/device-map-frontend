@@ -26,6 +26,9 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             switch (action.answer) {
                 case MapAppRemoteAnswerType.DEVICES_LISTED:
                     return { ...state, devices: action.devices };
+                case MapAppRemoteAnswerType.DEVICE_CREATED: {
+                    return { ...state, devices: [...state.devices, action.device] };
+                }
                 default:
                     return state;
             }
