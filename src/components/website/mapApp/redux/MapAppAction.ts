@@ -1,4 +1,5 @@
-import { Device, MapAppAddress, MapAppLocation } from './MapAppState';
+import { T22Device } from '@mancho-school-t22/graphql-types';
+import { MapAppAddress, MapAppLocation } from './MapAppState';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
@@ -94,10 +95,10 @@ export interface MapAppRemoteRequest {
 export interface MapAppSetDevices {
     type: MapAppActionType.REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICES_LISTED;
-    devices: Device[];
+    devices: T22Device[];
 }
 
-export function mapAppSetDevices(devices: Device[]): MapAppSetDevices {
+export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
     return {
         type: MapAppActionType.REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICES_LISTED,
@@ -108,10 +109,10 @@ export function mapAppSetDevices(devices: Device[]): MapAppSetDevices {
 interface MapAppAddDevice {
     type: MapAppActionType.REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICE_CREATED;
-    device: Device;
+    device: T22Device;
 }
 
-export function mapAppAddDevice(device: Device): MapAppAddDevice {
+export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
     return {
         type: MapAppActionType.REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICE_CREATED,

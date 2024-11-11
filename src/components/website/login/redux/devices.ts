@@ -9,7 +9,6 @@ import {
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
-import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
 
 export const devices: RootEpic = (action$, _, { devicesClient }) =>
@@ -28,7 +27,7 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
     );
 
 function processListDevicesRequest(response: Promise<T22Device[]>) {
-    const deviceTransformer = (device: T22Device): Device => ({
+    const deviceTransformer = (device: T22Device): T22Device => ({
         id: device.id,
         location: {
             lat: device.location.lat,
