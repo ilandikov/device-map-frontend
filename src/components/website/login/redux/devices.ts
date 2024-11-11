@@ -18,7 +18,7 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(
+                    return executeDeviceOperation(
                         appleSauce[action.request].call(devicesClient),
                         appleSauce[action.request].responseProcessor,
                     );
@@ -30,19 +30,23 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
         }),
     );
 
-const appleSauce: Partial<{
-    [key in MapAppRemoteRequestType]: {
-        call: (client: DevicesClient) => Promise<Query>;
-        responseProcessor: (response: Query) => Observable<MapAppAction>;
-    };
-}> = {
+type DeviceOperation<TOperation> = {
+    call: (client: DevicesClient) => Promise<TOperation>;
+    responseProcessor: (response: TOperation) => Observable<MapAppAction>;
+};
+
+type QueryOperations = Partial<{
+    [key in MapAppRemoteRequestType]: DeviceOperation<Query>;
+}>;
+
+const appleSauce: QueryOperations = {
     LIST_DEVICES: {
         call: (client) => client.listDevices(),
-        responseProcessor: (response: Query) => of(mapAppSetDevices(response.T22ListDevices)),
+        responseProcessor: (response) => of(mapAppSetDevices(response.T22ListDevices)),
     },
 };
 
-function processListDevicesRequest(
+function executeDeviceOperation(
     response: Promise<Query>,
     responseProcessor: (response: Query) => Observable<MapAppAction>,
 ) {
