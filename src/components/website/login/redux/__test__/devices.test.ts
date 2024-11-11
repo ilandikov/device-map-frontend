@@ -8,7 +8,7 @@ import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { DevicesClient } from '../../../../../redux/store';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
-const devicesClient: DevicesClient = {
+const resolvingClient: DevicesClient = {
     listDevices: () =>
         Promise.resolve([
             {
@@ -30,7 +30,7 @@ describe('devices epic test', () => {
         const expectedActions = [];
 
         // @ts-expect-error
-        await testDevicesEpic(sentAction, mapAppState, devicesClient, expectedActions);
+        await testDevicesEpic(sentAction, mapAppState, resolvingClient, expectedActions);
     });
 });
 
@@ -40,7 +40,7 @@ describe('list devices', () => {
             { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
         ]);
 
-        await testListDevicesProcessor(devicesClient.listDevices(), [expectedAction]);
+        await testListDevicesProcessor(resolvingClient.listDevices(), [expectedAction]);
     });
 
     it('should process a rejected promise', async () => {
