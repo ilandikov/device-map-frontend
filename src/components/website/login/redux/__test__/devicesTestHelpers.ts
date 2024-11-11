@@ -10,7 +10,9 @@ export async function testDevicesEpic(
     mapAppState: MapAppState,
     expectedActions: MapAppAction[],
 ) {
-    const output$ = devices(of(sentAction), buildStateForDevicesTest(mapAppState), {});
+    const output$ = devices(of(sentAction), buildStateForDevicesTest(mapAppState), {
+        apolloClient: { listDevices: () => Promise.resolve([]) },
+    });
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 
