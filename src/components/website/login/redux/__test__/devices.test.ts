@@ -61,8 +61,8 @@ describe('devices - create device', () => {
             },
         });
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
-        const expectedActions = [mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } })];
+        const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } });
 
-        await testDevicesEpic(sentAction, mapAppState, { listDevices: () => Promise.resolve([]) }, expectedActions);
+        await testDevicesEpic(sentAction, mapAppState, { listDevices: () => Promise.resolve([]) }, [expectedAction]);
     });
 });
