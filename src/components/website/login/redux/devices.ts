@@ -43,14 +43,13 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
 }
 
 function processCreateDeviceRequest(state$: StateObservable<RootState>, response: Promise<T22Device>) {
-    return fromPromise(response).pipe(
-        mergeMap(() =>
-            of(
-                mapAppAddDevice({
-                    id: 'testId',
-                    location: state$.value.mapAppState.selectedMarker.location,
-                }),
-            ),
-        ),
-    );
+    const createDeviceResponse = () =>
+        of(
+            mapAppAddDevice({
+                id: 'testId',
+                location: state$.value.mapAppState.selectedMarker.location,
+            }),
+        );
+
+    return fromPromise(response).pipe(mergeMap(createDeviceResponse));
 }
