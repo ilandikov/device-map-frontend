@@ -31,7 +31,7 @@ export const devices: RootEpic = (action$, state$, { devicesClient }) =>
         }),
     );
 
-export function processListDevicesRequest(response: Promise<T22Device[]>) {
+function processListDevicesRequest(response: Promise<T22Device[]>) {
     const deviceTransformer = (device: T22Device): Device => ({
         id: device.id,
         location: {

@@ -1,7 +1,6 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppAction, MapAppSetDevices } from '../../../mapApp/redux/MapAppAction';
-import { devices, processListDevicesRequest } from '../devices';
+import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
+import { devices } from '../devices';
 import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { MapAppState } from '../../../mapApp/redux/MapAppState';
 import { DevicesClient } from '../../../../../redux/store';
@@ -17,15 +16,6 @@ export async function testDevicesEpic(
     });
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-
-    expect(receivedAction).toEqual(expectedActions);
-}
-
-export async function testListDevicesProcessor(
-    remoteAnswer: Promise<T22Device[]>,
-    expectedActions: MapAppSetDevices[],
-) {
-    const receivedAction = await lastValueFrom(processListDevicesRequest(remoteAnswer).pipe(toArray()));
 
     expect(receivedAction).toEqual(expectedActions);
 }

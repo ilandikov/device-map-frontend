@@ -6,7 +6,7 @@ import {
 } from '../../../mapApp/redux/MapAppAction';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { DevicesClient } from '../../../../../redux/store';
-import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
+import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
     listDevices: () =>
@@ -40,15 +40,20 @@ describe('devices epic test', () => {
 
 describe('list devices', () => {
     it('should process a resolved promise', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
         const expectedAction = mapAppSetDevices([
             { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
         ]);
 
-        await testListDevicesProcessor(resolvingClient.listDevices(), [expectedAction]);
+        await testDevicesEpic(mapAppState, resolvingClient, sentAction, [expectedAction]);
     });
 
     it('should process a rejected promise', async () => {
-        await testListDevicesProcessor(rejectingClient.listDevices(), []);
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
+
+        await testDevicesEpic(mapAppState, rejectingClient, sentAction, []);
     });
 });
 
