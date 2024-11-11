@@ -38,9 +38,7 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
 
     const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response.map(deviceTransformer)));
 
-    const doNothing = () => EMPTY;
-
-    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(doNothing));
+    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
 }
 
 function processCreateDeviceRequest(response: Promise<T22Device>) {
