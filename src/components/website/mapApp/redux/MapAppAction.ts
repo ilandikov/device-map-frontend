@@ -9,6 +9,7 @@ export enum MapAppActionType {
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     REMOTE_REQUEST = 'REMOTE_REQUEST',
     REMOTE_ANSWER = 'REMOTE_ANSWER',
+    REMOTE_ERROR_ANSWER = 'REMOTE_ERROR_ANSWER',
 }
 
 export enum MapAppButton {
@@ -34,7 +35,8 @@ export type MapAppAction =
     | MapAppSetLocationAddress
     | MapAppRemoteRequest
     | MapAppSetDevices
-    | MapAppAddDevice;
+    | MapAppAddDevice
+    | MapAppRemoteErrorAnswer;
 
 export interface MapAppGenericAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
@@ -119,4 +121,13 @@ export function mapAppAddDevice(device: Device): MapAppAddDevice {
 
 export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppRemoteRequest {
     return { type: MapAppActionType.REMOTE_REQUEST, request };
+}
+
+interface MapAppRemoteErrorAnswer {
+    type: MapAppActionType.REMOTE_ERROR_ANSWER;
+    error: string;
+}
+
+export function mapAppRemoteErrorAnswer(error: string): MapAppRemoteErrorAnswer {
+    return { type: MapAppActionType.REMOTE_ERROR_ANSWER, error };
 }

@@ -1,8 +1,7 @@
 import { EMPTY, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { ApolloQueryResult } from '@apollo/client';
-import { Query, T22Device } from '@mancho-school-t22/graphql-types';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import {
     MapAppActionType,
     MapAppRemoteRequestType,
@@ -12,13 +11,13 @@ import {
 import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
 
-export const devices: RootEpic = (action$, state$, { apolloClient }) =>
+export const devices: RootEpic = (action$, state$, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(apolloClient.listDevices());
+                    return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
                     return of(
                         mapAppAddDevice({
@@ -32,7 +31,7 @@ export const devices: RootEpic = (action$, state$, { apolloClient }) =>
         }),
     );
 
-export function processListDevicesRequest(response: Promise<ApolloQueryResult<Query>>) {
+function processListDevicesRequest(response: Promise<T22Device[]>) {
     const deviceTransformer = (device: T22Device): Device => ({
         id: device.id,
         location: {
@@ -41,8 +40,7 @@ export function processListDevicesRequest(response: Promise<ApolloQueryResult<Qu
         },
     });
 
-    const listDevicesResponse = (response: ApolloQueryResult<Query>) =>
-        of(mapAppSetDevices(response.data.T22ListDevices.map(deviceTransformer)));
+    const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response.map(deviceTransformer)));
 
     const doNothing = () => EMPTY;
 
