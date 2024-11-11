@@ -1,10 +1,11 @@
-import { EMPTY, catchError, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import {
     MapAppActionType,
     MapAppRemoteRequestType,
+    MapAppSetDevices,
     mapAppAddDevice,
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
@@ -17,7 +18,9 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(devicesClient.listDevices());
+                    return processListDevicesRequest(devicesClient.listDevices(), (response: T22Device[]) =>
+                        of(mapAppSetDevices(response)),
+                    );
                 case MapAppRemoteRequestType.CREATE_DEVICE:
                     return processCreateDeviceRequest(devicesClient.createDevice());
                 default:
@@ -26,8 +29,11 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
         }),
     );
 
-function processListDevicesRequest(response: Promise<T22Device[]>) {
-    const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response));
+function processListDevicesRequest(
+    response: Promise<T22Device[]>,
+    responseProcessor: (response: T22Device[]) => Observable<MapAppSetDevices>,
+) {
+    const listDevicesResponse = responseProcessor;
 
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
 }
