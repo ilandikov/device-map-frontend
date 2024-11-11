@@ -1,5 +1,5 @@
 import { EMPTY, catchError, mergeMap, of, switchMap } from 'rxjs';
-import { StateObservable, ofType } from 'redux-observable';
+import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import {
@@ -9,9 +9,9 @@ import {
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
 import { Device } from '../../mapApp/redux/MapAppState';
-import { RootEpic, RootState } from '../../../../redux/store';
+import { RootEpic } from '../../../../redux/store';
 
-export const devices: RootEpic = (action$, state$, { devicesClient }) =>
+export const devices: RootEpic = (action$, _, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap((action) => {
@@ -19,7 +19,7 @@ export const devices: RootEpic = (action$, state$, { devicesClient }) =>
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest(state$, devicesClient.createDevice());
+                    return processCreateDeviceRequest(devicesClient.createDevice());
                 default:
                     return EMPTY;
             }
@@ -42,7 +42,7 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(doNothing));
 }
 
-function processCreateDeviceRequest(_state$: StateObservable<RootState>, response: Promise<T22Device>) {
+function processCreateDeviceRequest(response: Promise<T22Device>) {
     const createDeviceResponse = (response: T22Device) => of(mapAppAddDevice(response));
 
     return fromPromise(response).pipe(mergeMap(createDeviceResponse));
