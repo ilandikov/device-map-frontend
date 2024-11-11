@@ -1,5 +1,5 @@
-import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress, MapAppLocation } from './MapAppState';
+import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { MapAppAddress } from './MapAppState';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
@@ -62,19 +62,19 @@ export function mapAppAuthenticationCompleted(): MapAppGenericAction {
 
 export interface MapAppDeviceMarkerClick {
     type: MapAppActionType.SET_LOCATION_COORDINATES;
-    markerLocation: MapAppLocation;
+    markerLocation: T22Location;
 }
 
-export function mapAppSetLocationCoordinates(markerLocation: MapAppLocation): MapAppDeviceMarkerClick {
+export function mapAppSetLocationCoordinates(markerLocation: T22Location): MapAppDeviceMarkerClick {
     return { type: MapAppActionType.SET_LOCATION_COORDINATES, markerLocation };
 }
 
 export interface MapAppGetLocationAddress {
     type: MapAppActionType.GET_LOCATION_ADDRESS;
-    location: MapAppLocation;
+    location: T22Location;
 }
 
-export function mapAppGetLocationAddress(location: MapAppLocation): MapAppAction {
+export function mapAppGetLocationAddress(location: T22Location): MapAppAction {
     return { type: MapAppActionType.GET_LOCATION_ADDRESS, location };
 }
 
