@@ -1,6 +1,7 @@
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppRemoteErrorAnswer,
     mapAppRemoteRequest,
     mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppAction';
@@ -69,5 +70,13 @@ describe('devices - create device', () => {
         const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } });
 
         await testDevicesEpic(mapAppState, resolvingClient, sentAction, [expectedAction]);
+    });
+
+    it.failing('should notify about the error', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
+        const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');
+
+        await testDevicesEpic(mapAppState, rejectingClient, sentAction, [expectedAction]);
     });
 });
