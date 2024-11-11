@@ -1,18 +1,9 @@
 import { useSelector } from 'react-redux';
+import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import { RootState } from '../../../../redux/store';
 
 export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state.mapAppState);
-}
-
-export interface Device {
-    id: string;
-    location: MapAppLocation;
-}
-
-export interface MapAppLocation {
-    lat: number;
-    lon: number;
 }
 
 export interface MapAppAddress {
@@ -23,10 +14,10 @@ export interface MapAppAddress {
 export interface MapAppState {
     usageStep: MapAppUsageStep;
     selectedMarker: {
-        location: MapAppLocation | null;
+        location: T22Location | null;
         address: MapAppAddress | null;
     };
-    devices: Device[];
+    devices: T22Device[];
 }
 
 export enum MapAppUsageStep {

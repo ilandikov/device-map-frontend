@@ -12,7 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
-import { T22Device } from '@mancho-school-t22/graphql-types';
+import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -23,7 +23,6 @@ import { LoginModalAction } from '../components/website/login/redux/LoginModalAc
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import { listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
-import { MapAppLocation } from '../components/website/mapApp/redux/MapAppState';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -45,7 +44,7 @@ export interface DevicesClient {
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
-    geoApifyClient?: (location: MapAppLocation) => Observable<AjaxResponse<GeoApifyResponse>>;
+    geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;

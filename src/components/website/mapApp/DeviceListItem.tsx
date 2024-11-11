@@ -1,9 +1,9 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import { DeviceListItemWrapper } from './DeviceListItemWrapper';
-import { Device } from './redux/MapAppState';
 
-export function DeviceListItem(props: { device: Device; colorIndex: number }) {
+export function DeviceListItem(props: { device: T22Device; colorIndex: number }) {
     const { t } = useI18next();
 
     return (
