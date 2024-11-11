@@ -6,13 +6,13 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, ApolloLink, ApolloQueryResult, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
-import { Query } from '@mancho-school-t22/graphql-types';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -39,7 +39,7 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     apolloClient?: {
-        listDevices: () => Promise<ApolloQueryResult<Query>>;
+        listDevices: () => Promise<T22Device[]>;
     };
     geoApifyClient?: (location: MapAppLocation) => Observable<AjaxResponse<GeoApifyResponse>>;
 };
@@ -73,7 +73,8 @@ export function createStore() {
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
             apolloClient: {
-                listDevices: () => apolloClient.query(listDevicesQuery),
+                listDevices: () =>
+                    apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
             },
             geoApifyClient: (location) =>
                 ajax({

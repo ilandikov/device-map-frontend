@@ -1,5 +1,4 @@
-import { ApolloQueryResult } from '@apollo/client';
-import { Query } from '@mancho-school-t22/graphql-types';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
@@ -22,23 +21,17 @@ describe('devices epic test', () => {
 
 describe('list devices', () => {
     it('should process a resolved promise', async () => {
-        const remoteAnswer: Promise<ApolloQueryResult<Query>> = Promise.resolve({
-            data: {
-                T22ListDevices: [
-                    {
-                        __typename: 'T22Device',
-                        id: 'dev1',
-                        location: {
-                            __typename: 'T22Location',
-                            lat: 42.85862508449081,
-                            lon: 74.6085298061371,
-                        },
-                    },
-                ],
+        const remoteAnswer: Promise<T22Device[]> = Promise.resolve([
+            {
+                __typename: 'T22Device',
+                id: 'dev1',
+                location: {
+                    __typename: 'T22Location',
+                    lat: 42.85862508449081,
+                    lon: 74.6085298061371,
+                },
             },
-            loading: false,
-            networkStatus: 7,
-        });
+        ]);
 
         const expectedAction = mapAppSetDevices([
             { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
