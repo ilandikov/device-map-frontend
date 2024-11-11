@@ -3,14 +3,14 @@ import { ofType } from 'redux-observable';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import {
+    MapAppAction,
     MapAppActionType,
     MapAppRemoteRequestType,
-    MapAppSetDevices,
     mapAppAddDevice,
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
-import { RootEpic } from '../../../../redux/store';
+import { DevicesClient, RootEpic } from '../../../../redux/store';
 
 export const devices: RootEpic = (action$, _, { devicesClient }) =>
     action$.pipe(
@@ -18,7 +18,10 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(devicesClient.listDevices(), listDevicesResponse);
+                    return processListDevicesRequest(
+                        appleSauce[action.request].call(devicesClient),
+                        appleSauce[action.request].responseProcessor,
+                    );
                 case MapAppRemoteRequestType.CREATE_DEVICE:
                     return processCreateDeviceRequest(devicesClient.createDevice());
                 default:
@@ -27,10 +30,21 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
         }),
     );
 
-const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response));
+const appleSauce: Partial<{
+    [key in MapAppRemoteRequestType]: {
+        call: (client: DevicesClient) => Promise<T22Device[]>;
+        responseProcessor: (response: T22Device[]) => Observable<MapAppAction>;
+    };
+}> = {
+    LIST_DEVICES: {
+        call: (client) => client.listDevices(),
+        responseProcessor: (response: T22Device[]) => of(mapAppSetDevices(response)),
+    },
+};
+
 function processListDevicesRequest(
     response: Promise<T22Device[]>,
-    responseProcessor: (response: T22Device[]) => Observable<MapAppSetDevices>,
+    responseProcessor: (response: T22Device[]) => Observable<MapAppAction>,
 ) {
     return fromPromise(response).pipe(mergeMap(responseProcessor), catchError(reportError));
 }
