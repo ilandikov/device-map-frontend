@@ -39,6 +39,7 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
     listDevices: () => Promise<T22Device[]>;
+    createDevice: () => Promise<T22Device>;
 }
 
 export type Dependencies = {
@@ -78,6 +79,7 @@ export function createStore() {
             devicesClient: {
                 listDevices: () =>
                     apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                createDevice: () => Promise.resolve({}) as any,
             },
             geoApifyClient: (location) =>
                 ajax({

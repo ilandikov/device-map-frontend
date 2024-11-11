@@ -22,10 +22,12 @@ const resolvingClient: DevicesClient = {
                 },
             },
         ]),
+    createDevice: () => Promise.resolve({ id: 'testId', location: { lat: 2, lon: 3 } }),
 };
 
 const rejectingClient: DevicesClient = {
     listDevices: () => Promise.reject('list devices went wrong'),
+    createDevice: () => Promise.reject('create device went wrong'),
 };
 
 describe('devices epic test', () => {
