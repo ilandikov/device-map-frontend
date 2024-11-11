@@ -37,7 +37,7 @@ export type AllActions = LoginModalAction | MapAppAction;
 
 export type Dependency<T> = { [key in keyof T]: T[key] };
 
-interface DevicesClient {
+export interface DevicesClient {
     listDevices: () => Promise<T22Device[]>;
 }
 

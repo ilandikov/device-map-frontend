@@ -15,7 +15,7 @@ describe('devices epic test', () => {
         const expectedActions = [];
 
         // @ts-expect-error
-        await testDevicesEpic(sentAction, mapAppState, expectedActions);
+        await testDevicesEpic(sentAction, mapAppState, { listDevices: () => Promise.resolve([]) }, expectedActions);
     });
 });
 
@@ -58,6 +58,6 @@ describe('devices - create device', () => {
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedActions = [mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } })];
 
-        await testDevicesEpic(sentAction, mapAppState, expectedActions);
+        await testDevicesEpic(sentAction, mapAppState, { listDevices: () => Promise.resolve([]) }, expectedActions);
     });
 });
