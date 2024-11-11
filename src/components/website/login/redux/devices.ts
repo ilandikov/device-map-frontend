@@ -38,16 +38,13 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
 
     const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response.map(deviceTransformer)));
 
-    const doNothing = () => EMPTY;
-
-    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(doNothing));
+    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
 }
 
 function processCreateDeviceRequest(response: Promise<T22Device>) {
     const createDeviceResponse = (response: T22Device) => of(mapAppAddDevice(response));
 
-    return fromPromise(response).pipe(
-        mergeMap(createDeviceResponse),
-        catchError((error) => of(mapAppRemoteErrorAnswer(error))),
-    );
+    return fromPromise(response).pipe(mergeMap(createDeviceResponse), catchError(reportError));
 }
+
+const reportError = (error) => of(mapAppRemoteErrorAnswer(error));

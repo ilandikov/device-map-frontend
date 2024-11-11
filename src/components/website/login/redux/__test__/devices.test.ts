@@ -51,8 +51,9 @@ describe('list devices', () => {
 
     it('should process a rejected promise', async () => {
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
+        const expectedAction = mapAppRemoteErrorAnswer('list devices went wrong');
 
-        await testDevicesEpic(rejectingClient, sentAction, []);
+        await testDevicesEpic(rejectingClient, sentAction, [expectedAction]);
     });
 });
 
