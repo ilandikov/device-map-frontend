@@ -8,6 +8,8 @@ import {
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
+const devicesClient = { listDevices: () => Promise.resolve([]) };
+
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
         const mapAppState = buildMapAppState({});
@@ -15,7 +17,7 @@ describe('devices epic test', () => {
         const expectedActions = [];
 
         // @ts-expect-error
-        await testDevicesEpic(sentAction, mapAppState, { listDevices: () => Promise.resolve([]) }, expectedActions);
+        await testDevicesEpic(sentAction, mapAppState, devicesClient, expectedActions);
     });
 });
 
