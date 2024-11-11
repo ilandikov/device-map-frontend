@@ -27,15 +27,7 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
     );
 
 function processListDevicesRequest(response: Promise<T22Device[]>) {
-    const deviceTransformer = (device: T22Device): T22Device => ({
-        id: device.id,
-        location: {
-            lat: device.location.lat,
-            lon: device.location.lon,
-        },
-    });
-
-    const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response.map(deviceTransformer)));
+    const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response));
 
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
 }

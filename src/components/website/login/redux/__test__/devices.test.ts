@@ -43,7 +43,15 @@ describe('list devices', () => {
     it('should process a resolved promise', async () => {
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
         const expectedAction = mapAppSetDevices([
-            { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
+            {
+                __typename: 'T22Device',
+                id: 'dev1',
+                location: {
+                    __typename: 'T22Location',
+                    lat: 42.85862508449081,
+                    lon: 74.6085298061371,
+                },
+            },
         ]);
 
         await testDevicesEpic(resolvingClient, sentAction, [expectedAction]);
