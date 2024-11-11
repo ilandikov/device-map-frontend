@@ -36,11 +36,14 @@ export type RootState = ReturnType<typeof rootReducer>;
 export type AllActions = LoginModalAction | MapAppAction;
 
 export type Dependency<T> = { [key in keyof T]: T[key] };
+
+interface DevicesClient {
+    listDevices: () => Promise<T22Device[]>;
+}
+
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
-    devicesClient?: {
-        listDevices: () => Promise<T22Device[]>;
-    };
+    devicesClient?: DevicesClient;
     geoApifyClient?: (location: MapAppLocation) => Observable<AjaxResponse<GeoApifyResponse>>;
 };
 
