@@ -33,9 +33,7 @@ function processListDevicesRequest(
     response: Promise<T22Device[]>,
     responseProcessor: (response: T22Device[]) => Observable<MapAppSetDevices>,
 ) {
-    const listDevicesResponse = responseProcessor;
-
-    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
+    return fromPromise(response).pipe(mergeMap(responseProcessor), catchError(reportError));
 }
 
 function processCreateDeviceRequest(response: Promise<T22Device>) {
