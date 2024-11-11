@@ -10,17 +10,19 @@ import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
     listDevices: () =>
-        Promise.resolve([
-            {
-                __typename: 'T22Device',
-                id: 'dev1',
-                location: {
-                    __typename: 'T22Location',
-                    lat: 42.85862508449081,
-                    lon: 74.6085298061371,
+        Promise.resolve({
+            T22ListDevices: [
+                {
+                    __typename: 'T22Device',
+                    id: 'dev1',
+                    location: {
+                        __typename: 'T22Location',
+                        lat: 42.85862508449081,
+                        lon: 74.6085298061371,
+                    },
                 },
-            },
-        ]),
+            ],
+        }),
     createDevice: () => Promise.resolve({ id: 'testId', location: { lat: 2, lon: 3 } }),
 };
 

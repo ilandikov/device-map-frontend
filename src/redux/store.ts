@@ -12,7 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
-import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { Query, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -37,7 +37,7 @@ export type AllActions = LoginModalAction | MapAppAction;
 export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
-    listDevices: () => Promise<T22Device[]>;
+    listDevices: () => Promise<Query>;
     createDevice: () => Promise<T22Device>;
 }
 
@@ -76,8 +76,7 @@ export function createStore() {
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
             devicesClient: {
-                listDevices: () =>
-                    apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                listDevices: () => apolloClient.query(listDevicesQuery).then((response) => response.data),
                 createDevice: () => Promise.reject('not implemented'),
             },
             geoApifyClient: (location) =>
