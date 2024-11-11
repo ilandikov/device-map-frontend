@@ -79,7 +79,7 @@ export function createStore() {
             devicesClient: {
                 listDevices: () =>
                     apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
-                createDevice: () => Promise.resolve({}) as any,
+                createDevice: () => Promise.reject('not implemented'),
             },
             geoApifyClient: (location) =>
                 ajax({
