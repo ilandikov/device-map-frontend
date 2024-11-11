@@ -23,6 +23,10 @@ const resolvingClient: DevicesClient = {
         ]),
 };
 
+const rejectingClient: DevicesClient = {
+    listDevices: () => Promise.reject('list devices went wrong'),
+};
+
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
         const mapAppState = buildMapAppState({});
@@ -44,9 +48,7 @@ describe('list devices', () => {
     });
 
     it('should process a rejected promise', async () => {
-        const remoteAnswer = Promise.reject();
-
-        await testListDevicesProcessor(remoteAnswer, []);
+        await testListDevicesProcessor(rejectingClient.listDevices(), []);
     });
 });
 
