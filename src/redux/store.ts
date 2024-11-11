@@ -38,7 +38,7 @@ export type AllActions = LoginModalAction | MapAppAction;
 export type Dependency<T> = { [key in keyof T]: T[key] };
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
-    apolloClient?: {
+    devicesClient?: {
         listDevices: () => Promise<T22Device[]>;
     };
     geoApifyClient?: (location: MapAppLocation) => Observable<AjaxResponse<GeoApifyResponse>>;
@@ -72,7 +72,7 @@ export function createStore() {
                 UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID,
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
-            apolloClient: {
+            devicesClient: {
                 listDevices: () =>
                     apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
             },

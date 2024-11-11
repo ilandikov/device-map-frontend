@@ -11,13 +11,13 @@ import {
 import { Device } from '../../mapApp/redux/MapAppState';
 import { RootEpic } from '../../../../redux/store';
 
-export const devices: RootEpic = (action$, state$, { apolloClient }) =>
+export const devices: RootEpic = (action$, state$, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(apolloClient.listDevices());
+                    return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
                     return of(
                         mapAppAddDevice({
