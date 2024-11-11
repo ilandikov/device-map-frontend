@@ -42,14 +42,8 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(doNothing));
 }
 
-function processCreateDeviceRequest(state$: StateObservable<RootState>, response: Promise<T22Device>) {
-    const createDeviceResponse = () =>
-        of(
-            mapAppAddDevice({
-                id: 'testId',
-                location: state$.value.mapAppState.selectedMarker.location,
-            }),
-        );
+function processCreateDeviceRequest(_state$: StateObservable<RootState>, response: Promise<T22Device>) {
+    const createDeviceResponse = (response: T22Device) => of(mapAppAddDevice(response));
 
     return fromPromise(response).pipe(mergeMap(createDeviceResponse));
 }
