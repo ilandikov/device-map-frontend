@@ -64,7 +64,7 @@ describe('devices - create device', () => {
         await testDevicesEpic(resolvingClient, sentAction, [expectedAction]);
     });
 
-    it.failing('should notify about the error', async () => {
+    it('should notify about the error', async () => {
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');
 
