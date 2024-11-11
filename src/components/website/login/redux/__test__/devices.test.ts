@@ -1,4 +1,3 @@
-import { T22Device } from '@mancho-school-t22/graphql-types';
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
@@ -6,9 +5,23 @@ import {
     mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppAction';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
+import { DevicesClient } from '../../../../../redux/store';
 import { testDevicesEpic, testListDevicesProcessor } from './devicesTestHelpers';
 
-const devicesClient = { listDevices: () => Promise.resolve([]) };
+const devicesClient: DevicesClient = {
+    listDevices: () =>
+        Promise.resolve([
+            {
+                __typename: 'T22Device',
+                id: 'dev1',
+                location: {
+                    __typename: 'T22Location',
+                    lat: 42.85862508449081,
+                    lon: 74.6085298061371,
+                },
+            },
+        ]),
+};
 
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
@@ -23,23 +36,11 @@ describe('devices epic test', () => {
 
 describe('list devices', () => {
     it('should process a resolved promise', async () => {
-        const remoteAnswer: Promise<T22Device[]> = Promise.resolve([
-            {
-                __typename: 'T22Device',
-                id: 'dev1',
-                location: {
-                    __typename: 'T22Location',
-                    lat: 42.85862508449081,
-                    lon: 74.6085298061371,
-                },
-            },
-        ]);
-
         const expectedAction = mapAppSetDevices([
             { id: 'dev1', location: { lat: 42.85862508449081, lon: 74.6085298061371 } },
         ]);
 
-        await testListDevicesProcessor(remoteAnswer, [expectedAction]);
+        await testListDevicesProcessor(devicesClient.listDevices(), [expectedAction]);
     });
 
     it('should process a rejected promise', async () => {
