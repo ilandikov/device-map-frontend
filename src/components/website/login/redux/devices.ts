@@ -9,7 +9,7 @@ import {
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
 import { Device } from '../../mapApp/redux/MapAppState';
-import { RootEpic, RootState } from '../../../../redux/store';
+import { DevicesClient, RootEpic, RootState } from '../../../../redux/store';
 
 export const devices: RootEpic = (action$, state$, { devicesClient }) =>
     action$.pipe(
@@ -19,7 +19,7 @@ export const devices: RootEpic = (action$, state$, { devicesClient }) =>
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest(state$);
+                    return processCreateDeviceRequest(state$, devicesClient);
                 default:
                     return EMPTY;
             }
@@ -42,11 +42,15 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(doNothing));
 }
 
-function processCreateDeviceRequest(state$: StateObservable<RootState>) {
-    return of(
-        mapAppAddDevice({
-            id: 'testId',
-            location: state$.value.mapAppState.selectedMarker.location,
-        }),
+function processCreateDeviceRequest(state$: StateObservable<RootState>, devicesClient: DevicesClient) {
+    return fromPromise(devicesClient.createDevice()).pipe(
+        mergeMap(() =>
+            of(
+                mapAppAddDevice({
+                    id: 'testId',
+                    location: state$.value.mapAppState.selectedMarker.location,
+                }),
+            ),
+        ),
     );
 }
