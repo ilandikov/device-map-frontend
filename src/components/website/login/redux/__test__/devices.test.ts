@@ -6,6 +6,7 @@ import {
     mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
+import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
@@ -31,16 +32,18 @@ const rejectingClient: DevicesClient = {
 
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
+        const mapAppState = buildMapAppState({});
         const sentAction = { type: 'notAMapAppAction' };
         const expectedActions = [];
 
         // @ts-expect-error
-        await testDevicesEpic(resolvingClient, sentAction, expectedActions);
+        await testDevicesEpic(resolvingClient, mapAppState, sentAction, expectedActions);
     });
 });
 
 describe('list devices', () => {
     it('should process a resolved promise', async () => {
+        const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
         const expectedAction = mapAppSetDevices([
             {
@@ -54,29 +57,32 @@ describe('list devices', () => {
             },
         ]);
 
-        await testDevicesEpic(resolvingClient, sentAction, [expectedAction]);
+        await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
 
     it('should process a rejected promise', async () => {
+        const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
         const expectedAction = mapAppRemoteErrorAnswer('list devices went wrong');
 
-        await testDevicesEpic(rejectingClient, sentAction, [expectedAction]);
+        await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
 });
 
 describe('devices - create device', () => {
     it('should send action with the new device', async () => {
+        const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } });
 
-        await testDevicesEpic(resolvingClient, sentAction, [expectedAction]);
+        await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
 
     it('should notify about the error', async () => {
+        const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');
 
-        await testDevicesEpic(rejectingClient, sentAction, [expectedAction]);
+        await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
 });
