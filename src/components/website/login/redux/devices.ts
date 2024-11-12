@@ -19,7 +19,7 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest(devicesClient.createDevice());
+                    return processCreateDeviceRequest(devicesClient.createDevice({ lat: 8, lon: 1 }));
                 default:
                     return EMPTY;
             }

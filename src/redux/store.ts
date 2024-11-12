@@ -38,7 +38,7 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
     listDevices: () => Promise<T22Device[]>;
-    createDevice: () => Promise<T22Device>;
+    createDevice: (location: T22Location) => Promise<T22Device>;
 }
 
 export type Dependencies = {

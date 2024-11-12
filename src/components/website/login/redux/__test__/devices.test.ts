@@ -1,3 +1,4 @@
+import { T22Location } from '@mancho-school-t22/graphql-types';
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
@@ -22,7 +23,8 @@ const resolvingClient: DevicesClient = {
                 },
             },
         ]),
-    createDevice: () => Promise.resolve({ id: 'testId', location: { lat: 2, lon: 3 } }),
+    createDevice: (location: T22Location) =>
+        Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
 };
 
 const rejectingClient: DevicesClient = {
@@ -73,7 +75,7 @@ describe('devices - create device', () => {
     it('should send action with the new device', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
-        const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 2, lon: 3 } });
+        const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 8, lon: 1 } });
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
