@@ -72,10 +72,10 @@ describe('list devices', () => {
 });
 
 describe('devices - create device', () => {
-    it('should send action with the new device', async () => {
-        const mapAppState = buildMapAppState({});
+    it('should send action with the new device at selected marker location', async () => {
+        const mapAppState = buildMapAppState({ selectedMarker: { location: { lat: 5, lon: 6 }, address: null } });
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
-        const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 8, lon: 1 } });
+        const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 5, lon: 6 } });
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });

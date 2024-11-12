@@ -11,7 +11,7 @@ import {
 } from '../../mapApp/redux/MapAppAction';
 import { RootEpic } from '../../../../redux/store';
 
-export const devices: RootEpic = (action$, _, { devicesClient }) =>
+export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.REMOTE_REQUEST),
         switchMap((action) => {
@@ -19,7 +19,9 @@ export const devices: RootEpic = (action$, _, { devicesClient }) =>
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest(devicesClient.createDevice({ lat: 8, lon: 1 }));
+                    return processCreateDeviceRequest(
+                        devicesClient.createDevice($state.value.mapAppState.selectedMarker.location),
+                    );
                 default:
                     return EMPTY;
             }
