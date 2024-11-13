@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMapAppState } from './redux/MapAppState';
+import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import { DeviceListItem } from './DeviceListItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
@@ -16,7 +16,9 @@ export function DeviceList() {
         )
         .map((device, index) => <DeviceListItem device={device} colorIndex={index} key={index} />);
 
-    devicesAtSelectedMarkerLocation.push(<CreateDeviceItem />);
+    if (mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT) {
+        devicesAtSelectedMarkerLocation.push(<CreateDeviceItem />);
+    }
 
     return <div className="device-list-container">{devicesAtSelectedMarkerLocation}</div>;
 }
