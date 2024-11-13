@@ -1,98 +1,138 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`device list snapshot tests should list devices matching the selected marker with the create device item 1`] = `
+exports[`device list snapshot tests should show address loader and a list devices matching the selected marker with the create device item 1`] = `
 <div
-  className="device-list-container"
+  className="device-marker-description-window"
 >
   <div
-    className="device-list-item-container"
+    className="marker-address-container"
   >
-    <div
-      className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
-    />
-    <div
-      className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
-    />
     <img
-      alt="device-list-item-image"
-      className="device-list-item-image"
+      alt="marker-address-image"
+      className="marker-address-image"
       src="test-file-stub"
     />
     <div
-      className="device-list-item"
+      className="marker-address-loader-container"
     >
-      <p>
-        85378
-      </p>
-      <button
-        className="device-list-item-opaque-text"
-      >
-        deviceReportBroken
-      </button>
+      <div
+        className="marker-address-loader"
+      />
     </div>
   </div>
   <div
-    className="device-list-item-container"
+    className="device-list-container"
   >
     <div
-      className="device-list-item-shadow device-list-item-shadow-left device-list-create-device-item-shadow-left"
-    />
-    <div
-      className="device-list-item-shadow device-list-item-shadow-right device-list-create-device-item-shadow-right"
-    />
-    <img
-      alt="device-list-item-image"
-      className="device-list-item-image"
-      src="test-file-stub"
-    />
-    <div
-      className="device-list-item"
+      className="device-list-item-container"
     >
-      <p
-        className="device-list-item-opaque-text"
+      <div
+        className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+      />
+      <div
+        className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+      />
+      <img
+        alt="device-list-item-image"
+        className="device-list-item-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-item"
       >
-        deviceNoDeviceHere
-      </p>
-      <button
-        data-testid="createDeviceButton"
-        onClick={[Function]}
+        <p>
+          85378
+        </p>
+        <button
+          className="device-list-item-opaque-text"
+        >
+          deviceReportBroken
+        </button>
+      </div>
+    </div>
+    <div
+      className="device-list-item-container"
+    >
+      <div
+        className="device-list-item-shadow device-list-item-shadow-left device-list-create-device-item-shadow-left"
+      />
+      <div
+        className="device-list-item-shadow device-list-item-shadow-right device-list-create-device-item-shadow-right"
+      />
+      <img
+        alt="device-list-item-image"
+        className="device-list-item-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-item"
       >
-        deviceAddDevice
-      </button>
+        <p
+          className="device-list-item-opaque-text"
+        >
+          deviceNoDeviceHere
+        </p>
+        <button
+          data-testid="createDeviceButton"
+          onClick={[Function]}
+        >
+          deviceAddDevice
+        </button>
+      </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`device list snapshot tests should list devices matching the selected marker without the create device item 1`] = `
+exports[`device list snapshot tests should show address loader and a list devices matching the selected marker without the create device item 1`] = `
 <div
-  className="device-list-container"
+  className="device-marker-description-window"
 >
   <div
-    className="device-list-item-container"
+    className="marker-address-container"
   >
-    <div
-      className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
-    />
-    <div
-      className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
-    />
     <img
-      alt="device-list-item-image"
-      className="device-list-item-image"
+      alt="marker-address-image"
+      className="marker-address-image"
       src="test-file-stub"
     />
     <div
-      className="device-list-item"
+      className="marker-address-loader-container"
     >
-      <p>
-        85378
-      </p>
-      <button
-        className="device-list-item-opaque-text"
+      <div
+        className="marker-address-loader"
+      />
+    </div>
+  </div>
+  <div
+    className="device-list-container"
+  >
+    <div
+      className="device-list-item-container"
+    >
+      <div
+        className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+      />
+      <div
+        className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+      />
+      <img
+        alt="device-list-item-image"
+        className="device-list-item-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-item"
       >
-        deviceReportBroken
-      </button>
+        <p>
+          85378
+        </p>
+        <button
+          className="device-list-item-opaque-text"
+        >
+          deviceReportBroken
+        </button>
+      </div>
     </div>
   </div>
 </div>
