@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`device list snapshot tests should show address loader and a list devices matching the selected marker without the create device item 1`] = `
+<div
+  className="device-marker-description-window"
+>
+  <div
+    className="marker-address-container"
+  >
+    <img
+      alt="marker-address-image"
+      className="marker-address-image"
+      src="test-file-stub"
+    />
+    <div
+      className="marker-address-loader-container"
+    >
+      <div
+        className="marker-address-loader"
+      />
+    </div>
+  </div>
+  <div
+    className="device-list-container"
+  >
+    <div
+      className="device-list-item-container"
+    >
+      <div
+        className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+      />
+      <div
+        className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+      />
+      <img
+        alt="device-list-item-image"
+        className="device-list-item-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-item"
+      >
+        <p>
+          85378
+        </p>
+        <button
+          className="device-list-item-opaque-text"
+        >
+          deviceReportBroken
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`device list snapshot tests should show the address and a list devices matching the selected marker with the create device item 1`] = `
+<div
+  className="device-marker-description-window"
+>
+  <div
+    className="marker-address-container"
+  >
+    <img
+      alt="marker-address-image"
+      className="marker-address-image"
+      src="test-file-stub"
+    />
+    <div
+      className="marker-address"
+    >
+      <p>
+        Street and number
+      </p>
+      <span>
+        District and city
+      </span>
+    </div>
+  </div>
+  <div
+    className="device-list-container"
+  >
+    <div
+      className="device-list-item-container"
+    >
+      <div
+        className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+      />
+      <div
+        className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+      />
+      <img
+        alt="device-list-item-image"
+        className="device-list-item-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-item"
+      >
+        <p>
+          85378
+        </p>
+        <button
+          className="device-list-item-opaque-text"
+        >
+          deviceReportBroken
+        </button>
+      </div>
+    </div>
+    <div
+      className="device-list-item-container"
+    >
+      <div
+        className="device-list-item-shadow device-list-item-shadow-left device-list-create-device-item-shadow-left"
+      />
+      <div
+        className="device-list-item-shadow device-list-item-shadow-right device-list-create-device-item-shadow-right"
+      />
+      <img
+        alt="device-list-item-image"
+        className="device-list-item-image"
+        src="test-file-stub"
+      />
+      <div
+        className="device-list-item"
+      >
+        <p
+          className="device-list-item-opaque-text"
+        >
+          deviceNoDeviceHere
+        </p>
+        <button
+          data-testid="createDeviceButton"
+          onClick={[Function]}
+        >
+          deviceAddDevice
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
