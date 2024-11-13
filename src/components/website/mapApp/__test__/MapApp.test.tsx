@@ -14,8 +14,6 @@ describe('MapApp snapshot tests', () => {
     it('should match the snapshot at home screen step', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.HOME_SCREEN,
-            devices: [],
-            selectedMarker: { location: null, address: null },
         });
         const component = renderForSnapshotTest(<MapApp />);
 
@@ -25,8 +23,6 @@ describe('MapApp snapshot tests', () => {
     it('should match the snapshot at user authentication state', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
-            devices: [],
-            selectedMarker: { location: null, address: null },
         });
         const component = renderForSnapshotTest(<MapApp />);
 
@@ -36,8 +32,6 @@ describe('MapApp snapshot tests', () => {
     it('should match the snapshot at device management state', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
-            devices: [],
-            selectedMarker: { location: null, address: null },
         });
         const component = renderForSnapshotTest(<MapApp />);
 
