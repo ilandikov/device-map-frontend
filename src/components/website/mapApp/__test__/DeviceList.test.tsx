@@ -25,7 +25,7 @@ describe('device list snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should show address loader and a list devices matching the selected marker with the create device item', () => {
+    it('should show the address and a list devices matching the selected marker with the create device item', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             devices: [{ id: '85378', location: { lat: 6.3, lon: 9.2 } }],
