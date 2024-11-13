@@ -31,7 +31,10 @@ describe('device list snapshot tests', () => {
             devices: [{ id: '85378', location: { lat: 6.3, lon: 9.2 } }],
             selectedMarker: {
                 location: { lat: 6.3, lon: 9.2 },
-                address: null,
+                address: {
+                    addressLine1: 'Street and number',
+                    addressLine2: 'District and city',
+                },
             },
         });
         const component = renderForSnapshotTest(<DeviceMarkerDescription />);
