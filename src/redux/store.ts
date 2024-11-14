@@ -21,7 +21,7 @@ import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
-import { listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
+import { createDeviceMutation, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 
 const rootReducer = combineReducers({
@@ -38,7 +38,7 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
     listDevices: () => Promise<T22Device[]>;
-    createDevice: () => Promise<T22Device>;
+    createDevice: (location: T22Location) => Promise<T22Device>;
 }
 
 export type Dependencies = {
@@ -78,7 +78,10 @@ export function createStore() {
             devicesClient: {
                 listDevices: () =>
                     apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
-                createDevice: () => Promise.reject('not implemented'),
+                createDevice: (location) =>
+                    apolloClient
+                        .mutate({ mutation: createDeviceMutation, variables: location })
+                        .then((response) => response.data.T22CreateDevice),
             },
             geoApifyClient: (location) =>
                 ajax({
