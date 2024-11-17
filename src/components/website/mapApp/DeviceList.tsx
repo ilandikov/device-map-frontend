@@ -17,7 +17,8 @@ export function DeviceList() {
         .map((device, index) => <DeviceListItem device={device} colorIndex={index} key={index} />);
 
     if (mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT) {
-        devicesAtSelectedMarkerLocation.push(<CreateDeviceItem />);
+        const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;
+        devicesAtSelectedMarkerLocation.push(<CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />);
     }
 
     return <div className="device-list-container">{devicesAtSelectedMarkerLocation}</div>;
