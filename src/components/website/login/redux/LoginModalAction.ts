@@ -29,8 +29,13 @@ export function loginModalButtonClick(button: LoginModalButton): LoginModalButto
     return { type: LoginModalActionType.BUTTON_CLICKED, button: button };
 }
 
+export enum Domain {
+    AUTHENTICATION = 'AUTHENTICATION',
+}
+
 export interface LoginModalRemoteRequest {
     type: LoginModalActionType.REMOTE_REQUEST;
+    domain: Domain.AUTHENTICATION;
     check: LoginModalCheck;
 }
 
@@ -44,6 +49,7 @@ export enum LoginModalCheck {
 export function loginModalRemoteRequest(verify: LoginModalCheck): LoginModalRemoteRequest {
     return {
         type: LoginModalActionType.REMOTE_REQUEST,
+        domain: Domain.AUTHENTICATION,
         check: verify,
     };
 }
