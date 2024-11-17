@@ -35,6 +35,7 @@ export enum Domain {
 
 interface RemoteRequest {
     type: LoginModalActionType.REMOTE_REQUEST;
+    domain: Domain;
 }
 
 export interface LoginModalRemoteRequest extends RemoteRequest {
