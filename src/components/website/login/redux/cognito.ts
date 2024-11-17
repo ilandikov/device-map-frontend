@@ -1,16 +1,22 @@
-import { EMPTY, catchError, from, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, catchError, filter, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, Dependency, RootEpic } from '../../../../redux/store';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
-import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
+import {
+    Domain,
+    LoginModalActionType,
+    loginModalRemoteAnswerFailure,
+    loginModalRemoteAnswerSuccess,
+} from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
+        filter((action) => action.domain === Domain.AUTHENTICATION),
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
