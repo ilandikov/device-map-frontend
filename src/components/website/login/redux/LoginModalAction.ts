@@ -86,7 +86,9 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
     };
 }
 
-export interface LoginModalRemoteAnswer {
+export interface RemoteAnswer {}
+
+export interface LoginModalRemoteAnswer extends RemoteAnswer {
     type: LoginModalActionType.REMOTE_ANSWER;
     domain: Domain.AUTHENTICATION;
     result: LoginModalRemoteAnswerResult;
