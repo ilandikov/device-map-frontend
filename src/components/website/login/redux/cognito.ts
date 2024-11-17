@@ -6,7 +6,7 @@ import { AllActions, Dependency, RootEpic } from '../../../../redux/store';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import {
     Domain,
-    LoginModalActionType,
+    GenericActionType,
     loginModalRemoteAnswerFailure,
     loginModalRemoteAnswerSuccess,
 } from './LoginModalAction';
@@ -15,7 +15,7 @@ import { reasonFromCognitoError } from './cognitoHelpers';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
-        ofType(LoginModalActionType.REMOTE_REQUEST),
+        ofType(GenericActionType.REMOTE_REQUEST),
         filter((action) => action.domain === Domain.AUTHENTICATION),
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );

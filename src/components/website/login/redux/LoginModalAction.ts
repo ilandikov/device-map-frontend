@@ -7,8 +7,11 @@ export type LoginModalAction =
 export enum LoginModalActionType {
     BUTTON_CLICKED = 'BUTTON_CLICKED',
     INPUT = 'INPUT',
-    REMOTE_REQUEST = 'REMOTE_REQUEST',
     REMOTE_ANSWER = 'REMOTE_ANSWER',
+}
+
+export enum GenericActionType {
+    REMOTE_REQUEST = 'REMOTE_REQUEST',
 }
 
 export enum LoginModalButton {
@@ -34,7 +37,7 @@ export enum Domain {
 }
 
 interface RemoteRequest {
-    type: LoginModalActionType.REMOTE_REQUEST;
+    type: GenericActionType.REMOTE_REQUEST;
     domain: Domain;
 }
 
@@ -52,7 +55,7 @@ export enum LoginModalCheck {
 
 export function loginModalRemoteRequest(verify: LoginModalCheck): LoginModalRemoteRequest {
     return {
-        type: LoginModalActionType.REMOTE_REQUEST,
+        type: GenericActionType.REMOTE_REQUEST,
         domain: Domain.AUTHENTICATION,
         check: verify,
     };
