@@ -17,7 +17,7 @@ export function authentication(
             return { ...state, ...afterButtonClick(action, state) };
         case GenericActionType.REMOTE_REQUEST:
             return { ...state, ...beforeRemoteRequest(action, state) };
-        case LoginModalActionType.REMOTE_ANSWER:
+        case GenericActionType.REMOTE_ANSWER:
             return { ...state, ...afterRemoteAnswer(action, state) };
         default:
             return state;

@@ -9,7 +9,6 @@ export type LoginModalAction =
 export enum LoginModalActionType {
     BUTTON_CLICKED = 'BUTTON_CLICKED',
     INPUT = 'INPUT',
-    REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
 export enum LoginModalButton {
@@ -88,7 +87,7 @@ export enum LoginModalRemoteAnswerResult {
 
 export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionType.REMOTE_ANSWER,
+        type: GenericActionType.REMOTE_ANSWER,
         domain: Domain.AUTHENTICATION,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
@@ -96,7 +95,7 @@ export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
 
 export function loginModalRemoteAnswerFailure(reason: string): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionType.REMOTE_ANSWER,
+        type: GenericActionType.REMOTE_ANSWER,
         domain: Domain.AUTHENTICATION,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,

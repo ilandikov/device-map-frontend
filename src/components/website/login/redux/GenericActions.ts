@@ -1,7 +1,6 @@
-import { LoginModalActionType } from './LoginModalAction';
-
 export enum GenericActionType {
     REMOTE_REQUEST = 'REMOTE_REQUEST',
+    REMOTE_ANSWER = 'REMOTE_ANSWER',
 }
 
 export enum Domain {
@@ -14,6 +13,6 @@ export interface RemoteRequest {
 }
 
 export interface RemoteAnswer {
-    type: LoginModalActionType.REMOTE_ANSWER;
+    type: GenericActionType.REMOTE_ANSWER;
     domain: Domain;
 }
