@@ -7,12 +7,14 @@ export enum Domain {
     AUTHENTICATION = 'AUTHENTICATION',
 }
 
-export interface RemoteRequest {
-    type: GenericActionType.REMOTE_REQUEST;
+interface GenericAction {
     domain: Domain;
 }
 
-export interface RemoteAnswer {
+export interface RemoteRequest extends GenericAction {
+    type: GenericActionType.REMOTE_REQUEST;
+}
+
+export interface RemoteAnswer extends GenericAction {
     type: GenericActionType.REMOTE_ANSWER;
-    domain: Domain;
 }
