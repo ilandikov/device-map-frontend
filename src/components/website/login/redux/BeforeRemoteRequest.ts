@@ -12,7 +12,7 @@ export function beforeRemoteRequest(
     action: LoginModalRemoteRequest,
     state: AuthenticationState,
 ): Partial<AuthenticationState> {
-    const errorChecker = errorCheckers[action.check];
+    const errorChecker = errorCheckers[action.payload.check];
     if (errorChecker) {
         const error = errorChecker(state);
         if (error) {
@@ -38,7 +38,7 @@ const errorCheckers: { [key in LoginModalCheck]: PreAuthErrorChecker } = {
 type StateUpdater = (action: LoginModalRemoteRequest, state: AuthenticationState) => Partial<AuthenticationState>;
 
 const fromPasswordCreationOTP: StateUpdater = (action) => {
-    switch (action.check) {
+    switch (action.payload.check) {
         case LoginModalCheck.NONE:
             return { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
         case LoginModalCheck.OTP:

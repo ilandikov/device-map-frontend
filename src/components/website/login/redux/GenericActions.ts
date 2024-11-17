@@ -11,8 +11,9 @@ interface GenericAction {
     domain: Domain;
 }
 
-export interface RemoteRequest extends GenericAction {
+export interface RemoteRequest<TPayload> extends GenericAction {
     type: GenericActionType.REMOTE_REQUEST;
+    payload: TPayload;
 }
 
 export interface RemoteAnswer extends GenericAction {
