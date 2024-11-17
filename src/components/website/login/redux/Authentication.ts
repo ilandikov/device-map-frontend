@@ -1,9 +1,10 @@
-import { GenericActionType, LoginModalAction, LoginModalActionType } from './LoginModalAction';
+import { LoginModalAction, LoginModalActionType } from './LoginModalAction';
 import { AuthenticationState, initialAuthenticationState } from './AuthenticationState';
 import { afterRemoteAnswer } from './AfterRemoteAnswer';
 import { beforeRemoteRequest } from './BeforeRemoteRequest';
 import { afterButtonClick } from './AfterButtonClick';
 import { withPayload } from './WithPayload';
+import { GenericActionType } from './GenericActions';
 
 export function authentication(
     state: AuthenticationState = initialAuthenticationState,

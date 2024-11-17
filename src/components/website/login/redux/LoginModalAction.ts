@@ -1,3 +1,5 @@
+import { Domain, GenericActionType, RemoteAnswer, RemoteRequest } from './GenericActions';
+
 export type LoginModalAction =
     | LoginModalInput
     | LoginModalButtonClick
@@ -8,10 +10,6 @@ export enum LoginModalActionType {
     BUTTON_CLICKED = 'BUTTON_CLICKED',
     INPUT = 'INPUT',
     REMOTE_ANSWER = 'REMOTE_ANSWER',
-}
-
-export enum GenericActionType {
-    REMOTE_REQUEST = 'REMOTE_REQUEST',
 }
 
 export enum LoginModalButton {
@@ -30,15 +28,6 @@ export interface LoginModalButtonClick {
 
 export function loginModalButtonClick(button: LoginModalButton): LoginModalButtonClick {
     return { type: LoginModalActionType.BUTTON_CLICKED, button: button };
-}
-
-export enum Domain {
-    AUTHENTICATION = 'AUTHENTICATION',
-}
-
-interface RemoteRequest {
-    type: GenericActionType.REMOTE_REQUEST;
-    domain: Domain;
 }
 
 export interface LoginModalRemoteRequest extends RemoteRequest {
@@ -84,11 +73,6 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
             payload: inputPayload,
         },
     };
-}
-
-export interface RemoteAnswer {
-    type: LoginModalActionType.REMOTE_ANSWER;
-    domain: Domain;
 }
 
 export interface LoginModalRemoteAnswer extends RemoteAnswer {

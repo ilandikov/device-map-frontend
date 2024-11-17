@@ -4,14 +4,10 @@ import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, Dependency, RootEpic } from '../../../../redux/store';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
-import {
-    Domain,
-    GenericActionType,
-    loginModalRemoteAnswerFailure,
-    loginModalRemoteAnswerSuccess,
-} from './LoginModalAction';
+import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
+import { Domain, GenericActionType } from './GenericActions';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
