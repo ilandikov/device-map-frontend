@@ -33,8 +33,11 @@ export enum Domain {
     AUTHENTICATION = 'AUTHENTICATION',
 }
 
-export interface LoginModalRemoteRequest {
+interface RemoteRequest {
     type: LoginModalActionType.REMOTE_REQUEST;
+}
+
+export interface LoginModalRemoteRequest extends RemoteRequest {
     domain: Domain.AUTHENTICATION;
     check: LoginModalCheck;
 }
