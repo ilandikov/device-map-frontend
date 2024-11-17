@@ -88,6 +88,7 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
 
 export interface LoginModalRemoteAnswer {
     type: LoginModalActionType.REMOTE_ANSWER;
+    domain: Domain.AUTHENTICATION;
     result: LoginModalRemoteAnswerResult;
     reason?: string;
 }
@@ -100,6 +101,7 @@ export enum LoginModalRemoteAnswerResult {
 export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
+        domain: Domain.AUTHENTICATION,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
@@ -107,6 +109,7 @@ export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
 export function loginModalRemoteAnswerFailure(reason: string): LoginModalRemoteAnswer {
     return {
         type: LoginModalActionType.REMOTE_ANSWER,
+        domain: Domain.AUTHENTICATION,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };
