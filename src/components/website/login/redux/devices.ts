@@ -18,25 +18,16 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
         switchMap((action) => {
             const devicesRequest = devicesRequests[action.request];
-            if (devicesRequest) {
-                return processDevicesRequest(
-                    devicesRequest.clientCall(devicesClient, $state.value.mapAppState),
-                    devicesRequest.responseToAction,
-                );
+            if (!devicesRequest) {
+                return EMPTY;
             }
 
-            return EMPTY;
+            return fromPromise(devicesRequest.clientCall(devicesClient, $state.value.mapAppState)).pipe(
+                mergeMap(devicesRequest.responseToAction),
+                catchError((error) => of(mapAppRemoteErrorAnswer(error))),
+            );
         }),
     );
-
-function processDevicesRequest<TResponse>(
-    response: Promise<TResponse>,
-    responseToAction: (response: TResponse) => Observable<MapAppAction>,
-) {
-    return fromPromise(response).pipe(mergeMap(responseToAction), catchError(reportError));
-}
-
-const reportError = (error) => of(mapAppRemoteErrorAnswer(error));
 
 type DevicesRequest<TResponse> = {
     clientCall: (client: DevicesClient, state: MapAppState) => Promise<TResponse>;
