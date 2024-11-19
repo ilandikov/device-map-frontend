@@ -41,7 +41,7 @@ export async function createDevice(input) {
         data: { createDevice: device },
     } = await graphQLClient.mutate({
         mutation: createDeviceMutation,
-        variables: { input },
+        variables: input,
     });
 
     return device;
