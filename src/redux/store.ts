@@ -23,6 +23,7 @@ import { LoginModalAction } from '../components/website/login/redux/LoginModalAc
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import { createDeviceMutation, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
+import { setAuthenticatedClient } from '../client/graphql';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -85,8 +86,8 @@ export function createStore() {
                         apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
                 },
                 forAuthenticatedUser: {
-                    createDevice: (location) =>
-                        apolloClient
+                    createDevice: async (location) =>
+                        (await setAuthenticatedClient())
                             .mutate<Mutation>({ mutation: createDeviceMutation, variables: location })
                             .then((response) => response.data.T22CreateDevice),
                 },

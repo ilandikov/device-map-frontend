@@ -1,6 +1,6 @@
 import { EMPTY, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { Mutation, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppActionType,
@@ -10,8 +10,6 @@ import {
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
 import { RootEpic } from '../../../../redux/store';
-import { setAuthenticatedClient } from '../../../../client/graphql';
-import { createDeviceMutation } from './devicesHelpers';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
@@ -21,7 +19,11 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return processListDevicesRequest(devicesClient.forAnonymousUser.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest(createDevice($state.value.mapAppState.selectedMarker.location));
+                    return processCreateDeviceRequest(
+                        devicesClient.forAuthenticatedUser.createDevice(
+                            $state.value.mapAppState.selectedMarker.location,
+                        ),
+                    );
                 default:
                     return EMPTY;
             }
@@ -32,17 +34,6 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
     const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response));
 
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
-}
-
-export async function createDevice(location: T22Location): Promise<T22Device> {
-    const graphQLClient = await setAuthenticatedClient();
-
-    return await graphQLClient
-        .mutate<Mutation>({
-            mutation: createDeviceMutation,
-            variables: location,
-        })
-        .then((response) => response.data.T22CreateDevice);
 }
 
 function processCreateDeviceRequest(response: Promise<T22Device>) {
