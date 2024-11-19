@@ -37,7 +37,9 @@ export type AllActions = LoginModalAction | MapAppAction;
 export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
-    listDevices: () => Promise<T22Device[]>;
+    forAnonymousUser: {
+        listDevices: () => Promise<T22Device[]>;
+    };
     createDevice: (location: T22Location) => Promise<T22Device>;
 }
 
@@ -76,8 +78,10 @@ export function createStore() {
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
             devicesClient: {
-                listDevices: () =>
-                    apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                forAnonymousUser: {
+                    listDevices: () =>
+                        apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                },
                 createDevice: (location) =>
                     apolloClient
                         .mutate({ mutation: createDeviceMutation, variables: location })

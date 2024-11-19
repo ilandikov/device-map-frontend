@@ -11,24 +11,28 @@ import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
-    listDevices: () =>
-        Promise.resolve([
-            {
-                __typename: 'T22Device',
-                id: 'dev1',
-                location: {
-                    __typename: 'T22Location',
-                    lat: 42.85862508449081,
-                    lon: 74.6085298061371,
+    forAnonymousUser: {
+        listDevices: () =>
+            Promise.resolve([
+                {
+                    __typename: 'T22Device',
+                    id: 'dev1',
+                    location: {
+                        __typename: 'T22Location',
+                        lat: 42.85862508449081,
+                        lon: 74.6085298061371,
+                    },
                 },
-            },
-        ]),
+            ]),
+    },
     createDevice: (location: T22Location) =>
         Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
 };
 
 const rejectingClient: DevicesClient = {
-    listDevices: () => Promise.reject('list devices went wrong'),
+    forAnonymousUser: {
+        listDevices: () => Promise.reject('list devices went wrong'),
+    },
     createDevice: () => Promise.reject('create device went wrong'),
 };
 

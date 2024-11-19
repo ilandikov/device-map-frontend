@@ -19,7 +19,7 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(devicesClient.listDevices());
+                    return processListDevicesRequest(devicesClient.forAnonymousUser.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
                     return processCreateDeviceRequest(createDevice($state.value.mapAppState.selectedMarker.location));
                 default:
