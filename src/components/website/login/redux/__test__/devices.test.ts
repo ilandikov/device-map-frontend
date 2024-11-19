@@ -11,25 +11,33 @@ import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
-    listDevices: () =>
-        Promise.resolve([
-            {
-                __typename: 'T22Device',
-                id: 'dev1',
-                location: {
-                    __typename: 'T22Location',
-                    lat: 42.85862508449081,
-                    lon: 74.6085298061371,
+    forAnonymousUser: {
+        listDevices: () =>
+            Promise.resolve([
+                {
+                    __typename: 'T22Device',
+                    id: 'dev1',
+                    location: {
+                        __typename: 'T22Location',
+                        lat: 42.85862508449081,
+                        lon: 74.6085298061371,
+                    },
                 },
-            },
-        ]),
-    createDevice: (location: T22Location) =>
-        Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
+            ]),
+    },
+    forAuthenticatedUser: {
+        createDevice: (location: T22Location) =>
+            Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
+    },
 };
 
 const rejectingClient: DevicesClient = {
-    listDevices: () => Promise.reject('list devices went wrong'),
-    createDevice: () => Promise.reject('create device went wrong'),
+    forAnonymousUser: {
+        listDevices: () => Promise.reject('list devices went wrong'),
+    },
+    forAuthenticatedUser: {
+        createDevice: () => Promise.reject('create device went wrong'),
+    },
 };
 
 describe('devices epic test', () => {
@@ -72,7 +80,7 @@ describe('list devices', () => {
 });
 
 describe('devices - create device', () => {
-    it.failing('should send action with the new device at selected marker location', async () => {
+    it('should send action with the new device at selected marker location', async () => {
         const mapAppState = buildMapAppState({ selectedMarker: { location: { lat: 5, lon: 6 }, address: null } });
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 5, lon: 6 } });
@@ -80,7 +88,7 @@ describe('devices - create device', () => {
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
 
-    it.failing('should notify about the error', async () => {
+    it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');

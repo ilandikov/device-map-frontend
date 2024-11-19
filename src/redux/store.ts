@@ -12,7 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
-import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { Mutation, Query, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -23,6 +23,7 @@ import { LoginModalAction } from '../components/website/login/redux/LoginModalAc
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import { createDeviceMutation, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
+import { setAuthenticatedClient } from '../client/graphql';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -37,8 +38,12 @@ export type AllActions = LoginModalAction | MapAppAction;
 export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
-    listDevices: () => Promise<T22Device[]>;
-    createDevice: (location: T22Location) => Promise<T22Device>;
+    forAnonymousUser: {
+        listDevices: () => Promise<T22Device[]>;
+    };
+    forAuthenticatedUser: {
+        createDevice: (location: T22Location) => Promise<T22Device>;
+    };
 }
 
 export type Dependencies = {
@@ -76,12 +81,16 @@ export function createStore() {
                 ClientId: process.env.GATSBY_COGNITO_CLIENT_ID,
             }),
             devicesClient: {
-                listDevices: () =>
-                    apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
-                createDevice: (location) =>
-                    apolloClient
-                        .mutate({ mutation: createDeviceMutation, variables: location })
-                        .then((response) => response.data.T22CreateDevice),
+                forAnonymousUser: {
+                    listDevices: () =>
+                        apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                },
+                forAuthenticatedUser: {
+                    createDevice: async (location) =>
+                        (await setAuthenticatedClient())
+                            .mutate<Mutation>({ mutation: createDeviceMutation, variables: location })
+                            .then((response) => response.data.T22CreateDevice),
+                },
             },
             geoApifyClient: (location) =>
                 ajax({

@@ -8,7 +8,8 @@ export enum MapAppActionType {
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
-    REMOTE_REQUEST = 'MY_REMOTE_REQUEST',
+    // TODO do something about all these actions. Probably split this state into several states, map app state to manage only windows
+    MAP_APP_REMOTE_REQUEST = 'MAP_APP_REMOTE_REQUEST',
     REMOTE_ANSWER = 'REMOTE_ANSWER',
     REMOTE_ERROR_ANSWER = 'REMOTE_ERROR_ANSWER',
 }
@@ -88,7 +89,7 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 }
 
 export interface MapAppRemoteRequest {
-    type: MapAppActionType.REMOTE_REQUEST;
+    type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
     request: MapAppRemoteRequestType;
 }
 
@@ -121,7 +122,7 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
 }
 
 export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppRemoteRequest {
-    return { type: MapAppActionType.REMOTE_REQUEST, request };
+    return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 
 interface MapAppRemoteErrorAnswer {
