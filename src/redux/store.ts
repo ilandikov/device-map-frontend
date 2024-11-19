@@ -12,7 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
-import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { Mutation, Query, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -82,12 +82,12 @@ export function createStore() {
             devicesClient: {
                 forAnonymousUser: {
                     listDevices: () =>
-                        apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                        apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
                 },
                 forAuthenticatedUser: {
                     createDevice: (location) =>
                         apolloClient
-                            .mutate({ mutation: createDeviceMutation, variables: location })
+                            .mutate<Mutation>({ mutation: createDeviceMutation, variables: location })
                             .then((response) => response.data.T22CreateDevice),
                 },
             },
