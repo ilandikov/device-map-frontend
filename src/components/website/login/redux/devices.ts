@@ -11,6 +11,7 @@ import {
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
+import { MapAppState } from '../../mapApp/redux/MapAppState';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
@@ -18,7 +19,7 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         switchMap((action) => {
             if (devicesRequests[action.request]) {
                 return processDevicesRequest(
-                    devicesRequests[action.request].clientCall(devicesClient),
+                    devicesRequests[action.request].clientCall(devicesClient, $state.value.mapAppState),
                     devicesRequests[action.request].responseToAction,
                 );
             }
@@ -46,12 +47,12 @@ function processDevicesRequest<TResponse>(
 const reportError = (error) => of(mapAppRemoteErrorAnswer(error));
 
 type DevicesRequest<TResponse> = {
-    clientCall: (client: DevicesClient) => Promise<TResponse>;
+    clientCall: (client: DevicesClient, state: MapAppState) => Promise<TResponse>;
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
 const listDevicesRequest: DevicesRequest<T22Device[]> = {
-    clientCall: (client) => client.forAnonymousUser.listDevices(),
+    clientCall: (client, _) => client.forAnonymousUser.listDevices(),
     responseToAction: (response) => of(mapAppSetDevices(response)),
 };
 
