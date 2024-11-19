@@ -21,7 +21,10 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return processListDevicesRequest(devicesClient.listDevices());
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest($state.value.mapAppState.selectedMarker.location);
+                    return processCreateDeviceRequest(
+                        $state.value.mapAppState.selectedMarker.location,
+                        createDevice($state.value.mapAppState.selectedMarker.location),
+                    );
                 default:
                     return EMPTY;
             }
@@ -45,10 +48,10 @@ export async function createDevice(location: T22Location): Promise<T22Device> {
         .then((response) => response.data.T22CreateDevice);
 }
 
-function processCreateDeviceRequest(location: T22Location) {
+function processCreateDeviceRequest(_location: T22Location, response: Promise<T22Device>) {
     const createDeviceResponse = (response: T22Device) => of(mapAppAddDevice(response));
 
-    return from(createDevice(location)).pipe(mergeMap(createDeviceResponse), catchError(reportError));
+    return from(response).pipe(mergeMap(createDeviceResponse), catchError(reportError));
 }
 
 const reportError = (error) => of(mapAppRemoteErrorAnswer(error));
