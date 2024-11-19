@@ -25,15 +25,19 @@ const resolvingClient: DevicesClient = {
                 },
             ]),
     },
-    createDevice: (location: T22Location) =>
-        Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
+    forAuthenticatedUser: {
+        createDevice: (location: T22Location) =>
+            Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
+    },
 };
 
 const rejectingClient: DevicesClient = {
     forAnonymousUser: {
         listDevices: () => Promise.reject('list devices went wrong'),
     },
-    createDevice: () => Promise.reject('create device went wrong'),
+    forAuthenticatedUser: {
+        createDevice: () => Promise.reject('create device went wrong'),
+    },
 };
 
 describe('devices epic test', () => {

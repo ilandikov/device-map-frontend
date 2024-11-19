@@ -40,7 +40,9 @@ export interface DevicesClient {
     forAnonymousUser: {
         listDevices: () => Promise<T22Device[]>;
     };
-    createDevice: (location: T22Location) => Promise<T22Device>;
+    forAuthenticatedUser: {
+        createDevice: (location: T22Location) => Promise<T22Device>;
+    };
 }
 
 export type Dependencies = {
@@ -82,10 +84,12 @@ export function createStore() {
                     listDevices: () =>
                         apolloClient.query(listDevicesQuery).then((response) => response.data.T22ListDevices),
                 },
-                createDevice: (location) =>
-                    apolloClient
-                        .mutate({ mutation: createDeviceMutation, variables: location })
-                        .then((response) => response.data.T22CreateDevice),
+                forAuthenticatedUser: {
+                    createDevice: (location) =>
+                        apolloClient
+                            .mutate({ mutation: createDeviceMutation, variables: location })
+                            .then((response) => response.data.T22CreateDevice),
+                },
             },
             geoApifyClient: (location) =>
                 ajax({
