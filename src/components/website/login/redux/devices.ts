@@ -17,10 +17,11 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
         switchMap((action) => {
-            if (devicesRequests[action.request]) {
+            const devicesRequest = devicesRequests[action.request];
+            if (devicesRequest) {
                 return processDevicesRequest(
-                    devicesRequests[action.request].clientCall(devicesClient, $state.value.mapAppState),
-                    devicesRequests[action.request].responseToAction,
+                    devicesRequest.clientCall(devicesClient, $state.value.mapAppState),
+                    devicesRequest.responseToAction,
                 );
             }
 
