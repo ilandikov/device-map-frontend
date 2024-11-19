@@ -23,17 +23,8 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
                     devicesRequests[action.request].responseToAction,
                 );
             }
-            switch (action.request) {
-                case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processDevicesRequest<T22Device>(
-                        devicesClient.forAuthenticatedUser.createDevice(
-                            $state.value.mapAppState.selectedMarker.location,
-                        ),
-                        (response) => of(mapAppAddDevice(response)),
-                    );
-                default:
-                    return EMPTY;
-            }
+
+            return EMPTY;
         }),
     );
 
@@ -56,6 +47,12 @@ const listDevicesRequest: DevicesRequest<T22Device[]> = {
     responseToAction: (response) => of(mapAppSetDevices(response)),
 };
 
-const devicesRequests: Partial<{ [key in MapAppRemoteRequestType]: DevicesRequest<T22Device[]> }> = {
+const createDeviceRequest: DevicesRequest<T22Device> = {
+    clientCall: (client, state) => client.forAuthenticatedUser.createDevice(state.selectedMarker.location),
+    responseToAction: (response) => of(mapAppAddDevice(response)),
+};
+
+const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
     LIST_DEVICES: listDevicesRequest,
+    CREATE_DEVICE: createDeviceRequest,
 };
