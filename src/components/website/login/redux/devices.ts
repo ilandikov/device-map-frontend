@@ -1,45 +1,50 @@
-import { EMPTY, catchError, from, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
+    MapAppAction,
     MapAppActionType,
     MapAppRemoteRequestType,
     mapAppAddDevice,
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
-import { RootEpic } from '../../../../redux/store';
+import { DevicesClient, RootEpic } from '../../../../redux/store';
+import { MapAppState } from '../../mapApp/redux/MapAppState';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
         switchMap((action) => {
-            switch (action.request) {
-                case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest(devicesClient.forAnonymousUser.listDevices());
-                case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processCreateDeviceRequest(
-                        devicesClient.forAuthenticatedUser.createDevice(
-                            $state.value.mapAppState.selectedMarker.location,
-                        ),
-                    );
-                default:
-                    return EMPTY;
+            const request = devicesRequests[action.request];
+            if (!request) {
+                return EMPTY;
             }
+
+            return fromPromise(request.call(devicesClient, $state.value.mapAppState)).pipe(
+                mergeMap(request.responseToAction),
+                catchError((error) => of(mapAppRemoteErrorAnswer(error))),
+            );
         }),
     );
 
-function processListDevicesRequest(response: Promise<T22Device[]>) {
-    const listDevicesResponse = (response: T22Device[]) => of(mapAppSetDevices(response));
+type DevicesRequest<TResponse> = {
+    call: (client: DevicesClient, state: MapAppState) => Promise<TResponse>;
+    responseToAction: (response: TResponse) => Observable<MapAppAction>;
+};
 
-    return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
-}
+const listDevicesRequest: DevicesRequest<T22Device[]> = {
+    call: (client, _) => client.forAnonymousUser.listDevices(),
+    responseToAction: (response) => of(mapAppSetDevices(response)),
+};
 
-function processCreateDeviceRequest(response: Promise<T22Device>) {
-    const createDeviceResponse = (response: T22Device) => of(mapAppAddDevice(response));
+const createDeviceRequest: DevicesRequest<T22Device> = {
+    call: (client, state) => client.forAuthenticatedUser.createDevice(state.selectedMarker.location),
+    responseToAction: (response) => of(mapAppAddDevice(response)),
+};
 
-    return from(response).pipe(mergeMap(createDeviceResponse), catchError(reportError));
-}
-
-const reportError = (error) => of(mapAppRemoteErrorAnswer(error));
+const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
+    LIST_DEVICES: listDevicesRequest,
+    CREATE_DEVICE: createDeviceRequest,
+};
