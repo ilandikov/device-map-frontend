@@ -10,18 +10,19 @@ import {
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
-import { RootEpic } from '../../../../redux/store';
+import { DevicesClient, RootEpic } from '../../../../redux/store';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
         switchMap((action) => {
+            if (devicesRequests[action.request]) {
+                return processDevicesRequest(
+                    devicesRequests[action.request].clientCall(devicesClient),
+                    devicesRequests[action.request].responseToAction,
+                );
+            }
             switch (action.request) {
-                case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processDevicesRequest<T22Device[]>(
-                        devicesClient.forAnonymousUser.listDevices(),
-                        (response) => of(mapAppSetDevices(response)),
-                    );
                 case MapAppRemoteRequestType.CREATE_DEVICE:
                     return processDevicesRequest<T22Device>(
                         devicesClient.forAuthenticatedUser.createDevice(
@@ -43,3 +44,17 @@ function processDevicesRequest<TResponse>(
 }
 
 const reportError = (error) => of(mapAppRemoteErrorAnswer(error));
+
+type DevicesRequest<TResponse> = {
+    clientCall: (client: DevicesClient) => Promise<TResponse>;
+    responseToAction: (response: TResponse) => Observable<MapAppAction>;
+};
+
+const listDevicesRequest: DevicesRequest<T22Device[]> = {
+    clientCall: (client) => client.forAnonymousUser.listDevices(),
+    responseToAction: (response) => of(mapAppSetDevices(response)),
+};
+
+const devicesRequests: Partial<{ [key in MapAppRemoteRequestType]: DevicesRequest<T22Device[]> }> = {
+    LIST_DEVICES: listDevicesRequest,
+};
