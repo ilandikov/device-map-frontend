@@ -18,12 +18,12 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
-                    return processListDevicesRequest<T22Device[]>(
+                    return processDevicesRequest<T22Device[]>(
                         devicesClient.forAnonymousUser.listDevices(),
                         (response) => of(mapAppSetDevices(response)),
                     );
                 case MapAppRemoteRequestType.CREATE_DEVICE:
-                    return processListDevicesRequest<T22Device>(
+                    return processDevicesRequest<T22Device>(
                         devicesClient.forAuthenticatedUser.createDevice(
                             $state.value.mapAppState.selectedMarker.location,
                         ),
@@ -35,7 +35,7 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         }),
     );
 
-function processListDevicesRequest<TResponse>(
+function processDevicesRequest<TResponse>(
     response: Promise<TResponse>,
     responseToAction: (response: TResponse) => Observable<MapAppAction>,
 ) {
