@@ -15,7 +15,7 @@ import { createDeviceMutation } from './devicesHelpers';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.REMOTE_REQUEST),
+        ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
         switchMap((action) => {
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
