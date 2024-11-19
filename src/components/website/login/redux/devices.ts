@@ -17,30 +17,30 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
         ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
         switchMap((action) => {
-            const devicesRequest = devicesRequests[action.request];
-            if (!devicesRequest) {
+            const request = devicesRequests[action.request];
+            if (!request) {
                 return EMPTY;
             }
 
-            return fromPromise(devicesRequest.clientCall(devicesClient, $state.value.mapAppState)).pipe(
-                mergeMap(devicesRequest.responseToAction),
+            return fromPromise(request.call(devicesClient, $state.value.mapAppState)).pipe(
+                mergeMap(request.responseToAction),
                 catchError((error) => of(mapAppRemoteErrorAnswer(error))),
             );
         }),
     );
 
 type DevicesRequest<TResponse> = {
-    clientCall: (client: DevicesClient, state: MapAppState) => Promise<TResponse>;
+    call: (client: DevicesClient, state: MapAppState) => Promise<TResponse>;
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
 const listDevicesRequest: DevicesRequest<T22Device[]> = {
-    clientCall: (client, _) => client.forAnonymousUser.listDevices(),
+    call: (client, _) => client.forAnonymousUser.listDevices(),
     responseToAction: (response) => of(mapAppSetDevices(response)),
 };
 
 const createDeviceRequest: DevicesRequest<T22Device> = {
-    clientCall: (client, state) => client.forAuthenticatedUser.createDevice(state.selectedMarker.location),
+    call: (client, state) => client.forAuthenticatedUser.createDevice(state.selectedMarker.location),
     responseToAction: (response) => of(mapAppAddDevice(response)),
 };
 
