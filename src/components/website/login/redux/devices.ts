@@ -37,14 +37,12 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
 export async function createDevice(input) {
     const graphQLClient = await setAuthenticatedClient();
 
-    const {
-        data: { createDevice: device },
-    } = await graphQLClient.mutate({
-        mutation: createDeviceMutation,
-        variables: input,
-    });
-
-    return device;
+    return await graphQLClient
+        .mutate({
+            mutation: createDeviceMutation,
+            variables: input,
+        })
+        .then((response) => response.data.T22CreateDevice);
 }
 
 function processCreateDeviceRequest(location: T22Location) {
