@@ -1,6 +1,6 @@
 import { EMPTY, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { Mutation, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppActionType,
@@ -34,13 +34,13 @@ function processListDevicesRequest(response: Promise<T22Device[]>) {
     return fromPromise(response).pipe(mergeMap(listDevicesResponse), catchError(reportError));
 }
 
-export async function createDevice(input) {
+export async function createDevice(location: T22Location): Promise<T22Device> {
     const graphQLClient = await setAuthenticatedClient();
 
     return await graphQLClient
-        .mutate({
+        .mutate<Mutation>({
             mutation: createDeviceMutation,
-            variables: input,
+            variables: location,
         })
         .then((response) => response.data.T22CreateDevice);
 }
