@@ -19,7 +19,7 @@ export function LogInForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { email, error } = useLoginModalAuthentication();
+    const { email, password, error } = useLoginModalAuthentication();
 
     return (
         <>
@@ -35,6 +35,7 @@ export function LogInForm() {
                 <PasswordInputBox
                     helpText={t('enterPassword')}
                     testId="userPasswordLogin"
+                    value={password}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
                     }}

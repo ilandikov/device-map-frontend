@@ -16,7 +16,7 @@ export function PasswordCreationForm() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const { error } = useLoginModalAuthentication();
+    const { error, password, passwordRepeat } = useLoginModalAuthentication();
 
     return (
         <>
@@ -24,6 +24,7 @@ export function PasswordCreationForm() {
                 <PasswordInputBox
                     helpText={t('enterPassword')}
                     testId="userPassword"
+                    value={password}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
                     }}
@@ -32,6 +33,7 @@ export function PasswordCreationForm() {
                 <PasswordInputBox
                     helpText={t('repeatPassword')}
                     testId="userPasswordRepeat"
+                    value={passwordRepeat}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputType.PASSWORD_REPEAT, event.target.value));
                     }}
