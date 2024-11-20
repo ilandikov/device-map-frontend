@@ -98,6 +98,7 @@ exports[`LogInForm snapshot test should match snapshot without error 1`] = `
         data-testid="userPasswordLogin"
         onChange={[Function]}
         type="password"
+        value="password1"
       />
     </div>
   </div>,
