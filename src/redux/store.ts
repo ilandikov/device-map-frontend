@@ -12,7 +12,14 @@ import { createHttpLink } from '@apollo/client/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { ajax } from 'rxjs/internal/ajax/ajax';
-import { Mutation, Query, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import {
+    Mutation,
+    Query,
+    T22CreateDeviceInput,
+    T22CreateDeviceResponse,
+    T22ListDevicesResponse,
+    T22Location,
+} from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
@@ -39,10 +46,10 @@ export type Dependency<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
     forAnonymousUser: {
-        listDevices: () => Promise<T22Device[]>;
+        listDevices: () => Promise<T22ListDevicesResponse>;
     };
     forAuthenticatedUser: {
-        createDevice: (location: T22Location) => Promise<T22Device>;
+        createDevice: (createDeviceInput: T22CreateDeviceInput) => Promise<T22CreateDeviceResponse>;
     };
 }
 
@@ -86,9 +93,12 @@ export function createStore() {
                         apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
                 },
                 forAuthenticatedUser: {
-                    createDevice: async (location) =>
+                    createDevice: async (createDeviceInput) =>
                         (await setAuthenticatedClient())
-                            .mutate<Mutation>({ mutation: createDeviceMutation, variables: location })
+                            .mutate<Mutation>({
+                                mutation: createDeviceMutation,
+                                variables: { input: createDeviceInput },
+                            })
                             .then((response) => response.data.T22CreateDevice),
                 },
             },

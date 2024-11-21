@@ -1,4 +1,3 @@
-import { T22Location } from '@mancho-school-t22/graphql-types';
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
@@ -13,21 +12,24 @@ import { testDevicesEpic } from './devicesTestHelpers';
 const resolvingClient: DevicesClient = {
     forAnonymousUser: {
         listDevices: () =>
-            Promise.resolve([
-                {
-                    __typename: 'T22Device',
-                    id: 'dev1',
-                    location: {
-                        __typename: 'T22Location',
-                        lat: 42.85862508449081,
-                        lon: 74.6085298061371,
+            Promise.resolve({
+                devices: [
+                    {
+                        __typename: 'T22Device',
+                        id: 'dev1',
+                        location: {
+                            __typename: 'T22Location',
+                            lat: 42.85862508449081,
+                            lon: 74.6085298061371,
+                        },
                     },
-                },
-            ]),
+                ],
+                count: 1,
+            }),
     },
     forAuthenticatedUser: {
-        createDevice: (location: T22Location) =>
-            Promise.resolve({ id: 'testId', location: { lat: location.lat, lon: location.lon } }),
+        createDevice: (createDeviceInput) =>
+            Promise.resolve({ device: { id: 'testId', location: createDeviceInput.location } }),
     },
 };
 
