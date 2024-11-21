@@ -19,12 +19,14 @@ export const listDevicesQuery = {
 };
 
 export const createDeviceMutation = gql`
-    mutation ($lat: Float!, $lon: Float!) {
-        T22CreateDevice(lat: $lat, lon: $lon) {
-            id
-            location {
-                lat
-                lon
+    mutation ($input: T22CreateDeviceInput!) {
+        T22CreateDevice(input: $input) {
+            device {
+                id
+                location {
+                    lat
+                    lon
+                }
             }
         }
     }

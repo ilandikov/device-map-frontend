@@ -95,7 +95,10 @@ export function createStore() {
                 forAuthenticatedUser: {
                     createDevice: async (createDeviceInput) =>
                         (await setAuthenticatedClient())
-                            .mutate<Mutation>({ mutation: createDeviceMutation, variables: createDeviceInput })
+                            .mutate<Mutation>({
+                                mutation: createDeviceMutation,
+                                variables: { input: createDeviceInput },
+                            })
                             .then((response) => response.data.T22CreateDevice),
                 },
             },
