@@ -1,6 +1,6 @@
 import { EMPTY, Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { T22Device } from '@mancho-school-t22/graphql-types';
+import { T22CreateDeviceResponse, T22ListDevicesResponse } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppAction,
@@ -34,14 +34,14 @@ type DevicesRequest<TResponse> = {
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
-const listDevicesRequest: DevicesRequest<T22Device[]> = {
+const listDevicesRequest: DevicesRequest<T22ListDevicesResponse> = {
     call: (client, _) => client.forAnonymousUser.listDevices(),
-    responseToAction: (response) => of(mapAppSetDevices(response)),
+    responseToAction: (response) => of(mapAppSetDevices(response.devices)),
 };
 
-const createDeviceRequest: DevicesRequest<T22Device> = {
-    call: (client, state) => client.forAuthenticatedUser.createDevice(state.selectedMarker.location),
-    responseToAction: (response) => of(mapAppAddDevice(response)),
+const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse> = {
+    call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
+    responseToAction: (response) => of(mapAppAddDevice(response.device)),
 };
 
 const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
