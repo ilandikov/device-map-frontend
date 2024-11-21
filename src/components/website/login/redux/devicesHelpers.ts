@@ -4,11 +4,14 @@ export const listDevicesQuery = {
     query: gql`
         query {
             T22ListDevices {
-                id
-                location {
-                    lat
-                    lon
+                devices {
+                    id
+                    location {
+                        lat
+                        lon
+                    }
                 }
+                count
             }
         }
     `,
