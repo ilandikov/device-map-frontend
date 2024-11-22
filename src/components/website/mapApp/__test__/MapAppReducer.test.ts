@@ -6,6 +6,7 @@ import {
     mapAppAddDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
+    mapAppDeleteDevice,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
     mapAppRemoteRequest,
@@ -127,6 +128,20 @@ describe('MapApp reducer tests', () => {
                 { id: 'number1', location: { lat: 78, lon: 34 } },
                 { id: 'number2', location: { lat: 9, lon: 31 } },
             ],
+        });
+    });
+
+    it('should delete a device', () => {
+        const initialState = buildMapAppState({
+            devices: [
+                { id: 'toBeDeleted', location: { lat: 5.456, lon: 1.947 } },
+                { id: 'toBeKept', location: { lat: 3.853, lon: 0.537 } },
+            ],
+        });
+        const action = mapAppDeleteDevice('toBeDeleted');
+
+        verifyMapAppStateChange(initialState, action, {
+            devices: [{ id: 'toBeKept', location: { lat: 3.853, lon: 0.537 } }],
         });
     });
 });
