@@ -3,7 +3,7 @@ import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { useAppDispatch } from '../../../redux/store';
 import { DeviceListItemWrapper } from './DeviceListItemWrapper';
-import { mapAppDeleteDevice } from './redux/MapAppAction';
+import { mapAppDeleteDeviceRequest } from './redux/MapAppAction';
 
 export function DeviceListItem(props: { device: T22Device; colorIndex: number }) {
     const { t } = useI18next();
@@ -16,7 +16,7 @@ export function DeviceListItem(props: { device: T22Device; colorIndex: number })
             <button
                 className="device-list-item-opaque-text"
                 data-testid="deleteDeviceButton"
-                onClick={() => dispatch(mapAppDeleteDevice(props.device.id))}
+                onClick={() => dispatch(mapAppDeleteDeviceRequest(props.device.id))}
             >
                 {t('deleteDevice')}
             </button>

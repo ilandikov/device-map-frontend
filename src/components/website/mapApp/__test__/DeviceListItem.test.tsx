@@ -2,7 +2,7 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppDeleteDevice } from '../redux/MapAppAction';
+import { mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
 import { DeviceListItem } from '../DeviceListItem';
 
 jest.mock('react-redux', () => ({
@@ -24,6 +24,6 @@ describe('DeviceListItem action tests', () => {
         const loginButton = getByTestId(container, 'deleteDeviceButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppDeleteDevice('deleteMe'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppDeleteDeviceRequest('deleteMe'));
     });
 });

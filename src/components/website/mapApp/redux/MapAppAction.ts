@@ -23,6 +23,7 @@ export enum MapAppButton {
 export enum MapAppRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
     CREATE_DEVICE = 'CREATE_DEVICE',
+    DELETE_DEVICE = 'DELETE_DEVICE',
 }
 
 export enum MapAppRemoteAnswerType {
@@ -143,4 +144,16 @@ interface MapAppDeleteDevice {
 
 export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
     return { type: MapAppActionType.DELETE_DEVICE, id };
+}
+
+export interface MapAppDeleteDeviceRequest extends MapAppRemoteRequest {
+    id: string;
+}
+
+export function mapAppDeleteDeviceRequest(id: string): MapAppDeleteDeviceRequest {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
+        request: MapAppRemoteRequestType.DELETE_DEVICE,
+        id,
+    };
 }
