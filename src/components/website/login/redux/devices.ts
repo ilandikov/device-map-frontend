@@ -5,6 +5,7 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppAction,
     MapAppActionType,
+    MapAppRemoteRequest,
     MapAppRemoteRequestType,
     mapAppAddDevice,
     mapAppRemoteErrorAnswer,
@@ -22,15 +23,15 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
                 return EMPTY;
             }
 
-            return fromPromise(request.call(devicesClient, $state.value.mapAppState)).pipe(
+            return fromPromise(request.call(devicesClient, $state.value.mapAppState, action)).pipe(
                 mergeMap(request.responseToAction),
                 catchError((error) => of(mapAppRemoteErrorAnswer(error))),
             );
         }),
     );
 
-type DevicesRequest<TResponse> = {
-    call: (client: DevicesClient, state: MapAppState) => Promise<TResponse>;
+type DevicesRequest<TResponse, TRequestAction = MapAppRemoteRequest> = {
+    call: (client: DevicesClient, state: MapAppState, action: TRequestAction) => Promise<TResponse>;
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
