@@ -32,6 +32,11 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                 default:
                     return state;
             }
+        case MapAppActionType.DELETE_DEVICE:
+            return {
+                ...state,
+                devices: state.devices.filter((device) => device.id !== action.id),
+            };
         default:
             return state;
     }
