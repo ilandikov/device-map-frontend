@@ -30,7 +30,11 @@ import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
-import { createDeviceMutation, listDevicesQuery } from '../components/website/login/redux/devicesHelpers';
+import {
+    createDeviceMutation,
+    deleteDeviceMutation,
+    listDevicesQuery,
+} from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
 
@@ -103,7 +107,13 @@ export function createStore() {
                                 variables: { input: createDeviceInput },
                             })
                             .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: () => Promise.resolve({ id: 'deleted' }),
+                    deleteDevice: async (deleteDeviceInput: T22DeleteDeviceInput) =>
+                        (await setAuthenticatedClient())
+                            .mutate<Mutation>({
+                                mutation: deleteDeviceMutation,
+                                variables: { input: deleteDeviceInput },
+                            })
+                            .then((response) => response.data.T22DeleteDevice),
                 },
             },
             geoApifyClient: (location) =>
