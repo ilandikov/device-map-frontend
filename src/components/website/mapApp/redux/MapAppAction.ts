@@ -12,6 +12,7 @@ export enum MapAppActionType {
     MAP_APP_REMOTE_REQUEST = 'MAP_APP_REMOTE_REQUEST',
     REMOTE_ANSWER = 'REMOTE_ANSWER',
     REMOTE_ERROR_ANSWER = 'REMOTE_ERROR_ANSWER',
+    DELETE_DEVICE = 'DELETE_DEVICE',
 }
 
 export enum MapAppButton {
@@ -38,6 +39,7 @@ export type MapAppAction =
     | MapAppRemoteRequest
     | MapAppSetDevices
     | MapAppAddDevice
+    | MapAppDeleteDevice
     | MapAppRemoteErrorAnswer;
 
 export interface MapAppGenericAction {
@@ -132,4 +134,13 @@ interface MapAppRemoteErrorAnswer {
 
 export function mapAppRemoteErrorAnswer(error: string): MapAppRemoteErrorAnswer {
     return { type: MapAppActionType.REMOTE_ERROR_ANSWER, error };
+}
+
+interface MapAppDeleteDevice {
+    type: MapAppActionType.DELETE_DEVICE;
+    id: string;
+}
+
+export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
+    return { type: MapAppActionType.DELETE_DEVICE, id };
 }
