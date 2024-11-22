@@ -53,7 +53,7 @@ describe('devices epic test', () => {
     });
 });
 
-describe('list devices', () => {
+describe('devices - list devices', () => {
     it('should process a resolved promise', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
