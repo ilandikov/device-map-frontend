@@ -10,6 +10,7 @@ export function DeviceListItem(props: { device: T22Device; colorIndex: number })
         <DeviceListItemWrapper colorIndex={props.colorIndex}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
+            <button className="device-list-item-opaque-text">{t('deleteDevice')}</button>
         </DeviceListItemWrapper>
     );
 }
