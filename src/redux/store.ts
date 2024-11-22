@@ -17,6 +17,8 @@ import {
     Query,
     T22CreateDeviceInput,
     T22CreateDeviceResponse,
+    T22DeleteDeviceInput,
+    T22DeleteDeviceResponse,
     T22ListDevicesResponse,
     T22Location,
 } from '@mancho-school-t22/graphql-types';
@@ -50,6 +52,7 @@ export interface DevicesClient {
     };
     forAuthenticatedUser: {
         createDevice: (createDeviceInput: T22CreateDeviceInput) => Promise<T22CreateDeviceResponse>;
+        deleteDevice: (deleteDeviceInput: T22DeleteDeviceInput) => Promise<T22DeleteDeviceResponse>;
     };
 }
 
@@ -100,6 +103,7 @@ export function createStore() {
                                 variables: { input: createDeviceInput },
                             })
                             .then((response) => response.data.T22CreateDevice),
+                    deleteDevice: () => Promise.resolve({ id: 'deleted' }),
                 },
             },
             geoApifyClient: (location) =>

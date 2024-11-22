@@ -31,3 +31,11 @@ export const createDeviceMutation = gql`
         }
     }
 `;
+
+export const deleteDeviceMutation = gql`
+    mutation ($input: T22DeleteDeviceInput!) {
+        T22DeleteDevice(input: $input) {
+            id
+        }
+    }
+`;

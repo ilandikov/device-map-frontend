@@ -1,6 +1,8 @@
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppDeleteDevice,
+    mapAppDeleteDeviceRequest,
     mapAppRemoteErrorAnswer,
     mapAppRemoteRequest,
     mapAppSetDevices,
@@ -30,6 +32,7 @@ const resolvingClient: DevicesClient = {
     forAuthenticatedUser: {
         createDevice: (createDeviceInput) =>
             Promise.resolve({ device: { id: 'testId', location: createDeviceInput.location } }),
+        deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
     },
 };
 
@@ -39,6 +42,7 @@ const rejectingClient: DevicesClient = {
     },
     forAuthenticatedUser: {
         createDevice: () => Promise.reject('create device went wrong'),
+        deleteDevice: () => Promise.reject('delete device went wrong'),
     },
 };
 
@@ -94,6 +98,24 @@ describe('devices - create device', () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
         const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');
+
+        await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
+    });
+});
+
+describe('devices - delete device', () => {
+    it('should send action to delete device', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
+        const expectedAction = mapAppDeleteDevice('deleteThisOne');
+
+        await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
+    });
+
+    it('should notify about the error', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
+        const expectedAction = mapAppRemoteErrorAnswer('delete device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
