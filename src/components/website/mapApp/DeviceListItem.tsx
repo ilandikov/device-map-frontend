@@ -11,12 +11,13 @@ export function DeviceListItem(props: { device: T22Device; colorIndex: number })
     const dispatch = useAppDispatch();
 
     const userIsLoggedIn = useLoginModalAuthentication().step === AuthenticationStep.LOGGED_IN;
+    const userCreatedThisDevice = useLoginModalAuthentication().id === props.device.id;
 
     return (
         <DeviceListItemWrapper colorIndex={props.colorIndex}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            {userIsLoggedIn && (
+            {userIsLoggedIn && userCreatedThisDevice && (
                 <button
                     className="device-list-item-opaque-text"
                     data-testid="deleteDeviceButton"

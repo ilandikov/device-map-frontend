@@ -56,6 +56,7 @@ describe('DeviceListItem action tests', () => {
     });
 
     it('should dispatch delete device request on delete device button click', () => {
+        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN, id: 'deleteMe' });
         const container = renderForActionDispatchTest(
             <DeviceListItem device={{ id: 'deleteMe', location: { lat: 3, lon: 7 } }} colorIndex={0} />,
         );

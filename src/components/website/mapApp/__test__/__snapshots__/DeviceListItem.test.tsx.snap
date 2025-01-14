@@ -26,13 +26,6 @@ exports[`DeviceListItem snapshot test should match snapshot when user is authent
     >
       deviceReportBroken
     </button>
-    <button
-      className="device-list-item-opaque-text"
-      data-testid="deleteDeviceButton"
-      onClick={[Function]}
-    >
-      deleteDevice
-    </button>
   </div>
 </div>
 `;
