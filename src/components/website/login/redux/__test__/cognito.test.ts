@@ -59,7 +59,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 
 describe('user sign in tests', () => {
     it.each([
-        [Promise.resolve(cognitoSignInResult), [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()]],
+        [Promise.resolve(cognitoSignInResult), [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted('')]],
         [Promise.reject(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
