@@ -26,17 +26,15 @@ function processAuthMethod(state: AuthenticationState, client: Dependency<Cognit
         return EMPTY;
     }
 
-    const successActions = getSuccessActions(currentStep);
-
     return fromPromise(authenticationMethod(client, state)).pipe(
-        mergeMap(() => from(successActions)),
+        mergeMap((response) => from(getSuccessActions(currentStep, response))),
         catchError((error) => of(loginModalRemoteAnswerFailure(reasonFromCognitoError(error)))),
     );
 }
 
-function getSuccessActions(step: AuthenticationStep): AllActions[] {
+function getSuccessActions(step: AuthenticationStep, response: any): AllActions[] {
     if (step === AuthenticationStep.LOGIN_LOADING) {
-        return [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()];
+        return [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted(response.session.idToken.payload.sub)];
     }
 
     return [loginModalRemoteAnswerSuccess()];
