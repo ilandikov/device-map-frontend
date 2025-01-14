@@ -307,14 +307,14 @@ describe('sign up OTP logic', () => {
         });
     });
 
-    it('should transition to logged in after sign up has been confirmed', () => {
+    it('should transition to login after sign up has been confirmed', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
         const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGGED_IN,
+            step: AuthenticationStep.LOGIN,
         });
     });
 
@@ -412,14 +412,14 @@ describe('password reset logic', () => {
         });
     });
 
-    it('should transition to logged in state after new password has been set', () => {
+    it('should transition to login state after new password has been set', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGGED_IN,
+            step: AuthenticationStep.LOGIN,
         });
     });
 
@@ -435,14 +435,14 @@ describe('password reset logic', () => {
         });
     });
 
-    it('should transition to logged in state when password has been reset successfully', () => {
+    it('should transition to login after password has been reset successfully', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
         });
         const action = loginModalRemoteAnswerSuccess();
 
         verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGGED_IN,
+            step: AuthenticationStep.LOGIN,
         });
     });
 
