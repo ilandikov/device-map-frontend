@@ -10,8 +10,9 @@ export function DeviceListItem(props: { device: T22Device; colorIndex: number })
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
-    const userIsLoggedIn = useLoginModalAuthentication().step === AuthenticationStep.LOGGED_IN;
-    const userCreatedThisDevice = useLoginModalAuthentication().id === props.device.id;
+    const authenticationState = useLoginModalAuthentication();
+    const userIsLoggedIn = authenticationState.step === AuthenticationStep.LOGGED_IN;
+    const userCreatedThisDevice = authenticationState.id === props.device.id;
 
     return (
         <DeviceListItemWrapper colorIndex={props.colorIndex}>
