@@ -26,10 +26,8 @@ function processAuthMethod(state: AuthenticationState, client: Dependency<Cognit
         return EMPTY;
     }
 
-    const successActions = getSuccessActions(currentStep);
-
     return fromPromise(authenticationMethod(client, state)).pipe(
-        mergeMap(() => from(successActions)),
+        mergeMap(() => from(getSuccessActions(currentStep))),
         catchError((error) => of(loginModalRemoteAnswerFailure(reasonFromCognitoError(error)))),
     );
 }
