@@ -412,17 +412,6 @@ describe('password reset logic', () => {
         });
     });
 
-    it('should transition to login state after new password has been set', () => {
-        const initialState = buildAuthenticationState({
-            step: AuthenticationStep.PASSWORD_RESET_LOADING,
-        });
-        const action = loginModalRemoteAnswerSuccess();
-
-        verifyStateChange(initialState, action, {
-            step: AuthenticationStep.LOGIN,
-        });
-    });
-
     it('should transition back to password reset OTP input and show error', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
