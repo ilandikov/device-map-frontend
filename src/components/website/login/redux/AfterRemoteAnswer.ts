@@ -32,7 +32,7 @@ const fromLoadingStep: Partial<{ [key in AuthenticationStep]: nextSteps }> = {
         fallbackStep: AuthenticationStep.PASSWORD_RESET_REQUEST,
     },
     PASSWORD_CREATION_OTP_LOADING: {
-        successStep: AuthenticationStep.LOGGED_IN,
+        successStep: AuthenticationStep.LOGIN,
         fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
     },
     PASSWORD_CREATION_OTP_RESEND_LOADING: {
@@ -40,7 +40,7 @@ const fromLoadingStep: Partial<{ [key in AuthenticationStep]: nextSteps }> = {
         fallbackStep: AuthenticationStep.PASSWORD_CREATION_OTP,
     },
     PASSWORD_RESET_LOADING: {
-        successStep: AuthenticationStep.LOGGED_IN,
+        successStep: AuthenticationStep.LOGIN,
         fallbackStep: AuthenticationStep.PASSWORD_RESET_OTP,
     },
     LOGIN_LOADING: {
