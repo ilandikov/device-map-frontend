@@ -35,9 +35,7 @@ function processAuthMethod(state: AuthenticationState, client: Dependency<Cognit
 }
 
 function getSuccessActions(step: AuthenticationStep): AllActions[] {
-    const stepsCompletingAuthentication: AuthenticationStep[] = [AuthenticationStep.LOGIN_LOADING];
-
-    if (stepsCompletingAuthentication.includes(step)) {
+    if (step === AuthenticationStep.LOGIN_LOADING) {
         return [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()];
     }
 
