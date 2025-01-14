@@ -24,8 +24,22 @@ describe('DeviceListItem snapshot test', () => {
         expect(component).toMatchSnapshot();
     });
 
+    it('should match snapshot when user is authenticated, but not the creator of the device', () => {
+        mockAuthenticationState({
+            step: AuthenticationStep.LOGGED_IN,
+            id: 'i should render without delete button too',
+        });
+        const component = renderForSnapshotTest(
+            <DeviceListItem
+                device={{ id: 'not matching with id in authentication state', location: { lat: 3, lon: 7 } }}
+                colorIndex={0}
+            />,
+        );
+        expect(component).toMatchSnapshot();
+    });
+
     it('should match snapshot with error', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN });
+        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN, id: 'i should render with delete button' });
         const component = renderForSnapshotTest(
             <DeviceListItem
                 device={{ id: 'i should render with delete button', location: { lat: 3, lon: 7 } }}
