@@ -26,6 +26,7 @@ export enum AuthenticationStep {
 export const initialAuthenticationState: AuthenticationState = {
     step: AuthenticationStep.WELCOME,
     email: '',
+    id: '',
     error: null,
     password: '',
     passwordRepeat: '',
@@ -35,6 +36,7 @@ export const initialAuthenticationState: AuthenticationState = {
 export interface AuthenticationState {
     step: AuthenticationStep;
     email: string;
+    id: string;
     error: Error | null;
     password: string;
     passwordRepeat: string;
@@ -45,6 +47,7 @@ export function buildAuthenticationState(partialState: Partial<AuthenticationSta
     return {
         step: partialState.step ?? AuthenticationStep.WELCOME,
         email: partialState.email ?? '',
+        id: partialState.id ?? '',
         error: partialState.error ?? null,
         password: partialState.password ?? '',
         passwordRepeat: partialState.passwordRepeat ?? '',
