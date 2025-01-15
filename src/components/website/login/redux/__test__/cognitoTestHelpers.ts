@@ -74,36 +74,27 @@ export async function testCognitoNoOutput(initialState: AuthenticationState) {
 }
 
 export const cognitoSignUpRequestResult = {
-    user: {
-        username: '58vr7gv41m@mailcurity.com',
-        pool: {
-            userPoolId: 'us-west-2_Vks7GkhlO',
-            clientId: '7nm1627efll9vkbn9dnqhimp4g',
-            client: {
-                endpoint: 'https://cognito-idp.us-west-2.amazonaws.com/',
-                fetchOptions: {},
-            },
-            advancedSecurityDataCollectionFlag: true,
-            storage: {},
-        },
-        Session: null,
+    username: '58vr7gv41m@mailcurity.com',
+    pool: {
+        userPoolId: 'us-west-2_Vks7GkhlO',
+        clientId: '7nm1627efll9vkbn9dnqhimp4g',
         client: {
             endpoint: 'https://cognito-idp.us-west-2.amazonaws.com/',
             fetchOptions: {},
         },
-        signInUserSession: null,
-        authenticationFlowType: 'USER_SRP_AUTH',
+        advancedSecurityDataCollectionFlag: true,
         storage: {},
-        keyPrefix: 'CognitoIdentityServiceProvider.7nm1627efll9vkbn9dnqhimp4g',
-        userDataKey: 'CognitoIdentityServiceProvider.7nm1627efll9vkbn9dnqhimp4g.58vr7gv41m@mailcurity.com.userData',
     },
-    userConfirmed: false,
-    userSub: '3a2d8c52-ade3-468e-a9cb-88c82420dd7d',
-    codeDeliveryDetails: {
-        AttributeName: 'email',
-        DeliveryMedium: 'EMAIL',
-        Destination: '5***@m***',
+    Session: null,
+    client: {
+        endpoint: 'https://cognito-idp.us-west-2.amazonaws.com/',
+        fetchOptions: {},
     },
+    signInUserSession: null,
+    authenticationFlowType: 'USER_SRP_AUTH',
+    storage: {},
+    keyPrefix: 'CognitoIdentityServiceProvider.7nm1627efll9vkbn9dnqhimp4g',
+    userDataKey: 'CognitoIdentityServiceProvider.7nm1627efll9vkbn9dnqhimp4g.58vr7gv41m@mailcurity.com.userData',
 };
 
 export const cognitoPasswordResetRequestResult = {

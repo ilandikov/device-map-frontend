@@ -30,7 +30,10 @@ describe('user sign up tests', () => {
 
 describe('user password reset tests', () => {
     it.each([
-        [Promise.resolve(cognitoPasswordResetConfirmationResult), [loginModalRemoteAnswerSuccess()]],
+        [
+            Promise.resolve(cognitoPasswordResetConfirmationResult),
+            [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()],
+        ],
         [Promise.reject(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])(
         'should dispatch password has been reset notification when remote answer is: %s',
@@ -46,7 +49,10 @@ describe('user password reset tests', () => {
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
-        [Promise.resolve(cognitoSignUpConfirmationResult), [loginModalRemoteAnswerSuccess()]],
+        [
+            Promise.resolve(cognitoSignUpConfirmationResult),
+            [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()],
+        ],
         [Promise.reject(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch OTP notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({
