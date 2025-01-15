@@ -41,8 +41,7 @@ export type MapAppAction =
     | MapAppSetDevices
     | MapAppAddDevice
     | MapAppDeleteDevice
-    | MapAppRemoteErrorAnswer
-    | MapAppAuthCompleted;
+    | MapAppRemoteErrorAnswer;
 
 export interface MapAppGenericAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
@@ -61,13 +60,8 @@ export function mapAppLoginModalClose(): MapAppGenericAction {
     return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }
 
-interface MapAppAuthCompleted {
-    type: MapAppActionType.AUTHENTICATION_COMPLETED;
-    authenticatedUserId: string;
-}
-
-export function mapAppAuthenticationCompleted(authenticatedUserId: string): MapAppAuthCompleted {
-    return { type: MapAppActionType.AUTHENTICATION_COMPLETED, authenticatedUserId };
+export function mapAppAuthenticationCompleted(): MapAppGenericAction {
+    return { type: MapAppActionType.AUTHENTICATION_COMPLETED };
 }
 
 export interface MapAppDeviceMarkerClick {

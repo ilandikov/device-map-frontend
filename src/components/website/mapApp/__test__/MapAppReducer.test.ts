@@ -62,7 +62,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         });
-        const action = mapAppAuthenticationCompleted('');
+        const action = mapAppAuthenticationCompleted();
 
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
