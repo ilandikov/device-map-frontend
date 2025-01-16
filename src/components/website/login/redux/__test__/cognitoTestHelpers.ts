@@ -14,9 +14,12 @@ export enum ClientType {
 
 export class CognitoTestClient implements Dependency<CognitoClient> {
     private readonly _mockedResult: Promise<any>;
+    // @ts-expect-error
+    private readonly _clientType: ClientType;
 
     constructor(mockedResult: Promise<any>, _clientType: ClientType) {
         this._mockedResult = mockedResult;
+        this._clientType = _clientType;
     }
 
     signUp() {
