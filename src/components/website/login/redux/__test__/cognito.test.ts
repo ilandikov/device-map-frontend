@@ -2,6 +2,7 @@ import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '..
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import {
+    ClientType,
     cognitoPasswordResetConfirmationResult,
     cognitoPasswordResetRequestResult,
     cognitoSignInResult,
@@ -23,7 +24,7 @@ describe('user sign up tests', () => {
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+            await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
         },
     );
 });
@@ -39,7 +40,7 @@ describe('user password reset tests', () => {
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+            await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
         },
     );
 });
@@ -53,7 +54,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
         });
 
-        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
     });
 });
 
@@ -67,7 +68,7 @@ describe('user sign in tests', () => {
     ])('should dispatch login notification when remote answer is: %s', async (remoteServiceAnswer, expectedAction) => {
         const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
 
-        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
     });
 });
 
@@ -88,7 +89,7 @@ describe('password reset request tests', () => {
                 step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+            await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
         },
     );
 });
@@ -102,7 +103,7 @@ describe('OTP code resend tests', () => {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
 
-        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
     });
 });
 
@@ -115,7 +116,7 @@ describe('user sign out tests', () => {
             step: AuthenticationStep.LOGGED_IN,
         });
 
-        await testCognitoOutputAction(initialState, remoteServiceAnswer, expectedAction);
+        await testCognitoOutputAction(initialState, remoteServiceAnswer, ClientType.RESOLVING, expectedAction);
     });
 });
 
