@@ -12,6 +12,26 @@ export enum ClientType {
     REJECTING = 'REJECTING',
 }
 
+const cognitoResolvingTestClient: Dependency<CognitoClient> = {
+    signUp: () => Promise.resolve(cognitoSignUpRequestResult),
+    signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
+    signIn: () => Promise.resolve(cognitoSignInResult),
+    forgotPassword: () => Promise.resolve(cognitoPasswordResetRequestResult),
+    confirmPassword: () => Promise.resolve(cognitoPasswordResetConfirmationResult),
+    resendConfirmCode: () => Promise.resolve({} as any),
+    signOut: () => Promise.resolve(cognitoSignOutResult),
+};
+
+const cognitoRejectingTestClient: Dependency<CognitoClient> = {
+    signUp: () => Promise.reject(),
+    signUpConfirmCode: () => Promise.reject(),
+    signIn: () => Promise.reject(),
+    forgotPassword: () => Promise.reject(),
+    confirmPassword: () => Promise.reject(),
+    resendConfirmCode: () => Promise.reject(),
+    signOut: () => Promise.reject(),
+};
+
 export class CognitoTestClient implements Dependency<CognitoClient> {
     private readonly _mockedResult: Promise<any>;
     // @ts-expect-error
@@ -53,13 +73,13 @@ export class CognitoTestClient implements Dependency<CognitoClient> {
 
 export async function testCognitoOutputAction(
     initialState: AuthenticationState,
-    remoteServiceAnswer: Promise<any>,
+    _remoteServiceAnswer: Promise<any>,
     clientType: ClientType,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
     const stateForTest = buildStateForCognitoTest(initialState);
     const dependencies = {
-        cognitoClient: new CognitoTestClient(remoteServiceAnswer, clientType),
+        cognitoClient: clientType === ClientType.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
     };
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
@@ -82,7 +102,7 @@ export async function testCognitoNoOutput(initialState: AuthenticationState) {
     expect(receivedAction).toEqual([]);
 }
 
-export const cognitoSignUpRequestResult = {
+export const cognitoSignUpRequestResult: any = {
     user: {
         username: '58vr7gv41m@mailcurity.com',
         pool: {
@@ -127,7 +147,7 @@ export const cognitoSignUpConfirmationResult = 'SUCCESS';
 
 export const cognitoPasswordResetConfirmationResult = 'SUCCESS';
 
-export const cognitoSignInResult = {
+export const cognitoSignInResult: any = {
     session: {
         idToken: {
             jwtToken:
