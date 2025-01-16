@@ -4,6 +4,7 @@ import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, Dependency, RootEpic } from '../../../../redux/store';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
+import { getSession } from '../../../../client/graphql';
 import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
@@ -42,6 +43,7 @@ function getSuccessActions(step: AuthenticationStep): AllActions[] {
     ];
 
     if (stepsCompletingAuthentication.includes(step)) {
+        console.log(getSession());
         return [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted()];
     }
 

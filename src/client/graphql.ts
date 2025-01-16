@@ -114,3 +114,37 @@ export async function setAuthenticatedClient() {
         }),
     }));
 }
+
+export function getSession() {
+    return new Promise((resolve, reject) => {
+        const userPool = new AWSCognito.CognitoUserPool({
+            UserPoolId: process.env.GATSBY_COGNITO_USER_POOL_ID!,
+            ClientId: process.env.GATSBY_COGNITO_CLIENT_ID!,
+        });
+        const cognitoUser = userPool.getCurrentUser();
+
+        if (!cognitoUser) {
+            reject(new Error('No current user'));
+            return;
+        }
+
+        cognitoUser.getSession((err, session) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            if (!session.isValid()) {
+                reject(new Error('Session is not valid'));
+                return;
+            }
+
+            cognitoUser.getUserAttributes((err, result) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(result);
+            });
+        });
+    });
+}
