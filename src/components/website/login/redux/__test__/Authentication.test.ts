@@ -104,12 +104,12 @@ describe('navigation logic', () => {
 
         // From password creation to mail input
         [AuthenticationStep.PASSWORD_CREATION, AuthenticationStep.MAIL_INPUT],
-    ])('go back button: should transition from %s to %s', (initialUserAuthState, expectedUserAuthState) => {
-        const initialState = buildAuthenticationState({ step: initialUserAuthState });
+    ])('go back button: should transition from %s to %s', (initialStep, stepAfterGoBack) => {
+        const initialState = buildAuthenticationState({ step: initialStep });
         const action = loginModalButtonClick(LoginModalButton.GO_BACK);
 
         verifyStateChange(initialState, action, {
-            step: expectedUserAuthState,
+            step: stepAfterGoBack,
         });
     });
 });
