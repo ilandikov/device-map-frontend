@@ -24,7 +24,7 @@ describe('user sign up tests', () => {
                 step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+            await testCognitoOutputAction(initialState, clientType, expectedAction);
         },
     );
 });
@@ -44,7 +44,7 @@ describe('user password reset tests', () => {
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+            await testCognitoOutputAction(initialState, clientType, expectedAction);
         },
     );
 });
@@ -60,7 +60,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
                 step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+            await testCognitoOutputAction(initialState, clientType, expectedAction);
         },
     );
 });
@@ -78,7 +78,7 @@ describe('user sign in tests', () => {
         async (clientType, _remoteServiceAnswer, expectedAction) => {
             const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
 
-            await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+            await testCognitoOutputAction(initialState, clientType, expectedAction);
         },
     );
 });
@@ -100,7 +100,7 @@ describe('password reset request tests', () => {
                 step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             });
 
-            await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+            await testCognitoOutputAction(initialState, clientType, expectedAction);
         },
     );
 });
@@ -114,7 +114,7 @@ describe('OTP code resend tests', () => {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
 
-        await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+        await testCognitoOutputAction(initialState, clientType, expectedAction);
     });
 });
 
@@ -127,7 +127,7 @@ describe('user sign out tests', () => {
             step: AuthenticationStep.LOGGED_IN,
         });
 
-        await testCognitoOutputAction(initialState, _remoteServiceAnswer, clientType, expectedAction);
+        await testCognitoOutputAction(initialState, clientType, expectedAction);
     });
 });
 

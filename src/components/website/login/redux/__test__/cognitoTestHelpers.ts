@@ -34,7 +34,6 @@ const cognitoRejectingTestClient: Dependency<CognitoClient> = {
 
 export async function testCognitoOutputAction(
     initialState: AuthenticationState,
-    _remoteServiceAnswer: Promise<any>,
     clientType: ClientType,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
