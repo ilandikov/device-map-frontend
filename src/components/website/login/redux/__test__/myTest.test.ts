@@ -12,11 +12,11 @@ export interface FakeClientInterface {
 export const myEpic: RootEpic = (action$, _, { fakeClient }) =>
     action$.pipe(
         ofType(LoginModalActionType.REMOTE_REQUEST),
-        switchMap(() => processMyEpic(fakeClient)),
+        switchMap(() => processInMyEpic(fakeClient)),
     );
 
-function processMyEpic(client: FakeClientInterface) {
-    return fromPromise(client.remoteService()).pipe(
+function processInMyEpic(fakeClient: FakeClientInterface) {
+    return fromPromise(fakeClient.remoteService()).pipe(
         mergeMap(() => of({ promise: 'resolved' } as any)),
         catchError(() => of({ promise: 'rejected' } as any)),
     );
