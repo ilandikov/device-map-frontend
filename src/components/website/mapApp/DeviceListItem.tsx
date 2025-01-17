@@ -12,7 +12,7 @@ export function DeviceListItem(props: { device: T22Device; colorIndex: number; c
 
     const authenticationState = useLoginModalAuthentication();
     const userIsLoggedIn = authenticationState.step === AuthenticationStep.LOGGED_IN;
-    const userCreatedThisDevice = authenticationState.id === props.device.id;
+    const userCreatedThisDevice = props.currentUserId === props.device.id;
     const showDeleteButton = userIsLoggedIn && userCreatedThisDevice;
 
     return (

@@ -19,7 +19,7 @@ exports[`DeviceListItem snapshot test should match snapshot when user is authent
     className="device-list-item"
   >
     <p>
-      not matching with id in authentication state
+      not matching with id current user id
     </p>
     <button
       className="device-list-item-opaque-text"

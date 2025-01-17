@@ -14,7 +14,9 @@ export function DeviceList() {
                 device.location.lat === selectedMarker.location.lat &&
                 device.location.lon === selectedMarker.location.lon,
         )
-        .map((device, index) => <DeviceListItem device={device} colorIndex={index} key={index} />);
+        .map((device, index) => (
+            <DeviceListItem device={device} colorIndex={index} currentUserId={mapAppState.currentUserID} key={index} />
+        ));
 
     if (mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT) {
         const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;

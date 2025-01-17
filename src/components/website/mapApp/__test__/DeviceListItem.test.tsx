@@ -19,6 +19,7 @@ describe('DeviceListItem snapshot test', () => {
             <DeviceListItem
                 device={{ id: 'i should render without delete button', location: { lat: 3, lon: 7 } }}
                 colorIndex={0}
+                currentUserId={'since the ids are not matching'}
             />,
         );
         expect(component).toMatchSnapshot();
@@ -31,8 +32,9 @@ describe('DeviceListItem snapshot test', () => {
         });
         const component = renderForSnapshotTest(
             <DeviceListItem
-                device={{ id: 'not matching with id in authentication state', location: { lat: 3, lon: 7 } }}
+                device={{ id: 'not matching with id current user id', location: { lat: 3, lon: 7 } }}
                 colorIndex={0}
+                currentUserId={'definitely not matching'}
             />,
         );
         expect(component).toMatchSnapshot();
@@ -44,6 +46,7 @@ describe('DeviceListItem snapshot test', () => {
             <DeviceListItem
                 device={{ id: 'i should render with delete button', location: { lat: 3, lon: 7 } }}
                 colorIndex={0}
+                currentUserId={'i should render with delete button'}
             />,
         );
         expect(component).toMatchSnapshot();
@@ -58,7 +61,11 @@ describe('DeviceListItem action tests', () => {
     it('should dispatch delete device request on delete device button click', () => {
         mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN, id: 'deleteMe' });
         const container = renderForActionDispatchTest(
-            <DeviceListItem device={{ id: 'deleteMe', location: { lat: 3, lon: 7 } }} colorIndex={0} />,
+            <DeviceListItem
+                device={{ id: 'deleteMe', location: { lat: 3, lon: 7 } }}
+                colorIndex={0}
+                currentUserId={'deleteMe'}
+            />,
         );
 
         const loginButton = getByTestId(container, 'deleteDeviceButton');
