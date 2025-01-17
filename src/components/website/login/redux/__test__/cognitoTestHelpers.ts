@@ -13,9 +13,9 @@ export enum ClientType {
 }
 
 const cognitoResolvingTestClient: Dependency<CognitoClient> = {
-    signUp: () => Promise.resolve(cognitoSignUpRequestResult),
+    signUp: () => Promise.resolve(cognitoSignUpRequestResult as any),
     signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
-    signIn: () => Promise.resolve(cognitoSignInResult),
+    signIn: () => Promise.resolve(cognitoSignInResult as any),
     forgotPassword: () => Promise.resolve(cognitoPasswordResetRequestResult),
     confirmPassword: () => Promise.resolve(cognitoPasswordResetConfirmationResult),
     resendConfirmCode: () => Promise.resolve({} as any),
@@ -59,7 +59,7 @@ export async function testCognitoNoOutput(initialState: AuthenticationState) {
     expect(receivedAction).toEqual([]);
 }
 
-export const cognitoSignUpRequestResult: any = {
+export const cognitoSignUpRequestResult = {
     user: {
         username: '58vr7gv41m@mailcurity.com',
         pool: {
@@ -104,7 +104,7 @@ export const cognitoSignUpConfirmationResult = 'SUCCESS';
 
 export const cognitoPasswordResetConfirmationResult = 'SUCCESS';
 
-export const cognitoSignInResult: any = {
+export const cognitoSignInResult = {
     session: {
         idToken: {
             jwtToken:
