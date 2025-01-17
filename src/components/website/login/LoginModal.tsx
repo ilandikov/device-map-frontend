@@ -45,9 +45,6 @@ export function LoginModal() {
         // Logged in
         LOGGED_IN: <></>,
     };
-    function getAuthenticationComponent(authenticationStep: AuthenticationStep) {
-        return appleSauce[authenticationStep];
-    }
 
     return (
         <div className="login-modal-window">
@@ -55,7 +52,7 @@ export function LoginModal() {
                 {showShadows && <LoginModalShadows />}
                 {showNavigationButtons && <NavigationButtons />}
                 <LoginModalHeader />
-                {getAuthenticationComponent(authenticationStep)}
+                {appleSauce[authenticationStep]}
             </div>
         </div>
     );
