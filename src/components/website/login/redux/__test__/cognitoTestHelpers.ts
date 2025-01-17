@@ -7,50 +7,39 @@ import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { Dependency } from '../../../../../redux/store';
 
-export class CognitoTestClient implements Dependency<CognitoClient> {
-    private readonly _mockedResult: Promise<any>;
-
-    constructor(mockedResult: Promise<any>) {
-        this._mockedResult = mockedResult;
-    }
-
-    signUp() {
-        return this._mockedResult;
-    }
-
-    signUpConfirmCode() {
-        return this._mockedResult;
-    }
-
-    confirmPassword() {
-        return this._mockedResult;
-    }
-
-    signIn() {
-        return this._mockedResult;
-    }
-
-    forgotPassword() {
-        return this._mockedResult;
-    }
-
-    resendConfirmCode() {
-        return this._mockedResult;
-    }
-
-    signOut() {
-        return this._mockedResult;
-    }
+export enum TestClient {
+    RESOLVING = 'RESOLVING',
+    REJECTING = 'REJECTING',
 }
+
+const cognitoResolvingTestClient: Dependency<CognitoClient> = {
+    signUp: () => Promise.resolve(cognitoSignUpRequestResult as any),
+    signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
+    signIn: () => Promise.resolve(cognitoSignInResult as any),
+    forgotPassword: () => Promise.resolve(cognitoPasswordResetRequestResult),
+    confirmPassword: () => Promise.resolve(cognitoPasswordResetConfirmationResult),
+    resendConfirmCode: () => Promise.resolve({} as any),
+    signOut: () => Promise.resolve(cognitoSignOutResult),
+};
+
+const cognitoRejectingTestClient: Dependency<CognitoClient> = {
+    signUp: () => Promise.reject(),
+    signUpConfirmCode: () => Promise.reject(),
+    signIn: () => Promise.reject(),
+    forgotPassword: () => Promise.reject(),
+    confirmPassword: () => Promise.reject(),
+    resendConfirmCode: () => Promise.reject(),
+    signOut: () => Promise.reject(),
+};
 
 export async function testCognitoOutputAction(
     initialState: AuthenticationState,
-    remoteServiceAnswer: Promise<any>,
+    testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
     const stateForTest = buildStateForCognitoTest(initialState);
     const dependencies = {
-        cognitoClient: new CognitoTestClient(remoteServiceAnswer),
+        cognitoClient: testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
     };
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
@@ -62,12 +51,9 @@ export async function testCognitoOutputAction(
 
 export async function testCognitoNoOutput(initialState: AuthenticationState) {
     const stateForTest = buildStateForCognitoTest(initialState);
-    const dependencies = {
-        cognitoClient: new CognitoTestClient(Promise.resolve()),
-    };
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
-    const output$ = cognito(action, stateForTest, dependencies);
+    const output$ = cognito(action, stateForTest, {});
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([]);
