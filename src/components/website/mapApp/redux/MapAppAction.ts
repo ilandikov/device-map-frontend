@@ -45,7 +45,7 @@ export type MapAppAction =
     | MapAppAuthCompleted;
 
 export interface MapAppGenericAction {
-    type: MapAppActionType.LOGIN_MODAL_CLOSE | MapAppActionType.AUTHENTICATION_COMPLETED;
+    type: MapAppActionType.LOGIN_MODAL_CLOSE;
 }
 
 export interface MapAppButtonClick {
