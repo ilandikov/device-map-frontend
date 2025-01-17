@@ -22,7 +22,7 @@ function processInMyEpic(fakeClient: FakeClientInterface) {
     );
 }
 
-export async function testMyEpic(
+export async function testMyEpicWithRemoteServiceAsFunction(
     remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
@@ -41,7 +41,7 @@ describe('myEpic tests', () => {
 
         const expectedAction = [{ promise: 'resolved' } as any];
 
-        await testMyEpic(remoteServiceAnswer, expectedAction);
+        await testMyEpicWithRemoteServiceAsFunction(remoteServiceAnswer, expectedAction);
     });
 
     it('should reject', async () => {
@@ -49,6 +49,6 @@ describe('myEpic tests', () => {
 
         const expectedAction = [{ promise: 'rejected' } as any];
 
-        await testMyEpic(remoteServiceAnswer, expectedAction);
+        await testMyEpicWithRemoteServiceAsFunction(remoteServiceAnswer, expectedAction);
     });
 });
