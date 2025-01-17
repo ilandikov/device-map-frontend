@@ -1,5 +1,6 @@
 import { ofType } from 'redux-observable';
-import { EMPTY, lastValueFrom, of, switchMap, toArray } from 'rxjs';
+import { catchError, lastValueFrom, mergeMap, of, switchMap, toArray } from 'rxjs';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { RootEpic } from '../../../../../redux/store';
 import { LoginModalAction, LoginModalActionType, LoginModalCheck, loginModalRemoteRequest } from '../LoginModalAction';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
@@ -14,8 +15,11 @@ export const myEpic: RootEpic = (action$, _, { fakeClient }) =>
         switchMap(() => processMyEpic(fakeClient)),
     );
 
-function processMyEpic(_client: FakeClientInterface) {
-    return EMPTY;
+function processMyEpic(client: FakeClientInterface) {
+    return fromPromise(client.remoteService()).pipe(
+        mergeMap(() => of({ promise: 'resolved' } as any)),
+        catchError(() => of({ promise: 'rejected' } as any)),
+    );
 }
 
 export async function testMyEpic(
@@ -32,10 +36,18 @@ export async function testMyEpic(
 }
 
 describe('myEpic tests', () => {
-    it('should do nothing', async () => {
+    it('should resolve', async () => {
         const remoteServiceAnswer = Promise.resolve();
 
-        const expectedAction = [];
+        const expectedAction = [{ promise: 'resolved' } as any];
+
+        await testMyEpic(remoteServiceAnswer, expectedAction);
+    });
+
+    it('should reject', async () => {
+        const remoteServiceAnswer = Promise.reject();
+
+        const expectedAction = [{ promise: 'rejected' } as any];
 
         await testMyEpic(remoteServiceAnswer, expectedAction);
     });
