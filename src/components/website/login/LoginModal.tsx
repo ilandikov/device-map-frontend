@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -25,41 +25,29 @@ export function LoginModal() {
     ].includes(authenticationStep);
 
     function getAuthenticationComponent(authenticationStep: AuthenticationStep) {
-        switch (authenticationStep) {
-            case AuthenticationStep.WELCOME:
-                return <WelcomeForm />;
+        const appleSauce: { [key in AuthenticationStep]: ReactElement } = {
+            WELCOME: <WelcomeForm />,
             // Sign up
-            case AuthenticationStep.MAIL_INPUT:
-                return <MailInputForm />;
-            case AuthenticationStep.PASSWORD_CREATION:
-                return <PasswordCreationForm />;
-            case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                return <Loader />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP:
-                return <OTPForm />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
-                return <Loader />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING:
-                return <Loader />;
+            MAIL_INPUT: <MailInputForm />,
+            PASSWORD_CREATION: <PasswordCreationForm />,
+            PASSWORD_CREATION_LOADING: <Loader />,
+            PASSWORD_CREATION_OTP: <OTPForm />,
+            PASSWORD_CREATION_OTP_LOADING: <Loader />,
+            PASSWORD_CREATION_OTP_RESEND_LOADING: <Loader />,
             // Sign in
-            case AuthenticationStep.LOGIN:
-                return <LogInForm />;
-            case AuthenticationStep.LOGIN_LOADING:
-                return <Loader />;
+            LOGIN: <LogInForm />,
+            LOGIN_LOADING: <Loader />,
             // Password reset
-            case AuthenticationStep.PASSWORD_RESET_REQUEST:
-                return <PasswordResetRequestForm />;
-            case AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING:
-                return <Loader />;
-            case AuthenticationStep.PASSWORD_RESET_OTP:
-                return <OTPForm />;
-            case AuthenticationStep.PASSWORD_RESET:
-                return <PasswordCreationForm />;
-            case AuthenticationStep.PASSWORD_RESET_LOADING:
-                return <Loader />;
-        }
+            PASSWORD_RESET_REQUEST: <PasswordResetRequestForm />,
+            PASSWORD_RESET_REQUEST_LOADING: <Loader />,
+            PASSWORD_RESET_OTP: <OTPForm />,
+            PASSWORD_RESET: <PasswordCreationForm />,
+            PASSWORD_RESET_LOADING: <Loader />,
+            // Logged in
+            LOGGED_IN: <></>,
+        };
 
-        return <></>;
+        return appleSauce[authenticationStep];
     }
 
     return (
