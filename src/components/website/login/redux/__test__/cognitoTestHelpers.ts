@@ -7,7 +7,7 @@ import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { Dependency } from '../../../../../redux/store';
 
-export enum ClientType {
+export enum TestClient {
     RESOLVING = 'RESOLVING',
     REJECTING = 'REJECTING',
 }
@@ -34,12 +34,12 @@ const cognitoRejectingTestClient: Dependency<CognitoClient> = {
 
 export async function testCognitoOutputAction(
     initialState: AuthenticationState,
-    clientType: ClientType,
+    testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
     const stateForTest = buildStateForCognitoTest(initialState);
     const dependencies = {
-        cognitoClient: clientType === ClientType.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
+        cognitoClient: testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
     };
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
