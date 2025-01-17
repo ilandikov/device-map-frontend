@@ -24,43 +24,27 @@ export function LoginModal() {
         AuthenticationStep.PASSWORD_RESET_REQUEST,
     ].includes(authenticationStep);
 
-    function getAuthenticationComponent(authenticationStep: AuthenticationStep) {
-        switch (authenticationStep) {
-            case AuthenticationStep.WELCOME:
-                return <WelcomeForm />;
-            // Sign up
-            case AuthenticationStep.MAIL_INPUT:
-                return <MailInputForm />;
-            case AuthenticationStep.PASSWORD_CREATION:
-                return <PasswordCreationForm />;
-            case AuthenticationStep.PASSWORD_CREATION_LOADING:
-                return <Loader />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP:
-                return <OTPForm />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP_LOADING:
-                return <Loader />;
-            case AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING:
-                return <Loader />;
-            // Sign in
-            case AuthenticationStep.LOGIN:
-                return <LogInForm />;
-            case AuthenticationStep.LOGIN_LOADING:
-                return <Loader />;
-            // Password reset
-            case AuthenticationStep.PASSWORD_RESET_REQUEST:
-                return <PasswordResetRequestForm />;
-            case AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING:
-                return <Loader />;
-            case AuthenticationStep.PASSWORD_RESET_OTP:
-                return <OTPForm />;
-            case AuthenticationStep.PASSWORD_RESET:
-                return <PasswordCreationForm />;
-            case AuthenticationStep.PASSWORD_RESET_LOADING:
-                return <Loader />;
-        }
-
-        return <></>;
-    }
+    const authenticationComponents: { [key in AuthenticationStep]: React.ReactElement } = {
+        WELCOME: <WelcomeForm />,
+        // Sign up
+        MAIL_INPUT: <MailInputForm />,
+        PASSWORD_CREATION: <PasswordCreationForm />,
+        PASSWORD_CREATION_LOADING: <Loader />,
+        PASSWORD_CREATION_OTP: <OTPForm />,
+        PASSWORD_CREATION_OTP_LOADING: <Loader />,
+        PASSWORD_CREATION_OTP_RESEND_LOADING: <Loader />,
+        // Sign in
+        LOGIN: <LogInForm />,
+        LOGIN_LOADING: <Loader />,
+        // Password reset
+        PASSWORD_RESET_REQUEST: <PasswordResetRequestForm />,
+        PASSWORD_RESET_REQUEST_LOADING: <Loader />,
+        PASSWORD_RESET_OTP: <OTPForm />,
+        PASSWORD_RESET: <PasswordCreationForm />,
+        PASSWORD_RESET_LOADING: <Loader />,
+        // Logged in
+        LOGGED_IN: <></>,
+    };
 
     return (
         <div className="login-modal-window">
@@ -68,7 +52,7 @@ export function LoginModal() {
                 {showShadows && <LoginModalShadows />}
                 {showNavigationButtons && <NavigationButtons />}
                 <LoginModalHeader />
-                {getAuthenticationComponent(authenticationStep)}
+                {authenticationComponents[authenticationStep]}
             </div>
         </div>
     );
