@@ -6,6 +6,7 @@ export const listDevicesQuery = {
             T22ListDevices {
                 devices {
                     id
+                    creatorID
                     location {
                         lat
                         lon
@@ -23,6 +24,7 @@ export const createDeviceMutation = gql`
         T22CreateDevice(input: $input) {
             device {
                 id
+                creatorID
                 location {
                     lat
                     lon
