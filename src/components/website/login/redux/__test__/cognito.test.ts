@@ -1,45 +1,28 @@
 import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
-import {
-    ClientType,
-    cognitoPasswordResetConfirmationResult,
-    cognitoPasswordResetRequestResult,
-    cognitoSignInResult,
-    cognitoSignOutResult,
-    cognitoSignUpConfirmationResult,
-    cognitoSignUpRequestResult,
-    testCognitoNoOutput,
-    testCognitoOutputAction,
-} from './cognitoTestHelpers';
+import { ClientType, testCognitoNoOutput, testCognitoOutputAction } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
-        [ClientType.RESOLVING, Promise.resolve(cognitoSignUpRequestResult), [loginModalRemoteAnswerSuccess()]],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])(
-        'should dispatch sign up notification when remote answer is: %s',
-        async (clientType, _remoteServiceAnswer, expectedAction) => {
-            const initialState = buildAuthenticationState({
-                step: AuthenticationStep.PASSWORD_CREATION_LOADING,
-            });
+        [ClientType.RESOLVING, [loginModalRemoteAnswerSuccess()]],
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+    ])('should dispatch sign up notification when remote answer is: %s', async (clientType, expectedAction) => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_LOADING,
+        });
 
-            await testCognitoOutputAction(initialState, clientType, expectedAction);
-        },
-    );
+        await testCognitoOutputAction(initialState, clientType, expectedAction);
+    });
 });
 
 describe('user password reset tests', () => {
     it.each([
-        [
-            ClientType.RESOLVING,
-            Promise.resolve(cognitoPasswordResetConfirmationResult),
-            [loginModalRemoteAnswerSuccess()],
-        ],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [ClientType.RESOLVING, [loginModalRemoteAnswerSuccess()]],
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])(
         'should dispatch password has been reset notification when remote answer is: %s',
-        async (clientType, _remoteServiceAnswer, expectedAction) => {
+        async (clientType, expectedAction) => {
             const initialState = buildAuthenticationState({
                 step: AuthenticationStep.PASSWORD_RESET_LOADING,
             });
@@ -51,36 +34,30 @@ describe('user password reset tests', () => {
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
-        [ClientType.RESOLVING, Promise.resolve(cognitoSignUpConfirmationResult), [loginModalRemoteAnswerSuccess()]],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])(
-        'should dispatch OTP notification when remote answer is: %s',
-        async (clientType, _remoteServiceAnswer, expectedAction) => {
-            const initialState = buildAuthenticationState({
-                step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
-            });
+        [ClientType.RESOLVING, [loginModalRemoteAnswerSuccess()]],
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+    ])('should dispatch OTP notification when remote answer is: %s', async (clientType, expectedAction) => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
+        });
 
-            await testCognitoOutputAction(initialState, clientType, expectedAction);
-        },
-    );
+        await testCognitoOutputAction(initialState, clientType, expectedAction);
+    });
 });
 
 describe('user sign in tests', () => {
     it.each([
         [
             ClientType.RESOLVING,
-            Promise.resolve(cognitoSignInResult),
+
             [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57')],
         ],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])(
-        'should dispatch login notification when remote answer is: %s',
-        async (clientType, _remoteServiceAnswer, expectedAction) => {
-            const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+    ])('should dispatch login notification when remote answer is: %s', async (clientType, expectedAction) => {
+        const initialState = buildAuthenticationState({ step: AuthenticationStep.LOGIN_LOADING });
 
-            await testCognitoOutputAction(initialState, clientType, expectedAction);
-        },
-    );
+        await testCognitoOutputAction(initialState, clientType, expectedAction);
+    });
 });
 
 describe('password reset request tests', () => {
@@ -91,25 +68,22 @@ describe('password reset request tests', () => {
     });
 
     it.each([
-        [ClientType.RESOLVING, Promise.resolve(cognitoPasswordResetRequestResult), [loginModalRemoteAnswerSuccess()]],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])(
-        'should dispatch forgot password notification when remote answer is: %s',
-        async (clientType, _remoteServiceAnswer, expectedAction) => {
-            const initialState = buildAuthenticationState({
-                step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
-            });
+        [ClientType.RESOLVING, [loginModalRemoteAnswerSuccess()]],
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+    ])('should dispatch forgot password notification when remote answer is: %s', async (clientType, expectedAction) => {
+        const initialState = buildAuthenticationState({
+            step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
+        });
 
-            await testCognitoOutputAction(initialState, clientType, expectedAction);
-        },
-    );
+        await testCognitoOutputAction(initialState, clientType, expectedAction);
+    });
 });
 
 describe('OTP code resend tests', () => {
     it.each([
-        [ClientType.RESOLVING, Promise.resolve(), [loginModalRemoteAnswerSuccess()]],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should resign out user when remote answer is: %s', async (clientType, _remoteServiceAnswer, expectedAction) => {
+        [ClientType.RESOLVING, [loginModalRemoteAnswerSuccess()]],
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+    ])('should resign out user when remote answer is: %s', async (clientType, expectedAction) => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
         });
@@ -120,9 +94,9 @@ describe('OTP code resend tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [ClientType.RESOLVING, Promise.resolve(cognitoSignOutResult), [loginModalRemoteAnswerSuccess()]],
-        [ClientType.REJECTING, Promise.resolve(), [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should sign out user when remote answer is: %s', async (clientType, _remoteServiceAnswer, expectedAction) => {
+        [ClientType.RESOLVING, [loginModalRemoteAnswerSuccess()]],
+        [ClientType.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+    ])('should sign out user when remote answer is: %s', async (clientType, expectedAction) => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGGED_IN,
         });
