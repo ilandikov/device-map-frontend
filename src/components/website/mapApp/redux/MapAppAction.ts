@@ -32,7 +32,7 @@ export enum MapAppRemoteAnswerType {
 }
 
 export type MapAppAction =
-    | MapAppGenericAction
+    | MapAppLoginModalCloseAction
     | MapAppButtonClick
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
@@ -44,7 +44,7 @@ export type MapAppAction =
     | MapAppRemoteErrorAnswer
     | MapAppAuthCompleted;
 
-export interface MapAppGenericAction {
+export interface MapAppLoginModalCloseAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE;
 }
 
@@ -57,7 +57,7 @@ export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
     return { type: MapAppActionType.BUTTON_CLICK, button };
 }
 
-export function mapAppLoginModalClose(): MapAppGenericAction {
+export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
     return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }
 
