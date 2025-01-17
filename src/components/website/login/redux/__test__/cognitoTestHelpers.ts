@@ -91,12 +91,9 @@ export async function testCognitoOutputAction(
 
 export async function testCognitoNoOutput(initialState: AuthenticationState) {
     const stateForTest = buildStateForCognitoTest(initialState);
-    const dependencies = {
-        cognitoClient: new CognitoTestClient(Promise.resolve(), ClientType.RESOLVING),
-    };
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
-    const output$ = cognito(action, stateForTest, dependencies);
+    const output$ = cognito(action, stateForTest, {});
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([]);
