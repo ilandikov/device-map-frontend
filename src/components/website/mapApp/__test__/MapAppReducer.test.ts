@@ -62,9 +62,12 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         });
-        const action = mapAppAuthenticationCompleted('');
+        const action = mapAppAuthenticationCompleted('set me in the state');
 
-        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        verifyMapAppStateChange(initialState, action, {
+            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            currentUserID: 'set me in the state',
+        });
     });
 
     it('should set coordinates', () => {
