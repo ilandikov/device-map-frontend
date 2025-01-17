@@ -18,6 +18,7 @@ export interface MapAppState {
         address: MapAppAddress | null;
     };
     devices: T22Device[];
+    currentUserID: string;
 }
 
 export enum MapAppUsageStep {
@@ -33,6 +34,7 @@ export const mapAppInitialState: MapAppState = {
         location: null,
         address: null,
     },
+    currentUserID: '',
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
