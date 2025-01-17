@@ -14,14 +14,14 @@ export interface FakeClientInterface {
 
 class ServiceClass {
     // changing this to .resolve(); removes the UnhandledPromiseRejection
-    _remoteServiceAnswer: Promise<any> = Promise.reject();
+    _remoteServiceFunction: RemoteFunction = () => Promise.reject();
 
-    constructor(answer: Promise<any>) {
-        this._remoteServiceAnswer = answer;
+    constructor(remoteFunction: RemoteFunction) {
+        this._remoteServiceFunction = remoteFunction;
     }
 
     public call() {
-        return this._remoteServiceAnswer;
+        return this._remoteServiceFunction();
     }
 }
 
@@ -41,7 +41,7 @@ function processInMyEpic(fakeClient: FakeClientInterface) {
 function createFakeClient(remoteServiceAnswer: Promise<any>): FakeClientInterface {
     return {
         remoteServiceAsFunction: () => remoteServiceAnswer,
-        remoteServiceAsClass: new ServiceClass(remoteServiceAnswer),
+        remoteServiceAsClass: new ServiceClass(() => remoteServiceAnswer),
     };
 }
 
