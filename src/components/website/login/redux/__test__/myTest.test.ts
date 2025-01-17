@@ -7,6 +7,20 @@ import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
 export interface FakeClientInterface {
     remoteServiceAsFunction: () => Promise<any>;
+    remoteServiceAsClass: ServiceClass;
+}
+
+class ServiceClass {
+    // changing this to .resolve(); removes the UnhandledPromiseRejection
+    _remoteServiceAnswer: Promise<any> = Promise.reject();
+
+    constructor(answer: Promise<any>) {
+        this._remoteServiceAnswer = answer;
+    }
+
+    public call() {
+        return this._remoteServiceAnswer;
+    }
 }
 
 export const myEpic: RootEpic = (action$, _, { fakeClient }) =>
@@ -23,7 +37,10 @@ function processInMyEpic(fakeClient: FakeClientInterface) {
 }
 
 function createFakeClient(remoteServiceAnswer: Promise<any>): FakeClientInterface {
-    return { remoteServiceAsFunction: () => remoteServiceAnswer };
+    return {
+        remoteServiceAsFunction: () => remoteServiceAnswer,
+        remoteServiceAsClass: new ServiceClass(remoteServiceAnswer),
+    };
 }
 
 export async function testMyEpicWithRemoteServiceAsFunction(
