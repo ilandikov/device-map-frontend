@@ -6,7 +6,7 @@ import { LoginModalAction, LoginModalActionType, LoginModalCheck, loginModalRemo
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
 export interface FakeClientInterface {
-    remoteService: () => Promise<any>;
+    remoteServiceAsFunction: () => Promise<any>;
 }
 
 export const myEpic: RootEpic = (action$, _, { fakeClient }) =>
@@ -16,7 +16,7 @@ export const myEpic: RootEpic = (action$, _, { fakeClient }) =>
     );
 
 function processInMyEpic(fakeClient: FakeClientInterface) {
-    return fromPromise(fakeClient.remoteService()).pipe(
+    return fromPromise(fakeClient.remoteServiceAsFunction()).pipe(
         mergeMap(() => of({ promise: 'resolved' } as any)),
         catchError(() => of({ promise: 'rejected' } as any)),
     );
@@ -26,7 +26,7 @@ export async function testMyEpic(
     remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const fakeClient = { remoteService: () => remoteServiceAnswer };
+    const fakeClient: FakeClientInterface = { remoteServiceAsFunction: () => remoteServiceAnswer };
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
     const output$ = myEpic(action, {} as any, { fakeClient });
