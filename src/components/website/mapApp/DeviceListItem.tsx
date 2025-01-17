@@ -6,7 +6,7 @@ import { AuthenticationStep, useLoginModalAuthentication } from '../login/redux/
 import { DeviceListItemWrapper } from './DeviceListItemWrapper';
 import { mapAppDeleteDeviceRequest } from './redux/MapAppAction';
 
-export function DeviceListItem(props: { device: T22Device; colorIndex: number }) {
+export function DeviceListItem(props: { device: T22Device; colorIndex: number; currentUserId: string }) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
