@@ -22,11 +22,15 @@ function processInMyEpic(fakeClient: FakeClientInterface) {
     );
 }
 
+function createFakeClient(remoteServiceAnswer: Promise<any>): FakeClientInterface {
+    return { remoteServiceAsFunction: () => remoteServiceAnswer };
+}
+
 export async function testMyEpicWithRemoteServiceAsFunction(
     remoteServiceAnswer: Promise<any>,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const fakeClient: FakeClientInterface = { remoteServiceAsFunction: () => remoteServiceAnswer };
+    const fakeClient = createFakeClient(remoteServiceAnswer);
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
     const output$ = myEpic(action, {} as any, { fakeClient });
