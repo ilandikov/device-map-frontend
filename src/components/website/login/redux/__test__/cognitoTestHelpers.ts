@@ -32,45 +32,6 @@ const cognitoRejectingTestClient: Dependency<CognitoClient> = {
     signOut: () => Promise.reject(),
 };
 
-export class CognitoTestClient implements Dependency<CognitoClient> {
-    private readonly _mockedResult: Promise<any>;
-    // @ts-expect-error
-    private readonly _clientType: ClientType;
-
-    constructor(mockedResult: Promise<any>, _clientType: ClientType) {
-        this._mockedResult = mockedResult;
-        this._clientType = _clientType;
-    }
-
-    signUp() {
-        return this._mockedResult;
-    }
-
-    signUpConfirmCode() {
-        return this._mockedResult;
-    }
-
-    confirmPassword() {
-        return this._mockedResult;
-    }
-
-    signIn() {
-        return this._mockedResult;
-    }
-
-    forgotPassword() {
-        return this._mockedResult;
-    }
-
-    resendConfirmCode() {
-        return this._mockedResult;
-    }
-
-    signOut() {
-        return this._mockedResult;
-    }
-}
-
 export async function testCognitoOutputAction(
     initialState: AuthenticationState,
     _remoteServiceAnswer: Promise<any>,
