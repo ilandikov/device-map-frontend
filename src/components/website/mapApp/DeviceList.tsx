@@ -15,7 +15,12 @@ export function DeviceList() {
                 device.location.lon === selectedMarker.location.lon,
         )
         .map((device, index) => (
-            <DeviceListItem device={device} colorIndex={index} currentUserId={mapAppState.currentUserID} key={index} />
+            <DeviceListItem
+                device={device}
+                colorIndex={index}
+                showDeleteButton={device.id && device.id === mapAppState.currentUserID}
+                key={index}
+            />
         ));
 
     if (mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT) {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeviceListItem snapshot test should match snapshot when user is authenticated, but not the creator of the device 1`] = `
+exports[`DeviceListItem snapshot test should match snapshot without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -19,7 +19,7 @@ exports[`DeviceListItem snapshot test should match snapshot when user is authent
     className="device-list-item"
   >
     <p>
-      not matching with id current user id
+      with delete button
     </p>
     <button
       className="device-list-item-opaque-text"
@@ -30,7 +30,7 @@ exports[`DeviceListItem snapshot test should match snapshot when user is authent
 </div>
 `;
 
-exports[`DeviceListItem snapshot test should match snapshot when user is not authenticated 1`] = `
+exports[`DeviceListItem snapshot test should match snapshot without delete button 2`] = `
 <div
   className="device-list-item-container"
 >
@@ -49,49 +49,12 @@ exports[`DeviceListItem snapshot test should match snapshot when user is not aut
     className="device-list-item"
   >
     <p>
-      i should render without delete button
+      without delete button
     </p>
     <button
       className="device-list-item-opaque-text"
     >
       deviceReportBroken
-    </button>
-  </div>
-</div>
-`;
-
-exports[`DeviceListItem snapshot test should match snapshot with error 1`] = `
-<div
-  className="device-list-item-container"
->
-  <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
-  />
-  <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
-  />
-  <img
-    alt="device-list-item-image"
-    className="device-list-item-image"
-    src="test-file-stub"
-  />
-  <div
-    className="device-list-item"
-  >
-    <p>
-      i should render with delete button
-    </p>
-    <button
-      className="device-list-item-opaque-text"
-    >
-      deviceReportBroken
-    </button>
-    <button
-      className="device-list-item-opaque-text"
-      data-testid="deleteDeviceButton"
-      onClick={[Function]}
-    >
-      deleteDevice
     </button>
   </div>
 </div>
