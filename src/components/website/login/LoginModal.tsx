@@ -24,7 +24,7 @@ export function LoginModal() {
         AuthenticationStep.PASSWORD_RESET_REQUEST,
     ].includes(authenticationStep);
 
-    const appleSauce: { [key in AuthenticationStep]: ReactElement } = {
+    const authenticationComponents: { [key in AuthenticationStep]: ReactElement } = {
         WELCOME: <WelcomeForm />,
         // Sign up
         MAIL_INPUT: <MailInputForm />,
@@ -52,7 +52,7 @@ export function LoginModal() {
                 {showShadows && <LoginModalShadows />}
                 {showNavigationButtons && <NavigationButtons />}
                 <LoginModalHeader />
-                {appleSauce[authenticationStep]}
+                {authenticationComponents[authenticationStep]}
             </div>
         </div>
     );
