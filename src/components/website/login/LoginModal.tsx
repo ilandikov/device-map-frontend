@@ -24,29 +24,28 @@ export function LoginModal() {
         AuthenticationStep.PASSWORD_RESET_REQUEST,
     ].includes(authenticationStep);
 
+    const appleSauce: { [key in AuthenticationStep]: ReactElement } = {
+        WELCOME: <WelcomeForm />,
+        // Sign up
+        MAIL_INPUT: <MailInputForm />,
+        PASSWORD_CREATION: <PasswordCreationForm />,
+        PASSWORD_CREATION_LOADING: <Loader />,
+        PASSWORD_CREATION_OTP: <OTPForm />,
+        PASSWORD_CREATION_OTP_LOADING: <Loader />,
+        PASSWORD_CREATION_OTP_RESEND_LOADING: <Loader />,
+        // Sign in
+        LOGIN: <LogInForm />,
+        LOGIN_LOADING: <Loader />,
+        // Password reset
+        PASSWORD_RESET_REQUEST: <PasswordResetRequestForm />,
+        PASSWORD_RESET_REQUEST_LOADING: <Loader />,
+        PASSWORD_RESET_OTP: <OTPForm />,
+        PASSWORD_RESET: <PasswordCreationForm />,
+        PASSWORD_RESET_LOADING: <Loader />,
+        // Logged in
+        LOGGED_IN: <></>,
+    };
     function getAuthenticationComponent(authenticationStep: AuthenticationStep) {
-        const appleSauce: { [key in AuthenticationStep]: ReactElement } = {
-            WELCOME: <WelcomeForm />,
-            // Sign up
-            MAIL_INPUT: <MailInputForm />,
-            PASSWORD_CREATION: <PasswordCreationForm />,
-            PASSWORD_CREATION_LOADING: <Loader />,
-            PASSWORD_CREATION_OTP: <OTPForm />,
-            PASSWORD_CREATION_OTP_LOADING: <Loader />,
-            PASSWORD_CREATION_OTP_RESEND_LOADING: <Loader />,
-            // Sign in
-            LOGIN: <LogInForm />,
-            LOGIN_LOADING: <Loader />,
-            // Password reset
-            PASSWORD_RESET_REQUEST: <PasswordResetRequestForm />,
-            PASSWORD_RESET_REQUEST_LOADING: <Loader />,
-            PASSWORD_RESET_OTP: <OTPForm />,
-            PASSWORD_RESET: <PasswordCreationForm />,
-            PASSWORD_RESET_LOADING: <Loader />,
-            // Logged in
-            LOGGED_IN: <></>,
-        };
-
         return appleSauce[authenticationStep];
     }
 
