@@ -37,6 +37,7 @@ import {
 } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
+import { FakeClientInterface } from '../components/website/login/redux/__test__/myTest.test';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -64,6 +65,7 @@ export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
+    fakeClient?: FakeClientInterface;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
