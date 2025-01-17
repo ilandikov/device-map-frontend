@@ -5,8 +5,10 @@ import { RootEpic } from '../../../../../redux/store';
 import { LoginModalAction, LoginModalActionType, LoginModalCheck, loginModalRemoteRequest } from '../LoginModalAction';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 
+type RemoteFunction = () => Promise<any>;
+
 export interface FakeClientInterface {
-    remoteServiceAsFunction: () => Promise<any>;
+    remoteServiceAsFunction: RemoteFunction;
     remoteServiceAsClass: ServiceClass;
 }
 
