@@ -42,11 +42,14 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
 
-    it('should move to mainPage screen step on logout button click', () => {
-        const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
+    it('should move to mainPage screen step and reset user id on logout button click', () => {
+        const initialState = buildMapAppState({
+            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
+            currentUserID: 'reset me!',
+        });
         const action = mapAppButtonClick(MapAppButton.LOGOUT);
 
-        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
+        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: '' });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
@@ -62,9 +65,12 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
         });
-        const action = mapAppAuthenticationCompleted('');
+        const action = mapAppAuthenticationCompleted('set me in the state');
 
-        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        verifyMapAppStateChange(initialState, action, {
+            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            currentUserID: 'set me in the state',
+        });
     });
 
     it('should set coordinates', () => {

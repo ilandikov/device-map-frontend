@@ -4,6 +4,10 @@ import { MapAppState, MapAppUsageStep } from './MapAppState';
 export function afterButtonClicked(action: MapAppButtonClick): Partial<MapAppState> {
     const nextStep = stepAfterButtonClick[action.button];
     if (nextStep) {
+        if (action.button === MapAppButton.LOGOUT) {
+            return { usageStep: nextStep, currentUserID: '' };
+        }
+
         return { usageStep: nextStep };
     }
 

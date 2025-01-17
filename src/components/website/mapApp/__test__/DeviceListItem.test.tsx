@@ -1,10 +1,9 @@
 import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
-import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
+import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
 import { DeviceListItem } from '../DeviceListItem';
-import { AuthenticationStep } from '../../login/redux/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -13,23 +12,23 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('DeviceListItem snapshot test', () => {
-    it('should match snapshot when user is not authenticated', () => {
-        mockAuthenticationState({});
+    it('should match snapshot without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem
-                device={{ id: 'i should render without delete button', location: { lat: 3, lon: 7 } }}
+                device={{ id: 'with delete button', location: { lat: 3, lon: 7 } }}
                 colorIndex={0}
+                showDeleteButton={false}
             />,
         );
         expect(component).toMatchSnapshot();
     });
 
-    it('should match snapshot with error', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN });
+    it('should match snapshot without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem
-                device={{ id: 'i should render with delete button', location: { lat: 3, lon: 7 } }}
+                device={{ id: 'without delete button', location: { lat: 3, lon: 7 } }}
                 colorIndex={0}
+                showDeleteButton={false}
             />,
         );
         expect(component).toMatchSnapshot();
@@ -43,7 +42,11 @@ describe('DeviceListItem action tests', () => {
 
     it('should dispatch delete device request on delete device button click', () => {
         const container = renderForActionDispatchTest(
-            <DeviceListItem device={{ id: 'deleteMe', location: { lat: 3, lon: 7 } }} colorIndex={0} />,
+            <DeviceListItem
+                device={{ id: 'deleteMe', location: { lat: 3, lon: 7 } }}
+                colorIndex={0}
+                showDeleteButton={true}
+            />,
         );
 
         const loginButton = getByTestId(container, 'deleteDeviceButton');

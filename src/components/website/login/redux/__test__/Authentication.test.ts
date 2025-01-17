@@ -516,7 +516,6 @@ describe('logout logic', () => {
         const initialState = buildAuthenticationState({
             step: AuthenticationStep.LOGGED_IN,
             email: 'reset@me.com',
-            id: 'you-shall-not-pass',
             error: new Error('meToo!'),
             password: 'andMe',
             passwordRepeat: 'thisAsWell',

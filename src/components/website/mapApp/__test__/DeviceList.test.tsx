@@ -28,7 +28,11 @@ describe('device list snapshot tests', () => {
     it('should show the address and a list devices matching the selected marker with the create device item', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
-            devices: [{ id: '85378', location: { lat: 6.3, lon: 9.2 } }],
+            currentUserID: 'I created the second one!',
+            devices: [
+                { id: '85378', location: { lat: 6.3, lon: 9.2 } },
+                { id: 'with delete button', location: { lat: 6.3, lon: 9.2 }, creatorID: 'I created the second one!' },
+            ],
             selectedMarker: {
                 location: { lat: 6.3, lon: 9.2 },
                 address: {

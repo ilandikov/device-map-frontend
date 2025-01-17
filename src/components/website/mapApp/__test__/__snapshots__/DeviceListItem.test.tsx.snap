@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeviceListItem snapshot test should match snapshot when user is not authenticated 1`] = `
+exports[`DeviceListItem snapshot test should match snapshot without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -19,7 +19,7 @@ exports[`DeviceListItem snapshot test should match snapshot when user is not aut
     className="device-list-item"
   >
     <p>
-      i should render without delete button
+      with delete button
     </p>
     <button
       className="device-list-item-opaque-text"
@@ -30,7 +30,7 @@ exports[`DeviceListItem snapshot test should match snapshot when user is not aut
 </div>
 `;
 
-exports[`DeviceListItem snapshot test should match snapshot with error 1`] = `
+exports[`DeviceListItem snapshot test should match snapshot without delete button 2`] = `
 <div
   className="device-list-item-container"
 >
@@ -49,19 +49,12 @@ exports[`DeviceListItem snapshot test should match snapshot with error 1`] = `
     className="device-list-item"
   >
     <p>
-      i should render with delete button
+      without delete button
     </p>
     <button
       className="device-list-item-opaque-text"
     >
       deviceReportBroken
-    </button>
-    <button
-      className="device-list-item-opaque-text"
-      data-testid="deleteDeviceButton"
-      onClick={[Function]}
-    >
-      deleteDevice
     </button>
   </div>
 </div>
