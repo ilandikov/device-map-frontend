@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -24,7 +24,7 @@ export function LoginModal() {
         AuthenticationStep.PASSWORD_RESET_REQUEST,
     ].includes(authenticationStep);
 
-    const authenticationComponents: { [key in AuthenticationStep]: ReactElement } = {
+    const authenticationComponents: { [key in AuthenticationStep]: React.ReactElement } = {
         WELCOME: <WelcomeForm />,
         // Sign up
         MAIL_INPUT: <MailInputForm />,
