@@ -28,7 +28,6 @@ describe('DeviceListItem snapshot test', () => {
     it('should match snapshot when user is authenticated, but not the creator of the device', () => {
         mockAuthenticationState({
             step: AuthenticationStep.LOGGED_IN,
-            id: 'i should render without delete button too',
         });
         const component = renderForSnapshotTest(
             <DeviceListItem
@@ -41,7 +40,7 @@ describe('DeviceListItem snapshot test', () => {
     });
 
     it('should match snapshot with error', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN, id: 'i should render with delete button' });
+        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN });
         const component = renderForSnapshotTest(
             <DeviceListItem
                 device={{ id: 'i should render with delete button', location: { lat: 3, lon: 7 } }}
@@ -59,7 +58,7 @@ describe('DeviceListItem action tests', () => {
     });
 
     it('should dispatch delete device request on delete device button click', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN, id: 'deleteMe' });
+        mockAuthenticationState({ step: AuthenticationStep.LOGGED_IN });
         const container = renderForActionDispatchTest(
             <DeviceListItem
                 device={{ id: 'deleteMe', location: { lat: 3, lon: 7 } }}
