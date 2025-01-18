@@ -1,14 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeviceListItem snapshot test should match snapshot without delete button 1`] = `
+exports[`DeviceListItem snapshot tests should match snapshot created device with delete button 1`] = `
 <div
   className="device-list-item-container"
 >
   <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-created-shadow-left"
   />
   <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-created-shadow-right"
+  />
+  <img
+    alt="device-list-item-image"
+    className="device-list-item-image"
+    src="test-file-stub"
+  />
+  <div
+    className="device-list-item"
+  >
+    <p>
+      try to delete me
+    </p>
+    <button
+      className="device-list-item-opaque-text"
+    >
+      deviceReportBroken
+    </button>
+    <button
+      className="device-list-item-opaque-text"
+      data-testid="deleteDeviceButton"
+      onClick={[Function]}
+    >
+      deleteDevice
+    </button>
+  </div>
+</div>
+`;
+
+exports[`DeviceListItem snapshot tests should match snapshot created device without delete button 1`] = `
+<div
+  className="device-list-item-container"
+>
+  <div
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-created-shadow-left"
+  />
+  <div
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-created-shadow-right"
   />
   <img
     alt="device-list-item-image"
@@ -30,15 +67,45 @@ exports[`DeviceListItem snapshot test should match snapshot without delete butto
 </div>
 `;
 
-exports[`DeviceListItem snapshot test should match snapshot without delete button 2`] = `
+exports[`DeviceListItem snapshot tests should match snapshot validated device without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
   <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-shadow-left-first"
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-approved-shadow-left"
   />
   <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-shadow-right-first"
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-approved-shadow-right"
+  />
+  <img
+    alt="device-list-item-image"
+    className="device-list-item-image"
+    src="test-file-stub"
+  />
+  <div
+    className="device-list-item"
+  >
+    <p>
+      try to delete me
+    </p>
+    <button
+      className="device-list-item-opaque-text"
+    >
+      deviceReportBroken
+    </button>
+  </div>
+</div>
+`;
+
+exports[`DeviceListItem snapshot tests should match snapshot validating device without delete button 1`] = `
+<div
+  className="device-list-item-container"
+>
+  <div
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-approving-shadow-left"
+  />
+  <div
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-approving-shadow-right"
   />
   <img
     alt="device-list-item-image"

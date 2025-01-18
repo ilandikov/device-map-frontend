@@ -9,7 +9,7 @@ export function CreateDeviceItem() {
     const dispatch = useAppDispatch();
 
     return (
-        <DeviceListItemWrapper colorIndex={null}>
+        <DeviceListItemWrapper approvals={-1}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
             <button
                 data-testid="createDeviceButton"

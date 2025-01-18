@@ -5,12 +5,12 @@ import { useAppDispatch } from '../../../redux/store';
 import { DeviceListItemWrapper } from './DeviceListItemWrapper';
 import { mapAppDeleteDeviceRequest } from './redux/MapAppAction';
 
-export function DeviceListItem(props: { device: T22Device; colorIndex: number; showDeleteButton: boolean }) {
+export function DeviceListItem(props: { device: T22Device; approvals: number; showDeleteButton: boolean }) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
     return (
-        <DeviceListItemWrapper colorIndex={props.colorIndex}>
+        <DeviceListItemWrapper approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {props.showDeleteButton && (
