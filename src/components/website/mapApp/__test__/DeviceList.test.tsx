@@ -14,7 +14,9 @@ describe('device list snapshot tests', () => {
     it('should show address loader and a list devices matching the selected marker without the create device item', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.HOME_SCREEN,
-            devices: [{ id: '85378', location: { lat: 6.3, lon: 9.2 } }],
+            devices: [
+                { id: '85378', createdDate: '0000000000000', creatorID: 'John Doe', location: { lat: 6.3, lon: 9.2 } },
+            ],
             selectedMarker: {
                 location: { lat: 6.3, lon: 9.2 },
                 address: null,
@@ -30,8 +32,13 @@ describe('device list snapshot tests', () => {
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             currentUserID: 'I created the second one!',
             devices: [
-                { id: '85378', location: { lat: 6.3, lon: 9.2 } },
-                { id: 'with delete button', location: { lat: 6.3, lon: 9.2 }, creatorID: 'I created the second one!' },
+                { id: '85378', createdDate: '0000000000001', creatorID: 'someone', location: { lat: 6.3, lon: 9.2 } },
+                {
+                    id: 'with delete button',
+                    createdDate: '0000000000001',
+                    creatorID: 'I created the second one!',
+                    location: { lat: 6.3, lon: 9.2 },
+                },
             ],
             selectedMarker: {
                 location: { lat: 6.3, lon: 9.2 },
