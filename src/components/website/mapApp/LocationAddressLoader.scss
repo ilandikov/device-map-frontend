@@ -1,4 +1,4 @@
-.marker-address-loader-container {
+.location-address-loader-container {
   width: 100%;
 
   display: flex;
@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
 
-  .marker-address-loader {
+  .location-address-loader {
     height: 36px;
     width: 36px;
 
@@ -20,7 +20,7 @@
     animation: load 2s linear infinite;
   }
 
-  .marker-address-loader::before {
+  .location-address-loader::before {
     width: 75%;
     height: 75%;
     position: absolute;

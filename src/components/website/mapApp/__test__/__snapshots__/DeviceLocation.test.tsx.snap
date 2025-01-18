@@ -13,10 +13,10 @@ exports[`device list snapshot tests should show address loader and a list device
       src="test-file-stub"
     />
     <div
-      className="marker-address-loader-container"
+      className="location-address-loader-container"
     >
       <div
-        className="marker-address-loader"
+        className="location-address-loader"
       />
     </div>
   </div>
