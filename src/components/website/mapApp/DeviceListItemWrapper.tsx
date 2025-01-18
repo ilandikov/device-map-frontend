@@ -6,8 +6,12 @@ export function DeviceListItemWrapper(props: { approvals: number; children: Reac
 
     return (
         <div className="device-list-item-container">
-            <div className={`device-list-item-shadow device-list-item-shadow-left ${leftShadowColorClass}`}></div>
-            <div className={`device-list-item-shadow device-list-item-shadow-right ${rightShadowColorClass}`}></div>
+            <div
+                className={`device-list-item-shadow device-list-item-shadow-left device-list-item-${leftShadowColorClass}-shadow-left`}
+            ></div>
+            <div
+                className={`device-list-item-shadow device-list-item-shadow-right device-list-item-${rightShadowColorClass}-shadow-right`}
+            ></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">{props.children}</div>
         </div>
@@ -17,32 +21,32 @@ export function DeviceListItemWrapper(props: { approvals: number; children: Reac
 function getShadowClassesByValidationStatus(approvals: number) {
     if (approvals < 0) {
         return {
-            leftShadowColorClass: 'device-list-item-create-shadow-left',
-            rightShadowColorClass: 'device-list-item-create-shadow-right',
+            leftShadowColorClass: 'create',
+            rightShadowColorClass: 'create',
         };
     }
 
     switch (approvals) {
         case 0:
             return {
-                leftShadowColorClass: 'device-list-item-created-shadow-left',
-                rightShadowColorClass: 'device-list-item-created-shadow-right',
+                leftShadowColorClass: 'created',
+                rightShadowColorClass: 'created',
             };
         case 1:
             return {
-                leftShadowColorClass: 'device-list-item-approving-shadow-left',
-                rightShadowColorClass: 'device-list-item-approving-shadow-right',
+                leftShadowColorClass: 'approving',
+                rightShadowColorClass: 'approving',
             };
         case 2:
             return {
-                leftShadowColorClass: 'device-list-item-approved-shadow-left',
-                rightShadowColorClass: 'device-list-item-approved-shadow-right',
+                leftShadowColorClass: 'approved',
+                rightShadowColorClass: 'approved',
             };
         default:
             console.warn('DeviceListItem component: colorIndex mod 3 has been more than 4. Colors may be wrong.');
             return {
-                leftShadowColorClass: 'device-list-item-create-shadow-left',
-                rightShadowColorClass: 'device-list-item-create-shadow-right',
+                leftShadowColorClass: 'create',
+                rightShadowColorClass: 'create',
             };
     }
 }
