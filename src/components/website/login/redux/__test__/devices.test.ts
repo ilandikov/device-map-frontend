@@ -6,6 +6,8 @@ import {
     mapAppRemoteErrorAnswer,
     mapAppRemoteRequest,
     mapAppSetDevices,
+    mapAppValidateDevice,
+    mapAppValidateDeviceRequest,
 } from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
@@ -132,6 +134,29 @@ describe('devices - delete device', () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
         const expectedAction = mapAppRemoteErrorAnswer('delete device went wrong');
+
+        await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
+    });
+});
+
+describe('devices - validate device', () => {
+    it.failing('should send action to validate device', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppValidateDeviceRequest('validate me!');
+        const expectedAction = mapAppValidateDevice({
+            id: 'validate me!',
+            createdDate: '1781204597512',
+            creatorID: 'someone else',
+            location: { lat: 0, lon: 1 },
+        });
+
+        await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
+    });
+
+    it.failing('should notify about the error', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppValidateDeviceRequest('validate me!');
+        const expectedAction = mapAppRemoteErrorAnswer('validate device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
