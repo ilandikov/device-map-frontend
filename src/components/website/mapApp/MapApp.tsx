@@ -8,7 +8,7 @@ import { ProductDescription } from './ProductDescription';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
-import { DeviceMarkerDescription } from './DeviceMarkerDescription';
+import { DeviceLocation } from './DeviceLocation';
 
 export default function MapApp() {
     const mapAppState = useMapAppState();
@@ -22,7 +22,7 @@ export default function MapApp() {
         <div className="map-app-container">
             <MapAppHeader />
             {showProductDescription && <ProductDescription />}
-            {deviceMarkerWasSelected && <DeviceMarkerDescription />}
+            {deviceMarkerWasSelected && <DeviceLocation />}
             {showLoginModal && <LoginModal />}
             <DeviceMap />
         </div>

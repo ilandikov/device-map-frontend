@@ -3,7 +3,7 @@ import './DeviceMarkerDescription.scss';
 import { DeviceList } from './DeviceList';
 import { MarkerAddress } from './MarkerAddress';
 
-export function DeviceMarkerDescription() {
+export function DeviceLocation() {
     return (
         <div className="device-marker-description-window">
             <MarkerAddress />
