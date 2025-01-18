@@ -2,15 +2,15 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
 export function DeviceListItemWrapper(props: { approvals: number; children: React.ReactNode }) {
-    const { leftShadowColorClass, rightShadowColorClass } = getShadowClassesByValidationStatus(props.approvals);
+    const deviceApprovalStatus = getShadowClassesByValidationStatus(props.approvals);
 
     return (
         <div className="device-list-item-container">
             <div
-                className={`device-list-item-shadow device-list-item-shadow-left device-list-item-${leftShadowColorClass}-shadow-left`}
+                className={`device-list-item-shadow device-list-item-shadow-left device-list-item-${deviceApprovalStatus}-shadow-left`}
             ></div>
             <div
-                className={`device-list-item-shadow device-list-item-shadow-right device-list-item-${rightShadowColorClass}-shadow-right`}
+                className={`device-list-item-shadow device-list-item-shadow-right device-list-item-${deviceApprovalStatus}-shadow-right`}
             ></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">{props.children}</div>
@@ -18,16 +18,18 @@ export function DeviceListItemWrapper(props: { approvals: number; children: Reac
     );
 }
 
-function getShadowClassesByValidationStatus(approvals: number) {
+type DeviceApprovalStatus = 'create' | 'created' | 'approving' | 'approved';
+
+function getShadowClassesByValidationStatus(approvals: number): DeviceApprovalStatus {
     switch (true) {
         case approvals < 0:
-            return { leftShadowColorClass: 'create', rightShadowColorClass: 'create' };
+            return 'create';
         case approvals === 0:
-            return { leftShadowColorClass: 'created', rightShadowColorClass: 'created' };
+            return 'created';
         case approvals === 1:
-            return { leftShadowColorClass: 'approving', rightShadowColorClass: 'approving' };
+            return 'approving';
         case approvals >= 2:
-            return { leftShadowColorClass: 'approved', rightShadowColorClass: 'approved' };
+            return 'approved';
         default:
             throw new Error(`Unknown approval count: ${approvals}`);
     }
