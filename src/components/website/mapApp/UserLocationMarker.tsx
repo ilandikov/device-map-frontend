@@ -4,6 +4,9 @@ import { Icon } from 'leaflet';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
+import { useAppDispatch } from '../../../redux/store';
+import { buildLocationMarkerClickHandler } from './DeviceMarkers';
+import { useMapAppState } from './redux/MapAppState';
 
 export function UserLocationMarker() {
     const markerIcon = new Icon({
@@ -17,6 +20,10 @@ export function UserLocationMarker() {
 
     const [position, setPosition] = React.useState(null);
 
+    const dispatch = useAppDispatch();
+    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
+    const markerClickHandler = buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
+
     const map = useMapEvents({
         locationfound(locationEvent) {
             setPosition(locationEvent.latlng);
@@ -24,6 +31,7 @@ export function UserLocationMarker() {
         },
         click(locationEvent) {
             setPosition(locationEvent.latlng);
+            markerClickHandler(locationEvent);
         },
     });
 

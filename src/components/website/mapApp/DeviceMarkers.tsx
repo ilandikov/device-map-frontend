@@ -10,7 +10,7 @@ import { AllActions, useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
 
-function buildLocationMarkerClickHandler(selectedMarkerLocation: T22Location, dispatch: Dispatch<AllActions>) {
+export function buildLocationMarkerClickHandler(selectedMarkerLocation: T22Location, dispatch: Dispatch<AllActions>) {
     return (event: LeafletMouseEvent) => {
         const alreadySelectedMarkerClicked =
             selectedMarkerLocation &&
