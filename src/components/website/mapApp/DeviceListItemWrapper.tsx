@@ -2,7 +2,7 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
 export function DeviceListItemWrapper(props: { approvals: number; children: React.ReactNode }) {
-    const deviceApprovalStatus = getShadowClassesByValidationStatus(props.approvals);
+    const deviceApprovalStatus = getDeviceApprovalStatus(props.approvals);
 
     return (
         <div className="device-list-item-container">
@@ -20,7 +20,7 @@ export function DeviceListItemWrapper(props: { approvals: number; children: Reac
 
 type DeviceApprovalStatus = 'create' | 'created' | 'approving' | 'approved';
 
-function getShadowClassesByValidationStatus(approvals: number): DeviceApprovalStatus {
+function getDeviceApprovalStatus(approvals: number): DeviceApprovalStatus {
     switch (true) {
         case approvals < 0:
             return 'create';
