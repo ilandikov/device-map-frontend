@@ -37,7 +37,13 @@ export function UserLocationMarker() {
 
     return (
         position && (
-            <Marker icon={markerIcon} position={position}>
+            <Marker
+                icon={markerIcon}
+                position={position}
+                eventHandlers={{
+                    click: markerClickHandler,
+                }}
+            >
                 <Popup>You are here</Popup>
             </Marker>
         )
