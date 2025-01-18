@@ -20,14 +20,14 @@ const testDevice: T22Device = {
 };
 
 describe('DeviceListItem snapshot test', () => {
-    it('should match snapshot without delete button', () => {
+    it('should match snapshot created device without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={testDevice} validations={0} showDeleteButton={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
-    it('should match snapshot without delete button', () => {
+    it('should match snapshot created device without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={testDevice} validations={0} showDeleteButton={false} />,
         );
