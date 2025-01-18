@@ -18,7 +18,7 @@ export function DeviceList() {
             <DeviceListItem
                 device={device}
                 colorIndex={index}
-                showDeleteButton={device.creatorID && device.creatorID === mapAppState.currentUserID}
+                showDeleteButton={device.creatorID === mapAppState.currentUserID}
                 key={index}
             />
         ));
