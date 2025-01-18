@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../redux/store';
 import home from '../../../assets/images/Home.png';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppGetLocationAddress } from './redux/MapAppAction';
-import { MarkerAddressLoader } from './MarkerAddressLoader';
+import { LocationAddressLoader } from './LocationAddressLoader';
 import './MarkerAddress.scss';
 
 export function LocationAddress() {
@@ -19,7 +19,7 @@ export function LocationAddress() {
         <div className="marker-address-container">
             <img src={home} className="marker-address-image" alt="marker-address-image" />
             {waitingForAddress ? (
-                <MarkerAddressLoader />
+                <LocationAddressLoader />
             ) : (
                 <div className="marker-address">
                     <p>{selectedMarker.address.addressLine1}</p>
