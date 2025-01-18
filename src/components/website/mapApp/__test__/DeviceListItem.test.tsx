@@ -22,14 +22,14 @@ const testDevice: T22Device = {
 describe('DeviceListItem snapshot test', () => {
     it('should match snapshot without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} colorIndex={0} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} validations={0} showDeleteButton={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} colorIndex={0} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} validations={0} showDeleteButton={false} />,
         );
         expect(component).toMatchSnapshot();
     });
@@ -42,7 +42,7 @@ describe('DeviceListItem action tests', () => {
 
     it('should dispatch delete device request on delete device button click', () => {
         const container = renderForActionDispatchTest(
-            <DeviceListItem device={testDevice} colorIndex={0} showDeleteButton={true} />,
+            <DeviceListItem device={testDevice} validations={0} showDeleteButton={true} />,
         );
 
         const loginButton = getByTestId(container, 'deleteDeviceButton');
