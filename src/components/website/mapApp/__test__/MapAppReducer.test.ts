@@ -4,6 +4,7 @@ import {
     MapAppButton,
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppApproveDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
     mapAppDeleteDevice,
@@ -162,5 +163,14 @@ describe('MapApp reducer tests', () => {
         testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
         });
+    });
+
+    it('should approve a device', () => {
+        const initialState = buildMapAppState({
+            devices: [existingDevice, receivedDevice],
+        });
+        const action = mapAppApproveDevice(receivedDevice);
+
+        testMapAppStateChange(initialState, action, {});
     });
 });

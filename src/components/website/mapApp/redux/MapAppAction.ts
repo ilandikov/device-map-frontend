@@ -13,7 +13,7 @@ export enum MapAppActionType {
     REMOTE_ANSWER = 'REMOTE_ANSWER',
     REMOTE_ERROR_ANSWER = 'REMOTE_ERROR_ANSWER',
     DELETE_DEVICE = 'DELETE_DEVICE',
-    VALIDATE_DEVICE_REQUEST = 'VALIDATE_DEVICE_REQUEST',
+    MAP_APP_APPROVE_DEVICE = 'MAP_APP_APPROVE_DEVICE',
 }
 
 export enum MapAppButton {
@@ -25,6 +25,7 @@ export enum MapAppRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
     CREATE_DEVICE = 'CREATE_DEVICE',
     DELETE_DEVICE = 'DELETE_DEVICE',
+    APPROVE_DEVICE = 'APPROVE_DEVICE',
 }
 
 export enum MapAppRemoteAnswerType {
@@ -44,7 +45,8 @@ export type MapAppAction =
     | MapAppDeleteDevice
     | MapAppRemoteErrorAnswer
     | MapAppAuthCompleted
-    | MapAppValidateDeviceRequest;
+    | MapAppApproveDeviceRequest
+    | MapAppApproveDevice;
 
 export interface MapAppLoginModalCloseAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE;
@@ -166,19 +168,25 @@ export function mapAppDeleteDeviceRequest(id: string): MapAppDeleteDeviceRequest
     };
 }
 
-interface MapAppValidateDeviceRequest {
-    type: MapAppActionType.VALIDATE_DEVICE_REQUEST;
-    // TODO uncomment below
-    // type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
-    // request: MapAppRemoteRequestType.VALIDATE_DEVICE;
-    id;
+export interface MapAppApproveDeviceRequest {
+    type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
+    request: MapAppRemoteRequestType.APPROVE_DEVICE;
+    id: string;
 }
 
-export function mapAppValidateDeviceRequest(id: string): MapAppValidateDeviceRequest {
+export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceRequest {
     return {
-        type: MapAppActionType.VALIDATE_DEVICE_REQUEST,
-        // type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
-        // request: MapAppRemoteRequestType.VALIDATE_DEVICE,
+        type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
+        request: MapAppRemoteRequestType.APPROVE_DEVICE,
         id,
     };
+}
+
+interface MapAppApproveDevice {
+    type: MapAppActionType.MAP_APP_APPROVE_DEVICE;
+    device: T22Device;
+}
+
+export function mapAppApproveDevice(device: T22Device): MapAppApproveDevice {
+    return { type: MapAppActionType.MAP_APP_APPROVE_DEVICE, device };
 }

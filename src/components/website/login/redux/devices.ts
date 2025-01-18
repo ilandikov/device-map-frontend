@@ -3,16 +3,19 @@ import { ofType } from 'redux-observable';
 import {
     T22CreateDeviceResponse,
     T22DeleteDeviceResponse,
+    T22Device,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppAction,
     MapAppActionType,
+    MapAppApproveDeviceRequest,
     MapAppDeleteDeviceRequest,
     MapAppRemoteRequest,
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppApproveDevice,
     mapAppDeleteDevice,
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
@@ -56,8 +59,14 @@ const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteD
     responseToAction: (response) => of(mapAppDeleteDevice(response.id)),
 };
 
+const approveDevice: DevicesRequest<T22Device, MapAppApproveDeviceRequest> = {
+    call: (client, _, action) => client.forAuthenticatedUser.approveDevice(action.id),
+    responseToAction: (response) => of(mapAppApproveDevice(response)),
+};
+
 const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,
+    APPROVE_DEVICE: approveDevice,
 };

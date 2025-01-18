@@ -41,6 +41,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                 ...state,
                 devices: state.devices.filter((device) => device.id !== action.id),
             };
+        case MapAppActionType.MAP_APP_APPROVE_DEVICE:
+            return state;
         default:
             return state;
     }

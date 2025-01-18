@@ -1,6 +1,8 @@
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppApproveDevice,
+    mapAppApproveDeviceRequest,
     mapAppDeleteDevice,
     mapAppDeleteDeviceRequest,
     mapAppRemoteErrorAnswer,
@@ -42,6 +44,13 @@ const resolvingClient: DevicesClient = {
                 },
             }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
+        approveDevice: (id) =>
+            Promise.resolve({
+                id,
+                createdDate: '1781204597512',
+                creatorID: 'someone else',
+                location: { lat: 0, lon: 1 },
+            }),
     },
 };
 
@@ -52,6 +61,7 @@ const rejectingClient: DevicesClient = {
     forAuthenticatedUser: {
         createDevice: () => Promise.reject('create device went wrong'),
         deleteDevice: () => Promise.reject('delete device went wrong'),
+        approveDevice: () => Promise.reject('approve device went wrong'),
     },
 };
 
@@ -132,6 +142,29 @@ describe('devices - delete device', () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
         const expectedAction = mapAppRemoteErrorAnswer('delete device went wrong');
+
+        await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
+    });
+});
+
+describe('devices - approve device', () => {
+    it('should send action to approve device', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppApproveDeviceRequest('approve me!');
+        const expectedAction = mapAppApproveDevice({
+            id: 'approve me!',
+            createdDate: '1781204597512',
+            creatorID: 'someone else',
+            location: { lat: 0, lon: 1 },
+        });
+
+        await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
+    });
+
+    it('should notify about the error', async () => {
+        const mapAppState = buildMapAppState({});
+        const sentAction = mapAppApproveDeviceRequest('approve me!');
+        const expectedAction = mapAppRemoteErrorAnswer('approve device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
