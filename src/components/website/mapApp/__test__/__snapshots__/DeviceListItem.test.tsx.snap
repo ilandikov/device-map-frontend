@@ -19,7 +19,7 @@ exports[`DeviceListItem snapshot test should match snapshot without delete butto
     className="device-list-item"
   >
     <p>
-      with delete button
+      try to delete me
     </p>
     <button
       className="device-list-item-opaque-text"
@@ -49,7 +49,7 @@ exports[`DeviceListItem snapshot test should match snapshot without delete butto
     className="device-list-item"
   >
     <p>
-      without delete button
+      try to delete me
     </p>
     <button
       className="device-list-item-opaque-text"
