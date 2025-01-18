@@ -56,8 +56,14 @@ const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteD
     responseToAction: (response) => of(mapAppDeleteDevice(response.id)),
 };
 
+const validateDeviceRequest: DevicesRequest<any, any> = {
+    call: () => Promise.resolve(),
+    responseToAction: () => EMPTY,
+};
+
 const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,
+    VALIDATE_DEVICE: validateDeviceRequest,
 };
