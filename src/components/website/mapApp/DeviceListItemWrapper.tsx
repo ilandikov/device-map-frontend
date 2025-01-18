@@ -25,8 +25,8 @@ function getColorClassesForDeviceItemShadows(colorIndex: number | null) {
     switch (colorIndex % 3) {
         case 0:
             return {
-                leftShadowColorClass: 'device-list-item-shadow-left-first',
-                rightShadowColorClass: 'device-list-item-shadow-right-first',
+                leftShadowColorClass: 'device-list-item-validated-shadow-left',
+                rightShadowColorClass: 'device-list-item-validated-shadow-right',
             };
         case 1:
             return {
