@@ -4,6 +4,7 @@ import {
     MapAppButton,
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppApproveDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
     mapAppDeleteDevice,
@@ -13,7 +14,6 @@ import {
     mapAppSetDevices,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-    mapAppValidateDevice,
 } from '../redux/MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
@@ -165,11 +165,11 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should validate a device', () => {
+    it('should approve a device', () => {
         const initialState = buildMapAppState({
             devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppValidateDevice(receivedDevice);
+        const action = mapAppApproveDevice(receivedDevice);
 
         testMapAppStateChange(initialState, action, {});
     });

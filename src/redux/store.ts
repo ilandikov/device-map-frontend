@@ -58,7 +58,7 @@ export interface DevicesClient {
     forAuthenticatedUser: {
         createDevice: (createDeviceInput: T22CreateDeviceInput) => Promise<T22CreateDeviceResponse>;
         deleteDevice: (deleteDeviceInput: T22DeleteDeviceInput) => Promise<T22DeleteDeviceResponse>;
-        validateDevice: (id: string) => Promise<T22Device>;
+        approveDevice: (id: string) => Promise<T22Device>;
     };
 }
 
@@ -116,7 +116,7 @@ export function createStore() {
                                 variables: { input: deleteDeviceInput },
                             })
                             .then((response) => response.data.T22DeleteDevice),
-                    validateDevice: async () => Promise.reject(),
+                    approveDevice: async () => Promise.reject(),
                 },
             },
             geoApifyClient: (location) =>

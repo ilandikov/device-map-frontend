@@ -3,7 +3,7 @@ import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { useAppDispatch } from '../../../redux/store';
 import { DeviceListItemWrapper, getDeviceApprovalStatus } from './DeviceListItemWrapper';
-import { mapAppDeleteDeviceRequest, mapAppValidateDeviceRequest } from './redux/MapAppAction';
+import { mapAppApproveDeviceRequest, mapAppDeleteDeviceRequest } from './redux/MapAppAction';
 
 export function DeviceListItem(props: { device: T22Device; approvals: number; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
@@ -28,7 +28,7 @@ export function DeviceListItem(props: { device: T22Device; approvals: number; cr
                     <button
                         className="device-list-item-opaque-text"
                         data-testid="approveDeviceButton"
-                        onClick={() => dispatch(mapAppValidateDeviceRequest(props.device.id))}
+                        onClick={() => dispatch(mapAppApproveDeviceRequest(props.device.id))}
                     >
                         {t('approveDevice')}
                     </button>

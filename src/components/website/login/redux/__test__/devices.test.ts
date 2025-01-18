@@ -1,13 +1,13 @@
 import {
     MapAppRemoteRequestType,
     mapAppAddDevice,
+    mapAppApproveDevice,
+    mapAppApproveDeviceRequest,
     mapAppDeleteDevice,
     mapAppDeleteDeviceRequest,
     mapAppRemoteErrorAnswer,
     mapAppRemoteRequest,
     mapAppSetDevices,
-    mapAppValidateDevice,
-    mapAppValidateDeviceRequest,
 } from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
@@ -44,7 +44,7 @@ const resolvingClient: DevicesClient = {
                 },
             }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
-        validateDevice: (id) =>
+        approveDevice: (id) =>
             Promise.resolve({
                 id,
                 createdDate: '1781204597512',
@@ -61,7 +61,7 @@ const rejectingClient: DevicesClient = {
     forAuthenticatedUser: {
         createDevice: () => Promise.reject('create device went wrong'),
         deleteDevice: () => Promise.reject('delete device went wrong'),
-        validateDevice: () => Promise.reject('validate device went wrong'),
+        approveDevice: () => Promise.reject('approve device went wrong'),
     },
 };
 
@@ -147,12 +147,12 @@ describe('devices - delete device', () => {
     });
 });
 
-describe('devices - validate device', () => {
-    it('should send action to validate device', async () => {
+describe('devices - approve device', () => {
+    it('should send action to approve device', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppValidateDeviceRequest('validate me!');
-        const expectedAction = mapAppValidateDevice({
-            id: 'validate me!',
+        const sentAction = mapAppApproveDeviceRequest('approve me!');
+        const expectedAction = mapAppApproveDevice({
+            id: 'approve me!',
             createdDate: '1781204597512',
             creatorID: 'someone else',
             location: { lat: 0, lon: 1 },
@@ -163,8 +163,8 @@ describe('devices - validate device', () => {
 
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppValidateDeviceRequest('validate me!');
-        const expectedAction = mapAppRemoteErrorAnswer('validate device went wrong');
+        const sentAction = mapAppApproveDeviceRequest('approve me!');
+        const expectedAction = mapAppRemoteErrorAnswer('approve device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });

@@ -10,15 +10,15 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppAction,
     MapAppActionType,
+    MapAppApproveDeviceRequest,
     MapAppDeleteDeviceRequest,
     MapAppRemoteRequest,
     MapAppRemoteRequestType,
-    MapAppValidateDeviceRequest,
     mapAppAddDevice,
+    mapAppApproveDevice,
     mapAppDeleteDevice,
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
-    mapAppValidateDevice,
 } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
 import { MapAppState } from '../../mapApp/redux/MapAppState';
@@ -59,14 +59,14 @@ const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteD
     responseToAction: (response) => of(mapAppDeleteDevice(response.id)),
 };
 
-const validateDeviceRequest: DevicesRequest<T22Device, MapAppValidateDeviceRequest> = {
-    call: (client, _, action) => client.forAuthenticatedUser.validateDevice(action.id),
-    responseToAction: (response) => of(mapAppValidateDevice(response)),
+const approveDevice: DevicesRequest<T22Device, MapAppApproveDeviceRequest> = {
+    call: (client, _, action) => client.forAuthenticatedUser.approveDevice(action.id),
+    responseToAction: (response) => of(mapAppApproveDevice(response)),
 };
 
 const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,
-    VALIDATE_DEVICE: validateDeviceRequest,
+    APPROVE_DEVICE: approveDevice,
 };

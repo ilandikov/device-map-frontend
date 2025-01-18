@@ -3,7 +3,7 @@ import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppDeleteDeviceRequest, mapAppValidateDeviceRequest } from '../redux/MapAppAction';
+import { mapAppApproveDeviceRequest, mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
 import { DeviceListItem } from '../DeviceListItem';
 
 jest.mock('react-redux', () => ({
@@ -73,6 +73,6 @@ describe('DeviceListItem action tests', () => {
         const loginButton = getByTestId(container, 'approveDeviceButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppValidateDeviceRequest('try to delete me'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppApproveDeviceRequest('try to delete me'));
     });
 });
