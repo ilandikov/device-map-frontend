@@ -155,15 +155,12 @@ describe('MapApp reducer tests', () => {
 
     it('should delete a device', () => {
         const initialState = buildMapAppState({
-            devices: [
-                { id: 'toBeDeleted', location: { lat: 5.456, lon: 1.947 } },
-                { id: 'toBeKept', location: { lat: 3.853, lon: 0.537 } },
-            ],
+            devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppDeleteDevice('toBeDeleted');
+        const action = mapAppDeleteDevice('existing');
 
         verifyMapAppStateChange(initialState, action, {
-            devices: [{ id: 'toBeKept', location: { lat: 3.853, lon: 0.537 } }],
+            devices: [receivedDevice],
         });
     });
 });
