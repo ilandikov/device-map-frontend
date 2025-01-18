@@ -4,6 +4,7 @@ import { Icon } from 'leaflet';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
+import { useMarkerClickHandler } from './UseMarkerClickHandler';
 
 export function UserLocationMarker() {
     const markerIcon = new Icon({
@@ -17,10 +18,16 @@ export function UserLocationMarker() {
 
     const [position, setPosition] = React.useState(null);
 
+    const markerClickHandler = useMarkerClickHandler();
+
     const map = useMapEvents({
         locationfound(locationEvent) {
             setPosition(locationEvent.latlng);
             map.flyTo(locationEvent.latlng, map.getZoom());
+        },
+        click(locationEvent) {
+            setPosition(locationEvent.latlng);
+            markerClickHandler(locationEvent);
         },
     });
 
@@ -30,7 +37,13 @@ export function UserLocationMarker() {
 
     return (
         position && (
-            <Marker icon={markerIcon} position={position}>
+            <Marker
+                icon={markerIcon}
+                position={position}
+                eventHandlers={{
+                    click: markerClickHandler,
+                }}
+            >
                 <Popup>You are here</Popup>
             </Marker>
         )

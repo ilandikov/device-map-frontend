@@ -1,16 +1,13 @@
 import React from 'react';
-import { Icon, LatLng, LeafletMouseEvent } from 'leaflet';
+import { Icon, LatLng } from 'leaflet';
 import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
-import { useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
-import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
+import { useMarkerClickHandler } from './UseMarkerClickHandler';
 
 export function DeviceMarkers() {
-    const dispatch = useAppDispatch();
-
     const deviceMarkerIcon = new Icon({
         className: 'map-marker',
         iconRetinaUrl: markerRetinaImage,
@@ -20,18 +17,7 @@ export function DeviceMarkers() {
         shadowSize: [41, 41],
     });
 
-    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
-    const markerClickHandler = (event: LeafletMouseEvent) => {
-        if (
-            selectedMarkerLocation &&
-            selectedMarkerLocation.lat === event.latlng.lat &&
-            selectedMarkerLocation.lon === event.latlng.lng
-        ) {
-            return;
-        }
-
-        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
-    };
+    const markerClickHandler = useMarkerClickHandler();
 
     const devices = useMapAppState().devices;
 
