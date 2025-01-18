@@ -35,8 +35,8 @@ function getColorClassesForDeviceItemShadows(colorIndex: number | null) {
             };
         case 2:
             return {
-                leftShadowColorClass: 'device-list-item-shadow-left-third',
-                rightShadowColorClass: 'device-list-item-shadow-right-third',
+                leftShadowColorClass: 'device-list-item-created-shadow-left',
+                rightShadowColorClass: 'device-list-item-created-shadow-right',
             };
         default:
             console.warn('DeviceListItem component: colorIndex mod 3 has been more than 4. Colors may be wrong.');
