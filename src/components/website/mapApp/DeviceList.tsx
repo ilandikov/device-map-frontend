@@ -18,7 +18,7 @@ export function DeviceList() {
             <DeviceListItem
                 device={device}
                 approvals={0}
-                showDeleteButton={device.creatorID === mapAppState.currentUserID}
+                createdByCurrentUser={device.creatorID === mapAppState.currentUserID}
                 key={index}
             />
         ));

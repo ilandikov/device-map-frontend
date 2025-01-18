@@ -2,10 +2,10 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { useAppDispatch } from '../../../redux/store';
-import { DeviceListItemWrapper } from './DeviceListItemWrapper';
-import { mapAppDeleteDeviceRequest } from './redux/MapAppAction';
+import { DeviceListItemWrapper, getDeviceApprovalStatus } from './DeviceListItemWrapper';
+import { mapAppDeleteDeviceRequest, mapAppValidateDeviceRequest } from './redux/MapAppAction';
 
-export function DeviceListItem(props: { device: T22Device; approvals: number; showDeleteButton: boolean }) {
+export function DeviceListItem(props: { device: T22Device; approvals: number; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
@@ -13,7 +13,7 @@ export function DeviceListItem(props: { device: T22Device; approvals: number; sh
         <DeviceListItemWrapper approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            {props.showDeleteButton && (
+            {props.createdByCurrentUser && (
                 <button
                     className="device-list-item-opaque-text"
                     data-testid="deleteDeviceButton"
@@ -22,6 +22,17 @@ export function DeviceListItem(props: { device: T22Device; approvals: number; sh
                     {t('deleteDevice')}
                 </button>
             )}
+            {!props.createdByCurrentUser &&
+                (getDeviceApprovalStatus(props.approvals) === 'created' ||
+                    getDeviceApprovalStatus(props.approvals) === 'approving') && (
+                    <button
+                        className="device-list-item-opaque-text"
+                        data-testid="approveDeviceButton"
+                        onClick={() => dispatch(mapAppValidateDeviceRequest(props.device.id))}
+                    >
+                        {t('approveDevice')}
+                    </button>
+                )}
         </DeviceListItemWrapper>
     );
 }

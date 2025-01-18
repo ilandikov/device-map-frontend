@@ -3,7 +3,7 @@ import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
+import { mapAppDeleteDeviceRequest, mapAppValidateDeviceRequest } from '../redux/MapAppAction';
 import { DeviceListItem } from '../DeviceListItem';
 
 jest.mock('react-redux', () => ({
@@ -22,28 +22,28 @@ const testDevice: T22Device = {
 describe('DeviceListItem snapshot tests', () => {
     it('should match snapshot created device without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={0} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot validating device without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={1} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} approvals={1} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot validated device without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={2} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} approvals={2} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot created device with delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={0} showDeleteButton={true} />,
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={true} />,
         );
         expect(component).toMatchSnapshot();
     });
@@ -56,12 +56,23 @@ describe('DeviceListItem action tests', () => {
 
     it('should dispatch delete device request on delete device button click', () => {
         const container = renderForActionDispatchTest(
-            <DeviceListItem device={testDevice} approvals={0} showDeleteButton={true} />,
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={true} />,
         );
 
         const loginButton = getByTestId(container, 'deleteDeviceButton');
         fireEvent.click(loginButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppDeleteDeviceRequest('try to delete me'));
+    });
+
+    it('should dispatch approve request on approve device button click', () => {
+        const container = renderForActionDispatchTest(
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={false} />,
+        );
+
+        const loginButton = getByTestId(container, 'approveDeviceButton');
+        fireEvent.click(loginButton);
+
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppValidateDeviceRequest('try to delete me'));
     });
 });
