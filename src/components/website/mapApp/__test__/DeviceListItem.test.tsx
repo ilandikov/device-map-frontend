@@ -22,28 +22,28 @@ const testDevice: T22Device = {
 describe('DeviceListItem snapshot tests', () => {
     it('should match snapshot created device without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={0} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot validating device without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={1} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} approvals={1} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot validated device without delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={2} showDeleteButton={false} />,
+            <DeviceListItem device={testDevice} approvals={2} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot created device with delete button', () => {
         const component = renderForSnapshotTest(
-            <DeviceListItem device={testDevice} approvals={0} showDeleteButton={true} />,
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={true} />,
         );
         expect(component).toMatchSnapshot();
     });
@@ -56,7 +56,7 @@ describe('DeviceListItem action tests', () => {
 
     it('should dispatch delete device request on delete device button click', () => {
         const container = renderForActionDispatchTest(
-            <DeviceListItem device={testDevice} approvals={0} showDeleteButton={true} />,
+            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={true} />,
         );
 
         const loginButton = getByTestId(container, 'deleteDeviceButton');
