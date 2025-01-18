@@ -13,6 +13,7 @@ import {
     mapAppSetDevices,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
+    mapAppValidateDevice,
 } from '../redux/MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
@@ -162,5 +163,14 @@ describe('MapApp reducer tests', () => {
         testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
         });
+    });
+
+    it('should validate a device', () => {
+        const initialState = buildMapAppState({
+            devices: [existingDevice, receivedDevice],
+        });
+        const action = mapAppValidateDevice(receivedDevice);
+
+        testMapAppStateChange(initialState, action, {});
     });
 });
