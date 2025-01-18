@@ -19,7 +19,7 @@ const testDevice: T22Device = {
     location: { lat: 3, lon: 7 },
 };
 
-describe('DeviceListItem snapshot test', () => {
+describe('DeviceListItem snapshot tests', () => {
     it('should match snapshot created device without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={testDevice} validations={0} showDeleteButton={false} />,

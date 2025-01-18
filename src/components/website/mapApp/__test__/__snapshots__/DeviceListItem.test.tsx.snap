@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeviceListItem snapshot test should match snapshot created device with delete button 1`] = `
+exports[`DeviceListItem snapshot tests should match snapshot created device with delete button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -37,7 +37,7 @@ exports[`DeviceListItem snapshot test should match snapshot created device with 
 </div>
 `;
 
-exports[`DeviceListItem snapshot test should match snapshot created device without delete button 1`] = `
+exports[`DeviceListItem snapshot tests should match snapshot created device without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
