@@ -116,38 +116,51 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, {});
     });
 
+    const existingDevice = {
+        id: 'existing',
+        createdDate: '1796354896548',
+        creatorID: 'new creator',
+        location: { lat: 0, lon: 1 },
+    };
+    const receivedDevice = {
+        id: 'received',
+        createdDate: '1701482094513',
+        creatorID: 'another creator',
+        location: { lat: 10, lon: 11 },
+    };
+
     it('should overwrite devices', () => {
-        const initialState = buildMapAppState({ devices: [{ id: 'existing', location: { lat: 0, lon: 1 } }] });
-        const action = mapAppSetDevices([{ id: 'received', location: { lat: 10, lon: 11 } }]);
+        const initialState = buildMapAppState({
+            devices: [existingDevice],
+        });
+
+        const action = mapAppSetDevices([receivedDevice]);
 
         verifyMapAppStateChange(initialState, action, {
-            devices: [{ id: 'received', location: { lat: 10, lon: 11 } }],
+            devices: [receivedDevice],
         });
     });
 
     it('should add device', () => {
-        const initialState = buildMapAppState({ devices: [{ id: 'number1', location: { lat: 78, lon: 34 } }] });
-        const action = mapAppAddDevice({ id: 'number2', location: { lat: 9, lon: 31 } });
+        const initialState = buildMapAppState({
+            devices: [existingDevice],
+        });
+
+        const action = mapAppAddDevice(receivedDevice);
 
         verifyMapAppStateChange(initialState, action, {
-            devices: [
-                { id: 'number1', location: { lat: 78, lon: 34 } },
-                { id: 'number2', location: { lat: 9, lon: 31 } },
-            ],
+            devices: [existingDevice, receivedDevice],
         });
     });
 
     it('should delete a device', () => {
         const initialState = buildMapAppState({
-            devices: [
-                { id: 'toBeDeleted', location: { lat: 5.456, lon: 1.947 } },
-                { id: 'toBeKept', location: { lat: 3.853, lon: 0.537 } },
-            ],
+            devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppDeleteDevice('toBeDeleted');
+        const action = mapAppDeleteDevice('existing');
 
         verifyMapAppStateChange(initialState, action, {
-            devices: [{ id: 'toBeKept', location: { lat: 3.853, lon: 0.537 } }],
+            devices: [receivedDevice],
         });
     });
 });
