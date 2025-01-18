@@ -30,8 +30,8 @@ function getShadowClassesByValidationStatus(validations: number) {
             };
         case 1:
             return {
-                leftShadowColorClass: 'device-list-item-validating-left',
-                rightShadowColorClass: 'device-list-item-validating-right',
+                leftShadowColorClass: 'device-list-item-validating-shadow-left',
+                rightShadowColorClass: 'device-list-item-validating-shadow-right',
             };
         case 2:
             return {

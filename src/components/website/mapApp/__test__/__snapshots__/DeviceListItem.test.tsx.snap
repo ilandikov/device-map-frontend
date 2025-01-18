@@ -102,10 +102,10 @@ exports[`DeviceListItem snapshot tests should match snapshot validating device w
   className="device-list-item-container"
 >
   <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-validating-left"
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-validating-shadow-left"
   />
   <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-validating-right"
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-validating-shadow-right"
   />
   <img
     alt="device-list-item-image"
