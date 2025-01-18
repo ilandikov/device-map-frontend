@@ -16,7 +16,7 @@ import {
 } from '../redux/MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
 
-function verifyMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
+function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);
 
     const expectedState: MapAppState = {
@@ -32,14 +32,14 @@ describe('MapApp reducer tests', () => {
         const action = { type: 'DUMMY_ACTION' };
 
         // @ts-expect-error
-        verifyMapAppStateChange(initialState, action, {});
+        testMapAppStateChange(initialState, action, {});
     });
 
     it('should move to user authentication step on user button click', () => {
         const initialState = buildMapAppState({});
         const action = mapAppButtonClick(MapAppButton.LOGIN);
 
-        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
+        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
     });
 
     it('should move to mainPage screen step and reset user id on logout button click', () => {
@@ -49,7 +49,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppButtonClick(MapAppButton.LOGOUT);
 
-        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: '' });
+        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: '' });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
@@ -58,7 +58,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppLoginModalClose();
 
-        verifyMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
+        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
     });
 
     it('should move to device management when authentication has been completed', () => {
@@ -67,7 +67,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppAuthenticationCompleted('set me in the state');
 
-        verifyMapAppStateChange(initialState, action, {
+        testMapAppStateChange(initialState, action, {
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             currentUserID: 'set me in the state',
         });
@@ -77,7 +77,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({});
         const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
-        verifyMapAppStateChange(initialState, action, {
+        testMapAppStateChange(initialState, action, {
             selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
         });
     });
@@ -86,7 +86,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({});
         const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
-        verifyMapAppStateChange(initialState, action, {});
+        testMapAppStateChange(initialState, action, {});
     });
 
     it('should set location address', () => {
@@ -98,7 +98,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppSetLocationAddress({ addressLine1: 'line1', addressLine2: 'line2' });
 
-        verifyMapAppStateChange(initialState, action, {
+        testMapAppStateChange(initialState, action, {
             selectedMarker: {
                 location: { lat: 0, lon: 1 },
                 address: {
@@ -113,7 +113,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({});
         const action = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
 
-        verifyMapAppStateChange(initialState, action, {});
+        testMapAppStateChange(initialState, action, {});
     });
 
     const existingDevice = {
@@ -136,7 +136,7 @@ describe('MapApp reducer tests', () => {
 
         const action = mapAppSetDevices([receivedDevice]);
 
-        verifyMapAppStateChange(initialState, action, {
+        testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
         });
     });
@@ -148,7 +148,7 @@ describe('MapApp reducer tests', () => {
 
         const action = mapAppAddDevice(receivedDevice);
 
-        verifyMapAppStateChange(initialState, action, {
+        testMapAppStateChange(initialState, action, {
             devices: [existingDevice, receivedDevice],
         });
     });
@@ -159,7 +159,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppDeleteDevice('existing');
 
-        verifyMapAppStateChange(initialState, action, {
+        testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
         });
     });
