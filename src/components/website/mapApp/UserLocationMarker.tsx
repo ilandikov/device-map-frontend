@@ -22,6 +22,9 @@ export function UserLocationMarker() {
             setPosition(locationEvent.latlng);
             map.flyTo(locationEvent.latlng, map.getZoom());
         },
+        click(locationEvent) {
+            setPosition(locationEvent.latlng);
+        },
     });
 
     useEffect(() => {
