@@ -116,71 +116,40 @@ describe('MapApp reducer tests', () => {
         verifyMapAppStateChange(initialState, action, {});
     });
 
+    const existingDevice = {
+        id: 'existing',
+        createdDate: '1796354896548',
+        creatorID: 'new creator',
+        location: { lat: 0, lon: 1 },
+    };
+    const receivedDevice = {
+        id: 'received',
+        createdDate: '1701482094513',
+        creatorID: 'another creator',
+        location: { lat: 10, lon: 11 },
+    };
+
     it('should overwrite devices', () => {
         const initialState = buildMapAppState({
-            devices: [
-                {
-                    id: 'existing',
-                    createdDate: '1796354896548',
-                    creatorID: 'new creator',
-                    location: { lat: 0, lon: 1 },
-                },
-            ],
+            devices: [existingDevice],
         });
-        const action = mapAppSetDevices([
-            {
-                id: 'received',
-                createdDate: '1701482094513',
-                creatorID: 'another creator',
-                location: { lat: 10, lon: 11 },
-            },
-        ]);
+
+        const action = mapAppSetDevices([receivedDevice]);
 
         verifyMapAppStateChange(initialState, action, {
-            devices: [
-                {
-                    id: 'received',
-                    createdDate: '1701482094513',
-                    creatorID: 'another creator',
-                    location: { lat: 10, lon: 11 },
-                },
-            ],
+            devices: [receivedDevice],
         });
     });
 
     it('should add device', () => {
         const initialState = buildMapAppState({
-            devices: [
-                {
-                    id: 'existing',
-                    createdDate: '1796354896548',
-                    creatorID: 'new creator',
-                    location: { lat: 0, lon: 1 },
-                },
-            ],
-        });
-        const action = mapAppAddDevice({
-            id: 'received',
-            createdDate: '1701482094513',
-            creatorID: 'another creator',
-            location: { lat: 10, lon: 11 },
+            devices: [existingDevice],
         });
 
+        const action = mapAppAddDevice(receivedDevice);
+
         verifyMapAppStateChange(initialState, action, {
-            devices: [
-                {
-                    id: 'existing',
-                    createdDate: '1796354896548',
-                    creatorID: 'new creator',
-                    location: { lat: 0, lon: 1 },
-                },
-                {
-                    id: 'received',
-                    createdDate: '1701482094513',
-                    creatorID: 'another creator',
-                    location: { lat: 10, lon: 11 },
-                },
-            ],
+            devices: [existingDevice, receivedDevice],
         });
     });
 
