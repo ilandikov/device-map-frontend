@@ -6,9 +6,10 @@ import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
 import { Dispatch } from 'redux';
 import { T22Location } from '@mancho-school-t22/graphql-types';
-import { AllActions, useAppDispatch } from '../../../redux/store';
+import { AllActions } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
+import { useMarkerClickHandler } from './UserLocationMarker';
 
 export function buildLocationMarkerClickHandler(selectedMarkerLocation: T22Location, dispatch: Dispatch<AllActions>) {
     return (event: LeafletMouseEvent) => {
@@ -25,8 +26,6 @@ export function buildLocationMarkerClickHandler(selectedMarkerLocation: T22Locat
 }
 
 export function DeviceMarkers() {
-    const dispatch = useAppDispatch();
-
     const deviceMarkerIcon = new Icon({
         className: 'map-marker',
         iconRetinaUrl: markerRetinaImage,
@@ -36,8 +35,7 @@ export function DeviceMarkers() {
         shadowSize: [41, 41],
     });
 
-    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
-    const markerClickHandler = buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
+    const markerClickHandler = useMarkerClickHandler();
 
     const devices = useMapAppState().devices;
 

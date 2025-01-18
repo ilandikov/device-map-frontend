@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { buildLocationMarkerClickHandler } from './DeviceMarkers';
 import { useMapAppState } from './redux/MapAppState';
 
-function useMarkerClickHandler() {
+export function useMarkerClickHandler() {
     const dispatch = useAppDispatch();
     const selectedMarkerLocation = useMapAppState().selectedMarker.location;
     return buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
