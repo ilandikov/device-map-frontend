@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
-import { Icon } from 'leaflet';
+import { Icon, LeafletMouseEvent } from 'leaflet';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { useAppDispatch } from '../../../redux/store';
-import { buildLocationMarkerClickHandler } from './DeviceMarkers';
 import { useMapAppState } from './redux/MapAppState';
+import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
 
 export function useMarkerClickHandler() {
     const dispatch = useAppDispatch();
     const selectedMarkerLocation = useMapAppState().selectedMarker.location;
-    return buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
+
+    return (event: LeafletMouseEvent) => {
+        const alreadySelectedMarkerClicked =
+            selectedMarkerLocation &&
+            selectedMarkerLocation.lat === event.latlng.lat &&
+            selectedMarkerLocation.lon === event.latlng.lng;
+        if (alreadySelectedMarkerClicked) {
+            return;
+        }
+
+        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
+    };
 }
 
 export function UserLocationMarker() {

@@ -1,29 +1,11 @@
 import React from 'react';
-import { Icon, LatLng, LeafletMouseEvent } from 'leaflet';
+import { Icon, LatLng } from 'leaflet';
 import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
-import { Dispatch } from 'redux';
-import { T22Location } from '@mancho-school-t22/graphql-types';
-import { AllActions } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
-import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
 import { useMarkerClickHandler } from './UserLocationMarker';
-
-export function buildLocationMarkerClickHandler(selectedMarkerLocation: T22Location, dispatch: Dispatch<AllActions>) {
-    return (event: LeafletMouseEvent) => {
-        const alreadySelectedMarkerClicked =
-            selectedMarkerLocation &&
-            selectedMarkerLocation.lat === event.latlng.lat &&
-            selectedMarkerLocation.lon === event.latlng.lng;
-        if (alreadySelectedMarkerClicked) {
-            return;
-        }
-
-        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
-    };
-}
 
 export function DeviceMarkers() {
     const deviceMarkerIcon = new Icon({
