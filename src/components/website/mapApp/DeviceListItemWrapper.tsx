@@ -19,34 +19,16 @@ export function DeviceListItemWrapper(props: { approvals: number; children: Reac
 }
 
 function getShadowClassesByValidationStatus(approvals: number) {
-    if (approvals < 0) {
-        return {
-            leftShadowColorClass: 'create',
-            rightShadowColorClass: 'create',
-        };
-    }
-
-    switch (approvals) {
-        case 0:
-            return {
-                leftShadowColorClass: 'created',
-                rightShadowColorClass: 'created',
-            };
-        case 1:
-            return {
-                leftShadowColorClass: 'approving',
-                rightShadowColorClass: 'approving',
-            };
-        case 2:
-            return {
-                leftShadowColorClass: 'approved',
-                rightShadowColorClass: 'approved',
-            };
+    switch (true) {
+        case approvals < 0:
+            return { leftShadowColorClass: 'create', rightShadowColorClass: 'create' };
+        case approvals === 0:
+            return { leftShadowColorClass: 'created', rightShadowColorClass: 'created' };
+        case approvals === 1:
+            return { leftShadowColorClass: 'approving', rightShadowColorClass: 'approving' };
+        case approvals >= 2:
+            return { leftShadowColorClass: 'approved', rightShadowColorClass: 'approved' };
         default:
-            console.warn('DeviceListItem component: colorIndex mod 3 has been more than 4. Colors may be wrong.');
-            return {
-                leftShadowColorClass: 'create',
-                rightShadowColorClass: 'create',
-            };
+            throw new Error(`Unknown approval count: ${approvals}`);
     }
 }
