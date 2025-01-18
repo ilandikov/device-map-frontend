@@ -4,7 +4,7 @@ import home from '../../../assets/images/Home.png';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppGetLocationAddress } from './redux/MapAppAction';
 import { LocationAddressLoader } from './LocationAddressLoader';
-import './MarkerAddress.scss';
+import './LocationAddress.scss';
 
 export function LocationAddress() {
     const selectedMarker = useMapAppState().selectedMarker;

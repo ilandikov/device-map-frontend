@@ -1,5 +1,5 @@
 import React from 'react';
-import './MarkerAddressLoader.scss';
+import './LocationAddressLoader.scss';
 
 export function LocationAddressLoader() {
     return (

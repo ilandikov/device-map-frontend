@@ -1,5 +1,5 @@
 import React from 'react';
-import './DeviceMarkerDescription.scss';
+import './DeviceLocation.scss';
 import { DeviceList } from './DeviceList';
 import { LocationAddress } from './LocationAddress';
 
