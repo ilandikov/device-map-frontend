@@ -2,7 +2,7 @@
 
 exports[`device list snapshot tests should show address loader and a list devices matching the selected marker without the create device item 1`] = `
 <div
-  className="device-marker-description-window"
+  className="device-location-window"
 >
   <div
     className="location-address-container"
@@ -56,7 +56,7 @@ exports[`device list snapshot tests should show address loader and a list device
 
 exports[`device list snapshot tests should show the address and a list devices matching the selected marker with the create device item 1`] = `
 <div
-  className="device-marker-description-window"
+  className="device-location-window"
 >
   <div
     className="location-address-container"

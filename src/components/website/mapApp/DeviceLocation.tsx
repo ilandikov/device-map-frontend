@@ -5,7 +5,7 @@ import { LocationAddress } from './LocationAddress';
 
 export function DeviceLocation() {
     return (
-        <div className="device-marker-description-window">
+        <div className="device-location-window">
             <LocationAddress />
             <DeviceList />
         </div>
