@@ -4,9 +4,25 @@ import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
-import { useAppDispatch } from '../../../redux/store';
+import { Dispatch } from 'redux';
+import { T22Location } from '@mancho-school-t22/graphql-types';
+import { AllActions, useAppDispatch } from '../../../redux/store';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
+
+function buildLocationMarkerClickHandler(selectedMarkerLocation: T22Location, dispatch: Dispatch<AllActions>) {
+    return (event: LeafletMouseEvent) => {
+        const alreadySelectedMarkerClicked =
+            selectedMarkerLocation &&
+            selectedMarkerLocation.lat === event.latlng.lat &&
+            selectedMarkerLocation.lon === event.latlng.lng;
+        if (alreadySelectedMarkerClicked) {
+            return;
+        }
+
+        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
+    };
+}
 
 export function DeviceMarkers() {
     const dispatch = useAppDispatch();
@@ -21,17 +37,7 @@ export function DeviceMarkers() {
     });
 
     const selectedMarkerLocation = useMapAppState().selectedMarker.location;
-    const markerClickHandler = (event: LeafletMouseEvent) => {
-        const alreadySelectedMarkerClicked =
-            selectedMarkerLocation &&
-            selectedMarkerLocation.lat === event.latlng.lat &&
-            selectedMarkerLocation.lon === event.latlng.lng;
-        if (alreadySelectedMarkerClicked) {
-            return;
-        }
-
-        dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
-    };
+    const markerClickHandler = buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
 
     const devices = useMapAppState().devices;
 
