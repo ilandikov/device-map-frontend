@@ -27,6 +27,20 @@ describe('DeviceListItem snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
+    it('should match snapshot validating device without delete button', () => {
+        const component = renderForSnapshotTest(
+            <DeviceListItem device={testDevice} validations={1} showDeleteButton={false} />,
+        );
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match snapshot validated device without delete button', () => {
+        const component = renderForSnapshotTest(
+            <DeviceListItem device={testDevice} validations={2} showDeleteButton={false} />,
+        );
+        expect(component).toMatchSnapshot();
+    });
+
     it('should match snapshot created device with delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={testDevice} validations={0} showDeleteButton={true} />,
