@@ -13,6 +13,7 @@ export enum MapAppActionType {
     REMOTE_ANSWER = 'REMOTE_ANSWER',
     REMOTE_ERROR_ANSWER = 'REMOTE_ERROR_ANSWER',
     DELETE_DEVICE = 'DELETE_DEVICE',
+    VALIDATE_DEVICE_REQUEST = 'VALIDATE_DEVICE_REQUEST',
 }
 
 export enum MapAppButton {
@@ -42,7 +43,8 @@ export type MapAppAction =
     | MapAppAddDevice
     | MapAppDeleteDevice
     | MapAppRemoteErrorAnswer
-    | MapAppAuthCompleted;
+    | MapAppAuthCompleted
+    | MapAppValidateDeviceRequest;
 
 export interface MapAppLoginModalCloseAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE;
@@ -160,6 +162,23 @@ export function mapAppDeleteDeviceRequest(id: string): MapAppDeleteDeviceRequest
     return {
         type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
         request: MapAppRemoteRequestType.DELETE_DEVICE,
+        id,
+    };
+}
+
+interface MapAppValidateDeviceRequest {
+    type: MapAppActionType.VALIDATE_DEVICE_REQUEST;
+    // TODO uncomment below
+    // type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
+    // request: MapAppRemoteRequestType.VALIDATE_DEVICE;
+    id;
+}
+
+export function mapAppValidateDeviceRequest(id: string): MapAppValidateDeviceRequest {
+    return {
+        type: MapAppActionType.VALIDATE_DEVICE_REQUEST,
+        // type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
+        // request: MapAppRemoteRequestType.VALIDATE_DEVICE,
         id,
     };
 }

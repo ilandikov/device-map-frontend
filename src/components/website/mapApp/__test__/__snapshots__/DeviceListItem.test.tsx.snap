@@ -66,6 +66,7 @@ exports[`DeviceListItem snapshot tests should match snapshot created device with
     <button
       className="device-list-item-opaque-text"
       data-testid="approveDeviceButton"
+      onClick={[Function]}
     >
       approveDevice
     </button>
@@ -132,6 +133,7 @@ exports[`DeviceListItem snapshot tests should match snapshot validating device w
     <button
       className="device-list-item-opaque-text"
       data-testid="approveDeviceButton"
+      onClick={[Function]}
     >
       approveDevice
     </button>
