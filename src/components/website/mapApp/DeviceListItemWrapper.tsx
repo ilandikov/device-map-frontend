@@ -22,7 +22,7 @@ function getShadowClassesByValidationStatus(validations: number) {
         };
     }
 
-    switch (validations % 3) {
+    switch (validations) {
         case 0:
             return {
                 leftShadowColorClass: 'device-list-item-validated-shadow-left',
