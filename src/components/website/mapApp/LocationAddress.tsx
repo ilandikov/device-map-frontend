@@ -16,12 +16,12 @@ export function LocationAddress() {
     }, [selectedMarker.location]);
 
     return (
-        <div className="marker-address-container">
-            <img src={home} className="marker-address-image" alt="marker-address-image" />
+        <div className="location-address-container">
+            <img src={home} className="location-address-image" alt="location-address-image" />
             {waitingForAddress ? (
                 <LocationAddressLoader />
             ) : (
-                <div className="marker-address">
+                <div className="location-address">
                     <p>{selectedMarker.address.addressLine1}</p>
                     <span>{selectedMarker.address.addressLine2}</span>
                 </div>
