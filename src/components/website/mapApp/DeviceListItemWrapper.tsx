@@ -2,47 +2,35 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
 export function DeviceListItemWrapper(props: { approvals: number; children: React.ReactNode }) {
-    const { leftShadowColorClass, rightShadowColorClass } = getShadowClassesByValidationStatus(props.approvals);
+    const deviceApprovalStatus = getDeviceApprovalStatus(props.approvals);
 
     return (
         <div className="device-list-item-container">
-            <div className={`device-list-item-shadow device-list-item-shadow-left ${leftShadowColorClass}`}></div>
-            <div className={`device-list-item-shadow device-list-item-shadow-right ${rightShadowColorClass}`}></div>
+            <div
+                className={`device-list-item-shadow device-list-item-shadow-left device-list-item-${deviceApprovalStatus}-shadow-left`}
+            ></div>
+            <div
+                className={`device-list-item-shadow device-list-item-shadow-right device-list-item-${deviceApprovalStatus}-shadow-right`}
+            ></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">{props.children}</div>
         </div>
     );
 }
 
-function getShadowClassesByValidationStatus(approvals: number) {
-    if (approvals < 0) {
-        return {
-            leftShadowColorClass: 'device-list-item-create-shadow-left',
-            rightShadowColorClass: 'device-list-item-create-shadow-right',
-        };
-    }
+type DeviceApprovalStatus = 'create' | 'created' | 'approving' | 'approved';
 
-    switch (approvals) {
-        case 0:
-            return {
-                leftShadowColorClass: 'device-list-item-created-shadow-left',
-                rightShadowColorClass: 'device-list-item-created-shadow-right',
-            };
-        case 1:
-            return {
-                leftShadowColorClass: 'device-list-item-approving-shadow-left',
-                rightShadowColorClass: 'device-list-item-approving-shadow-right',
-            };
-        case 2:
-            return {
-                leftShadowColorClass: 'device-list-item-approved-shadow-left',
-                rightShadowColorClass: 'device-list-item-approved-shadow-right',
-            };
+function getDeviceApprovalStatus(approvals: number): DeviceApprovalStatus {
+    switch (true) {
+        case approvals < 0:
+            return 'create';
+        case approvals === 0:
+            return 'created';
+        case approvals === 1:
+            return 'approving';
+        case approvals >= 2:
+            return 'approved';
         default:
-            console.warn('DeviceListItem component: colorIndex mod 3 has been more than 4. Colors may be wrong.');
-            return {
-                leftShadowColorClass: 'device-list-item-create-shadow-left',
-                rightShadowColorClass: 'device-list-item-create-shadow-right',
-            };
+            throw new Error(`Unknown approval count: ${approvals}`);
     }
 }
