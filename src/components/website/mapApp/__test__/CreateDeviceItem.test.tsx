@@ -1,4 +1,5 @@
 import { fireEvent, getByTestId } from '@testing-library/react';
+import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
 import { CreateDeviceItem } from '../CreateDeviceItem';
@@ -23,7 +24,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch click action on create device button click', () => {
-        const container = renderForActionDispatchTest(CreateDeviceItem());
+        const container = renderForActionDispatchTest(<CreateDeviceItem />);
 
         const loginButton = getByTestId(container, 'createDeviceButton');
         fireEvent.click(loginButton);
