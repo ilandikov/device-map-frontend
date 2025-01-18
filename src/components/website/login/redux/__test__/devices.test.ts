@@ -19,6 +19,8 @@ const resolvingClient: DevicesClient = {
                     {
                         __typename: 'T22Device',
                         id: 'dev1',
+                        createdDate: '1754126457812',
+                        creatorID: 'fancy creator',
                         location: {
                             __typename: 'T22Location',
                             lat: 42.85862508449081,
@@ -31,7 +33,14 @@ const resolvingClient: DevicesClient = {
     },
     forAuthenticatedUser: {
         createDevice: (createDeviceInput) =>
-            Promise.resolve({ device: { id: 'testId', location: createDeviceInput.location } }),
+            Promise.resolve({
+                device: {
+                    id: 'testId',
+                    createdDate: '1796354896548',
+                    creatorID: 'new creator',
+                    location: createDeviceInput.location,
+                },
+            }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
     },
 };
@@ -65,6 +74,8 @@ describe('devices - list devices', () => {
             {
                 __typename: 'T22Device',
                 id: 'dev1',
+                createdDate: '1754126457812',
+                creatorID: 'fancy creator',
                 location: {
                     __typename: 'T22Location',
                     lat: 42.85862508449081,
@@ -89,7 +100,12 @@ describe('devices - create device', () => {
     it('should send action with the new device at selected marker location', async () => {
         const mapAppState = buildMapAppState({ selectedMarker: { location: { lat: 5, lon: 6 }, address: null } });
         const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
-        const expectedAction = mapAppAddDevice({ id: 'testId', location: { lat: 5, lon: 6 } });
+        const expectedAction = mapAppAddDevice({
+            id: 'testId',
+            createdDate: '1796354896548',
+            creatorID: 'new creator',
+            location: { lat: 5, lon: 6 },
+        });
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
