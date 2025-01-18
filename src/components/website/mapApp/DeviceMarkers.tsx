@@ -22,11 +22,11 @@ export function DeviceMarkers() {
 
     const selectedMarkerLocation = useMapAppState().selectedMarker.location;
     const markerClickHandler = (event: LeafletMouseEvent) => {
-        if (
+        const alreadySelectedMarkerClicked =
             selectedMarkerLocation &&
             selectedMarkerLocation.lat === event.latlng.lat &&
-            selectedMarkerLocation.lon === event.latlng.lng
-        ) {
+            selectedMarkerLocation.lon === event.latlng.lng;
+        if (alreadySelectedMarkerClicked) {
             return;
         }
 
