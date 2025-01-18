@@ -17,8 +17,8 @@ export function DeviceListItemWrapper(props: { colorIndex: number | null; childr
 function getColorClassesForDeviceItemShadows(colorIndex: number | null) {
     if (colorIndex === null) {
         return {
-            leftShadowColorClass: 'device-list-create-device-item-shadow-left',
-            rightShadowColorClass: 'device-list-create-device-item-shadow-right',
+            leftShadowColorClass: 'device-list-item-create-shadow-left',
+            rightShadowColorClass: 'device-list-item-create-shadow-right',
         };
     }
 
@@ -41,8 +41,8 @@ function getColorClassesForDeviceItemShadows(colorIndex: number | null) {
         default:
             console.warn('DeviceListItem component: colorIndex mod 3 has been more than 4. Colors may be wrong.');
             return {
-                leftShadowColorClass: 'device-list-create-device-item-shadow-left',
-                rightShadowColorClass: 'device-list-create-device-item-shadow-right',
+                leftShadowColorClass: 'device-list-item-create-shadow-left',
+                rightShadowColorClass: 'device-list-item-create-shadow-right',
             };
     }
 }

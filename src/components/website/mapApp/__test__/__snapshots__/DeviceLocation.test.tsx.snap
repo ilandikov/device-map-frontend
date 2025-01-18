@@ -145,10 +145,10 @@ exports[`device list snapshot tests should show the address and a list devices m
       className="device-list-item-container"
     >
       <div
-        className="device-list-item-shadow device-list-item-shadow-left device-list-create-device-item-shadow-left"
+        className="device-list-item-shadow device-list-item-shadow-left device-list-item-create-shadow-left"
       />
       <div
-        className="device-list-item-shadow device-list-item-shadow-right device-list-create-device-item-shadow-right"
+        className="device-list-item-shadow device-list-item-shadow-right device-list-item-create-shadow-right"
       />
       <img
         alt="device-list-item-image"
