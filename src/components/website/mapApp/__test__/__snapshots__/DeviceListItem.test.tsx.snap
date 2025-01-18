@@ -63,6 +63,12 @@ exports[`DeviceListItem snapshot tests should match snapshot created device with
     >
       deviceReportBroken
     </button>
+    <button
+      className="device-list-item-opaque-text"
+      data-testid="approveDeviceButton"
+    >
+      approveDevice
+    </button>
   </div>
 </div>
 `;
@@ -122,6 +128,12 @@ exports[`DeviceListItem snapshot tests should match snapshot validating device w
       className="device-list-item-opaque-text"
     >
       deviceReportBroken
+    </button>
+    <button
+      className="device-list-item-opaque-text"
+      data-testid="approveDeviceButton"
+    >
+      approveDevice
     </button>
   </div>
 </div>

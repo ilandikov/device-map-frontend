@@ -20,7 +20,7 @@ export function DeviceListItemWrapper(props: { approvals: number; children: Reac
 
 type DeviceApprovalStatus = 'create' | 'created' | 'approving' | 'approved';
 
-function getDeviceApprovalStatus(approvals: number): DeviceApprovalStatus {
+export function getDeviceApprovalStatus(approvals: number): DeviceApprovalStatus {
     switch (true) {
         case approvals < 0:
             return 'create';
