@@ -30,8 +30,8 @@ function getColorClassesForDeviceItemShadows(colorIndex: number | null) {
             };
         case 1:
             return {
-                leftShadowColorClass: 'device-list-item-shadow-left-second',
-                rightShadowColorClass: 'device-list-item-shadow-right-second',
+                leftShadowColorClass: 'device-list-item-validating-left',
+                rightShadowColorClass: 'device-list-item-validating-right',
             };
         case 2:
             return {
