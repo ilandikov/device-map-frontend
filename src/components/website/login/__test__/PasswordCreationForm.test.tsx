@@ -77,8 +77,8 @@ describe('PasswordCreationForm action tests', () => {
     it('should call password verification when next button is pressed', () => {
         const container = renderForActionDispatchTest(<PasswordCreationForm />);
 
-        const tryVerifyPasswordsButton = getByText(container, 'next');
-        fireEvent.click(tryVerifyPasswordsButton);
+        const nextButton = getByText(container, 'next');
+        fireEvent.click(nextButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.PASSWORD));
     });
