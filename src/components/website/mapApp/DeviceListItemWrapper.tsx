@@ -25,8 +25,8 @@ function getShadowClassesByValidationStatus(validations: number) {
     switch (validations) {
         case 0:
             return {
-                leftShadowColorClass: 'device-list-item-validated-shadow-left',
-                rightShadowColorClass: 'device-list-item-validated-shadow-right',
+                leftShadowColorClass: 'device-list-item-created-shadow-left',
+                rightShadowColorClass: 'device-list-item-created-shadow-right',
             };
         case 1:
             return {
@@ -35,8 +35,8 @@ function getShadowClassesByValidationStatus(validations: number) {
             };
         case 2:
             return {
-                leftShadowColorClass: 'device-list-item-created-shadow-left',
-                rightShadowColorClass: 'device-list-item-created-shadow-right',
+                leftShadowColorClass: 'device-list-item-validated-shadow-left',
+                rightShadowColorClass: 'device-list-item-validated-shadow-right',
             };
         default:
             console.warn('DeviceListItem component: colorIndex mod 3 has been more than 4. Colors may be wrong.');

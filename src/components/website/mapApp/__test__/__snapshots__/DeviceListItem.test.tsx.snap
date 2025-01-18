@@ -5,10 +5,10 @@ exports[`DeviceListItem snapshot tests should match snapshot created device with
   className="device-list-item-container"
 >
   <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-validated-shadow-left"
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-created-shadow-left"
   />
   <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-validated-shadow-right"
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-created-shadow-right"
   />
   <img
     alt="device-list-item-image"
@@ -42,10 +42,10 @@ exports[`DeviceListItem snapshot tests should match snapshot created device with
   className="device-list-item-container"
 >
   <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-validated-shadow-left"
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-created-shadow-left"
   />
   <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-validated-shadow-right"
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-created-shadow-right"
   />
   <img
     alt="device-list-item-image"
@@ -72,10 +72,10 @@ exports[`DeviceListItem snapshot tests should match snapshot validated device wi
   className="device-list-item-container"
 >
   <div
-    className="device-list-item-shadow device-list-item-shadow-left device-list-item-created-shadow-left"
+    className="device-list-item-shadow device-list-item-shadow-left device-list-item-validated-shadow-left"
   />
   <div
-    className="device-list-item-shadow device-list-item-shadow-right device-list-item-created-shadow-right"
+    className="device-list-item-shadow device-list-item-shadow-right device-list-item-validated-shadow-right"
   />
   <img
     alt="device-list-item-image"
