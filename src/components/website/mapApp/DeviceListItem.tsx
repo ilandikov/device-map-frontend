@@ -10,7 +10,7 @@ export function DeviceListItem(props: { device: T22Device; validations: number; 
     const dispatch = useAppDispatch();
 
     return (
-        <DeviceListItemWrapper validations={props.validations}>
+        <DeviceListItemWrapper approvals={props.validations}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {props.showDeleteButton && (

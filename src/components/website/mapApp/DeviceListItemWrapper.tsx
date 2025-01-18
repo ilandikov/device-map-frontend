@@ -1,8 +1,8 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
-export function DeviceListItemWrapper(props: { validations: number; children: React.ReactNode }) {
-    const { leftShadowColorClass, rightShadowColorClass } = getShadowClassesByValidationStatus(props.validations);
+export function DeviceListItemWrapper(props: { approvals: number; children: React.ReactNode }) {
+    const { leftShadowColorClass, rightShadowColorClass } = getShadowClassesByValidationStatus(props.approvals);
 
     return (
         <div className="device-list-item-container">
@@ -14,15 +14,15 @@ export function DeviceListItemWrapper(props: { validations: number; children: Re
     );
 }
 
-function getShadowClassesByValidationStatus(validations: number) {
-    if (validations < 0) {
+function getShadowClassesByValidationStatus(approvals: number) {
+    if (approvals < 0) {
         return {
             leftShadowColorClass: 'device-list-item-create-shadow-left',
             rightShadowColorClass: 'device-list-item-create-shadow-right',
         };
     }
 
-    switch (validations) {
+    switch (approvals) {
         case 0:
             return {
                 leftShadowColorClass: 'device-list-item-created-shadow-left',
