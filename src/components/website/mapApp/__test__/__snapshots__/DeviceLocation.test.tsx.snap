@@ -2,21 +2,21 @@
 
 exports[`device list snapshot tests should show address loader and a list devices matching the selected marker without the create device item 1`] = `
 <div
-  className="device-marker-description-window"
+  className="device-location-window"
 >
   <div
-    className="marker-address-container"
+    className="location-address-container"
   >
     <img
-      alt="marker-address-image"
-      className="marker-address-image"
+      alt="location-address-image"
+      className="location-address-image"
       src="test-file-stub"
     />
     <div
-      className="marker-address-loader-container"
+      className="location-address-loader-container"
     >
       <div
-        className="marker-address-loader"
+        className="location-address-loader"
       />
     </div>
   </div>
@@ -56,18 +56,18 @@ exports[`device list snapshot tests should show address loader and a list device
 
 exports[`device list snapshot tests should show the address and a list devices matching the selected marker with the create device item 1`] = `
 <div
-  className="device-marker-description-window"
+  className="device-location-window"
 >
   <div
-    className="marker-address-container"
+    className="location-address-container"
   >
     <img
-      alt="marker-address-image"
-      className="marker-address-image"
+      alt="location-address-image"
+      className="location-address-image"
       src="test-file-stub"
     />
     <div
-      className="marker-address"
+      className="location-address"
     >
       <p>
         Street and number

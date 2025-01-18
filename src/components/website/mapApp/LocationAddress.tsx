@@ -3,10 +3,10 @@ import { useAppDispatch } from '../../../redux/store';
 import home from '../../../assets/images/Home.png';
 import { useMapAppState } from './redux/MapAppState';
 import { mapAppGetLocationAddress } from './redux/MapAppAction';
-import { MarkerAddressLoader } from './MarkerAddressLoader';
-import './MarkerAddress.scss';
+import { LocationAddressLoader } from './LocationAddressLoader';
+import './LocationAddress.scss';
 
-export function MarkerAddress() {
+export function LocationAddress() {
     const selectedMarker = useMapAppState().selectedMarker;
     const waitingForAddress = selectedMarker.address === null;
 
@@ -16,12 +16,12 @@ export function MarkerAddress() {
     }, [selectedMarker.location]);
 
     return (
-        <div className="marker-address-container">
-            <img src={home} className="marker-address-image" alt="marker-address-image" />
+        <div className="location-address-container">
+            <img src={home} className="location-address-image" alt="location-address-image" />
             {waitingForAddress ? (
-                <MarkerAddressLoader />
+                <LocationAddressLoader />
             ) : (
-                <div className="marker-address">
+                <div className="location-address">
                     <p>{selectedMarker.address.addressLine1}</p>
                     <span>{selectedMarker.address.addressLine2}</span>
                 </div>

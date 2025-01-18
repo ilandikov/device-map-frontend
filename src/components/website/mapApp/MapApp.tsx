@@ -8,12 +8,12 @@ import { ProductDescription } from './ProductDescription';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
-import { DeviceMarkerDescription } from './DeviceMarkerDescription';
+import { DeviceLocation } from './DeviceLocation';
 
 export default function MapApp() {
     const mapAppState = useMapAppState();
 
-    const deviceMarkerWasSelected = mapAppState.selectedMarker.location;
+    const deviceLocationWasSelected = mapAppState.selectedMarker.location;
     const showProductDescription =
         mapAppState.usageStep === MapAppUsageStep.HOME_SCREEN && !mapAppState.selectedMarker.location;
     const showLoginModal = mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION;
@@ -22,7 +22,7 @@ export default function MapApp() {
         <div className="map-app-container">
             <MapAppHeader />
             {showProductDescription && <ProductDescription />}
-            {deviceMarkerWasSelected && <DeviceMarkerDescription />}
+            {deviceLocationWasSelected && <DeviceLocation />}
             {showLoginModal && <LoginModal />}
             <DeviceMap />
         </div>

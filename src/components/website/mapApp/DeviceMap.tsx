@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import './DeviceMap.scss';
 import { useAppDispatch } from '../../../redux/store';
 import { UserLocationMarker } from './UserLocationMarker';
-import { DeviceMarkers } from './DeviceMarkers';
+import { DeviceLocations } from './DeviceLocations';
 import { MapAppRemoteRequestType, mapAppRemoteRequest } from './redux/MapAppAction';
 
 export function DeviceMap() {
@@ -28,7 +28,7 @@ export function DeviceMap() {
             />
             <ZoomControl position="bottomright" />
             <UserLocationMarker />
-            <DeviceMarkers />
+            <DeviceLocations />
         </MapContainer>
     );
 }

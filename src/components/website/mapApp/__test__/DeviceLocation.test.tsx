@@ -2,7 +2,7 @@ import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { MapAppUsageStep } from '../redux/MapAppState';
-import { DeviceMarkerDescription } from '../DeviceMarkerDescription';
+import { DeviceLocation } from '../DeviceLocation';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -22,7 +22,7 @@ describe('device list snapshot tests', () => {
                 address: null,
             },
         });
-        const component = renderForSnapshotTest(<DeviceMarkerDescription />);
+        const component = renderForSnapshotTest(<DeviceLocation />);
 
         expect(component).toMatchSnapshot();
     });
@@ -48,7 +48,7 @@ describe('device list snapshot tests', () => {
                 },
             },
         });
-        const component = renderForSnapshotTest(<DeviceMarkerDescription />);
+        const component = renderForSnapshotTest(<DeviceLocation />);
 
         expect(component).toMatchSnapshot();
     });
