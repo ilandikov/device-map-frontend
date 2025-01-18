@@ -14,6 +14,8 @@ jest.mock('react-redux', () => ({
 
 const testDevice: T22Device = {
     id: 'try to delete me',
+    createdDate: '1704558741541',
+    creatorID: 'device list test creator id',
     location: { lat: 3, lon: 7 },
 };
 
