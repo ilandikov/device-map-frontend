@@ -1,7 +1,7 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
-export function DeviceListItemWrapper(props: { validations: number | null; children: React.ReactNode }) {
+export function DeviceListItemWrapper(props: { validations: number; children: React.ReactNode }) {
     const { leftShadowColorClass, rightShadowColorClass } = getShadowClassesByValidationStatus(props.validations);
 
     return (
@@ -14,8 +14,8 @@ export function DeviceListItemWrapper(props: { validations: number | null; child
     );
 }
 
-function getShadowClassesByValidationStatus(validations: number | null) {
-    if (validations === null) {
+function getShadowClassesByValidationStatus(validations: number) {
+    if (validations < 0) {
         return {
             leftShadowColorClass: 'device-list-item-create-shadow-left',
             rightShadowColorClass: 'device-list-item-create-shadow-right',
