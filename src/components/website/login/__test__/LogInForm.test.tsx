@@ -85,8 +85,8 @@ describe('LogInForm action tests', () => {
     it('should call user authentication when next button is pressed', () => {
         const container = renderForActionDispatchTest(<LogInForm />);
 
-        const tryVerifyPasswordsButton = getByText(container, 'next');
-        fireEvent.click(tryVerifyPasswordsButton);
+        const nextButton = getByText(container, 'next');
+        fireEvent.click(nextButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.NONE));
     });
