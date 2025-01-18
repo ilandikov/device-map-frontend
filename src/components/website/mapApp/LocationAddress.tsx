@@ -6,7 +6,7 @@ import { mapAppGetLocationAddress } from './redux/MapAppAction';
 import { MarkerAddressLoader } from './MarkerAddressLoader';
 import './MarkerAddress.scss';
 
-export function MarkerAddress() {
+export function LocationAddress() {
     const selectedMarker = useMapAppState().selectedMarker;
     const waitingForAddress = selectedMarker.address === null;
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import './DeviceMarkerDescription.scss';
 import { DeviceList } from './DeviceList';
-import { MarkerAddress } from './MarkerAddress';
+import { LocationAddress } from './LocationAddress';
 
 export function DeviceLocation() {
     return (
         <div className="device-marker-description-window">
-            <MarkerAddress />
+            <LocationAddress />
             <DeviceList />
         </div>
     );
