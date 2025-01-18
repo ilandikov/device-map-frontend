@@ -14,15 +14,15 @@ export function DeviceListItemWrapper(props: { validations: number | null; child
     );
 }
 
-function getColorClassesForDeviceItemShadows(colorIndex: number | null) {
-    if (colorIndex === null) {
+function getColorClassesForDeviceItemShadows(validations: number | null) {
+    if (validations === null) {
         return {
             leftShadowColorClass: 'device-list-item-create-shadow-left',
             rightShadowColorClass: 'device-list-item-create-shadow-right',
         };
     }
 
-    switch (colorIndex % 3) {
+    switch (validations % 3) {
         case 0:
             return {
                 leftShadowColorClass: 'device-list-item-validated-shadow-left',
