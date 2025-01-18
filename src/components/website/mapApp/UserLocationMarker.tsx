@@ -8,6 +8,12 @@ import { useAppDispatch } from '../../../redux/store';
 import { buildLocationMarkerClickHandler } from './DeviceMarkers';
 import { useMapAppState } from './redux/MapAppState';
 
+function useMarkerClickHandler() {
+    const dispatch = useAppDispatch();
+    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
+    return buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
+}
+
 export function UserLocationMarker() {
     const markerIcon = new Icon({
         className: 'map-marker',
@@ -20,9 +26,7 @@ export function UserLocationMarker() {
 
     const [position, setPosition] = React.useState(null);
 
-    const dispatch = useAppDispatch();
-    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
-    const markerClickHandler = buildLocationMarkerClickHandler(selectedMarkerLocation, dispatch);
+    const markerClickHandler = useMarkerClickHandler();
 
     const map = useMapEvents({
         locationfound(locationEvent) {
