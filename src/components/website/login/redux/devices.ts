@@ -3,6 +3,7 @@ import { ofType } from 'redux-observable';
 import {
     T22CreateDeviceResponse,
     T22DeleteDeviceResponse,
+    T22Device,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
@@ -12,10 +13,12 @@ import {
     MapAppDeleteDeviceRequest,
     MapAppRemoteRequest,
     MapAppRemoteRequestType,
+    MapAppValidateDeviceRequest,
     mapAppAddDevice,
     mapAppDeleteDevice,
     mapAppRemoteErrorAnswer,
     mapAppSetDevices,
+    mapAppValidateDevice,
 } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
 import { MapAppState } from '../../mapApp/redux/MapAppState';
@@ -56,9 +59,9 @@ const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteD
     responseToAction: (response) => of(mapAppDeleteDevice(response.id)),
 };
 
-const validateDeviceRequest: DevicesRequest<any, any> = {
-    call: () => Promise.resolve(),
-    responseToAction: () => EMPTY,
+const validateDeviceRequest: DevicesRequest<T22Device, MapAppValidateDeviceRequest> = {
+    call: (client, _, action) => client.forAuthenticatedUser.validateDevice(action.id),
+    responseToAction: (response) => of(mapAppValidateDevice(response)),
 };
 
 const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {

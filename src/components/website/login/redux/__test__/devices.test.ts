@@ -44,6 +44,13 @@ const resolvingClient: DevicesClient = {
                 },
             }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
+        validateDevice: (id) =>
+            Promise.resolve({
+                id,
+                createdDate: '1781204597512',
+                creatorID: 'someone else',
+                location: { lat: 0, lon: 1 },
+            }),
     },
 };
 
@@ -54,6 +61,7 @@ const rejectingClient: DevicesClient = {
     forAuthenticatedUser: {
         createDevice: () => Promise.reject('create device went wrong'),
         deleteDevice: () => Promise.reject('delete device went wrong'),
+        validateDevice: () => Promise.reject('validate device went wrong'),
     },
 };
 
@@ -140,7 +148,7 @@ describe('devices - delete device', () => {
 });
 
 describe('devices - validate device', () => {
-    it.failing('should send action to validate device', async () => {
+    it('should send action to validate device', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppValidateDeviceRequest('validate me!');
         const expectedAction = mapAppValidateDevice({
@@ -153,7 +161,7 @@ describe('devices - validate device', () => {
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
 
-    it.failing('should notify about the error', async () => {
+    it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppValidateDeviceRequest('validate me!');
         const expectedAction = mapAppRemoteErrorAnswer('validate device went wrong');

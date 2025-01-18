@@ -168,7 +168,7 @@ export function mapAppDeleteDeviceRequest(id: string): MapAppDeleteDeviceRequest
     };
 }
 
-interface MapAppValidateDeviceRequest {
+export interface MapAppValidateDeviceRequest {
     type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
     request: MapAppRemoteRequestType.VALIDATE_DEVICE;
     id: string;
