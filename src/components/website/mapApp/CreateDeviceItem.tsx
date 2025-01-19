@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { DeviceListItemWrapper } from './DeviceListItemWrapper';
+import { DeviceListItemContainer } from './DeviceListItemContainer';
 import { MapAppRemoteRequestType, mapAppRemoteRequest } from './redux/MapAppAction';
 
 export function CreateDeviceItem() {
@@ -9,7 +9,7 @@ export function CreateDeviceItem() {
     const dispatch = useAppDispatch();
 
     return (
-        <DeviceListItemWrapper approvals={-1}>
+        <DeviceListItemContainer approvals={-1}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
             <button
                 data-testid="createDeviceButton"
@@ -17,6 +17,6 @@ export function CreateDeviceItem() {
             >
                 {t('deviceAddDevice')}
             </button>
-        </DeviceListItemWrapper>
+        </DeviceListItemContainer>
     );
 }
