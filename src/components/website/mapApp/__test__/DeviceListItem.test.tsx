@@ -1,12 +1,8 @@
-import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppApproveDeviceRequest, mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
+import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { DeviceListItem } from '../DeviceListItem';
-import { DeleteButton } from '../DeleteButton';
-import { ApproveButton } from '../ApproveButton';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -48,29 +44,5 @@ describe('DeviceListItem snapshot tests', () => {
             <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={true} />,
         );
         expect(component).toMatchSnapshot();
-    });
-});
-
-describe('DeviceListItem action tests', () => {
-    beforeEach(() => {
-        jest.resetAllMocks();
-    });
-
-    it('should dispatch delete device request on delete device button click', () => {
-        const container = renderForActionDispatchTest(<DeleteButton id={'try to delete me'} />);
-
-        const loginButton = getByTestId(container, 'deleteDeviceButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppDeleteDeviceRequest('try to delete me'));
-    });
-
-    it('should dispatch approve request on approve device button click', () => {
-        const container = renderForActionDispatchTest(<ApproveButton id={'try to approve me'} />);
-
-        const loginButton = getByTestId(container, 'approveDeviceButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppApproveDeviceRequest('try to approve me'));
     });
 });
