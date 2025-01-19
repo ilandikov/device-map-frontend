@@ -66,11 +66,11 @@ describe('DeviceListItem action tests', () => {
     });
 
     it('should dispatch approve request on approve device button click', () => {
-        const container = renderForActionDispatchTest(<ApproveButton id={'try to delete me'} />);
+        const container = renderForActionDispatchTest(<ApproveButton id={'try to approve me'} />);
 
         const loginButton = getByTestId(container, 'approveDeviceButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppApproveDeviceRequest('try to delete me'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppApproveDeviceRequest('try to approve me'));
     });
 });
