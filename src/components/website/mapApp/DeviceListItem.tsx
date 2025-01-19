@@ -1,38 +1,26 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { useAppDispatch } from '../../../redux/store';
-import { DeviceListItemWrapper, getDeviceApprovalStatus } from './DeviceListItemWrapper';
-import { mapAppApproveDeviceRequest, mapAppDeleteDeviceRequest } from './redux/MapAppAction';
+import { DeviceListItemContainer, getDeviceApprovalStatus } from './DeviceListItemContainer';
+import { DeleteButton } from './DeleteButton';
+import { ApproveButton } from './ApproveButton';
 
 export function DeviceListItem(props: { device: T22Device; approvals: number; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
-    const dispatch = useAppDispatch();
+
+    const canBeDeleted = props.createdByCurrentUser;
+
+    const canReceiveApprovals =
+        getDeviceApprovalStatus(props.approvals) === 'created' ||
+        getDeviceApprovalStatus(props.approvals) === 'approving';
+    const canBeApproved = !props.createdByCurrentUser && canReceiveApprovals;
 
     return (
-        <DeviceListItemWrapper approvals={props.approvals}>
+        <DeviceListItemContainer approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            {props.createdByCurrentUser && (
-                <button
-                    className="device-list-item-opaque-text"
-                    data-testid="deleteDeviceButton"
-                    onClick={() => dispatch(mapAppDeleteDeviceRequest(props.device.id))}
-                >
-                    {t('deleteDevice')}
-                </button>
-            )}
-            {!props.createdByCurrentUser &&
-                (getDeviceApprovalStatus(props.approvals) === 'created' ||
-                    getDeviceApprovalStatus(props.approvals) === 'approving') && (
-                    <button
-                        className="device-list-item-opaque-text"
-                        data-testid="approveDeviceButton"
-                        onClick={() => dispatch(mapAppApproveDeviceRequest(props.device.id))}
-                    >
-                        {t('approveDevice')}
-                    </button>
-                )}
-        </DeviceListItemWrapper>
+            {canBeDeleted && <DeleteButton id={props.device.id} />}
+            {canBeApproved && <ApproveButton id={props.device.id} />}
+        </DeviceListItemContainer>
     );
 }

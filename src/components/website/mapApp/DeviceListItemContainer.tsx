@@ -1,7 +1,7 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
-export function DeviceListItemWrapper(props: { approvals: number; children: React.ReactNode }) {
+export function DeviceListItemContainer(props: { approvals: number; children: React.ReactNode }) {
     const deviceApprovalStatus = getDeviceApprovalStatus(props.approvals);
 
     return (
