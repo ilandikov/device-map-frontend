@@ -8,19 +8,19 @@ import { ApproveButton } from './ApproveButton';
 export function DeviceListItem(props: { device: T22Device; approvals: number; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
 
-    const canDeviceBeDeleted = props.createdByCurrentUser;
+    const canBeDeleted = props.createdByCurrentUser;
 
-    const canDeviceBeApproved =
+    const canReceiveApprovals =
         getDeviceApprovalStatus(props.approvals) === 'created' ||
         getDeviceApprovalStatus(props.approvals) === 'approving';
-    const canDeviceBeApproved2 = !props.createdByCurrentUser && canDeviceBeApproved;
+    const canBeApproved = !props.createdByCurrentUser && canReceiveApprovals;
 
     return (
         <DeviceListItemContainer approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            {canDeviceBeDeleted && <DeleteButton id={props.device.id} />}
-            {canDeviceBeApproved2 && <ApproveButton id={props.device.id} />}
+            {canBeDeleted && <DeleteButton id={props.device.id} />}
+            {canBeApproved && <ApproveButton id={props.device.id} />}
         </DeviceListItemContainer>
     );
 }
