@@ -13,13 +13,14 @@ export function DeviceListItem(props: { device: T22Device; approvals: number; cr
     const canDeviceBeApproved =
         getDeviceApprovalStatus(props.approvals) === 'created' ||
         getDeviceApprovalStatus(props.approvals) === 'approving';
+    const canDeviceBeApproved2 = !props.createdByCurrentUser && canDeviceBeApproved;
 
     return (
         <DeviceListItemContainer approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {canDeviceBeDeleted && <DeleteButton id={props.device.id} />}
-            {!props.createdByCurrentUser && canDeviceBeApproved && <ApproveButton id={props.device.id} />}
+            {canDeviceBeApproved2 && <ApproveButton id={props.device.id} />}
         </DeviceListItemContainer>
     );
 }
