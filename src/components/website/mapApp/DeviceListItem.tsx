@@ -5,6 +5,21 @@ import { useAppDispatch } from '../../../redux/store';
 import { DeviceListItemWrapper, getDeviceApprovalStatus } from './DeviceListItemWrapper';
 import { mapAppApproveDeviceRequest, mapAppDeleteDeviceRequest } from './redux/MapAppAction';
 
+function DeleteButton(props: { id: string }) {
+    const { t } = useI18next();
+    const dispatch = useAppDispatch();
+
+    return (
+        <button
+            className="device-list-item-opaque-text"
+            data-testid="deleteDeviceButton"
+            onClick={() => dispatch(mapAppDeleteDeviceRequest(props.id))}
+        >
+            {t('deleteDevice')}
+        </button>
+    );
+}
+
 export function DeviceListItem(props: { device: T22Device; approvals: number; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
@@ -13,15 +28,7 @@ export function DeviceListItem(props: { device: T22Device; approvals: number; cr
         <DeviceListItemWrapper approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            {props.createdByCurrentUser && (
-                <button
-                    className="device-list-item-opaque-text"
-                    data-testid="deleteDeviceButton"
-                    onClick={() => dispatch(mapAppDeleteDeviceRequest(props.device.id))}
-                >
-                    {t('deleteDevice')}
-                </button>
-            )}
+            {props.createdByCurrentUser && <DeleteButton id={props.device.id} />}
             {!props.createdByCurrentUser &&
                 (getDeviceApprovalStatus(props.approvals) === 'created' ||
                     getDeviceApprovalStatus(props.approvals) === 'approving') && (
