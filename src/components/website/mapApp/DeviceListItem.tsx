@@ -10,22 +10,24 @@ export function DeviceListItem(props: { device: T22Device; approvals: number; cr
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
+    const canDeviceBeApproved =
+        getDeviceApprovalStatus(props.approvals) === 'created' ||
+        getDeviceApprovalStatus(props.approvals) === 'approving';
+
     return (
         <DeviceListItemWrapper approvals={props.approvals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {props.createdByCurrentUser && <DeleteButton id={props.device.id} />}
-            {!props.createdByCurrentUser &&
-                (getDeviceApprovalStatus(props.approvals) === 'created' ||
-                    getDeviceApprovalStatus(props.approvals) === 'approving') && (
-                    <button
-                        className="device-list-item-opaque-text"
-                        data-testid="approveDeviceButton"
-                        onClick={() => dispatch(mapAppApproveDeviceRequest(props.device.id))}
-                    >
-                        {t('approveDevice')}
-                    </button>
-                )}
+            {!props.createdByCurrentUser && canDeviceBeApproved && (
+                <button
+                    className="device-list-item-opaque-text"
+                    data-testid="approveDeviceButton"
+                    onClick={() => dispatch(mapAppApproveDeviceRequest(props.device.id))}
+                >
+                    {t('approveDevice')}
+                </button>
+            )}
         </DeviceListItemWrapper>
     );
 }
