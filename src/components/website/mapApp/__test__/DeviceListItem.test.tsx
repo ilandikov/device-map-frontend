@@ -5,6 +5,8 @@ import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/m
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppApproveDeviceRequest, mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
 import { DeviceListItem } from '../DeviceListItem';
+import { DeleteButton } from '../DeleteButton';
+import { ApproveButton } from '../ApproveButton';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -55,9 +57,7 @@ describe('DeviceListItem action tests', () => {
     });
 
     it('should dispatch delete device request on delete device button click', () => {
-        const container = renderForActionDispatchTest(
-            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={true} />,
-        );
+        const container = renderForActionDispatchTest(<DeleteButton id={'try to delete me'} />);
 
         const loginButton = getByTestId(container, 'deleteDeviceButton');
         fireEvent.click(loginButton);
@@ -66,9 +66,7 @@ describe('DeviceListItem action tests', () => {
     });
 
     it('should dispatch approve request on approve device button click', () => {
-        const container = renderForActionDispatchTest(
-            <DeviceListItem device={testDevice} approvals={0} createdByCurrentUser={false} />,
-        );
+        const container = renderForActionDispatchTest(<ApproveButton id={'try to delete me'} />);
 
         const loginButton = getByTestId(container, 'approveDeviceButton');
         fireEvent.click(loginButton);
