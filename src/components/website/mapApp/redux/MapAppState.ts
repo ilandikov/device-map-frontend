@@ -11,7 +11,7 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
-type T22DeviceTemp = T22Device & { approvals?: number; lastUpdate?: number };
+export type T22DeviceTemp = T22Device & { approvals?: number; lastUpdate?: number };
 
 export interface MapAppState {
     usageStep: MapAppUsageStep;
