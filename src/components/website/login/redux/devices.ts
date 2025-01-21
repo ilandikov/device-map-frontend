@@ -61,7 +61,7 @@ const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteD
 
 const approveDevice: DevicesRequest<T22ApproveDeviceResponse, MapAppApproveDeviceRequest> = {
     call: (client, _, action) => client.forAuthenticatedUser.approveDevice({ id: action.id }),
-    responseToAction: (response) => of(mapAppApproveDevice(response.lastUpdate)),
+    responseToAction: (response) => of(mapAppApproveDevice(response.id, response.lastUpdate)),
 };
 
 const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {

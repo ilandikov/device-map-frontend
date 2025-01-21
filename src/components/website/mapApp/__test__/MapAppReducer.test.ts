@@ -169,7 +169,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppApproveDevice(receivedDevice);
+        const action = mapAppApproveDevice(receivedDevice.id, 1112222233333);
 
         testMapAppStateChange(initialState, action, {});
     });

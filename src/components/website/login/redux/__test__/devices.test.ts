@@ -145,12 +145,7 @@ describe('devices - approve device', () => {
     it.failing('should send action to approve device', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppApproveDeviceRequest('approve me!');
-        const expectedAction = mapAppApproveDevice({
-            id: 'approve me!',
-            createdDate: '1781204597512',
-            creatorID: 'someone else',
-            location: { lat: 0, lon: 1 },
-        });
+        const expectedAction = mapAppApproveDevice('approve me!', 1781204597512);
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
