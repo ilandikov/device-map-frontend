@@ -44,7 +44,7 @@ const resolvingClient: DevicesClient = {
                 },
             }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
-        approveDevice: () => Promise.resolve({ lastUpdate: '1740541578412' }),
+        approveDevice: (approveDeviceInput) => Promise.resolve({ id: approveDeviceInput.id, lastUpdate: Date.now() }),
     },
 };
 
