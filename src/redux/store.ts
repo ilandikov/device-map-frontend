@@ -33,6 +33,7 @@ import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import {
+    approveDeviceMutation,
     createDeviceMutation,
     deleteDeviceMutation,
     listDevicesQuery,
@@ -117,7 +118,13 @@ export function createStore() {
                                 variables: { input: deleteDeviceInput },
                             })
                             .then((response) => response.data.T22DeleteDevice),
-                    approveDevice: async () => Promise.reject(),
+                    approveDevice: async (approveDeviceInput) =>
+                        (await setAuthenticatedClient())
+                            .mutate<Mutation>({
+                                mutation: approveDeviceMutation,
+                                variables: { input: approveDeviceInput },
+                            })
+                            .then((response) => response.data.T22ApproveDevice),
                 },
             },
             geoApifyClient: (location) =>
