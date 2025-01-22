@@ -10,13 +10,14 @@ export function DeviceListItem(props: { device: T22DeviceTemp; approvals: number
 
     const canBeDeleted = props.createdByCurrentUser;
 
+    const deviceApprovals = props.approvals;
     const canReceiveApprovals =
-        getDeviceApprovalStatus(props.approvals) === 'created' ||
-        getDeviceApprovalStatus(props.approvals) === 'approving';
+        getDeviceApprovalStatus(deviceApprovals) === 'created' ||
+        getDeviceApprovalStatus(deviceApprovals) === 'approving';
     const canBeApproved = !props.createdByCurrentUser && canReceiveApprovals;
 
     return (
-        <DeviceListItemContainer approvals={props.approvals}>
+        <DeviceListItemContainer approvals={deviceApprovals}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {canBeDeleted && <DeleteButton id={props.device.id} />}
