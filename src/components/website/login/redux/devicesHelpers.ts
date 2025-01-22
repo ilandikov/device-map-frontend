@@ -11,6 +11,8 @@ export const listDevicesQuery = {
                         lat
                         lon
                     }
+                    approvals
+                    lastUpdate
                 }
                 count
             }
@@ -29,6 +31,8 @@ export const createDeviceMutation = gql`
                     lat
                     lon
                 }
+                approvals
+                lastUpdate
             }
         }
     }
@@ -38,6 +42,15 @@ export const deleteDeviceMutation = gql`
     mutation ($input: T22DeleteDeviceInput!) {
         T22DeleteDevice(input: $input) {
             id
+        }
+    }
+`;
+
+export const approveDeviceMutation = gql`
+    mutation ($input: T22ApproveDeviceInput!) {
+        T22ApproveDevice(input: $input) {
+            id
+            lastUpdate
         }
     }
 `;

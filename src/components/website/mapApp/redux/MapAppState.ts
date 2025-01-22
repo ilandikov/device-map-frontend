@@ -11,15 +11,13 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
-export type T22DeviceTemp = T22Device & { approvals?: number; lastUpdate?: number };
-
 export interface MapAppState {
     usageStep: MapAppUsageStep;
     selectedMarker: {
         location: T22Location | null;
         address: MapAppAddress | null;
     };
-    devices: T22DeviceTemp[];
+    devices: T22Device[];
     currentUserID: string;
 }
 
