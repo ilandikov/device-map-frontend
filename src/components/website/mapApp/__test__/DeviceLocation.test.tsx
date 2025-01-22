@@ -32,16 +32,16 @@ describe('device list snapshot tests', () => {
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             currentUserID: 'I created the second one!',
             devices: [
-                { id: '85378', createdDate: '0000000000001', creatorID: 'someone', location: { lat: 6.3, lon: 9.2 } },
+                { id: '85378', createdDate: '0000000000001', creatorID: 'someone', location: { lat: 0, lon: 0 } },
                 {
                     id: 'with delete button',
                     createdDate: '0000000000001',
                     creatorID: 'I created the second one!',
-                    location: { lat: 6.3, lon: 9.2 },
+                    location: { lat: 26.3553423, lon: 19.23131 },
                 },
             ],
             selectedMarker: {
-                location: { lat: 6.3, lon: 9.2 },
+                location: { lat: 26.3553423, lon: 19.23131 },
                 address: {
                     addressLine1: 'Street and number',
                     addressLine2: 'District and city',
