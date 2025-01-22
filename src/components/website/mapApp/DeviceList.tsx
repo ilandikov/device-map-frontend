@@ -17,7 +17,6 @@ export function DeviceList() {
         .map((device, index) => (
             <DeviceListItem
                 device={device}
-                approvals={0}
                 createdByCurrentUser={device.creatorID === mapAppState.currentUserID}
                 key={index}
             />

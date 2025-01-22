@@ -184,9 +184,10 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
 
 interface MapAppApproveDevice {
     type: MapAppActionType.MAP_APP_APPROVE_DEVICE;
-    device: T22Device;
+    id: string;
+    lastUpdate: number;
 }
 
-export function mapAppApproveDevice(device: T22Device): MapAppApproveDevice {
-    return { type: MapAppActionType.MAP_APP_APPROVE_DEVICE, device };
+export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppApproveDevice {
+    return { type: MapAppActionType.MAP_APP_APPROVE_DEVICE, id, lastUpdate };
 }

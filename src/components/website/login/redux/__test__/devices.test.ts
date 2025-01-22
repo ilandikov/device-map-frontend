@@ -44,13 +44,7 @@ const resolvingClient: DevicesClient = {
                 },
             }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
-        approveDevice: (id) =>
-            Promise.resolve({
-                id,
-                createdDate: '1781204597512',
-                creatorID: 'someone else',
-                location: { lat: 0, lon: 1 },
-            }),
+        approveDevice: (approveDeviceInput) => Promise.resolve({ id: approveDeviceInput.id, lastUpdate: Date.now() }),
     },
 };
 
@@ -64,6 +58,17 @@ const rejectingClient: DevicesClient = {
         approveDevice: () => Promise.reject('approve device went wrong'),
     },
 };
+
+const deviceCreationTimeStampFromBackend = 1896916059204;
+
+beforeEach(() => {
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date(deviceCreationTimeStampFromBackend));
+});
+
+afterEach(() => {
+    jest.useRealTimers();
+});
 
 describe('devices epic test', () => {
     it('should return no action to a non-remote request action', async () => {
@@ -151,12 +156,7 @@ describe('devices - approve device', () => {
     it('should send action to approve device', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppApproveDeviceRequest('approve me!');
-        const expectedAction = mapAppApproveDevice({
-            id: 'approve me!',
-            createdDate: '1781204597512',
-            creatorID: 'someone else',
-            location: { lat: 0, lon: 1 },
-        });
+        const expectedAction = mapAppApproveDevice('approve me!', deviceCreationTimeStampFromBackend);
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
