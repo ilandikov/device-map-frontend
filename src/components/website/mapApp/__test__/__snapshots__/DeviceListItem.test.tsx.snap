@@ -28,10 +28,10 @@ exports[`DeviceListItem snapshot tests - anonymous user should match snapshot - 
     </button>
     <button
       className="device-list-item-opaque-text"
-      data-testid="deleteDeviceButton"
+      data-testid="approveDeviceButton"
       onClick={[Function]}
     >
-      deleteDevice
+      approveDevice
     </button>
   </div>
 </div>

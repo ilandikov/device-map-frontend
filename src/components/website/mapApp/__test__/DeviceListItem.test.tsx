@@ -49,7 +49,7 @@ describe('DeviceListItem snapshot tests - logged in user', () => {
 describe('DeviceListItem snapshot tests - anonymous user', () => {
     it('should match snapshot - created device without approval button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.HOME_SCREEN });
-        const component = renderForSnapshotTest(<DeviceListItem device={testDevice} createdByCurrentUser={true} />);
+        const component = renderForSnapshotTest(<DeviceListItem device={testDevice} createdByCurrentUser={false} />);
         expect(component).toMatchSnapshot();
     });
 });
