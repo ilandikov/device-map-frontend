@@ -5,12 +5,12 @@ import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
 import { T22DeviceTemp } from './redux/MapAppState';
 
-export function DeviceListItem(props: { device: T22DeviceTemp; approvals: number; createdByCurrentUser: boolean }) {
+export function DeviceListItem(props: { device: T22DeviceTemp; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
 
     const canBeDeleted = props.createdByCurrentUser;
 
-    const deviceApprovals = props.approvals;
+    const deviceApprovals = props.device.approvals ?? 0;
     const canReceiveApprovals =
         getDeviceApprovalStatus(deviceApprovals) === 'created' ||
         getDeviceApprovalStatus(deviceApprovals) === 'approving';
