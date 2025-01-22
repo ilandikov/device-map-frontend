@@ -3,7 +3,7 @@ import React from 'react';
 import { DeviceListItemContainer, getDeviceApprovalStatus } from './DeviceListItemContainer';
 import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
-import { T22DeviceTemp } from './redux/MapAppState';
+import { MapAppUsageStep, T22DeviceTemp, useMapAppState } from './redux/MapAppState';
 
 export function DeviceListItem(props: { device: T22DeviceTemp; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
@@ -14,7 +14,9 @@ export function DeviceListItem(props: { device: T22DeviceTemp; createdByCurrentU
     const canReceiveApprovals =
         getDeviceApprovalStatus(deviceApprovals) === 'created' ||
         getDeviceApprovalStatus(deviceApprovals) === 'approving';
-    const canBeApproved = !props.createdByCurrentUser && canReceiveApprovals;
+    const { usageStep } = useMapAppState();
+    const canBeApproved =
+        !props.createdByCurrentUser && canReceiveApprovals && usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
 
     return (
         <DeviceListItemContainer approvals={deviceApprovals}>

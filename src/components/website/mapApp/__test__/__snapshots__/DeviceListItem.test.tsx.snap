@@ -26,13 +26,6 @@ exports[`DeviceListItem snapshot tests - anonymous user should match snapshot - 
     >
       deviceReportBroken
     </button>
-    <button
-      className="device-list-item-opaque-text"
-      data-testid="approveDeviceButton"
-      onClick={[Function]}
-    >
-      approveDevice
-    </button>
   </div>
 </div>
 `;

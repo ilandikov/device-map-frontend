@@ -20,6 +20,7 @@ const testDevice: T22Device = {
 
 describe('DeviceListItem snapshot tests - logged in user', () => {
     it('should match snapshot - created device with approve button and without delete button', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
             <DeviceListItem device={{ ...testDevice, approvals: 0 }} createdByCurrentUser={false} />,
         );
@@ -27,6 +28,7 @@ describe('DeviceListItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - validating device with approve button and without delete button', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
             <DeviceListItem device={{ ...testDevice, approvals: 1 }} createdByCurrentUser={false} />,
         );
@@ -34,6 +36,7 @@ describe('DeviceListItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - validated device without approve button and without delete button', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
             <DeviceListItem device={{ ...testDevice, approvals: 2 }} createdByCurrentUser={false} />,
         );
@@ -41,6 +44,7 @@ describe('DeviceListItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - created device without approval button and with delete button', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(<DeviceListItem device={testDevice} createdByCurrentUser={true} />);
         expect(component).toMatchSnapshot();
     });
