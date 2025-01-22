@@ -32,9 +32,14 @@ describe('device list snapshot tests', () => {
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
             currentUserID: 'I created the second one!',
             devices: [
-                { id: '85378', createdDate: '0000000000001', creatorID: 'someone', location: { lat: 0, lon: 0 } },
                 {
-                    id: 'with delete button',
+                    id: 'Not matching selected marker',
+                    createdDate: '0000000000001',
+                    creatorID: 'someone',
+                    location: { lat: 0, lon: 0 },
+                },
+                {
+                    id: 'Matching selected marker',
                     createdDate: '0000000000001',
                     creatorID: 'I created the second one!',
                     location: { lat: 26.3553423, lon: 19.23131 },
