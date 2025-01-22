@@ -18,29 +18,29 @@ const testDevice: T22Device = {
     location: { lat: 3, lon: 7 },
 };
 
-describe('DeviceListItem snapshot tests', () => {
-    it('should match snapshot created device with approve button and without delete button', () => {
+describe('DeviceListItem snapshot tests - logged in user', () => {
+    it('should match snapshot - created device with approve button and without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={{ ...testDevice, approvals: 0 }} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
-    it('should match snapshot validating device with approve button and without delete button', () => {
+    it('should match snapshot - validating device with approve button and without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={{ ...testDevice, approvals: 1 }} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
-    it('should match snapshot validated device without approve button and without delete button', () => {
+    it('should match snapshot - validated device without approve button and without delete button', () => {
         const component = renderForSnapshotTest(
             <DeviceListItem device={{ ...testDevice, approvals: 2 }} createdByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
-    it('should match snapshot created device without approval button and with delete button', () => {
+    it('should match snapshot - created device without approval button and with delete button', () => {
         const component = renderForSnapshotTest(<DeviceListItem device={testDevice} createdByCurrentUser={true} />);
         expect(component).toMatchSnapshot();
     });

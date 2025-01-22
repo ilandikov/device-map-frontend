@@ -37,7 +37,7 @@ exports[`DeviceListItem snapshot tests - anonymous user should match snapshot - 
 </div>
 `;
 
-exports[`DeviceListItem snapshot tests should match snapshot created device with approve button and without delete button 1`] = `
+exports[`DeviceListItem snapshot tests - logged in user should match snapshot - created device with approve button and without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -74,7 +74,7 @@ exports[`DeviceListItem snapshot tests should match snapshot created device with
 </div>
 `;
 
-exports[`DeviceListItem snapshot tests should match snapshot created device without approval button and with delete button 1`] = `
+exports[`DeviceListItem snapshot tests - logged in user should match snapshot - created device without approval button and with delete button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -111,7 +111,7 @@ exports[`DeviceListItem snapshot tests should match snapshot created device with
 </div>
 `;
 
-exports[`DeviceListItem snapshot tests should match snapshot validated device without approve button and without delete button 1`] = `
+exports[`DeviceListItem snapshot tests - logged in user should match snapshot - validated device without approve button and without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -141,7 +141,7 @@ exports[`DeviceListItem snapshot tests should match snapshot validated device wi
 </div>
 `;
 
-exports[`DeviceListItem snapshot tests should match snapshot validating device with approve button and without delete button 1`] = `
+exports[`DeviceListItem snapshot tests - logged in user should match snapshot - validating device with approve button and without delete button 1`] = `
 <div
   className="device-list-item-container"
 >
