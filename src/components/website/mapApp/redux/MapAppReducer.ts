@@ -1,5 +1,6 @@
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
-import { MapAppState, MapAppUsageStep, T22DeviceTemp, mapAppInitialState } from './MapAppState';
+import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
@@ -43,7 +44,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
         case MapAppActionType.MAP_APP_APPROVE_DEVICE: {
             const deviceToApprove = state.devices.find((device) => device.id === action.id);
-            const approvedDevice: T22DeviceTemp = {
+            const approvedDevice: T22Device = {
                 ...deviceToApprove,
                 lastUpdate: action.lastUpdate,
                 approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,

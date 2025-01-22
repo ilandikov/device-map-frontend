@@ -1,11 +1,12 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
+import { T22Device } from '@mancho-school-t22/graphql-types';
 import { DeviceListItemContainer, getDeviceApprovalStatus } from './DeviceListItemContainer';
 import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
-import { MapAppUsageStep, T22DeviceTemp, useMapAppState } from './redux/MapAppState';
+import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 
-export function DeviceListItem(props: { device: T22DeviceTemp; createdByCurrentUser: boolean }) {
+export function DeviceListItem(props: { device: T22Device; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
 
     const canBeDeleted = props.createdByCurrentUser;
