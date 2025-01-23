@@ -1,4 +1,4 @@
-import { MapAppReducer } from '../redux/MapAppReducer';
+import { MapAppReducer } from '../MapAppReducer';
 import {
     MapAppAction,
     MapAppButton,
@@ -14,8 +14,8 @@ import {
     mapAppSetDevices,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-} from '../redux/MapAppAction';
-import { MapAppState, MapAppUsageStep, buildMapAppState } from '../redux/MapAppState';
+} from '../MapAppAction';
+import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);
