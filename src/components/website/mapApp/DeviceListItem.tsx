@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { DeviceListItemContainer } from './DeviceListItemContainer';
+import { DeviceItemContainer } from './DeviceItemContainer';
 import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
@@ -19,11 +19,11 @@ export function DeviceListItem(props: { device: T22Device; createdByCurrentUser:
     const canBeApproved = canReceiveApprovals && userLoggedIn && !props.createdByCurrentUser;
 
     return (
-        <DeviceListItemContainer deviceItemType={deviceItemType}>
+        <DeviceItemContainer deviceItemType={deviceItemType}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {canBeDeleted && <DeleteButton id={props.device.id} />}
             {canBeApproved && <ApproveButton id={props.device.id} />}
-        </DeviceListItemContainer>
+        </DeviceItemContainer>
     );
 }
