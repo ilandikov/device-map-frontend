@@ -7,7 +7,7 @@ import { ApproveButton } from './ApproveButton';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import { getDeviceItemType } from './DeviceItemType';
 
-export function DeviceListItem(props: { device: T22Device; createdByCurrentUser: boolean }) {
+export function DeviceItem(props: { device: T22Device; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
 
     const canBeDeleted = props.createdByCurrentUser;
