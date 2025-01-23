@@ -18,7 +18,7 @@ const testDevice: T22Device = {
     location: { lat: 3, lon: 7 },
 };
 
-describe('DeviceListItem snapshot tests - logged in user', () => {
+describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - created device with approve button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
@@ -50,7 +50,7 @@ describe('DeviceListItem snapshot tests - logged in user', () => {
     });
 });
 
-describe('DeviceListItem snapshot tests - anonymous user', () => {
+describe('DeviceItem snapshot tests - anonymous user', () => {
     it('should match snapshot - created device without approval button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.HOME_SCREEN });
         const component = renderForSnapshotTest(<DeviceItem device={testDevice} createdByCurrentUser={false} />);
