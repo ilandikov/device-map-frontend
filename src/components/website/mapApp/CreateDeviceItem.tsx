@@ -9,7 +9,7 @@ export function CreateDeviceItem() {
     const dispatch = useAppDispatch();
 
     return (
-        <DeviceListItemContainer deviceApprovalStatus={'create'}>
+        <DeviceListItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
             <button
                 data-testid="createDeviceButton"

@@ -13,13 +13,13 @@ export function DeviceListItem(props: { device: T22Device; createdByCurrentUser:
     const canBeDeleted = props.createdByCurrentUser;
 
     const deviceApprovals = props.device.approvals ?? 0;
-    const deviceStatus = getDeviceItemType(deviceApprovals);
-    const canReceiveApprovals = deviceStatus === 'created' || deviceStatus === 'approving';
+    const deviceItemType = getDeviceItemType(deviceApprovals);
+    const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
     const userLoggedIn = useMapAppState().usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
     const canBeApproved = canReceiveApprovals && userLoggedIn && !props.createdByCurrentUser;
 
     return (
-        <DeviceListItemContainer deviceApprovalStatus={deviceStatus}>
+        <DeviceListItemContainer deviceItemType={deviceItemType}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {canBeDeleted && <DeleteButton id={props.device.id} />}
