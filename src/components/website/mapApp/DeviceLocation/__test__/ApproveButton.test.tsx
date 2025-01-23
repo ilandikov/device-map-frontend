@@ -1,8 +1,8 @@
 import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
-import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppApproveDeviceRequest } from '../redux/MapAppAction';
+import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
+import { mapAppApproveDeviceRequest } from '../../redux/MapAppAction';
 import { ApproveButton } from '../ApproveButton';
 
 jest.mock('react-redux', () => ({

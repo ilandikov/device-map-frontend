@@ -1,6 +1,6 @@
 import React from 'react';
-import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
-import { DeviceListItem } from './DeviceListItem';
+import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
+import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 
@@ -15,7 +15,7 @@ export function DeviceList() {
                 device.location.lon === selectedMarker.location.lon,
         )
         .map((device, index) => (
-            <DeviceListItem
+            <DeviceItem
                 device={device}
                 createdByCurrentUser={device.creatorID === mapAppState.currentUserID}
                 key={index}

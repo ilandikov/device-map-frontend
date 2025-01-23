@@ -4,8 +4,8 @@ import markerRetinaImage from 'leaflet/dist/images/marker-icon-2x.png';
 import markerImage from 'leaflet/dist/images/marker-icon.png';
 import shadowImage from 'leaflet/dist/images/marker-shadow.png';
 import { Marker } from 'react-leaflet';
-import { useMapAppState } from './redux/MapAppState';
-import { useMarkerClickHandler } from './UseMarkerClickHandler';
+import { useMapAppState } from '../redux/MapAppState';
+import { useMarkerClickHandler } from '../UseMarkerClickHandler';
 
 export function DeviceLocationMarkers() {
     const deviceMarkerIcon = new Icon({

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import './DeviceMap.scss';
 import { useAppDispatch } from '../../../redux/store';
 import { UserLocationMarker } from './UserLocationMarker';
-import { DeviceLocationMarkers } from './DeviceLocationMarkers';
+import { DeviceLocationMarkers } from './DeviceLocation/DeviceLocationMarkers';
 import { MapAppRemoteRequestType, mapAppRemoteRequest } from './redux/MapAppAction';
 
 export function DeviceMap() {
