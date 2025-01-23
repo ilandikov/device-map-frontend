@@ -1,9 +1,9 @@
 import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
-import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { renderForActionDispatchTest } from '../../../../../tests/utils/RenderingHelpers';
-import { CreateDeviceItem } from '../DeviceLocation/CreateDeviceItem';
-import { MapAppRemoteRequestType, mapAppRemoteRequest } from '../redux/MapAppAction';
+import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
+import { CreateDeviceItem } from '../CreateDeviceItem';
+import { MapAppRemoteRequestType, mapAppRemoteRequest } from '../../redux/MapAppAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

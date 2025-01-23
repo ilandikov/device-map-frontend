@@ -1,8 +1,8 @@
 import React from 'react';
-import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { MapAppUsageStep } from '../redux/MapAppState';
-import { DeviceLocation } from '../DeviceLocation/DeviceLocation';
+import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { renderForSnapshotTest } from '../../../../../../tests/utils/RenderingHelpers';
+import { MapAppUsageStep } from '../../redux/MapAppState';
+import { DeviceLocation } from '../DeviceLocation';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
