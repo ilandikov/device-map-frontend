@@ -7,23 +7,23 @@ import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
 import { getDeviceItemType } from './DeviceItemType';
 
-export function DeviceItem(props: { device: T22Device; createdByCurrentUser: boolean }) {
+export function DeviceItem(props: { device: T22Device; isDeviceCreatedByCurrentUser: boolean }) {
     const { t } = useI18next();
 
-    const canBeDeleted = props.createdByCurrentUser;
+    const { device, isDeviceCreatedByCurrentUser } = props;
 
-    const deviceApprovals = props.device.approvals ?? 0;
-    const deviceItemType = getDeviceItemType(deviceApprovals);
+    const canBeDeleted = isDeviceCreatedByCurrentUser;
+    const deviceItemType = getDeviceItemType(device.approvals ?? 0);
     const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
-    const userLoggedIn = useMapAppState().usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
-    const canBeApproved = canReceiveApprovals && userLoggedIn && !props.createdByCurrentUser;
+    const isUserLoggedIn = useMapAppState().usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
+    const canBeApproved = canReceiveApprovals && isUserLoggedIn && !isDeviceCreatedByCurrentUser;
 
     return (
         <DeviceItemContainer deviceItemType={deviceItemType}>
-            <p>{props.device.id}</p>
+            <p>{device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
-            {canBeDeleted && <DeleteButton id={props.device.id} />}
-            {canBeApproved && <ApproveButton id={props.device.id} />}
+            {canBeDeleted && <DeleteButton id={device.id} />}
+            {canBeApproved && <ApproveButton id={device.id} />}
         </DeviceItemContainer>
     );
 }

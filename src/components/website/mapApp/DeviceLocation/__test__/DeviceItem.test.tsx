@@ -22,7 +22,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - created device with approve button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
-            <DeviceItem device={{ ...testDevice, approvals: 0 }} createdByCurrentUser={false} />,
+            <DeviceItem device={{ ...testDevice, approvals: 0 }} isDeviceCreatedByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
@@ -30,7 +30,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - validating device with approve button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
-            <DeviceItem device={{ ...testDevice, approvals: 1 }} createdByCurrentUser={false} />,
+            <DeviceItem device={{ ...testDevice, approvals: 1 }} isDeviceCreatedByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
@@ -38,14 +38,14 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - validated device without approve button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const component = renderForSnapshotTest(
-            <DeviceItem device={{ ...testDevice, approvals: 2 }} createdByCurrentUser={false} />,
+            <DeviceItem device={{ ...testDevice, approvals: 2 }} isDeviceCreatedByCurrentUser={false} />,
         );
         expect(component).toMatchSnapshot();
     });
 
     it('should match snapshot - created device without approval button and with delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
-        const component = renderForSnapshotTest(<DeviceItem device={testDevice} createdByCurrentUser={true} />);
+        const component = renderForSnapshotTest(<DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={true} />);
         expect(component).toMatchSnapshot();
     });
 });
@@ -53,7 +53,9 @@ describe('DeviceItem snapshot tests - logged in user', () => {
 describe('DeviceItem snapshot tests - anonymous user', () => {
     it('should match snapshot - created device without approval button and without delete button', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.HOME_SCREEN });
-        const component = renderForSnapshotTest(<DeviceItem device={testDevice} createdByCurrentUser={false} />);
+        const component = renderForSnapshotTest(
+            <DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={false} />,
+        );
         expect(component).toMatchSnapshot();
     });
 });
