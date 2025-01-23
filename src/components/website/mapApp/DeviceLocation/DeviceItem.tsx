@@ -10,8 +10,7 @@ import { getDeviceItemType } from './DeviceItemType';
 export function DeviceItem(props: { device: T22Device; createdByCurrentUser: boolean }) {
     const { t } = useI18next();
 
-    const device = props.device;
-    const createdByCurrentUser = props.createdByCurrentUser;
+    const { device, createdByCurrentUser } = props;
 
     const canBeDeleted = createdByCurrentUser;
     const deviceItemType = getDeviceItemType(device.approvals ?? 0);
