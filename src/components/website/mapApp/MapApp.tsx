@@ -8,7 +8,7 @@ import { ProductDescription } from './ProductDescription';
 import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
-import { DeviceLocation } from './DeviceLocation';
+import { DeviceLocation } from './DeviceLocation/DeviceLocation';
 
 export default function MapApp() {
     const mapAppState = useMapAppState();

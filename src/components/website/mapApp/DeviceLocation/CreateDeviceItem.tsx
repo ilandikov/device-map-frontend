@@ -1,8 +1,8 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { useAppDispatch } from '../../../redux/store';
+import { useAppDispatch } from '../../../../redux/store';
+import { MapAppRemoteRequestType, mapAppRemoteRequest } from '../redux/MapAppAction';
 import { DeviceItemContainer } from './DeviceItemContainer';
-import { MapAppRemoteRequestType, mapAppRemoteRequest } from './redux/MapAppAction';
 
 export function CreateDeviceItem() {
     const { t } = useI18next();

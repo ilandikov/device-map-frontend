@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
+import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
 import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';

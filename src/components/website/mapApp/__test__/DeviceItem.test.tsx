@@ -2,7 +2,7 @@ import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
-import { DeviceItem } from '../DeviceItem';
+import { DeviceItem } from '../DeviceLocation/DeviceItem';
 import { MapAppUsageStep } from '../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
