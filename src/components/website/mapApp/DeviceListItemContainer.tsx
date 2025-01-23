@@ -2,19 +2,16 @@ import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
 export function DeviceListItemContainer(props: {
-    approvals: number;
     deviceApprovalStatus: DeviceApprovalStatus;
     children: React.ReactNode;
 }) {
-    const deviceApprovalStatus = getDeviceApprovalStatus(props.approvals);
-
     return (
         <div className="device-list-item-container">
             <div
-                className={`device-list-item-shadow device-list-item-shadow-left device-list-item-${deviceApprovalStatus}-shadow-left`}
+                className={`device-list-item-shadow device-list-item-shadow-left device-list-item-${props.deviceApprovalStatus}-shadow-left`}
             ></div>
             <div
-                className={`device-list-item-shadow device-list-item-shadow-right device-list-item-${deviceApprovalStatus}-shadow-right`}
+                className={`device-list-item-shadow device-list-item-shadow-right device-list-item-${props.deviceApprovalStatus}-shadow-right`}
             ></div>
             <img src={terminals} className="device-list-item-image" alt="device-list-item-image" />
             <div className="device-list-item">{props.children}</div>

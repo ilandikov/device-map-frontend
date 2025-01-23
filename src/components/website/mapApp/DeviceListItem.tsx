@@ -18,7 +18,7 @@ export function DeviceListItem(props: { device: T22Device; createdByCurrentUser:
     const canBeApproved = canReceiveApprovals && userLoggedIn && !props.createdByCurrentUser;
 
     return (
-        <DeviceListItemContainer approvals={deviceApprovals} deviceApprovalStatus={deviceStatus}>
+        <DeviceListItemContainer deviceApprovalStatus={deviceStatus}>
             <p>{props.device.id}</p>
             <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
             {canBeDeleted && <DeleteButton id={props.device.id} />}
