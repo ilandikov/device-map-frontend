@@ -1,10 +1,7 @@
 import React from 'react';
 import terminals from '../../../assets/images/Terminals.png';
 
-export function DeviceListItemContainer(props: {
-    deviceApprovalStatus: DeviceApprovalStatus;
-    children: React.ReactNode;
-}) {
+export function DeviceListItemContainer(props: { deviceApprovalStatus: DeviceItemType; children: React.ReactNode }) {
     return (
         <div className="device-list-item-container">
             <div
@@ -19,9 +16,9 @@ export function DeviceListItemContainer(props: {
     );
 }
 
-type DeviceApprovalStatus = 'create' | 'created' | 'approving' | 'approved';
+type DeviceItemType = 'create' | 'created' | 'approving' | 'approved';
 
-export function getDeviceApprovalStatus(approvals: number): DeviceApprovalStatus {
+export function getDeviceItemType(approvals: number): DeviceItemType {
     switch (true) {
         case approvals < 0:
             return 'create';
