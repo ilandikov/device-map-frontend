@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMapAppState } from '../redux/MapAppState';
+import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
 import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
@@ -23,11 +23,12 @@ export function DeviceList() {
         ));
 
     const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;
+    const isUserLoggedIn = mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
 
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} isUserLoggedIn={isUserLoggedIn} />
         </div>
     );
 }
