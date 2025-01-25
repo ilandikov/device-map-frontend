@@ -1,9 +1,10 @@
 import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
-import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { CreateDeviceItem } from '../CreateDeviceItem';
 import { MapAppRemoteRequestType, mapAppRemoteRequest } from '../../redux/MapAppAction';
+import { MapAppUsageStep } from '../../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -24,6 +25,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch click action on create device button click', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
         const container = renderForActionDispatchTest(<CreateDeviceItem />);
 
         const loginButton = getByTestId(container, 'createDeviceButton');
