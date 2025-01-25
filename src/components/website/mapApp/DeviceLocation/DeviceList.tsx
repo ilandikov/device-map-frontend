@@ -23,13 +23,12 @@ export function DeviceList() {
         ));
 
     const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;
+    const isUserLoggedIn = mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
 
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            {mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT && (
-                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
-            )}
+            {isUserLoggedIn && <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />}
         </div>
     );
 }
