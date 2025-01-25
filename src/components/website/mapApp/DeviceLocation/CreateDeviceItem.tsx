@@ -1,37 +1,9 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { useAppDispatch } from '../../../../redux/store';
-import { MapAppButton, MapAppRemoteRequestType, mapAppButtonClick, mapAppRemoteRequest } from '../redux/MapAppAction';
 import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
 import { DeviceItemContainer } from './DeviceItemContainer';
-
-function AddDeviceButton() {
-    const { t } = useI18next();
-    const dispatch = useAppDispatch();
-
-    return (
-        <button
-            data-testid="createDeviceButton"
-            onClick={() => dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
-        >
-            {t('deviceAddDevice')}
-        </button>
-    );
-}
-
-function CreateAccountOrLoginButton() {
-    const { t } = useI18next();
-    const dispatch = useAppDispatch();
-
-    return (
-        <button
-            data-testid="deviceCreateAccountOrLogin"
-            onClick={() => dispatch(mapAppButtonClick(MapAppButton.LOGIN))}
-        >
-            {t('deviceCreateAccountOrLogin')}
-        </button>
-    );
-}
+import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
+import { AddDeviceButton } from './AddDeviceButton';
 
 export function CreateDeviceItem() {
     const { t } = useI18next();
