@@ -72,7 +72,10 @@ exports[`device list snapshot tests should show address loader and a list device
         >
           deviceNoDeviceHere
         </p>
-        <button>
+        <button
+          data-testid="deviceCreateAccountOrLogin"
+          onClick={[Function]}
+        >
           deviceCreateAccountOrLogin
         </button>
       </div>
