@@ -19,9 +19,22 @@ function AddDeviceButton() {
     );
 }
 
-export function CreateDeviceItem() {
+function CreateAccountOrLoginButton() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
+
+    return (
+        <button
+            data-testid="deviceCreateAccountOrLogin"
+            onClick={() => dispatch(mapAppButtonClick(MapAppButton.LOGIN))}
+        >
+            {t('deviceCreateAccountOrLogin')}
+        </button>
+    );
+}
+
+export function CreateDeviceItem() {
+    const { t } = useI18next();
 
     const mapAppState = useMapAppState();
     const isUserLoggedIn = mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
@@ -29,16 +42,7 @@ export function CreateDeviceItem() {
     return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            {isUserLoggedIn ? (
-                <AddDeviceButton />
-            ) : (
-                <button
-                    data-testid="deviceCreateAccountOrLogin"
-                    onClick={() => dispatch(mapAppButtonClick(MapAppButton.LOGIN))}
-                >
-                    {t('deviceCreateAccountOrLogin')}
-                </button>
-            )}
+            {isUserLoggedIn ? <AddDeviceButton /> : <CreateAccountOrLoginButton />}
         </DeviceItemContainer>
     );
 }
