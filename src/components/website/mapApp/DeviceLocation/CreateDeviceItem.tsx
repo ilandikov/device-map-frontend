@@ -5,6 +5,20 @@ import { MapAppButton, MapAppRemoteRequestType, mapAppButtonClick, mapAppRemoteR
 import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
 import { DeviceItemContainer } from './DeviceItemContainer';
 
+function AddDeviceButton() {
+    const { t } = useI18next();
+    const dispatch = useAppDispatch();
+
+    return (
+        <button
+            data-testid="createDeviceButton"
+            onClick={() => dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
+        >
+            {t('deviceAddDevice')}
+        </button>
+    );
+}
+
 export function CreateDeviceItem() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
@@ -16,12 +30,7 @@ export function CreateDeviceItem() {
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
             {isUserLoggedIn ? (
-                <button
-                    data-testid="createDeviceButton"
-                    onClick={() => dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
-                >
-                    {t('deviceAddDevice')}
-                </button>
+                <AddDeviceButton />
             ) : (
                 <button
                     data-testid="deviceCreateAccountOrLogin"
