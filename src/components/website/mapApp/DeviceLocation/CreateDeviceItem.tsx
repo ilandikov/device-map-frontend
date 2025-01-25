@@ -12,19 +12,19 @@ export function CreateDeviceItem() {
     const mapAppState = useMapAppState();
     const isUserLoggedIn = mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
 
-    if (isUserLoggedIn === false) {
-        return <></>;
-    }
-
     return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            <button
-                data-testid="createDeviceButton"
-                onClick={() => dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
-            >
-                {t('deviceAddDevice')}
-            </button>
+            {isUserLoggedIn ? (
+                <button
+                    data-testid="createDeviceButton"
+                    onClick={() => dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
+                >
+                    {t('deviceAddDevice')}
+                </button>
+            ) : (
+                <button>{t('deviceCreateAccountOrLogin')}</button>
+            )}
         </DeviceItemContainer>
     );
 }
