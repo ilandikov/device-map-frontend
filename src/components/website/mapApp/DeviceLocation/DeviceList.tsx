@@ -22,10 +22,14 @@ export function DeviceList() {
             />
         ));
 
-    if (mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT) {
-        const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;
-        devicesAtSelectedMarkerLocation.push(<CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />);
-    }
+    const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;
 
-    return <div className="device-list-container">{devicesAtSelectedMarkerLocation}</div>;
+    return (
+        <div className="device-list-container">
+            {devicesAtSelectedMarkerLocation}
+            {mapAppState.usageStep === MapAppUsageStep.DEVICE_MANAGEMENT && (
+                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            )}
+        </div>
+    );
 }
