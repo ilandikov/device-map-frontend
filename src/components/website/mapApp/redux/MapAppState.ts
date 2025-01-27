@@ -36,7 +36,7 @@ export const mapAppInitialState: MapAppState = {
         address: null,
     },
     currentUserID: '',
-    currentUserPoints: null,
+    currentUserPoints: 320,
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
