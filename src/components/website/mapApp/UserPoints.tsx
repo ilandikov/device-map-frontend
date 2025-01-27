@@ -12,7 +12,7 @@ export function UserPoints(props: { className: string }) {
     return (
         <div className={`${props.className} user-points-header-block`}>
             <img src={Points} alt="user-points-image" />
-            {userPoints !== null ? (
+            {userPoints ? (
                 <>
                     <span className="user-points">{userPoints}</span>
                     <span className="user-points">{userPoints > 1 ? t('points') : t('point')}</span>
