@@ -7,7 +7,7 @@ import { useMapAppState } from './redux/MapAppState';
 export function UserPoints(props: { className: string }) {
     const { t } = useI18next();
 
-    const currentUserPoints = useMapAppState().currentUserPoints;
+    const { currentUserPoints } = useMapAppState();
 
     return (
         <div className={`${props.className} user-points-header-block`}>
