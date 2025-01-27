@@ -1,4 +1,4 @@
-.login-modal-loader {
+.finik-loader {
   max-height: 24px;
   max-width: 24px;
   height: 100%;
@@ -15,7 +15,7 @@
   animation: load 2s linear infinite;
 }
 
-.login-modal-loader::before {
+.finik-loader::before {
   width: 75%;
   height: 75%;
   position: absolute;
