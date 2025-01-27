@@ -114,4 +114,13 @@
     .user-points:first-of-type {
         color: #FFFFFF;
     }
+
+    .user-points-loader-container {
+        height: 100%;
+        width: 100%;
+        min-width: 24px;
+
+        display: flex;
+        align-items: center;
+    }
 }
