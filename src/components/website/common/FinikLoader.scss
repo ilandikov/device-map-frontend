@@ -1,0 +1,31 @@
+.finik-loader {
+  max-height: 24px;
+  max-width: 24px;
+  height: 100%;
+  width: 100%;
+
+  background: conic-gradient(transparent, #ACF709);
+  border-radius: 50%;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: load 2s linear infinite;
+}
+
+.finik-loader::before {
+  width: 75%;
+  height: 75%;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #222222;
+  content: '';
+}
+
+@keyframes load {
+  100% {
+    transform: rotate(360deg);
+  }
+}

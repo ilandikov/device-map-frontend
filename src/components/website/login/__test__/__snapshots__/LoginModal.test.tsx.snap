@@ -30,7 +30,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP checking for
       className="login-modal-loader-container"
     >
       <div
-        className="login-modal-loader"
+        className="finik-loader"
       />
       <p
         className="login-modal-loader-text"
@@ -72,7 +72,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP checking for
       className="login-modal-loader-container"
     >
       <div
-        className="login-modal-loader"
+        className="finik-loader"
       />
       <p
         className="login-modal-loader-text"
@@ -338,7 +338,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP resending fo
       className="login-modal-loader-container"
     >
       <div
-        className="login-modal-loader"
+        className="finik-loader"
       />
       <p
         className="login-modal-loader-text"
@@ -380,7 +380,7 @@ exports[`LoginModal snapshot tests should match the snapshot at login loading st
       className="login-modal-loader-container"
     >
       <div
-        className="login-modal-loader"
+        className="finik-loader"
       />
       <p
         className="login-modal-loader-text"
@@ -611,7 +611,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
       className="login-modal-loader-container"
     >
       <div
-        className="login-modal-loader"
+        className="finik-loader"
       />
       <p
         className="login-modal-loader-text"
@@ -749,7 +749,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset r
       className="login-modal-loader-container"
     >
       <div
-        className="login-modal-loader"
+        className="finik-loader"
       />
       <p
         className="login-modal-loader-text"
