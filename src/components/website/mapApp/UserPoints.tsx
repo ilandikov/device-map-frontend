@@ -4,7 +4,7 @@ import Points from '/src/assets/images/Points.svg';
 
 export function UserPoints(props: { className: string }) {
     const { t } = useI18next();
-    const userPoints = 320;
+    const userPoints: number | null = 320;
 
     return (
         <div className={`${props.className} user-points-header-block`}>
