@@ -59,6 +59,6 @@ function deviceReducer(devices: T22Device[], action: MapAppDeviceRemoteAction): 
             return [...withoutApprovedDevice, approvedDevice];
         }
         default:
-            return [];
+            return devices;
     }
 }
