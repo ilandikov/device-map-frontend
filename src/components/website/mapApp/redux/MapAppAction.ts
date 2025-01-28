@@ -11,8 +11,8 @@ export enum MapAppActionType {
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     // TODO do something about all these actions. Probably split this state into several states, map app state to manage only windows
     MAP_APP_REMOTE_REQUEST = 'MAP_APP_REMOTE_REQUEST',
-    REMOTE_ANSWER = 'REMOTE_ANSWER',
-    REMOTE_ERROR_ANSWER = 'REMOTE_ERROR_ANSWER',
+    MAP_APP_REMOTE_ANSWER = 'MAP_APP_REMOTE_ANSWER',
+    MAP_APP_REMOTE_ERROR_ANSWER = 'MAP_APP_REMOTE_ERROR_ANSWER',
     DELETE_DEVICE = 'DELETE_DEVICE',
     MAP_APP_APPROVE_DEVICE = 'MAP_APP_APPROVE_DEVICE',
 }
@@ -95,40 +95,40 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 }
 
 export interface MapAppSetDevices {
-    type: MapAppActionType.REMOTE_ANSWER;
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICES_LISTED;
     devices: T22Device[];
 }
 
 export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
     return {
-        type: MapAppActionType.REMOTE_ANSWER,
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICES_LISTED,
         devices: devices,
     };
 }
 
 interface MapAppAddDevice {
-    type: MapAppActionType.REMOTE_ANSWER;
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICE_CREATED;
     device: T22Device;
 }
 
 export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
     return {
-        type: MapAppActionType.REMOTE_ANSWER,
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICE_CREATED,
         device,
     };
 }
 
 interface MapAppRemoteErrorAnswer {
-    type: MapAppActionType.REMOTE_ERROR_ANSWER;
+    type: MapAppActionType.MAP_APP_REMOTE_ERROR_ANSWER;
     error: string;
 }
 
 export function mapAppRemoteErrorAnswer(error: string): MapAppRemoteErrorAnswer {
-    return { type: MapAppActionType.REMOTE_ERROR_ANSWER, error };
+    return { type: MapAppActionType.MAP_APP_REMOTE_ERROR_ANSWER, error };
 }
 
 interface MapAppDeleteDevice {

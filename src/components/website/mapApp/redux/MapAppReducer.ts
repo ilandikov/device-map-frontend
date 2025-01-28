@@ -27,7 +27,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.REMOTE_ANSWER:
+        case MapAppActionType.MAP_APP_REMOTE_ANSWER:
             switch (action.answer) {
                 case MapAppRemoteAnswerType.DEVICES_LISTED:
                     return { ...state, devices: action.devices };
