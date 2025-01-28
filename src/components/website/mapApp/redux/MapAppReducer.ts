@@ -2,7 +2,7 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
-import { MapAppDeviceActionType, MapAppDeviceRemoteAnswer, MapAppRemoteRequestType } from './MapAppRemoteActions';
+import { MapAppDeviceActionType, MapAppDeviceRemoteAction, MapAppRemoteRequestType } from './MapAppRemoteActions';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
@@ -35,7 +35,11 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
     }
 }
 
-function deviceReducer(devices: T22Device[], action: MapAppDeviceRemoteAnswer): T22Device[] {
+function deviceReducer(devices: T22Device[], action: MapAppDeviceRemoteAction): T22Device[] {
+    if (action.type !== MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER) {
+        return devices;
+    }
+
     switch (action.request) {
         case MapAppRemoteRequestType.LIST_DEVICES:
             return action.devices;
