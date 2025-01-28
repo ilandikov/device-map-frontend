@@ -40,6 +40,7 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppRemoteRequest
+    | MapAppCreateDeviceRequest
     | MapAppSetDevices
     | MapAppAddDevice
     | MapAppDeleteDevice
@@ -134,7 +135,9 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
     };
 }
 
-export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppRemoteRequest {
+interface MapAppCreateDeviceRequest extends MapAppRemoteRequest {}
+
+export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppCreateDeviceRequest {
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 
