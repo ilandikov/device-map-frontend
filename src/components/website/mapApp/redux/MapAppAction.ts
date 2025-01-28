@@ -139,7 +139,10 @@ export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppLis
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 
-export interface MapAppCreateDeviceRequest extends MapAppListDevicesRemoteRequest {}
+export interface MapAppCreateDeviceRequest {
+    type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
+    request: MapAppRemoteRequestType.CREATE_DEVICE;
+}
 
 export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {
     return {
@@ -166,7 +169,9 @@ export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
     return { type: MapAppActionType.DELETE_DEVICE, id };
 }
 
-export interface MapAppDeleteDeviceRequest extends MapAppListDevicesRemoteRequest {
+export interface MapAppDeleteDeviceRequest {
+    type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
+    request: MapAppRemoteRequestType.DELETE_DEVICE;
     id: string;
 }
 
