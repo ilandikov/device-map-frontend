@@ -13,7 +13,6 @@ export enum MapAppActionType {
     MAP_APP_DEVICE_REMOTE_REQUEST = 'MAP_APP_DEVICE_REMOTE_REQUEST',
     MAP_APP_REMOTE_ANSWER = 'MAP_APP_REMOTE_ANSWER',
     MAP_APP_DEVICE_REQUEST_ERROR = 'MAP_APP_DEVICE_REQUEST_ERROR',
-    MAP_APP_APPROVE_DEVICE = 'MAP_APP_APPROVE_DEVICE',
 }
 
 export enum MapAppButton {
@@ -137,7 +136,7 @@ export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
 }
 
 interface MapAppApproveDevice {
-    type: MapAppActionType.MAP_APP_APPROVE_DEVICE;
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICE_APPROVED;
     id: string;
     lastUpdate: number;
@@ -145,7 +144,7 @@ interface MapAppApproveDevice {
 
 export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppApproveDevice {
     return {
-        type: MapAppActionType.MAP_APP_APPROVE_DEVICE,
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICE_APPROVED,
         id,
         lastUpdate,

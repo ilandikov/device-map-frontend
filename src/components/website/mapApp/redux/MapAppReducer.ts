@@ -39,19 +39,19 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                         ...state,
                         devices: state.devices.filter((device) => device.id !== action.id),
                     };
+                case MapAppRemoteAnswerType.DEVICE_APPROVED: {
+                    const deviceToApprove = state.devices.find((device) => device.id === action.id);
+                    const approvedDevice: T22Device = {
+                        ...deviceToApprove,
+                        lastUpdate: action.lastUpdate,
+                        approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
+                    };
+                    const withoutApprovedDevice = state.devices.filter((device) => device.id !== action.id);
+                    return { ...state, devices: [...withoutApprovedDevice, approvedDevice] };
+                }
                 default:
                     return state;
             }
-        case MapAppActionType.MAP_APP_APPROVE_DEVICE: {
-            const deviceToApprove = state.devices.find((device) => device.id === action.id);
-            const approvedDevice: T22Device = {
-                ...deviceToApprove,
-                lastUpdate: action.lastUpdate,
-                approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
-            };
-            const withoutApprovedDevice = state.devices.filter((device) => device.id !== action.id);
-            return { ...state, devices: [...withoutApprovedDevice, approvedDevice] };
-        }
         default:
             return state;
     }
