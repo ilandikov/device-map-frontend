@@ -10,11 +10,6 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import {
     MapAppAction,
     MapAppActionType,
-    MapAppApproveDeviceRequest,
-    MapAppCreateDeviceRequest,
-    MapAppDeleteDeviceRequest,
-    MapAppListDevicesRemoteRequest,
-    MapAppRemoteRequestType,
     mapAppAddDevice,
     mapAppApproveDevice,
     mapAppDeleteDevice,
@@ -23,6 +18,13 @@ import {
 } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
 import { MapAppState } from '../../mapApp/redux/MapAppState';
+import {
+    MapAppApproveDeviceRequest,
+    MapAppCreateDeviceRequest,
+    MapAppDeleteDeviceRequest,
+    MapAppListDevicesRemoteRequest,
+    MapAppRemoteRequestType,
+} from '../../mapApp/redux/AppleSauceActions';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(

@@ -1,7 +1,8 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../../redux/store';
-import { mapAppApproveDeviceRequest } from '../redux/MapAppAction';
+
+import { mapAppApproveDeviceRequest } from '../redux/AppleSauceActions';
 
 export function ApproveButton(props: { id: string }) {
     const { t } = useI18next();

@@ -1,7 +1,8 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../../redux/store';
-import { mapAppDeleteDeviceRequest } from '../redux/MapAppAction';
+
+import { mapAppDeleteDeviceRequest } from '../redux/AppleSauceActions';
 
 export function DeleteButton(props: { id: string }) {
     const { t } = useI18next();

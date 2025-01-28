@@ -1,16 +1,18 @@
 import {
-    MapAppRemoteRequestType,
     mapAppAddDevice,
     mapAppApproveDevice,
-    mapAppApproveDeviceRequest,
     mapAppDeleteDevice,
-    mapAppDeleteDeviceRequest,
     mapAppRemoteErrorAnswer,
-    mapAppRemoteRequest,
     mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
+import {
+    MapAppRemoteRequestType,
+    mapAppApproveDeviceRequest,
+    mapAppDeleteDeviceRequest,
+    mapAppRemoteRequest,
+} from '../../../mapApp/redux/AppleSauceActions';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
