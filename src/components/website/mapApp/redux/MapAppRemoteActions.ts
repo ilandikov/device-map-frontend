@@ -64,3 +64,12 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
         id,
     };
 }
+
+export interface MapAppRemoteErrorAnswer {
+    type: MapAppActionType.MAP_APP_REMOTE_ERROR_ANSWER;
+    error: string;
+}
+
+export function mapAppRemoteErrorAnswer(error: string): MapAppRemoteErrorAnswer {
+    return { type: MapAppActionType.MAP_APP_REMOTE_ERROR_ANSWER, error };
+}

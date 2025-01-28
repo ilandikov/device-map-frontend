@@ -13,7 +13,6 @@ import {
     mapAppAddDevice,
     mapAppApproveDevice,
     mapAppDeleteDevice,
-    mapAppRemoteErrorAnswer,
     mapAppSetDevices,
 } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
@@ -24,6 +23,7 @@ import {
     MapAppDeleteDeviceRequest,
     MapAppListDevicesRemoteRequest,
     MapAppRemoteRequestType,
+    mapAppRemoteErrorAnswer,
 } from '../../mapApp/redux/MapAppRemoteActions';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>

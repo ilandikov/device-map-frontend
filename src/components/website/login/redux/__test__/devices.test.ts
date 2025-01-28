@@ -2,7 +2,6 @@ import {
     mapAppAddDevice,
     mapAppApproveDevice,
     mapAppDeleteDevice,
-    mapAppRemoteErrorAnswer,
     mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
@@ -12,6 +11,7 @@ import {
     mapAppCreateDeviceRequest,
     mapAppDeleteDeviceRequest,
     mapAppListDevicesRequest,
+    mapAppRemoteErrorAnswer,
 } from '../../../mapApp/redux/MapAppRemoteActions';
 import { testDevicesEpic } from './devicesTestHelpers';
 

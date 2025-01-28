@@ -1,6 +1,6 @@
 import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppAddress } from './MapAppState';
-import { MapAppRemoteRequest } from './MapAppRemoteActions';
+import { MapAppRemoteErrorAnswer, MapAppRemoteRequest } from './MapAppRemoteActions';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
@@ -120,15 +120,6 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
         answer: MapAppRemoteAnswerType.DEVICE_CREATED,
         device,
     };
-}
-
-interface MapAppRemoteErrorAnswer {
-    type: MapAppActionType.MAP_APP_REMOTE_ERROR_ANSWER;
-    error: string;
-}
-
-export function mapAppRemoteErrorAnswer(error: string): MapAppRemoteErrorAnswer {
-    return { type: MapAppActionType.MAP_APP_REMOTE_ERROR_ANSWER, error };
 }
 
 interface MapAppDeleteDevice {
