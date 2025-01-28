@@ -4,7 +4,7 @@ import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks_
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { CreateDeviceItem } from '../CreateDeviceItem';
 import { MapAppButton, mapAppButtonClick } from '../../redux/MapAppAction';
-import { mapAppListDevicesRequest } from '../../redux/AppleSauceActions';
+import { mapAppListDevicesRequest } from '../../redux/MapAppRemoteActions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

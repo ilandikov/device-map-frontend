@@ -24,7 +24,7 @@ import {
     MapAppDeleteDeviceRequest,
     MapAppListDevicesRemoteRequest,
     MapAppRemoteRequestType,
-} from '../../mapApp/redux/AppleSauceActions';
+} from '../../mapApp/redux/MapAppRemoteActions';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(

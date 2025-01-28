@@ -12,7 +12,7 @@ import {
     mapAppCreateDeviceRequest,
     mapAppDeleteDeviceRequest,
     mapAppListDevicesRequest,
-} from '../../../mapApp/redux/AppleSauceActions';
+} from '../../../mapApp/redux/MapAppRemoteActions';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {

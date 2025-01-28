@@ -3,7 +3,7 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { ApproveButton } from '../ApproveButton';
-import { mapAppApproveDeviceRequest } from '../../redux/AppleSauceActions';
+import { mapAppApproveDeviceRequest } from '../../redux/MapAppRemoteActions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

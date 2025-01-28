@@ -5,7 +5,7 @@ import './DeviceMap.scss';
 import { useAppDispatch } from '../../../redux/store';
 import { UserLocationMarker } from './UserLocationMarker';
 import { DeviceLocationMarkers } from './DeviceLocation/DeviceLocationMarkers';
-import { mapAppListDevicesRequest } from './redux/AppleSauceActions';
+import { mapAppListDevicesRequest } from './redux/MapAppRemoteActions';
 
 export function DeviceMap() {
     const dispatch = useAppDispatch();

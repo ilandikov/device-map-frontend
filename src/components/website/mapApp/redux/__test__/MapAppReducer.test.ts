@@ -14,7 +14,7 @@ import {
     mapAppSetLocationCoordinates,
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
-import { mapAppCreateDeviceRequest, mapAppListDevicesRequest } from '../AppleSauceActions';
+import { mapAppCreateDeviceRequest, mapAppListDevicesRequest } from '../MapAppRemoteActions';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);

@@ -3,7 +3,7 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { DeleteButton } from '../DeleteButton';
-import { mapAppDeleteDeviceRequest } from '../../redux/AppleSauceActions';
+import { mapAppDeleteDeviceRequest } from '../../redux/MapAppRemoteActions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
