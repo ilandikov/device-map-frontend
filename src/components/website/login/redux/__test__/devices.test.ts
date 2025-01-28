@@ -8,7 +8,6 @@ import {
 import { DevicesClient } from '../../../../../redux/store';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import {
-    MapAppRemoteRequestType,
     mapAppApproveDeviceRequest,
     mapAppCreateDeviceRequest,
     mapAppDeleteDeviceRequest,
@@ -87,7 +86,7 @@ describe('devices epic test', () => {
 describe('devices - list devices', () => {
     it('should process a resolved promise', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppListDevicesRequest(MapAppRemoteRequestType.LIST_DEVICES);
+        const sentAction = mapAppListDevicesRequest();
         const expectedAction = mapAppSetDevices([
             {
                 __typename: 'T22Device',
@@ -107,7 +106,7 @@ describe('devices - list devices', () => {
 
     it('should process a rejected promise', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppListDevicesRequest(MapAppRemoteRequestType.LIST_DEVICES);
+        const sentAction = mapAppListDevicesRequest();
         const expectedAction = mapAppRemoteErrorAnswer('list devices went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
