@@ -25,6 +25,7 @@ export enum MapAppRemoteAnswerType {
     DEVICES_LISTED = 'DEVICES_LISTED',
     DEVICE_CREATED = 'DEVICE_CREATED',
     DEVICE_DELETED = 'DEVICE_DELETED',
+    DEVICE_APPROVED = 'DEVICE_APPROVED',
 }
 
 export type MapAppAction =
@@ -137,10 +138,16 @@ export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
 
 interface MapAppApproveDevice {
     type: MapAppActionType.MAP_APP_APPROVE_DEVICE;
+    answer: MapAppRemoteAnswerType.DEVICE_APPROVED;
     id: string;
     lastUpdate: number;
 }
 
 export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppApproveDevice {
-    return { type: MapAppActionType.MAP_APP_APPROVE_DEVICE, id, lastUpdate };
+    return {
+        type: MapAppActionType.MAP_APP_APPROVE_DEVICE,
+        answer: MapAppRemoteAnswerType.DEVICE_APPROVED,
+        id,
+        lastUpdate,
+    };
 }
