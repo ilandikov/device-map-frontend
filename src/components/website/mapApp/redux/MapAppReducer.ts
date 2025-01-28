@@ -29,22 +29,21 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
         case MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER:
-            return deviceReducer(state, action);
+            return { ...state, ...deviceReducer(state, action) };
         default:
             return state;
     }
 }
 
-function deviceReducer(state: MapAppState, action: MapAppDeviceRemoteAnswer) {
+function deviceReducer(state: MapAppState, action: MapAppDeviceRemoteAnswer): Partial<MapAppState> {
     switch (action.request) {
         case MapAppRemoteRequestType.LIST_DEVICES:
-            return { ...state, devices: action.devices };
+            return { devices: action.devices };
         case MapAppRemoteRequestType.CREATE_DEVICE: {
-            return { ...state, devices: [...state.devices, action.device] };
+            return { devices: [...state.devices, action.device] };
         }
         case MapAppRemoteRequestType.DELETE_DEVICE:
             return {
-                ...state,
                 devices: state.devices.filter((device) => device.id !== action.id),
             };
         case MapAppRemoteRequestType.APPROVE_DEVICE: {
@@ -55,9 +54,9 @@ function deviceReducer(state: MapAppState, action: MapAppDeviceRemoteAnswer) {
                 approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
             };
             const withoutApprovedDevice = state.devices.filter((device) => device.id !== action.id);
-            return { ...state, devices: [...withoutApprovedDevice, approvedDevice] };
+            return { devices: [...withoutApprovedDevice, approvedDevice] };
         }
         default:
-            return state;
+            return {};
     }
 }
