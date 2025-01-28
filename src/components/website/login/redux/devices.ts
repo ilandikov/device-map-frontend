@@ -15,13 +15,13 @@ import {
     MapAppCreateDeviceRequest,
     MapAppDeleteDeviceRequest,
     MapAppDeviceActionType,
+    MapAppDeviceRemoteRequest,
     MapAppListDevicesRequest,
     MapAppRemoteRequestType,
-    MapAppRemoteRequests,
     mapAppDeviceApproved,
     mapAppDeviceCreated,
     mapAppDeviceDeleted,
-    mapAppDeviceRequestError,
+    mapAppDeviceRemoteError,
     mapAppDevicesListed,
 } from '../../mapApp/redux/MapAppRemoteActions';
 
@@ -36,7 +36,7 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
 
             return fromPromise(request.call(devicesClient, $state.value.mapAppState, action)).pipe(
                 mergeMap(request.responseToAction),
-                catchError((error) => of(mapAppDeviceRequestError(error))),
+                catchError((error) => of(mapAppDeviceRemoteError(error))),
             );
         }),
     );
@@ -66,13 +66,15 @@ const approveDevice: DevicesRequest<T22ApproveDeviceResponse, MapAppApproveDevic
     responseToAction: (response) => of(mapAppDeviceApproved(response.id, response.lastUpdate)),
 };
 
-type RemoteResponse =
+type DeviceRemoteResponse =
     | T22ListDevicesResponse
     | T22CreateDeviceResponse
     | T22DeleteDeviceResponse
     | T22ApproveDeviceResponse;
 
-const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<RemoteResponse, MapAppRemoteRequests> } = {
+const devicesRequests: {
+    [key in MapAppRemoteRequestType]: DevicesRequest<DeviceRemoteResponse, MapAppDeviceRemoteRequest>;
+} = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,

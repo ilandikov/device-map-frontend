@@ -1,8 +1,8 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 
-export type MapAppDeviceRemoteAction = MapAppRemoteRequests | MapAppRemoteAnswer | MapAppDeviceRequestError;
+export type MapAppDeviceRemoteAction = MapAppDeviceRemoteRequest | MapAppDeviceRemoteAnswer | MapAppDeviceRemoteError;
 
-export type MapAppRemoteRequests =
+export type MapAppDeviceRemoteRequest =
     | MapAppListDevicesRequest
     | MapAppCreateDeviceRequest
     | MapAppDeleteDeviceRequest
@@ -73,7 +73,7 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
     };
 }
 
-type MapAppRemoteAnswer = MapAppDevicesListed | MapAppDeviceCreated | MapAppDeviceDeleted | MapAppDeviceApproved;
+type MapAppDeviceRemoteAnswer = MapAppDevicesListed | MapAppDeviceCreated | MapAppDeviceDeleted | MapAppDeviceApproved;
 
 export interface MapAppDevicesListed {
     type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
@@ -100,7 +100,7 @@ export interface MapAppDeviceApproved {
     lastUpdate: number;
 }
 
-export interface MapAppDeviceRequestError {
+export interface MapAppDeviceRemoteError {
     type: MapAppDeviceActionType.MAP_APP_DEVICE_REQUEST_ERROR;
     error: string;
 }
@@ -138,6 +138,6 @@ export function mapAppDeviceApproved(id: string, lastUpdate: number): MapAppDevi
     };
 }
 
-export function mapAppDeviceRequestError(error: string): MapAppDeviceRequestError {
+export function mapAppDeviceRemoteError(error: string): MapAppDeviceRemoteError {
     return { type: MapAppDeviceActionType.MAP_APP_DEVICE_REQUEST_ERROR, error };
 }

@@ -7,7 +7,7 @@ import {
     mapAppDeviceApproved,
     mapAppDeviceCreated,
     mapAppDeviceDeleted,
-    mapAppDeviceRequestError,
+    mapAppDeviceRemoteError,
     mapAppDevicesListed,
     mapAppListDevicesRequest,
 } from '../../../mapApp/redux/MapAppRemoteActions';
@@ -105,7 +105,7 @@ describe('devices - list devices', () => {
     it('should process a rejected promise', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppListDevicesRequest();
-        const expectedAction = mapAppDeviceRequestError('list devices went wrong');
+        const expectedAction = mapAppDeviceRemoteError('list devices went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
@@ -128,7 +128,7 @@ describe('devices - create device', () => {
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppCreateDeviceRequest();
-        const expectedAction = mapAppDeviceRequestError('create device went wrong');
+        const expectedAction = mapAppDeviceRemoteError('create device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
@@ -146,7 +146,7 @@ describe('devices - delete device', () => {
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
-        const expectedAction = mapAppDeviceRequestError('delete device went wrong');
+        const expectedAction = mapAppDeviceRemoteError('delete device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
@@ -164,7 +164,7 @@ describe('devices - approve device', () => {
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
         const sentAction = mapAppApproveDeviceRequest('approve me!');
-        const expectedAction = mapAppDeviceRequestError('approve device went wrong');
+        const expectedAction = mapAppDeviceRemoteError('approve device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
