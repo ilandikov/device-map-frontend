@@ -135,11 +135,11 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
     };
 }
 
-interface MapAppCreateDeviceRequest extends MapAppRemoteRequest {}
-
-export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppCreateDeviceRequest {
+export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppRemoteRequest {
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
+
+interface MapAppCreateDeviceRequest extends MapAppRemoteRequest {}
 
 export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {
     return {
