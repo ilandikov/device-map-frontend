@@ -7,6 +7,7 @@ import {
     mapAppApproveDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
+    mapAppCreateDeviceRequest,
     mapAppDeleteDevice,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
@@ -113,6 +114,13 @@ describe('MapApp reducer tests', () => {
     it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
         const action = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
+
+        testMapAppStateChange(initialState, action, {});
+    });
+
+    it('should not change state on create device remote request', () => {
+        const initialState = buildMapAppState({});
+        const action = mapAppCreateDeviceRequest();
 
         testMapAppStateChange(initialState, action, {});
     });
