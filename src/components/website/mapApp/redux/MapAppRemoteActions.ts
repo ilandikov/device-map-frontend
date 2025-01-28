@@ -11,7 +11,8 @@ export type MapAppRemoteRequest =
     | MapAppListDevicesRemoteRequest
     | MapAppCreateDeviceRequest
     | MapAppDeleteDeviceRequest
-    | MapAppApproveDeviceRequest;
+    | MapAppApproveDeviceRequest
+    | MapAppRemoteErrorAnswer;
 
 export interface MapAppListDevicesRemoteRequest {
     type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
