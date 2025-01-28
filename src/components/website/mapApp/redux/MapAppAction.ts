@@ -20,13 +20,6 @@ export enum MapAppButton {
     LOGOUT = 'LOGOUT',
 }
 
-export enum MapAppRemoteAnswerType {
-    DEVICES_LISTED = 'DEVICES_LISTED',
-    DEVICE_CREATED = 'DEVICE_CREATED',
-    DEVICE_DELETED = 'DEVICE_DELETED',
-    DEVICE_APPROVED = 'DEVICE_APPROVED',
-}
-
 export type MapAppAction =
     | MapAppLoginModalCloseAction
     | MapAppButtonClick

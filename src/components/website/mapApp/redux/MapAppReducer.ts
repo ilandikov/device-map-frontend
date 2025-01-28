@@ -1,7 +1,8 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppAction, MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
+import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
+import { MapAppRemoteRequestType } from './MapAppRemoteActions';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
@@ -29,17 +30,17 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
         }
         case MapAppActionType.MAP_APP_REMOTE_ANSWER:
             switch (action.answer) {
-                case MapAppRemoteAnswerType.DEVICES_LISTED:
+                case MapAppRemoteRequestType.LIST_DEVICES:
                     return { ...state, devices: action.devices };
-                case MapAppRemoteAnswerType.DEVICE_CREATED: {
+                case MapAppRemoteRequestType.CREATE_DEVICE: {
                     return { ...state, devices: [...state.devices, action.device] };
                 }
-                case MapAppRemoteAnswerType.DEVICE_DELETED:
+                case MapAppRemoteRequestType.DELETE_DEVICE:
                     return {
                         ...state,
                         devices: state.devices.filter((device) => device.id !== action.id),
                     };
-                case MapAppRemoteAnswerType.DEVICE_APPROVED: {
+                case MapAppRemoteRequestType.APPROVE_DEVICE: {
                     const deviceToApprove = state.devices.find((device) => device.id === action.id);
                     const approvedDevice: T22Device = {
                         ...deviceToApprove,
