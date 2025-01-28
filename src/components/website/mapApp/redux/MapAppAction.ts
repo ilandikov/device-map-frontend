@@ -139,7 +139,7 @@ export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppLis
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 
-interface MapAppCreateDeviceRequest extends MapAppListDevicesRemoteRequest {}
+export interface MapAppCreateDeviceRequest extends MapAppListDevicesRemoteRequest {}
 
 export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {
     return {

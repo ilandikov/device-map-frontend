@@ -11,6 +11,7 @@ import {
     MapAppAction,
     MapAppActionType,
     MapAppApproveDeviceRequest,
+    MapAppCreateDeviceRequest,
     MapAppDeleteDeviceRequest,
     MapAppListDevicesRemoteRequest,
     MapAppRemoteRequestType,
@@ -39,17 +40,17 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         }),
     );
 
-type DevicesRequest<TResponse, TRequestAction = MapAppListDevicesRemoteRequest> = {
+type DevicesRequest<TResponse, TRequestAction> = {
     call: (client: DevicesClient, state: MapAppState, action: TRequestAction) => Promise<TResponse>;
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
-const listDevicesRequest: DevicesRequest<T22ListDevicesResponse> = {
+const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, MapAppListDevicesRemoteRequest> = {
     call: (client, _) => client.forAnonymousUser.listDevices(),
     responseToAction: (response) => of(mapAppSetDevices(response.devices)),
 };
 
-const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse> = {
+const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse, MapAppCreateDeviceRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
     responseToAction: (response) => of(mapAppAddDevice(response.device)),
 };
@@ -64,7 +65,8 @@ const approveDevice: DevicesRequest<T22ApproveDeviceResponse, MapAppApproveDevic
     responseToAction: (response) => of(mapAppApproveDevice(response.id, response.lastUpdate)),
 };
 
-const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
+// TODO add explicit types instead of any
+const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any, any> } = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,
