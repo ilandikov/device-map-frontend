@@ -69,31 +69,31 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
 }
 
 type MapAppRemoteAnswers =
-    | MapAppSetDevices
-    | MapAppAddDevice
-    | MapAppDeleteDevice
-    | MapAppApproveDevice
+    | MapAppDevicesListed
+    | MapAppDeviceCreated
+    | MapAppDeviceDeleted
+    | MapAppDeviceApproved
     | MapAppDeviceRequestError;
 
-export interface MapAppSetDevices {
+export interface MapAppDevicesListed {
     type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
     request: MapAppRemoteRequestType.LIST_DEVICES;
     devices: T22Device[];
 }
 
-export interface MapAppAddDevice {
+export interface MapAppDeviceCreated {
     type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
     request: MapAppRemoteRequestType.CREATE_DEVICE;
     device: T22Device;
 }
 
-export interface MapAppDeleteDevice {
+export interface MapAppDeviceDeleted {
     type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
     request: MapAppRemoteRequestType.DELETE_DEVICE;
     id: string;
 }
 
-export interface MapAppApproveDevice {
+export interface MapAppDeviceApproved {
     type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
     request: MapAppRemoteRequestType.APPROVE_DEVICE;
     id: string;
@@ -105,7 +105,7 @@ export interface MapAppDeviceRequestError {
     error: string;
 }
 
-export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
+export function mapAppDevicesListed(devices: T22Device[]): MapAppDevicesListed {
     return {
         type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
         request: MapAppRemoteRequestType.LIST_DEVICES,
@@ -113,7 +113,7 @@ export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
     };
 }
 
-export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
+export function mapAppDeviceCreated(device: T22Device): MapAppDeviceCreated {
     return {
         type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
         request: MapAppRemoteRequestType.CREATE_DEVICE,
@@ -121,7 +121,7 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
     };
 }
 
-export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
+export function mapAppDeviceDeleted(id: string): MapAppDeviceDeleted {
     return {
         type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
         request: MapAppRemoteRequestType.DELETE_DEVICE,
@@ -129,7 +129,7 @@ export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
     };
 }
 
-export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppApproveDevice {
+export function mapAppDeviceApproved(id: string, lastUpdate: number): MapAppDeviceApproved {
     return {
         type: MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
         request: MapAppRemoteRequestType.APPROVE_DEVICE,
@@ -138,6 +138,6 @@ export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppAppro
     };
 }
 
-export function mapAppRemoteErrorAnswer(error: string): MapAppDeviceRequestError {
+export function mapAppDeviceRequestError(error: string): MapAppDeviceRequestError {
     return { type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR, error };
 }

@@ -16,11 +16,11 @@ import {
     MapAppDeleteDeviceRequest,
     MapAppListDevicesRequest,
     MapAppRemoteRequestType,
-    mapAppAddDevice,
-    mapAppApproveDevice,
-    mapAppDeleteDevice,
-    mapAppRemoteErrorAnswer,
-    mapAppSetDevices,
+    mapAppDeviceApproved,
+    mapAppDeviceCreated,
+    mapAppDeviceDeleted,
+    mapAppDeviceRequestError,
+    mapAppDevicesListed,
 } from '../../mapApp/redux/MapAppRemoteActions';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
@@ -34,7 +34,7 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
 
             return fromPromise(request.call(devicesClient, $state.value.mapAppState, action)).pipe(
                 mergeMap(request.responseToAction),
-                catchError((error) => of(mapAppRemoteErrorAnswer(error))),
+                catchError((error) => of(mapAppDeviceRequestError(error))),
             );
         }),
     );
@@ -46,22 +46,22 @@ type DevicesRequest<TResponse, TRequestAction> = {
 
 const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, MapAppListDevicesRequest> = {
     call: (client, _) => client.forAnonymousUser.listDevices(),
-    responseToAction: (response) => of(mapAppSetDevices(response.devices)),
+    responseToAction: (response) => of(mapAppDevicesListed(response.devices)),
 };
 
 const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse, MapAppCreateDeviceRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
-    responseToAction: (response) => of(mapAppAddDevice(response.device)),
+    responseToAction: (response) => of(mapAppDeviceCreated(response.device)),
 };
 
 const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteDeviceRequest> = {
     call: (client, _, action) => client.forAuthenticatedUser.deleteDevice({ id: action.id }),
-    responseToAction: (response) => of(mapAppDeleteDevice(response.id)),
+    responseToAction: (response) => of(mapAppDeviceDeleted(response.id)),
 };
 
 const approveDevice: DevicesRequest<T22ApproveDeviceResponse, MapAppApproveDeviceRequest> = {
     call: (client, _, action) => client.forAuthenticatedUser.approveDevice({ id: action.id }),
-    responseToAction: (response) => of(mapAppApproveDevice(response.id, response.lastUpdate)),
+    responseToAction: (response) => of(mapAppDeviceApproved(response.id, response.lastUpdate)),
 };
 
 // TODO add explicit types instead of any

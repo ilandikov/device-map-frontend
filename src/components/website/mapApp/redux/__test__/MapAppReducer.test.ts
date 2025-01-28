@@ -11,12 +11,12 @@ import {
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
 import {
-    mapAppAddDevice,
-    mapAppApproveDevice,
     mapAppCreateDeviceRequest,
-    mapAppDeleteDevice,
+    mapAppDeviceApproved,
+    mapAppDeviceCreated,
+    mapAppDeviceDeleted,
+    mapAppDevicesListed,
     mapAppListDevicesRequest,
-    mapAppSetDevices,
 } from '../MapAppRemoteActions';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
@@ -144,7 +144,7 @@ describe('MapApp reducer tests', () => {
             devices: [existingDevice],
         });
 
-        const action = mapAppSetDevices([receivedDevice]);
+        const action = mapAppDevicesListed([receivedDevice]);
 
         testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
@@ -156,7 +156,7 @@ describe('MapApp reducer tests', () => {
             devices: [existingDevice],
         });
 
-        const action = mapAppAddDevice(receivedDevice);
+        const action = mapAppDeviceCreated(receivedDevice);
 
         testMapAppStateChange(initialState, action, {
             devices: [existingDevice, receivedDevice],
@@ -167,7 +167,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppDeleteDevice('existing');
+        const action = mapAppDeviceDeleted('existing');
 
         testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
@@ -178,7 +178,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppApproveDevice(receivedDevice.id, 1112222233333);
+        const action = mapAppDeviceApproved(receivedDevice.id, 1112222233333);
 
         testMapAppStateChange(initialState, action, {
             devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1112222233333 }],
