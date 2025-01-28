@@ -29,29 +29,29 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
         case MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER:
-            return { ...state, devices: deviceReducer(state, action) };
+            return { ...state, devices: deviceReducer(state.devices, action) };
         default:
             return state;
     }
 }
 
-function deviceReducer(state: MapAppState, action: MapAppDeviceRemoteAnswer): T22Device[] {
+function deviceReducer(devices: T22Device[], action: MapAppDeviceRemoteAnswer): T22Device[] {
     switch (action.request) {
         case MapAppRemoteRequestType.LIST_DEVICES:
             return action.devices;
         case MapAppRemoteRequestType.CREATE_DEVICE: {
-            return [...state.devices, action.device];
+            return [...devices, action.device];
         }
         case MapAppRemoteRequestType.DELETE_DEVICE:
-            return state.devices.filter((device) => device.id !== action.id);
+            return devices.filter((device) => device.id !== action.id);
         case MapAppRemoteRequestType.APPROVE_DEVICE: {
-            const deviceToApprove = state.devices.find((device) => device.id === action.id);
+            const deviceToApprove = devices.find((device) => device.id === action.id);
             const approvedDevice: T22Device = {
                 ...deviceToApprove,
                 lastUpdate: action.lastUpdate,
                 approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
             };
-            const withoutApprovedDevice = state.devices.filter((device) => device.id !== action.id);
+            const withoutApprovedDevice = devices.filter((device) => device.id !== action.id);
             return [...withoutApprovedDevice, approvedDevice];
         }
         default:
