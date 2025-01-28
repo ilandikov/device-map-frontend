@@ -1,17 +1,15 @@
-import {
-    mapAppAddDevice,
-    mapAppApproveDevice,
-    mapAppDeleteDevice,
-    mapAppSetDevices,
-} from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import {
+    mapAppAddDevice,
+    mapAppApproveDevice,
     mapAppApproveDeviceRequest,
     mapAppCreateDeviceRequest,
+    mapAppDeleteDevice,
     mapAppDeleteDeviceRequest,
     mapAppListDevicesRequest,
     mapAppRemoteErrorAnswer,
+    mapAppSetDevices,
 } from '../../../mapApp/redux/MapAppRemoteActions';
 import { testDevicesEpic } from './devicesTestHelpers';
 

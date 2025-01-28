@@ -2,19 +2,22 @@ import { MapAppReducer } from '../MapAppReducer';
 import {
     MapAppAction,
     MapAppButton,
-    mapAppAddDevice,
-    mapAppApproveDevice,
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
-    mapAppDeleteDevice,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
-    mapAppSetDevices,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
-import { mapAppCreateDeviceRequest, mapAppListDevicesRequest } from '../MapAppRemoteActions';
+import {
+    mapAppAddDevice,
+    mapAppApproveDevice,
+    mapAppCreateDeviceRequest,
+    mapAppDeleteDevice,
+    mapAppListDevicesRequest,
+    mapAppSetDevices,
+} from '../MapAppRemoteActions';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);

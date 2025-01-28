@@ -1,4 +1,5 @@
-import { MapAppActionType } from './MapAppAction';
+import { T22Device } from '@mancho-school-t22/graphql-types';
+import { MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
 
 export enum MapAppRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
@@ -73,4 +74,62 @@ export interface MapAppDeviceRequestError {
 
 export function mapAppRemoteErrorAnswer(error: string): MapAppDeviceRequestError {
     return { type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR, error };
+}
+
+export interface MapAppSetDevices {
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
+    answer: MapAppRemoteAnswerType.DEVICES_LISTED;
+    devices: T22Device[];
+}
+
+export interface MapAppAddDevice {
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
+    answer: MapAppRemoteAnswerType.DEVICE_CREATED;
+    device: T22Device;
+}
+
+export interface MapAppDeleteDevice {
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
+    answer: MapAppRemoteAnswerType.DEVICE_DELETED;
+    id: string;
+}
+
+export interface MapAppApproveDevice {
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
+    answer: MapAppRemoteAnswerType.DEVICE_APPROVED;
+    id: string;
+    lastUpdate: number;
+}
+
+export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
+        answer: MapAppRemoteAnswerType.DEVICES_LISTED,
+        devices: devices,
+    };
+}
+
+export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
+        answer: MapAppRemoteAnswerType.DEVICE_CREATED,
+        device,
+    };
+}
+
+export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
+        answer: MapAppRemoteAnswerType.DEVICE_DELETED,
+        id,
+    };
+}
+
+export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppApproveDevice {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
+        answer: MapAppRemoteAnswerType.DEVICE_APPROVED,
+        id,
+        lastUpdate,
+    };
 }

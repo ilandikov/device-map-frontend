@@ -1,6 +1,12 @@
-import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppAddress } from './MapAppState';
-import { MapAppDeviceRemoteAction } from './MapAppRemoteActions';
+import {
+    MapAppAddDevice,
+    MapAppApproveDevice,
+    MapAppDeleteDevice,
+    MapAppDeviceRemoteAction,
+    MapAppSetDevices,
+} from './MapAppRemoteActions';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
@@ -91,62 +97,4 @@ export interface MapAppSetLocationAddress {
 
 export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
-}
-
-export interface MapAppSetDevices {
-    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
-    answer: MapAppRemoteAnswerType.DEVICES_LISTED;
-    devices: T22Device[];
-}
-
-export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
-    return {
-        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
-        answer: MapAppRemoteAnswerType.DEVICES_LISTED,
-        devices: devices,
-    };
-}
-
-interface MapAppAddDevice {
-    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
-    answer: MapAppRemoteAnswerType.DEVICE_CREATED;
-    device: T22Device;
-}
-
-export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
-    return {
-        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
-        answer: MapAppRemoteAnswerType.DEVICE_CREATED,
-        device,
-    };
-}
-
-interface MapAppDeleteDevice {
-    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
-    answer: MapAppRemoteAnswerType.DEVICE_DELETED;
-    id: string;
-}
-
-export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
-    return {
-        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
-        answer: MapAppRemoteAnswerType.DEVICE_DELETED,
-        id,
-    };
-}
-
-interface MapAppApproveDevice {
-    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
-    answer: MapAppRemoteAnswerType.DEVICE_APPROVED;
-    id: string;
-    lastUpdate: number;
-}
-
-export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppApproveDevice {
-    return {
-        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
-        answer: MapAppRemoteAnswerType.DEVICE_APPROVED,
-        id,
-        lastUpdate,
-    };
 }
