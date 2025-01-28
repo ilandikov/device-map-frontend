@@ -1,5 +1,5 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppAction, MapAppActionType } from './MapAppAction';
+import { MapAppAction, MapAppActionType, MapAppDeviceActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
 import { MapAppRemoteRequestType } from './MapAppRemoteActions';
@@ -28,7 +28,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.MAP_APP_DEVICE_REMOTE_ANSWER:
+        case MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER:
             switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return { ...state, devices: action.devices };

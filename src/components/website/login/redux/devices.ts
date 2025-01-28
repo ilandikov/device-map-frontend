@@ -7,7 +7,7 @@ import {
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { MapAppAction, MapAppActionType } from '../../mapApp/redux/MapAppAction';
+import { MapAppAction, MapAppDeviceActionType } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
 import { MapAppState } from '../../mapApp/redux/MapAppState';
 import {
@@ -25,7 +25,7 @@ import {
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.MAP_APP_DEVICE_REMOTE_REQUEST),
+        ofType(MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST),
         switchMap((action) => {
             const request = devicesRequests[action.request];
             if (!request) {
