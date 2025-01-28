@@ -17,6 +17,7 @@ import {
     MapAppDeviceActionType,
     MapAppListDevicesRequest,
     MapAppRemoteRequestType,
+    MapAppRemoteRequests,
     mapAppDeviceApproved,
     mapAppDeviceCreated,
     mapAppDeviceDeleted,
@@ -65,8 +66,13 @@ const approveDevice: DevicesRequest<T22ApproveDeviceResponse, MapAppApproveDevic
     responseToAction: (response) => of(mapAppDeviceApproved(response.id, response.lastUpdate)),
 };
 
-// TODO add explicit types instead of any
-const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any, any> } = {
+type RemoteResponse =
+    | T22ListDevicesResponse
+    | T22CreateDeviceResponse
+    | T22DeleteDeviceResponse
+    | T22ApproveDeviceResponse;
+
+const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<RemoteResponse, MapAppRemoteRequests> } = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,

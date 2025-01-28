@@ -2,7 +2,7 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 
 export type MapAppDeviceRemoteAction = MapAppRemoteRequests | MapAppRemoteAnswer | MapAppDeviceRequestError;
 
-type MapAppRemoteRequests =
+export type MapAppRemoteRequests =
     | MapAppListDevicesRequest
     | MapAppCreateDeviceRequest
     | MapAppDeleteDeviceRequest
