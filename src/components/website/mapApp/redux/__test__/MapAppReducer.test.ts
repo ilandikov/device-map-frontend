@@ -11,12 +11,12 @@ import {
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
 import {
-    mapAppCreateDeviceRequest,
-    mapAppDeviceApproved,
-    mapAppDeviceCreated,
-    mapAppDeviceDeleted,
-    mapAppDevicesListed,
-    mapAppListDevicesRequest,
+    deviceApproved,
+    deviceCreateRequest,
+    deviceCreated,
+    deviceDeleted,
+    deviceListRequest,
+    devicesListed,
 } from '../MapAppRemoteActions';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
@@ -114,14 +114,14 @@ describe('MapApp reducer tests', () => {
 
     it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppListDevicesRequest();
+        const action = deviceListRequest();
 
         testMapAppStateChange(initialState, action, {});
     });
 
     it('should not change state on create device remote request', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppCreateDeviceRequest();
+        const action = deviceCreateRequest();
 
         testMapAppStateChange(initialState, action, {});
     });
@@ -144,7 +144,7 @@ describe('MapApp reducer tests', () => {
             devices: [existingDevice],
         });
 
-        const action = mapAppDevicesListed([receivedDevice]);
+        const action = devicesListed([receivedDevice]);
 
         testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
@@ -156,7 +156,7 @@ describe('MapApp reducer tests', () => {
             devices: [existingDevice],
         });
 
-        const action = mapAppDeviceCreated(receivedDevice);
+        const action = deviceCreated(receivedDevice);
 
         testMapAppStateChange(initialState, action, {
             devices: [existingDevice, receivedDevice],
@@ -167,7 +167,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppDeviceDeleted('existing');
+        const action = deviceDeleted('existing');
 
         testMapAppStateChange(initialState, action, {
             devices: [receivedDevice],
@@ -178,7 +178,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({
             devices: [existingDevice, receivedDevice],
         });
-        const action = mapAppDeviceApproved(receivedDevice.id, 1112222233333);
+        const action = deviceApproved(receivedDevice.id, 1112222233333);
 
         testMapAppStateChange(initialState, action, {
             devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1112222233333 }],

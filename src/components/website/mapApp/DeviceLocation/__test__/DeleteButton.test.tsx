@@ -3,7 +3,7 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { DeleteButton } from '../DeleteButton';
-import { mapAppDeleteDeviceRequest } from '../../redux/MapAppRemoteActions';
+import { deviceDeleteRequest } from '../../redux/MapAppRemoteActions';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -22,6 +22,6 @@ describe('DeleteButton action tests', () => {
         const loginButton = getByTestId(container, 'deleteDeviceButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppDeleteDeviceRequest('try to delete me'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, deviceDeleteRequest('try to delete me'));
     });
 });

@@ -2,7 +2,7 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
-import { MapAppDeviceActionType, MapAppDeviceRemoteAction, MapAppRemoteRequestType } from './MapAppRemoteActions';
+import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './MapAppRemoteActions';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
@@ -28,27 +28,27 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER:
+        case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
         default:
             return state;
     }
 }
 
-function deviceReducer(devices: T22Device[], action: MapAppDeviceRemoteAction): T22Device[] {
-    if (action.type !== MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER) {
+function deviceReducer(devices: T22Device[], action: DeviceAction): T22Device[] {
+    if (action.type !== DeviceActionType.DEVICE_REMOTE_ANSWER) {
         return devices;
     }
 
     switch (action.request) {
-        case MapAppRemoteRequestType.LIST_DEVICES:
+        case DeviceRemoteRequestType.LIST_DEVICES:
             return action.devices;
-        case MapAppRemoteRequestType.CREATE_DEVICE: {
+        case DeviceRemoteRequestType.CREATE_DEVICE: {
             return [...devices, action.device];
         }
-        case MapAppRemoteRequestType.DELETE_DEVICE:
+        case DeviceRemoteRequestType.DELETE_DEVICE:
             return devices.filter((device) => device.id !== action.id);
-        case MapAppRemoteRequestType.APPROVE_DEVICE: {
+        case DeviceRemoteRequestType.APPROVE_DEVICE: {
             const deviceToApprove = devices.find((device) => device.id === action.id);
             const approvedDevice: T22Device = {
                 ...deviceToApprove,

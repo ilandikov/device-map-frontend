@@ -1,147 +1,139 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 
-export type MapAppDeviceRemoteAction = MapAppDeviceRemoteRequest | MapAppDeviceRemoteAnswer | MapAppDeviceRemoteError;
+export type DeviceAction = DeviceRemoteRequest | DeviceRemoteAnswer | DeviceRemoteError;
 
-export type MapAppDeviceRemoteRequest =
-    | MapAppListDevicesRequest
-    | MapAppCreateDeviceRequest
-    | MapAppDeleteDeviceRequest
-    | MapAppApproveDeviceRequest;
+export type DeviceRemoteRequest = DeviceListRequest | DeviceCreateRequest | DeviceDeleteRequest | DeviceApproveRequest;
 
-export enum MapAppDeviceActionType {
-    MAP_APP_DEVICE_REMOTE_REQUEST = 'MAP_APP_DEVICE_REMOTE_REQUEST',
-    MAP_APP_DEVICE_REMOTE_ANSWER = 'MAP_APP_DEVICE_REMOTE_ANSWER',
-    MAP_APP_DEVICE_REQUEST_ERROR = 'MAP_APP_DEVICE_REQUEST_ERROR',
+export enum DeviceActionType {
+    DEVICE_REMOTE_REQUEST = 'DEVICE_REMOTE_REQUEST',
+    DEVICE_REMOTE_ANSWER = 'DEVICE_REMOTE_ANSWER',
+    DEVICE_REQUEST_ERROR = 'DEVICE_REQUEST_ERROR',
 }
 
-export enum MapAppRemoteRequestType {
+export enum DeviceRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
     CREATE_DEVICE = 'CREATE_DEVICE',
     DELETE_DEVICE = 'DELETE_DEVICE',
     APPROVE_DEVICE = 'APPROVE_DEVICE',
 }
 
-export interface MapAppListDevicesRequest {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST;
-    request: MapAppRemoteRequestType.LIST_DEVICES;
+export interface DeviceListRequest {
+    type: DeviceActionType.DEVICE_REMOTE_REQUEST;
+    request: DeviceRemoteRequestType.LIST_DEVICES;
 }
 
-export interface MapAppCreateDeviceRequest {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST;
-    request: MapAppRemoteRequestType.CREATE_DEVICE;
+export interface DeviceCreateRequest {
+    type: DeviceActionType.DEVICE_REMOTE_REQUEST;
+    request: DeviceRemoteRequestType.CREATE_DEVICE;
 }
 
-export interface MapAppDeleteDeviceRequest {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST;
-    request: MapAppRemoteRequestType.DELETE_DEVICE;
+export interface DeviceDeleteRequest {
+    type: DeviceActionType.DEVICE_REMOTE_REQUEST;
+    request: DeviceRemoteRequestType.DELETE_DEVICE;
     id: string;
 }
 
-export interface MapAppApproveDeviceRequest {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST;
-    request: MapAppRemoteRequestType.APPROVE_DEVICE;
+export interface DeviceApproveRequest {
+    type: DeviceActionType.DEVICE_REMOTE_REQUEST;
+    request: DeviceRemoteRequestType.APPROVE_DEVICE;
     id: string;
 }
 
-export function mapAppListDevicesRequest(): MapAppListDevicesRequest {
+export function deviceListRequest(): DeviceListRequest {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST,
-        request: MapAppRemoteRequestType.LIST_DEVICES,
+        type: DeviceActionType.DEVICE_REMOTE_REQUEST,
+        request: DeviceRemoteRequestType.LIST_DEVICES,
     };
 }
 
-export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {
+export function deviceCreateRequest(): DeviceCreateRequest {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST,
-        request: MapAppRemoteRequestType.CREATE_DEVICE,
+        type: DeviceActionType.DEVICE_REMOTE_REQUEST,
+        request: DeviceRemoteRequestType.CREATE_DEVICE,
     };
 }
 
-export function mapAppDeleteDeviceRequest(id: string): MapAppDeleteDeviceRequest {
+export function deviceDeleteRequest(id: string): DeviceDeleteRequest {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST,
-        request: MapAppRemoteRequestType.DELETE_DEVICE,
+        type: DeviceActionType.DEVICE_REMOTE_REQUEST,
+        request: DeviceRemoteRequestType.DELETE_DEVICE,
         id,
     };
 }
 
-export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceRequest {
+export function deviceApproveRequest(id: string): DeviceApproveRequest {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_REQUEST,
-        request: MapAppRemoteRequestType.APPROVE_DEVICE,
+        type: DeviceActionType.DEVICE_REMOTE_REQUEST,
+        request: DeviceRemoteRequestType.APPROVE_DEVICE,
         id,
     };
 }
 
-export type MapAppDeviceRemoteAnswer =
-    | MapAppDevicesListed
-    | MapAppDeviceCreated
-    | MapAppDeviceDeleted
-    | MapAppDeviceApproved;
+export type DeviceRemoteAnswer = DevicesListed | DeviceCreated | DeviceDeleted | DeviceApproved;
 
-export interface MapAppDevicesListed {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
-    request: MapAppRemoteRequestType.LIST_DEVICES;
+export interface DevicesListed {
+    type: DeviceActionType.DEVICE_REMOTE_ANSWER;
+    request: DeviceRemoteRequestType.LIST_DEVICES;
     devices: T22Device[];
 }
 
-export interface MapAppDeviceCreated {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
-    request: MapAppRemoteRequestType.CREATE_DEVICE;
+export interface DeviceCreated {
+    type: DeviceActionType.DEVICE_REMOTE_ANSWER;
+    request: DeviceRemoteRequestType.CREATE_DEVICE;
     device: T22Device;
 }
 
-export interface MapAppDeviceDeleted {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
-    request: MapAppRemoteRequestType.DELETE_DEVICE;
+export interface DeviceDeleted {
+    type: DeviceActionType.DEVICE_REMOTE_ANSWER;
+    request: DeviceRemoteRequestType.DELETE_DEVICE;
     id: string;
 }
 
-export interface MapAppDeviceApproved {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
-    request: MapAppRemoteRequestType.APPROVE_DEVICE;
+export interface DeviceApproved {
+    type: DeviceActionType.DEVICE_REMOTE_ANSWER;
+    request: DeviceRemoteRequestType.APPROVE_DEVICE;
     id: string;
     lastUpdate: number;
 }
 
-export interface MapAppDeviceRemoteError {
-    type: MapAppDeviceActionType.MAP_APP_DEVICE_REQUEST_ERROR;
+export interface DeviceRemoteError {
+    type: DeviceActionType.DEVICE_REQUEST_ERROR;
     error: string;
 }
 
-export function mapAppDevicesListed(devices: T22Device[]): MapAppDevicesListed {
+export function devicesListed(devices: T22Device[]): DevicesListed {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
-        request: MapAppRemoteRequestType.LIST_DEVICES,
+        type: DeviceActionType.DEVICE_REMOTE_ANSWER,
+        request: DeviceRemoteRequestType.LIST_DEVICES,
         devices: devices,
     };
 }
 
-export function mapAppDeviceCreated(device: T22Device): MapAppDeviceCreated {
+export function deviceCreated(device: T22Device): DeviceCreated {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
-        request: MapAppRemoteRequestType.CREATE_DEVICE,
+        type: DeviceActionType.DEVICE_REMOTE_ANSWER,
+        request: DeviceRemoteRequestType.CREATE_DEVICE,
         device,
     };
 }
 
-export function mapAppDeviceDeleted(id: string): MapAppDeviceDeleted {
+export function deviceDeleted(id: string): DeviceDeleted {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
-        request: MapAppRemoteRequestType.DELETE_DEVICE,
+        type: DeviceActionType.DEVICE_REMOTE_ANSWER,
+        request: DeviceRemoteRequestType.DELETE_DEVICE,
         id,
     };
 }
 
-export function mapAppDeviceApproved(id: string, lastUpdate: number): MapAppDeviceApproved {
+export function deviceApproved(id: string, lastUpdate: number): DeviceApproved {
     return {
-        type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER,
-        request: MapAppRemoteRequestType.APPROVE_DEVICE,
+        type: DeviceActionType.DEVICE_REMOTE_ANSWER,
+        request: DeviceRemoteRequestType.APPROVE_DEVICE,
         id,
         lastUpdate,
     };
 }
 
-export function mapAppDeviceRemoteError(error: string): MapAppDeviceRemoteError {
-    return { type: MapAppDeviceActionType.MAP_APP_DEVICE_REQUEST_ERROR, error };
+export function deviceRemoteError(error: string): DeviceRemoteError {
+    return { type: DeviceActionType.DEVICE_REQUEST_ERROR, error };
 }
