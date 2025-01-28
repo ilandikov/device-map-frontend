@@ -25,6 +25,7 @@ export enum MapAppButton {
 export enum MapAppRemoteAnswerType {
     DEVICES_LISTED = 'DEVICES_LISTED',
     DEVICE_CREATED = 'DEVICE_CREATED',
+    DEVICE_DELETED = 'DEVICE_DELETED',
 }
 
 export type MapAppAction =
@@ -123,11 +124,16 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
 
 interface MapAppDeleteDevice {
     type: MapAppActionType.DELETE_DEVICE;
+    answer: MapAppRemoteAnswerType.DEVICE_DELETED;
     id: string;
 }
 
 export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
-    return { type: MapAppActionType.DELETE_DEVICE, id };
+    return {
+        type: MapAppActionType.DELETE_DEVICE,
+        answer: MapAppRemoteAnswerType.DEVICE_DELETED,
+        id,
+    };
 }
 
 interface MapAppApproveDevice {
