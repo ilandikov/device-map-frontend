@@ -141,6 +141,13 @@ export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppCre
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 
+export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
+        request: MapAppRemoteRequestType.CREATE_DEVICE,
+    };
+}
+
 interface MapAppRemoteErrorAnswer {
     type: MapAppActionType.REMOTE_ERROR_ANSWER;
     error: string;
