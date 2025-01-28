@@ -34,14 +34,14 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                 case MapAppRemoteAnswerType.DEVICE_CREATED: {
                     return { ...state, devices: [...state.devices, action.device] };
                 }
+                case MapAppRemoteAnswerType.DEVICE_DELETED:
+                    return {
+                        ...state,
+                        devices: state.devices.filter((device) => device.id !== action.id),
+                    };
                 default:
                     return state;
             }
-        case MapAppActionType.DELETE_DEVICE:
-            return {
-                ...state,
-                devices: state.devices.filter((device) => device.id !== action.id),
-            };
         case MapAppActionType.MAP_APP_APPROVE_DEVICE: {
             const deviceToApprove = state.devices.find((device) => device.id === action.id);
             const approvedDevice: T22Device = {

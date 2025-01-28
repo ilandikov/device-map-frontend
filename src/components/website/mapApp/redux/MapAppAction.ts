@@ -13,7 +13,6 @@ export enum MapAppActionType {
     MAP_APP_DEVICE_REMOTE_REQUEST = 'MAP_APP_DEVICE_REMOTE_REQUEST',
     MAP_APP_REMOTE_ANSWER = 'MAP_APP_REMOTE_ANSWER',
     MAP_APP_DEVICE_REQUEST_ERROR = 'MAP_APP_DEVICE_REQUEST_ERROR',
-    DELETE_DEVICE = 'DELETE_DEVICE',
     MAP_APP_APPROVE_DEVICE = 'MAP_APP_APPROVE_DEVICE',
 }
 
@@ -123,14 +122,14 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
 }
 
 interface MapAppDeleteDevice {
-    type: MapAppActionType.DELETE_DEVICE;
+    type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICE_DELETED;
     id: string;
 }
 
 export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
     return {
-        type: MapAppActionType.DELETE_DEVICE,
+        type: MapAppActionType.MAP_APP_REMOTE_ANSWER,
         answer: MapAppRemoteAnswerType.DEVICE_DELETED,
         id,
     };
