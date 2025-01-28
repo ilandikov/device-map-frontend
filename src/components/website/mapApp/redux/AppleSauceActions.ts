@@ -7,6 +7,12 @@ export enum MapAppRemoteRequestType {
     APPROVE_DEVICE = 'APPROVE_DEVICE',
 }
 
+export type MapAppRemoteRequest =
+    | MapAppListDevicesRemoteRequest
+    | MapAppCreateDeviceRequest
+    | MapAppDeleteDeviceRequest
+    | MapAppApproveDeviceRequest;
+
 export interface MapAppListDevicesRemoteRequest {
     type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
     request: MapAppRemoteRequestType.LIST_DEVICES;
