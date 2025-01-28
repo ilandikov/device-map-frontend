@@ -1,8 +1,8 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppAction, MapAppActionType, MapAppDeviceActionType } from './MapAppAction';
+import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
-import { MapAppRemoteRequestType } from './MapAppRemoteActions';
+import { MapAppDeviceActionType, MapAppRemoteRequestType } from './MapAppRemoteActions';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
