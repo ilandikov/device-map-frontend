@@ -21,14 +21,14 @@ import {
     MapAppApproveDeviceRequest,
     MapAppCreateDeviceRequest,
     MapAppDeleteDeviceRequest,
-    MapAppListDevicesRemoteRequest,
+    MapAppListDevicesRequest,
     MapAppRemoteRequestType,
     mapAppRemoteErrorAnswer,
 } from '../../mapApp/redux/MapAppRemoteActions';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
+        ofType(MapAppActionType.MAP_APP_DEVICE_REMOTE_REQUEST),
         switchMap((action) => {
             const request = devicesRequests[action.request];
             if (!request) {
@@ -47,7 +47,7 @@ type DevicesRequest<TResponse, TRequestAction> = {
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
-const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, MapAppListDevicesRemoteRequest> = {
+const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, MapAppListDevicesRequest> = {
     call: (client, _) => client.forAnonymousUser.listDevices(),
     responseToAction: (response) => of(mapAppSetDevices(response.devices)),
 };

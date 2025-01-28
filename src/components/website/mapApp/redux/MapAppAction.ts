@@ -1,6 +1,6 @@
 import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppAddress } from './MapAppState';
-import { MapAppRemoteRequest } from './MapAppRemoteActions';
+import { MapAppDeviceRemoteAction } from './MapAppRemoteActions';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
@@ -10,9 +10,9 @@ export enum MapAppActionType {
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     // TODO do something about all these actions. Probably split this state into several states, map app state to manage only windows
-    MAP_APP_REMOTE_REQUEST = 'MAP_APP_REMOTE_REQUEST',
+    MAP_APP_DEVICE_REMOTE_REQUEST = 'MAP_APP_DEVICE_REMOTE_REQUEST',
     MAP_APP_REMOTE_ANSWER = 'MAP_APP_REMOTE_ANSWER',
-    MAP_APP_REMOTE_ERROR_ANSWER = 'MAP_APP_REMOTE_ERROR_ANSWER',
+    MAP_APP_DEVICE_REQUEST_ERROR = 'MAP_APP_DEVICE_REQUEST_ERROR',
     DELETE_DEVICE = 'DELETE_DEVICE',
     MAP_APP_APPROVE_DEVICE = 'MAP_APP_APPROVE_DEVICE',
 }
@@ -38,7 +38,7 @@ export type MapAppAction =
     | MapAppDeleteDevice
     | MapAppAuthCompleted
     | MapAppApproveDevice
-    | MapAppRemoteRequest;
+    | MapAppDeviceRemoteAction;
 
 export interface MapAppLoginModalCloseAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE;
