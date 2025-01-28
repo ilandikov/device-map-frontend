@@ -29,7 +29,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
         case MapAppActionType.MAP_APP_REMOTE_ANSWER:
-            switch (action.answer) {
+            switch (action.request) {
                 case MapAppRemoteRequestType.LIST_DEVICES:
                     return { ...state, devices: action.devices };
                 case MapAppRemoteRequestType.CREATE_DEVICE: {
