@@ -1,14 +1,13 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
 
-export type MapAppDeviceRemoteAction = MapAppRemoteRequests;
+export type MapAppDeviceRemoteAction = MapAppRemoteRequests | MapAppRemoteAnswers;
 
 type MapAppRemoteRequests =
     | MapAppListDevicesRequest
     | MapAppCreateDeviceRequest
     | MapAppDeleteDeviceRequest
-    | MapAppApproveDeviceRequest
-    | MapAppDeviceRequestError;
+    | MapAppApproveDeviceRequest;
 
 export enum MapAppRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
@@ -68,6 +67,13 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
         id,
     };
 }
+
+type MapAppRemoteAnswers =
+    | MapAppSetDevices
+    | MapAppAddDevice
+    | MapAppDeleteDevice
+    | MapAppApproveDevice
+    | MapAppDeviceRequestError;
 
 export interface MapAppDeviceRequestError {
     type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR;

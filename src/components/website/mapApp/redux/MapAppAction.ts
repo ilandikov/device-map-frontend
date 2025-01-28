@@ -1,12 +1,6 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppAddress } from './MapAppState';
-import {
-    MapAppAddDevice,
-    MapAppApproveDevice,
-    MapAppDeleteDevice,
-    MapAppDeviceRemoteAction,
-    MapAppSetDevices,
-} from './MapAppRemoteActions';
+import { MapAppDeviceRemoteAction } from './MapAppRemoteActions';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',
@@ -39,11 +33,7 @@ export type MapAppAction =
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
-    | MapAppSetDevices
-    | MapAppAddDevice
-    | MapAppDeleteDevice
     | MapAppAuthCompleted
-    | MapAppApproveDevice
     | MapAppDeviceRemoteAction;
 
 export interface MapAppLoginModalCloseAction {
