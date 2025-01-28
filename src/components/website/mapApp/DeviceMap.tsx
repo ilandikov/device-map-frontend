@@ -5,13 +5,13 @@ import './DeviceMap.scss';
 import { useAppDispatch } from '../../../redux/store';
 import { UserLocationMarker } from './UserLocationMarker';
 import { DeviceLocationMarkers } from './DeviceLocation/DeviceLocationMarkers';
-import { MapAppRemoteRequestType, mapAppRemoteRequest } from './redux/MapAppAction';
+import { deviceListRequest } from './redux/DeviceAction';
 
 export function DeviceMap() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES));
+        dispatch(deviceListRequest());
     }, []);
 
     return (

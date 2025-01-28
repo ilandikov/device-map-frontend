@@ -3,12 +3,8 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { CreateDeviceItem } from '../CreateDeviceItem';
-import {
-    MapAppButton,
-    MapAppRemoteRequestType,
-    mapAppButtonClick,
-    mapAppRemoteRequest,
-} from '../../redux/MapAppAction';
+import { MapAppButton, mapAppButtonClick } from '../../redux/MapAppAction';
+import { deviceListRequest } from '../../redux/DeviceAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -34,7 +30,7 @@ describe('Create Device Item action tests', () => {
         const loginButton = getByTestId(container, 'createDeviceButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, deviceListRequest());
     });
 
     it('should dispatch show login modal on create account or login button click', () => {

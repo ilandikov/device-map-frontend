@@ -1,16 +1,16 @@
-import {
-    MapAppRemoteRequestType,
-    mapAppAddDevice,
-    mapAppApproveDevice,
-    mapAppApproveDeviceRequest,
-    mapAppDeleteDevice,
-    mapAppDeleteDeviceRequest,
-    mapAppRemoteErrorAnswer,
-    mapAppRemoteRequest,
-    mapAppSetDevices,
-} from '../../../mapApp/redux/MapAppAction';
 import { DevicesClient } from '../../../../../redux/store';
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
+import {
+    deviceApproveRequest,
+    deviceApproved,
+    deviceCreateRequest,
+    deviceCreated,
+    deviceDeleteRequest,
+    deviceDeleted,
+    deviceListRequest,
+    deviceRemoteError,
+    devicesListed,
+} from '../../../mapApp/redux/DeviceAction';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {
@@ -84,8 +84,8 @@ describe('devices epic test', () => {
 describe('devices - list devices', () => {
     it('should process a resolved promise', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
-        const expectedAction = mapAppSetDevices([
+        const sentAction = deviceListRequest();
+        const expectedAction = devicesListed([
             {
                 __typename: 'T22Device',
                 id: 'dev1',
@@ -104,8 +104,8 @@ describe('devices - list devices', () => {
 
     it('should process a rejected promise', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
-        const expectedAction = mapAppRemoteErrorAnswer('list devices went wrong');
+        const sentAction = deviceListRequest();
+        const expectedAction = deviceRemoteError('list devices went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
@@ -114,8 +114,8 @@ describe('devices - list devices', () => {
 describe('devices - create device', () => {
     it('should send action with the new device at selected marker location', async () => {
         const mapAppState = buildMapAppState({ selectedMarker: { location: { lat: 5, lon: 6 }, address: null } });
-        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
-        const expectedAction = mapAppAddDevice({
+        const sentAction = deviceCreateRequest();
+        const expectedAction = deviceCreated({
             id: 'testId',
             createdDate: '1796354896548',
             creatorID: 'new creator',
@@ -127,8 +127,8 @@ describe('devices - create device', () => {
 
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE);
-        const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');
+        const sentAction = deviceCreateRequest();
+        const expectedAction = deviceRemoteError('create device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
@@ -137,16 +137,16 @@ describe('devices - create device', () => {
 describe('devices - delete device', () => {
     it('should send action to delete device', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
-        const expectedAction = mapAppDeleteDevice('deleteThisOne');
+        const sentAction = deviceDeleteRequest('deleteThisOne');
+        const expectedAction = deviceDeleted('deleteThisOne');
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
 
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppDeleteDeviceRequest('deleteThisOne');
-        const expectedAction = mapAppRemoteErrorAnswer('delete device went wrong');
+        const sentAction = deviceDeleteRequest('deleteThisOne');
+        const expectedAction = deviceRemoteError('delete device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });
@@ -155,16 +155,16 @@ describe('devices - delete device', () => {
 describe('devices - approve device', () => {
     it('should send action to approve device', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppApproveDeviceRequest('approve me!');
-        const expectedAction = mapAppApproveDevice('approve me!', deviceCreationTimeStampFromBackend);
+        const sentAction = deviceApproveRequest('approve me!');
+        const expectedAction = deviceApproved('approve me!', deviceCreationTimeStampFromBackend);
 
         await testDevicesEpic(resolvingClient, mapAppState, sentAction, [expectedAction]);
     });
 
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppApproveDeviceRequest('approve me!');
-        const expectedAction = mapAppRemoteErrorAnswer('approve device went wrong');
+        const sentAction = deviceApproveRequest('approve me!');
+        const expectedAction = deviceRemoteError('approve device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);
     });

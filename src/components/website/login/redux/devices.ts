@@ -7,25 +7,27 @@ import {
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import {
-    MapAppAction,
-    MapAppActionType,
-    MapAppApproveDeviceRequest,
-    MapAppDeleteDeviceRequest,
-    MapAppRemoteRequest,
-    MapAppRemoteRequestType,
-    mapAppAddDevice,
-    mapAppApproveDevice,
-    mapAppDeleteDevice,
-    mapAppRemoteErrorAnswer,
-    mapAppSetDevices,
-} from '../../mapApp/redux/MapAppAction';
+import { MapAppAction } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
 import { MapAppState } from '../../mapApp/redux/MapAppState';
+import {
+    DeviceActionType,
+    DeviceApproveRequest,
+    DeviceCreateRequest,
+    DeviceDeleteRequest,
+    DeviceListRequest,
+    DeviceRemoteRequest,
+    DeviceRemoteRequestType,
+    deviceApproved,
+    deviceCreated,
+    deviceDeleted,
+    deviceRemoteError,
+    devicesListed,
+} from '../../mapApp/redux/DeviceAction';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.MAP_APP_REMOTE_REQUEST),
+        ofType(DeviceActionType.DEVICE_REMOTE_REQUEST),
         switchMap((action) => {
             const request = devicesRequests[action.request];
             if (!request) {
@@ -34,37 +36,45 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
 
             return fromPromise(request.call(devicesClient, $state.value.mapAppState, action)).pipe(
                 mergeMap(request.responseToAction),
-                catchError((error) => of(mapAppRemoteErrorAnswer(error))),
+                catchError((error) => of(deviceRemoteError(error))),
             );
         }),
     );
 
-type DevicesRequest<TResponse, TRequestAction = MapAppRemoteRequest> = {
+type DevicesRequest<TResponse, TRequestAction> = {
     call: (client: DevicesClient, state: MapAppState, action: TRequestAction) => Promise<TResponse>;
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };
 
-const listDevicesRequest: DevicesRequest<T22ListDevicesResponse> = {
+const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, DeviceListRequest> = {
     call: (client, _) => client.forAnonymousUser.listDevices(),
-    responseToAction: (response) => of(mapAppSetDevices(response.devices)),
+    responseToAction: (response) => of(devicesListed(response.devices)),
 };
 
-const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse> = {
+const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse, DeviceCreateRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
-    responseToAction: (response) => of(mapAppAddDevice(response.device)),
+    responseToAction: (response) => of(deviceCreated(response.device)),
 };
 
-const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, MapAppDeleteDeviceRequest> = {
+const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, DeviceDeleteRequest> = {
     call: (client, _, action) => client.forAuthenticatedUser.deleteDevice({ id: action.id }),
-    responseToAction: (response) => of(mapAppDeleteDevice(response.id)),
+    responseToAction: (response) => of(deviceDeleted(response.id)),
 };
 
-const approveDevice: DevicesRequest<T22ApproveDeviceResponse, MapAppApproveDeviceRequest> = {
+const approveDevice: DevicesRequest<T22ApproveDeviceResponse, DeviceApproveRequest> = {
     call: (client, _, action) => client.forAuthenticatedUser.approveDevice({ id: action.id }),
-    responseToAction: (response) => of(mapAppApproveDevice(response.id, response.lastUpdate)),
+    responseToAction: (response) => of(deviceApproved(response.id, response.lastUpdate)),
 };
 
-const devicesRequests: { [key in MapAppRemoteRequestType]: DevicesRequest<any> } = {
+type DeviceRemoteResponse =
+    | T22ListDevicesResponse
+    | T22CreateDeviceResponse
+    | T22DeleteDeviceResponse
+    | T22ApproveDeviceResponse;
+
+const devicesRequests: {
+    [key in DeviceRemoteRequestType]: DevicesRequest<DeviceRemoteResponse, DeviceRemoteRequest>;
+} = {
     LIST_DEVICES: listDevicesRequest,
     CREATE_DEVICE: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,

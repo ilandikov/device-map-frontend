@@ -2,8 +2,8 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
-import { mapAppApproveDeviceRequest } from '../../redux/MapAppAction';
 import { ApproveButton } from '../ApproveButton';
+import { deviceApproveRequest } from '../../redux/DeviceAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -22,6 +22,6 @@ describe('ApproveButton action tests', () => {
         const loginButton = getByTestId(container, 'approveDeviceButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppApproveDeviceRequest('try to approve me'));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, deviceApproveRequest('try to approve me'));
     });
 });

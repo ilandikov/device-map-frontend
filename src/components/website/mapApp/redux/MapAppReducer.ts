@@ -1,7 +1,8 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppAction, MapAppActionType, MapAppRemoteAnswerType } from './MapAppAction';
+import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
 import { afterButtonClicked } from './AfterButtonClicked';
+import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './DeviceAction';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
@@ -27,32 +28,37 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.REMOTE_ANSWER:
-            switch (action.answer) {
-                case MapAppRemoteAnswerType.DEVICES_LISTED:
-                    return { ...state, devices: action.devices };
-                case MapAppRemoteAnswerType.DEVICE_CREATED: {
-                    return { ...state, devices: [...state.devices, action.device] };
-                }
-                default:
-                    return state;
-            }
-        case MapAppActionType.DELETE_DEVICE:
-            return {
-                ...state,
-                devices: state.devices.filter((device) => device.id !== action.id),
-            };
-        case MapAppActionType.MAP_APP_APPROVE_DEVICE: {
-            const deviceToApprove = state.devices.find((device) => device.id === action.id);
+        case DeviceActionType.DEVICE_REMOTE_ANSWER:
+            return { ...state, devices: deviceReducer(state.devices, action) };
+        default:
+            return state;
+    }
+}
+
+function deviceReducer(devices: T22Device[], action: DeviceAction): T22Device[] {
+    if (action.type !== DeviceActionType.DEVICE_REMOTE_ANSWER) {
+        return devices;
+    }
+
+    switch (action.request) {
+        case DeviceRemoteRequestType.LIST_DEVICES:
+            return action.devices;
+        case DeviceRemoteRequestType.CREATE_DEVICE: {
+            return [...devices, action.device];
+        }
+        case DeviceRemoteRequestType.DELETE_DEVICE:
+            return devices.filter((device) => device.id !== action.id);
+        case DeviceRemoteRequestType.APPROVE_DEVICE: {
+            const deviceToApprove = devices.find((device) => device.id === action.id);
             const approvedDevice: T22Device = {
                 ...deviceToApprove,
                 lastUpdate: action.lastUpdate,
                 approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
             };
-            const withoutApprovedDevice = state.devices.filter((device) => device.id !== action.id);
-            return { ...state, devices: [...withoutApprovedDevice, approvedDevice] };
+            const withoutApprovedDevice = devices.filter((device) => device.id !== action.id);
+            return [...withoutApprovedDevice, approvedDevice];
         }
         default:
-            return state;
+            return devices;
     }
 }
