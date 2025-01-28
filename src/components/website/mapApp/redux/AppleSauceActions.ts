@@ -9,7 +9,7 @@ export enum MapAppRemoteRequestType {
 
 export interface MapAppListDevicesRemoteRequest {
     type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
-    request: MapAppRemoteRequestType;
+    request: MapAppRemoteRequestType.LIST_DEVICES;
 }
 
 export interface MapAppCreateDeviceRequest {
@@ -29,8 +29,11 @@ export interface MapAppApproveDeviceRequest {
     id: string;
 }
 
-export function mapAppListDevicesRequest(request: MapAppRemoteRequestType): MapAppListDevicesRemoteRequest {
-    return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
+export function mapAppListDevicesRequest(_request: MapAppRemoteRequestType): MapAppListDevicesRemoteRequest {
+    return {
+        type: MapAppActionType.MAP_APP_REMOTE_REQUEST,
+        request: MapAppRemoteRequestType.LIST_DEVICES,
+    };
 }
 
 export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {

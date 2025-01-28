@@ -10,6 +10,7 @@ import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import {
     MapAppRemoteRequestType,
     mapAppApproveDeviceRequest,
+    mapAppCreateDeviceRequest,
     mapAppDeleteDeviceRequest,
     mapAppListDevicesRequest,
 } from '../../../mapApp/redux/AppleSauceActions';
@@ -116,7 +117,7 @@ describe('devices - list devices', () => {
 describe('devices - create device', () => {
     it('should send action with the new device at selected marker location', async () => {
         const mapAppState = buildMapAppState({ selectedMarker: { location: { lat: 5, lon: 6 }, address: null } });
-        const sentAction = mapAppListDevicesRequest(MapAppRemoteRequestType.CREATE_DEVICE);
+        const sentAction = mapAppCreateDeviceRequest();
         const expectedAction = mapAppAddDevice({
             id: 'testId',
             createdDate: '1796354896548',
@@ -129,7 +130,7 @@ describe('devices - create device', () => {
 
     it('should notify about the error', async () => {
         const mapAppState = buildMapAppState({});
-        const sentAction = mapAppListDevicesRequest(MapAppRemoteRequestType.CREATE_DEVICE);
+        const sentAction = mapAppCreateDeviceRequest();
         const expectedAction = mapAppRemoteErrorAnswer('create device went wrong');
 
         await testDevicesEpic(rejectingClient, mapAppState, sentAction, [expectedAction]);

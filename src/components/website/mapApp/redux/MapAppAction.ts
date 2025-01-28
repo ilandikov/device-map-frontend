@@ -3,6 +3,7 @@ import { MapAppAddress } from './MapAppState';
 import {
     MapAppApproveDeviceRequest,
     MapAppCreateDeviceRequest,
+    MapAppDeleteDeviceRequest,
     MapAppListDevicesRemoteRequest,
 } from './AppleSauceActions';
 
@@ -45,7 +46,8 @@ export type MapAppAction =
     | MapAppRemoteErrorAnswer
     | MapAppAuthCompleted
     | MapAppApproveDeviceRequest
-    | MapAppApproveDevice;
+    | MapAppApproveDevice
+    | MapAppDeleteDeviceRequest;
 
 export interface MapAppLoginModalCloseAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE;
