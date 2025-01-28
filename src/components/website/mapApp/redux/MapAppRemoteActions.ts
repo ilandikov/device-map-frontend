@@ -75,15 +75,6 @@ type MapAppRemoteAnswers =
     | MapAppApproveDevice
     | MapAppDeviceRequestError;
 
-export interface MapAppDeviceRequestError {
-    type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR;
-    error: string;
-}
-
-export function mapAppRemoteErrorAnswer(error: string): MapAppDeviceRequestError {
-    return { type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR, error };
-}
-
 export interface MapAppSetDevices {
     type: MapAppActionType.MAP_APP_REMOTE_ANSWER;
     answer: MapAppRemoteAnswerType.DEVICES_LISTED;
@@ -107,6 +98,11 @@ export interface MapAppApproveDevice {
     answer: MapAppRemoteAnswerType.DEVICE_APPROVED;
     id: string;
     lastUpdate: number;
+}
+
+export interface MapAppDeviceRequestError {
+    type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR;
+    error: string;
 }
 
 export function mapAppSetDevices(devices: T22Device[]): MapAppSetDevices {
@@ -140,4 +136,8 @@ export function mapAppApproveDevice(id: string, lastUpdate: number): MapAppAppro
         id,
         lastUpdate,
     };
+}
+
+export function mapAppRemoteErrorAnswer(error: string): MapAppDeviceRequestError {
+    return { type: MapAppActionType.MAP_APP_DEVICE_REQUEST_ERROR, error };
 }
