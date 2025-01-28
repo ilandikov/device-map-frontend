@@ -29,7 +29,7 @@ export interface MapAppApproveDeviceRequest {
     id: string;
 }
 
-export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppListDevicesRemoteRequest {
+export function mapAppListDevicesRequest(request: MapAppRemoteRequestType): MapAppListDevicesRemoteRequest {
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 

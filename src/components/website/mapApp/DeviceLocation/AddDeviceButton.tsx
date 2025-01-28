@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../../redux/store';
-import { MapAppRemoteRequestType, mapAppRemoteRequest } from '../redux/AppleSauceActions';
+import { MapAppRemoteRequestType, mapAppListDevicesRequest } from '../redux/AppleSauceActions';
 
 export function AddDeviceButton() {
     const { t } = useI18next();
@@ -10,7 +10,7 @@ export function AddDeviceButton() {
     return (
         <button
             data-testid="createDeviceButton"
-            onClick={() => dispatch(mapAppRemoteRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
+            onClick={() => dispatch(mapAppListDevicesRequest(MapAppRemoteRequestType.CREATE_DEVICE))}
         >
             {t('deviceAddDevice')}
         </button>

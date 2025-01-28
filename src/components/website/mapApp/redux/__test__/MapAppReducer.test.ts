@@ -14,7 +14,7 @@ import {
     mapAppSetLocationCoordinates,
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
-import { MapAppRemoteRequestType, mapAppCreateDeviceRequest, mapAppRemoteRequest } from '../AppleSauceActions';
+import { MapAppRemoteRequestType, mapAppCreateDeviceRequest, mapAppListDevicesRequest } from '../AppleSauceActions';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);
@@ -111,7 +111,7 @@ describe('MapApp reducer tests', () => {
 
     it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppRemoteRequest(MapAppRemoteRequestType.LIST_DEVICES);
+        const action = mapAppListDevicesRequest(MapAppRemoteRequestType.LIST_DEVICES);
 
         testMapAppStateChange(initialState, action, {});
     });
