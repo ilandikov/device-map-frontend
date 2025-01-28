@@ -73,7 +73,11 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
     };
 }
 
-type MapAppDeviceRemoteAnswer = MapAppDevicesListed | MapAppDeviceCreated | MapAppDeviceDeleted | MapAppDeviceApproved;
+export type MapAppDeviceRemoteAnswer =
+    | MapAppDevicesListed
+    | MapAppDeviceCreated
+    | MapAppDeviceDeleted
+    | MapAppDeviceApproved;
 
 export interface MapAppDevicesListed {
     type: MapAppDeviceActionType.MAP_APP_DEVICE_REMOTE_ANSWER;
