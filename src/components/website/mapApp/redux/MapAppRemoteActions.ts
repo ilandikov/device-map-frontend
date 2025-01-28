@@ -8,7 +8,9 @@ export enum MapAppRemoteRequestType {
     APPROVE_DEVICE = 'APPROVE_DEVICE',
 }
 
-export type MapAppDeviceRemoteAction =
+export type MapAppDeviceRemoteAction = MapAppRemoteRequests;
+
+type MapAppRemoteRequests =
     | MapAppListDevicesRequest
     | MapAppCreateDeviceRequest
     | MapAppDeleteDeviceRequest
