@@ -12,7 +12,7 @@ import {
     MapAppActionType,
     MapAppApproveDeviceRequest,
     MapAppDeleteDeviceRequest,
-    MapAppRemoteRequest,
+    MapAppListDevicesRemoteRequest,
     MapAppRemoteRequestType,
     mapAppAddDevice,
     mapAppApproveDevice,
@@ -39,7 +39,7 @@ export const devices: RootEpic = (action$, $state, { devicesClient }) =>
         }),
     );
 
-type DevicesRequest<TResponse, TRequestAction = MapAppRemoteRequest> = {
+type DevicesRequest<TResponse, TRequestAction = MapAppListDevicesRemoteRequest> = {
     call: (client: DevicesClient, state: MapAppState, action: TRequestAction) => Promise<TResponse>;
     responseToAction: (response: TResponse) => Observable<MapAppAction>;
 };

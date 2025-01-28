@@ -39,7 +39,7 @@ export type MapAppAction =
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
-    | MapAppRemoteRequest
+    | MapAppListDevicesRemoteRequest
     | MapAppCreateDeviceRequest
     | MapAppSetDevices
     | MapAppAddDevice
@@ -102,7 +102,7 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
 }
 
-export interface MapAppRemoteRequest {
+export interface MapAppListDevicesRemoteRequest {
     type: MapAppActionType.MAP_APP_REMOTE_REQUEST;
     request: MapAppRemoteRequestType;
 }
@@ -135,11 +135,11 @@ export function mapAppAddDevice(device: T22Device): MapAppAddDevice {
     };
 }
 
-export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppRemoteRequest {
+export function mapAppRemoteRequest(request: MapAppRemoteRequestType): MapAppListDevicesRemoteRequest {
     return { type: MapAppActionType.MAP_APP_REMOTE_REQUEST, request };
 }
 
-interface MapAppCreateDeviceRequest extends MapAppRemoteRequest {}
+interface MapAppCreateDeviceRequest extends MapAppListDevicesRemoteRequest {}
 
 export function mapAppCreateDeviceRequest(): MapAppCreateDeviceRequest {
     return {
@@ -166,7 +166,7 @@ export function mapAppDeleteDevice(id: string): MapAppDeleteDevice {
     return { type: MapAppActionType.DELETE_DEVICE, id };
 }
 
-export interface MapAppDeleteDeviceRequest extends MapAppRemoteRequest {
+export interface MapAppDeleteDeviceRequest extends MapAppListDevicesRemoteRequest {
     id: string;
 }
 
