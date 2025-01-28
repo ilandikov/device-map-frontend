@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../../redux/store';
-import { deviceListRequest } from '../redux/MapAppRemoteActions';
+import { deviceListRequest } from '../redux/DeviceAction';
 
 export function AddDeviceButton() {
     const { t } = useI18next();

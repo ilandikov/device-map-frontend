@@ -23,7 +23,7 @@ import {
     deviceDeleted,
     deviceRemoteError,
     devicesListed,
-} from '../../mapApp/redux/MapAppRemoteActions';
+} from '../../mapApp/redux/DeviceAction';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(

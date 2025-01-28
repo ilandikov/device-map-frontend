@@ -1,6 +1,6 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppAddress } from './MapAppState';
-import { DeviceAction } from './MapAppRemoteActions';
+import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
     BUTTON_CLICK = 'BUTTON_CLICK',

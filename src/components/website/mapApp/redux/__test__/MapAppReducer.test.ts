@@ -17,7 +17,7 @@ import {
     deviceDeleted,
     deviceListRequest,
     devicesListed,
-} from '../MapAppRemoteActions';
+} from '../DeviceAction';
 
 function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(initialState, action);
