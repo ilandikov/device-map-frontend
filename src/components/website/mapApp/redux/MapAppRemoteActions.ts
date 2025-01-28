@@ -1,6 +1,6 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 
-export type MapAppDeviceRemoteAction = MapAppRemoteRequests | MapAppRemoteAnswers;
+export type MapAppDeviceRemoteAction = MapAppRemoteRequests | MapAppRemoteAnswer;
 
 type MapAppRemoteRequests =
     | MapAppListDevicesRequest
@@ -73,7 +73,7 @@ export function mapAppApproveDeviceRequest(id: string): MapAppApproveDeviceReque
     };
 }
 
-type MapAppRemoteAnswers =
+type MapAppRemoteAnswer =
     | MapAppDevicesListed
     | MapAppDeviceCreated
     | MapAppDeviceDeleted
