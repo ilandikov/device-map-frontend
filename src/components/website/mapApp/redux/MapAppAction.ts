@@ -11,7 +11,7 @@ export enum MapAppActionType {
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     // TODO do something about all these actions. Probably split this state into several states, map app state to manage only windows
     MAP_APP_DEVICE_REMOTE_REQUEST = 'MAP_APP_DEVICE_REMOTE_REQUEST',
-    MAP_APP_REMOTE_ANSWER = 'MAP_APP_REMOTE_ANSWER',
+    MAP_APP_DEVICE_REMOTE_ANSWER = 'MAP_APP_DEVICE_REMOTE_ANSWER',
     MAP_APP_DEVICE_REQUEST_ERROR = 'MAP_APP_DEVICE_REQUEST_ERROR',
 }
 
