@@ -1,11 +1,25 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
-import { mapAppGetUserPoints, mapAppGetUserPointsError, mapAppSetUserPoints } from '../../../mapApp/redux/MapAppAction';
+import { Observable, lastValueFrom, of, toArray } from 'rxjs';
+import {
+    MapAppAction,
+    mapAppGetUserPoints,
+    mapAppGetUserPointsError,
+    mapAppSetUserPoints,
+} from '../../../mapApp/redux/MapAppAction';
 import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBuilders';
-import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
+import { MapAppState, buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { user } from '../User';
 
 const userResolvingClient = () => Promise.resolve({ points: 320 });
 const userRejectingClient = () => Promise.reject('could not get user points');
+
+async function testUserEpic(action: Observable<MapAppAction>, initialState: MapAppState, expectedAction: MapAppAction) {
+    const output$ = user(action, buildStateForDevicesTest(initialState), {
+        userClient: userResolvingClient,
+    });
+
+    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
+    expect(receivedAction).toEqual([expectedAction]);
+}
 
 describe('user epic tests', () => {
     it('should get user points', async () => {
@@ -13,12 +27,7 @@ describe('user epic tests', () => {
         const action = of(mapAppGetUserPoints());
         const expectedAction = mapAppSetUserPoints(320);
 
-        const output$ = user(action, buildStateForDevicesTest(initialState), {
-            userClient: userResolvingClient,
-        });
-
-        const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-        expect(receivedAction).toEqual([expectedAction]);
+        await testUserEpic(action, initialState, expectedAction);
     });
 
     it('should report remote error', async () => {
