@@ -28,6 +28,7 @@ export type MapAppAction =
     | MapAppAuthCompleted
     | MapAppGetUserPoints
     | MapAppSetUserPoints
+    | MapAppGetUserPointsError
     | DeviceAction;
 
 export interface MapAppLoginModalCloseAction {

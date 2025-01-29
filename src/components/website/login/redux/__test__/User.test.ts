@@ -10,18 +10,22 @@ describe('user epic tests', () => {
         const action = of(mapAppGetUserPoints('fake user id'));
         const expectedAction = mapAppSetUserPoints(320);
 
-        const output$ = user(action, buildStateForDevicesTest(initialState), {});
+        const output$ = user(action, buildStateForDevicesTest(initialState), {
+            userClient: () => Promise.resolve({ points: 320 }),
+        });
 
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
         expect(receivedAction).toEqual([expectedAction]);
     });
 
-    it.failing('should report remote error', async () => {
+    it('should report remote error', async () => {
         const initialState = buildMapAppState({});
         const action = of(mapAppGetUserPoints('i should be rejected'));
         const expectedAction = mapAppGetUserPointsError('could not get user points');
 
-        const output$ = user(action, buildStateForDevicesTest(initialState), {});
+        const output$ = user(action, buildStateForDevicesTest(initialState), {
+            userClient: () => Promise.reject('could not get user points'),
+        });
 
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
         expect(receivedAction).toEqual([expectedAction]);
