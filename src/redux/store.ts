@@ -40,6 +40,7 @@ import {
 } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
+import { user } from '../components/website/login/redux/User';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -74,7 +75,7 @@ export type Dependencies = {
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 
-const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
+const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices, user);
 
 export function createStore() {
     const apolloClient = new ApolloClient({
