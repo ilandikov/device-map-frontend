@@ -37,7 +37,7 @@ function getSuccessActions(step: AuthenticationStep, response: any): AllActions[
         return [
             loginModalRemoteAnswerSuccess(),
             mapAppAuthenticationCompleted(response.session.idToken.payload.sub),
-            mapAppGetUserPoints(response.session.idToken.payload.sub),
+            mapAppGetUserPoints(),
         ];
     }
 

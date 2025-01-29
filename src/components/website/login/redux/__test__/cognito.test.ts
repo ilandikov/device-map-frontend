@@ -53,7 +53,7 @@ describe('user sign in tests', () => {
             [
                 loginModalRemoteAnswerSuccess(),
                 mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57'),
-                mapAppGetUserPoints('0636d777-7355-4fc4-899c-5a7268434a57'),
+                mapAppGetUserPoints(),
             ],
         ],
         [TestClient.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],

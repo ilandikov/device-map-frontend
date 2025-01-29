@@ -95,11 +95,10 @@ export function mapAppSetUserPoints(points: number): MapAppSetUserPoints {
 
 interface MapAppGetUserPoints {
     type: MapAppActionType.GET_USER_POINTS;
-    id: string;
 }
 
-export function mapAppGetUserPoints(id: string): MapAppGetUserPoints {
-    return { type: MapAppActionType.GET_USER_POINTS, id };
+export function mapAppGetUserPoints(): MapAppGetUserPoints {
+    return { type: MapAppActionType.GET_USER_POINTS };
 }
 
 interface MapAppGetUserPointsError {

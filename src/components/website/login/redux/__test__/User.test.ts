@@ -7,7 +7,7 @@ import { user } from '../User';
 describe('user epic tests', () => {
     it('should get user points', async () => {
         const initialState = buildMapAppState({});
-        const action = of(mapAppGetUserPoints('fake user id'));
+        const action = of(mapAppGetUserPoints());
         const expectedAction = mapAppSetUserPoints(320);
 
         const output$ = user(action, buildStateForDevicesTest(initialState), {
@@ -20,7 +20,7 @@ describe('user epic tests', () => {
 
     it('should report remote error', async () => {
         const initialState = buildMapAppState({});
-        const action = of(mapAppGetUserPoints('i should be rejected'));
+        const action = of(mapAppGetUserPoints());
         const expectedAction = mapAppGetUserPointsError('could not get user points');
 
         const output$ = user(action, buildStateForDevicesTest(initialState), {
