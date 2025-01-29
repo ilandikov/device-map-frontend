@@ -8,6 +8,7 @@ import {
     mapAppLoginModalClose,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
+    mapAppSetUserPoints,
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
 import {
@@ -110,6 +111,13 @@ describe('MapApp reducer tests', () => {
                 },
             },
         });
+    });
+
+    it('should set current user points', () => {
+        const initialState = buildMapAppState({});
+        const action = mapAppSetUserPoints(10);
+
+        testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
     });
 
     it('should not change state on list devices remote request', () => {
