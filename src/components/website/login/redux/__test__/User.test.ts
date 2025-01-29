@@ -41,11 +41,6 @@ describe('user epic tests', () => {
         const action = of(mapAppGetUserPoints());
         const expectedAction = mapAppGetUserPointsError('could not get user points');
 
-        const output$ = user(action, buildStateForDevicesTest(initialState), {
-            userClient: userRejectingClient,
-        });
-
-        const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-        expect(receivedAction).toEqual([expectedAction]);
+        await testUserEpic(userRejectingClient, action, initialState, expectedAction);
     });
 });
