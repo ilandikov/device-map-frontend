@@ -4,6 +4,9 @@ import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBu
 import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { user } from '../User';
 
+const userResolvingClient = () => Promise.resolve({ points: 320 });
+const userRejectingClient = () => Promise.reject('could not get user points');
+
 describe('user epic tests', () => {
     it('should get user points', async () => {
         const initialState = buildMapAppState({});
@@ -11,7 +14,7 @@ describe('user epic tests', () => {
         const expectedAction = mapAppSetUserPoints(320);
 
         const output$ = user(action, buildStateForDevicesTest(initialState), {
-            userClient: () => Promise.resolve({ points: 320 }),
+            userClient: userResolvingClient,
         });
 
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
@@ -24,7 +27,7 @@ describe('user epic tests', () => {
         const expectedAction = mapAppGetUserPointsError('could not get user points');
 
         const output$ = user(action, buildStateForDevicesTest(initialState), {
-            userClient: () => Promise.reject('could not get user points'),
+            userClient: userRejectingClient,
         });
 
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
