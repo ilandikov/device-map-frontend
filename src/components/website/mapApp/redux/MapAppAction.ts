@@ -11,6 +11,7 @@ export enum MapAppActionType {
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     SET_USER_POINTS = 'SET_USER_POINTS',
     GET_USER_POINTS = 'GET_USER_POINTS',
+    GET_USER_POINTS_ERROR = 'GET_USER_POINTS_ERROR',
 }
 
 export enum MapAppButton {
@@ -98,4 +99,13 @@ interface MapAppGetUserPoints {
 
 export function mapAppGetUserPoints(id: string): MapAppGetUserPoints {
     return { type: MapAppActionType.GET_USER_POINTS, id };
+}
+
+interface MapAppGetUserPointsError {
+    type: MapAppActionType.GET_USER_POINTS_ERROR;
+    error: string;
+}
+
+export function mapAppGetUserPointsError(error: string): MapAppGetUserPointsError {
+    return { type: MapAppActionType.GET_USER_POINTS_ERROR, error };
 }
