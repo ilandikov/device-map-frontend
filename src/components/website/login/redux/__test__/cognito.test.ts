@@ -1,6 +1,6 @@
 import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
-import { mapAppAuthenticationCompleted, mapAppSetUserPoints } from '../../../mapApp/redux/MapAppAction';
+import { mapAppAuthenticationCompleted, mapAppGetUserPoints } from '../../../mapApp/redux/MapAppAction';
 import { TestClient, testCognitoNoOutput, testCognitoOutputAction } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
@@ -53,7 +53,7 @@ describe('user sign in tests', () => {
             [
                 loginModalRemoteAnswerSuccess(),
                 mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57'),
-                mapAppSetUserPoints(320),
+                mapAppGetUserPoints('0636d777-7355-4fc4-899c-5a7268434a57'),
             ],
         ],
         [TestClient.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
