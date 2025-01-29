@@ -40,6 +40,7 @@ import {
 } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
+import { user } from '../components/website/login/redux/User';
 
 const rootReducer = combineReducers({
     getDevices,
@@ -64,16 +65,19 @@ export interface DevicesClient {
     };
 }
 
+export type UserClient = () => Promise<{ points: number }>;
+
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
+    userClient: UserClient;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
 
-const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices);
+const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices, user);
 
 export function createStore() {
     const apolloClient = new ApolloClient({
@@ -134,6 +138,7 @@ export function createStore() {
                     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
                     crossDomain: true,
                 }),
+            userClient: () => Promise.resolve({ points: 320 }),
         },
     });
 

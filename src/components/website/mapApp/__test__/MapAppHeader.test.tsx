@@ -18,8 +18,15 @@ describe('MapAppHeader snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at device management step', () => {
+    it('should match the snapshot at device management while waiting for user points', () => {
         mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        const component = renderForSnapshotTest(<MapAppHeader />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should match the snapshot at device management step after getting the user points', () => {
+        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT, currentUserPoints: 320 });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();

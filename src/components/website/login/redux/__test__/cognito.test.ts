@@ -1,6 +1,6 @@
 import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
-import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
+import { mapAppAuthenticationCompleted, mapAppGetUserPoints } from '../../../mapApp/redux/MapAppAction';
 import { TestClient, testCognitoNoOutput, testCognitoOutputAction } from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
@@ -50,7 +50,11 @@ describe('user sign in tests', () => {
         [
             TestClient.RESOLVING,
 
-            [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57')],
+            [
+                loginModalRemoteAnswerSuccess(),
+                mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57'),
+                mapAppGetUserPoints(),
+            ],
         ],
         [TestClient.REJECTING, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch login notification when remote answer is: %s', async (client, expectedAction) => {

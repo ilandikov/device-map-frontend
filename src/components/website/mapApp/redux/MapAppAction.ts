@@ -9,6 +9,9 @@ export enum MapAppActionType {
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
+    SET_USER_POINTS = 'SET_USER_POINTS',
+    GET_USER_POINTS = 'GET_USER_POINTS',
+    GET_USER_POINTS_ERROR = 'GET_USER_POINTS_ERROR',
 }
 
 export enum MapAppButton {
@@ -23,6 +26,9 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppAuthCompleted
+    | MapAppGetUserPoints
+    | MapAppSetUserPoints
+    | MapAppGetUserPointsError
     | DeviceAction;
 
 export interface MapAppLoginModalCloseAction {
@@ -76,4 +82,30 @@ export interface MapAppSetLocationAddress {
 
 export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
+}
+
+interface MapAppSetUserPoints {
+    type: MapAppActionType.SET_USER_POINTS;
+    points: number;
+}
+
+export function mapAppSetUserPoints(points: number): MapAppSetUserPoints {
+    return { type: MapAppActionType.SET_USER_POINTS, points };
+}
+
+interface MapAppGetUserPoints {
+    type: MapAppActionType.GET_USER_POINTS;
+}
+
+export function mapAppGetUserPoints(): MapAppGetUserPoints {
+    return { type: MapAppActionType.GET_USER_POINTS };
+}
+
+interface MapAppGetUserPointsError {
+    type: MapAppActionType.GET_USER_POINTS_ERROR;
+    error: string;
+}
+
+export function mapAppGetUserPointsError(error: string): MapAppGetUserPointsError {
+    return { type: MapAppActionType.GET_USER_POINTS_ERROR, error };
 }
