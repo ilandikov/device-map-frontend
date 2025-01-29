@@ -10,6 +10,7 @@ export enum MapAppActionType {
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     SET_USER_POINTS = 'SET_USER_POINTS',
+    GET_USER_POINTS = 'GET_USER_POINTS',
 }
 
 export enum MapAppButton {
@@ -24,6 +25,7 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppAuthCompleted
+    | MapAppGetUserPoints
     | MapAppSetUserPoints
     | DeviceAction;
 
@@ -87,4 +89,13 @@ interface MapAppSetUserPoints {
 
 export function mapAppSetUserPoints(points: number): MapAppSetUserPoints {
     return { type: MapAppActionType.SET_USER_POINTS, points };
+}
+
+interface MapAppGetUserPoints {
+    type: MapAppActionType.GET_USER_POINTS;
+    id: string;
+}
+
+export function mapAppGetUserPoints(id: string): MapAppGetUserPoints {
+    return { type: MapAppActionType.GET_USER_POINTS, id };
 }
