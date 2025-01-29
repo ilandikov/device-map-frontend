@@ -5,6 +5,7 @@ import {
     mapAppAuthenticationCompleted,
     mapAppButtonClick,
     mapAppGetLocationAddress,
+    mapAppGetUserPoints,
     mapAppLoginModalClose,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
@@ -111,6 +112,13 @@ describe('MapApp reducer tests', () => {
                 },
             },
         });
+    });
+
+    it('should reset current user points', () => {
+        const initialState = buildMapAppState({ currentUserPoints: 100500 });
+        const action = mapAppGetUserPoints();
+
+        testMapAppStateChange(initialState, action, { currentUserPoints: null });
     });
 
     it('should set current user points', () => {
