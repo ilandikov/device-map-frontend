@@ -54,3 +54,12 @@ export const approveDeviceMutation = gql`
         }
     }
 `;
+
+export const getUserQuery = gql`
+    query {
+        T22GetUser {
+            id
+            points
+        }
+    }
+`;

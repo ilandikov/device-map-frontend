@@ -21,6 +21,7 @@ import {
     T22CreateDeviceResponse,
     T22DeleteDeviceInput,
     T22DeleteDeviceResponse,
+    T22GetUserResponse,
     T22ListDevicesResponse,
     T22Location,
 } from '@mancho-school-t22/graphql-types';
@@ -36,6 +37,7 @@ import {
     approveDeviceMutation,
     createDeviceMutation,
     deleteDeviceMutation,
+    getUserQuery,
     listDevicesQuery,
 } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
@@ -65,13 +67,15 @@ export interface DevicesClient {
     };
 }
 
-export type UserClient = () => Promise<{ points: number }>;
+export type UsersClient = () => Promise<T22GetUserResponse>;
 
+// TODO rename this to something like Clients and remote Client from each field
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
+    // TODO extract type
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
-    userClient: UserClient;
+    usersClient?: UsersClient;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
@@ -111,9 +115,11 @@ export function createStore() {
                     createDevice: async (createDeviceInput) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
+                                // TODO extract all these arguments to functions that build the query
                                 mutation: createDeviceMutation,
                                 variables: { input: createDeviceInput },
                             })
+                            // TODO extract this in a function and reuse in every then()
                             .then((response) => response.data.T22CreateDevice),
                     deleteDevice: async (deleteDeviceInput: T22DeleteDeviceInput) =>
                         (await setAuthenticatedClient())
@@ -138,7 +144,10 @@ export function createStore() {
                     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
                     crossDomain: true,
                 }),
-            userClient: () => Promise.resolve({ points: 320 }),
+            usersClient: async () =>
+                (await setAuthenticatedClient())
+                    .query<Query>({ query: getUserQuery })
+                    .then((response) => response.data.T22GetUser),
         },
     });
 

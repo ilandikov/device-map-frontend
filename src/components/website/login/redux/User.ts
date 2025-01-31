@@ -4,11 +4,11 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { RootEpic } from '../../../../redux/store';
 import { MapAppActionType, mapAppGetUserPointsError, mapAppSetUserPoints } from '../../mapApp/redux/MapAppAction';
 
-export const user: RootEpic = (action$, _, { userClient }) =>
+export const user: RootEpic = (action$, _, { usersClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_USER_POINTS),
         switchMap(() =>
-            fromPromise(userClient()).pipe(
+            fromPromise(usersClient()).pipe(
                 mergeMap((response) => of(mapAppSetUserPoints(response.points))),
                 catchError((error) => of(mapAppGetUserPointsError(error))),
             ),
