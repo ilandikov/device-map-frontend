@@ -71,7 +71,7 @@ export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
-    userClient: UserClient;
+    userClient?: UserClient;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
