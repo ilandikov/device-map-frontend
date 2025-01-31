@@ -11,7 +11,7 @@ export const userRejectingClient = () => Promise.reject('could not get user poin
 export async function testUserEpic(userClient: UserClient, action: MapAppAction, expectedAction: MapAppAction) {
     const initialState = buildMapAppState({});
     const output$ = user(of(action), buildStateForDevicesTest(initialState), {
-        userClient,
+        usersClient: userClient,
     });
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));

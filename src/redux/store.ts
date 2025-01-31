@@ -72,7 +72,7 @@ export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
-    userClient?: UserClient;
+    usersClient?: UserClient;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
@@ -139,7 +139,7 @@ export function createStore() {
                     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
                     crossDomain: true,
                 }),
-            userClient: () => Promise.resolve({ id: '', points: 320 }),
+            usersClient: () => Promise.resolve({ id: '', points: 320 }),
         },
     });
 
