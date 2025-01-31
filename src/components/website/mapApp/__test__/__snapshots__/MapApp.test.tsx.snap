@@ -54,11 +54,6 @@ exports[`MapApp snapshot tests should match the snapshot at device management st
         >
           320
         </span>
-        <span
-          className="user-points"
-        >
-          points
-        </span>
       </div>
       <div
         className="map-app-header-block"
