@@ -66,7 +66,7 @@ export interface DevicesClient {
     };
 }
 
-export type UserClient = () => Promise<T22GetUserResponse>;
+export type UsersClient = () => Promise<T22GetUserResponse>;
 
 // TODO rename this to something like Clients and remote Client from each field
 export type Dependencies = {
@@ -74,7 +74,7 @@ export type Dependencies = {
     devicesClient?: DevicesClient;
     // TODO extract type
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
-    usersClient?: UserClient;
+    usersClient?: UsersClient;
 };
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
