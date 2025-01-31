@@ -68,9 +68,11 @@ export interface DevicesClient {
 
 export type UserClient = () => Promise<T22GetUserResponse>;
 
+// TODO rename this to something like Clients and remote Client from each field
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
+    // TODO extract type
     geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
     usersClient?: UserClient;
 };
