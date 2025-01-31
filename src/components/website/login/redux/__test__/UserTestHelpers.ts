@@ -5,7 +5,7 @@ import { buildMapAppState } from '../../../mapApp/redux/MapAppState';
 import { user } from '../User';
 import { buildStateForDevicesTest } from '../../../../../redux/__mocks__/stateBuilders';
 
-export const userResolvingClient = () => Promise.resolve({ points: 320 });
+export const userResolvingClient = () => Promise.resolve({ id: 'testUserId', points: 320 });
 export const userRejectingClient = () => Promise.reject('could not get user points');
 
 export async function testUserEpic(userClient: UserClient, action: MapAppAction, expectedAction: MapAppAction) {

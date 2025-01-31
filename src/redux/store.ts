@@ -21,6 +21,7 @@ import {
     T22CreateDeviceResponse,
     T22DeleteDeviceInput,
     T22DeleteDeviceResponse,
+    T22GetUserResponse,
     T22ListDevicesResponse,
     T22Location,
 } from '@mancho-school-t22/graphql-types';
@@ -65,7 +66,7 @@ export interface DevicesClient {
     };
 }
 
-export type UserClient = () => Promise<{ points: number }>;
+export type UserClient = () => Promise<T22GetUserResponse>;
 
 export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
@@ -138,7 +139,7 @@ export function createStore() {
                     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
                     crossDomain: true,
                 }),
-            userClient: () => Promise.resolve({ points: 320 }),
+            userClient: () => Promise.resolve({ id: '', points: 320 }),
         },
     });
 
