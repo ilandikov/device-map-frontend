@@ -9,12 +9,12 @@ export function UserPoints(props: { className: string }) {
     return (
         <div className={`${props.className} user-points-header-block`}>
             <img src={Points} alt="user-points-image" />
-            {currentUserPoints !== null ? (
-                <span className="user-points">{currentUserPoints}</span>
-            ) : (
+            {currentUserPoints === null ? (
                 <div className="user-points-loader-container">
                     <FinikLoader />
                 </div>
+            ) : (
+                <span className="user-points">{currentUserPoints}</span>
             )}
         </div>
     );
