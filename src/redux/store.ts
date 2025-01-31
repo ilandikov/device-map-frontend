@@ -37,6 +37,7 @@ import {
     approveDeviceMutation,
     createDeviceMutation,
     deleteDeviceMutation,
+    getUserQuery,
     listDevicesQuery,
 } from '../components/website/login/redux/devicesHelpers';
 import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
@@ -141,7 +142,10 @@ export function createStore() {
                     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
                     crossDomain: true,
                 }),
-            usersClient: () => Promise.resolve({ id: '', points: 320 }),
+            usersClient: async () =>
+                (await setAuthenticatedClient())
+                    .query<Query>({ query: getUserQuery })
+                    .then((response) => response.data.T22GetUser),
         },
     });
 
