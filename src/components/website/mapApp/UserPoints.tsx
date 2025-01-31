@@ -1,7 +1,7 @@
 import React from 'react';
 import Points from '/src/assets/images/Points.svg';
-import { FinikLoader } from '../common/FinikLoader';
 import { useMapAppState } from './redux/MapAppState';
+import { UserPointsLoader } from './UserPointsLoader';
 
 export function UserPoints(props: { className: string }) {
     const { currentUserPoints } = useMapAppState();
@@ -9,14 +9,10 @@ export function UserPoints(props: { className: string }) {
     return (
         <div className={`${props.className} user-points-header-block`}>
             <img src={Points} alt="user-points-image" />
-            {currentUserPoints !== null ? (
-                <>
-                    <span className="user-points">{currentUserPoints}</span>
-                </>
+            {currentUserPoints === null ? (
+                <UserPointsLoader />
             ) : (
-                <div className="user-points-loader-container">
-                    <FinikLoader />
-                </div>
+                <span className="user-points">{currentUserPoints}</span>
             )}
         </div>
     );
