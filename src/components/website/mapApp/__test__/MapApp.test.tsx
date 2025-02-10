@@ -32,7 +32,6 @@ describe('MapApp snapshot tests', () => {
     it('should match the snapshot at device management state', () => {
         mockMapAppState({
             usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
-            currentUserPoints: 320,
         });
         const component = renderForSnapshotTest(<MapApp />);
 
