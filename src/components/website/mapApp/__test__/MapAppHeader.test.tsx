@@ -10,14 +10,14 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('MapAppHeader snapshot tests', () => {
-    it('should match the snapshot at the initial state', () => {
+    it('should match the snapshot before the user is logged in', () => {
         mockMapAppState({ currentUserID: null });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at device management step', () => {
+    it('should match the snapshot when the user is logged in', () => {
         mockMapAppState({ currentUserID: 'i am logged in' });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
