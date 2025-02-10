@@ -1,4 +1,5 @@
 import React from 'react';
+import { ComponentMap } from '../mapApp/MapApp';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
@@ -24,7 +25,7 @@ export function LoginModal() {
         AuthenticationStep.PASSWORD_RESET_REQUEST,
     ].includes(authenticationStep);
 
-    const authenticationComponents: { [key in AuthenticationStep]: React.ReactElement } = {
+    const authenticationComponents: ComponentMap<AuthenticationStep> = {
         WELCOME: <WelcomeForm />,
         // Sign up
         MAIL_INPUT: <MailInputForm />,

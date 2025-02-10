@@ -12,7 +12,7 @@ import { DeviceLocation } from './DeviceLocation/DeviceLocation';
 
 type EnumConstraint = string | number | symbol;
 
-type ComponentMap<TStep extends EnumConstraint> = {
+export type ComponentMap<TStep extends EnumConstraint> = {
     [key in TStep]: React.ReactElement;
 };
 
