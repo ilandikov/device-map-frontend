@@ -2,6 +2,7 @@
 import React from 'react';
 
 import './MapApp.scss';
+import { ComponentMap } from '../common/ComponentMap';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
@@ -9,12 +10,6 @@ import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
 import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
 import { DeviceLocation } from './DeviceLocation/DeviceLocation';
-
-type EnumConstraint = string | number | symbol;
-
-export type ComponentMap<TStep extends EnumConstraint> = {
-    [key in TStep]: React.ReactElement;
-};
 
 export default function MapApp() {
     const mapAppState = useMapAppState();

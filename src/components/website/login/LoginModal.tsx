@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMap } from '../mapApp/MapApp';
+import { ComponentMap } from '../common/ComponentMap';
 import { MailInputForm } from './MailInputForm';
 import { PasswordCreationForm } from './PasswordCreationForm';
 import { OTPForm } from './OTPForm';
