@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserPoints snapshot tests should match the snapshot after getting the user points 1`] = `
+<div
+  className="map-app-header-block user-points-header-block"
+>
+  <img
+    alt="user-points-image"
+    src="test-file-stub"
+  />
+  <div
+    className="user-points-loader-container"
+  >
+    <div
+      className="finik-loader"
+    />
+  </div>
+</div>
+`;
+
+exports[`UserPoints snapshot tests should match the snapshot while waiting for user points 1`] = `
+<div
+  className="map-app-header-block user-points-header-block"
+>
+  <img
+    alt="user-points-image"
+    src="test-file-stub"
+  />
+  <div
+    className="user-points-loader-container"
+  >
+    <div
+      className="finik-loader"
+    />
+  </div>
+</div>
+`;

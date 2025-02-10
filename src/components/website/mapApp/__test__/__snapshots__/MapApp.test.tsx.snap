@@ -49,11 +49,13 @@ exports[`MapApp snapshot tests should match the snapshot at device management st
           alt="user-points-image"
           src="test-file-stub"
         />
-        <span
-          className="user-points"
+        <div
+          className="user-points-loader-container"
         >
-          320
-        </span>
+          <div
+            className="finik-loader"
+          />
+        </div>
       </div>
       <div
         className="map-app-header-block"
