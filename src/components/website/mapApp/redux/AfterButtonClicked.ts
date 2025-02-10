@@ -5,7 +5,7 @@ export function afterButtonClicked(action: MapAppButtonClick): Partial<MapAppSta
     const nextStep = stepAfterButtonClick[action.button];
     if (nextStep) {
         if (action.button === MapAppButton.LOGOUT) {
-            return { usageStep: nextStep, currentUserID: '' };
+            return { usageStep: nextStep, currentUserID: null };
         }
 
         return { usageStep: nextStep };

@@ -54,7 +54,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppButtonClick(MapAppButton.LOGOUT);
 
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: '' });
+        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: null });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
