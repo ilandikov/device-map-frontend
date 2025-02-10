@@ -10,13 +10,17 @@ import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
 import { DeviceLocation } from './DeviceLocation/DeviceLocation';
 
-type ComponentMap = { [key in MapAppUsageStep]: React.ReactElement };
+type EnumConstraint = string | number | symbol;
+
+type ComponentMap<TStep extends EnumConstraint> = {
+    [key in TStep]: React.ReactElement;
+};
 
 export default function MapApp() {
     const mapAppState = useMapAppState();
 
     const deviceLocationWasSelected = mapAppState.selectedMarker.location;
-    const usageComponent: ComponentMap = {
+    const usageComponent: ComponentMap<MapAppUsageStep> = {
         HOME_SCREEN: !deviceLocationWasSelected && <ProductDescription />,
         USER_AUTHENTICATION: <LoginModal />,
         DEVICE_MANAGEMENT: deviceLocationWasSelected && <DeviceLocation />,
