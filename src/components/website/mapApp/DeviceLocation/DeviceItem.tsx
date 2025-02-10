@@ -1,7 +1,7 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
-import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
+import { useMapAppState } from '../redux/MapAppState';
 import { DeviceItemContainer } from './DeviceItemContainer';
 import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
@@ -12,10 +12,11 @@ export function DeviceItem(props: { device: T22Device; isDeviceCreatedByCurrentU
 
     const { device, isDeviceCreatedByCurrentUser } = props;
 
+    // TODO remove isDeviceCreatedByCurrentUser from props and calculate it here
     const canBeDeleted = isDeviceCreatedByCurrentUser;
     const deviceItemType = getDeviceItemType(device.approvals ?? 0);
     const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
-    const isUserLoggedIn = useMapAppState().usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
+    const isUserLoggedIn = useMapAppState().currentUserID !== null;
     const canBeApproved = canReceiveApprovals && isUserLoggedIn && !isDeviceCreatedByCurrentUser;
 
     return (

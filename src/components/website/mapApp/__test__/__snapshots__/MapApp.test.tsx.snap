@@ -24,39 +24,10 @@ exports[`MapApp snapshot tests should match the snapshot at device management st
           map
         </p>
       </div>
-      <div
-        className="map-app-header-block terminal-search-header-block"
-      >
-        <img
-          alt="terminal-search-image"
-          src="test-file-stub"
-        />
-        <input
-          className="terminal-search-input"
-          data-testid="terminalSearch"
-          placeholder="search"
-          type="text"
-        />
-      </div>
     </div>
     <div
       className="map-app-header-block-container"
     >
-      <div
-        className="map-app-header-block user-points-header-block"
-      >
-        <img
-          alt="user-points-image"
-          src="test-file-stub"
-        />
-        <div
-          className="user-points-loader-container"
-        >
-          <div
-            className="finik-loader"
-          />
-        </div>
-      </div>
       <div
         className="map-app-header-block"
       >
@@ -72,7 +43,9 @@ exports[`MapApp snapshot tests should match the snapshot at device management st
           />
           <p
             className="map-app-header-account-text"
-          />
+          >
+            loginAction
+          </p>
         </button>
         <img
           alt="map-app-header-apps-google-play"

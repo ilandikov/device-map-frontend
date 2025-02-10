@@ -20,7 +20,7 @@ const testDevice: T22Device = {
 
 describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - created device with approve button and without delete button', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        mockMapAppState({ currentUserID: 'do something with the device' });
         const component = renderForSnapshotTest(
             <DeviceItem device={{ ...testDevice, approvals: 0 }} isDeviceCreatedByCurrentUser={false} />,
         );
@@ -28,7 +28,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - validating device with approve button and without delete button', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        mockMapAppState({ currentUserID: 'do something with the device' });
         const component = renderForSnapshotTest(
             <DeviceItem device={{ ...testDevice, approvals: 1 }} isDeviceCreatedByCurrentUser={false} />,
         );
@@ -36,7 +36,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - validated device without approve button and without delete button', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        mockMapAppState({ currentUserID: 'do something with the device' });
         const component = renderForSnapshotTest(
             <DeviceItem device={{ ...testDevice, approvals: 2 }} isDeviceCreatedByCurrentUser={false} />,
         );
@@ -52,7 +52,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
 
 describe('DeviceItem snapshot tests - anonymous user', () => {
     it('should match snapshot - created device without approval button and without delete button', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.HOME_SCREEN });
+        mockMapAppState({ currentUserID: null });
         const component = renderForSnapshotTest(
             <DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={false} />,
         );

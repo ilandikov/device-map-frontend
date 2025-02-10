@@ -18,7 +18,8 @@ export interface MapAppState {
         address: MapAppAddress | null;
     };
     devices: T22Device[];
-    currentUserID: string;
+    // TODO extract loggedUser field containing id and points
+    currentUserID: string | null;
     currentUserPoints: number | null;
 }
 
@@ -35,7 +36,7 @@ export const mapAppInitialState: MapAppState = {
         location: null,
         address: null,
     },
-    currentUserID: '',
+    currentUserID: null,
     currentUserPoints: null,
 };
 
