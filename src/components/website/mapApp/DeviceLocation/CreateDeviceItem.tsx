@@ -1,6 +1,6 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { MapAppUsageStep, useMapAppState } from '../redux/MapAppState';
+import { useMapAppState } from '../redux/MapAppState';
 import { DeviceItemContainer } from './DeviceItemContainer';
 import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
 import { AddDeviceButton } from './AddDeviceButton';
@@ -8,7 +8,7 @@ import { AddDeviceButton } from './AddDeviceButton';
 export function CreateDeviceItem() {
     const { t } = useI18next();
 
-    const isUserLoggedIn = useMapAppState().usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
+    const isUserLoggedIn = useMapAppState().currentUserID !== null;
 
     return (
         <DeviceItemContainer deviceItemType={'create'}>

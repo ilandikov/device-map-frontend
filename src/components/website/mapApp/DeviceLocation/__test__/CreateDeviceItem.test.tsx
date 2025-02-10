@@ -5,7 +5,6 @@ import { renderForActionDispatchTest } from '../../../../../../tests/utils/Rende
 import { CreateDeviceItem } from '../CreateDeviceItem';
 import { MapAppButton, mapAppButtonClick } from '../../redux/MapAppAction';
 import { deviceListRequest } from '../../redux/DeviceAction';
-import { MapAppUsageStep } from '../../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -26,8 +25,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch create device action on create device button click', () => {
-        // mockMapAppState({ currentUserID: 'i can create a device' });
-        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        mockMapAppState({ currentUserID: 'i can create a device' });
         const container = renderForActionDispatchTest(<CreateDeviceItem />);
 
         const loginButton = getByTestId(container, 'createDeviceButton');
@@ -37,8 +35,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch show login modal on create account or login button click', () => {
-        // mockMapAppState({ currentUserID: null });
-        mockMapAppState({ usageStep: MapAppUsageStep.HOME_SCREEN });
+        mockMapAppState({ currentUserID: null });
         const container = renderForActionDispatchTest(<CreateDeviceItem />);
 
         const loginButton = getByTestId(container, 'deviceCreateAccountOrLogin');
