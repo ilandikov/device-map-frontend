@@ -12,6 +12,7 @@ export function DeviceItem(props: { device: T22Device; isDeviceCreatedByCurrentU
 
     const { device, isDeviceCreatedByCurrentUser } = props;
 
+    // TODO remove isDeviceCreatedByCurrentUser from props and calculate it here
     const canBeDeleted = isDeviceCreatedByCurrentUser;
     const deviceItemType = getDeviceItemType(device.approvals ?? 0);
     const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
