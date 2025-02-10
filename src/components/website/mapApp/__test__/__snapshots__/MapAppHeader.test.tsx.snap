@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MapAppHeader snapshot tests should match the snapshot at device management step after getting the user points 1`] = `
+exports[`MapAppHeader snapshot tests should match the snapshot after getting the user points 1`] = `
 <div
   className="map-app-header-block user-points-header-block"
 >
@@ -12,22 +12,6 @@ exports[`MapAppHeader snapshot tests should match the snapshot at device managem
     className="user-points"
   >
     320
-  </span>
-</div>
-`;
-
-exports[`MapAppHeader snapshot tests should match the snapshot at device management step with 0 points 1`] = `
-<div
-  className="map-app-header-block user-points-header-block"
->
-  <img
-    alt="user-points-image"
-    src="test-file-stub"
-  />
-  <span
-    className="user-points"
-  >
-    0
   </span>
 </div>
 `;
@@ -171,4 +155,22 @@ exports[`MapAppHeader snapshot tests should match the snapshot at the initial st
     </div>
   </div>
 </header>
+`;
+
+exports[`MapAppHeader snapshot tests should match the snapshot while waiting for user points 1`] = `
+<div
+  className="map-app-header-block user-points-header-block"
+>
+  <img
+    alt="user-points-image"
+    src="test-file-stub"
+  />
+  <div
+    className="user-points-loader-container"
+  >
+    <div
+      className="finik-loader"
+    />
+  </div>
+</div>
 `;

@@ -26,14 +26,14 @@ describe('MapAppHeader snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at device management step with 0 points', () => {
-        mockMapAppState({ currentUserPoints: 0 });
+    it('should match the snapshot while waiting for user points', () => {
+        mockMapAppState({ currentUserPoints: null });
         const component = renderForSnapshotTest(<UserPoints className="map-app-header-block" />);
 
         expect(component).toMatchSnapshot();
     });
 
-    it('should match the snapshot at device management step after getting the user points', () => {
+    it('should match the snapshot after getting the user points', () => {
         mockMapAppState({ currentUserPoints: 320 });
         const component = renderForSnapshotTest(<UserPoints className="map-app-header-block" />);
 
