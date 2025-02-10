@@ -21,16 +21,16 @@ function UserButton(props: { caption: string; onClick: () => void }) {
 }
 
 export function LogoutButton() {
-    const useDispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const { email } = useLoginModalAuthentication();
 
     return (
         <UserButton
             caption={email}
             onClick={() => {
-                useDispatch(mapAppButtonClick(MapAppButton.LOGOUT));
-                useDispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
-                useDispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
+                dispatch(mapAppButtonClick(MapAppButton.LOGOUT));
+                dispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
+                dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
             }}
         />
     );
@@ -38,13 +38,13 @@ export function LogoutButton() {
 
 export function LoginButton() {
     const { t } = useI18next();
-    const useDispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     return (
         <UserButton
             caption={t('loginAction')}
             onClick={() => {
-                useDispatch(mapAppButtonClick(MapAppButton.LOGIN));
+                dispatch(mapAppButtonClick(MapAppButton.LOGIN));
             }}
         />
     );
