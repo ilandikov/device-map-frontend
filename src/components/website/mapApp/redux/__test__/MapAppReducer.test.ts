@@ -127,7 +127,9 @@ describe('MapApp reducer tests', () => {
 
         testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
     });
+});
 
+describe('rename me', () => {
     it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
         const action = deviceListRequest();
