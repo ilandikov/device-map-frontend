@@ -9,6 +9,7 @@ import {
     mapAppLoginModalClose,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
+    mapAppSetUsageStep,
     mapAppSetUserPoints,
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
@@ -126,6 +127,13 @@ describe('MapApp reducer tests', () => {
         const action = mapAppSetUserPoints(10);
 
         testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
+    });
+
+    it('should the map app state', () => {
+        const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
+        const action = mapAppSetUsageStep(MapAppUsageStep.DEVICE_MANAGEMENT);
+
+        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
     });
 });
 
