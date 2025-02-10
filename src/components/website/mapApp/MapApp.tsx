@@ -16,14 +16,16 @@ export default function MapApp() {
     const deviceLocationWasSelected = mapAppState.selectedMarker.location;
     const showProductDescription =
         mapAppState.usageStep === MapAppUsageStep.HOME_SCREEN && !mapAppState.selectedMarker.location;
-    const showLoginModal = mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION;
+    const usageComponent: Partial<{ [key in MapAppUsageStep]: React.ReactElement }> = {
+        USER_AUTHENTICATION: <LoginModal />,
+    };
 
     return (
         <div className="map-app-container">
             <MapAppHeader />
             {showProductDescription && <ProductDescription />}
             {deviceLocationWasSelected && <DeviceLocation />}
-            {showLoginModal && <LoginModal />}
+            {usageComponent[mapAppState.usageStep]}
             <DeviceMap />
         </div>
     );
