@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MapAppHeader snapshot tests should match the snapshot at device management while waiting for user points 1`] = `
+exports[`MapAppHeader snapshot tests should match the snapshot at device management step 1`] = `
 <header
   className="map-app-header"
 >
