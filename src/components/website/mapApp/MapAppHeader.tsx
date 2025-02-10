@@ -9,13 +9,13 @@ import AppStore from '/src/assets/images/AppStore.svg';
 import { TerminalSearch } from './TerminalSearch';
 import { UserPoints } from './UserPoints';
 import { LoginButton, LogoutButton } from './UserButton';
-import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
+import { useMapAppState } from './redux/MapAppState';
 
 export function MapAppHeader() {
     const { t } = useI18next();
 
-    const { usageStep } = useMapAppState();
-    const isUserLoggedIn = usageStep === MapAppUsageStep.DEVICE_MANAGEMENT;
+    const { currentUserID } = useMapAppState();
+    const isUserLoggedIn = currentUserID !== null;
 
     return (
         <header className="map-app-header">

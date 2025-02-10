@@ -2,7 +2,6 @@ import React from 'react';
 import { MapAppHeader } from '../MapAppHeader';
 import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { MapAppUsageStep } from '../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -12,14 +11,14 @@ jest.mock('react-redux', () => ({
 
 describe('MapAppHeader snapshot tests', () => {
     it('should match the snapshot at the initial state', () => {
-        mockMapAppState({});
+        mockMapAppState({ currentUserID: null });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();
     });
 
     it('should match the snapshot at device management step', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        mockMapAppState({ currentUserID: 'i am logged in' });
         const component = renderForSnapshotTest(<MapAppHeader />);
 
         expect(component).toMatchSnapshot();
