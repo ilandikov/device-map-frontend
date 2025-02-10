@@ -10,11 +10,13 @@ import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
 import { DeviceLocation } from './DeviceLocation/DeviceLocation';
 
+type ComponentMap = { [key in MapAppUsageStep]: React.ReactElement };
+
 export default function MapApp() {
     const mapAppState = useMapAppState();
 
     const deviceLocationWasSelected = mapAppState.selectedMarker.location;
-    const usageComponent: { [key in MapAppUsageStep]: React.ReactElement } = {
+    const usageComponent: ComponentMap = {
         HOME_SCREEN: !deviceLocationWasSelected && <ProductDescription />,
         USER_AUTHENTICATION: <LoginModal />,
         DEVICE_MANAGEMENT: deviceLocationWasSelected && <DeviceLocation />,
