@@ -57,3 +57,8 @@ export function testValueInInput(component: React.JSX.Element, input: string, va
     const emailInput = getByTestId(container, input) as HTMLInputElement;
     expect(emailInput.value).toEqual(value);
 }
+
+export function testSnapshot(component: React.JSX.Element) {
+    const componentJSON = renderForSnapshotTest(component);
+    expect(componentJSON).toMatchSnapshot();
+}

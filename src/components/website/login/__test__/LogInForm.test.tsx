@@ -4,6 +4,7 @@ import {
     click,
     renderForSnapshotTest,
     testDispatchedAction,
+    testSnapshot,
     testValueInInput,
     type,
 } from '../../../../../tests/utils/RenderingHelpers';
@@ -23,11 +24,6 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
-
-function testSnapshot(component: React.JSX.Element) {
-    const componentJSON = renderForSnapshotTest(component);
-    expect(componentJSON).toMatchSnapshot();
-}
 
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
