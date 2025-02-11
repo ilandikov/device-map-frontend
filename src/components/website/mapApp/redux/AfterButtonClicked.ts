@@ -8,8 +8,6 @@ export function afterButtonClicked(action: MapAppButtonClick): Partial<MapAppSta
         if (action.button === MapAppButton.LOGOUT) {
             return { currentUserID: null };
         }
-
-        return {};
     }
 
     return {};
