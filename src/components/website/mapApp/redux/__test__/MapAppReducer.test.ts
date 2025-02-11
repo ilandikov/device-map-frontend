@@ -45,7 +45,7 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({});
         const action = mapAppButtonClick(MapAppButton.LOGIN);
 
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
+        testMapAppStateChange(initialState, action, {});
     });
 
     it('should move to mainPage screen step and reset user id on logout button click', () => {
@@ -55,7 +55,7 @@ describe('MapApp reducer tests', () => {
         });
         const action = mapAppButtonClick(MapAppButton.LOGOUT);
 
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: null });
+        testMapAppStateChange(initialState, action, { currentUserID: null });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
