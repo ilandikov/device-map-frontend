@@ -1,6 +1,6 @@
 import React from 'react';
 import { MailInputForm } from '../MailInputForm';
-import { click, renderForSnapshotTest, testDispatchedAction, type } from '../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction, testSnapshot, type } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
     LoginModalCheck,
@@ -22,9 +22,8 @@ jest.mock('react-redux', () => ({
 describe('MailInputForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
         mockAuthenticationState({ email: 'enteredMail@form.fr', error: null });
-        const component = renderForSnapshotTest(<MailInputForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MailInputForm />);
     });
 
     it('should match the snapshot at mail exists error', () => {
@@ -32,16 +31,14 @@ describe('MailInputForm snapshot tests', () => {
             email: 'existing@mail.ru',
             error: new Error(CognitoErrors.USERNAME_EXISTS),
         });
-        const component = renderForSnapshotTest(<MailInputForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MailInputForm />);
     });
 
     it('should match the snapshot at mail not valid error', () => {
         mockAuthenticationState({ email: 'notAMailAddress', error: new Error(MailInputError.NOT_VALID) });
-        const component = renderForSnapshotTest(<MailInputForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MailInputForm />);
     });
 });
 

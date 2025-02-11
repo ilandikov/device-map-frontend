@@ -4,9 +4,9 @@ import { mockDispatch } from '../../../../redux/__mocks__/mocks';
 import { LoginModalButton, loginModalButtonClick } from '../redux/LoginModalAction';
 import {
     click,
-    renderForSnapshotTest,
     testDispatchedAction,
     testDispatchedActionsInOrder,
+    testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppLoginModalClose } from '../../mapApp/redux/MapAppAction';
 
@@ -17,9 +17,7 @@ jest.mock('react-redux', () => ({
 
 describe('NavigationButtons snapshot tests', () => {
     it('should match snapshot', () => {
-        const component = renderForSnapshotTest(<NavigationButtons />);
-
-        expect(component).toMatchSnapshot();
+        testSnapshot(<NavigationButtons />);
     });
 });
 

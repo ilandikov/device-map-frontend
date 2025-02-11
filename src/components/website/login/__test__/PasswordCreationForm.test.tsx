@@ -1,6 +1,6 @@
 import React from 'react';
 import { PasswordCreationForm } from '../PasswordCreationForm';
-import { click, renderForSnapshotTest, testDispatchedAction, type } from '../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction, testSnapshot, type } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalCheck,
     LoginModalInputType,
@@ -18,18 +18,16 @@ jest.mock('react-redux', () => ({
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
         mockAuthenticationState({ password: 'one2three', passwordRepeat: 'anotherPassword' });
-        const component = renderForSnapshotTest(<PasswordCreationForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<PasswordCreationForm />);
     });
 
     it('should match the snapshot at password not match error', () => {
         mockAuthenticationState({
             error: new Error('renderMeToo'),
         });
-        const component = renderForSnapshotTest(<PasswordCreationForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<PasswordCreationForm />);
     });
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import { click, renderForSnapshotTest, testDispatchedAction, type } from '../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction, testSnapshot, type } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalCheck,
     LoginModalInputType,
@@ -18,9 +18,8 @@ jest.mock('react-redux', () => ({
 describe('PasswordResetRequestForm snapshot tests', () => {
     it('should match the snapshot', () => {
         mockAuthenticationState({ email: 'reset@password.kr', error: new Error('somethingIsWrong') });
-        const component = renderForSnapshotTest(<PasswordResetRequestForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<PasswordResetRequestForm />);
     });
 });
 

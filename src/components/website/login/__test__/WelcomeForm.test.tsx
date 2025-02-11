@@ -2,7 +2,7 @@ import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { LoginModalButton, loginModalButtonClick } from '../redux/LoginModalAction';
 import { WelcomeForm } from '../WelcomeForm';
-import { click, renderForSnapshotTest, testDispatchedAction } from '../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction, testSnapshot } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -12,9 +12,7 @@ jest.mock('react-redux', () => ({
 
 describe('WelcomeForm snapshot tests', () => {
     it('should match the snapshot', () => {
-        const component = renderForSnapshotTest(<WelcomeForm />);
-
-        expect(component).toMatchSnapshot();
+        testSnapshot(<WelcomeForm />);
     });
 });
 

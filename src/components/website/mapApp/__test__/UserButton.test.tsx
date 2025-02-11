@@ -1,9 +1,9 @@
 import React from 'react';
 import {
     click,
-    renderForSnapshotTest,
     testDispatchedAction,
     testDispatchedActionsInOrder,
+    testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { mapAppResetCurrentUser, mapAppShowComponent } from '../redux/MapAppAction';
@@ -24,16 +24,13 @@ jest.mock('react-redux', () => ({
 
 describe('UserButton snapshot tests', () => {
     it('Login button should match the snapshot', () => {
-        const component = renderForSnapshotTest(<LoginButton />);
-
-        expect(component).toMatchSnapshot();
+        testSnapshot(<LoginButton />);
     });
 
     it('Logout button should match the snapshot', () => {
         mockAuthenticationState({ email: 'logged@in.kr' });
-        const component = renderForSnapshotTest(<LogoutButton />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<LogoutButton />);
     });
 });
 

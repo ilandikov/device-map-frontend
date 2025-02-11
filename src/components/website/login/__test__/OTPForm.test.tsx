@@ -5,7 +5,7 @@ import {
     createEvent,
     getNonNumeric,
     renderForActionDispatchTest,
-    renderForSnapshotTest,
+    testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalCheck,
@@ -29,9 +29,8 @@ function getInput(container: HTMLElement, inputIndex: number) {
 describe('OTPForm snapshot tests', () => {
     it('should match snapshot at OTP for user creation step without error', () => {
         mockAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null });
-        const component = renderForSnapshotTest(<OTPForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<OTPForm />);
     });
 
     it('should match snapshot at OTP for password reset step with error', () => {
@@ -39,9 +38,8 @@ describe('OTPForm snapshot tests', () => {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thisShouldNotHappen'),
         });
-        const component = renderForSnapshotTest(<OTPForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<OTPForm />);
     });
 });
 
