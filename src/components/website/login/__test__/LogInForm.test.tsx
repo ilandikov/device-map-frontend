@@ -24,11 +24,16 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
+function testSnapshot(component: React.JSX.Element) {
+    const componentJSON = renderForSnapshotTest(component);
+    expect(componentJSON).toMatchSnapshot();
+}
+
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
         mockAuthenticationState({ email: 'verify@me.uk', password: 'password1' });
-        const component = renderForSnapshotTest(<LogInForm />);
-        expect(component).toMatchSnapshot();
+
+        testSnapshot(<LogInForm />);
     });
 
     it('should match snapshot with error', () => {
