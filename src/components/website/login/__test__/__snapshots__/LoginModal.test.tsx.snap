@@ -469,7 +469,7 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
       >
         <input
           className="login-modal-input-text"
-          data-testid="userPasswordLogin"
+          data-testid="passwordInput"
           onChange={[Function]}
           type="password"
         />
@@ -483,12 +483,14 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
       >
         <button
           className="login-modal-correct-input"
+          data-testid="resetPasswordButton"
           onClick={[Function]}
         >
           resetPassword
         </button>
         <button
           className="login-modal-button-black-on-green"
+          data-testid="nextButton"
           onClick={[Function]}
         >
           next

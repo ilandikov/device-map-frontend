@@ -30,7 +30,7 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
     >
       <input
         className="login-modal-input-text"
-        data-testid="userPasswordLogin"
+        data-testid="passwordInput"
         onChange={[Function]}
         type="password"
       />
@@ -49,12 +49,14 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
     >
       <button
         className="login-modal-correct-input"
+        data-testid="resetPasswordButton"
         onClick={[Function]}
       >
         resetPassword
       </button>
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
@@ -95,7 +97,7 @@ exports[`LogInForm snapshot test should match snapshot without error 1`] = `
     >
       <input
         className="login-modal-input-text"
-        data-testid="userPasswordLogin"
+        data-testid="passwordInput"
         onChange={[Function]}
         type="password"
         value="password1"
@@ -110,12 +112,14 @@ exports[`LogInForm snapshot test should match snapshot without error 1`] = `
     >
       <button
         className="login-modal-correct-input"
+        data-testid="resetPasswordButton"
         onClick={[Function]}
       >
         resetPassword
       </button>
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
