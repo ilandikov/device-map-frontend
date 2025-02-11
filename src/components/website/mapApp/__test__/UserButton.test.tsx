@@ -57,12 +57,9 @@ describe('UserButton action tests', () => {
     });
 
     it('should dispatch click action on login button click', () => {
-        const container = renderForActionDispatchTest(<LoginButton />);
+        clickButtonInComponent(<LoginButton />, 'userButton');
 
-        const loginButton = getByTestId(container, 'userButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppShowComponent(MapAppComponents.LOGIN_MODAL));
+        testDispatchedActionsInOrder([mapAppShowComponent(MapAppComponents.LOGIN_MODAL)]);
     });
 
     it('should dispatch click action on login button click', () => {
