@@ -10,12 +10,12 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
-                component: MapAppComponents.HOME_SCREEN,
+                component: MapAppComponents.PRODUCT_DESCRIPTION,
             };
         case MapAppActionType.AUTHENTICATION_COMPLETED:
             return {
                 ...state,
-                component: MapAppComponents.DEVICE_MANAGEMENT,
+                component: MapAppComponents.DEVICE_LOCATION,
                 currentUserID: action.authenticatedUserId,
             };
         case MapAppActionType.SET_LOCATION_COORDINATES:

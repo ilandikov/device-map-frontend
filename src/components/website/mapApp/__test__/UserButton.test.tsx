@@ -44,7 +44,7 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppComponents.USER_AUTHENTICATION));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppComponents.LOGIN_MODAL));
     });
 
     it('should dispatch click action on login button click', () => {
@@ -53,7 +53,7 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppComponents.HOME_SCREEN));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppComponents.PRODUCT_DESCRIPTION));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppResetCurrentUser());
         expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalButtonClick(LoginModalButton.USER_BUTTON));
         expect(mockDispatch).toHaveBeenNthCalledWith(4, loginModalRemoteRequest(LoginModalCheck.NONE));

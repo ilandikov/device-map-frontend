@@ -29,7 +29,7 @@ export function LogoutButton() {
         <UserButton
             caption={email}
             onClick={() => {
-                dispatch(mapAppSetUsageStep(MapAppComponents.HOME_SCREEN));
+                dispatch(mapAppSetUsageStep(MapAppComponents.PRODUCT_DESCRIPTION));
                 dispatch(mapAppResetCurrentUser());
                 dispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
                 dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
@@ -46,7 +46,7 @@ export function LoginButton() {
         <UserButton
             caption={t('loginAction')}
             onClick={() => {
-                dispatch(mapAppSetUsageStep(MapAppComponents.USER_AUTHENTICATION));
+                dispatch(mapAppSetUsageStep(MapAppComponents.LOGIN_MODAL));
             }}
         />
     );

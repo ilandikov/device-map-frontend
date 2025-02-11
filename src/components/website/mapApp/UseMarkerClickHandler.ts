@@ -17,6 +17,6 @@ export function useMarkerClickHandler() {
         }
 
         dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
-        dispatch(mapAppSetUsageStep(MapAppComponents.DEVICE_MANAGEMENT));
+        dispatch(mapAppSetUsageStep(MapAppComponents.DEVICE_LOCATION));
     };
 }

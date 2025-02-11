@@ -44,7 +44,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - created device without approval button and with delete button', () => {
-        mockMapAppState({ component: MapAppComponents.DEVICE_MANAGEMENT });
+        mockMapAppState({ component: MapAppComponents.DEVICE_LOCATION });
         const component = renderForSnapshotTest(<DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={true} />);
         expect(component).toMatchSnapshot();
     });

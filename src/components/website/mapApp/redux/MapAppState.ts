@@ -24,13 +24,13 @@ export interface MapAppState {
 }
 
 export enum MapAppComponents {
-    HOME_SCREEN = 'PRODUCT_DESCRIPTION',
-    USER_AUTHENTICATION = 'LOGIN_MODAL',
-    DEVICE_MANAGEMENT = 'DEVICE_LOCATION',
+    PRODUCT_DESCRIPTION = 'PRODUCT_DESCRIPTION',
+    LOGIN_MODAL = 'LOGIN_MODAL',
+    DEVICE_LOCATION = 'DEVICE_LOCATION',
 }
 
 export const mapAppInitialState: MapAppState = {
-    component: MapAppComponents.HOME_SCREEN,
+    component: MapAppComponents.PRODUCT_DESCRIPTION,
     devices: [],
     selectedMarker: {
         location: null,

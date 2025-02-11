@@ -51,21 +51,21 @@ describe('MapApp reducer tests', () => {
 
     it('should move to mainPage screen on navigation cancel action', () => {
         const initialState = buildMapAppState({
-            component: MapAppComponents.USER_AUTHENTICATION,
+            component: MapAppComponents.LOGIN_MODAL,
         });
         const action = mapAppLoginModalClose();
 
-        testMapAppStateChange(initialState, action, { component: MapAppComponents.HOME_SCREEN });
+        testMapAppStateChange(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
     it('should move to device management when authentication has been completed', () => {
         const initialState = buildMapAppState({
-            component: MapAppComponents.USER_AUTHENTICATION,
+            component: MapAppComponents.LOGIN_MODAL,
         });
         const action = mapAppAuthenticationCompleted('set me in the state');
 
         testMapAppStateChange(initialState, action, {
-            component: MapAppComponents.DEVICE_MANAGEMENT,
+            component: MapAppComponents.DEVICE_LOCATION,
             currentUserID: 'set me in the state',
         });
     });
@@ -121,10 +121,10 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should change the map app state', () => {
-        const initialState = buildMapAppState({ component: MapAppComponents.USER_AUTHENTICATION });
-        const action = mapAppSetUsageStep(MapAppComponents.DEVICE_MANAGEMENT);
+        const initialState = buildMapAppState({ component: MapAppComponents.LOGIN_MODAL });
+        const action = mapAppSetUsageStep(MapAppComponents.DEVICE_LOCATION);
 
-        testMapAppStateChange(initialState, action, { component: MapAppComponents.DEVICE_MANAGEMENT });
+        testMapAppStateChange(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
     });
 });
 

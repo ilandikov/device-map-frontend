@@ -13,7 +13,7 @@ jest.mock('react-redux', () => ({
 describe('device list snapshot tests', () => {
     it('should show address loader and a list devices matching the selected marker without the create device item', () => {
         mockMapAppState({
-            component: MapAppComponents.HOME_SCREEN,
+            component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [
                 { id: '85378', createdDate: '0000000000000', creatorID: 'John Doe', location: { lat: 6.3, lon: 9.2 } },
             ],
@@ -29,7 +29,7 @@ describe('device list snapshot tests', () => {
 
     it('should show the address and a list devices matching the selected marker with the create device item', () => {
         mockMapAppState({
-            component: MapAppComponents.DEVICE_MANAGEMENT,
+            component: MapAppComponents.DEVICE_LOCATION,
             currentUserID: 'I created the second one!',
             devices: [
                 {
