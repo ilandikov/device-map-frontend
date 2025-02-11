@@ -1,11 +1,10 @@
-import { getByTestId } from '@testing-library/react';
 import React from 'react';
 import { LogInForm } from '../LogInForm';
 import {
     click,
-    renderForActionDispatchTest,
     renderForSnapshotTest,
     testDispatchedAction,
+    testValueInInput,
     type,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
@@ -38,12 +37,6 @@ describe('LogInForm snapshot test', () => {
         expect(component).toMatchSnapshot();
     });
 });
-
-function testValueInInput(component: React.JSX.Element, input: string, value: string) {
-    const container = renderForActionDispatchTest(component);
-    const emailInput = getByTestId(container, input) as HTMLInputElement;
-    expect(emailInput.value).toEqual(value);
-}
 
 describe('LogInForm action tests', () => {
     beforeEach(() => {
