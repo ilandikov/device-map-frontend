@@ -46,17 +46,20 @@ describe('OTPForm snapshot tests', () => {
     });
 });
 
+function testTypeDigitAndExpectValue(input: HTMLInputElement, typed: string, expected: string) {
+    fireEvent.change(input, createEvent(typed));
+    expect(input.value).toEqual(expected);
+}
+
 describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
         const container = renderForActionDispatchTest(<OTPForm />);
         const input = getInput(container, inputIndex);
         expect(input.value).toEqual('');
 
-        fireEvent.change(input, createEvent('1'));
-        expect(input.value).toEqual('1');
+        testTypeDigitAndExpectValue(input, '1', '1');
 
-        fireEvent.change(input, createEvent(getNonNumeric()));
-        expect(input.value).toEqual('');
+        testTypeDigitAndExpectValue(input, getNonNumeric(), '');
     });
 
     it.each([0, 1, 2, 3, 4, 5])(
