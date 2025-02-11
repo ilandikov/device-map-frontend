@@ -11,6 +11,7 @@ import {
     loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
 import { MapAppComponents } from '../redux/MapAppState';
+import { AllActions } from '../../../../redux/store';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -38,6 +39,13 @@ function clickButton(container: HTMLElement, buttonTestId: string) {
     fireEvent.click(button);
 }
 
+function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
+    expectedActions.forEach((action, index) => {
+        expect(mockDispatch).toHaveBeenNthCalledWith(index + 1, action);
+    });
+    expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
+}
+
 describe('UserButton action tests', () => {
     beforeEach(() => {
         jest.resetAllMocks();
@@ -57,15 +65,11 @@ describe('UserButton action tests', () => {
 
         clickButton(container, 'userButton');
 
-        const expectedActions = [
+        testDispatchedActionsInOrder([
             mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
             mapAppResetCurrentUser(),
             loginModalButtonClick(LoginModalButton.USER_BUTTON),
             loginModalRemoteRequest(LoginModalCheck.NONE),
-        ];
-        expectedActions.forEach((action, index) => {
-            expect(mockDispatch).toHaveBeenNthCalledWith(index + 1, action);
-        });
-        expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
+        ]);
     });
 });
