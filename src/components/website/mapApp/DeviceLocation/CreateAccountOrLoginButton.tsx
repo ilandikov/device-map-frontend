@@ -8,7 +8,7 @@ export function CreateAccountOrLoginButton() {
     const dispatch = useAppDispatch();
 
     return (
-        <button data-testid="deviceCreateAccountOrLogin" onClick={() => dispatch(mapAppResetCurrentUser())}>
+        <button data-testid="createAccountOrLoginButton" onClick={() => dispatch(mapAppResetCurrentUser())}>
             {t('deviceCreateAccountOrLogin')}
         </button>
     );
