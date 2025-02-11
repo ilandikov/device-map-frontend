@@ -2,6 +2,7 @@ import React from 'react';
 import {
     clickButtonInComponent,
     renderForSnapshotTest,
+    testDispatchedAction,
     testDispatchedActionsInOrder,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
@@ -44,7 +45,7 @@ describe('UserButton action tests', () => {
     it('should dispatch click action on login button click', () => {
         clickButtonInComponent(<LoginButton />, 'userButton');
 
-        testDispatchedActionsInOrder([mapAppShowComponent(MapAppComponents.LOGIN_MODAL)]);
+        testDispatchedAction(mapAppShowComponent(MapAppComponents.LOGIN_MODAL));
     });
 
     it('should dispatch click action on login button click', () => {

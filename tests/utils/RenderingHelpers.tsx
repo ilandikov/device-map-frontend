@@ -47,3 +47,7 @@ export function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
     });
     expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
 }
+
+export function testDispatchedAction(expectedAction: AllActions) {
+    testDispatchedActionsInOrder([expectedAction]);
+}
