@@ -2,7 +2,7 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { MapAppButton, mapAppButtonClick } from '../redux/MapAppAction';
+import { MapAppButton, mapAppButtonClick, mapAppSetUsageStep } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
     LoginModalButton,
@@ -10,6 +10,7 @@ import {
     loginModalButtonClick,
     loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
+import { MapAppUsageStep } from '../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -43,7 +44,8 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppButtonClick(MapAppButton.LOGIN));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppUsageStep.USER_AUTHENTICATION));
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppButtonClick(MapAppButton.LOGIN));
     });
 
     it('should dispatch click action on login button click', () => {
@@ -52,8 +54,9 @@ describe('UserButton action tests', () => {
         const loginButton = getByTestId(container, 'userButton');
         fireEvent.click(loginButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppButtonClick(MapAppButton.LOGOUT));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick(LoginModalButton.USER_BUTTON));
-        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalRemoteRequest(LoginModalCheck.NONE));
+        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppUsageStep.HOME_SCREEN));
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppButtonClick(MapAppButton.LOGOUT));
+        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalButtonClick(LoginModalButton.USER_BUTTON));
+        expect(mockDispatch).toHaveBeenNthCalledWith(4, loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 });
