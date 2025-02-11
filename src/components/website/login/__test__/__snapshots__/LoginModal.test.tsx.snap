@@ -574,6 +574,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next

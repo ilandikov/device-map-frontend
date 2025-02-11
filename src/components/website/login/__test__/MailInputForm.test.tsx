@@ -1,11 +1,6 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { MailInputForm } from '../MailInputForm';
-import {
-    createEvent,
-    renderForActionDispatchTest,
-    renderForSnapshotTest,
-} from '../../../../../tests/utils/RenderingHelpers';
+import { click, renderForSnapshotTest, testDispatchedAction, type } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
     LoginModalCheck,
@@ -56,29 +51,21 @@ describe('MailInputForm action tests', () => {
     });
 
     it('should call email setter from email input', () => {
-        const container = renderForActionDispatchTest(<MailInputForm />);
+        type(<MailInputForm />, 'emailInput', 'new@email.com');
 
-        const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, createEvent('new@email.com'));
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
+        testDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
     it('should call email verification, update mail error and transition to password creation after mail has been sent to input', () => {
-        const container = renderForActionDispatchTest(<MailInputForm />);
+        click(<MailInputForm />, 'nextButton');
 
-        const nextButton = getByText(container, 'next');
-        fireEvent.click(nextButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.USERNAME));
+        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.USERNAME));
     });
 
     it('should move from mail already exists to password verification stage', () => {
         mockAuthenticationState({ error: new Error(CognitoErrors.USERNAME_EXISTS) });
-        const container = renderForActionDispatchTest(<MailInputForm />);
 
-        const loginButton = getByText(container, 'accountLogin');
-        fireEvent.click(loginButton);
+        click(<MailInputForm />, 'loginButton');
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
     });
