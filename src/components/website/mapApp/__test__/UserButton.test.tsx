@@ -33,9 +33,9 @@ describe('UserButton snapshot tests', () => {
     });
 });
 
-function clickButton(container: HTMLElement, button: string) {
-    const loginButton = getByTestId(container, button);
-    fireEvent.click(loginButton);
+function clickButton(container: HTMLElement, buttonTestId: string) {
+    const button = getByTestId(container, buttonTestId);
+    fireEvent.click(button);
 }
 
 describe('UserButton action tests', () => {
