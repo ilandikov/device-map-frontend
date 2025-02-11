@@ -57,10 +57,15 @@ describe('UserButton action tests', () => {
 
         clickButton(container, 'userButton');
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppResetCurrentUser());
-        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalButtonClick(LoginModalButton.USER_BUTTON));
-        expect(mockDispatch).toHaveBeenNthCalledWith(4, loginModalRemoteRequest(LoginModalCheck.NONE));
-        expect(mockDispatch).toHaveBeenCalledTimes(4);
+        const expectedActions = [
+            mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
+            mapAppResetCurrentUser(),
+            loginModalButtonClick(LoginModalButton.USER_BUTTON),
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+        ];
+        expectedActions.forEach((action, index) => {
+            expect(mockDispatch).toHaveBeenNthCalledWith(index + 1, action);
+        });
+        expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
     });
 });
