@@ -39,6 +39,12 @@ describe('LogInForm snapshot test', () => {
     });
 });
 
+function testValueInInput(component: React.JSX.Element, input: string, value: string) {
+    const container = renderForActionDispatchTest(component);
+    const emailInput = getByTestId(container, input) as HTMLInputElement;
+    expect(emailInput.value).toEqual(value);
+}
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
@@ -54,10 +60,8 @@ describe('LogInForm action tests', () => {
 
     it('should show the already input email on password input stage', () => {
         mockAuthenticationState({ email: 'here_is_my@email.com' });
-        const container = renderForActionDispatchTest(<LogInForm />);
 
-        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
-        expect(emailInput.value).toEqual('here_is_my@email.com');
+        testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
     });
 
     it('should update user password when typed', () => {
