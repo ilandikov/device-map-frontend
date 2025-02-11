@@ -39,11 +39,10 @@ export interface MapAppLoginModalCloseAction {
 
 export interface MapAppButtonClick {
     type: MapAppActionType.BUTTON_CLICK;
-    button: MapAppButton;
 }
 
-export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
-    return { type: MapAppActionType.BUTTON_CLICK, button };
+export function mapAppButtonClick(): MapAppButtonClick {
+    return { type: MapAppActionType.BUTTON_CLICK };
 }
 
 export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
