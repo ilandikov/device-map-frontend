@@ -1,12 +1,11 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
     MapAppAction,
-    MapAppButton,
     mapAppAuthenticationCompleted,
-    mapAppButtonClick,
     mapAppGetLocationAddress,
     mapAppGetUserPoints,
     mapAppLoginModalClose,
+    mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
     mapAppSetUsageStep,
@@ -41,21 +40,13 @@ describe('MapApp reducer tests', () => {
         testMapAppStateChange(initialState, action, {});
     });
 
-    it('should move to user authentication step on user button click', () => {
-        const initialState = buildMapAppState({});
-        const action = mapAppButtonClick(MapAppButton.LOGIN);
-
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.USER_AUTHENTICATION });
-    });
-
-    it('should move to mainPage screen step and reset user id on logout button click', () => {
+    it('should reset current user id', () => {
         const initialState = buildMapAppState({
-            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
             currentUserID: 'reset me!',
         });
-        const action = mapAppButtonClick(MapAppButton.LOGOUT);
+        const action = mapAppResetCurrentUser();
 
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN, currentUserID: null });
+        testMapAppStateChange(initialState, action, { currentUserID: null });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {

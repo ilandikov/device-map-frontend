@@ -3,7 +3,7 @@ import { MapAppAddress, MapAppUsageStep } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
-    BUTTON_CLICK = 'BUTTON_CLICK',
+    RESET_CURRENT_USER = 'RESET_CURRENT_USER',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
     AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
@@ -22,7 +22,7 @@ export enum MapAppButton {
 
 export type MapAppAction =
     | MapAppLoginModalCloseAction
-    | MapAppButtonClick
+    | MapAppResetCurrentUser
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
@@ -37,13 +37,12 @@ export interface MapAppLoginModalCloseAction {
     type: MapAppActionType.LOGIN_MODAL_CLOSE;
 }
 
-export interface MapAppButtonClick {
-    type: MapAppActionType.BUTTON_CLICK;
-    button: MapAppButton;
+export interface MapAppResetCurrentUser {
+    type: MapAppActionType.RESET_CURRENT_USER;
 }
 
-export function mapAppButtonClick(button: MapAppButton): MapAppButtonClick {
-    return { type: MapAppActionType.BUTTON_CLICK, button };
+export function mapAppResetCurrentUser(): MapAppResetCurrentUser {
+    return { type: MapAppActionType.RESET_CURRENT_USER };
 }
 
 export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
