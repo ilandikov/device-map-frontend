@@ -2,9 +2,12 @@ import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
 import {
+    click,
     createEvent,
     getNonNumeric,
     renderForActionDispatchTest,
+    testDispatchedAction,
+    testDispatchedActionsInOrder,
     testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
@@ -194,7 +197,6 @@ describe('OTP form action tests', () => {
     });
 
     it('should send OTP code and verification request on next button click', () => {
-        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         inputOTPDigit(container, 0, '2');
@@ -204,20 +206,18 @@ describe('OTP form action tests', () => {
         inputOTPDigit(container, 4, '7');
         inputOTPDigit(container, 5, '3');
 
-        const nextButton = getByText(container, 'next');
+        const nextButton = getByTestId(container, 'nextButton');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.OTP, '208473'));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalRemoteRequest(LoginModalCheck.OTP));
+        testDispatchedActionsInOrder([
+            loginModalInput(LoginModalInputType.OTP, '208473'),
+            loginModalRemoteRequest(LoginModalCheck.OTP),
+        ]);
     });
 
     it('should request the OTP code again on resend OTP button click', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        click(<OTPForm />, 'sendOTPAgainButton');
 
-        const resendOTPButton = getByText(container, 'OTPSendAgain');
-        fireEvent.click(resendOTPButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.NONE));
+        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 });
