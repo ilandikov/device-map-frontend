@@ -61,5 +61,6 @@ describe('UserButton action tests', () => {
         expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppResetCurrentUser());
         expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalButtonClick(LoginModalButton.USER_BUTTON));
         expect(mockDispatch).toHaveBeenNthCalledWith(4, loginModalRemoteRequest(LoginModalCheck.NONE));
+        expect(mockDispatch).toHaveBeenCalledTimes(4);
     });
 });
