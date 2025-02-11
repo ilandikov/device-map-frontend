@@ -56,7 +56,8 @@ function renderOTPFormAndGetInputs() {
     const inputs = [0, 1, 2, 3, 4, 5].map((inputIndex) => {
         return getInput(container, inputIndex);
     });
-    return { inputs };
+    const nextButton = getByTestId(container, 'nextButton');
+    return { inputs, nextButton };
 }
 
 describe('OTP input elements individual tests', () => {
@@ -99,12 +100,10 @@ describe('OTP form tests', () => {
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs, nextButton } = renderOTPFormAndGetInputs();
 
-        const input = getInput(container, 5);
-        fireEvent.change(input, createEvent('1'));
+        testTypeDigitAndExpectValue(inputs[5], '1', '1');
 
-        const nextButton = getByText(container, 'next');
         expect(nextButton).toHaveFocus();
     });
 
