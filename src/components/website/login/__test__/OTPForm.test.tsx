@@ -85,12 +85,12 @@ describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            const container = renderForActionDispatchTest(<OTPForm />);
+            const inputs = renderOTPFormAndGetInputs();
+            const input = inputs[inputIndex];
+            const nextInput = inputs[inputIndex + 1];
 
-            const input = getInput(container, inputIndex);
             fireEvent.change(input, createEvent('1'));
 
-            const nextInput = getInput(container, inputIndex + 1);
             expect(nextInput).toHaveFocus();
         },
     );
