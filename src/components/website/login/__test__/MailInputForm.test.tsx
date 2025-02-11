@@ -18,13 +18,6 @@ import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../.
 import { CognitoErrors } from '../redux/cognitoHelpers';
 import { MailInputError } from '../redux/AuthenticationErrors';
 
-jest.mock('gatsby-plugin-react-i18next', () => ({
-    ...jest.requireActual('gatsby-plugin-react-i18next'),
-    useI18next: jest.fn().mockImplementation(() => ({
-        t: jest.fn().mockImplementation((val) => val),
-    })),
-}));
-
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,

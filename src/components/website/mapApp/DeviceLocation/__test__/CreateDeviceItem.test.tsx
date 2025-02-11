@@ -12,13 +12,6 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-jest.mock('gatsby-plugin-react-i18next', () => ({
-    ...jest.requireActual('gatsby-plugin-react-i18next'),
-    useI18next: jest.fn().mockImplementation(() => ({
-        t: jest.fn().mockImplementation((val) => val),
-    })),
-}));
-
 describe('Create Device Item action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
