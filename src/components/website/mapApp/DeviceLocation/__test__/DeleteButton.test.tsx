@@ -1,7 +1,6 @@
-import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction } from '../../../../../../tests/utils/RenderingHelpers';
 import { DeleteButton } from '../DeleteButton';
 import { deviceDeleteRequest } from '../../redux/DeviceAction';
 
@@ -17,11 +16,8 @@ describe('DeleteButton action tests', () => {
     });
 
     it('should dispatch delete device request on delete device button click', () => {
-        const container = renderForActionDispatchTest(<DeleteButton id={'try to delete me'} />);
+        click(<DeleteButton id={'try to delete me'} />, 'deleteDeviceButton');
 
-        const loginButton = getByTestId(container, 'deleteDeviceButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, deviceDeleteRequest('try to delete me'));
+        testDispatchedAction(deviceDeleteRequest('try to delete me'));
     });
 });
