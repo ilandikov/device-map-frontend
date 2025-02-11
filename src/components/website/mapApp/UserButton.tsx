@@ -47,7 +47,6 @@ export function LoginButton() {
             caption={t('loginAction')}
             onClick={() => {
                 dispatch(mapAppSetUsageStep(MapAppUsageStep.USER_AUTHENTICATION));
-                dispatch(mapAppButtonClick(MapAppButton.LOGIN));
             }}
         />
     );

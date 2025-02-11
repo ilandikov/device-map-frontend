@@ -45,7 +45,6 @@ describe('UserButton action tests', () => {
         fireEvent.click(loginButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppUsageStep.USER_AUTHENTICATION));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppButtonClick(MapAppButton.LOGIN));
     });
 
     it('should dispatch click action on login button click', () => {
