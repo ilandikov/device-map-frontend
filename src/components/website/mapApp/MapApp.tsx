@@ -6,7 +6,7 @@ import { ComponentMap } from '../common/ComponentMap';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
-import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
+import { MapAppComponents, useMapAppState } from './redux/MapAppState';
 import 'leaflet/dist/leaflet.css';
 import { DeviceMap } from './DeviceMap';
 import { DeviceLocation } from './DeviceLocation/DeviceLocation';
@@ -15,16 +15,16 @@ export default function MapApp() {
     const mapAppState = useMapAppState();
 
     const deviceLocationWasSelected = mapAppState.selectedMarker.location;
-    const usageComponent: ComponentMap<MapAppUsageStep> = {
-        HOME_SCREEN: !deviceLocationWasSelected && <ProductDescription />,
-        USER_AUTHENTICATION: <LoginModal />,
-        DEVICE_MANAGEMENT: deviceLocationWasSelected && <DeviceLocation />,
+    const mainComponents: ComponentMap<MapAppComponents> = {
+        PRODUCT_DESCRIPTION: !deviceLocationWasSelected && <ProductDescription />,
+        LOGIN_MODAL: <LoginModal />,
+        DEVICE_LOCATION: deviceLocationWasSelected && <DeviceLocation />,
     };
 
     return (
         <div className="map-app-container">
             <MapAppHeader />
-            {usageComponent[mapAppState.usageStep]}
+            {mainComponents[mapAppState.component]}
             <DeviceMap />
         </div>
     );

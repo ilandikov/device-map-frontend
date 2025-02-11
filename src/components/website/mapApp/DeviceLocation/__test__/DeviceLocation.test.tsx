@@ -1,7 +1,7 @@
 import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForSnapshotTest } from '../../../../../../tests/utils/RenderingHelpers';
-import { MapAppUsageStep } from '../../redux/MapAppState';
+import { MapAppComponents } from '../../redux/MapAppState';
 import { DeviceLocation } from '../DeviceLocation';
 
 jest.mock('react-redux', () => ({
@@ -13,7 +13,7 @@ jest.mock('react-redux', () => ({
 describe('device list snapshot tests', () => {
     it('should show address loader and a list devices matching the selected marker without the create device item', () => {
         mockMapAppState({
-            usageStep: MapAppUsageStep.HOME_SCREEN,
+            component: MapAppComponents.HOME_SCREEN,
             devices: [
                 { id: '85378', createdDate: '0000000000000', creatorID: 'John Doe', location: { lat: 6.3, lon: 9.2 } },
             ],
@@ -29,7 +29,7 @@ describe('device list snapshot tests', () => {
 
     it('should show the address and a list devices matching the selected marker with the create device item', () => {
         mockMapAppState({
-            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            component: MapAppComponents.DEVICE_MANAGEMENT,
             currentUserID: 'I created the second one!',
             devices: [
                 {
