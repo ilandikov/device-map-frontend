@@ -51,7 +51,7 @@ function testTypeDigitAndExpectValue(input: HTMLInputElement, typed: string, exp
     expect(input.value).toEqual(expected);
 }
 
-function renderOTPFormAndGetInputs() {
+function renderOTPForm() {
     const container = renderForActionDispatchTest(<OTPForm />);
     const inputs = [0, 1, 2, 3, 4, 5].map((inputIndex) => {
         return getInput(container, inputIndex);
@@ -62,7 +62,7 @@ function renderOTPFormAndGetInputs() {
 
 describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        const { inputs } = renderOTPFormAndGetInputs();
+        const { inputs } = renderOTPForm();
         const input = inputs[inputIndex];
 
         testTypeDigitAndExpectValue(input, '1', '1');
@@ -73,7 +73,7 @@ describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            const { inputs } = renderOTPFormAndGetInputs();
+            const { inputs } = renderOTPForm();
             const input = inputs[inputIndex];
 
             testTypeDigitAndExpectValue(input, '3', '3');
@@ -89,7 +89,7 @@ describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            const { inputs } = renderOTPFormAndGetInputs();
+            const { inputs } = renderOTPForm();
             const input = inputs[inputIndex];
             const nextInput = inputs[inputIndex + 1];
 
@@ -100,7 +100,7 @@ describe('OTP form tests', () => {
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        const { inputs, nextButton } = renderOTPFormAndGetInputs();
+        const { inputs, nextButton } = renderOTPForm();
 
         testTypeDigitAndExpectValue(inputs[5], '1', '1');
 
