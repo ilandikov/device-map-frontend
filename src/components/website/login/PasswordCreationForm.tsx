@@ -23,7 +23,7 @@ export function PasswordCreationForm() {
             <div className="login-modal-input-container">
                 <PasswordInputBox
                     helpText={t('enterPassword')}
-                    testId="userPassword"
+                    testId="passwordInput"
                     value={password}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
@@ -32,7 +32,7 @@ export function PasswordCreationForm() {
                 />
                 <PasswordInputBox
                     helpText={t('repeatPassword')}
-                    testId="userPasswordRepeat"
+                    testId="passwordRepeatInput"
                     value={passwordRepeat}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputType.PASSWORD_REPEAT, event.target.value));
@@ -47,6 +47,7 @@ export function PasswordCreationForm() {
                     onClick={() => {
                         dispatch(loginModalRemoteRequest(LoginModalCheck.PASSWORD));
                     }}
+                    data-testid="nextButton"
                 >
                     {t('next')}
                 </button>
