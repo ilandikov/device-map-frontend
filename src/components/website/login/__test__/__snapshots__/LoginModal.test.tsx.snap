@@ -837,6 +837,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset r
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="sendOTPButton"
         onClick={[Function]}
       >
         OTPSendSMS
