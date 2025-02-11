@@ -2,10 +2,10 @@ import { MapAppReducer } from '../MapAppReducer';
 import {
     MapAppAction,
     mapAppAuthenticationCompleted,
-    mapAppButtonClick,
     mapAppGetLocationAddress,
     mapAppGetUserPoints,
     mapAppLoginModalClose,
+    mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
     mapAppSetUsageStep,
@@ -42,7 +42,7 @@ describe('MapApp reducer tests', () => {
 
     it('should move to user authentication step on user button click', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppButtonClick();
+        const action = mapAppResetCurrentUser();
 
         testMapAppStateChange(initialState, action, {});
     });
@@ -52,7 +52,7 @@ describe('MapApp reducer tests', () => {
             usageStep: MapAppUsageStep.USER_AUTHENTICATION,
             currentUserID: 'reset me!',
         });
-        const action = mapAppButtonClick();
+        const action = mapAppResetCurrentUser();
 
         testMapAppStateChange(initialState, action, { currentUserID: null });
     });

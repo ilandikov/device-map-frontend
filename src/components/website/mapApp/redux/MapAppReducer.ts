@@ -5,7 +5,7 @@ import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './Devic
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
-        case MapAppActionType.BUTTON_CLICK:
+        case MapAppActionType.RESET_CURRENT_USER:
             return { ...state, currentUserID: null };
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {

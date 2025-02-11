@@ -2,7 +2,7 @@ import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { mapAppButtonClick, mapAppSetUsageStep } from '../redux/MapAppAction';
+import { mapAppResetCurrentUser, mapAppSetUsageStep } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
     LoginModalButton,
@@ -54,7 +54,7 @@ describe('UserButton action tests', () => {
         fireEvent.click(loginButton);
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppSetUsageStep(MapAppUsageStep.HOME_SCREEN));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppButtonClick());
+        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppResetCurrentUser());
         expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalButtonClick(LoginModalButton.USER_BUTTON));
         expect(mockDispatch).toHaveBeenNthCalledWith(4, loginModalRemoteRequest(LoginModalCheck.NONE));
     });
