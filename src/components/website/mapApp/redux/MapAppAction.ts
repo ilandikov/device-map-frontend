@@ -116,6 +116,6 @@ interface MapAppShowComponent {
     component: MapAppComponents;
 }
 
-export function mapAppSetUsageStep(step: MapAppComponents): MapAppShowComponent {
+export function mapAppShowComponent(step: MapAppComponents): MapAppShowComponent {
     return { type: MapAppActionType.SHOW_COMPONENT, component: step };
 }

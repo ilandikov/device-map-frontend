@@ -8,8 +8,8 @@ import {
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-    mapAppSetUsageStep,
     mapAppSetUserPoints,
+    mapAppShowComponent,
 } from '../MapAppAction';
 import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
 import {
@@ -122,7 +122,7 @@ describe('MapApp reducer tests', () => {
 
     it('should change the map app state', () => {
         const initialState = buildMapAppState({ component: MapAppComponents.LOGIN_MODAL });
-        const action = mapAppSetUsageStep(MapAppComponents.DEVICE_LOCATION);
+        const action = mapAppShowComponent(MapAppComponents.DEVICE_LOCATION);
 
         testMapAppStateChange(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
     });
