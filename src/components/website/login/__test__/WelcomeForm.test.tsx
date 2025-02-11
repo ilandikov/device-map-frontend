@@ -1,9 +1,8 @@
-import { fireEvent, getByText } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { LoginModalButton, loginModalButtonClick } from '../redux/LoginModalAction';
 import { WelcomeForm } from '../WelcomeForm';
-import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
+import { click, renderForSnapshotTest, testDispatchedAction } from '../../../../../tests/utils/RenderingHelpers';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -25,20 +24,14 @@ describe('WelcomeForm action tests', () => {
     });
 
     it('should transition to email input from welcome state', () => {
-        const container = renderForActionDispatchTest(<WelcomeForm />);
+        click(<WelcomeForm />, 'registerButton');
 
-        const registerButton = getByText(container, 'accountRegister');
-        fireEvent.click(registerButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER));
+        testDispatchedAction(loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER));
     });
 
     it('should transition to login from welcome state', () => {
-        const container = renderForActionDispatchTest(<WelcomeForm />);
+        click(<WelcomeForm />, 'loginButton');
 
-        const loginButton = getByText(container, 'accountLogin');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
+        testDispatchedAction(loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
     });
 });

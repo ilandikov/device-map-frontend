@@ -962,12 +962,14 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="loginButton"
         onClick={[Function]}
       >
         accountLogin
       </button>
       <button
         className="login-modal-button-green-on-black"
+        data-testid="registerButton"
         onClick={[Function]}
       >
         accountRegister
