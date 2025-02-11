@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    clickButtonInComponent,
+    click,
     renderForSnapshotTest,
     testDispatchedAction,
     testDispatchedActionsInOrder,
@@ -43,13 +43,13 @@ describe('UserButton action tests', () => {
     });
 
     it('should dispatch click action on login button click', () => {
-        clickButtonInComponent(<LoginButton />, 'userButton');
+        click(<LoginButton />, 'userButton');
 
         testDispatchedAction(mapAppShowComponent(MapAppComponents.LOGIN_MODAL));
     });
 
     it('should dispatch click action on login button click', () => {
-        clickButtonInComponent(<LogoutButton />, 'userButton');
+        click(<LogoutButton />, 'userButton');
 
         testDispatchedActionsInOrder([
             mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),

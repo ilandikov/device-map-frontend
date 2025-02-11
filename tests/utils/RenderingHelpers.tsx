@@ -29,13 +29,13 @@ export function renderForActionDispatchTest(component: React.JSX.Element) {
     return container;
 }
 
-export function clickButtonInComponent(component: React.JSX.Element, buttonTestId: string) {
+export function click(component: React.JSX.Element, buttonTestId: string) {
     const container = renderForActionDispatchTest(component);
     const button = getByTestId(container, buttonTestId);
     fireEvent.click(button);
 }
 
-export function userTypedInComponentInput(component: React.JSX.Element, inputTestId: string, userTyped: string) {
+export function type(component: React.JSX.Element, inputTestId: string, userTyped: string) {
     const container = renderForActionDispatchTest(component);
     const input = getByTestId(container, inputTestId);
     fireEvent.change(input, createEvent(userTyped));

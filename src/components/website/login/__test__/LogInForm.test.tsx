@@ -2,11 +2,11 @@ import { getByTestId } from '@testing-library/react';
 import React from 'react';
 import { LogInForm } from '../LogInForm';
 import {
-    clickButtonInComponent,
+    click,
     renderForActionDispatchTest,
     renderForSnapshotTest,
     testDispatchedAction,
-    userTypedInComponentInput,
+    type,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
@@ -47,7 +47,7 @@ describe('LogInForm action tests', () => {
     it('should update the user email on input on password input stage', () => {
         mockAuthenticationState({ step: AuthenticationStep.LOGIN });
 
-        userTypedInComponentInput(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
+        type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
 
         testDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'));
     });
@@ -61,19 +61,19 @@ describe('LogInForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        userTypedInComponentInput(<LogInForm />, 'passwordInput', 'strongPassword');
+        type(<LogInForm />, 'passwordInput', 'strongPassword');
 
         testDispatchedAction(loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'));
     });
 
     it('should call user authentication when next button is pressed', () => {
-        clickButtonInComponent(<LogInForm />, 'nextButton');
+        click(<LogInForm />, 'nextButton');
 
         testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 
     it('should transition to password reset state when reset button was clicked', () => {
-        clickButtonInComponent(<LogInForm />, 'resetPasswordButton');
+        click(<LogInForm />, 'resetPasswordButton');
 
         testDispatchedAction(loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
     });
