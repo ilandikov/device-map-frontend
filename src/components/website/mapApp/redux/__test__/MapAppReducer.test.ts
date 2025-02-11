@@ -129,7 +129,7 @@ describe('MapApp reducer tests', () => {
         testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
     });
 
-    it('should the map app state', () => {
+    it('should change the map app state', () => {
         const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
         const action = mapAppSetUsageStep(MapAppUsageStep.DEVICE_MANAGEMENT);
 
