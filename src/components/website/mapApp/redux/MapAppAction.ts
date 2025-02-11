@@ -1,5 +1,5 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress, MapAppUsageStep } from './MapAppState';
+import { MapAppAddress, MapAppComponents } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
@@ -12,7 +12,7 @@ export enum MapAppActionType {
     SET_USER_POINTS = 'SET_USER_POINTS',
     GET_USER_POINTS = 'GET_USER_POINTS',
     GET_USER_POINTS_ERROR = 'GET_USER_POINTS_ERROR',
-    SET_USAGE_STEP = 'SET_USAGE_STEP',
+    SHOW_COMPONENT = 'SHOW_COMPONENT',
 }
 
 export enum MapAppButton {
@@ -30,7 +30,7 @@ export type MapAppAction =
     | MapAppGetUserPoints
     | MapAppSetUserPoints
     | MapAppGetUserPointsError
-    | MapAppSetUsageStep
+    | MapAppShowComponent
     | DeviceAction;
 
 export interface MapAppLoginModalCloseAction {
@@ -111,11 +111,11 @@ export function mapAppGetUserPointsError(error: string): MapAppGetUserPointsErro
     return { type: MapAppActionType.GET_USER_POINTS_ERROR, error };
 }
 
-interface MapAppSetUsageStep {
-    type: MapAppActionType.SET_USAGE_STEP;
-    step: MapAppUsageStep;
+interface MapAppShowComponent {
+    type: MapAppActionType.SHOW_COMPONENT;
+    component: MapAppComponents;
 }
 
-export function mapAppSetUsageStep(step: MapAppUsageStep): MapAppSetUsageStep {
-    return { type: MapAppActionType.SET_USAGE_STEP, step };
+export function mapAppShowComponent(step: MapAppComponents): MapAppShowComponent {
+    return { type: MapAppActionType.SHOW_COMPONENT, component: step };
 }

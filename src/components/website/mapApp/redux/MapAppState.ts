@@ -12,7 +12,7 @@ export interface MapAppAddress {
 }
 
 export interface MapAppState {
-    usageStep: MapAppUsageStep;
+    component: MapAppComponents;
     selectedMarker: {
         location: T22Location | null;
         address: MapAppAddress | null;
@@ -23,14 +23,14 @@ export interface MapAppState {
     currentUserPoints: number | null;
 }
 
-export enum MapAppUsageStep {
-    HOME_SCREEN = 'HOME_SCREEN',
-    USER_AUTHENTICATION = 'USER_AUTHENTICATION',
-    DEVICE_MANAGEMENT = 'DEVICE_MANAGEMENT',
+export enum MapAppComponents {
+    PRODUCT_DESCRIPTION = 'PRODUCT_DESCRIPTION',
+    LOGIN_MODAL = 'LOGIN_MODAL',
+    DEVICE_LOCATION = 'DEVICE_LOCATION',
 }
 
 export const mapAppInitialState: MapAppState = {
-    usageStep: MapAppUsageStep.HOME_SCREEN,
+    component: MapAppComponents.PRODUCT_DESCRIPTION,
     devices: [],
     selectedMarker: {
         location: null,

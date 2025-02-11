@@ -3,7 +3,7 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { renderForSnapshotTest } from '../../../../../../tests/utils/RenderingHelpers';
 import { DeviceItem } from '../DeviceItem';
-import { MapAppUsageStep } from '../../redux/MapAppState';
+import { MapAppComponents } from '../../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -44,7 +44,7 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     });
 
     it('should match snapshot - created device without approval button and with delete button', () => {
-        mockMapAppState({ usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        mockMapAppState({ component: MapAppComponents.DEVICE_LOCATION });
         const component = renderForSnapshotTest(<DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={true} />);
         expect(component).toMatchSnapshot();
     });

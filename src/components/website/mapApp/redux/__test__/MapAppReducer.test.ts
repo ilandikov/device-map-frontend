@@ -8,10 +8,10 @@ import {
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-    mapAppSetUsageStep,
     mapAppSetUserPoints,
+    mapAppShowComponent,
 } from '../MapAppAction';
-import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
+import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
     deviceCreateRequest,
@@ -51,21 +51,21 @@ describe('MapApp reducer tests', () => {
 
     it('should move to mainPage screen on navigation cancel action', () => {
         const initialState = buildMapAppState({
-            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
+            component: MapAppComponents.LOGIN_MODAL,
         });
         const action = mapAppLoginModalClose();
 
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.HOME_SCREEN });
+        testMapAppStateChange(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
     it('should move to device management when authentication has been completed', () => {
         const initialState = buildMapAppState({
-            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
+            component: MapAppComponents.LOGIN_MODAL,
         });
         const action = mapAppAuthenticationCompleted('set me in the state');
 
         testMapAppStateChange(initialState, action, {
-            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            component: MapAppComponents.DEVICE_LOCATION,
             currentUserID: 'set me in the state',
         });
     });
@@ -121,10 +121,10 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should change the map app state', () => {
-        const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
-        const action = mapAppSetUsageStep(MapAppUsageStep.DEVICE_MANAGEMENT);
+        const initialState = buildMapAppState({ component: MapAppComponents.LOGIN_MODAL });
+        const action = mapAppShowComponent(MapAppComponents.DEVICE_LOCATION);
 
-        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+        testMapAppStateChange(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
     });
 });
 

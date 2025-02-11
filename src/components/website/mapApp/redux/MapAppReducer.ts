@@ -1,6 +1,6 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
-import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
+import { MapAppComponents, MapAppState, mapAppInitialState } from './MapAppState';
 import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './DeviceAction';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
@@ -10,12 +10,12 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
-                usageStep: MapAppUsageStep.HOME_SCREEN,
+                component: MapAppComponents.PRODUCT_DESCRIPTION,
             };
         case MapAppActionType.AUTHENTICATION_COMPLETED:
             return {
                 ...state,
-                usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+                component: MapAppComponents.DEVICE_LOCATION,
                 currentUserID: action.authenticatedUserId,
             };
         case MapAppActionType.SET_LOCATION_COORDINATES:
@@ -31,8 +31,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, currentUserPoints: null };
         case MapAppActionType.SET_USER_POINTS:
             return { ...state, currentUserPoints: action.points };
-        case MapAppActionType.SET_USAGE_STEP:
-            return { ...state, usageStep: action.step };
+        case MapAppActionType.SHOW_COMPONENT:
+            return { ...state, component: action.component };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
         default:
