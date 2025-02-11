@@ -34,7 +34,8 @@ describe('UserButton snapshot tests', () => {
     });
 });
 
-function clickButton(container: HTMLElement, buttonTestId: string) {
+function clickButtonInComponent(component: React.JSX.Element, buttonTestId: string) {
+    const container = renderForActionDispatchTest(component);
     const button = getByTestId(container, buttonTestId);
     fireEvent.click(button);
 }
@@ -44,11 +45,6 @@ function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
         expect(mockDispatch).toHaveBeenNthCalledWith(index + 1, action);
     });
     expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
-}
-
-function clickButtonInComponent(component: React.JSX.Element, buttonTestId: string) {
-    const container = renderForActionDispatchTest(component);
-    clickButton(container, buttonTestId);
 }
 
 describe('UserButton action tests', () => {
