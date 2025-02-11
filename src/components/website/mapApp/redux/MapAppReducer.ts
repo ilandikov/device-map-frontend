@@ -1,13 +1,12 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { MapAppState, MapAppUsageStep, mapAppInitialState } from './MapAppState';
-import { afterButtonClicked } from './AfterButtonClicked';
 import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './DeviceAction';
 
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.BUTTON_CLICK:
-            return { ...state, ...afterButtonClicked(action) };
+            return { ...state, ...{ currentUserID: null } };
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
