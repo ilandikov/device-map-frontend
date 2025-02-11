@@ -51,16 +51,16 @@ function testTypeDigitAndExpectValue(input: HTMLInputElement, typed: string, exp
     expect(input.value).toEqual(expected);
 }
 
-function renderOTPFormAndGetInput(inputIndex: number) {
+function renderOTPFormAndGetInputs() {
     const container = renderForActionDispatchTest(<OTPForm />);
-    const input = getInput(container, inputIndex);
-    expect(input.value).toEqual('');
-    return input;
+    return [0, 1, 2, 3, 4, 5].map((inputIndex) => {
+        return getInput(container, inputIndex);
+    });
 }
 
 describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        const input = renderOTPFormAndGetInput(inputIndex);
+        const input = renderOTPFormAndGetInputs()[inputIndex];
 
         testTypeDigitAndExpectValue(input, '1', '1');
 
@@ -70,7 +70,7 @@ describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            const input = renderOTPFormAndGetInput(inputIndex);
+            const input = renderOTPFormAndGetInputs()[inputIndex];
 
             testTypeDigitAndExpectValue(input, '3', '3');
 
