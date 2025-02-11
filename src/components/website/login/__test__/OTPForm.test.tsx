@@ -70,11 +70,9 @@ describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            const container = renderForActionDispatchTest(<OTPForm />);
-            const input = getInput(container, inputIndex);
+            const input = renderOTPFormAndGetInput(inputIndex);
 
-            fireEvent.change(input, createEvent('3'));
-            expect(input.value).toEqual('3');
+            testTypeDigitAndExpectValue(input, '3', '3');
 
             input.focus();
 
