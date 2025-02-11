@@ -121,19 +121,14 @@ describe('OTP form tests', () => {
 
 describe('OTP form paste tests', () => {
     it('should dispatch 3 digit value over 3 inputs', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs } = renderOTPForm();
 
-        const input0 = getInput(container, 0);
-        const input1 = getInput(container, 1);
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        fireEvent.change(input0, createEvent('649'));
+        fireEvent.change(inputs[0], createEvent('649'));
 
-        expect(input0.value).toEqual('6');
-        expect(input1.value).toEqual('4');
-        expect(input2.value).toEqual('9');
-        expect(input3).toHaveFocus();
+        expect(inputs[0].value).toEqual('6');
+        expect(inputs[1].value).toEqual('4');
+        expect(inputs[2].value).toEqual('9');
+        expect(inputs[3]).toHaveFocus();
     });
 
     it('should not overflow the inputs and focus on the button', () => {
