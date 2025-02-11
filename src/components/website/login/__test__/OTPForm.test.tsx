@@ -108,16 +108,14 @@ describe('OTP form tests', () => {
     });
 
     it('should focus on the next empty input after a digit has been input', () => {
-        const container = renderForActionDispatchTest(<OTPForm />);
-        const input0 = getInput(container, 0);
-        const input1 = getInput(container, 1);
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        fireEvent.change(input2, createEvent('2'));
-        fireEvent.change(input1, createEvent('1'));
+        const { inputs } = renderOTPForm();
 
-        fireEvent.change(input0, createEvent('1'));
-        expect(input3).toHaveFocus();
+        fireEvent.change(inputs[1], createEvent('1'));
+        fireEvent.change(inputs[2], createEvent('2'));
+        fireEvent.change(inputs[4], createEvent('4'));
+        fireEvent.change(inputs[0], createEvent('1'));
+
+        expect(inputs[3]).toHaveFocus();
     });
 });
 
