@@ -35,6 +35,12 @@ export function clickButtonInComponent(component: React.JSX.Element, buttonTestI
     fireEvent.click(button);
 }
 
+export function userTypedInComponentInput(component: React.JSX.Element, inputTestId: string, userTyped: string) {
+    const container = renderForActionDispatchTest(component);
+    const input = getByTestId(container, inputTestId);
+    fireEvent.change(input, createEvent(userTyped));
+}
+
 export function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
     expectedActions.forEach((action, index) => {
         expect(mockDispatch).toHaveBeenNthCalledWith(index + 1, action);

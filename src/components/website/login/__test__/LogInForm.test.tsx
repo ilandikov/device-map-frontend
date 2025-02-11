@@ -5,6 +5,7 @@ import {
     createEvent,
     renderForActionDispatchTest,
     renderForSnapshotTest,
+    userTypedInComponentInput,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
@@ -36,12 +37,6 @@ describe('LogInForm snapshot test', () => {
         expect(component).toMatchSnapshot();
     });
 });
-
-function userTypedInComponentInput(component: React.JSX.Element, inputTestId: string, userTyped: string) {
-    const container = renderForActionDispatchTest(component);
-    const input = getByTestId(container, inputTestId);
-    fireEvent.change(input, createEvent(userTyped));
-}
 
 describe('LogInForm action tests', () => {
     beforeEach(() => {
