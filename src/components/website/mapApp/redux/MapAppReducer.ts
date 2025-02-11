@@ -32,6 +32,8 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return { ...state, currentUserPoints: null };
         case MapAppActionType.SET_USER_POINTS:
             return { ...state, currentUserPoints: action.points };
+        case MapAppActionType.SET_USAGE_STEP:
+            return { ...state, usageStep: action.step };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
         default:

@@ -1,5 +1,5 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress } from './MapAppState';
+import { MapAppAddress, MapAppUsageStep } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
@@ -12,6 +12,7 @@ export enum MapAppActionType {
     SET_USER_POINTS = 'SET_USER_POINTS',
     GET_USER_POINTS = 'GET_USER_POINTS',
     GET_USER_POINTS_ERROR = 'GET_USER_POINTS_ERROR',
+    SET_USAGE_STEP = 'SET_USAGE_STEP',
 }
 
 export enum MapAppButton {
@@ -29,6 +30,7 @@ export type MapAppAction =
     | MapAppGetUserPoints
     | MapAppSetUserPoints
     | MapAppGetUserPointsError
+    | MapAppSetUsageStep
     | DeviceAction;
 
 export interface MapAppLoginModalCloseAction {
@@ -108,4 +110,13 @@ interface MapAppGetUserPointsError {
 
 export function mapAppGetUserPointsError(error: string): MapAppGetUserPointsError {
     return { type: MapAppActionType.GET_USER_POINTS_ERROR, error };
+}
+
+interface MapAppSetUsageStep {
+    type: MapAppActionType.SET_USAGE_STEP;
+    step: MapAppUsageStep;
+}
+
+export function mapAppSetUsageStep(step: MapAppUsageStep): MapAppSetUsageStep {
+    return { type: MapAppActionType.SET_USAGE_STEP, step };
 }

@@ -9,6 +9,7 @@ import {
     mapAppLoginModalClose,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
+    mapAppSetUsageStep,
     mapAppSetUserPoints,
 } from '../MapAppAction';
 import { MapAppState, MapAppUsageStep, buildMapAppState } from '../MapAppState';
@@ -128,6 +129,15 @@ describe('MapApp reducer tests', () => {
         testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
     });
 
+    it('should change the map app state', () => {
+        const initialState = buildMapAppState({ usageStep: MapAppUsageStep.USER_AUTHENTICATION });
+        const action = mapAppSetUsageStep(MapAppUsageStep.DEVICE_MANAGEMENT);
+
+        testMapAppStateChange(initialState, action, { usageStep: MapAppUsageStep.DEVICE_MANAGEMENT });
+    });
+});
+
+describe('rename me', () => {
     it('should not change state on list devices remote request', () => {
         const initialState = buildMapAppState({});
         const action = deviceListRequest();

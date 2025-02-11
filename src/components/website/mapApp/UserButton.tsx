@@ -8,8 +8,9 @@ import {
     loginModalButtonClick,
     loginModalRemoteRequest,
 } from '../login/redux/LoginModalAction';
-import { MapAppButton, mapAppButtonClick } from './redux/MapAppAction';
+import { MapAppButton, mapAppButtonClick, mapAppSetUsageStep } from './redux/MapAppAction';
 import Account from '/src/assets/images/Account.svg';
+import { MapAppUsageStep } from './redux/MapAppState';
 
 function UserButton(props: { caption: string; onClick: () => void }) {
     return (
@@ -28,6 +29,7 @@ export function LogoutButton() {
         <UserButton
             caption={email}
             onClick={() => {
+                dispatch(mapAppSetUsageStep(MapAppUsageStep.HOME_SCREEN));
                 dispatch(mapAppButtonClick(MapAppButton.LOGOUT));
                 dispatch(loginModalButtonClick(LoginModalButton.USER_BUTTON));
                 dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
@@ -44,6 +46,7 @@ export function LoginButton() {
         <UserButton
             caption={t('loginAction')}
             onClick={() => {
+                dispatch(mapAppSetUsageStep(MapAppUsageStep.USER_AUTHENTICATION));
                 dispatch(mapAppButtonClick(MapAppButton.LOGIN));
             }}
         />

@@ -1,7 +1,7 @@
 import { LeafletMouseEvent } from 'leaflet';
 import { useAppDispatch } from '../../../redux/store';
-import { useMapAppState } from './redux/MapAppState';
-import { mapAppSetLocationCoordinates } from './redux/MapAppAction';
+import { MapAppUsageStep, useMapAppState } from './redux/MapAppState';
+import { mapAppSetLocationCoordinates, mapAppSetUsageStep } from './redux/MapAppAction';
 
 export function useMarkerClickHandler() {
     const dispatch = useAppDispatch();
@@ -17,5 +17,6 @@ export function useMarkerClickHandler() {
         }
 
         dispatch(mapAppSetLocationCoordinates({ lat: event.latlng.lat, lon: event.latlng.lng }));
+        dispatch(mapAppSetUsageStep(MapAppUsageStep.DEVICE_MANAGEMENT));
     };
 }
