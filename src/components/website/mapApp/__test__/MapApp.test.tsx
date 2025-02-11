@@ -37,4 +37,16 @@ describe('MapApp snapshot tests', () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it('should match the snapshot at device management with a device location open', () => {
+        mockMapAppState({
+            usageStep: MapAppUsageStep.DEVICE_MANAGEMENT,
+            currentUserID: 'i clicked at device location',
+            currentUserPoints: 320,
+            selectedMarker: { location: { lat: 1, lon: 2 }, address: { addressLine1: 'street', addressLine2: 'city' } },
+        });
+        const component = renderForSnapshotTest(<MapApp />);
+
+        expect(component).toMatchSnapshot();
+    });
 });

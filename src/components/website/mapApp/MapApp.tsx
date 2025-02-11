@@ -2,6 +2,7 @@
 import React from 'react';
 
 import './MapApp.scss';
+import { ComponentMap } from '../common/ComponentMap';
 import { LoginModal } from '../login/LoginModal';
 import { MapAppHeader } from './MapAppHeader';
 import { ProductDescription } from './ProductDescription';
@@ -14,16 +15,16 @@ export default function MapApp() {
     const mapAppState = useMapAppState();
 
     const deviceLocationWasSelected = mapAppState.selectedMarker.location;
-    const showProductDescription =
-        mapAppState.usageStep === MapAppUsageStep.HOME_SCREEN && !mapAppState.selectedMarker.location;
-    const showLoginModal = mapAppState.usageStep === MapAppUsageStep.USER_AUTHENTICATION;
+    const usageComponent: ComponentMap<MapAppUsageStep> = {
+        HOME_SCREEN: !deviceLocationWasSelected && <ProductDescription />,
+        USER_AUTHENTICATION: <LoginModal />,
+        DEVICE_MANAGEMENT: deviceLocationWasSelected && <DeviceLocation />,
+    };
 
     return (
         <div className="map-app-container">
             <MapAppHeader />
-            {showProductDescription && <ProductDescription />}
-            {deviceLocationWasSelected && <DeviceLocation />}
-            {showLoginModal && <LoginModal />}
+            {usageComponent[mapAppState.usageStep]}
             <DeviceMap />
         </div>
     );
