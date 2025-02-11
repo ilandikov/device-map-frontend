@@ -33,6 +33,11 @@ describe('UserButton snapshot tests', () => {
     });
 });
 
+function clickButton(container: HTMLElement, button: string) {
+    const loginButton = getByTestId(container, button);
+    fireEvent.click(loginButton);
+}
+
 describe('UserButton action tests', () => {
     beforeEach(() => {
         jest.resetAllMocks();
@@ -50,8 +55,7 @@ describe('UserButton action tests', () => {
     it('should dispatch click action on login button click', () => {
         const container = renderForActionDispatchTest(<LogoutButton />);
 
-        const loginButton = getByTestId(container, 'userButton');
-        fireEvent.click(loginButton);
+        clickButton(container, 'userButton');
 
         expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION));
         expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppResetCurrentUser());
