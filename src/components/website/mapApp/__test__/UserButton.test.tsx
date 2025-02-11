@@ -1,6 +1,9 @@
-import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
-import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
+import {
+    clickButtonInComponent,
+    renderForSnapshotTest,
+    testDispatchedActionsInOrder,
+} from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { mapAppResetCurrentUser, mapAppShowComponent } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
@@ -11,7 +14,6 @@ import {
     loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
 import { MapAppComponents } from '../redux/MapAppState';
-import { AllActions } from '../../../../redux/store';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -33,19 +35,6 @@ describe('UserButton snapshot tests', () => {
         expect(component).toMatchSnapshot();
     });
 });
-
-function clickButtonInComponent(component: React.JSX.Element, buttonTestId: string) {
-    const container = renderForActionDispatchTest(component);
-    const button = getByTestId(container, buttonTestId);
-    fireEvent.click(button);
-}
-
-function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
-    expectedActions.forEach((action, index) => {
-        expect(mockDispatch).toHaveBeenNthCalledWith(index + 1, action);
-    });
-    expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
-}
 
 describe('UserButton action tests', () => {
     beforeEach(() => {
