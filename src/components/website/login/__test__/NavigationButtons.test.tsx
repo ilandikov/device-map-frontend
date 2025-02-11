@@ -1,9 +1,13 @@
-import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { NavigationButtons } from '../NavigationButtons';
 import { mockDispatch } from '../../../../redux/__mocks__/mocks';
 import { LoginModalButton, loginModalButtonClick } from '../redux/LoginModalAction';
-import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
+import {
+    click,
+    renderForSnapshotTest,
+    testDispatchedAction,
+    testDispatchedActionsInOrder,
+} from '../../../../../tests/utils/RenderingHelpers';
 import { mapAppLoginModalClose } from '../../mapApp/redux/MapAppAction';
 
 jest.mock('react-redux', () => ({
@@ -25,21 +29,14 @@ describe('Navigation buttons tests', () => {
     });
 
     it('should go back to welcome stage on cancel button click', () => {
-        const container = renderForActionDispatchTest(<NavigationButtons />);
+        click(<NavigationButtons />, 'cancelButton');
 
-        const cancelButton = getByTestId(container, 'cancelButton');
-        fireEvent.click(cancelButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppLoginModalClose());
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalButtonClick(LoginModalButton.CANCEL));
+        testDispatchedActionsInOrder([mapAppLoginModalClose(), loginModalButtonClick(LoginModalButton.CANCEL)]);
     });
 
     it('should go back to a desired go back state on go back button click', () => {
-        const container = renderForActionDispatchTest(<NavigationButtons />);
+        click(<NavigationButtons />, 'goBackButton');
 
-        const goBackButton = getByTestId(container, 'goBackButton');
-        fireEvent.click(goBackButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.GO_BACK));
+        testDispatchedAction(loginModalButtonClick(LoginModalButton.GO_BACK));
     });
 });
