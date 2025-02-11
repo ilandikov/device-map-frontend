@@ -46,6 +46,11 @@ function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
     expect(mockDispatch).toHaveBeenCalledTimes(expectedActions.length);
 }
 
+function clickButtonInComponent(component: React.JSX.Element, buttonTestId: string) {
+    const container = renderForActionDispatchTest(component);
+    clickButton(container, buttonTestId);
+}
+
 describe('UserButton action tests', () => {
     beforeEach(() => {
         jest.resetAllMocks();
@@ -61,9 +66,7 @@ describe('UserButton action tests', () => {
     });
 
     it('should dispatch click action on login button click', () => {
-        const container = renderForActionDispatchTest(<LogoutButton />);
-
-        clickButton(container, 'userButton');
+        clickButtonInComponent(<LogoutButton />, 'userButton');
 
         testDispatchedActionsInOrder([
             mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
