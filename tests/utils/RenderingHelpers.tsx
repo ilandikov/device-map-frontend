@@ -20,8 +20,9 @@ function componentWithStoreProvider(component: React.JSX.Element) {
     return <Provider store={configureTestStore()}>{component}</Provider>;
 }
 
-export function renderForSnapshotTest(component: React.JSX.Element) {
-    return renderer.create(componentWithStoreProvider(component)).toJSON();
+export function testSnapshot(component: React.JSX.Element) {
+    const componentJSON = renderer.create(componentWithStoreProvider(component)).toJSON();
+    expect(componentJSON).toMatchSnapshot();
 }
 
 export function renderForActionDispatchTest(component: React.JSX.Element) {
@@ -56,9 +57,4 @@ export function testValueInInput(component: React.JSX.Element, input: string, va
     const container = renderForActionDispatchTest(component);
     const emailInput = getByTestId(container, input) as HTMLInputElement;
     expect(emailInput.value).toEqual(value);
-}
-
-export function testSnapshot(component: React.JSX.Element) {
-    const componentJSON = renderForSnapshotTest(component);
-    expect(componentJSON).toMatchSnapshot();
 }
