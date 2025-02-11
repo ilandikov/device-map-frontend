@@ -37,6 +37,12 @@ describe('LogInForm snapshot test', () => {
     });
 });
 
+function userTypedInComponentInput(component: React.JSX.Element, inputTestId: string, userTyped: string) {
+    const container = renderForActionDispatchTest(component);
+    const input = getByTestId(container, inputTestId);
+    fireEvent.change(input, createEvent(userTyped));
+}
+
 describe('LogInForm action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
@@ -44,10 +50,8 @@ describe('LogInForm action tests', () => {
 
     it('should update the user email on input on password input stage', () => {
         mockAuthenticationState({ step: AuthenticationStep.LOGIN });
-        const container = renderForActionDispatchTest(<LogInForm />);
 
-        const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
+        userTypedInComponentInput(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
 
         expect(mockDispatch).toHaveBeenNthCalledWith(
             1,
