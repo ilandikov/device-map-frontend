@@ -40,16 +40,8 @@ describe('MapApp reducer tests', () => {
         testMapAppStateChange(initialState, action, {});
     });
 
-    it('should move to user authentication step on user button click', () => {
-        const initialState = buildMapAppState({});
-        const action = mapAppResetCurrentUser();
-
-        testMapAppStateChange(initialState, action, {});
-    });
-
-    it('should move to mainPage screen step and reset user id on logout button click', () => {
+    it('should reset current user id', () => {
         const initialState = buildMapAppState({
-            usageStep: MapAppUsageStep.USER_AUTHENTICATION,
             currentUserID: 'reset me!',
         });
         const action = mapAppResetCurrentUser();
