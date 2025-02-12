@@ -28,9 +28,9 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.GET_USER_POINTS:
+        case MapAppActionType.GET_LOGGED_IN_USER:
             return { ...state, currentUserPoints: null };
-        case MapAppActionType.SET_USER_POINTS:
+        case MapAppActionType.SET_LOGGED_IN_USER:
             return { ...state, currentUserPoints: action.points };
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };

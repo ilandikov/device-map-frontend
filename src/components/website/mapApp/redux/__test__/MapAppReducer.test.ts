@@ -3,12 +3,12 @@ import {
     MapAppAction,
     mapAppAuthenticationCompleted,
     mapAppGetLocationAddress,
-    mapAppGetUserPoints,
+    mapAppGetLoggedInUser,
     mapAppLoginModalClose,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-    mapAppSetUserPoints,
+    mapAppSetLoggedInUser,
     mapAppShowComponent,
 } from '../MapAppAction';
 import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
@@ -108,14 +108,14 @@ describe('MapApp reducer tests', () => {
 
     it('should reset current user points', () => {
         const initialState = buildMapAppState({ currentUserPoints: 100500 });
-        const action = mapAppGetUserPoints();
+        const action = mapAppGetLoggedInUser();
 
         testMapAppStateChange(initialState, action, { currentUserPoints: null });
     });
 
     it('should set current user points', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppSetUserPoints({ id: 'i have to be set', points: 10 });
+        const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
 
         testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
     });
