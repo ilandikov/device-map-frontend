@@ -3,7 +3,6 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
 import { DeviceItem } from '../DeviceItem';
-import { MapAppComponents } from '../../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -14,31 +13,31 @@ jest.mock('react-redux', () => ({
 const testDevice: T22Device = {
     id: 'try to delete me',
     createdDate: '1704558741541',
-    creatorID: 'device list test creator id',
+    creatorID: 'i created the device',
     location: { lat: 3, lon: 7 },
 };
 
 describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - created device with approve button and without delete button', () => {
-        mockMapAppState({ loggedInUser: { id: 'do something with the device', points: 0 } });
+        mockMapAppState({ loggedInUser: { id: 'i did not create the device', points: 0 } });
 
         testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 0 }} isDeviceCreatedByCurrentUser={false} />);
     });
 
     it('should match snapshot - validating device with approve button and without delete button', () => {
-        mockMapAppState({ loggedInUser: { id: 'do something with the device', points: 0 } });
+        mockMapAppState({ loggedInUser: { id: 'i did not create the device', points: 0 } });
 
         testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 1 }} isDeviceCreatedByCurrentUser={false} />);
     });
 
     it('should match snapshot - validated device without approve button and without delete button', () => {
-        mockMapAppState({ loggedInUser: { id: 'do something with the device', points: 0 } });
+        mockMapAppState({ loggedInUser: { id: 'i did not create the device', points: 0 } });
 
         testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 2 }} isDeviceCreatedByCurrentUser={false} />);
     });
 
     it('should match snapshot - created device without approval button and with delete button', () => {
-        mockMapAppState({ component: MapAppComponents.DEVICE_LOCATION });
+        mockMapAppState({ loggedInUser: { id: 'i created the device', points: 0 } });
 
         testSnapshot(<DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={true} />);
     });
