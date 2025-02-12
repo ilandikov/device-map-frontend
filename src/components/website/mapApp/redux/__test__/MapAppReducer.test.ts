@@ -42,7 +42,7 @@ describe('MapApp reducer tests', () => {
 
     it('should reset current user id', () => {
         const initialState = buildMapAppState({
-            loggedInUser: { id: 'reset me!' },
+            loggedInUser: { id: 'reset me!', points: 0 },
         });
         const action = mapAppResetCurrentUser();
 
@@ -66,7 +66,7 @@ describe('MapApp reducer tests', () => {
 
         testMapAppStateChange(initialState, action, {
             component: MapAppComponents.DEVICE_LOCATION,
-            loggedInUser: { id: 'set me in the state' },
+            loggedInUser: { id: 'set me in the state', points: 0 },
         });
     });
 
