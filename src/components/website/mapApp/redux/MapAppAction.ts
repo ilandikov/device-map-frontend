@@ -87,12 +87,14 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 
 interface MapAppSetLoggedInUser {
     type: MapAppActionType.SET_LOGGED_IN_USER;
-    id: string;
-    points: number;
+    user: {
+        id: string;
+        points: number;
+    };
 }
 
 export function mapAppSetLoggedInUser({ id, points }: { id: string; points: number }): MapAppSetLoggedInUser {
-    return { type: MapAppActionType.SET_LOGGED_IN_USER, points, id };
+    return { type: MapAppActionType.SET_LOGGED_IN_USER, user: { points, id } };
 }
 
 interface MapAppGetLoggedInUser {
