@@ -69,6 +69,7 @@ exports[`OTPForm snapshot tests should match snapshot at OTP for password reset 
     </p>
     <button
       className="login-modal-input-help login-modal-correct-input"
+      data-testid="sendOTPAgainButton"
       onClick={[Function]}
     >
       OTPSendAgain
@@ -84,6 +85,7 @@ exports[`OTPForm snapshot tests should match snapshot at OTP for password reset 
   >
     <button
       className="login-modal-button-black-on-green"
+      data-testid="nextButton"
       onClick={[Function]}
     >
       next
@@ -161,6 +163,7 @@ exports[`OTPForm snapshot tests should match snapshot at OTP for user creation s
     </p>
     <button
       className="login-modal-input-help login-modal-correct-input"
+      data-testid="sendOTPAgainButton"
       onClick={[Function]}
     >
       OTPSendAgain
@@ -171,6 +174,7 @@ exports[`OTPForm snapshot tests should match snapshot at OTP for user creation s
   >
     <button
       className="login-modal-button-black-on-green"
+      data-testid="nextButton"
       onClick={[Function]}
     >
       next

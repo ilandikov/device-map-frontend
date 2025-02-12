@@ -1,11 +1,6 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordResetRequestForm } from '../PasswordResetRequestForm';
-import {
-    createEvent,
-    renderForActionDispatchTest,
-    renderForSnapshotTest,
-} from '../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction, testSnapshot, type } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalCheck,
     LoginModalInputType,
@@ -23,9 +18,8 @@ jest.mock('react-redux', () => ({
 describe('PasswordResetRequestForm snapshot tests', () => {
     it('should match the snapshot', () => {
         mockAuthenticationState({ email: 'reset@password.kr', error: new Error('somethingIsWrong') });
-        const component = renderForSnapshotTest(<PasswordResetRequestForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<PasswordResetRequestForm />);
     });
 });
 
@@ -35,20 +29,14 @@ describe('PasswordResetRequest form action tests', () => {
     });
 
     it('should update user mail when set', () => {
-        const container = renderForActionDispatchTest(<PasswordResetRequestForm />);
+        type(<PasswordResetRequestForm />, 'emailInput', 'new@email.com');
 
-        const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, createEvent('new@email.com'));
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
+        testDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'new@email.com'));
     });
 
     it('should transition to login OTP state on OTP button click', () => {
-        const container = renderForActionDispatchTest(<PasswordResetRequestForm />);
+        click(<PasswordResetRequestForm />, 'sendOTPButton');
 
-        const requestOTPButton = getByText(container, 'OTPSendSMS');
-        fireEvent.click(requestOTPButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.USERNAME));
+        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.USERNAME));
     });
 });

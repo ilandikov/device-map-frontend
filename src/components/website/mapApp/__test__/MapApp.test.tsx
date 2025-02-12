@@ -1,6 +1,6 @@
 import React from 'react';
 import MapApp from '../MapApp';
-import { renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
+import { testSnapshot } from '../../../../../tests/utils/RenderingHelpers';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { MapAppComponents } from '../redux/MapAppState';
 
@@ -15,27 +15,24 @@ describe('MapApp snapshot tests', () => {
         mockMapAppState({
             component: MapAppComponents.PRODUCT_DESCRIPTION,
         });
-        const component = renderForSnapshotTest(<MapApp />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MapApp />);
     });
 
     it('should match the snapshot at user authentication state', () => {
         mockMapAppState({
             component: MapAppComponents.LOGIN_MODAL,
         });
-        const component = renderForSnapshotTest(<MapApp />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MapApp />);
     });
 
     it('should match the snapshot at device management state', () => {
         mockMapAppState({
             component: MapAppComponents.DEVICE_LOCATION,
         });
-        const component = renderForSnapshotTest(<MapApp />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MapApp />);
     });
 
     it('should match the snapshot at device management with a device location open', () => {
@@ -45,8 +42,7 @@ describe('MapApp snapshot tests', () => {
             currentUserPoints: 320,
             selectedMarker: { location: { lat: 1, lon: 2 }, address: { addressLine1: 'street', addressLine2: 'city' } },
         });
-        const component = renderForSnapshotTest(<MapApp />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<MapApp />);
     });
 });

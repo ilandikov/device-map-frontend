@@ -37,6 +37,7 @@ export function PasswordResetRequestForm() {
                     onClick={() => {
                         dispatch(loginModalRemoteRequest(LoginModalCheck.USERNAME));
                     }}
+                    data-testid="sendOTPButton"
                 >
                     {t('OTPSendSMS')}
                 </button>

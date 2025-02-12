@@ -1,7 +1,6 @@
-import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import { renderForActionDispatchTest } from '../../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction } from '../../../../../../tests/utils/RenderingHelpers';
 import { ApproveButton } from '../ApproveButton';
 import { deviceApproveRequest } from '../../redux/DeviceAction';
 
@@ -17,11 +16,8 @@ describe('ApproveButton action tests', () => {
     });
 
     it('should dispatch approve request on approve device button click', () => {
-        const container = renderForActionDispatchTest(<ApproveButton id={'try to approve me'} />);
+        click(<ApproveButton id={'try to approve me'} />, 'approveDeviceButton');
 
-        const loginButton = getByTestId(container, 'approveDeviceButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, deviceApproveRequest('try to approve me'));
+        testDispatchedAction(deviceApproveRequest('try to approve me'));
     });
 });

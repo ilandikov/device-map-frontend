@@ -1,10 +1,11 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { LogInForm } from '../LogInForm';
 import {
-    createEvent,
-    renderForActionDispatchTest,
-    renderForSnapshotTest,
+    click,
+    testDispatchedAction,
+    testSnapshot,
+    testValueInInput,
+    type,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalButton,
@@ -17,13 +18,6 @@ import {
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { AuthenticationStep } from '../redux/AuthenticationState';
 
-jest.mock('gatsby-plugin-react-i18next', () => ({
-    ...jest.requireActual('gatsby-plugin-react-i18next'),
-    useI18next: jest.fn().mockImplementation(() => ({
-        t: jest.fn().mockImplementation((val) => val),
-    })),
-}));
-
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
@@ -33,14 +27,14 @@ jest.mock('react-redux', () => ({
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
         mockAuthenticationState({ email: 'verify@me.uk', password: 'password1' });
-        const component = renderForSnapshotTest(<LogInForm />);
-        expect(component).toMatchSnapshot();
+
+        testSnapshot(<LogInForm />);
     });
 
     it('should match snapshot with error', () => {
         mockAuthenticationState({ error: new Error('somethingIsWrong') });
-        const component = renderForSnapshotTest(<LogInForm />);
-        expect(component).toMatchSnapshot();
+
+        testSnapshot(<LogInForm />);
     });
 });
 
@@ -51,52 +45,33 @@ describe('LogInForm action tests', () => {
 
     it('should update the user email on input on password input stage', () => {
         mockAuthenticationState({ step: AuthenticationStep.LOGIN });
-        const container = renderForActionDispatchTest(<LogInForm />);
 
-        const emailInput = getByTestId(container, 'emailInput');
-        fireEvent.change(emailInput, createEvent('hereIsMyMail@server.com'));
+        type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'),
-        );
+        testDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'));
     });
 
     it('should show the already input email on password input stage', () => {
         mockAuthenticationState({ email: 'here_is_my@email.com' });
-        const container = renderForActionDispatchTest(<LogInForm />);
 
-        const emailInput = getByTestId(container, 'emailInput') as HTMLInputElement;
-        expect(emailInput.value).toEqual('here_is_my@email.com');
+        testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
     });
 
     it('should update user password when typed', () => {
-        const container = renderForActionDispatchTest(<LogInForm />);
+        type(<LogInForm />, 'passwordInput', 'strongPassword');
 
-        const userPasswordInput = getByTestId(container, 'userPasswordLogin');
-        fireEvent.change(userPasswordInput, createEvent('strongPassword'));
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'),
-        );
+        testDispatchedAction(loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'));
     });
 
     it('should call user authentication when next button is pressed', () => {
-        const container = renderForActionDispatchTest(<LogInForm />);
+        click(<LogInForm />, 'nextButton');
 
-        const nextButton = getByText(container, 'next');
-        fireEvent.click(nextButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.NONE));
+        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 
     it('should transition to password reset state when reset button was clicked', () => {
-        const container = renderForActionDispatchTest(<LogInForm />);
+        click(<LogInForm />, 'resetPasswordButton');
 
-        const resetPasswordButton = getByText(container, 'resetPassword');
-        fireEvent.click(resetPasswordButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
+        testDispatchedAction(loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
     });
 });

@@ -1,6 +1,10 @@
-import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
-import { renderForActionDispatchTest, renderForSnapshotTest } from '../../../../../tests/utils/RenderingHelpers';
+import {
+    click,
+    testDispatchedAction,
+    testDispatchedActionsInOrder,
+    testSnapshot,
+} from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
 import { mapAppResetCurrentUser, mapAppShowComponent } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
@@ -20,16 +24,13 @@ jest.mock('react-redux', () => ({
 
 describe('UserButton snapshot tests', () => {
     it('Login button should match the snapshot', () => {
-        const component = renderForSnapshotTest(<LoginButton />);
-
-        expect(component).toMatchSnapshot();
+        testSnapshot(<LoginButton />);
     });
 
     it('Logout button should match the snapshot', () => {
         mockAuthenticationState({ email: 'logged@in.kr' });
-        const component = renderForSnapshotTest(<LogoutButton />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<LogoutButton />);
     });
 });
 
@@ -39,23 +40,19 @@ describe('UserButton action tests', () => {
     });
 
     it('should dispatch click action on login button click', () => {
-        const container = renderForActionDispatchTest(<LoginButton />);
+        click(<LoginButton />, 'userButton');
 
-        const loginButton = getByTestId(container, 'userButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppShowComponent(MapAppComponents.LOGIN_MODAL));
+        testDispatchedAction(mapAppShowComponent(MapAppComponents.LOGIN_MODAL));
     });
 
     it('should dispatch click action on login button click', () => {
-        const container = renderForActionDispatchTest(<LogoutButton />);
+        click(<LogoutButton />, 'userButton');
 
-        const loginButton = getByTestId(container, 'userButton');
-        fireEvent.click(loginButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, mapAppResetCurrentUser());
-        expect(mockDispatch).toHaveBeenNthCalledWith(3, loginModalButtonClick(LoginModalButton.USER_BUTTON));
-        expect(mockDispatch).toHaveBeenNthCalledWith(4, loginModalRemoteRequest(LoginModalCheck.NONE));
+        testDispatchedActionsInOrder([
+            mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
+            mapAppResetCurrentUser(),
+            loginModalButtonClick(LoginModalButton.USER_BUTTON),
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+        ]);
     });
 });

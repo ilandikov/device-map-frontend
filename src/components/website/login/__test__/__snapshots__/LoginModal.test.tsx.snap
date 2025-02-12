@@ -177,6 +177,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP for login st
       </p>
       <button
         className="login-modal-input-help login-modal-correct-input"
+        data-testid="sendOTPAgainButton"
         onClick={[Function]}
       >
         OTPSendAgain
@@ -187,6 +188,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP for login st
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
@@ -289,6 +291,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
       </p>
       <button
         className="login-modal-input-help login-modal-correct-input"
+        data-testid="sendOTPAgainButton"
         onClick={[Function]}
       >
         OTPSendAgain
@@ -299,6 +302,7 @@ exports[`LoginModal snapshot tests should match the snapshot at OTP input stage 
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
@@ -469,7 +473,7 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
       >
         <input
           className="login-modal-input-text"
-          data-testid="userPasswordLogin"
+          data-testid="passwordInput"
           onChange={[Function]}
           type="password"
         />
@@ -483,12 +487,14 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
       >
         <button
           className="login-modal-correct-input"
+          data-testid="resetPasswordButton"
           onClick={[Function]}
         >
           resetPassword
         </button>
         <button
           className="login-modal-button-black-on-green"
+          data-testid="nextButton"
           onClick={[Function]}
         >
           next
@@ -572,6 +578,7 @@ exports[`LoginModal snapshot tests should match the snapshot at mail input stage
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
@@ -684,7 +691,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
       >
         <input
           className="login-modal-input-text"
-          data-testid="userPassword"
+          data-testid="passwordInput"
           onChange={[Function]}
           type="password"
         />
@@ -699,7 +706,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
       >
         <input
           className="login-modal-input-text"
-          data-testid="userPasswordRepeat"
+          data-testid="passwordRepeatInput"
           onChange={[Function]}
           type="password"
         />
@@ -710,6 +717,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
@@ -834,6 +842,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset r
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="sendOTPButton"
         onClick={[Function]}
       >
         OTPSendSMS
@@ -882,7 +891,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
       >
         <input
           className="login-modal-input-text"
-          data-testid="userPassword"
+          data-testid="passwordInput"
           onChange={[Function]}
           type="password"
         />
@@ -897,7 +906,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
       >
         <input
           className="login-modal-input-text"
-          data-testid="userPasswordRepeat"
+          data-testid="passwordRepeatInput"
           onChange={[Function]}
           type="password"
         />
@@ -908,6 +917,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="nextButton"
         onClick={[Function]}
       >
         next
@@ -957,12 +967,14 @@ exports[`LoginModal snapshot tests should match the snapshot at user welcome sta
     >
       <button
         className="login-modal-button-black-on-green"
+        data-testid="loginButton"
         onClick={[Function]}
       >
         accountLogin
       </button>
       <button
         className="login-modal-button-green-on-black"
+        data-testid="registerButton"
         onClick={[Function]}
       >
         accountRegister

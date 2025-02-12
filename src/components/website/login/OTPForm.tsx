@@ -62,6 +62,7 @@ export function OTPForm() {
                     onClick={() => {
                         dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
                     }}
+                    data-testid="sendOTPAgainButton"
                 >
                     {t('OTPSendAgain')}
                 </button>
@@ -77,6 +78,7 @@ export function OTPForm() {
 
                         dispatch(loginModalRemoteRequest(LoginModalCheck.OTP));
                     }}
+                    data-testid="nextButton"
                 >
                     {t('next')}
                 </button>

@@ -34,7 +34,7 @@ export function LogInForm() {
                 />
                 <PasswordInputBox
                     helpText={t('enterPassword')}
-                    testId="userPasswordLogin"
+                    testId="passwordInput"
                     value={password}
                     onChange={(event) => {
                         dispatch(loginModalInput(LoginModalInputType.PASSWORD, event.target.value));
@@ -50,6 +50,7 @@ export function LogInForm() {
                         onClick={() => {
                             dispatch(loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
                         }}
+                        data-testid="resetPasswordButton"
                     >
                         {t('resetPassword')}
                     </button>
@@ -58,6 +59,7 @@ export function LogInForm() {
                         onClick={() => {
                             dispatch(loginModalRemoteRequest(LoginModalCheck.NONE));
                         }}
+                        data-testid="nextButton"
                     >
                         {t('next')}
                     </button>

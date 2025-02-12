@@ -1,11 +1,6 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
 import React from 'react';
 import { PasswordCreationForm } from '../PasswordCreationForm';
-import {
-    createEvent,
-    renderForActionDispatchTest,
-    renderForSnapshotTest,
-} from '../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedAction, testSnapshot, type } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalCheck,
     LoginModalInputType,
@@ -13,13 +8,6 @@ import {
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-
-jest.mock('gatsby-plugin-react-i18next', () => ({
-    ...jest.requireActual('gatsby-plugin-react-i18next'),
-    useI18next: jest.fn().mockImplementation(() => ({
-        t: jest.fn().mockImplementation((val) => val),
-    })),
-}));
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -30,18 +18,16 @@ jest.mock('react-redux', () => ({
 describe('PasswordCreationForm snapshot tests', () => {
     it('should match the snapshot without error', () => {
         mockAuthenticationState({ password: 'one2three', passwordRepeat: 'anotherPassword' });
-        const component = renderForSnapshotTest(<PasswordCreationForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<PasswordCreationForm />);
     });
 
     it('should match the snapshot at password not match error', () => {
         mockAuthenticationState({
             error: new Error('renderMeToo'),
         });
-        const component = renderForSnapshotTest(<PasswordCreationForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<PasswordCreationForm />);
     });
 });
 
@@ -51,35 +37,20 @@ describe('PasswordCreationForm action tests', () => {
     });
 
     it('should update user password when typed', () => {
-        const container = renderForActionDispatchTest(<PasswordCreationForm />);
+        type(<PasswordCreationForm />, 'passwordInput', 'verySecurePassword1');
 
-        const userPasswordInput = getByTestId(container, 'userPassword');
-        fireEvent.change(userPasswordInput, createEvent('verySecurePassword1'));
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputType.PASSWORD, 'verySecurePassword1'),
-        );
+        testDispatchedAction(loginModalInput(LoginModalInputType.PASSWORD, 'verySecurePassword1'));
     });
 
     it('should update repeated user password when typed', () => {
-        const container = renderForActionDispatchTest(<PasswordCreationForm />);
+        type(<PasswordCreationForm />, 'passwordRepeatInput', 'evenBetterPassword');
 
-        const userPasswordRepeatInput = getByTestId(container, 'userPasswordRepeat');
-        fireEvent.change(userPasswordRepeatInput, createEvent('evenBetterPassword'));
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(
-            1,
-            loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'evenBetterPassword'),
-        );
+        testDispatchedAction(loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'evenBetterPassword'));
     });
 
     it('should call password verification when next button is pressed', () => {
-        const container = renderForActionDispatchTest(<PasswordCreationForm />);
+        click(<PasswordCreationForm />, 'nextButton');
 
-        const nextButton = getByText(container, 'next');
-        fireEvent.click(nextButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.PASSWORD));
+        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.PASSWORD));
     });
 });

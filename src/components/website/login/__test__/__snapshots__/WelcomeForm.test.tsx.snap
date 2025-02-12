@@ -10,12 +10,14 @@ exports[`WelcomeForm snapshot tests should match the snapshot 1`] = `
   >
     <button
       className="login-modal-button-black-on-green"
+      data-testid="loginButton"
       onClick={[Function]}
     >
       accountLogin
     </button>
     <button
       className="login-modal-button-green-on-black"
+      data-testid="registerButton"
       onClick={[Function]}
     >
       accountRegister

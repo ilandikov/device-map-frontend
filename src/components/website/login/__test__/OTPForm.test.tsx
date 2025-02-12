@@ -1,11 +1,14 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
+import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
 import {
+    click,
     createEvent,
     getNonNumeric,
     renderForActionDispatchTest,
-    renderForSnapshotTest,
+    testDispatchedAction,
+    testDispatchedActionsInOrder,
+    testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import {
     LoginModalCheck,
@@ -29,9 +32,8 @@ function getInput(container: HTMLElement, inputIndex: number) {
 describe('OTPForm snapshot tests', () => {
     it('should match snapshot at OTP for user creation step without error', () => {
         mockAuthenticationState({ step: AuthenticationStep.PASSWORD_CREATION_OTP, error: null });
-        const component = renderForSnapshotTest(<OTPForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<OTPForm />);
     });
 
     it('should match snapshot at OTP for password reset step with error', () => {
@@ -39,33 +41,42 @@ describe('OTPForm snapshot tests', () => {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thisShouldNotHappen'),
         });
-        const component = renderForSnapshotTest(<OTPForm />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<OTPForm />);
     });
 });
 
+function testTypeDigitAndExpectValue(input: HTMLInputElement, typed: string, expected: string) {
+    fireEvent.change(input, createEvent(typed));
+    expect(input.value).toEqual(expected);
+}
+
+function renderOTPForm() {
+    const container = renderForActionDispatchTest(<OTPForm />);
+    const inputs = [0, 1, 2, 3, 4, 5].map((inputIndex) => {
+        return getInput(container, inputIndex);
+    });
+    const nextButton = getByTestId(container, 'nextButton');
+    return { inputs, nextButton };
+}
+
 describe('OTP input elements individual tests', () => {
     it.each([0, 1, 2, 3, 4, 5])('should enter numeric characters in OTP input number %i', (inputIndex) => {
-        const container = renderForActionDispatchTest(<OTPForm />);
-        const input = getInput(container, inputIndex);
-        expect(input.value).toEqual('');
+        const { inputs } = renderOTPForm();
+        const input = inputs[inputIndex];
 
-        fireEvent.change(input, createEvent('1'));
-        expect(input.value).toEqual('1');
+        testTypeDigitAndExpectValue(input, '1', '1');
 
-        fireEvent.change(input, createEvent(getNonNumeric()));
-        expect(input.value).toEqual('');
+        testTypeDigitAndExpectValue(input, getNonNumeric(), '');
     });
 
     it.each([0, 1, 2, 3, 4, 5])(
         'should rewrite an existing value that has already been input in OTP input number %i',
         (inputIndex) => {
-            const container = renderForActionDispatchTest(<OTPForm />);
-            const input = getInput(container, inputIndex);
+            const { inputs } = renderOTPForm();
+            const input = inputs[inputIndex];
 
-            fireEvent.change(input, createEvent('3'));
-            expect(input.value).toEqual('3');
+            testTypeDigitAndExpectValue(input, '3', '3');
 
             input.focus();
 
@@ -78,110 +89,85 @@ describe('OTP form tests', () => {
     it.each([0, 1, 2, 3, 4])(
         'should focus on next input element when a digit is input for input %i (Only the first 5 inputs, index=0...4)',
         (inputIndex) => {
-            const container = renderForActionDispatchTest(<OTPForm />);
+            const { inputs } = renderOTPForm();
+            const input = inputs[inputIndex];
+            const nextInput = inputs[inputIndex + 1];
 
-            const input = getInput(container, inputIndex);
             fireEvent.change(input, createEvent('1'));
 
-            const nextInput = getInput(container, inputIndex + 1);
             expect(nextInput).toHaveFocus();
         },
     );
 
     it('should focus on "next" button when a digit is input for last input (index = 5)', () => {
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs, nextButton } = renderOTPForm();
 
-        const input = getInput(container, 5);
-        fireEvent.change(input, createEvent('1'));
+        testTypeDigitAndExpectValue(inputs[5], '1', '1');
 
-        const nextButton = getByText(container, 'next');
         expect(nextButton).toHaveFocus();
     });
 
     it('should focus on the next empty input after a digit has been input', () => {
-        const container = renderForActionDispatchTest(<OTPForm />);
-        const input0 = getInput(container, 0);
-        const input1 = getInput(container, 1);
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        fireEvent.change(input2, createEvent('2'));
-        fireEvent.change(input1, createEvent('1'));
+        const { inputs } = renderOTPForm();
 
-        fireEvent.change(input0, createEvent('1'));
-        expect(input3).toHaveFocus();
+        fireEvent.change(inputs[1], createEvent('1'));
+        fireEvent.change(inputs[2], createEvent('2'));
+        fireEvent.change(inputs[4], createEvent('4'));
+        fireEvent.change(inputs[0], createEvent('1'));
+
+        expect(inputs[3]).toHaveFocus();
     });
 });
 
 describe('OTP form paste tests', () => {
     it('should dispatch 3 digit value over 3 inputs', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs } = renderOTPForm();
 
-        const input0 = getInput(container, 0);
-        const input1 = getInput(container, 1);
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        fireEvent.change(input0, createEvent('649'));
+        fireEvent.change(inputs[0], createEvent('649'));
 
-        expect(input0.value).toEqual('6');
-        expect(input1.value).toEqual('4');
-        expect(input2.value).toEqual('9');
-        expect(input3).toHaveFocus();
+        expect(inputs[0].value).toEqual('6');
+        expect(inputs[1].value).toEqual('4');
+        expect(inputs[2].value).toEqual('9');
+        expect(inputs[3]).toHaveFocus();
     });
 
     it('should not overflow the inputs and focus on the button', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs, nextButton } = renderOTPForm();
 
-        const input3 = getInput(container, 3);
-        const input4 = getInput(container, 4);
-        const input5 = getInput(container, 5);
-        const nextButton = getByText(container, 'next');
-        fireEvent.change(input3, createEvent('0574'));
+        fireEvent.change(inputs[3], createEvent('0574'));
 
-        expect(input3.value).toEqual('0');
-        expect(input4.value).toEqual('5');
-        expect(input5.value).toEqual('7');
+        expect(inputs[3].value).toEqual('0');
+        expect(inputs[4].value).toEqual('5');
+        expect(inputs[5].value).toEqual('7');
 
         expect(nextButton).toHaveFocus();
     });
 
     it('should not input anything if input contains a non numerical character', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs } = renderOTPForm();
 
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        const input4 = getInput(container, 4);
-        input2.focus();
-        fireEvent.change(input2, createEvent('3e4'));
+        inputs[2].focus();
+        fireEvent.change(inputs[2], createEvent('3e4'));
 
-        expect(input2.value).toEqual('');
-        expect(input3.value).toEqual('');
-        expect(input4.value).toEqual('');
+        expect(inputs[2].value).toEqual('');
+        expect(inputs[3].value).toEqual('');
+        expect(inputs[4].value).toEqual('');
 
-        expect(input2).toHaveFocus();
+        expect(inputs[2]).toHaveFocus();
     });
 
     it('should overwrite existing values in multiple inputs', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs } = renderOTPForm();
 
-        const input1 = getInput(container, 1);
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        const input4 = getInput(container, 4);
-        const input5 = getInput(container, 5);
+        fireEvent.change(inputs[1], createEvent('6103'));
+        fireEvent.change(inputs[1], createEvent('974'));
 
-        fireEvent.change(input1, createEvent('6103'));
-        fireEvent.change(input1, createEvent('974'));
+        expect(inputs[1].value).toEqual('9');
+        expect(inputs[2].value).toEqual('7');
+        expect(inputs[3].value).toEqual('4');
+        expect(inputs[4].value).toEqual('3');
 
-        expect(input1.value).toEqual('9');
-        expect(input2.value).toEqual('7');
-        expect(input3.value).toEqual('4');
-        expect(input4.value).toEqual('3');
-
-        expect(input5).toHaveFocus();
+        expect(inputs[5]).toHaveFocus();
     });
 });
 
@@ -196,7 +182,6 @@ describe('OTP form action tests', () => {
     });
 
     it('should send OTP code and verification request on next button click', () => {
-        mockAuthenticationState({});
         const container = renderForActionDispatchTest(<OTPForm />);
 
         inputOTPDigit(container, 0, '2');
@@ -206,20 +191,18 @@ describe('OTP form action tests', () => {
         inputOTPDigit(container, 4, '7');
         inputOTPDigit(container, 5, '3');
 
-        const nextButton = getByText(container, 'next');
+        const nextButton = getByTestId(container, 'nextButton');
         fireEvent.click(nextButton);
 
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalInput(LoginModalInputType.OTP, '208473'));
-        expect(mockDispatch).toHaveBeenNthCalledWith(2, loginModalRemoteRequest(LoginModalCheck.OTP));
+        testDispatchedActionsInOrder([
+            loginModalInput(LoginModalInputType.OTP, '208473'),
+            loginModalRemoteRequest(LoginModalCheck.OTP),
+        ]);
     });
 
     it('should request the OTP code again on resend OTP button click', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        click(<OTPForm />, 'sendOTPAgainButton');
 
-        const resendOTPButton = getByText(container, 'OTPSendAgain');
-        fireEvent.click(resendOTPButton);
-
-        expect(mockDispatch).toHaveBeenNthCalledWith(1, loginModalRemoteRequest(LoginModalCheck.NONE));
+        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.NONE));
     });
 });

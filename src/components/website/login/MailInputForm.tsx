@@ -40,6 +40,7 @@ export function MailInputForm() {
                         onClick={() => {
                             dispatch(loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
                         }}
+                        data-testid="loginButton"
                     >
                         {t('accountLogin')}
                     </button>
@@ -49,6 +50,7 @@ export function MailInputForm() {
                     onClick={() => {
                         dispatch(loginModalRemoteRequest(LoginModalCheck.USERNAME));
                     }}
+                    data-testid="nextButton"
                 >
                     {t('next')}
                 </button>

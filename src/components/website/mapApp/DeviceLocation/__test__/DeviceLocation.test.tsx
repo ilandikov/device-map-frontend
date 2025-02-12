@@ -1,6 +1,6 @@
 import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import { renderForSnapshotTest } from '../../../../../../tests/utils/RenderingHelpers';
+import { testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
 import { MapAppComponents } from '../../redux/MapAppState';
 import { DeviceLocation } from '../DeviceLocation';
 
@@ -22,9 +22,8 @@ describe('device list snapshot tests', () => {
                 address: null,
             },
         });
-        const component = renderForSnapshotTest(<DeviceLocation />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<DeviceLocation />);
     });
 
     it('should show the address and a list devices matching the selected marker with the create device item', () => {
@@ -53,8 +52,7 @@ describe('device list snapshot tests', () => {
                 },
             },
         });
-        const component = renderForSnapshotTest(<DeviceLocation />);
 
-        expect(component).toMatchSnapshot();
+        testSnapshot(<DeviceLocation />);
     });
 });

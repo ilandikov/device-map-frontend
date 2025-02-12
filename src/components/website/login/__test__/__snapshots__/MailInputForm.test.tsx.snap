@@ -32,12 +32,14 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail exists e
   >
     <button
       className="login-modal-button-green-on-black"
+      data-testid="loginButton"
       onClick={[Function]}
     >
       accountLogin
     </button>
     <button
       className="login-modal-button-black-on-green"
+      data-testid="nextButton"
       onClick={[Function]}
     >
       next
@@ -78,6 +80,7 @@ exports[`MailInputForm snapshot tests should match the snapshot at mail not vali
   >
     <button
       className="login-modal-button-black-on-green"
+      data-testid="nextButton"
       onClick={[Function]}
     >
       next
@@ -113,6 +116,7 @@ exports[`MailInputForm snapshot tests should match the snapshot without error 1`
   >
     <button
       className="login-modal-button-black-on-green"
+      data-testid="nextButton"
       onClick={[Function]}
     >
       next

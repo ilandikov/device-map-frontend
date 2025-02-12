@@ -16,6 +16,7 @@ export function WelcomeForm() {
                     onClick={() => {
                         dispatch(loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN));
                     }}
+                    data-testid="loginButton"
                 >
                     {t('accountLogin')}
                 </button>
@@ -24,6 +25,7 @@ export function WelcomeForm() {
                     onClick={() => {
                         dispatch(loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER));
                     }}
+                    data-testid="registerButton"
                 >
                     {t('accountRegister')}
                 </button>
