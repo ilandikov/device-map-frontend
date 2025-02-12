@@ -54,7 +54,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 export type AllActions = LoginModalAction | MapAppAction;
 
-export type Dependency<T> = { [key in keyof T]: T[key] };
+export type ClassToInterface<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
     forAnonymousUser: {
@@ -74,7 +74,7 @@ interface AddressClient {
 export type UsersClient = () => Promise<T22GetUserResponse>;
 
 export interface RemoteClients {
-    cognitoClient?: Dependency<CognitoClient>;
+    cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;

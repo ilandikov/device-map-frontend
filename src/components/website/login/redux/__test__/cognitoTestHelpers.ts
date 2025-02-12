@@ -5,14 +5,14 @@ import { AuthenticationState } from '../AuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
-import { Dependency } from '../../../../../redux/store';
+import { ClassToInterface } from '../../../../../redux/store';
 
 export enum TestClient {
     RESOLVING = 'RESOLVING',
     REJECTING = 'REJECTING',
 }
 
-const cognitoResolvingTestClient: Dependency<CognitoClient> = {
+const cognitoResolvingTestClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.resolve(cognitoSignUpRequestResult as any),
     signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
     signIn: () => Promise.resolve(cognitoSignInResult as any),
@@ -22,7 +22,7 @@ const cognitoResolvingTestClient: Dependency<CognitoClient> = {
     signOut: () => Promise.resolve(cognitoSignOutResult),
 };
 
-const cognitoRejectingTestClient: Dependency<CognitoClient> = {
+const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.reject(),
     signUpConfirmCode: () => Promise.reject(),
     signIn: () => Promise.reject(),
