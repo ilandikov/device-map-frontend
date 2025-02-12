@@ -74,7 +74,7 @@ export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     // TODO extract type
-    geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
+    geoApifyClient?: { appleSauce: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>> };
     usersClient?: UsersClient;
 };
 
@@ -137,13 +137,15 @@ export function createStore() {
                             .then((response) => response.data.T22ApproveDevice),
                 },
             },
-            geoApifyClient: (location) =>
-                ajax({
-                    url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
-                    method: 'GET',
-                    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-                    crossDomain: true,
-                }),
+            geoApifyClient: {
+                appleSauce: (location) =>
+                    ajax({
+                        url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
+                        method: 'GET',
+                        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+                        crossDomain: true,
+                    }),
+            },
             usersClient: async () =>
                 (await setAuthenticatedClient())
                     .query<Query>({ query: getUserQuery })

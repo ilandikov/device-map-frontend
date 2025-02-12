@@ -12,7 +12,7 @@ export async function testGeoApifyEpic(
     expectedActions: MapAppAction[],
 ) {
     const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
-        geoApifyClient: () => fromPromise(remoteAnswer),
+        geoApifyClient: { appleSauce: () => fromPromise(remoteAnswer) },
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedActions).toEqual(expectedActions);

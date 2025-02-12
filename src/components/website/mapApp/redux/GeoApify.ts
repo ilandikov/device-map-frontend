@@ -8,7 +8,7 @@ import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
 export const GeoApify: RootEpic = (action$, _, { geoApifyClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
-        mergeMap((action) => getGeoApifyAddress(geoApifyClient(action.location))),
+        mergeMap((action) => getGeoApifyAddress(geoApifyClient.appleSauce(action.location))),
     );
 
 function getGeoApifyAddress(sendAddressRequest: Observable<AjaxResponse<GeoApifyResponse>>) {
