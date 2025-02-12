@@ -10,11 +10,11 @@ import { getDeviceItemType } from './DeviceItemType';
 export function DeviceItem(props: { device: T22Device; isDeviceCreatedByCurrentUser: boolean }) {
     const { t } = useI18next();
 
-    const { device, isDeviceCreatedByCurrentUser } = props;
+    const { device } = props;
 
     const { loggedInUser } = useMapAppState();
 
-    // TODO remove isDeviceCreatedByCurrentUser from props and calculate it here
+    const isDeviceCreatedByCurrentUser = device.creatorID === loggedInUser?.id;
     const canBeDeleted = isDeviceCreatedByCurrentUser;
     const deviceItemType = getDeviceItemType(device.approvals ?? 0);
     const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
