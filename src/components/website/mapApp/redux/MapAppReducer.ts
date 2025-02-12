@@ -31,7 +31,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
         case MapAppActionType.GET_LOGGED_IN_USER:
             return { ...state, currentUserPoints: null };
         case MapAppActionType.SET_LOGGED_IN_USER:
-            return { ...state, currentUserPoints: action.user.points };
+            return { ...state, currentUserPoints: action.user.points, loggedInUser: action.user };
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:

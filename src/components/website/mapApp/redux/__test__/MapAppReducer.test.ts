@@ -117,7 +117,10 @@ describe('MapApp reducer tests', () => {
         const initialState = buildMapAppState({});
         const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
 
-        testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
+        testMapAppStateChange(initialState, action, {
+            currentUserPoints: 10,
+            loggedInUser: { id: 'i have to be set', points: 10 },
+        });
     });
 
     it('should change the map app state', () => {
