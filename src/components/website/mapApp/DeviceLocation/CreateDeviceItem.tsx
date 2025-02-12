@@ -8,12 +8,12 @@ import { AddDeviceButton } from './AddDeviceButton';
 export function CreateDeviceItem() {
     const { t } = useI18next();
 
-    const isUserLoggedIn = useMapAppState().loggedInUser !== null;
+    const { loggedInUser } = useMapAppState();
 
     return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            {isUserLoggedIn ? <AddDeviceButton /> : <CreateAccountOrLoginButton />}
+            {loggedInUser ? <AddDeviceButton /> : <CreateAccountOrLoginButton />}
         </DeviceItemContainer>
     );
 }
