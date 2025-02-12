@@ -6,7 +6,7 @@ import { MapAppActionType, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } f
 
 export const user: RootEpic = (action$, _, { usersClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.GET_LOGGED_IN_USER),
+        ofType(MapAppActionType.AUTHENTICATION_COMPLETED),
         switchMap(() =>
             fromPromise(usersClient()).pipe(
                 mergeMap((response) => of(mapAppSetLoggedInUser(response))),

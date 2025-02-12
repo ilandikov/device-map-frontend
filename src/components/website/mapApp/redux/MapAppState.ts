@@ -11,12 +11,13 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
-export interface T22User {
+// TODO this has to be in the types package
+interface T22User {
     id: string;
     points: number;
 }
 
-interface MapAppUser extends T22User {
+export interface MapAppUser extends T22User {
     points: number | null;
 }
 

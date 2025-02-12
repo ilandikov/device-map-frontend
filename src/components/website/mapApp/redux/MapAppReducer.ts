@@ -28,8 +28,6 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.GET_LOGGED_IN_USER:
-            return { ...state };
         case MapAppActionType.SET_LOGGED_IN_USER:
             return { ...state, loggedInUser: action.user };
         case MapAppActionType.SHOW_COMPONENT:

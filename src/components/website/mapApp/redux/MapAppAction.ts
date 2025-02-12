@@ -1,5 +1,5 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress, MapAppComponents, T22User } from './MapAppState';
+import { MapAppAddress, MapAppComponents, MapAppUser } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
@@ -10,14 +10,8 @@ export enum MapAppActionType {
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER',
-    GET_LOGGED_IN_USER = 'GET_LOGGED_IN_USER',
     GET_LOGGED_IN_USER_ERROR = 'GET_LOGGED_IN_USER_ERROR',
     SHOW_COMPONENT = 'SHOW_COMPONENT',
-}
-
-export enum MapAppButton {
-    LOGIN = 'LOGIN',
-    LOGOUT = 'LOGOUT',
 }
 
 export type MapAppAction =
@@ -27,7 +21,6 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppAuthCompleted
-    | MapAppGetLoggedInUser
     | MapAppSetLoggedInUser
     | MapAppGetLoggedInUserError
     | MapAppShowComponent
@@ -87,22 +80,11 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 
 interface MapAppSetLoggedInUser {
     type: MapAppActionType.SET_LOGGED_IN_USER;
-    user: {
-        id: string;
-        points: number;
-    };
+    user: MapAppUser;
 }
 
-export function mapAppSetLoggedInUser(user: T22User): MapAppSetLoggedInUser {
+export function mapAppSetLoggedInUser(user: MapAppUser): MapAppSetLoggedInUser {
     return { type: MapAppActionType.SET_LOGGED_IN_USER, user };
-}
-
-interface MapAppGetLoggedInUser {
-    type: MapAppActionType.GET_LOGGED_IN_USER;
-}
-
-export function mapAppGetLoggedInUser(): MapAppGetLoggedInUser {
-    return { type: MapAppActionType.GET_LOGGED_IN_USER };
 }
 
 interface MapAppGetLoggedInUserError {
