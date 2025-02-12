@@ -10,7 +10,6 @@ export enum MapAppActionType {
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER',
-    GET_LOGGED_IN_USER = 'GET_LOGGED_IN_USER',
     GET_LOGGED_IN_USER_ERROR = 'GET_LOGGED_IN_USER_ERROR',
     SHOW_COMPONENT = 'SHOW_COMPONENT',
 }
@@ -27,7 +26,6 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppAuthCompleted
-    | MapAppGetLoggedInUser
     | MapAppSetLoggedInUser
     | MapAppGetLoggedInUserError
     | MapAppShowComponent
@@ -95,14 +93,6 @@ interface MapAppSetLoggedInUser {
 
 export function mapAppSetLoggedInUser(user: T22User): MapAppSetLoggedInUser {
     return { type: MapAppActionType.SET_LOGGED_IN_USER, user };
-}
-
-interface MapAppGetLoggedInUser {
-    type: MapAppActionType.GET_LOGGED_IN_USER;
-}
-
-export function mapAppGetLoggedInUser(): MapAppGetLoggedInUser {
-    return { type: MapAppActionType.GET_LOGGED_IN_USER };
 }
 
 interface MapAppGetLoggedInUserError {
