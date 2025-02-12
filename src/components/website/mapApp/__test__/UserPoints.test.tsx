@@ -5,13 +5,17 @@ import { UserPoints } from '../UserPoints';
 
 describe('UserPoints snapshot tests', () => {
     it('should match the snapshot while waiting for user points', () => {
-        mockMapAppState({ currentUserPoints: null });
+        mockMapAppState({
+            loggedInUser: { id: 'i am logged in but waiting for points', points: null },
+        });
 
         testSnapshot(<UserPoints className="map-app-header-block" />);
     });
 
     it('should match the snapshot after getting the user points', () => {
-        mockMapAppState({ currentUserPoints: 320 });
+        mockMapAppState({
+            loggedInUser: { id: 'i am logged in but waiting for points', points: 320 },
+        });
 
         testSnapshot(<UserPoints className="map-app-header-block" />);
     });
