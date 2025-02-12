@@ -3,7 +3,6 @@ import {
     MapAppAction,
     mapAppAuthenticationCompleted,
     mapAppGetLocationAddress,
-    mapAppGetLoggedInUser,
     mapAppLoginModalClose,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
@@ -104,14 +103,6 @@ describe('MapApp reducer tests', () => {
                 },
             },
         });
-    });
-
-    // TODO remove me
-    it('should reset current user points', () => {
-        const initialState = buildMapAppState({});
-        const action = mapAppGetLoggedInUser();
-
-        testMapAppStateChange(initialState, action, {});
     });
 
     it('should set current user points', () => {
