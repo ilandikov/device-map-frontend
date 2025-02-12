@@ -14,11 +14,6 @@ export enum MapAppActionType {
     SHOW_COMPONENT = 'SHOW_COMPONENT',
 }
 
-export enum MapAppButton {
-    LOGIN = 'LOGIN',
-    LOGOUT = 'LOGOUT',
-}
-
 export type MapAppAction =
     | MapAppLoginModalCloseAction
     | MapAppResetCurrentUser
