@@ -106,11 +106,12 @@ describe('MapApp reducer tests', () => {
         });
     });
 
+    // TODO remove me
     it('should reset current user points', () => {
-        const initialState = buildMapAppState({ currentUserPoints: 100500 });
+        const initialState = buildMapAppState({});
         const action = mapAppGetLoggedInUser();
 
-        testMapAppStateChange(initialState, action, { currentUserPoints: null });
+        testMapAppStateChange(initialState, action, {});
     });
 
     it('should set current user points', () => {
@@ -118,7 +119,6 @@ describe('MapApp reducer tests', () => {
         const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
 
         testMapAppStateChange(initialState, action, {
-            currentUserPoints: 10,
             loggedInUser: { id: 'i have to be set', points: 10 },
         });
     });

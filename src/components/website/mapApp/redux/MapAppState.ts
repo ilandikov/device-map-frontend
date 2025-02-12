@@ -29,7 +29,6 @@ export interface MapAppState {
     devices: T22Device[];
     // TODO extract loggedUser field containing id and points
     loggedInUser: MapAppUser | null;
-    currentUserPoints: number | null;
 }
 
 export enum MapAppComponents {
@@ -46,7 +45,6 @@ export const mapAppInitialState: MapAppState = {
         address: null,
     },
     loggedInUser: null,
-    currentUserPoints: null,
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
