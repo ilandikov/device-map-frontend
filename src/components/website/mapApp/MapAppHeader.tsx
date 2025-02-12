@@ -15,7 +15,6 @@ export function MapAppHeader() {
     const { t } = useI18next();
 
     const { loggedInUser } = useMapAppState();
-    const isUserLoggedIn = loggedInUser !== null;
 
     return (
         <header className="map-app-header">
@@ -24,12 +23,12 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {isUserLoggedIn && <TerminalSearch className="map-app-header-block" />}
+                {loggedInUser !== null && <TerminalSearch className="map-app-header-block" />}
             </div>
             <div className="map-app-header-block-container">
-                {isUserLoggedIn && <UserPoints className="map-app-header-block" />}
+                {loggedInUser !== null && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
-                    {isUserLoggedIn ? <LogoutButton /> : <LoginButton />}
+                    {loggedInUser !== null ? <LogoutButton /> : <LoginButton />}
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
                     <img src={AppStore} alt="map-app-header-apps-app-store" />
                 </div>
