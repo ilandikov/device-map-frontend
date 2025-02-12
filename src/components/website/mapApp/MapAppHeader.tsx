@@ -23,12 +23,12 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {loggedInUser !== null && <TerminalSearch className="map-app-header-block" />}
+                {loggedInUser && <TerminalSearch className="map-app-header-block" />}
             </div>
             <div className="map-app-header-block-container">
-                {loggedInUser !== null && <UserPoints className="map-app-header-block" />}
+                {loggedInUser && <UserPoints className="map-app-header-block" />}
                 <div className="map-app-header-block">
-                    {loggedInUser !== null ? <LogoutButton /> : <LoginButton />}
+                    {loggedInUser ? <LogoutButton /> : <LoginButton />}
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
                     <img src={AppStore} alt="map-app-header-apps-app-store" />
                 </div>
