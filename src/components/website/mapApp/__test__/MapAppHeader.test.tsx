@@ -17,7 +17,7 @@ describe('MapAppHeader snapshot tests', () => {
     });
 
     it('should match the snapshot when the user is logged in', () => {
-        mockMapAppState({ currentUserID: 'i am logged in' });
+        mockMapAppState({ currentUserID: { id: 'i am logged in' } });
 
         testSnapshot(<MapAppHeader />);
     });

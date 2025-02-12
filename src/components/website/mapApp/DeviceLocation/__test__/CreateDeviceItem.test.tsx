@@ -17,7 +17,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch create device action on create device button click', () => {
-        mockMapAppState({ currentUserID: 'i can create a device' });
+        mockMapAppState({ currentUserID: { id: 'i can create a device' } });
 
         click(<CreateDeviceItem />, 'createDeviceButton');
 
