@@ -11,6 +11,11 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
+export interface MapAppUser {
+    id: string;
+    points: number;
+}
+
 export interface MapAppState {
     component: MapAppComponents;
     selectedMarker: {
@@ -19,10 +24,7 @@ export interface MapAppState {
     };
     devices: T22Device[];
     // TODO extract loggedUser field containing id and points
-    loggedInUser: {
-        id: string;
-        points: number;
-    } | null;
+    loggedInUser: MapAppUser | null;
     currentUserPoints: number | null;
 }
 

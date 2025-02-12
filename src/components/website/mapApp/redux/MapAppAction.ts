@@ -1,5 +1,5 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress, MapAppComponents } from './MapAppState';
+import { MapAppAddress, MapAppComponents, MapAppUser } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
@@ -93,8 +93,8 @@ interface MapAppSetLoggedInUser {
     };
 }
 
-export function mapAppSetLoggedInUser({ id, points }: { id: string; points: number }): MapAppSetLoggedInUser {
-    return { type: MapAppActionType.SET_LOGGED_IN_USER, user: { points, id } };
+export function mapAppSetLoggedInUser(user: MapAppUser): MapAppSetLoggedInUser {
+    return { type: MapAppActionType.SET_LOGGED_IN_USER, user };
 }
 
 interface MapAppGetLoggedInUser {
