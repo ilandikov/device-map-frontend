@@ -69,6 +69,8 @@ export interface DevicesClient {
 
 interface AddressClient {
     geoApifyGetAddress: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
+    // TODO the type in the promise has to be T22...
+    getAddress: (location: T22Location) => Promise<{ address: { line1: string; line2: string } }>;
 }
 
 export type UsersClient = () => Promise<T22GetUserResponse>;
@@ -147,6 +149,7 @@ export function createStore() {
                         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
                         crossDomain: true,
                     }),
+                getAddress: () => Promise.reject('not implemented'),
             },
             usersClient: async () =>
                 (await setAuthenticatedClient())
