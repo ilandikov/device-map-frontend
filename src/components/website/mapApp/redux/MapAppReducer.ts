@@ -17,7 +17,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return {
                 ...state,
                 component: MapAppComponents.DEVICE_LOCATION,
-                loggedInUser: { id: action.authenticatedUserId, points: 0 },
+                loggedInUser: { id: action.authenticatedUserId, points: null },
             };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };

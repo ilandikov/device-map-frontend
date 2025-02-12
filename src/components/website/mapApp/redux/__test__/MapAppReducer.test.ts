@@ -66,7 +66,7 @@ describe('MapApp reducer tests', () => {
 
         testMapAppStateChange(initialState, action, {
             component: MapAppComponents.DEVICE_LOCATION,
-            loggedInUser: { id: 'set me in the state', points: 0 },
+            loggedInUser: { id: 'set me in the state', points: null },
         });
     });
 

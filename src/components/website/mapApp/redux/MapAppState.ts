@@ -11,9 +11,13 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
-export interface MapAppUser {
+export interface T22User {
     id: string;
     points: number;
+}
+
+interface MapAppUser extends T22User {
+    points: number | null;
 }
 
 export interface MapAppState {
