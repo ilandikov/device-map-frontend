@@ -4,7 +4,7 @@ import { testUserEpic, userRejectingClient, userResolvingClient } from './UserTe
 describe('user epic tests', () => {
     it('should get user points', async () => {
         const action = mapAppGetUserPoints();
-        const expectedAction = mapAppSetUserPoints(320);
+        const expectedAction = mapAppSetUserPoints({ id: 'testUserId', points: 320 });
 
         await testUserEpic(userResolvingClient, action, expectedAction);
     });

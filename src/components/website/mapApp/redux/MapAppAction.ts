@@ -87,11 +87,12 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
 
 interface MapAppSetUserPoints {
     type: MapAppActionType.SET_USER_POINTS;
+    id: string;
     points: number;
 }
 
-export function mapAppSetUserPoints(points: number): MapAppSetUserPoints {
-    return { type: MapAppActionType.SET_USER_POINTS, points };
+export function mapAppSetUserPoints({ id, points }: { id: string; points: number }): MapAppSetUserPoints {
+    return { type: MapAppActionType.SET_USER_POINTS, points, id };
 }
 
 interface MapAppGetUserPoints {

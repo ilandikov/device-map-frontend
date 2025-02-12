@@ -9,7 +9,7 @@ export const user: RootEpic = (action$, _, { usersClient }) =>
         ofType(MapAppActionType.GET_USER_POINTS),
         switchMap(() =>
             fromPromise(usersClient()).pipe(
-                mergeMap((response) => of(mapAppSetUserPoints(response.points))),
+                mergeMap((response) => of(mapAppSetUserPoints(response))),
                 catchError((error) => of(mapAppGetUserPointsError(error))),
             ),
         ),
