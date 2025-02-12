@@ -74,7 +74,7 @@ export type Dependencies = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     // TODO extract type
-    geoApifyClient?: { appleSauce: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>> };
+    addressClient?: { geoApifyGetAddress: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>> };
     usersClient?: UsersClient;
 };
 
@@ -137,8 +137,8 @@ export function createStore() {
                             .then((response) => response.data.T22ApproveDevice),
                 },
             },
-            geoApifyClient: {
-                appleSauce: (location) =>
+            addressClient: {
+                geoApifyGetAddress: (location) =>
                     ajax({
                         url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
                         method: 'GET',

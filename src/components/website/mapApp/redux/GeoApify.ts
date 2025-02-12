@@ -5,10 +5,10 @@ import { RootEpic } from '../../../../redux/store';
 import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
 import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
 
-export const GeoApify: RootEpic = (action$, _, { geoApifyClient }) =>
+export const GeoApify: RootEpic = (action$, _, { addressClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
-        mergeMap((action) => getGeoApifyAddress(geoApifyClient.appleSauce(action.location))),
+        mergeMap((action) => getGeoApifyAddress(addressClient.geoApifyGetAddress(action.location))),
     );
 
 function getGeoApifyAddress(sendAddressRequest: Observable<AjaxResponse<GeoApifyResponse>>) {
