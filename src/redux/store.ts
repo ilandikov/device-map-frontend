@@ -73,16 +73,15 @@ interface AddressClient {
 
 export type UsersClient = () => Promise<T22GetUserResponse>;
 
-// TODO rename this to something like Clients and remote Client from each field
-export type Dependencies = {
+export type RemoteClients = {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
 };
 
-type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
-export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
+type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
+export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices, user);
 
