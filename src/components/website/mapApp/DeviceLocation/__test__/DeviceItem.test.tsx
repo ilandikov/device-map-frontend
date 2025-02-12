@@ -21,25 +21,25 @@ describe('DeviceItem snapshot tests - logged in user', () => {
     it('should match snapshot - created device with approve button and without delete button', () => {
         mockMapAppState({ loggedInUser: { id: 'i did not create the device', points: 0 } });
 
-        testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 0 }} isDeviceCreatedByCurrentUser={false} />);
+        testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 0 }} />);
     });
 
     it('should match snapshot - validating device with approve button and without delete button', () => {
         mockMapAppState({ loggedInUser: { id: 'i did not create the device', points: 0 } });
 
-        testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 1 }} isDeviceCreatedByCurrentUser={false} />);
+        testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 1 }} />);
     });
 
     it('should match snapshot - validated device without approve button and without delete button', () => {
         mockMapAppState({ loggedInUser: { id: 'i did not create the device', points: 0 } });
 
-        testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 2 }} isDeviceCreatedByCurrentUser={false} />);
+        testSnapshot(<DeviceItem device={{ ...testDevice, approvals: 2 }} />);
     });
 
     it('should match snapshot - created device without approval button and with delete button', () => {
         mockMapAppState({ loggedInUser: { id: 'i created the device', points: 0 } });
 
-        testSnapshot(<DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={true} />);
+        testSnapshot(<DeviceItem device={testDevice} />);
     });
 });
 
@@ -47,6 +47,6 @@ describe('DeviceItem snapshot tests - anonymous user', () => {
     it('should match snapshot - created device without approval button and without delete button', () => {
         mockMapAppState({ loggedInUser: null });
 
-        testSnapshot(<DeviceItem device={testDevice} isDeviceCreatedByCurrentUser={false} />);
+        testSnapshot(<DeviceItem device={testDevice} />);
     });
 });

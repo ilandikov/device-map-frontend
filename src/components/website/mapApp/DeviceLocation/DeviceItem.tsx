@@ -7,7 +7,7 @@ import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
 import { getDeviceItemType } from './DeviceItemType';
 
-export function DeviceItem(props: { device: T22Device; isDeviceCreatedByCurrentUser: boolean }) {
+export function DeviceItem(props: { device: T22Device }) {
     const { t } = useI18next();
 
     const { device } = props;
