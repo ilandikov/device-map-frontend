@@ -6,6 +6,7 @@ export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state.mapAppState);
 }
 
+// TODO this has to be in the types package
 export interface MapAppAddress {
     line1: string;
     line2: string;
