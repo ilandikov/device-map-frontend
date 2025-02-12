@@ -12,6 +12,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
                 ...state,
                 component: MapAppComponents.PRODUCT_DESCRIPTION,
             };
+        // TODO this action shall be removed towards SHOW_COMPONENT and the user data shall be taken with GET_USER_POINTS or similar
         case MapAppActionType.AUTHENTICATION_COMPLETED:
             return {
                 ...state,
