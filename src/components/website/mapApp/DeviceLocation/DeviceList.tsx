@@ -17,7 +17,7 @@ export function DeviceList() {
         .map((device, index) => (
             <DeviceItem
                 device={device}
-                isDeviceCreatedByCurrentUser={device.creatorID === mapAppState.currentUserID?.id}
+                isDeviceCreatedByCurrentUser={device.creatorID === mapAppState.loggedInUser?.id}
                 key={index}
             />
         ));

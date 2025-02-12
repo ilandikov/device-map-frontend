@@ -42,11 +42,11 @@ describe('MapApp reducer tests', () => {
 
     it('should reset current user id', () => {
         const initialState = buildMapAppState({
-            currentUserID: { id: 'reset me!' },
+            loggedInUser: { id: 'reset me!' },
         });
         const action = mapAppResetCurrentUser();
 
-        testMapAppStateChange(initialState, action, { currentUserID: null });
+        testMapAppStateChange(initialState, action, { loggedInUser: null });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
@@ -66,7 +66,7 @@ describe('MapApp reducer tests', () => {
 
         testMapAppStateChange(initialState, action, {
             component: MapAppComponents.DEVICE_LOCATION,
-            currentUserID: { id: 'set me in the state' },
+            loggedInUser: { id: 'set me in the state' },
         });
     });
 

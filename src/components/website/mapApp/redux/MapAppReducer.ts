@@ -6,7 +6,7 @@ import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './Devic
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.RESET_CURRENT_USER:
-            return { ...state, currentUserID: null };
+            return { ...state, loggedInUser: null };
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
@@ -16,7 +16,7 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             return {
                 ...state,
                 component: MapAppComponents.DEVICE_LOCATION,
-                currentUserID: { id: action.authenticatedUserId },
+                loggedInUser: { id: action.authenticatedUserId },
             };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
