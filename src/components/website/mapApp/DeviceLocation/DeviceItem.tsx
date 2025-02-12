@@ -12,12 +12,13 @@ export function DeviceItem(props: { device: T22Device; isDeviceCreatedByCurrentU
 
     const { device, isDeviceCreatedByCurrentUser } = props;
 
+    const { loggedInUser } = useMapAppState();
+
     // TODO remove isDeviceCreatedByCurrentUser from props and calculate it here
     const canBeDeleted = isDeviceCreatedByCurrentUser;
     const deviceItemType = getDeviceItemType(device.approvals ?? 0);
     const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
-    const loggedInUser = useMapAppState().loggedInUser;
-    const canBeApproved = canReceiveApprovals && loggedInUser !== null && !isDeviceCreatedByCurrentUser;
+    const canBeApproved = canReceiveApprovals && loggedInUser && !isDeviceCreatedByCurrentUser;
 
     return (
         <DeviceItemContainer deviceItemType={deviceItemType}>
