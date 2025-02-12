@@ -73,12 +73,12 @@ interface AddressClient {
 
 export type UsersClient = () => Promise<T22GetUserResponse>;
 
-export type RemoteClients = {
+export interface RemoteClients {
     cognitoClient?: Dependency<CognitoClient>;
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
-};
+}
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
