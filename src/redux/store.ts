@@ -67,10 +67,14 @@ export interface DevicesClient {
     };
 }
 
+// TODO import this type from types package
+interface T22GetAddressResponse {
+    address: { line1: string; line2: string };
+}
+
 interface AddressClient {
     geoApifyGetAddress: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
-    // TODO the type in the promise has to be T22...
-    getAddress: (location: T22Location) => Promise<{ address: { line1: string; line2: string } }>;
+    getAddress: (location: T22Location) => Promise<T22GetAddressResponse>;
 }
 
 export type UsersClient = () => Promise<T22GetUserResponse>;
