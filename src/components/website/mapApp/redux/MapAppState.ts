@@ -7,8 +7,8 @@ export function useMapAppState(): MapAppState {
 }
 
 export interface MapAppAddress {
-    addressLine1: string;
-    addressLine2: string;
+    line1: string;
+    line2: string;
 }
 
 // TODO this has to be in the types package

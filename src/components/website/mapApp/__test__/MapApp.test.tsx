@@ -39,7 +39,7 @@ describe('MapApp snapshot tests', () => {
         mockMapAppState({
             component: MapAppComponents.DEVICE_LOCATION,
             loggedInUser: { id: 'i clicked at device location', points: 320 },
-            selectedMarker: { location: { lat: 1, lon: 2 }, address: { addressLine1: 'street', addressLine2: 'city' } },
+            selectedMarker: { location: { lat: 1, lon: 2 }, address: { line1: 'street', line2: 'city' } },
         });
 
         testSnapshot(<MapApp />);

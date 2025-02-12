@@ -13,8 +13,8 @@ describe('GeoApify tests', () => {
         const remoteAnswer = Promise.resolve(chui120);
         const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
         const expectedAction = mapAppSetLocationAddress({
-            addressLine1: 'Чуй, 120',
-            addressLine2: 'Первомайский, Бишкек',
+            line1: 'Чуй, 120',
+            line2: 'Первомайский, Бишкек',
         });
 
         await testGeoApifyEpic(remoteAnswer, sentAction, [expectedAction]);
