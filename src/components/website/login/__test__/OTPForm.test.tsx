@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, getByText } from '@testing-library/react';
+import { fireEvent, getByTestId } from '@testing-library/react';
 import React from 'react';
 import { OTPForm } from '../OTPForm';
 import {
@@ -132,58 +132,42 @@ describe('OTP form paste tests', () => {
     });
 
     it('should not overflow the inputs and focus on the button', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs, nextButton } = renderOTPForm();
 
-        const input3 = getInput(container, 3);
-        const input4 = getInput(container, 4);
-        const input5 = getInput(container, 5);
-        const nextButton = getByText(container, 'next');
-        fireEvent.change(input3, createEvent('0574'));
+        fireEvent.change(inputs[3], createEvent('0574'));
 
-        expect(input3.value).toEqual('0');
-        expect(input4.value).toEqual('5');
-        expect(input5.value).toEqual('7');
+        expect(inputs[3].value).toEqual('0');
+        expect(inputs[4].value).toEqual('5');
+        expect(inputs[5].value).toEqual('7');
 
         expect(nextButton).toHaveFocus();
     });
 
     it('should not input anything if input contains a non numerical character', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs } = renderOTPForm();
 
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        const input4 = getInput(container, 4);
-        input2.focus();
-        fireEvent.change(input2, createEvent('3e4'));
+        inputs[2].focus();
+        fireEvent.change(inputs[2], createEvent('3e4'));
 
-        expect(input2.value).toEqual('');
-        expect(input3.value).toEqual('');
-        expect(input4.value).toEqual('');
+        expect(inputs[2].value).toEqual('');
+        expect(inputs[3].value).toEqual('');
+        expect(inputs[4].value).toEqual('');
 
-        expect(input2).toHaveFocus();
+        expect(inputs[2]).toHaveFocus();
     });
 
     it('should overwrite existing values in multiple inputs', () => {
-        mockAuthenticationState({});
-        const container = renderForActionDispatchTest(<OTPForm />);
+        const { inputs } = renderOTPForm();
 
-        const input1 = getInput(container, 1);
-        const input2 = getInput(container, 2);
-        const input3 = getInput(container, 3);
-        const input4 = getInput(container, 4);
-        const input5 = getInput(container, 5);
+        fireEvent.change(inputs[1], createEvent('6103'));
+        fireEvent.change(inputs[1], createEvent('974'));
 
-        fireEvent.change(input1, createEvent('6103'));
-        fireEvent.change(input1, createEvent('974'));
+        expect(inputs[1].value).toEqual('9');
+        expect(inputs[2].value).toEqual('7');
+        expect(inputs[3].value).toEqual('4');
+        expect(inputs[4].value).toEqual('3');
 
-        expect(input1.value).toEqual('9');
-        expect(input2.value).toEqual('7');
-        expect(input3.value).toEqual('4');
-        expect(input4.value).toEqual('3');
-
-        expect(input5).toHaveFocus();
+        expect(inputs[5]).toHaveFocus();
     });
 });
 
