@@ -6,17 +6,18 @@ import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './Devic
 export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.RESET_CURRENT_USER:
-            return { ...state, currentUserID: null };
+            return { ...state, loggedInUser: null };
         case MapAppActionType.LOGIN_MODAL_CLOSE:
             return {
                 ...state,
                 component: MapAppComponents.PRODUCT_DESCRIPTION,
             };
+        // TODO this action shall be removed towards SHOW_COMPONENT and the user data shall be taken with GET_USER_POINTS or similar
         case MapAppActionType.AUTHENTICATION_COMPLETED:
             return {
                 ...state,
                 component: MapAppComponents.DEVICE_LOCATION,
-                currentUserID: action.authenticatedUserId,
+                loggedInUser: { id: action.authenticatedUserId, points: null },
             };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
@@ -27,10 +28,10 @@ export function MapAppReducer(state: MapAppState = mapAppInitialState, action: M
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.GET_USER_POINTS:
-            return { ...state, currentUserPoints: null };
-        case MapAppActionType.SET_USER_POINTS:
-            return { ...state, currentUserPoints: action.points };
+        case MapAppActionType.GET_LOGGED_IN_USER:
+            return { ...state };
+        case MapAppActionType.SET_LOGGED_IN_USER:
+            return { ...state, loggedInUser: action.user };
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:

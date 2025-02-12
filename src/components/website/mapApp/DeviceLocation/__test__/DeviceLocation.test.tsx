@@ -29,7 +29,7 @@ describe('device list snapshot tests', () => {
     it('should show the address and a list devices matching the selected marker with the create device item', () => {
         mockMapAppState({
             component: MapAppComponents.DEVICE_LOCATION,
-            currentUserID: 'I created the second one!',
+            loggedInUser: { id: 'I created the second one!', points: 0 },
             devices: [
                 {
                     id: 'Not matching selected marker',

@@ -17,7 +17,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch create device action on create device button click', () => {
-        mockMapAppState({ currentUserID: 'i can create a device' });
+        mockMapAppState({ loggedInUser: { id: 'i can create a device', points: 0 } });
 
         click(<CreateDeviceItem />, 'createDeviceButton');
 
@@ -25,7 +25,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch show login modal on create account or login button click', () => {
-        mockMapAppState({ currentUserID: null });
+        mockMapAppState({ loggedInUser: null });
 
         click(<CreateDeviceItem />, 'createAccountOrLoginButton');
 

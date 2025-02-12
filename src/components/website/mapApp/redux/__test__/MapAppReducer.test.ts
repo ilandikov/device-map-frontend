@@ -3,12 +3,11 @@ import {
     MapAppAction,
     mapAppAuthenticationCompleted,
     mapAppGetLocationAddress,
-    mapAppGetUserPoints,
     mapAppLoginModalClose,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-    mapAppSetUserPoints,
+    mapAppSetLoggedInUser,
     mapAppShowComponent,
 } from '../MapAppAction';
 import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
@@ -42,11 +41,11 @@ describe('MapApp reducer tests', () => {
 
     it('should reset current user id', () => {
         const initialState = buildMapAppState({
-            currentUserID: 'reset me!',
+            loggedInUser: { id: 'reset me!', points: 0 },
         });
         const action = mapAppResetCurrentUser();
 
-        testMapAppStateChange(initialState, action, { currentUserID: null });
+        testMapAppStateChange(initialState, action, { loggedInUser: null });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
@@ -66,7 +65,7 @@ describe('MapApp reducer tests', () => {
 
         testMapAppStateChange(initialState, action, {
             component: MapAppComponents.DEVICE_LOCATION,
-            currentUserID: 'set me in the state',
+            loggedInUser: { id: 'set me in the state', points: null },
         });
     });
 
@@ -106,18 +105,13 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should reset current user points', () => {
-        const initialState = buildMapAppState({ currentUserPoints: 100500 });
-        const action = mapAppGetUserPoints();
-
-        testMapAppStateChange(initialState, action, { currentUserPoints: null });
-    });
-
     it('should set current user points', () => {
         const initialState = buildMapAppState({});
-        const action = mapAppSetUserPoints(10);
+        const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
 
-        testMapAppStateChange(initialState, action, { currentUserPoints: 10 });
+        testMapAppStateChange(initialState, action, {
+            loggedInUser: { id: 'i have to be set', points: 10 },
+        });
     });
 
     it('should change the map app state', () => {

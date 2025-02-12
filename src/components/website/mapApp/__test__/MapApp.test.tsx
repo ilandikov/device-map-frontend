@@ -38,8 +38,7 @@ describe('MapApp snapshot tests', () => {
     it('should match the snapshot at device management with a device location open', () => {
         mockMapAppState({
             component: MapAppComponents.DEVICE_LOCATION,
-            currentUserID: 'i clicked at device location',
-            currentUserPoints: 320,
+            loggedInUser: { id: 'i clicked at device location', points: 320 },
             selectedMarker: { location: { lat: 1, lon: 2 }, address: { addressLine1: 'street', addressLine2: 'city' } },
         });
 

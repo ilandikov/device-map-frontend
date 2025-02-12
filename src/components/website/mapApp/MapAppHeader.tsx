@@ -14,8 +14,8 @@ import { useMapAppState } from './redux/MapAppState';
 export function MapAppHeader() {
     const { t } = useI18next();
 
-    const { currentUserID } = useMapAppState();
-    const isUserLoggedIn = currentUserID !== null;
+    const { loggedInUser } = useMapAppState();
+    const isUserLoggedIn = loggedInUser !== null;
 
     return (
         <header className="map-app-header">

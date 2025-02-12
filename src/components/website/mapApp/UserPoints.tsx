@@ -4,7 +4,8 @@ import { useMapAppState } from './redux/MapAppState';
 import { UserPointsLoader } from './UserPointsLoader';
 
 export function UserPoints(props: { className: string }) {
-    const { currentUserPoints } = useMapAppState();
+    const { loggedInUser } = useMapAppState();
+    const currentUserPoints = loggedInUser?.points ?? null;
 
     return (
         <div className={`${props.className} user-points-header-block`}>

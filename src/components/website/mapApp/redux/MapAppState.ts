@@ -11,6 +11,15 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
+export interface T22User {
+    id: string;
+    points: number;
+}
+
+interface MapAppUser extends T22User {
+    points: number | null;
+}
+
 export interface MapAppState {
     component: MapAppComponents;
     selectedMarker: {
@@ -18,9 +27,7 @@ export interface MapAppState {
         address: MapAppAddress | null;
     };
     devices: T22Device[];
-    // TODO extract loggedUser field containing id and points
-    currentUserID: string | null;
-    currentUserPoints: number | null;
+    loggedInUser: MapAppUser | null;
 }
 
 export enum MapAppComponents {
@@ -36,8 +43,7 @@ export const mapAppInitialState: MapAppState = {
         location: null,
         address: null,
     },
-    currentUserID: null,
-    currentUserPoints: null,
+    loggedInUser: null,
 };
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {

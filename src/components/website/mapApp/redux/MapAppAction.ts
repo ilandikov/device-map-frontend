@@ -1,5 +1,5 @@
 import { T22Location } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress, MapAppComponents } from './MapAppState';
+import { MapAppAddress, MapAppComponents, T22User } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
@@ -9,9 +9,9 @@ export enum MapAppActionType {
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
-    SET_USER_POINTS = 'SET_USER_POINTS',
-    GET_USER_POINTS = 'GET_USER_POINTS',
-    GET_USER_POINTS_ERROR = 'GET_USER_POINTS_ERROR',
+    SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER',
+    GET_LOGGED_IN_USER = 'GET_LOGGED_IN_USER',
+    GET_LOGGED_IN_USER_ERROR = 'GET_LOGGED_IN_USER_ERROR',
     SHOW_COMPONENT = 'SHOW_COMPONENT',
 }
 
@@ -27,9 +27,9 @@ export type MapAppAction =
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
     | MapAppAuthCompleted
-    | MapAppGetUserPoints
-    | MapAppSetUserPoints
-    | MapAppGetUserPointsError
+    | MapAppGetLoggedInUser
+    | MapAppSetLoggedInUser
+    | MapAppGetLoggedInUserError
     | MapAppShowComponent
     | DeviceAction;
 
@@ -85,30 +85,33 @@ export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocat
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
 }
 
-interface MapAppSetUserPoints {
-    type: MapAppActionType.SET_USER_POINTS;
-    points: number;
+interface MapAppSetLoggedInUser {
+    type: MapAppActionType.SET_LOGGED_IN_USER;
+    user: {
+        id: string;
+        points: number;
+    };
 }
 
-export function mapAppSetUserPoints(points: number): MapAppSetUserPoints {
-    return { type: MapAppActionType.SET_USER_POINTS, points };
+export function mapAppSetLoggedInUser(user: T22User): MapAppSetLoggedInUser {
+    return { type: MapAppActionType.SET_LOGGED_IN_USER, user };
 }
 
-interface MapAppGetUserPoints {
-    type: MapAppActionType.GET_USER_POINTS;
+interface MapAppGetLoggedInUser {
+    type: MapAppActionType.GET_LOGGED_IN_USER;
 }
 
-export function mapAppGetUserPoints(): MapAppGetUserPoints {
-    return { type: MapAppActionType.GET_USER_POINTS };
+export function mapAppGetLoggedInUser(): MapAppGetLoggedInUser {
+    return { type: MapAppActionType.GET_LOGGED_IN_USER };
 }
 
-interface MapAppGetUserPointsError {
-    type: MapAppActionType.GET_USER_POINTS_ERROR;
+interface MapAppGetLoggedInUserError {
+    type: MapAppActionType.GET_LOGGED_IN_USER_ERROR;
     error: string;
 }
 
-export function mapAppGetUserPointsError(error: string): MapAppGetUserPointsError {
-    return { type: MapAppActionType.GET_USER_POINTS_ERROR, error };
+export function mapAppGetLoggedInUserError(error: string): MapAppGetLoggedInUserError {
+    return { type: MapAppActionType.GET_LOGGED_IN_USER_ERROR, error };
 }
 
 interface MapAppShowComponent {
