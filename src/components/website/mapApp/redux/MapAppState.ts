@@ -11,6 +11,7 @@ export interface MapAppAddress {
     addressLine2: string;
 }
 
+// TODO this has to be in the types package
 interface T22User {
     id: string;
     points: number;
