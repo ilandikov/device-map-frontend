@@ -5,8 +5,8 @@ import { akTub, chui120, igemberdiyeva42 } from './GeoApifyTestHelpers';
 describe('GeoApify API helpers - buildMapAppAddress ', () => {
     function testBuildingAddressFromGeoApifyAPI(geoApifyResponse: GeoApifyResponse, expectedAddress: MapAppAddress) {
         const address = buildMapAppAddress(geoApifyResponse);
-        expect(address.addressLine1).toEqual(expectedAddress.addressLine1);
-        expect(address.addressLine2).toEqual(expectedAddress.addressLine2);
+        expect(address.line1).toEqual(expectedAddress.line1);
+        expect(address.line2).toEqual(expectedAddress.line2);
     }
 
     it('should provide an error message if no addresses were provided', () => {
@@ -15,8 +15,8 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
         };
 
         testBuildingAddressFromGeoApifyAPI(geoApifyResponse, {
-            addressLine1: 'mapAppCouldNotRetrieveAddress',
-            addressLine2: '',
+            line1: 'mapAppCouldNotRetrieveAddress',
+            line2: '',
         });
     });
 
@@ -43,29 +43,29 @@ describe('GeoApify API helpers - buildMapAppAddress ', () => {
         };
 
         testBuildingAddressFromGeoApifyAPI(geoApifyResponse, {
-            addressLine1: '2, 1',
-            addressLine2: '3, 4',
+            line1: '2, 1',
+            line2: '3, 4',
         });
     });
 
     it('should build normal address', () => {
         testBuildingAddressFromGeoApifyAPI(chui120.response, {
-            addressLine1: 'Чуй, 120',
-            addressLine2: 'Первомайский, Бишкек',
+            line1: 'Чуй, 120',
+            line2: 'Первомайский, Бишкек',
         });
     });
 
     it('should build address without district', () => {
         testBuildingAddressFromGeoApifyAPI(igemberdiyeva42, {
-            addressLine1: 'Игембердиева Зыфара, 42а',
-            addressLine2: 'Бишкек',
+            line1: 'Игембердиева Зыфара, 42а',
+            line2: 'Бишкек',
         });
     });
 
     it('should build address without street number', () => {
         testBuildingAddressFromGeoApifyAPI(akTub, {
-            addressLine1: 'Ак-Тюбинская',
-            addressLine2: 'Первомайский, Бишкек',
+            line1: 'Ак-Тюбинская',
+            line2: 'Первомайский, Бишкек',
         });
     });
 });

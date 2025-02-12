@@ -22,8 +22,8 @@ export function LocationAddress() {
                 <LocationAddressLoader />
             ) : (
                 <div className="location-address">
-                    <p>{selectedMarker.address.addressLine1}</p>
-                    <span>{selectedMarker.address.addressLine2}</span>
+                    <p>{selectedMarker.address.line1}</p>
+                    <span>{selectedMarker.address.line2}</span>
                 </div>
             )}
         </div>

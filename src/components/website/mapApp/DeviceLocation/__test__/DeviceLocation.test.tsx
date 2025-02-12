@@ -47,8 +47,8 @@ describe('device list snapshot tests', () => {
             selectedMarker: {
                 location: { lat: 26.3553423, lon: 19.23131 },
                 address: {
-                    addressLine1: 'Street and number',
-                    addressLine2: 'District and city',
+                    line1: 'Street and number',
+                    line2: 'District and city',
                 },
             },
         });
