@@ -63,3 +63,14 @@ export const getUserQuery = gql`
         }
     }
 `;
+
+export const getAddressQuery = gql`
+    query ($input: T22GetAddressInput!) {
+        T22GetAddress(input: $input) {
+            address {
+                line1
+                line2
+            }
+        }
+    }
+`;

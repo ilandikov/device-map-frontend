@@ -35,6 +35,7 @@ import {
     approveDeviceMutation,
     createDeviceMutation,
     deleteDeviceMutation,
+    getAddressQuery,
     getUserQuery,
     listDevicesQuery,
 } from '../components/website/login/redux/devicesHelpers';
@@ -137,7 +138,10 @@ export function createStore() {
                 },
             },
             addressClient: {
-                getAddress: () => Promise.reject('not implemented'),
+                getAddress: (input) =>
+                    apolloClient
+                        .query<Query>({ query: getAddressQuery, variables: { input } })
+                        .then((response) => response.data.T22GetAddress),
             },
             usersClient: async () =>
                 (await setAuthenticatedClient())
