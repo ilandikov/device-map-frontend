@@ -18,10 +18,7 @@ describe('GeoApify tests', () => {
             line2: 'Первомайский, Бишкек',
         });
 
-        await testGeoApifyEpic(remoteAnswer, sentAction, [expectedAction], {
-            geoApifyGetAddress: () => fromPromise(remoteAnswer),
-            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
-        });
+        await testGeoApifyEpic(remoteAnswer, sentAction, [expectedAction], resolvingAddressClient);
     });
 
     it('should show error from the remote', async () => {
