@@ -9,9 +9,6 @@ import CognitoClient from '@mancho.devs/cognito';
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
-import { Observable } from 'rxjs';
-import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
-import { ajax } from 'rxjs/internal/ajax/ajax';
 import {
     Mutation,
     Query,
@@ -25,7 +22,6 @@ import {
     T22GetAddressResponse,
     T22GetUserResponse,
     T22ListDevicesResponse,
-    T22Location,
 } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
@@ -42,7 +38,6 @@ import {
     getUserQuery,
     listDevicesQuery,
 } from '../components/website/login/redux/devicesHelpers';
-import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/login/redux/User';
 
@@ -70,7 +65,6 @@ export interface DevicesClient {
 }
 
 export interface AddressClient {
-    geoApifyGetAddress: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }
 
@@ -143,13 +137,6 @@ export function createStore() {
                 },
             },
             addressClient: {
-                geoApifyGetAddress: (location) =>
-                    ajax({
-                        url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
-                        method: 'GET',
-                        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-                        crossDomain: true,
-                    }),
                 getAddress: () => Promise.reject('not implemented'),
             },
             usersClient: async () =>

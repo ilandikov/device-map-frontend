@@ -1,5 +1,4 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { MapAppAction } from '../MapAppAction';
 import { GeoApify } from '../GeoApify';
 import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
@@ -18,11 +17,9 @@ export async function testGeoApifyEpic(
 }
 
 export const resolvingAddressClient: AddressClient = {
-    geoApifyGetAddress: () => fromPromise(Promise.resolve({} as any)),
     getAddress: () => Promise.resolve({ address: { line1: 'Чуй, 120', line2: 'Первомайский, Бишкек' } }),
 };
 
-export const rejectingAddressClient = {
-    geoApifyGetAddress: () => fromPromise(Promise.reject('something went wrong')),
+export const rejectingAddressClient: AddressClient = {
     getAddress: () => Promise.reject('something went wrong'),
 };
