@@ -21,6 +21,8 @@ import {
     T22CreateDeviceResponse,
     T22DeleteDeviceInput,
     T22DeleteDeviceResponse,
+    T22GetAddressInput,
+    T22GetAddressResponse,
     T22GetUserResponse,
     T22ListDevicesResponse,
     T22Location,
@@ -67,14 +69,9 @@ export interface DevicesClient {
     };
 }
 
-// TODO import this type from types package
-interface T22GetAddressResponse {
-    address: { line1: string; line2: string };
-}
-
 interface AddressClient {
     geoApifyGetAddress: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
-    getAddress: (location: T22Location) => Promise<T22GetAddressResponse>;
+    getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }
 
 export type UsersClient = () => Promise<T22GetUserResponse>;
