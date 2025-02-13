@@ -216,5 +216,5 @@ export const akTub: GeoApifyResponse = {
 
 export const resolvingAddressClient: AddressClient = {
     geoApifyGetAddress: () => fromPromise(Promise.resolve(chui120)),
-    getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
+    getAddress: () => Promise.resolve({ address: { line1: 'Чуй, 120', line2: 'Первомайский, Бишкек' } }),
 };
