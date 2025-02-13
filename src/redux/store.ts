@@ -69,6 +69,7 @@ export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }
 
+// TODO make this an object with a field
 export type UsersClient = () => Promise<T22GetUserResponse>;
 
 export interface RemoteClients {
