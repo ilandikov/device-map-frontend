@@ -8,10 +8,9 @@ import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateB
 import { AddressClient } from '../../../../../redux/store';
 
 export async function testGeoApifyEpic(
-    _remoteAnswer: Promise<AjaxResponse<GeoApifyResponse>>,
+    addressClient: AddressClient,
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
-    addressClient: AddressClient,
 ) {
     const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
         addressClient,
