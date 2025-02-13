@@ -1,5 +1,5 @@
-import { T22Location } from '@mancho-school-t22/graphql-types';
-import { MapAppAddress, MapAppComponents, MapAppUser } from './MapAppState';
+import { T22Address, T22Location } from '@mancho-school-t22/graphql-types';
+import { MapAppComponents, MapAppUser } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
@@ -71,10 +71,10 @@ export function mapAppGetLocationAddress(location: T22Location): MapAppAction {
 
 export interface MapAppSetLocationAddress {
     type: MapAppActionType.SET_LOCATION_ADDRESS;
-    address: MapAppAddress;
+    address: T22Address;
 }
 
-export function mapAppSetLocationAddress(address: MapAppAddress): MapAppSetLocationAddress {
+export function mapAppSetLocationAddress(address: T22Address): MapAppSetLocationAddress {
     return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
 }
 
