@@ -1,6 +1,5 @@
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
-import { chui120, resolvingAddressClient, testGeoApifyEpic } from './GeoApifyTestHelpers';
+import { chui120, rejectingAddressClient, resolvingAddressClient, testGeoApifyEpic } from './GeoApifyTestHelpers';
 
 describe('GeoApify tests', () => {
     it('should not answer to a random action', async () => {
@@ -22,13 +21,11 @@ describe('GeoApify tests', () => {
     });
 
     it('should show error from the remote', async () => {
-        const remoteAnswer = Promise.reject('something went wrong');
+        const remoteAnswer = () => Promise.reject('something went wrong');
         const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
 
+        // TODO send a normal action here, maybe reuse existing error action
         // @ts-expect-error
-        await testGeoApifyEpic(remoteAnswer, sentAction, ['something went wrong'], {
-            geoApifyGetAddress: () => fromPromise(remoteAnswer),
-            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
-        });
+        await testGeoApifyEpic(remoteAnswer, sentAction, ['something went wrong'], rejectingAddressClient);
     });
 });

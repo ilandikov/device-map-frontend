@@ -218,3 +218,8 @@ export const resolvingAddressClient: AddressClient = {
     geoApifyGetAddress: () => fromPromise(Promise.resolve(chui120)),
     getAddress: () => Promise.resolve({ address: { line1: 'Чуй, 120', line2: 'Первомайский, Бишкек' } }),
 };
+
+export const rejectingAddressClient = {
+    geoApifyGetAddress: () => fromPromise(Promise.reject('something went wrong')),
+    getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
+};
