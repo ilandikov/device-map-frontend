@@ -69,7 +69,7 @@ export interface DevicesClient {
     };
 }
 
-interface AddressClient {
+export interface AddressClient {
     geoApifyGetAddress: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }

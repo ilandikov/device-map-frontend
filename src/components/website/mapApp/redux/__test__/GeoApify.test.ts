@@ -1,3 +1,4 @@
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
 import { chui120, testGeoApifyEpic } from './GeoApifyTestHelpers';
 
@@ -6,7 +7,10 @@ describe('GeoApify tests', () => {
         const sentAction = { type: 'RANDOM_ACTION' };
 
         // @ts-expect-error
-        await testGeoApifyEpic(Promise.resolve({}), sentAction, []);
+        await testGeoApifyEpic(Promise.resolve({}), sentAction, [], {
+            geoApifyGetAddress: () => fromPromise(Promise.resolve({})),
+            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
+        });
     });
 
     it('should get address for a location in Bishkek', async () => {
@@ -17,7 +21,10 @@ describe('GeoApify tests', () => {
             line2: 'Первомайский, Бишкек',
         });
 
-        await testGeoApifyEpic(remoteAnswer, sentAction, [expectedAction]);
+        await testGeoApifyEpic(remoteAnswer, sentAction, [expectedAction], {
+            geoApifyGetAddress: () => fromPromise(remoteAnswer),
+            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
+        });
     });
 
     it('should show error from the remote', async () => {
@@ -25,6 +32,9 @@ describe('GeoApify tests', () => {
         const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
 
         // @ts-expect-error
-        await testGeoApifyEpic(remoteAnswer, sentAction, ['something went wrong']);
+        await testGeoApifyEpic(remoteAnswer, sentAction, ['something went wrong'], {
+            geoApifyGetAddress: () => fromPromise(remoteAnswer),
+            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
+        });
     });
 });

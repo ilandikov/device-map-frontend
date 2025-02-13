@@ -1,21 +1,19 @@
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { GeoApifyResponse } from '../GeoApifyHelpers';
 import { MapAppAction } from '../MapAppAction';
 import { GeoApify } from '../GeoApify';
 import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
+import { AddressClient } from '../../../../../redux/store';
 
 export async function testGeoApifyEpic(
-    remoteAnswer: Promise<AjaxResponse<GeoApifyResponse>>,
+    _remoteAnswer: Promise<AjaxResponse<GeoApifyResponse>>,
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
+    addressClient: AddressClient,
 ) {
     const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
-        addressClient: {
-            geoApifyGetAddress: () => fromPromise(remoteAnswer),
-            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
-        },
+        addressClient,
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedActions).toEqual(expectedActions);
