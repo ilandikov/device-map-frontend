@@ -1,16 +1,13 @@
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
-import { chui120, testGeoApifyEpic } from './GeoApifyTestHelpers';
+import { chui120, resolvingAddressClient, testGeoApifyEpic } from './GeoApifyTestHelpers';
 
 describe('GeoApify tests', () => {
     it('should not answer to a random action', async () => {
         const sentAction = { type: 'RANDOM_ACTION' };
 
         // @ts-expect-error
-        await testGeoApifyEpic(Promise.resolve({}), sentAction, [], {
-            geoApifyGetAddress: () => fromPromise(Promise.resolve({})),
-            getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
-        });
+        await testGeoApifyEpic(Promise.resolve({}), sentAction, [], resolvingAddressClient);
     });
 
     it('should get address for a location in Bishkek', async () => {

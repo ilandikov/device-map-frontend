@@ -1,5 +1,6 @@
 import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
 import { lastValueFrom, of, toArray } from 'rxjs';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { GeoApifyResponse } from '../GeoApifyHelpers';
 import { MapAppAction } from '../MapAppAction';
 import { GeoApify } from '../GeoApify';
@@ -211,4 +212,9 @@ export const akTub: GeoApifyResponse = {
         lon: 74.60671663284303,
         plus_code: '8JJPVJ44+CM',
     },
+};
+
+export const resolvingAddressClient: AddressClient = {
+    geoApifyGetAddress: () => fromPromise(Promise.resolve(chui120)),
+    getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
 };
