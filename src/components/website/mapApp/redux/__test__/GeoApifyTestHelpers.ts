@@ -220,5 +220,5 @@ export const resolvingAddressClient: AddressClient = {
 
 export const rejectingAddressClient = {
     geoApifyGetAddress: () => fromPromise(Promise.reject('something went wrong')),
-    getAddress: () => Promise.resolve({ address: { line1: 'line1', line2: 'line2' } }),
+    getAddress: () => Promise.reject('something went wrong'),
 };

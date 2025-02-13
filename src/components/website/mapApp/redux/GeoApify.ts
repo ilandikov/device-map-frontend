@@ -1,24 +1,18 @@
 import { ofType } from 'redux-observable';
-import { Observable, catchError, map, mergeMap, of } from 'rxjs';
-import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
-import { RootEpic } from '../../../../redux/store';
-import { MapAppActionType, mapAppSetLocationAddress } from './MapAppAction';
-import { GeoApifyResponse, buildMapAppAddress } from './GeoApifyHelpers';
+import { catchError, map, mergeMap, of } from 'rxjs';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { AddressClient, RootEpic } from '../../../../redux/store';
+import { MapAppActionType, MapAppGetLocationAddress, mapAppSetLocationAddress } from './MapAppAction';
 
 export const GeoApify: RootEpic = (action$, _, { addressClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
-        mergeMap((action) => getGeoApifyAddress(addressClient.geoApifyGetAddress(action.location))),
+        mergeMap((action) => processGetAddressResponse(addressClient, action)),
     );
 
-function getGeoApifyAddress(sendAddressRequest: Observable<AjaxResponse<GeoApifyResponse>>) {
-    function processResponse(ajaxResponse: AjaxResponse<GeoApifyResponse>) {
-        const address = buildMapAppAddress(ajaxResponse.response);
-        return mapAppSetLocationAddress(address);
-    }
-
-    return sendAddressRequest.pipe(
-        map(processResponse),
+function processGetAddressResponse(addressClient: AddressClient, action: MapAppGetLocationAddress) {
+    return fromPromise(addressClient.getAddress({ location: action.location })).pipe(
+        map((response) => mapAppSetLocationAddress(response.address)),
         catchError((error) => of(error)),
     );
 }
