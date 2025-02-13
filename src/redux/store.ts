@@ -9,9 +9,6 @@ import CognitoClient from '@mancho.devs/cognito';
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
-import { Observable } from 'rxjs';
-import { AjaxResponse } from 'rxjs/internal/ajax/AjaxResponse';
-import { ajax } from 'rxjs/internal/ajax/ajax';
 import {
     Mutation,
     Query,
@@ -21,9 +18,10 @@ import {
     T22CreateDeviceResponse,
     T22DeleteDeviceInput,
     T22DeleteDeviceResponse,
+    T22GetAddressInput,
+    T22GetAddressResponse,
     T22GetUserResponse,
     T22ListDevicesResponse,
-    T22Location,
 } from '@mancho-school-t22/graphql-types';
 import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
@@ -37,10 +35,10 @@ import {
     approveDeviceMutation,
     createDeviceMutation,
     deleteDeviceMutation,
+    getAddressQuery,
     getUserQuery,
     listDevicesQuery,
 } from '../components/website/login/redux/devicesHelpers';
-import { GeoApifyResponse } from '../components/website/mapApp/redux/GeoApifyHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/login/redux/User';
 
@@ -54,7 +52,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 export type AllActions = LoginModalAction | MapAppAction;
 
-export type Dependency<T> = { [key in keyof T]: T[key] };
+export type ClassToInterface<T> = { [key in keyof T]: T[key] };
 
 export interface DevicesClient {
     forAnonymousUser: {
@@ -67,19 +65,22 @@ export interface DevicesClient {
     };
 }
 
+export interface AddressClient {
+    getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
+}
+
+// TODO make this an object with a field
 export type UsersClient = () => Promise<T22GetUserResponse>;
 
-// TODO rename this to something like Clients and remote Client from each field
-export type Dependencies = {
-    cognitoClient?: Dependency<CognitoClient>;
+export interface RemoteClients {
+    cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
-    // TODO extract type
-    geoApifyClient?: (location: T22Location) => Observable<AjaxResponse<GeoApifyResponse>>;
+    addressClient?: AddressClient;
     usersClient?: UsersClient;
-};
+}
 
-type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, Dependencies>;
-export type RootEpic = Epic<AllActions, AllActions, RootState, Dependencies>;
+type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
+export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices, user);
 
@@ -137,13 +138,12 @@ export function createStore() {
                             .then((response) => response.data.T22ApproveDevice),
                 },
             },
-            geoApifyClient: (location) =>
-                ajax({
-                    url: `https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lon}&apiKey=8b2ff18a6cd44e7a9a916eb52cc51f8b&lang=ru`,
-                    method: 'GET',
-                    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-                    crossDomain: true,
-                }),
+            addressClient: {
+                getAddress: (input) =>
+                    apolloClient
+                        .query<Query>({ query: getAddressQuery, variables: { input } })
+                        .then((response) => response.data.T22GetAddress),
+            },
             usersClient: async () =>
                 (await setAuthenticatedClient())
                     .query<Query>({ query: getUserQuery })

@@ -1,14 +1,9 @@
 import { useSelector } from 'react-redux';
-import { T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { T22Address, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
 import { RootState } from '../../../../redux/store';
 
 export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state.mapAppState);
-}
-
-export interface MapAppAddress {
-    line1: string;
-    line2: string;
 }
 
 // TODO this has to be in the types package
@@ -25,7 +20,7 @@ export interface MapAppState {
     component: MapAppComponents;
     selectedMarker: {
         location: T22Location | null;
-        address: MapAppAddress | null;
+        address: T22Address | null;
     };
     devices: T22Device[];
     loggedInUser: MapAppUser | null;

@@ -2,7 +2,7 @@ import { EMPTY, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { AllActions, Dependency, RootEpic } from '../../../../redux/store';
+import { AllActions, ClassToInterface, RootEpic } from '../../../../redux/store';
 import { mapAppAuthenticationCompleted } from '../../mapApp/redux/MapAppAction';
 import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
@@ -14,7 +14,7 @@ export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
-function processAuthMethod(state: AuthenticationState, client: Dependency<CognitoClient>) {
+function processAuthMethod(state: AuthenticationState, client: ClassToInterface<CognitoClient>) {
     const skipRequest = state.error !== null;
     if (skipRequest) {
         return EMPTY;
@@ -40,7 +40,7 @@ function getSuccessActions(step: AuthenticationStep, response: any): AllActions[
     return [loginModalRemoteAnswerSuccess()];
 }
 
-type AuthenticationMethod = (client: Dependency<CognitoClient>, state: AuthenticationState) => Promise<any>;
+type AuthenticationMethod = (client: ClassToInterface<CognitoClient>, state: AuthenticationState) => Promise<any>;
 
 const authenticationMethods: Partial<{ [key in AuthenticationStep]: AuthenticationMethod }> = {
     PASSWORD_CREATION_LOADING: (client, state) => client.signUp(state.email, state.password),

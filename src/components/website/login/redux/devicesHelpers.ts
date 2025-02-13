@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// TODO rename file to something related to GraphQL and move it outside of this folder
 export const listDevicesQuery = {
     query: gql`
         query {
@@ -60,6 +61,17 @@ export const getUserQuery = gql`
         T22GetUser {
             id
             points
+        }
+    }
+`;
+
+export const getAddressQuery = gql`
+    query ($input: T22GetAddressInput!) {
+        T22GetAddress(input: $input) {
+            address {
+                line1
+                line2
+            }
         }
     }
 `;
