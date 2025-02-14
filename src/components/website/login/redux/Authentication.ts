@@ -1,12 +1,12 @@
 import { LoginModalAction, LoginModalActionType } from './LoginModalAction';
-import { AuthenticationState, initialAuthenticationState } from './AuthenticationState';
+import { AuthenticationState, buildAuthenticationState } from './AuthenticationState';
 import { afterRemoteAnswer } from './AfterRemoteAnswer';
 import { beforeRemoteRequest } from './BeforeRemoteRequest';
 import { afterButtonClick } from './AfterButtonClick';
 import { withPayload } from './WithPayload';
 
 export function authentication(
-    state: AuthenticationState = initialAuthenticationState,
+    state: AuthenticationState = buildAuthenticationState({}),
     action: LoginModalAction,
 ): AuthenticationState {
     switch (action.type) {

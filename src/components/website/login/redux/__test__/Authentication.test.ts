@@ -10,12 +10,7 @@ import {
     loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
 } from '../LoginModalAction';
-import {
-    AuthenticationState,
-    AuthenticationStep,
-    buildAuthenticationState,
-    initialAuthenticationState,
-} from '../AuthenticationState';
+import { AuthenticationState, AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
 
@@ -526,6 +521,6 @@ describe('logout logic', () => {
         };
         const action = loginModalButtonClick(LoginModalButton.USER_BUTTON);
 
-        testStateChange(initialState, action, initialAuthenticationState);
+        testStateChange(initialState, action, buildAuthenticationState({}));
     });
 });

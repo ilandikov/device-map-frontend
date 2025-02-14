@@ -1,5 +1,5 @@
 import { LoginModalButton, LoginModalButtonClick } from './LoginModalAction';
-import { AuthenticationState, AuthenticationStep, initialAuthenticationState } from './AuthenticationState';
+import { AuthenticationState, AuthenticationStep, buildAuthenticationState } from './AuthenticationState';
 
 export function afterButtonClick(
     action: LoginModalButtonClick,
@@ -14,9 +14,9 @@ type StateTransformer = (state: AuthenticationState) => Partial<AuthenticationSt
 const stateTransformers: { [key in LoginModalButton]: StateTransformer } = {
     ACCOUNT_REGISTER: () => ({ step: AuthenticationStep.MAIL_INPUT }),
     ACCOUNT_LOGIN: () => ({ step: AuthenticationStep.LOGIN, error: null }),
-    CANCEL: () => ({ ...initialAuthenticationState }),
+    CANCEL: () => buildAuthenticationState({}),
     RESET_PASSWORD: () => ({ step: AuthenticationStep.PASSWORD_RESET_REQUEST, password: '', error: null }),
-    USER_BUTTON: () => ({ ...initialAuthenticationState }),
+    USER_BUTTON: () => buildAuthenticationState({}),
     GO_BACK: (state) => ({ step: goBackFrom[state.step] }),
 };
 
