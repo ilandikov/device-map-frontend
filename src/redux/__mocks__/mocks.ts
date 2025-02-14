@@ -1,4 +1,7 @@
-import { AuthenticationState } from '../../components/website/login/redux/AuthenticationState';
+import {
+    AuthenticationState,
+    buildAuthenticationState,
+} from '../../components/website/login/redux/AuthenticationState';
 
 import { MapAppState, buildMapAppState } from '../../components/website/mapApp/redux/MapAppState';
 
@@ -24,7 +27,7 @@ export let mockPrepareSelector: () => any;
 
 export function mockAuthenticationState(authenticationState: Partial<AuthenticationState>) {
     mockPrepareSelector = () => {
-        return authenticationState;
+        return buildAuthenticationState(authenticationState);
     };
 }
 
