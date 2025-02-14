@@ -49,13 +49,11 @@ describe('MapApp reducer tests', () => {
 
     it('should not change the initial state on a dummy action', () => {
         // @ts-expect-error
-        testMapAppStateChange(buildMapAppState({}), { type: 'DUMMY_ACTION' }, {});
+        testMapAppStateChange({}, { type: 'DUMMY_ACTION' }, {});
     });
 
     it('should reset current user id', () => {
-        const initialState = buildMapAppState({
-            loggedInUser: { id: 'reset me!', points: 0 },
-        });
+        const initialState = { loggedInUser: { id: 'reset me!', points: 0 } };
         const action = mapAppResetCurrentUser();
 
         testMapAppStateChange(initialState, action, { loggedInUser: null });
@@ -95,12 +93,12 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should set location address', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             selectedMarker: {
                 location: { lat: 0, lon: 1 },
                 address: null,
             },
-        });
+        };
         const action = mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' });
 
         testMapAppStateChange(initialState, action, {
