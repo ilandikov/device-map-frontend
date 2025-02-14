@@ -20,14 +20,14 @@ import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
 
 function testStateChange(
-    initialState: AuthenticationState,
+    initialState: Partial<AuthenticationState>,
     action: LoginModalAction,
     expectedChange: Partial<AuthenticationState>,
 ) {
-    const nextState = authentication(initialState, action);
+    const nextState = authentication(buildAuthenticationState(initialState), action);
 
     const expectedState: AuthenticationState = {
-        ...initialState,
+        ...buildAuthenticationState(initialState),
         ...expectedChange,
     };
     expect(nextState).toEqual(expectedState);
