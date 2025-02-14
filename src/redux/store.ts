@@ -120,7 +120,7 @@ export function createStore() {
                             })
                             // TODO extract this in a function and reuse in every then()
                             .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: async (deleteDeviceInput: T22DeleteDeviceInput) =>
+                    deleteDevice: async (deleteDeviceInput) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
                                 mutation: deleteDeviceMutation,
