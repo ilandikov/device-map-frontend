@@ -23,7 +23,6 @@ import {
     T22GetUserResponse,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
-import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
@@ -43,7 +42,6 @@ import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/login/redux/User';
 
 const rootReducer = combineReducers({
-    getDevices,
     mapAppState: MapAppReducer,
     authentication,
 });
