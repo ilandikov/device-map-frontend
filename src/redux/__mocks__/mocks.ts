@@ -22,14 +22,14 @@ mockLoginModalAuthenticationState({
 export const mockDispatch = jest.fn();
 export let mockPrepareSelector: () => any;
 
-export function mockAuthenticationState(mockState: Partial<AuthenticationState>) {
+export function mockAuthenticationState(authenticationState: Partial<AuthenticationState>) {
     mockPrepareSelector = () => {
-        return mockState;
+        return authenticationState;
     };
 }
 
-export function mockMapAppState(mockState: Partial<MapAppState>) {
+export function mockMapAppState(mapAppState: Partial<MapAppState>) {
     mockPrepareSelector = () => {
-        return buildMapAppState(mockState);
+        return buildMapAppState(mapAppState);
     };
 }
