@@ -33,7 +33,7 @@ const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
 };
 
 export async function testCognitoOutputAction(
-    initialState: AuthenticationState,
+    initialState: Partial<AuthenticationState>,
     testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
