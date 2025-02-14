@@ -5,7 +5,7 @@ import { initialAuthenticationState } from '../../components/website/login/redux
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
 import { mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
 
-function buildInitialTestState(partialRootState?: Partial<RootState>): RootState {
+function buildInitialTestState(partialRootState: Partial<RootState>): RootState {
     return {
         authentication: initialAuthenticationState,
         getDevices: initialGetDevicesState,
