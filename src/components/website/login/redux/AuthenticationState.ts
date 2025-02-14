@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
 export function useLoginModalAuthentication(): AuthenticationState {
-    return useSelector((state: RootState) => state.authentication);
+    return useSelector((state: RootState) => state).authentication;
 }
 
 export enum AuthenticationStep {

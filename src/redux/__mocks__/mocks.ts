@@ -1,7 +1,4 @@
-import {
-    AuthenticationState,
-    buildAuthenticationState,
-} from '../../components/website/login/redux/AuthenticationState';
+import { AuthenticationState } from '../../components/website/login/redux/AuthenticationState';
 
 import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
 import { ShallowPartial, buildInitialTestState } from '../stateBuilders';
@@ -28,9 +25,7 @@ export const mockDispatch = jest.fn();
 export let mockPrepareSelector: () => any;
 
 export function mockAuthenticationState(authenticationState: Partial<AuthenticationState>) {
-    mockPrepareSelector = () => {
-        return buildAuthenticationState(authenticationState);
-    };
+    mockState({ authentication: authenticationState });
 }
 
 export function mockMapAppState(mapAppState: Partial<MapAppState>) {
