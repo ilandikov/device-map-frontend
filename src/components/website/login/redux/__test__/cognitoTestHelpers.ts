@@ -37,7 +37,7 @@ export async function testCognitoOutputAction(
     testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const stateForTest = buildStateForCognitoTest(initialState);
+    const stateForTest = buildStateForCognitoTest({ authentication: initialState });
     const dependencies = {
         cognitoClient: testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
     };
@@ -50,7 +50,7 @@ export async function testCognitoOutputAction(
 }
 
 export async function testCognitoNoOutput(initialState: AuthenticationState) {
-    const stateForTest = buildStateForCognitoTest(initialState);
+    const stateForTest = buildStateForCognitoTest({ authentication: initialState });
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
     const output$ = cognito(action, stateForTest, {});
