@@ -3,7 +3,7 @@ import { EMPTY } from 'rxjs';
 import { RootState } from '../store';
 import { initialAuthenticationState } from '../../components/website/login/redux/AuthenticationState';
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
-import { MapAppState, mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
+import { mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
 
 function buildInitialTestState(partialRootState?: Partial<RootState>): RootState {
     return {
@@ -17,8 +17,4 @@ function buildInitialTestState(partialRootState?: Partial<RootState>): RootState
 // TODO remove this helpers and generalise buildTestStateObservable()
 export function buildStateForCognitoTest(partialRootState: Partial<RootState>): StateObservable<RootState> {
     return new StateObservable(EMPTY, buildInitialTestState(partialRootState));
-}
-
-export function buildStateForDevicesTest(mapAppState: MapAppState): StateObservable<RootState> {
-    return new StateObservable(EMPTY, { ...buildInitialTestState(), mapAppState });
 }
