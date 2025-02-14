@@ -3,7 +3,7 @@ import React from 'react';
 import { useMapAppState } from '../redux/MapAppState';
 import { DeviceItemContainer } from './DeviceItemContainer';
 import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
-import { AddDeviceButton } from './AddDeviceButton';
+import { CreateDeviceButton } from './CreateDeviceButton';
 
 export function CreateDeviceItem() {
     const { t } = useI18next();
@@ -13,7 +13,7 @@ export function CreateDeviceItem() {
     return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            {loggedInUser ? <AddDeviceButton /> : <CreateAccountOrLoginButton />}
+            {loggedInUser ? <CreateDeviceButton /> : <CreateAccountOrLoginButton />}
         </DeviceItemContainer>
     );
 }
