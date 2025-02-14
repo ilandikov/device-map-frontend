@@ -111,27 +111,27 @@ export function createStore() {
                         apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
                 },
                 forAuthenticatedUser: {
-                    createDevice: async (createDeviceInput) =>
+                    createDevice: async (input) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
                                 // TODO extract all these arguments to functions that build the query
                                 mutation: createDeviceMutation,
-                                variables: { input: createDeviceInput },
+                                variables: { input },
                             })
                             // TODO extract this in a function and reuse in every then()
                             .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: async (deleteDeviceInput) =>
+                    deleteDevice: async (input) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
                                 mutation: deleteDeviceMutation,
-                                variables: { input: deleteDeviceInput },
+                                variables: { input },
                             })
                             .then((response) => response.data.T22DeleteDevice),
-                    approveDevice: async (approveDeviceInput) =>
+                    approveDevice: async (input) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
                                 mutation: approveDeviceMutation,
-                                variables: { input: approveDeviceInput },
+                                variables: { input },
                             })
                             .then((response) => response.data.T22ApproveDevice),
                 },
