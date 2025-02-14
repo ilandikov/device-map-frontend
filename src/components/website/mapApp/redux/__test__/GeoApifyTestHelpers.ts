@@ -1,6 +1,6 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction } from '../MapAppAction';
-import { GeoApify } from '../GeoApify';
+import { address } from '../Address';
 import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { AddressClient } from '../../../../../redux/store';
 
@@ -9,7 +9,7 @@ export async function testGeoApifyEpic(
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const output$ = GeoApify(of(sentAction), buildStateForGeoApifyTest(), {
+    const output$ = address(of(sentAction), buildStateForGeoApifyTest(), {
         addressClient,
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
