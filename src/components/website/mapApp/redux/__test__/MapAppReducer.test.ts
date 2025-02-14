@@ -20,11 +20,15 @@ import {
     devicesListed,
 } from '../DeviceAction';
 
-function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, stateChange: Partial<MapAppState>) {
-    const resultingState = MapAppReducer(initialState, action);
+function testMapAppStateChange(
+    initialState: Partial<MapAppState>,
+    action: MapAppAction,
+    stateChange: Partial<MapAppState>,
+) {
+    const resultingState = MapAppReducer(buildMapAppState(initialState), action);
 
     const expectedState: MapAppState = {
-        ...initialState,
+        ...buildMapAppState(initialState),
         ...stateChange,
     };
     expect(resultingState).toEqual(expectedState);
