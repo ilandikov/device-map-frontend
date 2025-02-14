@@ -49,8 +49,8 @@ export async function testCognitoOutputAction(
     expect(receivedAction).toEqual(expectedActions);
 }
 
-export async function testCognitoNoOutput(initialState: AuthenticationState) {
-    const stateForTest = buildTestStateObservable({ authentication: initialState });
+export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
+    const stateForTest = buildTestStateObservable({ authentication: buildAuthenticationState(initialState) });
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
     const output$ = cognito(action, stateForTest, {});
