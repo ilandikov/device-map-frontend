@@ -33,7 +33,5 @@ export function mockMapAppState(mapAppState: Partial<MapAppState>) {
 }
 
 export function mockState(mockState: ShallowPartial<RootState>) {
-    mockPrepareSelector = () => {
-        return buildInitialTestState(mockState);
-    };
+    mockPrepareSelector = () => buildInitialTestState(mockState);
 }
