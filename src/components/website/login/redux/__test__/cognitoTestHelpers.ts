@@ -4,7 +4,7 @@ import { LoginModalAction, LoginModalCheck, loginModalRemoteRequest } from '../L
 import { AuthenticationState } from '../AuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
-import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
+import { buildTestStateObservable } from '../../../../../redux/__mocks__/stateBuilders';
 import { ClassToInterface } from '../../../../../redux/store';
 
 export enum TestClient {
@@ -37,7 +37,7 @@ export async function testCognitoOutputAction(
     testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const stateForTest = buildStateForCognitoTest({ authentication: initialState });
+    const stateForTest = buildTestStateObservable({ authentication: initialState });
     const dependencies = {
         cognitoClient: testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
     };
@@ -50,7 +50,7 @@ export async function testCognitoOutputAction(
 }
 
 export async function testCognitoNoOutput(initialState: AuthenticationState) {
-    const stateForTest = buildStateForCognitoTest({ authentication: initialState });
+    const stateForTest = buildTestStateObservable({ authentication: initialState });
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
     const output$ = cognito(action, stateForTest, {});
