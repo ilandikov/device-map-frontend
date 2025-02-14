@@ -88,7 +88,7 @@ async function appleSauce(input: T22DeleteDeviceInput, mutation: DocumentNode) {
             mutation,
             variables: { input },
         })
-        .then((response) => response.data.T22DeleteDevice);
+        .then((response) => response.data['T22DeleteDevice']);
 }
 
 export function createStore() {
