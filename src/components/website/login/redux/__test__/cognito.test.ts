@@ -1,5 +1,5 @@
 import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
-import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
+import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import { TestClient, testCognitoNoOutput, testCognitoOutputAction } from './cognitoTestHelpers';
 
@@ -56,7 +56,7 @@ describe('user sign in tests', () => {
 
 describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
-        const initialState = buildAuthenticationState({ step: AuthenticationStep.MAIL_INPUT });
+        const initialState = { step: AuthenticationStep.MAIL_INPUT };
 
         await testCognitoNoOutput(initialState);
     });
@@ -96,7 +96,7 @@ describe('user sign out tests', () => {
 describe('state tests', () => {
     const allSteps = Object.values(AuthenticationStep);
     it.each(allSteps)('should not process request at %s step when there is an error', async (step) => {
-        const initialState = buildAuthenticationState({ step, error: new Error('something is wrong') });
+        const initialState = { step, error: new Error('something is wrong') };
 
         await testCognitoNoOutput(initialState);
     });
