@@ -62,18 +62,14 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
-        const initialState = {
-            component: MapAppComponents.LOGIN_MODAL,
-        };
+        const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppLoginModalClose();
 
         testMapAppStateChange(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
     it('should move to device management when authentication has been completed', () => {
-        const initialState = {
-            component: MapAppComponents.LOGIN_MODAL,
-        };
+        const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppAuthenticationCompleted('set me in the state');
 
         testMapAppStateChange(initialState, action, {
@@ -164,9 +160,7 @@ describe('rename me', () => {
     };
 
     it('should overwrite devices', () => {
-        const initialState = {
-            devices: [existingDevice],
-        };
+        const initialState = { devices: [existingDevice] };
         const action = devicesListed([receivedDevice]);
 
         testMapAppStateChange(initialState, action, {
@@ -175,9 +169,7 @@ describe('rename me', () => {
     });
 
     it('should add device', () => {
-        const initialState = {
-            devices: [existingDevice],
-        };
+        const initialState = { devices: [existingDevice] };
         const action = deviceCreated(receivedDevice);
 
         testMapAppStateChange(initialState, action, {
@@ -186,9 +178,7 @@ describe('rename me', () => {
     });
 
     it('should delete a device', () => {
-        const initialState = {
-            devices: [existingDevice, receivedDevice],
-        };
+        const initialState = { devices: [existingDevice, receivedDevice] };
         const action = deviceDeleted('existing');
 
         testMapAppStateChange(initialState, action, {
@@ -197,9 +187,7 @@ describe('rename me', () => {
     });
 
     it('should approve a device', () => {
-        const initialState = {
-            devices: [existingDevice, receivedDevice],
-        };
+        const initialState = { devices: [existingDevice, receivedDevice] };
         const action = deviceApproved(receivedDevice.id, 1112222233333);
 
         testMapAppStateChange(initialState, action, {
