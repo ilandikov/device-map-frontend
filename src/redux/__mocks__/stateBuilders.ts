@@ -7,10 +7,9 @@ import { mapAppInitialState } from '../../components/website/mapApp/redux/MapApp
 
 function buildInitialTestState(partialRootState: Partial<RootState>): RootState {
     return {
-        authentication: initialAuthenticationState,
-        getDevices: initialGetDevicesState,
-        mapAppState: mapAppInitialState,
-        ...partialRootState,
+        authentication: { ...initialAuthenticationState, ...partialRootState.authentication },
+        getDevices: { ...initialGetDevicesState, ...partialRootState.getDevices },
+        mapAppState: { ...mapAppInitialState, ...partialRootState.mapAppState },
     };
 }
 
