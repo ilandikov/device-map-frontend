@@ -43,12 +43,9 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should return initial state: user is not logged in', () => {
-        const initialState = buildMapAppState({});
-        const action = { type: 'DUMMY_ACTION' };
-
+    it('should not change the initial state on a dummy action', () => {
         // @ts-expect-error
-        testMapAppStateChange(initialState, action, {});
+        testMapAppStateChange(buildMapAppState({}), { type: 'DUMMY_ACTION' }, {});
     });
 
     it('should reset current user id', () => {
