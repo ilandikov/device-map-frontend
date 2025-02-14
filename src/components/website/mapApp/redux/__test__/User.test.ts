@@ -1,8 +1,4 @@
-import {
-    mapAppAuthenticationCompleted,
-    mapAppGetLoggedInUserError,
-    mapAppSetLoggedInUser,
-} from '../../../mapApp/redux/MapAppAction';
+import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { testUserEpic, userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 describe('user epic tests', () => {

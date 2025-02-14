@@ -1,8 +1,8 @@
 import { StateObservable } from 'redux-observable';
 import { EMPTY } from 'rxjs';
-import { RootState } from '../store';
-import { buildAuthenticationState } from '../../components/website/login/redux/AuthenticationState';
-import { buildMapAppState } from '../../components/website/mapApp/redux/MapAppState';
+import { buildAuthenticationState } from '../components/website/login/redux/AuthenticationState';
+import { buildMapAppState } from '../components/website/mapApp/redux/MapAppState';
+import { RootState } from './store';
 
 type ShallowPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 

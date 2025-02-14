@@ -4,7 +4,7 @@ import { LoginModalAction, LoginModalCheck, loginModalRemoteRequest } from '../L
 import { AuthenticationState } from '../AuthenticationState';
 import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
-import { buildTestStateObservable } from '../../../../../redux/__mocks__/stateBuilders';
+import { buildTestStateObservable } from '../../../../../redux/stateBuilders';
 import { ClassToInterface } from '../../../../../redux/store';
 
 export enum TestClient {

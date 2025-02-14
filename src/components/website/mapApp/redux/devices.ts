@@ -7,9 +7,9 @@ import {
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { MapAppAction } from '../../mapApp/redux/MapAppAction';
 import { DevicesClient, RootEpic } from '../../../../redux/store';
-import { MapAppState } from '../../mapApp/redux/MapAppState';
+import { MapAppAction } from './MapAppAction';
+import { MapAppState } from './MapAppState';
 import {
     DeviceActionType,
     DeviceApproveRequest,
@@ -23,7 +23,7 @@ import {
     deviceDeleted,
     deviceRemoteError,
     devicesListed,
-} from '../../mapApp/redux/DeviceAction';
+} from './DeviceAction';
 
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(

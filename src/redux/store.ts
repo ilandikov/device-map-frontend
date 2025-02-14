@@ -27,7 +27,7 @@ import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer'
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
 import { address } from '../components/website/mapApp/redux/Address';
-import { devices } from '../components/website/login/redux/devices';
+import { devices } from '../components/website/mapApp/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import {
@@ -37,9 +37,9 @@ import {
     getAddressQuery,
     getUserQuery,
     listDevicesQuery,
-} from '../components/website/login/redux/devicesHelpers';
+} from '../components/website/mapApp/redux/devicesHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
-import { user } from '../components/website/login/redux/User';
+import { user } from '../components/website/mapApp/redux/User';
 
 const rootReducer = combineReducers({
     mapAppState: MapAppReducer,
