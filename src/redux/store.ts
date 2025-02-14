@@ -82,6 +82,15 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
 
+async function appleSauce(input: T22DeleteDeviceInput) {
+    return (await setAuthenticatedClient())
+        .mutate<Mutation>({
+            mutation: deleteDeviceMutation,
+            variables: { input },
+        })
+        .then((response) => response.data.T22DeleteDevice);
+}
+
 export function createStore() {
     const apolloClient = new ApolloClient({
         link: ApolloLink.from([
@@ -120,13 +129,7 @@ export function createStore() {
                             })
                             // TODO extract this in a function and reuse in every then()
                             .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: async (input) =>
-                        (await setAuthenticatedClient())
-                            .mutate<Mutation>({
-                                mutation: deleteDeviceMutation,
-                                variables: { input },
-                            })
-                            .then((response) => response.data.T22DeleteDevice),
+                    deleteDevice: async (input) => await appleSauce(input),
                     approveDevice: async (input) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
