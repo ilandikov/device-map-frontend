@@ -6,7 +6,7 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, DocumentNode, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
@@ -82,10 +82,10 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
 
-async function appleSauce(input: T22DeleteDeviceInput) {
+async function appleSauce(input: T22DeleteDeviceInput, mutation: DocumentNode) {
     return (await setAuthenticatedClient())
         .mutate<Mutation>({
-            mutation: deleteDeviceMutation,
+            mutation,
             variables: { input },
         })
         .then((response) => response.data.T22DeleteDevice);
@@ -129,7 +129,7 @@ export function createStore() {
                             })
                             // TODO extract this in a function and reuse in every then()
                             .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: async (input) => await appleSauce(input),
+                    deleteDevice: async (input) => await appleSauce(input, deleteDeviceMutation),
                     approveDevice: async (input) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
