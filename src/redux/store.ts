@@ -10,7 +10,6 @@ import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
-    Mutation,
     Query,
     T22ApproveDeviceInput,
     T22ApproveDeviceResponse,
@@ -37,7 +36,8 @@ import {
     getAddressQuery,
     getUserQuery,
     listDevicesQuery,
-} from '../components/website/mapApp/redux/devicesHelpers';
+    mutateAsAuthUser,
+} from '../client/query';
 import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
 
@@ -111,29 +111,12 @@ export function createStore() {
                         apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
                 },
                 forAuthenticatedUser: {
-                    createDevice: async (createDeviceInput) =>
-                        (await setAuthenticatedClient())
-                            .mutate<Mutation>({
-                                // TODO extract all these arguments to functions that build the query
-                                mutation: createDeviceMutation,
-                                variables: { input: createDeviceInput },
-                            })
-                            // TODO extract this in a function and reuse in every then()
-                            .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: async (deleteDeviceInput: T22DeleteDeviceInput) =>
-                        (await setAuthenticatedClient())
-                            .mutate<Mutation>({
-                                mutation: deleteDeviceMutation,
-                                variables: { input: deleteDeviceInput },
-                            })
-                            .then((response) => response.data.T22DeleteDevice),
-                    approveDevice: async (approveDeviceInput) =>
-                        (await setAuthenticatedClient())
-                            .mutate<Mutation>({
-                                mutation: approveDeviceMutation,
-                                variables: { input: approveDeviceInput },
-                            })
-                            .then((response) => response.data.T22ApproveDevice),
+                    createDevice: async (input) =>
+                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDevice'),
+                    deleteDevice: async (input) =>
+                        await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDevice'),
+                    approveDevice: async (input) =>
+                        await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
             addressClient: {
