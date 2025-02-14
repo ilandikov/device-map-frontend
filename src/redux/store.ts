@@ -121,23 +121,11 @@ export function createStore() {
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
-                        (await setAuthenticatedClient())
-                            .mutate<Mutation>({
-                                // TODO extract all these arguments to functions that build the query
-                                mutation: createDeviceMutation,
-                                variables: { input },
-                            })
-                            // TODO extract this in a function and reuse in every then()
-                            .then((response) => response.data.T22CreateDevice),
+                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDevice'),
                     deleteDevice: async (input) =>
                         await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDevice'),
                     approveDevice: async (input) =>
-                        (await setAuthenticatedClient())
-                            .mutate<Mutation>({
-                                mutation: approveDeviceMutation,
-                                variables: { input },
-                            })
-                            .then((response) => response.data.T22ApproveDevice),
+                        await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
             addressClient: {
