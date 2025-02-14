@@ -42,12 +42,5 @@ export interface AuthenticationState {
 }
 
 export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
-    return {
-        step: partialState?.step ?? AuthenticationStep.WELCOME,
-        email: partialState?.email ?? '',
-        error: partialState?.error ?? null,
-        password: partialState?.password ?? '',
-        passwordRepeat: partialState?.passwordRepeat ?? '',
-        OTP: partialState?.OTP ?? '',
-    };
+    return { ...initialAuthenticationState, ...partialState };
 }
