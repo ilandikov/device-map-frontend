@@ -62,18 +62,18 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             component: MapAppComponents.LOGIN_MODAL,
-        });
+        };
         const action = mapAppLoginModalClose();
 
         testMapAppStateChange(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
     it('should move to device management when authentication has been completed', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             component: MapAppComponents.LOGIN_MODAL,
-        });
+        };
         const action = mapAppAuthenticationCompleted('set me in the state');
 
         testMapAppStateChange(initialState, action, {
@@ -83,7 +83,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should set coordinates', () => {
-        const initialState = buildMapAppState({});
+        const initialState = {};
         const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
         testMapAppStateChange(initialState, action, {
@@ -92,7 +92,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should do nothing when getting an address', () => {
-        const initialState = buildMapAppState({});
+        const initialState = {};
         const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
         testMapAppStateChange(initialState, action, {});
@@ -119,7 +119,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should set current user points', () => {
-        const initialState = buildMapAppState({});
+        const initialState = {};
         const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
 
         testMapAppStateChange(initialState, action, {
@@ -128,7 +128,7 @@ describe('MapApp reducer tests', () => {
     });
 
     it('should change the map app state', () => {
-        const initialState = buildMapAppState({ component: MapAppComponents.LOGIN_MODAL });
+        const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppShowComponent(MapAppComponents.DEVICE_LOCATION);
 
         testMapAppStateChange(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
@@ -137,14 +137,14 @@ describe('MapApp reducer tests', () => {
 
 describe('rename me', () => {
     it('should not change state on list devices remote request', () => {
-        const initialState = buildMapAppState({});
+        const initialState = {};
         const action = deviceListRequest();
 
         testMapAppStateChange(initialState, action, {});
     });
 
     it('should not change state on create device remote request', () => {
-        const initialState = buildMapAppState({});
+        const initialState = {};
         const action = deviceCreateRequest();
 
         testMapAppStateChange(initialState, action, {});
@@ -164,10 +164,9 @@ describe('rename me', () => {
     };
 
     it('should overwrite devices', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             devices: [existingDevice],
-        });
-
+        };
         const action = devicesListed([receivedDevice]);
 
         testMapAppStateChange(initialState, action, {
@@ -176,10 +175,9 @@ describe('rename me', () => {
     });
 
     it('should add device', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             devices: [existingDevice],
-        });
-
+        };
         const action = deviceCreated(receivedDevice);
 
         testMapAppStateChange(initialState, action, {
@@ -188,9 +186,9 @@ describe('rename me', () => {
     });
 
     it('should delete a device', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             devices: [existingDevice, receivedDevice],
-        });
+        };
         const action = deviceDeleted('existing');
 
         testMapAppStateChange(initialState, action, {
@@ -199,9 +197,9 @@ describe('rename me', () => {
     });
 
     it('should approve a device', () => {
-        const initialState = buildMapAppState({
+        const initialState = {
             devices: [existingDevice, receivedDevice],
-        });
+        };
         const action = deviceApproved(receivedDevice.id, 1112222233333);
 
         testMapAppStateChange(initialState, action, {
