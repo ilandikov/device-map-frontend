@@ -476,6 +476,7 @@ exports[`LoginModal snapshot tests should match the snapshot at login stage 1`] 
           data-testid="passwordInput"
           onChange={[Function]}
           type="password"
+          value=""
         />
       </div>
     </div>
@@ -694,6 +695,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
           data-testid="passwordInput"
           onChange={[Function]}
           type="password"
+          value=""
         />
       </div>
       <p
@@ -709,6 +711,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password creatio
           data-testid="passwordRepeatInput"
           onChange={[Function]}
           type="password"
+          value=""
         />
       </div>
     </div>
@@ -894,6 +897,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
           data-testid="passwordInput"
           onChange={[Function]}
           type="password"
+          value=""
         />
       </div>
       <p
@@ -909,6 +913,7 @@ exports[`LoginModal snapshot tests should match the snapshot at password reset s
           data-testid="passwordRepeatInput"
           onChange={[Function]}
           type="password"
+          value=""
         />
       </div>
     </div>

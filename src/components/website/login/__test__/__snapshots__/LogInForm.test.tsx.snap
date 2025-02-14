@@ -18,6 +18,7 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
         data-testid="emailInput"
         onChange={[Function]}
         type="email"
+        value=""
       />
     </div>
     <p
@@ -33,6 +34,7 @@ exports[`LogInForm snapshot test should match snapshot with error 1`] = `
         data-testid="passwordInput"
         onChange={[Function]}
         type="password"
+        value=""
       />
     </div>
     <p

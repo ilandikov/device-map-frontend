@@ -1,9 +1,10 @@
 import { AuthenticationState } from '../../components/website/login/redux/AuthenticationState';
 
-import { MapAppState, buildMapAppState } from '../../components/website/mapApp/redux/MapAppState';
+import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
+import { RootState } from '../store';
+import { ShallowPartial, buildInitialTestState } from './state';
 
-/* To mock the react-redux functionalities in regard to {@link LoginModalState}
- * add the following code to the test:
+/* To mock the react-redux state add the following code to the test:
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -11,25 +12,20 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
- * and then use the following to set the state in each test:
-
-mockLoginModalAuthenticationState({
-    field: value,
-        });
-
+ * and then use the functions below to mock the state.
  */
 
 export const mockDispatch = jest.fn();
-export let mockPrepareSelector: () => any;
+export let mockPrepareSelector: () => RootState;
 
-export function mockAuthenticationState(mockState: Partial<AuthenticationState>) {
-    mockPrepareSelector = () => {
-        return mockState;
-    };
+export function mockAuthenticationState(authentication: Partial<AuthenticationState>) {
+    mockState({ authentication });
 }
 
-export function mockMapAppState(mockState: Partial<MapAppState>) {
-    mockPrepareSelector = () => {
-        return buildMapAppState(mockState);
-    };
+export function mockMapAppState(mapAppState: Partial<MapAppState>) {
+    mockState({ mapAppState });
+}
+
+export function mockState(mockState: ShallowPartial<RootState>) {
+    mockPrepareSelector = () => buildInitialTestState(mockState);
 }

@@ -3,7 +3,7 @@ import { T22Address, T22Device, T22Location } from '@mancho-school-t22/graphql-t
 import { RootState } from '../../../../redux/store';
 
 export function useMapAppState(): MapAppState {
-    return useSelector((state: RootState) => state.mapAppState);
+    return useSelector((state: RootState) => state).mapAppState;
 }
 
 // TODO this has to be in the types package
