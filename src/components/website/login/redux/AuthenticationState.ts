@@ -23,15 +23,6 @@ export enum AuthenticationStep {
     LOGGED_IN = 'LOGGED_IN',
 }
 
-export const initialAuthenticationState: AuthenticationState = {
-    step: AuthenticationStep.WELCOME,
-    email: '',
-    error: null,
-    password: '',
-    passwordRepeat: '',
-    OTP: '',
-};
-
 export interface AuthenticationState {
     step: AuthenticationStep;
     email: string;
@@ -43,11 +34,12 @@ export interface AuthenticationState {
 
 export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
-        step: partialState?.step ?? AuthenticationStep.WELCOME,
-        email: partialState?.email ?? '',
-        error: partialState?.error ?? null,
-        password: partialState?.password ?? '',
-        passwordRepeat: partialState?.passwordRepeat ?? '',
-        OTP: partialState?.OTP ?? '',
+        step: AuthenticationStep.WELCOME,
+        email: '',
+        error: null,
+        password: '',
+        passwordRepeat: '',
+        OTP: '',
+        ...partialState,
     };
 }

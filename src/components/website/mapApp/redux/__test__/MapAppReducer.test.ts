@@ -10,7 +10,7 @@ import {
     mapAppSetLoggedInUser,
     mapAppShowComponent,
 } from '../MapAppAction';
-import { MapAppComponents, MapAppState, buildMapAppState, mapAppInitialState } from '../MapAppState';
+import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
     deviceCreateRequest,
@@ -36,7 +36,7 @@ function testMapAppStateChange(
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
-        expect(mapAppInitialState).toMatchObject<MapAppState>({
+        expect(buildMapAppState({})).toMatchObject<MapAppState>({
             component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [],
             selectedMarker: {

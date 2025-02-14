@@ -32,16 +32,15 @@ export enum MapAppComponents {
     DEVICE_LOCATION = 'DEVICE_LOCATION',
 }
 
-export const mapAppInitialState: MapAppState = {
-    component: MapAppComponents.PRODUCT_DESCRIPTION,
-    devices: [],
-    selectedMarker: {
-        location: null,
-        address: null,
-    },
-    loggedInUser: null,
-};
-
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
-    return { ...mapAppInitialState, ...partialState };
+    return {
+        component: MapAppComponents.PRODUCT_DESCRIPTION,
+        devices: [],
+        selectedMarker: {
+            location: null,
+            address: null,
+        },
+        loggedInUser: null,
+        ...partialState,
+    };
 }

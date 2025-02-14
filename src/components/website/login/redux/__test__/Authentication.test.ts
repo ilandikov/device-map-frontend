@@ -10,12 +10,7 @@ import {
     loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
 } from '../LoginModalAction';
-import {
-    AuthenticationState,
-    AuthenticationStep,
-    buildAuthenticationState,
-    initialAuthenticationState,
-} from '../AuthenticationState';
+import { AuthenticationState, AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
 
@@ -35,7 +30,7 @@ function testStateChange(
 
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {
-        expect(initialAuthenticationState).toMatchObject<AuthenticationState>({
+        expect(buildAuthenticationState({})).toMatchObject<AuthenticationState>({
             step: AuthenticationStep.WELCOME,
             email: '',
             error: null,
@@ -47,7 +42,7 @@ describe('LoginModal reducer tests', () => {
 
     it('should not change the initial state on a dummy action', () => {
         // @ts-expect-error
-        testStateChange(initialAuthenticationState, { type: 'DUMMY_ACTION' }, {});
+        testStateChange({}, { type: 'DUMMY_ACTION' }, {});
     });
 
     it('any input shall reset the error', () => {
@@ -526,6 +521,6 @@ describe('logout logic', () => {
         };
         const action = loginModalButtonClick(LoginModalButton.USER_BUTTON);
 
-        testStateChange(initialState, action, initialAuthenticationState);
+        testStateChange(initialState, action, buildAuthenticationState({}));
     });
 });
