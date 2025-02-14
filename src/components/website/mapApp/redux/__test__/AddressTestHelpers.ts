@@ -9,7 +9,7 @@ export async function testAddressEpic(
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const output$ = address(of(sentAction), buildTestStateObservable(), {
+    const output$ = address(of(sentAction), buildTestStateObservable({}), {
         addressClient,
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
