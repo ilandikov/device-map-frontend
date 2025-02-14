@@ -1,9 +1,9 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
-import { MapAppComponents, MapAppState, mapAppInitialState } from './MapAppState';
+import { MapAppComponents, MapAppState, buildMapAppState } from './MapAppState';
 import { DeviceAction, DeviceActionType, DeviceRemoteRequestType } from './DeviceAction';
 
-export function MapAppReducer(state: MapAppState = mapAppInitialState, action: MapAppAction): MapAppState {
+export function MapAppReducer(state: MapAppState = buildMapAppState({}), action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.RESET_CURRENT_USER:
             return { ...state, loggedInUser: null };

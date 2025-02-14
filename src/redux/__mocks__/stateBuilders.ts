@@ -3,7 +3,7 @@ import { EMPTY } from 'rxjs';
 import { RootState } from '../store';
 import { buildAuthenticationState } from '../../components/website/login/redux/AuthenticationState';
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
-import { buildMapAppState, mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
+import { buildMapAppState } from '../../components/website/mapApp/redux/MapAppState';
 
 type ShallowPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
@@ -11,7 +11,7 @@ function buildInitialTestState(partialRootState: ShallowPartial<RootState>): Roo
     return {
         authentication: buildAuthenticationState(partialRootState.authentication),
         getDevices: { ...initialGetDevicesState, ...partialRootState.getDevices },
-        mapAppState: { ...mapAppInitialState, ...buildMapAppState(partialRootState.mapAppState) },
+        mapAppState: { ...buildMapAppState(partialRootState.mapAppState) },
     };
 }
 
