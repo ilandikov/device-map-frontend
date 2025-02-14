@@ -1,5 +1,5 @@
 import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
-import { rejectingAddressClient, resolvingAddressClient, testAddressEpic } from './GeoApifyTestHelpers';
+import { rejectingAddressClient, resolvingAddressClient, testAddressEpic } from './AddressTestHelpers';
 
 describe('Address epic tests', () => {
     it('should not answer to a random action', async () => {
