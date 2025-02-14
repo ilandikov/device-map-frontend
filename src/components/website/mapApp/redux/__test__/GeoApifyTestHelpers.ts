@@ -4,7 +4,7 @@ import { address } from '../Address';
 import { buildStateForGeoApifyTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { AddressClient } from '../../../../../redux/store';
 
-export async function testGeoApifyEpic(
+export async function testAddressEpic(
     addressClient: AddressClient,
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],

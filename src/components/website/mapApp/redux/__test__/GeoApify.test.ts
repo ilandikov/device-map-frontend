@@ -1,12 +1,12 @@
 import { mapAppGetLocationAddress, mapAppSetLocationAddress } from '../MapAppAction';
-import { rejectingAddressClient, resolvingAddressClient, testGeoApifyEpic } from './GeoApifyTestHelpers';
+import { rejectingAddressClient, resolvingAddressClient, testAddressEpic } from './GeoApifyTestHelpers';
 
-describe('GeoApify tests', () => {
+describe('Address epic tests', () => {
     it('should not answer to a random action', async () => {
         const sentAction = { type: 'RANDOM_ACTION' };
 
         // @ts-expect-error
-        await testGeoApifyEpic(resolvingAddressClient, sentAction, []);
+        await testAddressEpic(resolvingAddressClient, sentAction, []);
     });
 
     it('should get address for a location in Bishkek', async () => {
@@ -16,7 +16,7 @@ describe('GeoApify tests', () => {
             line2: 'Первомайский, Бишкек',
         });
 
-        await testGeoApifyEpic(resolvingAddressClient, sentAction, [expectedAction]);
+        await testAddressEpic(resolvingAddressClient, sentAction, [expectedAction]);
     });
 
     it('should show error from the remote', async () => {
@@ -24,6 +24,6 @@ describe('GeoApify tests', () => {
 
         // TODO send a normal action here, maybe reuse existing error action
         // @ts-expect-error
-        await testGeoApifyEpic(rejectingAddressClient, sentAction, ['something went wrong']);
+        await testAddressEpic(rejectingAddressClient, sentAction, ['something went wrong']);
     });
 });
