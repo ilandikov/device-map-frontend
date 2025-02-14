@@ -6,7 +6,7 @@ import { RootState } from './store';
 
 export type ShallowPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
-function buildInitialTestState(partialRootState: ShallowPartial<RootState>): RootState {
+export function buildInitialTestState(partialRootState: ShallowPartial<RootState>): RootState {
     return {
         authentication: buildAuthenticationState(partialRootState.authentication),
         mapAppState: buildMapAppState(partialRootState.mapAppState),

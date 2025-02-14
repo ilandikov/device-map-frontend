@@ -3,8 +3,8 @@ import {
     buildAuthenticationState,
 } from '../../components/website/login/redux/AuthenticationState';
 
-import { MapAppState, buildMapAppState } from '../../components/website/mapApp/redux/MapAppState';
-import { ShallowPartial } from '../stateBuilders';
+import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
+import { ShallowPartial, buildInitialTestState } from '../stateBuilders';
 import { RootState } from '../store';
 
 /* To mock the react-redux functionalities in regard to {@link LoginModalState}
@@ -39,6 +39,6 @@ export function mockMapAppState(mapAppState: Partial<MapAppState>) {
 
 export function mockState(mockState: ShallowPartial<RootState>) {
     mockPrepareSelector = () => {
-        return buildMapAppState(mockState.mapAppState);
+        return buildInitialTestState(mockState);
     };
 }
