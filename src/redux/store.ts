@@ -37,7 +37,7 @@ import {
     getAddressQuery,
     getUserQuery,
     listDevicesQuery,
-} from '../components/website/mapApp/redux/devicesHelpers';
+} from '../client/devicesHelpers';
 import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
 
