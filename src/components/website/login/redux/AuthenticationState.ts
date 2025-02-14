@@ -34,14 +34,12 @@ export interface AuthenticationState {
 
 export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
     return {
-        ...{
-            step: AuthenticationStep.WELCOME,
-            email: '',
-            error: null,
-            password: '',
-            passwordRepeat: '',
-            OTP: '',
-        },
+        step: AuthenticationStep.WELCOME,
+        email: '',
+        error: null,
+        password: '',
+        passwordRepeat: '',
+        OTP: '',
         ...partialState,
     };
 }
