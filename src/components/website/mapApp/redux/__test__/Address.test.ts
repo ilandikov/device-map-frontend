@@ -9,7 +9,7 @@ describe('Address epic tests', () => {
         await testAddressEpic(resolvingAddressClient, sentAction, []);
     });
 
-    it('should get address for a location in Bishkek', async () => {
+    it('should send action with an address', async () => {
         const sentAction = mapAppGetLocationAddress({ lat: 42.875352500000005, lon: 74.60261920574811 });
         const expectedAction = mapAppSetLocationAddress({
             line1: 'Чуй, 120',
