@@ -6,11 +6,10 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, ApolloLink, DocumentNode, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
-    Mutation,
     Query,
     T22ApproveDeviceInput,
     T22ApproveDeviceResponse,
@@ -37,6 +36,7 @@ import {
     getAddressQuery,
     getUserQuery,
     listDevicesQuery,
+    mutateAsAuthUser,
 } from '../client/query';
 import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
@@ -81,15 +81,6 @@ type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteCl
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
-
-async function mutateAsAuthUser<TInput, TResponse>(input: TInput, mutation: DocumentNode, resolver: keyof Mutation) {
-    return (await setAuthenticatedClient())
-        .mutate<Mutation>({
-            mutation,
-            variables: { input },
-        })
-        .then((response) => response.data[resolver] as TResponse);
-}
 
 export function createStore() {
     const apolloClient = new ApolloClient({

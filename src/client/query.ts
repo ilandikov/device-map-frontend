@@ -1,4 +1,19 @@
-import { gql } from '@apollo/client';
+import { DocumentNode, gql } from '@apollo/client';
+import { Mutation } from '@mancho-school-t22/graphql-types';
+import { setAuthenticatedClient } from './graphql';
+
+export async function mutateAsAuthUser<TInput, TResponse>(
+    input: TInput,
+    mutation: DocumentNode,
+    resolver: keyof Mutation,
+) {
+    return (await setAuthenticatedClient())
+        .mutate<Mutation>({
+            mutation,
+            variables: { input },
+        })
+        .then((response) => response.data[resolver] as TResponse);
+}
 
 export const listDevicesQuery = {
     query: gql`
