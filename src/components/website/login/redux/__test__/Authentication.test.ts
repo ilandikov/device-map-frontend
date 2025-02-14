@@ -34,6 +34,17 @@ function testStateChange(
 }
 
 describe('LoginModal reducer tests', () => {
+    it('should match the initial state', () => {
+        expect(initialAuthenticationState).toMatchObject<AuthenticationState>({
+            step: AuthenticationStep.WELCOME,
+            email: '',
+            error: null,
+            password: '',
+            passwordRepeat: '',
+            OTP: '',
+        });
+    });
+
     it('should not change the initial state on a dummy action', () => {
         // @ts-expect-error
         testStateChange(initialAuthenticationState, { type: 'DUMMY_ACTION' }, {});

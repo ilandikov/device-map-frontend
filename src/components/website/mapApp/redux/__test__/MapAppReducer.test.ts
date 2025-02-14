@@ -10,7 +10,7 @@ import {
     mapAppSetLoggedInUser,
     mapAppShowComponent,
 } from '../MapAppAction';
-import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
+import { MapAppComponents, MapAppState, buildMapAppState, mapAppInitialState } from '../MapAppState';
 import {
     deviceApproved,
     deviceCreateRequest,
@@ -31,6 +31,18 @@ function testMapAppStateChange(initialState: MapAppState, action: MapAppAction, 
 }
 
 describe('MapApp reducer tests', () => {
+    it('should match the initial state', () => {
+        expect(mapAppInitialState).toMatchObject<MapAppState>({
+            component: MapAppComponents.PRODUCT_DESCRIPTION,
+            devices: [],
+            selectedMarker: {
+                location: null,
+                address: null,
+            },
+            loggedInUser: null,
+        });
+    });
+
     it('should return initial state: user is not logged in', () => {
         const initialState = buildMapAppState({});
         const action = { type: 'DUMMY_ACTION' };
