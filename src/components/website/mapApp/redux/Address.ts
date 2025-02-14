@@ -4,8 +4,7 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AddressClient, RootEpic } from '../../../../redux/store';
 import { MapAppActionType, MapAppGetLocationAddress, mapAppSetLocationAddress } from './MapAppAction';
 
-// TODO rename this epic and related files and function to something related to address
-export const GeoApify: RootEpic = (action$, _, { addressClient }) =>
+export const address: RootEpic = (action$, _, { addressClient }) =>
     action$.pipe(
         ofType(MapAppActionType.GET_LOCATION_ADDRESS),
         mergeMap((action) => processGetAddressResponse(addressClient, action)),

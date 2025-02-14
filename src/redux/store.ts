@@ -27,7 +27,7 @@ import getDevices from '../components/devices/getDevices/redux/reducer';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
-import { GeoApify } from '../components/website/mapApp/redux/GeoApify';
+import { address } from '../components/website/mapApp/redux/Address';
 import { devices } from '../components/website/login/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
@@ -82,7 +82,7 @@ export interface RemoteClients {
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
-const rootEpic: RootEpic = combineEpics(cognito, GeoApify, devices, user);
+const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
 
 export function createStore() {
     const apolloClient = new ApolloClient({

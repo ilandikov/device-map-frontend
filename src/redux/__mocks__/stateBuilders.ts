@@ -16,6 +16,7 @@ function buildInitialTestState(): RootState {
     };
 }
 
+// TODO remove this helpers and generalise buildTestStateObservable()
 export function buildStateForCognitoTest(authentication: AuthenticationState): StateObservable<RootState> {
     return new StateObservable(EMPTY, {
         ...buildInitialTestState(),
@@ -27,6 +28,6 @@ export function buildStateForDevicesTest(mapAppState: MapAppState): StateObserva
     return new StateObservable(EMPTY, { ...buildInitialTestState(), mapAppState });
 }
 
-export function buildStateForGeoApifyTest(): StateObservable<RootState> {
+export function buildTestStateObservable(): StateObservable<RootState> {
     return new StateObservable(EMPTY, buildInitialTestState());
 }
