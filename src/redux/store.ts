@@ -82,13 +82,13 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
 
-async function appleSauce<TInput>(input: TInput, mutation: DocumentNode) {
+async function appleSauce<TInput>(input: TInput, mutation: DocumentNode, resolver: keyof Mutation) {
     return (await setAuthenticatedClient())
         .mutate<Mutation>({
             mutation,
             variables: { input },
         })
-        .then((response) => response.data['T22DeleteDevice']);
+        .then((response) => response.data[resolver] as T22DeleteDeviceResponse);
 }
 
 export function createStore() {
@@ -129,7 +129,7 @@ export function createStore() {
                             })
                             // TODO extract this in a function and reuse in every then()
                             .then((response) => response.data.T22CreateDevice),
-                    deleteDevice: async (input) => await appleSauce(input, deleteDeviceMutation),
+                    deleteDevice: async (input) => await appleSauce(input, deleteDeviceMutation, 'T22DeleteDevice'),
                     approveDevice: async (input) =>
                         (await setAuthenticatedClient())
                             .mutate<Mutation>({
