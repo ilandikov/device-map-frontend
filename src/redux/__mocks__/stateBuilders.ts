@@ -8,11 +8,12 @@ import {
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
 import { MapAppState, mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
 
-function buildInitialTestState(): RootState {
+function buildInitialTestState(partialRootState?: Partial<RootState>): RootState {
     return {
         authentication: initialAuthenticationState,
         getDevices: initialGetDevicesState,
         mapAppState: mapAppInitialState,
+        ...partialRootState,
     };
 }
 
