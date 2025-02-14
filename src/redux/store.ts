@@ -82,13 +82,13 @@ export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
 const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
 
-async function appleSauce<TInput>(input: TInput, mutation: DocumentNode, resolver: keyof Mutation) {
+async function appleSauce<TInput, TResponse>(input: TInput, mutation: DocumentNode, resolver: keyof Mutation) {
     return (await setAuthenticatedClient())
         .mutate<Mutation>({
             mutation,
             variables: { input },
         })
-        .then((response) => response.data[resolver] as T22DeleteDeviceResponse);
+        .then((response) => response.data[resolver] as TResponse);
 }
 
 export function createStore() {
