@@ -34,15 +34,13 @@ export enum MapAppComponents {
 
 export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
     return {
-        ...{
-            component: MapAppComponents.PRODUCT_DESCRIPTION,
-            devices: [],
-            selectedMarker: {
-                location: null,
-                address: null,
-            },
-            loggedInUser: null,
+        component: MapAppComponents.PRODUCT_DESCRIPTION,
+        devices: [],
+        selectedMarker: {
+            location: null,
+            address: null,
         },
+        loggedInUser: null,
         ...partialState,
     };
 }
