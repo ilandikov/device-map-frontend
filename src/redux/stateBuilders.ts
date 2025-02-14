@@ -4,7 +4,7 @@ import { buildAuthenticationState } from '../components/website/login/redux/Auth
 import { buildMapAppState } from '../components/website/mapApp/redux/MapAppState';
 import { RootState } from './store';
 
-type ShallowPartial<T> = { [K in keyof T]?: Partial<T[K]> };
+export type ShallowPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
 function buildInitialTestState(partialRootState: ShallowPartial<RootState>): RootState {
     return {
