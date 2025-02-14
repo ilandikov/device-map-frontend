@@ -1,7 +1,7 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction } from '../MapAppAction';
 import { address } from '../Address';
-import { buildTestStateObservable } from '../../../../../redux/state';
+import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { AddressClient } from '../../../../../redux/store';
 
 export async function testAddressEpic(

@@ -1,7 +1,7 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction } from '../MapAppAction';
 import { devices } from '../devices';
-import { buildTestStateObservable } from '../../../../../redux/state';
+import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { DevicesClient } from '../../../../../redux/store';
 import { MapAppState } from '../MapAppState';
 

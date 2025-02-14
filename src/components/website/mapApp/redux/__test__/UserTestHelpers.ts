@@ -2,7 +2,7 @@ import { lastValueFrom, of, toArray } from 'rxjs';
 import { UsersClient } from '../../../../../redux/store';
 import { MapAppAction } from '../MapAppAction';
 import { user } from '../User';
-import { buildTestStateObservable } from '../../../../../redux/state';
+import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 
 export const userResolvingClient = () => Promise.resolve({ id: 'testUserId', points: 320 });
 export const userRejectingClient = () => Promise.reject('could not get logged in user data');

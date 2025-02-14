@@ -1,8 +1,8 @@
 import { AuthenticationState } from '../../components/website/login/redux/AuthenticationState';
 
 import { MapAppState } from '../../components/website/mapApp/redux/MapAppState';
-import { ShallowPartial, buildInitialTestState } from '../state';
 import { RootState } from '../store';
+import { ShallowPartial, buildInitialTestState } from './state';
 
 /* To mock the react-redux state add the following code to the test:
 
