@@ -35,7 +35,7 @@ function testStateChange(
 
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {
-        expect(initialAuthenticationState).toMatchObject<AuthenticationState>({
+        expect(buildAuthenticationState({})).toMatchObject<AuthenticationState>({
             step: AuthenticationStep.WELCOME,
             email: '',
             error: null,
