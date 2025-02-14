@@ -7,7 +7,7 @@ import { MapAppState } from '../../../mapApp/redux/MapAppState';
 
 export async function testDevicesEpic(
     devicesClient: DevicesClient,
-    mapAppState: MapAppState,
+    mapAppState: Partial<MapAppState>,
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {

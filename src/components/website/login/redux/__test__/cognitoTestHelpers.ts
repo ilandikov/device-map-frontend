@@ -33,7 +33,7 @@ const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
 };
 
 export async function testCognitoOutputAction(
-    initialState: AuthenticationState,
+    initialState: Partial<AuthenticationState>,
     testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
@@ -49,7 +49,7 @@ export async function testCognitoOutputAction(
     expect(receivedAction).toEqual(expectedActions);
 }
 
-export async function testCognitoNoOutput(initialState: AuthenticationState) {
+export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
     const stateForTest = buildTestStateObservable({ authentication: initialState });
 
     const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
