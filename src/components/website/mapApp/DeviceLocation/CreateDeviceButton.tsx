@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../../../redux/store';
 import { deviceCreateRequest } from '../redux/DeviceAction';
 
-export function AddDeviceButton() {
+export function CreateDeviceButton() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
