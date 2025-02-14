@@ -22,7 +22,3 @@ export function buildStateForCognitoTest(partialRootState: Partial<RootState>): 
 export function buildStateForDevicesTest(mapAppState: MapAppState): StateObservable<RootState> {
     return new StateObservable(EMPTY, { ...buildInitialTestState(), mapAppState });
 }
-
-export function buildTestStateObservable(): StateObservable<RootState> {
-    return new StateObservable(EMPTY, buildInitialTestState());
-}

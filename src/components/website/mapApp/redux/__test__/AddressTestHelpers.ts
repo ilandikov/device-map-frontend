@@ -1,7 +1,7 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction } from '../MapAppAction';
 import { address } from '../Address';
-import { buildTestStateObservable } from '../../../../../redux/__mocks__/stateBuilders';
+import { buildStateForCognitoTest } from '../../../../../redux/__mocks__/stateBuilders';
 import { AddressClient } from '../../../../../redux/store';
 
 export async function testAddressEpic(
@@ -9,7 +9,7 @@ export async function testAddressEpic(
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const output$ = address(of(sentAction), buildTestStateObservable(), {
+    const output$ = address(of(sentAction), buildStateForCognitoTest({}), {
         addressClient,
     });
     const receivedActions = await lastValueFrom(output$.pipe(toArray()));
