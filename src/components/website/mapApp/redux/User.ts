@@ -8,7 +8,7 @@ export const user: RootEpic = (action$, _, { usersClient }) =>
     action$.pipe(
         ofType(MapAppActionType.AUTHENTICATION_COMPLETED),
         switchMap(() =>
-            fromPromise(usersClient()).pipe(
+            fromPromise(usersClient.getUser()).pipe(
                 mergeMap((response) => of(mapAppSetLoggedInUser(response))),
                 catchError((error) => of(mapAppGetLoggedInUserError(error))),
             ),
