@@ -18,6 +18,6 @@ function buildInitialTestState(partialRootState: ShallowPartial<RootState>): Roo
     };
 }
 
-export function buildTestStateObservable(partialRootState: Partial<RootState>): StateObservable<RootState> {
+export function buildTestStateObservable(partialRootState: ShallowPartial<RootState>): StateObservable<RootState> {
     return new StateObservable(EMPTY, buildInitialTestState(partialRootState));
 }

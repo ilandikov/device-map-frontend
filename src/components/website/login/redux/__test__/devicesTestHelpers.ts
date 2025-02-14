@@ -3,7 +3,7 @@ import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { devices } from '../devices';
 import { buildTestStateObservable } from '../../../../../redux/__mocks__/stateBuilders';
 import { DevicesClient } from '../../../../../redux/store';
-import { MapAppState, buildMapAppState } from '../../../mapApp/redux/MapAppState';
+import { MapAppState } from '../../../mapApp/redux/MapAppState';
 
 export async function testDevicesEpic(
     devicesClient: DevicesClient,
@@ -11,7 +11,7 @@ export async function testDevicesEpic(
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const output$ = devices(of(sentAction), buildTestStateObservable({ mapAppState: buildMapAppState(mapAppState) }), {
+    const output$ = devices(of(sentAction), buildTestStateObservable({ mapAppState }), {
         devicesClient: devicesClient,
     });
 
