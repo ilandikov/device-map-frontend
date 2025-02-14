@@ -1,6 +1,6 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { UsersClient } from '../../../../../redux/store';
-import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
+import { MapAppAction } from '../MapAppAction';
 import { user } from '../User';
 import { buildTestStateObservable } from '../../../../../redux/stateBuilders';
 

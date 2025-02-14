@@ -9,7 +9,7 @@ import {
     deviceListRequest,
     deviceRemoteError,
     devicesListed,
-} from '../../../mapApp/redux/DeviceAction';
+} from '../DeviceAction';
 import { testDevicesEpic } from './devicesTestHelpers';
 
 const resolvingClient: DevicesClient = {

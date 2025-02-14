@@ -1,9 +1,9 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
+import { MapAppAction } from '../MapAppAction';
 import { devices } from '../devices';
 import { buildTestStateObservable } from '../../../../../redux/stateBuilders';
 import { DevicesClient } from '../../../../../redux/store';
-import { MapAppState } from '../../../mapApp/redux/MapAppState';
+import { MapAppState } from '../MapAppState';
 
 export async function testDevicesEpic(
     devicesClient: DevicesClient,
