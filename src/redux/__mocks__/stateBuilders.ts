@@ -1,17 +1,20 @@
 import { StateObservable } from 'redux-observable';
 import { EMPTY } from 'rxjs';
 import { RootState } from '../store';
-import { initialAuthenticationState } from '../../components/website/login/redux/AuthenticationState';
+import {
+    buildAuthenticationState,
+    initialAuthenticationState,
+} from '../../components/website/login/redux/AuthenticationState';
 import { initialGetDevicesState } from '../../components/devices/getDevices/redux/reducer';
-import { mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
+import { buildMapAppState, mapAppInitialState } from '../../components/website/mapApp/redux/MapAppState';
 
 type ShallowPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
 function buildInitialTestState(partialRootState: ShallowPartial<RootState>): RootState {
     return {
-        authentication: { ...initialAuthenticationState, ...partialRootState.authentication },
+        authentication: { ...initialAuthenticationState, ...buildAuthenticationState(partialRootState.authentication) },
         getDevices: { ...initialGetDevicesState, ...partialRootState.getDevices },
-        mapAppState: { ...mapAppInitialState, ...partialRootState.mapAppState },
+        mapAppState: { ...mapAppInitialState, ...buildMapAppState(partialRootState.mapAppState) },
     };
 }
 
