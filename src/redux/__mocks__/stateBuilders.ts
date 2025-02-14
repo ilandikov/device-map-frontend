@@ -11,7 +11,7 @@ function buildInitialTestState(partialRootState: ShallowPartial<RootState>): Roo
     return {
         authentication: buildAuthenticationState(partialRootState.authentication),
         getDevices: { ...initialGetDevicesState, ...partialRootState.getDevices },
-        mapAppState: { ...buildMapAppState(partialRootState.mapAppState) },
+        mapAppState: buildMapAppState(partialRootState.mapAppState),
     };
 }
 
