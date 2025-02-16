@@ -20,7 +20,7 @@ import {
     devicesListed,
 } from '../DeviceAction';
 
-function getAppleSauce<TState, TAction>(
+function buildReducerTester<TState, TAction>(
     reducer: (state: TState, action: TAction) => TState,
     stateBuilder: (partialState: Partial<TState>) => TState,
 ) {
@@ -40,8 +40,8 @@ function testMapAppStateChange(
     action: MapAppAction,
     stateChange: Partial<MapAppState>,
 ) {
-    const berrySauce = getAppleSauce(MapAppReducer, buildMapAppState);
-    berrySauce(initialState, action, stateChange);
+    const testReducer = buildReducerTester(MapAppReducer, buildMapAppState);
+    testReducer(initialState, action, stateChange);
 }
 
 describe('MapApp reducer tests', () => {
