@@ -16,9 +16,9 @@ import { buildReducerTester } from '../../../../../redux/__test__/helpers';
 
 const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
-function appleSauce() {
+function appleSauce(stateBuilder: (partialState: Partial<AuthenticationState>) => AuthenticationState) {
     function berrySauce() {
-        expect(buildAuthenticationState({})).toMatchObject<AuthenticationState>({
+        expect(stateBuilder({})).toMatchObject<AuthenticationState>({
             step: AuthenticationStep.WELCOME,
             email: '',
             error: null,
@@ -33,7 +33,7 @@ function appleSauce() {
 
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {
-        appleSauce();
+        appleSauce(buildAuthenticationState);
     });
 
     it('should not change the initial state on a dummy action', () => {
