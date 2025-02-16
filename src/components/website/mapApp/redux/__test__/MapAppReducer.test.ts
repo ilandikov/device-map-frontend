@@ -21,9 +21,7 @@ import {
 } from '../DeviceAction';
 
 function getAppleSauce() {
-    function stateBuilder() {
-        return buildMapAppState;
-    }
+    const stateBuilder = () => buildMapAppState;
 
     return function (initialState: Partial<MapAppState>, action: MapAppAction, stateChange: Partial<MapAppState>) {
         const resultingState = MapAppReducer(stateBuilder()(initialState), action);
