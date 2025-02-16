@@ -21,11 +21,15 @@ import {
 } from '../DeviceAction';
 
 function getAppleSauce() {
+    function stateBuilder() {
+        return buildMapAppState;
+    }
+
     return function (initialState: Partial<MapAppState>, action: MapAppAction, stateChange: Partial<MapAppState>) {
-        const resultingState = MapAppReducer(buildMapAppState(initialState), action);
+        const resultingState = MapAppReducer(stateBuilder()(initialState), action);
 
         const expectedState: MapAppState = {
-            ...buildMapAppState(initialState),
+            ...stateBuilder()(initialState),
             ...stateChange,
         };
         expect(resultingState).toEqual(expectedState);
