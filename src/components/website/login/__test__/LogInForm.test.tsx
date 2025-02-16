@@ -43,11 +43,11 @@ describe('LogInForm action tests', () => {
         mockDispatch.mockReset();
     });
 
-    it('should update the user email on input on password input stage', () => {
-        const state = { step: AuthenticationStep.LOGIN };
-        const userAction = () => type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
-        const dispatched = loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com');
+    const state = { step: AuthenticationStep.LOGIN };
+    const userAction = () => type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
+    const dispatched = loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com');
 
+    it('should update the user email on input on password input stage', () => {
         mockAuthenticationState(state);
 
         userAction();
