@@ -20,14 +20,12 @@ import {
     devicesListed,
 } from '../DeviceAction';
 
-function getAppleSauce() {
-    const stateBuilder = () => buildMapAppState;
-
+function getAppleSauce(stateBuilder: (partialState: Partial<MapAppState>) => MapAppState) {
     return function (initialState: Partial<MapAppState>, action: MapAppAction, stateChange: Partial<MapAppState>) {
-        const resultingState = MapAppReducer(stateBuilder()(initialState), action);
+        const resultingState = MapAppReducer(stateBuilder(initialState), action);
 
         const expectedState: MapAppState = {
-            ...stateBuilder()(initialState),
+            ...stateBuilder(initialState),
             ...stateChange,
         };
         expect(resultingState).toEqual(expectedState);
@@ -39,7 +37,7 @@ function testMapAppStateChange(
     action: MapAppAction,
     stateChange: Partial<MapAppState>,
 ) {
-    const berrySauce = getAppleSauce();
+    const berrySauce = getAppleSauce(buildMapAppState);
     berrySauce(initialState, action, stateChange);
 }
 
