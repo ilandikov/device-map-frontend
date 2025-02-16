@@ -47,9 +47,9 @@ describe('LogInForm action tests', () => {
     const userAction = () => type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
     const dispatched = loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com');
 
-    it.each([[state, userAction, dispatched]])(
+    it.each([[{ state, userAction, dispatched }]])(
         'should update the user email on input on password input stage',
-        (state, userAction, dispatched) => {
+        ({ state, userAction, dispatched }) => {
             mockAuthenticationState(state);
 
             userAction();
