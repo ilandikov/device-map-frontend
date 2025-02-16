@@ -30,12 +30,17 @@ function appleSauce(initialState: Partial<MapAppState>, action: MapAppAction, st
     expect(resultingState).toEqual(expectedState);
 }
 
+function getAppleSauce() {
+    return appleSauce;
+}
+
 function testMapAppStateChange(
     initialState: Partial<MapAppState>,
     action: MapAppAction,
     stateChange: Partial<MapAppState>,
 ) {
-    appleSauce(initialState, action, stateChange);
+    const berrySauce = getAppleSauce();
+    berrySauce(initialState, action, stateChange);
 }
 
 describe('MapApp reducer tests', () => {
