@@ -16,13 +16,16 @@ import { buildReducerTester } from '../../../../../redux/__test__/helpers';
 
 const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
-function berrySauce<TState>(stateBuilder: (partialState: Partial<TState>) => TState, expectedInitialState: TState) {
+function testInitialState<TState>(
+    stateBuilder: (partialState: Partial<TState>) => TState,
+    expectedInitialState: TState,
+) {
     expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
 }
 
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {
-        berrySauce(buildAuthenticationState, {
+        testInitialState(buildAuthenticationState, {
             step: AuthenticationStep.WELCOME,
             email: '',
             error: null,
