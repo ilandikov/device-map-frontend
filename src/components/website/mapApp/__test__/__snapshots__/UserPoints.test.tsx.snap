@@ -8,13 +8,11 @@ exports[`UserPoints snapshot tests should match the snapshot after getting the u
     alt="user-points-image"
     src="test-file-stub"
   />
-  <div
-    className="user-points-loader-container"
+  <span
+    className="user-points"
   >
-    <div
-      className="finik-loader"
-    />
-  </div>
+    320
+  </span>
 </div>
 `;
 
