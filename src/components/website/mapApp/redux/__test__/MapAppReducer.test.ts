@@ -20,11 +20,7 @@ import {
     devicesListed,
 } from '../DeviceAction';
 
-function testMapAppStateChange(
-    initialState: Partial<MapAppState>,
-    action: MapAppAction,
-    stateChange: Partial<MapAppState>,
-) {
+function appleSauce(initialState: Partial<MapAppState>, action: MapAppAction, stateChange: Partial<MapAppState>) {
     const resultingState = MapAppReducer(buildMapAppState(initialState), action);
 
     const expectedState: MapAppState = {
@@ -32,6 +28,14 @@ function testMapAppStateChange(
         ...stateChange,
     };
     expect(resultingState).toEqual(expectedState);
+}
+
+function testMapAppStateChange(
+    initialState: Partial<MapAppState>,
+    action: MapAppAction,
+    stateChange: Partial<MapAppState>,
+) {
+    appleSauce(initialState, action, stateChange);
 }
 
 describe('MapApp reducer tests', () => {
