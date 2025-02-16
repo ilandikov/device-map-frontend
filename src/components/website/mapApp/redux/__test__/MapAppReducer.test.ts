@@ -37,12 +37,13 @@ function buildReducerTester<TState, TAction>(
     };
 }
 
+const testReducer = buildReducerTester(MapAppReducer, buildMapAppState);
+
 function testMapAppStateChange(
     initialState: Partial<MapAppState>,
     action: MapAppAction,
     stateChange: Partial<MapAppState>,
 ) {
-    const testReducer = buildReducerTester(MapAppReducer, buildMapAppState);
     testReducer(initialState, action, stateChange);
 }
 
