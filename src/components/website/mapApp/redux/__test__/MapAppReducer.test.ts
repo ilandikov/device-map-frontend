@@ -36,7 +36,7 @@ function buildReducerTester<TState, TAction>(
     };
 }
 
-const testReducer = buildReducerTester(MapAppReducer, buildMapAppState);
+const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
@@ -53,28 +53,28 @@ describe('MapApp reducer tests', () => {
 
     it('should not change the initial state on a dummy action', () => {
         // @ts-expect-error
-        testReducer({}, { type: 'DUMMY_ACTION' }, {});
+        testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
     });
 
     it('should reset current user id', () => {
         const initialState = { loggedInUser: { id: 'reset me!', points: 0 } };
         const action = mapAppResetCurrentUser();
 
-        testReducer(initialState, action, { loggedInUser: null });
+        testMapAppReducer(initialState, action, { loggedInUser: null });
     });
 
     it('should move to mainPage screen on navigation cancel action', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppLoginModalClose();
 
-        testReducer(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
+        testMapAppReducer(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
     it('should move to device management when authentication has been completed', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppAuthenticationCompleted('set me in the state');
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             component: MapAppComponents.DEVICE_LOCATION,
             loggedInUser: { id: 'set me in the state', points: null },
         });
@@ -84,7 +84,7 @@ describe('MapApp reducer tests', () => {
         const initialState = {};
         const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
         });
     });
@@ -93,7 +93,7 @@ describe('MapApp reducer tests', () => {
         const initialState = {};
         const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 });
 
-        testReducer(initialState, action, {});
+        testMapAppReducer(initialState, action, {});
     });
 
     it('should set location address', () => {
@@ -105,7 +105,7 @@ describe('MapApp reducer tests', () => {
         };
         const action = mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' });
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             selectedMarker: {
                 location: { lat: 0, lon: 1 },
                 address: {
@@ -120,7 +120,7 @@ describe('MapApp reducer tests', () => {
         const initialState = {};
         const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             loggedInUser: { id: 'i have to be set', points: 10 },
         });
     });
@@ -129,7 +129,7 @@ describe('MapApp reducer tests', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppShowComponent(MapAppComponents.DEVICE_LOCATION);
 
-        testReducer(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
+        testMapAppReducer(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
     });
 });
 
@@ -138,14 +138,14 @@ describe('rename me', () => {
         const initialState = {};
         const action = deviceListRequest();
 
-        testReducer(initialState, action, {});
+        testMapAppReducer(initialState, action, {});
     });
 
     it('should not change state on create device remote request', () => {
         const initialState = {};
         const action = deviceCreateRequest();
 
-        testReducer(initialState, action, {});
+        testMapAppReducer(initialState, action, {});
     });
 
     const existingDevice = {
@@ -165,7 +165,7 @@ describe('rename me', () => {
         const initialState = { devices: [existingDevice] };
         const action = devicesListed([receivedDevice]);
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             devices: [receivedDevice],
         });
     });
@@ -174,7 +174,7 @@ describe('rename me', () => {
         const initialState = { devices: [existingDevice] };
         const action = deviceCreated(receivedDevice);
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             devices: [existingDevice, receivedDevice],
         });
     });
@@ -183,7 +183,7 @@ describe('rename me', () => {
         const initialState = { devices: [existingDevice, receivedDevice] };
         const action = deviceDeleted('existing');
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             devices: [receivedDevice],
         });
     });
@@ -192,7 +192,7 @@ describe('rename me', () => {
         const initialState = { devices: [existingDevice, receivedDevice] };
         const action = deviceApproved(receivedDevice.id, 1112222233333);
 
-        testReducer(initialState, action, {
+        testMapAppReducer(initialState, action, {
             devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1112222233333 }],
         });
     });
