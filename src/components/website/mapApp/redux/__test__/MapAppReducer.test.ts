@@ -20,11 +20,11 @@ import {
     devicesListed,
 } from '../DeviceAction';
 
-function getAppleSauce<TState>(
-    reducer: (state: TState, action: MapAppAction) => TState,
+function getAppleSauce<TState, TAction>(
+    reducer: (state: TState, action: TAction) => TState,
     stateBuilder: (partialState: Partial<TState>) => TState,
 ) {
-    return function (initialState: Partial<TState>, action: MapAppAction, stateChange: Partial<TState>) {
+    return function (initialState: Partial<TState>, action: TAction, stateChange: Partial<TState>) {
         const resultingState = reducer(stateBuilder(initialState), action);
 
         const expectedState: TState = {
