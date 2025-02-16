@@ -1,6 +1,5 @@
 import { authentication } from '../Authentication';
 import {
-    LoginModalAction,
     LoginModalButton,
     LoginModalCheck,
     LoginModalInputType,
@@ -10,27 +9,16 @@ import {
     loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
 } from '../LoginModalAction';
-import { AuthenticationState, AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
+import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
+import { buildReducerTester, testInitialState } from '../../../../../redux/__test__/helpers';
 
-function testStateChange(
-    initialState: Partial<AuthenticationState>,
-    action: LoginModalAction,
-    expectedChange: Partial<AuthenticationState>,
-) {
-    const nextState = authentication(buildAuthenticationState(initialState), action);
-
-    const expectedState: AuthenticationState = {
-        ...buildAuthenticationState(initialState),
-        ...expectedChange,
-    };
-    expect(nextState).toEqual(expectedState);
-}
+const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {
-        expect(buildAuthenticationState({})).toMatchObject<AuthenticationState>({
+        testInitialState(buildAuthenticationState, {
             step: AuthenticationStep.WELCOME,
             email: '',
             error: null,
@@ -42,14 +30,14 @@ describe('LoginModal reducer tests', () => {
 
     it('should not change the initial state on a dummy action', () => {
         // @ts-expect-error
-        testStateChange({}, { type: 'DUMMY_ACTION' }, {});
+        testAuthenticationReducer({}, { type: 'DUMMY_ACTION' }, {});
     });
 
     it('any input shall reset the error', () => {
         const initialState = { error: new Error('shouldDisappear') }; // @ts-expect-error
         const action = loginModalInput('wrongType', '');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             error: null,
         });
     });
@@ -60,7 +48,7 @@ describe('welcome screen buttons', () => {
         const initialState = { step: AuthenticationStep.WELCOME };
         const action = loginModalButtonClick(LoginModalButton.ACCOUNT_REGISTER);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.MAIL_INPUT,
         });
     });
@@ -69,7 +57,7 @@ describe('welcome screen buttons', () => {
         const initialState = { step: AuthenticationStep.WELCOME };
         const action = loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGIN,
         });
     });
@@ -87,7 +75,7 @@ describe('navigation logic', () => {
         };
         const action = loginModalButtonClick(LoginModalButton.CANCEL);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.WELCOME,
             email: '',
             error: null,
@@ -113,7 +101,7 @@ describe('navigation logic', () => {
         const initialState = { step: initialStep };
         const action = loginModalButtonClick(LoginModalButton.GO_BACK);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: stepAfterGoBack,
         });
     });
@@ -124,7 +112,7 @@ describe('email input logic', () => {
         const initialState = { step: AuthenticationStep.MAIL_INPUT };
         const action = loginModalInput(LoginModalInputType.EMAIL, 'myMail@myServer.xyz');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             email: 'myMail@myServer.xyz',
         });
     });
@@ -137,7 +125,7 @@ describe('email input logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.USERNAME);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION,
             error: null,
         });
@@ -150,7 +138,7 @@ describe('email input logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.USERNAME);
 
-        testStateChange(initialState, action, { error: new Error(MailInputError.NOT_VALID) });
+        testAuthenticationReducer(initialState, action, { error: new Error(MailInputError.NOT_VALID) });
     });
 
     it('should remove mail error and transition to login with an existing mail', () => {
@@ -161,7 +149,7 @@ describe('email input logic', () => {
         };
         const action = loginModalButtonClick(LoginModalButton.ACCOUNT_LOGIN);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGIN,
             error: null,
         });
@@ -173,7 +161,7 @@ describe('user password logic', () => {
         const initialState = {};
         const action = loginModalInput(LoginModalInputType.PASSWORD, 'haha!!11');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             password: 'haha!!11',
         });
     });
@@ -182,7 +170,7 @@ describe('user password logic', () => {
         const initialState = {};
         const action = loginModalInput(LoginModalInputType.PASSWORD_REPEAT, 'lmao!rofl!');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             passwordRepeat: 'lmao!rofl!',
         });
     });
@@ -196,7 +184,7 @@ describe('user password logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.PASSWORD);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_LOADING,
             error: null,
         });
@@ -211,7 +199,7 @@ describe('user password logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.PASSWORD);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_LOADING,
             error: null,
         });
@@ -224,7 +212,7 @@ describe('user password logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.PASSWORD);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             error: new Error(PasswordError.NOT_MATCHING),
         });
     });
@@ -237,7 +225,7 @@ describe('sign up logic', () => {
         };
         const action = loginModalRemoteAnswerSuccess();
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
         });
     });
@@ -249,7 +237,7 @@ describe('sign up logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('thisIsWhy');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.MAIL_INPUT,
             error: new Error('thisIsWhy'),
         });
@@ -265,7 +253,7 @@ describe('sign up OTP logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.OTP);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING,
             error: null,
         });
@@ -279,7 +267,7 @@ describe('sign up OTP logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.OTP);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET,
             error: null,
         });
@@ -291,7 +279,7 @@ describe('sign up OTP logic', () => {
         };
         const action = loginModalInput(LoginModalInputType.OTP, '9832');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             OTP: '9832',
         });
     });
@@ -302,7 +290,7 @@ describe('sign up OTP logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.OTP);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             error: new Error(OTPError.TOO_SHORT),
         });
     });
@@ -313,7 +301,7 @@ describe('sign up OTP logic', () => {
         };
         const action = loginModalRemoteAnswerSuccess();
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGIN,
         });
     });
@@ -324,7 +312,7 @@ describe('sign up OTP logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('signUpWasNotConfirmedUnfortunately');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
             error: new Error('signUpWasNotConfirmedUnfortunately'),
         });
@@ -339,7 +327,7 @@ describe('login logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.NONE);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGIN_LOADING,
             error: null,
         });
@@ -354,7 +342,7 @@ describe('login logic', () => {
         };
         const action = loginModalButtonClick(LoginModalButton.RESET_PASSWORD);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
             password: '',
             error: null,
@@ -367,7 +355,7 @@ describe('login logic', () => {
         };
         const action = loginModalRemoteAnswerSuccess();
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGGED_IN,
         });
     });
@@ -378,7 +366,7 @@ describe('login logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('thereHasBeenAnError');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGIN,
             error: new Error('thereHasBeenAnError'),
         });
@@ -394,7 +382,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.USERNAME);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING,
             error: null,
         });
@@ -407,7 +395,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.USERNAME);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             error: new Error(MailInputError.NOT_VALID),
         });
     });
@@ -418,7 +406,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('thereHasBeenAnError');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thereHasBeenAnError'),
         });
@@ -430,7 +418,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteAnswerSuccess();
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.LOGIN,
         });
     });
@@ -441,7 +429,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('thisCouldNotGoWorseThanThat');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
             error: new Error('thisCouldNotGoWorseThanThat'),
         });
@@ -453,7 +441,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteAnswerSuccess();
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_OTP,
         });
     });
@@ -464,7 +452,7 @@ describe('password reset logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('couldNotRequest');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_RESET_REQUEST,
             error: new Error('couldNotRequest'),
         });
@@ -479,7 +467,7 @@ describe('OTP code resend logic', () => {
         };
         const action = loginModalRemoteRequest(LoginModalCheck.NONE);
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING,
             error: null,
         });
@@ -491,7 +479,7 @@ describe('OTP code resend logic', () => {
         };
         const action = loginModalRemoteAnswerSuccess();
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
         });
     });
@@ -502,7 +490,7 @@ describe('OTP code resend logic', () => {
         };
         const action = loginModalRemoteAnswerFailure('couldNotResendOTP');
 
-        testStateChange(initialState, action, {
+        testAuthenticationReducer(initialState, action, {
             step: AuthenticationStep.PASSWORD_CREATION_OTP,
             error: new Error('couldNotResendOTP'),
         });
@@ -521,6 +509,6 @@ describe('logout logic', () => {
         };
         const action = loginModalButtonClick(LoginModalButton.USER_BUTTON);
 
-        testStateChange(initialState, action, buildAuthenticationState({}));
+        testAuthenticationReducer(initialState, action, buildAuthenticationState({}));
     });
 });

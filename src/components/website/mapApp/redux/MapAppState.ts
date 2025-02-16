@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { T22Address, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
-import { RootState } from '../../../../redux/store';
+import { RootState, StateBuilder } from '../../../../redux/store';
 
 export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state).mapAppState;
@@ -32,15 +32,13 @@ export enum MapAppComponents {
     DEVICE_LOCATION = 'DEVICE_LOCATION',
 }
 
-export function buildMapAppState(partialState: Partial<MapAppState>): MapAppState {
-    return {
-        component: MapAppComponents.PRODUCT_DESCRIPTION,
-        devices: [],
-        selectedMarker: {
-            location: null,
-            address: null,
-        },
-        loggedInUser: null,
-        ...partialState,
-    };
-}
+export const buildMapAppState: StateBuilder<MapAppState> = (partialState) => ({
+    component: MapAppComponents.PRODUCT_DESCRIPTION,
+    devices: [],
+    selectedMarker: {
+        location: null,
+        address: null,
+    },
+    loggedInUser: null,
+    ...partialState,
+});
