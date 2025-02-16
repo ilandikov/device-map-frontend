@@ -13,19 +13,16 @@ import {
 import { AuthenticationState, AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
+import { buildReducerTester } from '../../../../../redux/__test__/helpers';
+
+const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
 function testStateChange(
     initialState: Partial<AuthenticationState>,
     action: LoginModalAction,
     expectedChange: Partial<AuthenticationState>,
 ) {
-    const nextState = authentication(buildAuthenticationState(initialState), action);
-
-    const expectedState: AuthenticationState = {
-        ...buildAuthenticationState(initialState),
-        ...expectedChange,
-    };
-    expect(nextState).toEqual(expectedState);
+    testAuthenticationReducer(initialState, action, expectedChange);
 }
 
 describe('LoginModal reducer tests', () => {
