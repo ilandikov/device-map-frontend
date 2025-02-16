@@ -9,7 +9,7 @@ import {
     mapAppSetLoggedInUser,
     mapAppShowComponent,
 } from '../MapAppAction';
-import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
+import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
     deviceCreateRequest,
@@ -18,13 +18,13 @@ import {
     deviceListRequest,
     devicesListed,
 } from '../DeviceAction';
-import { buildReducerTester } from '../../../../../redux/__test__/helpers';
+import { buildReducerTester, testInitialState } from '../../../../../redux/__test__/helpers';
 
 const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
-        expect(buildMapAppState({})).toMatchObject<MapAppState>({
+        testInitialState(buildMapAppState, {
             component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [],
             selectedMarker: {
