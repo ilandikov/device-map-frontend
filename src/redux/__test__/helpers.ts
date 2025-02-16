@@ -1,6 +1,8 @@
+type StateBuilder<TState> = (partialState: Partial<TState>) => TState;
+
 export function buildReducerTester<TState, TAction>(
     reducer: (state: TState, action: TAction) => TState,
-    stateBuilder: (partialState: Partial<TState>) => TState,
+    stateBuilder: StateBuilder<TState>,
 ) {
     return function (partialInitialState: Partial<TState>, action: TAction, stateChange: Partial<TState>) {
         const initialState = stateBuilder(partialInitialState);
@@ -15,9 +17,6 @@ export function buildReducerTester<TState, TAction>(
     };
 }
 
-export function testInitialState<TState>(
-    stateBuilder: (partialState: Partial<TState>) => TState,
-    expectedInitialState: TState,
-) {
+export function testInitialState<TState>(stateBuilder: StateBuilder<TState>, expectedInitialState: TState) {
     expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
 }
