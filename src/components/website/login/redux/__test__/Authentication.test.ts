@@ -9,31 +9,30 @@ import {
     loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
 } from '../LoginModalAction';
-import { AuthenticationState, AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
+import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
 import { buildReducerTester } from '../../../../../redux/__test__/helpers';
 
 const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
-function appleSauce(stateBuilder: (partialState: Partial<AuthenticationState>) => AuthenticationState) {
-    function berrySauce<TState>(stateBuilder: (partialState: Partial<TState>) => TState, expectedInitialState: TState) {
-        expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
-    }
-
-    berrySauce(stateBuilder, {
-        step: AuthenticationStep.WELCOME,
-        email: '',
-        error: null,
-        password: '',
-        passwordRepeat: '',
-        OTP: '',
-    });
-}
-
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {
-        appleSauce(buildAuthenticationState);
+        function berrySauce<TState>(
+            stateBuilder: (partialState: Partial<TState>) => TState,
+            expectedInitialState: TState,
+        ) {
+            expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
+        }
+
+        berrySauce(buildAuthenticationState, {
+            step: AuthenticationStep.WELCOME,
+            email: '',
+            error: null,
+            password: '',
+            passwordRepeat: '',
+            OTP: '',
+        });
     });
 
     it('should not change the initial state on a dummy action', () => {
