@@ -17,18 +17,18 @@ import { buildReducerTester } from '../../../../../redux/__test__/helpers';
 const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
 function appleSauce(stateBuilder: (partialState: Partial<AuthenticationState>) => AuthenticationState) {
-    function berrySauce() {
-        expect(stateBuilder({})).toMatchObject<AuthenticationState>({
-            step: AuthenticationStep.WELCOME,
-            email: '',
-            error: null,
-            password: '',
-            passwordRepeat: '',
-            OTP: '',
-        });
+    function berrySauce(expectedInitialState: AuthenticationState) {
+        expect(stateBuilder({})).toMatchObject<AuthenticationState>(expectedInitialState);
     }
 
-    berrySauce();
+    berrySauce({
+        step: AuthenticationStep.WELCOME,
+        email: '',
+        error: null,
+        password: '',
+        passwordRepeat: '',
+        OTP: '',
+    });
 }
 
 describe('LoginModal reducer tests', () => {
