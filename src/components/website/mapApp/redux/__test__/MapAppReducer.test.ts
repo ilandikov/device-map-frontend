@@ -25,10 +25,11 @@ function buildReducerTester<TState, TAction>(
     stateBuilder: (partialState: Partial<TState>) => TState,
 ) {
     return function (partialInitialState: Partial<TState>, action: TAction, stateChange: Partial<TState>) {
-        const resultingState = reducer(stateBuilder(partialInitialState), action);
+        const initialState = stateBuilder(partialInitialState);
+        const resultingState = reducer(initialState, action);
 
         const expectedState: TState = {
-            ...stateBuilder(partialInitialState),
+            ...initialState,
             ...stateChange,
         };
         expect(resultingState).toEqual(expectedState);
