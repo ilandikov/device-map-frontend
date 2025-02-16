@@ -1,4 +1,4 @@
-export type StateBuilder<TState> = (partialState: Partial<TState>) => TState;
+import { StateBuilder } from '../store';
 
 export function buildReducerTester<TState, TAction>(
     reducer: (state: TState, action: TAction) => TState,

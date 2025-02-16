@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
-import { StateBuilder } from '../../../../redux/__test__/helpers';
+import { RootState, StateBuilder } from '../../../../redux/store';
 
 export function useLoginModalAuthentication(): AuthenticationState {
     return useSelector((state: RootState) => state).authentication;

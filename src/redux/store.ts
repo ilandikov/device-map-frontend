@@ -48,6 +48,8 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
+export type StateBuilder<TState> = (partialState: Partial<TState>) => TState;
+
 export type AllActions = LoginModalAction | MapAppAction;
 
 export type ClassToInterface<T> = { [key in keyof T]: T[key] };
