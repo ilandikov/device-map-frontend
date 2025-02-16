@@ -12,16 +12,9 @@ import {
 import { AuthenticationStep, buildAuthenticationState } from '../AuthenticationState';
 import { CognitoErrors } from '../cognitoHelpers';
 import { MailInputError, OTPError, PasswordError } from '../AuthenticationErrors';
-import { buildReducerTester } from '../../../../../redux/__test__/helpers';
+import { buildReducerTester, testInitialState } from '../../../../../redux/__test__/helpers';
 
 const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
-
-function testInitialState<TState>(
-    stateBuilder: (partialState: Partial<TState>) => TState,
-    expectedInitialState: TState,
-) {
-    expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
-}
 
 describe('LoginModal reducer tests', () => {
     it('should match the initial state', () => {

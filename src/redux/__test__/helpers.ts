@@ -14,3 +14,10 @@ export function buildReducerTester<TState, TAction>(
         expect(resultingState).toEqual(expectedState);
     };
 }
+
+export function testInitialState<TState>(
+    stateBuilder: (partialState: Partial<TState>) => TState,
+    expectedInitialState: TState,
+) {
+    expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
+}
