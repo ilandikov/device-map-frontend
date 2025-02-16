@@ -17,11 +17,8 @@ import { buildReducerTester } from '../../../../../redux/__test__/helpers';
 const testAuthenticationReducer = buildReducerTester(authentication, buildAuthenticationState);
 
 function appleSauce(stateBuilder: (partialState: Partial<AuthenticationState>) => AuthenticationState) {
-    function berrySauce(
-        stateBuilder: (partialState: Partial<AuthenticationState>) => AuthenticationState,
-        expectedInitialState: AuthenticationState,
-    ) {
-        expect(stateBuilder({})).toMatchObject<AuthenticationState>(expectedInitialState);
+    function berrySauce<TState>(stateBuilder: (partialState: Partial<TState>) => TState, expectedInitialState: TState) {
+        expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
     }
 
     berrySauce(stateBuilder, {
