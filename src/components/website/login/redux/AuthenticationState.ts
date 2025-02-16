@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
+import { StateBuilder } from '../../../../redux/__test__/helpers';
 
 export function useLoginModalAuthentication(): AuthenticationState {
     return useSelector((state: RootState) => state).authentication;
@@ -32,14 +33,12 @@ export interface AuthenticationState {
     OTP: string;
 }
 
-export function buildAuthenticationState(partialState: Partial<AuthenticationState>): AuthenticationState {
-    return {
-        step: AuthenticationStep.WELCOME,
-        email: '',
-        error: null,
-        password: '',
-        passwordRepeat: '',
-        OTP: '',
-        ...partialState,
-    };
-}
+export const buildAuthenticationState: StateBuilder<AuthenticationState> = (partialState) => ({
+    step: AuthenticationStep.WELCOME,
+    email: '',
+    error: null,
+    password: '',
+    passwordRepeat: '',
+    OTP: '',
+    ...partialState,
+});
