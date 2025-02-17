@@ -19,3 +19,49 @@ export async function testDevicesEpic(
 
     expect(receivedAction).toEqual(expectedActions);
 }
+
+export const resolvingDevicesClient: DevicesClient = {
+    forAnonymousUser: {
+        listDevices: () =>
+            Promise.resolve({
+                devices: [
+                    {
+                        __typename: 'T22Device',
+                        id: 'dev1',
+                        createdDate: '1754126457812',
+                        creatorID: 'fancy creator',
+                        location: {
+                            __typename: 'T22Location',
+                            lat: 42.85862508449081,
+                            lon: 74.6085298061371,
+                        },
+                    },
+                ],
+                count: 1,
+            }),
+    },
+    forAuthenticatedUser: {
+        createDevice: (createDeviceInput) =>
+            Promise.resolve({
+                device: {
+                    id: 'testId',
+                    createdDate: '1796354896548',
+                    creatorID: 'new creator',
+                    location: createDeviceInput.location,
+                },
+            }),
+        deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
+        approveDevice: (approveDeviceInput) => Promise.resolve({ id: approveDeviceInput.id, lastUpdate: Date.now() }),
+    },
+};
+
+export const rejectingDevicesClient: DevicesClient = {
+    forAnonymousUser: {
+        listDevices: () => Promise.reject('list devices went wrong'),
+    },
+    forAuthenticatedUser: {
+        createDevice: () => Promise.reject('create device went wrong'),
+        deleteDevice: () => Promise.reject('delete device went wrong'),
+        approveDevice: () => Promise.reject('approve device went wrong'),
+    },
+};
