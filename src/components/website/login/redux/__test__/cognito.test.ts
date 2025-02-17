@@ -67,7 +67,6 @@ describe('user sign in tests', () => {
     it.each([
         [
             cognitoResolvingClient,
-
             [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57')],
         ],
         [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
