@@ -8,14 +8,14 @@ import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
 import { cognito } from '../cognito';
-import { cognitoRejectingTestClient, cognitoResolvingTestClient, testCognitoNoOutput } from './cognitoTestHelpers';
+import { cognitoRejectingClient, cognitoResolvingClient, testCognitoNoOutput } from './cognitoTestHelpers';
 
 const testCognitoEpic = buildEpicTester(cognito);
 
 describe('user sign up tests', () => {
     it.each([
-        [cognitoResolvingTestClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch sign up notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_LOADING };
 
@@ -30,8 +30,8 @@ describe('user sign up tests', () => {
 
 describe('user password reset tests', () => {
     it.each([
-        [cognitoResolvingTestClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])(
         'should dispatch password has been reset notification when remote answer is: %s',
         async (client, expectedAction) => {
@@ -49,8 +49,8 @@ describe('user password reset tests', () => {
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
     it.each([
-        [cognitoResolvingTestClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch OTP notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
 
@@ -66,11 +66,11 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
 describe('user sign in tests', () => {
     it.each([
         [
-            cognitoResolvingTestClient,
+            cognitoResolvingClient,
 
             [loginModalRemoteAnswerSuccess(), mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57')],
         ],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch login notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.LOGIN_LOADING };
 
@@ -91,8 +91,8 @@ describe('password reset request tests', () => {
     });
 
     it.each([
-        [cognitoResolvingTestClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch forgot password notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING };
 
@@ -107,8 +107,8 @@ describe('password reset request tests', () => {
 
 describe('OTP code resend tests', () => {
     it.each([
-        [cognitoResolvingTestClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should resign out user when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
 
@@ -123,8 +123,8 @@ describe('OTP code resend tests', () => {
 
 describe('user sign out tests', () => {
     it.each([
-        [cognitoResolvingTestClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingTestClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
+        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
+        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should sign out user when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.LOGGED_IN };
 

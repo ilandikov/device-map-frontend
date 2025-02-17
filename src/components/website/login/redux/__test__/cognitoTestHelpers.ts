@@ -11,7 +11,7 @@ export enum TestClient {
     REJECTING = 'REJECTING',
 }
 
-export const cognitoResolvingTestClient: ClassToInterface<CognitoClient> = {
+export const cognitoResolvingClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.resolve(cognitoSignUpRequestResult as any),
     signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
     signIn: () => Promise.resolve(cognitoSignInResult as any),
@@ -21,7 +21,7 @@ export const cognitoResolvingTestClient: ClassToInterface<CognitoClient> = {
     signOut: () => Promise.resolve(cognitoSignOutResult),
 };
 
-export const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
+export const cognitoRejectingClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.reject(),
     signUpConfirmCode: () => Promise.reject(),
     signIn: () => Promise.reject(),
