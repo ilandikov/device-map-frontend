@@ -1,7 +1,7 @@
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
+import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
-import { buildEpicTester } from './devicesTestHelpers';
 
 const testUserEpic = buildEpicTester(user);
 

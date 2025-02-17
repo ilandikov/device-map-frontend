@@ -6,8 +6,8 @@ import {
 } from '../LoginModalAction';
 import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
-import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
 import { cognito } from '../cognito';
+import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
 const testCognitoEpic = buildEpicTester(cognito);

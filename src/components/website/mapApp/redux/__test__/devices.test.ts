@@ -10,7 +10,8 @@ import {
     devicesListed,
 } from '../DeviceAction';
 import { devices } from '../devices';
-import { buildEpicTester, rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
+import { buildEpicTester } from '../../../../../redux/__test__/helpers';
+import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
 
 const testDevicesEpic = buildEpicTester(devices);
 

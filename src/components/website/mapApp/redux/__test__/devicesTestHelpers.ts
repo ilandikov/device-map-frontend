@@ -1,21 +1,4 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
-import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/__mocks__/state';
-import { AllActions, DevicesClient, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
-
-export function buildEpicTester(epic: RootEpic) {
-    return async function (
-        remoteClients: RemoteClients,
-        partialRootState: ShallowPartial<RootState>,
-        sentAction: AllActions,
-        expectedActions: AllActions[],
-    ) {
-        const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
-
-        const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-
-        expect(receivedAction).toEqual(expectedActions);
-    };
-}
+import { DevicesClient } from '../../../../../redux/store';
 
 export const resolvingDevicesClient: DevicesClient = {
     forAnonymousUser: {
