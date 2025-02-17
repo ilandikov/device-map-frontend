@@ -20,13 +20,14 @@ function buildEpicTester(epic: RootEpic) {
     };
 }
 
+const testDevicesEpic1 = buildEpicTester(devices);
+
 export async function testDevicesEpic(
     devicesClient: DevicesClient,
     mapAppState: Partial<MapAppState>,
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const testDevicesEpic1 = buildEpicTester(devices);
     await testDevicesEpic1({ devicesClient }, { mapAppState }, sentAction, expectedActions);
 }
 
