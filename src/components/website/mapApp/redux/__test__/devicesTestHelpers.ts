@@ -7,9 +7,9 @@ import { MapAppState } from '../MapAppState';
 
 function getAppleSauce() {
     return async function (
-        sentAction: MapAppAction,
-        mapAppState: Partial<MapAppState>,
         devicesClient: DevicesClient,
+        mapAppState: Partial<MapAppState>,
+        sentAction: MapAppAction,
         expectedActions: MapAppAction[],
     ) {
         const output$ = devices(of(sentAction), buildTestStateObservable({ mapAppState }), {
@@ -29,7 +29,7 @@ export async function testDevicesEpic(
     expectedActions: MapAppAction[],
 ) {
     const appleSauce = getAppleSauce();
-    await appleSauce(sentAction, mapAppState, devicesClient, expectedActions);
+    await appleSauce(devicesClient, mapAppState, sentAction, expectedActions);
 }
 
 export const resolvingDevicesClient: DevicesClient = {
