@@ -88,8 +88,8 @@ describe('user sign in tests', () => {
 export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
     const stateForTest = buildTestStateObservable({ authentication: initialState });
 
-    const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
-    const output$ = cognito(action, stateForTest, {});
+    const action = loginModalRemoteRequest(LoginModalCheck.NONE);
+    const output$ = cognito(of(action), stateForTest, {});
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
     expect(receivedAction).toEqual([]);
