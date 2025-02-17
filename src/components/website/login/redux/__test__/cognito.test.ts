@@ -1,4 +1,3 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
 import {
     LoginModalCheck,
     loginModalRemoteAnswerFailure,
@@ -9,7 +8,6 @@ import { AuthenticationState, AuthenticationStep } from '../AuthenticationState'
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
 import { cognito } from '../cognito';
-import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
 const testCognitoEpic = buildEpicTester(cognito);
@@ -87,10 +85,8 @@ describe('user sign in tests', () => {
 
 export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
     const action = loginModalRemoteRequest(LoginModalCheck.NONE);
-    const output$ = cognito(of(action), buildTestStateObservable({ authentication: initialState }), {});
 
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedAction).toEqual([]);
+    await testCognitoEpic({}, { authentication: initialState }, action, []);
 }
 
 describe('password reset request tests', () => {
