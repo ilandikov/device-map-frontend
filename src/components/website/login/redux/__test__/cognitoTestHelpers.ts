@@ -1,11 +1,6 @@
 import CognitoClient from '@mancho.devs/cognito';
 import { ClassToInterface } from '../../../../../redux/store';
 
-export enum TestClient {
-    RESOLVING = 'RESOLVING',
-    REJECTING = 'REJECTING',
-}
-
 export const cognitoResolvingClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.resolve(cognitoSignUpRequestResult as any),
     signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
