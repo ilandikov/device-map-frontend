@@ -4,7 +4,7 @@ import {
     loginModalRemoteAnswerSuccess,
     loginModalRemoteRequest,
 } from '../LoginModalAction';
-import { AuthenticationState, AuthenticationStep } from '../AuthenticationState';
+import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
 import { cognito } from '../cognito';
@@ -83,17 +83,17 @@ describe('user sign in tests', () => {
     });
 });
 
-export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
-    const action = loginModalRemoteRequest(LoginModalCheck.NONE);
-
-    await testCognitoEpic({}, { authentication: initialState }, action, []);
-}
-
 describe('password reset request tests', () => {
     it('should not call cognito service on email verification during mail input step', async () => {
         const initialState = { step: AuthenticationStep.MAIL_INPUT };
+        const expectedAction = [];
 
-        await testCognitoNoOutput(initialState);
+        await testCognitoEpic(
+            {},
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 
     it.each([
@@ -147,7 +147,13 @@ describe('state tests', () => {
     const allSteps = Object.values(AuthenticationStep);
     it.each(allSteps)('should not process request at %s step when there is an error', async (step) => {
         const initialState = { step, error: new Error('something is wrong') };
+        const expectedAction = [];
 
-        await testCognitoNoOutput(initialState);
+        await testCognitoEpic(
+            {},
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
