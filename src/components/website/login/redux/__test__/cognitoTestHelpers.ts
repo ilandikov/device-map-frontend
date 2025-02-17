@@ -1,9 +1,4 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
-import { LoginModalCheck, loginModalRemoteRequest } from '../LoginModalAction';
-import { AuthenticationState } from '../AuthenticationState';
-import { cognito } from '../cognito';
-import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { ClassToInterface } from '../../../../../redux/store';
 
 export enum TestClient {
@@ -30,16 +25,6 @@ export const cognitoRejectingClient: ClassToInterface<CognitoClient> = {
     resendConfirmCode: () => Promise.reject(),
     signOut: () => Promise.reject(),
 };
-
-export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
-    const stateForTest = buildTestStateObservable({ authentication: initialState });
-
-    const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
-    const output$ = cognito(action, stateForTest, {});
-
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedAction).toEqual([]);
-}
 
 export const cognitoSignUpRequestResult = {
     user: {
