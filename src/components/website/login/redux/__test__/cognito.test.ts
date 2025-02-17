@@ -1,12 +1,16 @@
-import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
+import {
+    LoginModalCheck,
+    loginModalRemoteAnswerFailure,
+    loginModalRemoteAnswerSuccess,
+    loginModalRemoteRequest,
+} from '../LoginModalAction';
 import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
-import {
-    cognitoRejectingTestClient,
-    cognitoResolvingTestClient,
-    testCognitoNoOutput,
-    testCognitoOutputAction,
-} from './cognitoTestHelpers';
+import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
+import { cognito } from '../cognito';
+import { cognitoRejectingTestClient, cognitoResolvingTestClient, testCognitoNoOutput } from './cognitoTestHelpers';
+
+const testCognitoEpic = buildEpicTester(cognito);
 
 describe('user sign up tests', () => {
     it.each([
@@ -15,7 +19,12 @@ describe('user sign up tests', () => {
     ])('should dispatch sign up notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_LOADING };
 
-        await testCognitoOutputAction(client, initialState, expectedAction);
+        await testCognitoEpic(
+            { cognitoClient: client },
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
 
@@ -28,7 +37,12 @@ describe('user password reset tests', () => {
         async (client, expectedAction) => {
             const initialState = { step: AuthenticationStep.PASSWORD_RESET_LOADING };
 
-            await testCognitoOutputAction(client, initialState, expectedAction);
+            await testCognitoEpic(
+                { cognitoClient: client },
+                { authentication: initialState },
+                loginModalRemoteRequest(LoginModalCheck.NONE),
+                expectedAction,
+            );
         },
     );
 });
@@ -40,7 +54,12 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
     ])('should dispatch OTP notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
 
-        await testCognitoOutputAction(client, initialState, expectedAction);
+        await testCognitoEpic(
+            { cognitoClient: client },
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
 
@@ -55,7 +74,12 @@ describe('user sign in tests', () => {
     ])('should dispatch login notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.LOGIN_LOADING };
 
-        await testCognitoOutputAction(client, initialState, expectedAction);
+        await testCognitoEpic(
+            { cognitoClient: client },
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
 
@@ -72,7 +96,12 @@ describe('password reset request tests', () => {
     ])('should dispatch forgot password notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING };
 
-        await testCognitoOutputAction(client, initialState, expectedAction);
+        await testCognitoEpic(
+            { cognitoClient: client },
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
 
@@ -83,7 +112,12 @@ describe('OTP code resend tests', () => {
     ])('should resign out user when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
 
-        await testCognitoOutputAction(client, initialState, expectedAction);
+        await testCognitoEpic(
+            { cognitoClient: client },
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
 
@@ -94,7 +128,12 @@ describe('user sign out tests', () => {
     ])('should sign out user when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.LOGGED_IN };
 
-        await testCognitoOutputAction(client, initialState, expectedAction);
+        await testCognitoEpic(
+            { cognitoClient: client },
+            { authentication: initialState },
+            loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedAction,
+        );
     });
 });
 

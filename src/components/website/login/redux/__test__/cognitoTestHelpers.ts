@@ -1,12 +1,10 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
-import { LoginModalAction, LoginModalCheck, loginModalRemoteRequest } from '../LoginModalAction';
+import { LoginModalCheck, loginModalRemoteRequest } from '../LoginModalAction';
 import { AuthenticationState } from '../AuthenticationState';
 import { cognito } from '../cognito';
-import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { ClassToInterface } from '../../../../../redux/store';
-import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
 
 export enum TestClient {
     RESOLVING = 'RESOLVING',
@@ -32,21 +30,6 @@ export const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
     resendConfirmCode: () => Promise.reject(),
     signOut: () => Promise.reject(),
 };
-
-const testCognitoEpic = buildEpicTester(cognito);
-
-export async function testCognitoOutputAction(
-    cognitoResolvingTestClient1: ClassToInterface<CognitoClient>,
-    initialState: Partial<AuthenticationState>,
-    expectedActions: (LoginModalAction | MapAppAction)[],
-) {
-    await testCognitoEpic(
-        { cognitoClient: cognitoResolvingTestClient1 },
-        { authentication: initialState },
-        loginModalRemoteRequest(LoginModalCheck.NONE),
-        expectedActions,
-    );
-}
 
 export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
     const stateForTest = buildTestStateObservable({ authentication: initialState });
