@@ -40,13 +40,15 @@ export async function testCognitoOutputAction(
     testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
-    const partialRootState = { authentication: initialState };
-    const dependencies = {
-        cognitoClient: testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
-    };
-    const action = loginModalRemoteRequest(LoginModalCheck.NONE);
-
-    await testCognitoEpic(dependencies, partialRootState, action, expectedActions);
+    await testCognitoEpic(
+        {
+            cognitoClient:
+                testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
+        },
+        { authentication: initialState },
+        loginModalRemoteRequest(LoginModalCheck.NONE),
+        expectedActions,
+    );
 }
 
 export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
