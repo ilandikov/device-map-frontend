@@ -6,6 +6,7 @@ import { cognito } from '../cognito';
 import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
 import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { ClassToInterface } from '../../../../../redux/store';
+import { buildEpicTester } from '../../../mapApp/redux/__test__/devicesTestHelpers';
 
 export enum TestClient {
     RESOLVING = 'RESOLVING',
@@ -32,6 +33,8 @@ const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
     signOut: () => Promise.reject(),
 };
 
+const testCognitoEpic = buildEpicTester(cognito);
+
 export async function testCognitoOutputAction(
     initialState: Partial<AuthenticationState>,
     testClient: TestClient,
@@ -43,10 +46,7 @@ export async function testCognitoOutputAction(
     };
     const action = loginModalRemoteRequest(LoginModalCheck.NONE);
 
-    const output$ = cognito(of(action), buildTestStateObservable(partialRootState), dependencies);
-
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedAction).toEqual(expectedActions);
+    await testCognitoEpic(dependencies, partialRootState, action, expectedActions);
 }
 
 export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
