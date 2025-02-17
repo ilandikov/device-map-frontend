@@ -23,7 +23,7 @@ export const cognitoResolvingTestClient: ClassToInterface<CognitoClient> = {
     signOut: () => Promise.resolve(cognitoSignOutResult),
 };
 
-const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
+export const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.reject(),
     signUpConfirmCode: () => Promise.reject(),
     signIn: () => Promise.reject(),
@@ -38,13 +38,12 @@ const testCognitoEpic = buildEpicTester(cognito);
 export async function testCognitoOutputAction(
     cognitoResolvingTestClient1: ClassToInterface<CognitoClient>,
     initialState: Partial<AuthenticationState>,
-    testClient: TestClient,
+    _testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
     await testCognitoEpic(
         {
-            cognitoClient:
-                testClient === TestClient.RESOLVING ? cognitoResolvingTestClient1 : cognitoRejectingTestClient,
+            cognitoClient: cognitoResolvingTestClient1,
         },
         { authentication: initialState },
         loginModalRemoteRequest(LoginModalCheck.NONE),
