@@ -3,12 +3,13 @@ import { user } from '../User';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 import { buildEpicTester } from './devicesTestHelpers';
 
+const testUserEpic = buildEpicTester(user);
+
 describe('user epic tests', () => {
     it('should get user points', async () => {
         const action = mapAppAuthenticationCompleted('testUserId');
         const expectedAction = mapAppSetLoggedInUser({ id: 'testUserId', points: 320 });
 
-        const testUserEpic = buildEpicTester(user);
         await testUserEpic({ usersClient: userResolvingClient }, {}, action, [expectedAction]);
     });
 
@@ -16,7 +17,6 @@ describe('user epic tests', () => {
         const action = mapAppAuthenticationCompleted('testUserId');
         const expectedAction = mapAppGetLoggedInUserError('could not get logged in user data');
 
-        const testUserEpic = buildEpicTester(user);
         await testUserEpic({ usersClient: userRejectingClient }, {}, action, [expectedAction]);
     });
 });
