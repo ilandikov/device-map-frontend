@@ -5,7 +5,7 @@ import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/_
 import { AllActions, DevicesClient, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
 import { MapAppState } from '../MapAppState';
 
-function getAppleSauce(epic: RootEpic) {
+function buildEpicTester(epic: RootEpic) {
     return async function (
         remoteClients: RemoteClients,
         partialRootState: ShallowPartial<RootState>,
@@ -26,8 +26,8 @@ export async function testDevicesEpic(
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const appleSauce = getAppleSauce(devices);
-    await appleSauce({ devicesClient }, { mapAppState }, sentAction, expectedActions);
+    const testDevicesEpic1 = buildEpicTester(devices);
+    await testDevicesEpic1({ devicesClient }, { mapAppState }, sentAction, expectedActions);
 }
 
 export const resolvingDevicesClient: DevicesClient = {
