@@ -2,17 +2,17 @@ import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction } from '../MapAppAction';
 import { devices } from '../devices';
 import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
-import { DevicesClient } from '../../../../../redux/store';
+import { DevicesClient, RootEpic } from '../../../../../redux/store';
 import { MapAppState } from '../MapAppState';
 
-function getAppleSauce() {
+function getAppleSauce(epic: RootEpic) {
     return async function (
         devicesClient: DevicesClient,
         mapAppState: Partial<MapAppState>,
         sentAction: MapAppAction,
         expectedActions: MapAppAction[],
     ) {
-        const output$ = devices(of(sentAction), buildTestStateObservable({ mapAppState }), {
+        const output$ = epic(of(sentAction), buildTestStateObservable({ mapAppState }), {
             devicesClient: devicesClient,
         });
 
@@ -28,7 +28,7 @@ export async function testDevicesEpic(
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const appleSauce = getAppleSauce();
+    const appleSauce = getAppleSauce(devices);
     await appleSauce(devicesClient, mapAppState, sentAction, expectedActions);
 }
 
