@@ -1,7 +1,12 @@
 import { loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from '../LoginModalAction';
 import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
-import { TestClient, testCognitoNoOutput, testCognitoOutputAction } from './cognitoTestHelpers';
+import {
+    TestClient,
+    cognitoResolvingTestClient,
+    testCognitoNoOutput,
+    testCognitoOutputAction,
+} from './cognitoTestHelpers';
 
 describe('user sign up tests', () => {
     it.each([
@@ -10,7 +15,7 @@ describe('user sign up tests', () => {
     ])('should dispatch sign up notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_LOADING };
 
-        await testCognitoOutputAction(initialState, client, expectedAction);
+        await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
     });
 });
 
@@ -23,7 +28,7 @@ describe('user password reset tests', () => {
         async (client, expectedAction) => {
             const initialState = { step: AuthenticationStep.PASSWORD_RESET_LOADING };
 
-            await testCognitoOutputAction(initialState, client, expectedAction);
+            await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
         },
     );
 });
@@ -35,7 +40,7 @@ describe('user sign up OTP code confirmation tests (from password creation loadi
     ])('should dispatch OTP notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
 
-        await testCognitoOutputAction(initialState, client, expectedAction);
+        await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
     });
 });
 
@@ -50,7 +55,7 @@ describe('user sign in tests', () => {
     ])('should dispatch login notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.LOGIN_LOADING };
 
-        await testCognitoOutputAction(initialState, client, expectedAction);
+        await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
     });
 });
 
@@ -67,7 +72,7 @@ describe('password reset request tests', () => {
     ])('should dispatch forgot password notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING };
 
-        await testCognitoOutputAction(initialState, client, expectedAction);
+        await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
     });
 });
 
@@ -78,7 +83,7 @@ describe('OTP code resend tests', () => {
     ])('should resign out user when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
 
-        await testCognitoOutputAction(initialState, client, expectedAction);
+        await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
     });
 });
 
@@ -89,7 +94,7 @@ describe('user sign out tests', () => {
     ])('should sign out user when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.LOGGED_IN };
 
-        await testCognitoOutputAction(initialState, client, expectedAction);
+        await testCognitoOutputAction(cognitoResolvingTestClient, initialState, client, expectedAction);
     });
 });
 
