@@ -38,13 +38,10 @@ const testCognitoEpic = buildEpicTester(cognito);
 export async function testCognitoOutputAction(
     cognitoResolvingTestClient1: ClassToInterface<CognitoClient>,
     initialState: Partial<AuthenticationState>,
-    _testClient: TestClient,
     expectedActions: (LoginModalAction | MapAppAction)[],
 ) {
     await testCognitoEpic(
-        {
-            cognitoClient: cognitoResolvingTestClient1,
-        },
+        { cognitoClient: cognitoResolvingTestClient1 },
         { authentication: initialState },
         loginModalRemoteRequest(LoginModalCheck.NONE),
         expectedActions,
