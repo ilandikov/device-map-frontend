@@ -9,7 +9,10 @@ import {
     deviceRemoteError,
     devicesListed,
 } from '../DeviceAction';
-import { rejectingDevicesClient, resolvingDevicesClient, testDevicesEpic } from './devicesTestHelpers';
+import { devices } from '../devices';
+import { buildEpicTester, rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
+
+const testDevicesEpic1 = buildEpicTester(devices);
 
 const deviceCreationTimeStampFromBackend = 1896916059204;
 
@@ -29,7 +32,7 @@ describe('devices epic test', () => {
         const expectedActions = [];
 
         // @ts-expect-error
-        await testDevicesEpic(resolvingDevicesClient, mapAppState, sentAction, expectedActions);
+        await testDevicesEpic1({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, expectedActions);
     });
 });
 
@@ -51,7 +54,9 @@ describe('devices - list devices', () => {
             },
         ]);
 
-        await testDevicesEpic(resolvingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 
     it('should process a rejected promise', async () => {
@@ -59,7 +64,9 @@ describe('devices - list devices', () => {
         const sentAction = deviceListRequest();
         const expectedAction = deviceRemoteError('list devices went wrong');
 
-        await testDevicesEpic(rejectingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 });
 
@@ -74,7 +81,9 @@ describe('devices - create device', () => {
             location: { lat: 5, lon: 6 },
         });
 
-        await testDevicesEpic(resolvingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 
     it('should notify about the error', async () => {
@@ -82,7 +91,9 @@ describe('devices - create device', () => {
         const sentAction = deviceCreateRequest();
         const expectedAction = deviceRemoteError('create device went wrong');
 
-        await testDevicesEpic(rejectingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 });
 
@@ -92,7 +103,9 @@ describe('devices - delete device', () => {
         const sentAction = deviceDeleteRequest('deleteThisOne');
         const expectedAction = deviceDeleted('deleteThisOne');
 
-        await testDevicesEpic(resolvingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 
     it('should notify about the error', async () => {
@@ -100,7 +113,9 @@ describe('devices - delete device', () => {
         const sentAction = deviceDeleteRequest('deleteThisOne');
         const expectedAction = deviceRemoteError('delete device went wrong');
 
-        await testDevicesEpic(rejectingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 });
 
@@ -110,7 +125,9 @@ describe('devices - approve device', () => {
         const sentAction = deviceApproveRequest('approve me!');
         const expectedAction = deviceApproved('approve me!', deviceCreationTimeStampFromBackend);
 
-        await testDevicesEpic(resolvingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 
     it('should notify about the error', async () => {
@@ -118,6 +135,8 @@ describe('devices - approve device', () => {
         const sentAction = deviceApproveRequest('approve me!');
         const expectedAction = deviceRemoteError('approve device went wrong');
 
-        await testDevicesEpic(rejectingDevicesClient, mapAppState, sentAction, [expectedAction]);
+        await testDevicesEpic1({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 });

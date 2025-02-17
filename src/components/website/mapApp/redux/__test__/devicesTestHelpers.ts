@@ -1,11 +1,8 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
-import { MapAppAction } from '../MapAppAction';
-import { devices } from '../devices';
 import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { AllActions, DevicesClient, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
-import { MapAppState } from '../MapAppState';
 
-function buildEpicTester(epic: RootEpic) {
+export function buildEpicTester(epic: RootEpic) {
     return async function (
         remoteClients: RemoteClients,
         partialRootState: ShallowPartial<RootState>,
@@ -18,17 +15,6 @@ function buildEpicTester(epic: RootEpic) {
 
         expect(receivedAction).toEqual(expectedActions);
     };
-}
-
-const testDevicesEpic1 = buildEpicTester(devices);
-
-export async function testDevicesEpic(
-    devicesClient: DevicesClient,
-    mapAppState: Partial<MapAppState>,
-    sentAction: MapAppAction,
-    expectedActions: MapAppAction[],
-) {
-    await testDevicesEpic1({ devicesClient }, { mapAppState }, sentAction, expectedActions);
 }
 
 export const resolvingDevicesClient: DevicesClient = {
