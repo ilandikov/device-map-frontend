@@ -1,18 +1,7 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
 import CognitoClient from '@mancho.devs/cognito';
-import { LoginModalAction, LoginModalCheck, loginModalRemoteRequest } from '../LoginModalAction';
-import { AuthenticationState } from '../AuthenticationState';
-import { cognito } from '../cognito';
-import { MapAppAction } from '../../../mapApp/redux/MapAppAction';
-import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { ClassToInterface } from '../../../../../redux/store';
 
-export enum TestClient {
-    RESOLVING = 'RESOLVING',
-    REJECTING = 'REJECTING',
-}
-
-const cognitoResolvingTestClient: ClassToInterface<CognitoClient> = {
+export const cognitoResolvingClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.resolve(cognitoSignUpRequestResult as any),
     signUpConfirmCode: () => Promise.resolve(cognitoSignUpConfirmationResult),
     signIn: () => Promise.resolve(cognitoSignInResult as any),
@@ -22,7 +11,7 @@ const cognitoResolvingTestClient: ClassToInterface<CognitoClient> = {
     signOut: () => Promise.resolve(cognitoSignOutResult),
 };
 
-const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
+export const cognitoRejectingClient: ClassToInterface<CognitoClient> = {
     signUp: () => Promise.reject(),
     signUpConfirmCode: () => Promise.reject(),
     signIn: () => Promise.reject(),
@@ -31,33 +20,6 @@ const cognitoRejectingTestClient: ClassToInterface<CognitoClient> = {
     resendConfirmCode: () => Promise.reject(),
     signOut: () => Promise.reject(),
 };
-
-export async function testCognitoOutputAction(
-    initialState: Partial<AuthenticationState>,
-    testClient: TestClient,
-    expectedActions: (LoginModalAction | MapAppAction)[],
-) {
-    const stateForTest = buildTestStateObservable({ authentication: initialState });
-    const dependencies = {
-        cognitoClient: testClient === TestClient.RESOLVING ? cognitoResolvingTestClient : cognitoRejectingTestClient,
-    };
-
-    const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
-    const output$ = cognito(action, stateForTest, dependencies);
-
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedAction).toEqual(expectedActions);
-}
-
-export async function testCognitoNoOutput(initialState: Partial<AuthenticationState>) {
-    const stateForTest = buildTestStateObservable({ authentication: initialState });
-
-    const action = of(loginModalRemoteRequest(LoginModalCheck.NONE));
-    const output$ = cognito(action, stateForTest, {});
-
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-    expect(receivedAction).toEqual([]);
-}
 
 export const cognitoSignUpRequestResult = {
     user: {
