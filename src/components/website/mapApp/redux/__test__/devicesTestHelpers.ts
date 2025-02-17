@@ -2,15 +2,15 @@ import { lastValueFrom, of, toArray } from 'rxjs';
 import { MapAppAction } from '../MapAppAction';
 import { devices } from '../devices';
 import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/__mocks__/state';
-import { DevicesClient, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
+import { AllActions, DevicesClient, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
 import { MapAppState } from '../MapAppState';
 
 function getAppleSauce(epic: RootEpic) {
     return async function (
         remoteClients: RemoteClients,
         partialRootState: ShallowPartial<RootState>,
-        sentAction: MapAppAction,
-        expectedActions: MapAppAction[],
+        sentAction: AllActions,
+        expectedActions: AllActions[],
     ) {
         const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
 
