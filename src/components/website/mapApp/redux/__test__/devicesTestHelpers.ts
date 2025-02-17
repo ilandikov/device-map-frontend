@@ -5,19 +5,31 @@ import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { DevicesClient } from '../../../../../redux/store';
 import { MapAppState } from '../MapAppState';
 
+function getAppleSauce() {
+    return async function (
+        sentAction: MapAppAction,
+        mapAppState: Partial<MapAppState>,
+        devicesClient: DevicesClient,
+        expectedActions: MapAppAction[],
+    ) {
+        const output$ = devices(of(sentAction), buildTestStateObservable({ mapAppState }), {
+            devicesClient: devicesClient,
+        });
+
+        const receivedAction = await lastValueFrom(output$.pipe(toArray()));
+
+        expect(receivedAction).toEqual(expectedActions);
+    };
+}
+
 export async function testDevicesEpic(
     devicesClient: DevicesClient,
     mapAppState: Partial<MapAppState>,
     sentAction: MapAppAction,
     expectedActions: MapAppAction[],
 ) {
-    const output$ = devices(of(sentAction), buildTestStateObservable({ mapAppState }), {
-        devicesClient: devicesClient,
-    });
-
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-
-    expect(receivedAction).toEqual(expectedActions);
+    const appleSauce = getAppleSauce();
+    await appleSauce(sentAction, mapAppState, devicesClient, expectedActions);
 }
 
 export const resolvingDevicesClient: DevicesClient = {
