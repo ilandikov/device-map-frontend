@@ -1,4 +1,4 @@
-import { EMPTY, Observable, catchError, first, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import {
     T22ApproveDeviceResponse,
@@ -86,21 +86,23 @@ const devicesRequests: {
 export const deviceSubscriptions: RootEpic = (action$) =>
     action$.pipe(
         ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST),
-        mergeMap(() =>
-            new Observable<DeviceRemoteAnswer>((subscriber) => {
-                subscriber.next(
-                    deviceCreated2({
-                        id: 'id-to-be-created',
-                        creatorID: 'created-from-subscription',
-                        createdDate: 12345678000,
-                        lastUpdate: 12345678000,
-                        location: { lat: 9, lon: 5 },
-                    }),
-                );
+        mergeMap(
+            () =>
+                new Observable<DeviceRemoteAnswer>((subscriber) => {
+                    subscriber.next(
+                        deviceCreated2({
+                            id: 'id-to-be-created',
+                            creatorID: 'created-from-subscription',
+                            createdDate: 12345678000,
+                            lastUpdate: 12345678000,
+                            location: { lat: 9, lon: 5 },
+                        }),
+                    );
+                    subscriber.complete();
 
-                return () => {
-                    subscriber.unsubscribe();
-                };
-            }).pipe(first()),
+                    return () => {
+                        subscriber.unsubscribe();
+                    };
+                }),
         ),
     );
