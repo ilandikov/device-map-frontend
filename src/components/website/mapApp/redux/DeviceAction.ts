@@ -156,7 +156,7 @@ export function deviceCreationSubscriptionRequest(id: string): DeviceCreationSub
     };
 }
 
-export function deviceCreated2(device: T22Device): DeviceCreated {
+export function updateDevice(device: T22Device): DeviceCreated {
     return {
         type: DeviceActionType.DEVICE_REMOTE_ANSWER,
         request: DeviceRemoteRequestType.CREATE_DEVICE,
