@@ -69,6 +69,8 @@ export interface DevicesClient {
     };
 }
 
+export type DeviceSubscriptionClient = (id: string) => Observable<Subscription>;
+
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }
@@ -77,14 +79,12 @@ export interface UsersClient {
     getUser: () => Promise<T22GetUserResponse>;
 }
 
-export type DeviceSubscriptionClient = (id: string) => Observable<Subscription>;
-
 export interface RemoteClients {
     cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
+    deviceSubscriptionClient?: DeviceSubscriptionClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
-    deviceSubscriptionClient?: DeviceSubscriptionClient;
 }
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
@@ -129,18 +129,6 @@ export function createStore() {
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
-            addressClient: {
-                getAddress: (input) =>
-                    apolloClient
-                        .query<Query>({ query: getAddressQuery, variables: { input } })
-                        .then((response) => response.data.T22GetAddress),
-            },
-            usersClient: {
-                getUser: async () =>
-                    (await setAuthenticatedClient())
-                        .query<Query>({ query: getUserQuery })
-                        .then((response) => response.data.T22GetUser),
-            },
             // TODO remove console.log()
             deviceSubscriptionClient: (id) => {
                 console.log('SUBS: creating observable');
@@ -165,6 +153,18 @@ export function createStore() {
                         console.log('Unsubscribed from Apollo subscription');
                     };
                 });
+            },
+            addressClient: {
+                getAddress: (input) =>
+                    apolloClient
+                        .query<Query>({ query: getAddressQuery, variables: { input } })
+                        .then((response) => response.data.T22GetAddress),
+            },
+            usersClient: {
+                getUser: async () =>
+                    (await setAuthenticatedClient())
+                        .query<Query>({ query: getUserQuery })
+                        .then((response) => response.data.T22GetUser),
             },
         },
     });
