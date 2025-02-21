@@ -22,11 +22,12 @@ import {
     T22GetUserResponse,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
+import { Observable } from 'rxjs';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
 import { address } from '../components/website/mapApp/redux/Address';
-import { DeviceSubscription, devices } from '../components/website/mapApp/redux/devices';
+import { DeviceSubscription, deviceSubscriptions, devices } from '../components/website/mapApp/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import {
@@ -37,8 +38,9 @@ import {
     getUserQuery,
     listDevicesQuery,
     mutateAsAuthUser,
+    onDeviceCreationSubscription,
 } from '../client/query';
-import { setAuthenticatedClient } from '../client/graphql';
+import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
 
 const rootReducer = combineReducers({
@@ -134,6 +136,31 @@ export function createStore() {
                     (await setAuthenticatedClient())
                         .query<Query>({ query: getUserQuery })
                         .then((response) => response.data.T22GetUser),
+            },
+            // TODO remove console.log()
+            project: (id) => {
+                console.log('SUBS: creating observable');
+                return new Observable((subscriber) => {
+                    console.log('SUBS: trying to subscribe with id', id);
+                    const subscription = anonymousClient
+                        .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
+                        .subscribe({
+                            next: (fetchResult) => {
+                                console.log('SUBS: got a result');
+                                console.log(fetchResult);
+                                subscriber.complete();
+                            },
+                            error: (error) => {
+                                console.log('SUBS: got an error');
+                                console.log(error);
+                                subscriber.error(error);
+                            },
+                        });
+                    return () => {
+                        subscription.unsubscribe();
+                        console.log('Unsubscribed from Apollo subscription');
+                    };
+                });
             },
         },
     });
