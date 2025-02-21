@@ -83,8 +83,7 @@ const devicesRequests: {
     APPROVE_DEVICE: approveDevice,
 };
 
-type DeviceSubscription = Observable<DeviceRemoteAnswer>;
-export type Project = () => DeviceSubscription;
+export type DeviceSubscription = Observable<DeviceRemoteAnswer>;
 
 export function subscription(): DeviceSubscription {
     return new Observable((subscriber) => {
