@@ -77,14 +77,14 @@ export interface UsersClient {
     getUser: () => Promise<T22GetUserResponse>;
 }
 
-export type DeviceSubscription = Observable<Subscription>;
+export type DeviceSubscriptionClient = (id: string) => Observable<Subscription>;
 
 export interface RemoteClients {
     cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
-    deviceSubscriptionClient?: (id: string) => DeviceSubscription;
+    deviceSubscriptionClient?: DeviceSubscriptionClient;
 }
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
