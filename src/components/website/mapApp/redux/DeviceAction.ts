@@ -2,12 +2,18 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 
 export type DeviceAction = DeviceRemoteRequest | DeviceRemoteAnswer | DeviceRemoteError;
 
-export type DeviceRemoteRequest = DeviceListRequest | DeviceCreateRequest | DeviceDeleteRequest | DeviceApproveRequest;
+export type DeviceRemoteRequest =
+    | DeviceListRequest
+    | DeviceCreateRequest
+    | DeviceDeleteRequest
+    | DeviceApproveRequest
+    | DeviceCreationSubscriptionRequest;
 
 export enum DeviceActionType {
     DEVICE_REMOTE_REQUEST = 'DEVICE_REMOTE_REQUEST',
     DEVICE_REMOTE_ANSWER = 'DEVICE_REMOTE_ANSWER',
     DEVICE_REQUEST_ERROR = 'DEVICE_REQUEST_ERROR',
+    DEVICE_SUBSCRIPTION_REQUEST = 'DEVICE_SUBSCRIPTION_REQUEST',
 }
 
 export enum DeviceRemoteRequestType {
@@ -136,4 +142,24 @@ export function deviceApproved(id: string, lastUpdate: number): DeviceApproved {
 
 export function deviceRemoteError(error: string): DeviceRemoteError {
     return { type: DeviceActionType.DEVICE_REQUEST_ERROR, error };
+}
+
+interface DeviceCreationSubscriptionRequest {
+    type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST;
+    id: string;
+}
+
+export function deviceCreationSubscriptionRequest(id: string): DeviceCreationSubscriptionRequest {
+    return {
+        type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
+        id,
+    };
+}
+
+export function deviceCreated2(device: T22Device): DeviceCreated {
+    return {
+        type: DeviceActionType.DEVICE_REMOTE_ANSWER,
+        request: DeviceRemoteRequestType.CREATE_DEVICE,
+        device,
+    };
 }

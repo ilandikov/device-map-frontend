@@ -3,13 +3,15 @@ import {
     deviceApproved,
     deviceCreateRequest,
     deviceCreated,
+    deviceCreated2,
+    deviceCreationSubscriptionRequest,
     deviceDeleteRequest,
     deviceDeleted,
     deviceListRequest,
     deviceRemoteError,
     devicesListed,
 } from '../DeviceAction';
-import { devices } from '../devices';
+import { deviceSubscriptions, devices } from '../devices';
 import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
 
@@ -123,5 +125,35 @@ describe('devices - approve device', () => {
         const expectedAction = deviceRemoteError('approve device went wrong');
 
         await testDevicesEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    });
+});
+
+const testDeviceSubscriptionsEpic = buildEpicTester(deviceSubscriptions);
+
+describe('devices - response from subscription to device creation', () => {
+    it('should send action with the new device', async () => {
+        const mapAppState = {};
+        const sentAction = deviceCreationSubscriptionRequest('id-to-be-created');
+        const expectedAction = deviceCreated2({
+            id: 'id-to-be-created',
+            creatorID: 'created-from-subscription',
+            createdDate: 12345678000,
+            lastUpdate: 12345678000,
+            location: { lat: 9, lon: 5 },
+        });
+
+        await testDeviceSubscriptionsEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
+    });
+
+    it.failing('should notify about the error', async () => {
+        const mapAppState = {};
+        const sentAction = deviceCreationSubscriptionRequest('id-to-be-created');
+        const expectedAction = deviceRemoteError('could not subscribe to device update');
+
+        await testDeviceSubscriptionsEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 });
