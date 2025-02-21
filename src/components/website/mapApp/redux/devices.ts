@@ -86,7 +86,7 @@ const devicesRequests: {
 type Project = () => Observable<DeviceRemoteAnswer>;
 
 const project: Project = () =>
-    new Observable<DeviceRemoteAnswer>((subscriber) => {
+    new Observable((subscriber) => {
         subscriber.next(
             deviceCreated2({
                 id: 'id-to-be-created',
