@@ -105,7 +105,20 @@ export async function setAuthenticatedClient() {
 
     const httpLink = createHttpLink({ uri: process.env.GATSBY_APPSYNC_ENDPOINT! });
 
-    const link = ApolloLink.from([authLink, httpLink]);
+    const link = ApolloLink.from([
+        authLink,
+        createSubscriptionHandshakeLink(
+            {
+                url: process.env.GATSBY_APPSYNC_ENDPOINT!,
+                region: process.env.GATSBY_REGION!,
+                auth: {
+                    type: AUTH_TYPE.AWS_IAM,
+                    credentials: AWS.config.credentials!,
+                },
+            },
+            httpLink,
+        ),
+    ]);
 
     return (anonymousClient = new ApolloClient({
         link,
