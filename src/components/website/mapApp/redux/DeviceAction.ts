@@ -14,6 +14,7 @@ export enum DeviceActionType {
     DEVICE_REMOTE_ANSWER = 'DEVICE_REMOTE_ANSWER',
     DEVICE_REQUEST_ERROR = 'DEVICE_REQUEST_ERROR',
     DEVICE_SUBSCRIPTION_REQUEST = 'DEVICE_SUBSCRIPTION_REQUEST',
+    DEVICE_SUBSCRIPTION_ANSWER = 'DEVICE_SUBSCRIPTION_ANSWER',
 }
 
 export enum DeviceRemoteRequestType {
@@ -75,7 +76,12 @@ export function deviceApproveRequest(id: string): DeviceApproveRequest {
     };
 }
 
-export type DeviceRemoteAnswer = DevicesListed | DeviceCreated | DeviceDeleted | DeviceApproved;
+export type DeviceRemoteAnswer =
+    | DevicesListed
+    | DeviceCreated
+    | DeviceDeleted
+    | DeviceApproved
+    | DeviceCreationSubscriptionAnswer;
 
 export interface DevicesListed {
     type: DeviceActionType.DEVICE_REMOTE_ANSWER;
@@ -156,9 +162,15 @@ export function deviceCreationSubscriptionRequest(id: string): DeviceCreationSub
     };
 }
 
-export function updateDevice(device: T22Device): DeviceCreated {
+interface DeviceCreationSubscriptionAnswer {
+    type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER;
+    request: DeviceRemoteRequestType.CREATE_DEVICE;
+    device: T22Device;
+}
+
+export function updateDevice(device: T22Device): DeviceCreationSubscriptionAnswer {
     return {
-        type: DeviceActionType.DEVICE_REMOTE_ANSWER,
+        type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER,
         request: DeviceRemoteRequestType.CREATE_DEVICE,
         device,
     };
