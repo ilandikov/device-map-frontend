@@ -85,11 +85,11 @@ const devicesRequests: {
 
 export type DeviceSubscription = Observable<Subscription>;
 
-export function subscription(): DeviceSubscription {
+export function subscription(id: string): DeviceSubscription {
     return new Observable((subscriber) => {
         subscriber.next({
             T22OnDeviceCreation: {
-                id: 'id-to-be-created',
+                id,
                 creatorID: 'created-from-subscription',
                 createdDate: 12345678000,
                 lastUpdate: 12345678000,

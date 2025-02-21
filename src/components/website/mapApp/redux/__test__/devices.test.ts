@@ -142,9 +142,12 @@ describe('devices - response from subscription to device creation', () => {
             location: { lat: 9, lon: 5 },
         });
 
-        await testDeviceSubscriptionsEpic({ project: () => subscription() }, { mapAppState }, sentAction, [
-            expectedAction,
-        ]);
+        await testDeviceSubscriptionsEpic(
+            { project: () => subscription('id-to-be-created') },
+            { mapAppState },
+            sentAction,
+            [expectedAction],
+        );
     });
 
     it('should notify about the error', async () => {
