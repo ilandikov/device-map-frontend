@@ -132,7 +132,6 @@ const testDeviceSubscriptionsEpic = buildEpicTester(deviceSubscriptions);
 
 describe('devices - response from subscription to device creation', () => {
     it('should send action with the new device', async () => {
-        const mapAppState = {};
         const sentAction = deviceCreationSubscriptionRequest('id-to-be-created');
         const expectedAction = deviceCreated2({
             id: 'id-to-be-created',
@@ -142,17 +141,16 @@ describe('devices - response from subscription to device creation', () => {
             location: { lat: 9, lon: 5 },
         });
 
-        await testDeviceSubscriptionsEpic({ project: (id) => subscription(id) }, { mapAppState }, sentAction, [
+        await testDeviceSubscriptionsEpic({ project: (id) => subscription(id) }, { mapAppState: {} }, sentAction, [
             expectedAction,
         ]);
     });
 
     it('should notify about the error', async () => {
-        const mapAppState = {};
         const sentAction = deviceCreationSubscriptionRequest('id-to-be-created');
         const expectedAction = deviceRemoteError('could not subscribe to device update');
 
-        await testDeviceSubscriptionsEpic({ project: () => subscriptionError() }, { mapAppState }, sentAction, [
+        await testDeviceSubscriptionsEpic({ project: () => subscriptionError() }, { mapAppState: {} }, sentAction, [
             expectedAction,
         ]);
     });
