@@ -11,7 +11,7 @@ import {
     deviceRemoteError,
     devicesListed,
 } from '../DeviceAction';
-import { deviceSubscriptions, devices, subscription } from '../devices';
+import { deviceSubscriptions, devices, subscription, subscriptionError } from '../devices';
 import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
 
@@ -147,12 +147,12 @@ describe('devices - response from subscription to device creation', () => {
         ]);
     });
 
-    it.failing('should notify about the error', async () => {
+    it('should notify about the error', async () => {
         const mapAppState = {};
         const sentAction = deviceCreationSubscriptionRequest('id-to-be-created');
         const expectedAction = deviceRemoteError('could not subscribe to device update');
 
-        await testDeviceSubscriptionsEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [
+        await testDeviceSubscriptionsEpic({ project: () => subscriptionError() }, { mapAppState }, sentAction, [
             expectedAction,
         ]);
     });

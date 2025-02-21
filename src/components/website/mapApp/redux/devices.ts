@@ -96,6 +96,17 @@ export function subscription(): DeviceSubscription {
     });
 }
 
+export function subscriptionError(): DeviceSubscription {
+    return new Observable((subscriber) => {
+        subscriber.error();
+        subscriber.complete();
+
+        return () => {
+            subscriber.unsubscribe();
+        };
+    });
+}
+
 export const deviceSubscriptions: RootEpic = (action$, _, { project }) =>
     action$.pipe(
         ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST),
@@ -110,6 +121,7 @@ export const deviceSubscriptions: RootEpic = (action$, _, { project }) =>
                         location: { lat: 9, lon: 5 },
                     }),
                 ),
+                catchError(() => of(deviceRemoteError('could not subscribe to device update'))),
             ),
         ),
     );
