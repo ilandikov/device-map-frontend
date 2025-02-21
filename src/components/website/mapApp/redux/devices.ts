@@ -83,26 +83,25 @@ const devicesRequests: {
     APPROVE_DEVICE: approveDevice,
 };
 
-export const deviceSubscriptions: RootEpic = (action$) =>
-    action$.pipe(
-        ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST),
-        mergeMap(
-            () =>
-                new Observable<DeviceRemoteAnswer>((subscriber) => {
-                    subscriber.next(
-                        deviceCreated2({
-                            id: 'id-to-be-created',
-                            creatorID: 'created-from-subscription',
-                            createdDate: 12345678000,
-                            lastUpdate: 12345678000,
-                            location: { lat: 9, lon: 5 },
-                        }),
-                    );
-                    subscriber.complete();
+type Project = () => Observable<DeviceRemoteAnswer>;
 
-                    return () => {
-                        subscriber.unsubscribe();
-                    };
-                }),
-        ),
-    );
+const project: Project = () =>
+    new Observable<DeviceRemoteAnswer>((subscriber) => {
+        subscriber.next(
+            deviceCreated2({
+                id: 'id-to-be-created',
+                creatorID: 'created-from-subscription',
+                createdDate: 12345678000,
+                lastUpdate: 12345678000,
+                location: { lat: 9, lon: 5 },
+            }),
+        );
+        subscriber.complete();
+
+        return () => {
+            subscriber.unsubscribe();
+        };
+    });
+
+export const deviceSubscriptions: RootEpic = (action$) =>
+    action$.pipe(ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST), mergeMap(project));
