@@ -1,6 +1,7 @@
 import { EMPTY, Observable, catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import {
+    Subscription,
     T22ApproveDeviceResponse,
     T22CreateDeviceResponse,
     T22DeleteDeviceResponse,
@@ -16,7 +17,6 @@ import {
     DeviceCreateRequest,
     DeviceDeleteRequest,
     DeviceListRequest,
-    DeviceRemoteAnswer,
     DeviceRemoteRequest,
     DeviceRemoteRequestType,
     deviceApproved,
@@ -83,11 +83,19 @@ const devicesRequests: {
     APPROVE_DEVICE: approveDevice,
 };
 
-export type DeviceSubscription = Observable<DeviceRemoteAnswer>;
+export type DeviceSubscription = Observable<Subscription>;
 
 export function subscription(): DeviceSubscription {
     return new Observable((subscriber) => {
-        subscriber.next();
+        subscriber.next({
+            T22OnDeviceCreation: {
+                id: 'id-to-be-created',
+                creatorID: 'created-from-subscription',
+                createdDate: 12345678000,
+                lastUpdate: 12345678000,
+                location: { lat: 9, lon: 5 },
+            },
+        });
         subscriber.complete();
 
         return () => {
@@ -112,15 +120,7 @@ export const deviceSubscriptions: RootEpic = (action$, _, { project }) =>
         ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST),
         mergeMap(() =>
             project().pipe(
-                map(() =>
-                    deviceCreated2({
-                        id: 'id-to-be-created',
-                        creatorID: 'created-from-subscription',
-                        createdDate: 12345678000,
-                        lastUpdate: 12345678000,
-                        location: { lat: 9, lon: 5 },
-                    }),
-                ),
+                map((data) => deviceCreated2(data.T22OnDeviceCreation)),
                 catchError(() => of(deviceRemoteError('could not subscribe to device update'))),
             ),
         ),
