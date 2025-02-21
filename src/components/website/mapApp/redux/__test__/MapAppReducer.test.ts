@@ -17,6 +17,7 @@ import {
     deviceDeleted,
     deviceListRequest,
     devicesListed,
+    updateDevice,
 } from '../DeviceAction';
 import { buildReducerTester, testInitialState } from '../../../../../redux/__test__/helpers';
 
@@ -178,6 +179,17 @@ describe('rename me', () => {
 
         testMapAppReducer(initialState, action, {
             devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1112222233333 }],
+        });
+    });
+
+    it('should update a device', () => {
+        const initialState = { devices: [existingDevice] };
+
+        const updatedDevice = { ...existingDevice, location: { lat: 33, lon: 22 } };
+        const action = updateDevice(updatedDevice);
+
+        testMapAppReducer(initialState, action, {
+            devices: [updatedDevice],
         });
     });
 });

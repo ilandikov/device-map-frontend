@@ -11,6 +11,7 @@ import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
+    Subscription,
     T22ApproveDeviceInput,
     T22ApproveDeviceResponse,
     T22CreateDeviceInput,
@@ -22,6 +23,7 @@ import {
     T22GetUserResponse,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
+import { Observable } from 'rxjs';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
@@ -37,9 +39,11 @@ import {
     getUserQuery,
     listDevicesQuery,
     mutateAsAuthUser,
+    onDeviceCreationSubscription,
 } from '../client/query';
-import { setAuthenticatedClient } from '../client/graphql';
+import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
+import { deviceSubscriptions } from '../components/website/mapApp/redux/deviceSubscriptions';
 
 const rootReducer = combineReducers({
     mapAppState: MapAppReducer,
@@ -65,6 +69,8 @@ export interface DevicesClient {
     };
 }
 
+export type DeviceSubscriptionClient = (id: string) => Observable<Subscription>;
+
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }
@@ -76,6 +82,7 @@ export interface UsersClient {
 export interface RemoteClients {
     cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
+    deviceSubscriptionClient?: DeviceSubscriptionClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
 }
@@ -83,7 +90,7 @@ export interface RemoteClients {
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
-const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
+const rootEpic: RootEpic = combineEpics(cognito, address, devices, deviceSubscriptions, user);
 
 export function createStore() {
     const apolloClient = new ApolloClient({
@@ -121,6 +128,31 @@ export function createStore() {
                     approveDevice: async (input) =>
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
+            },
+            // TODO remove console.log()
+            deviceSubscriptionClient: (id) => {
+                console.log('SUBS: creating observable');
+                return new Observable((subscriber) => {
+                    console.log('SUBS: trying to subscribe with id', id);
+                    const subscription = anonymousClient
+                        .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
+                        .subscribe({
+                            next: (fetchResult) => {
+                                console.log('SUBS: got a result');
+                                console.log(fetchResult);
+                                subscriber.complete();
+                            },
+                            error: (error) => {
+                                console.log('SUBS: got an error');
+                                console.log(error);
+                                subscriber.error(error);
+                            },
+                        });
+                    return () => {
+                        subscription.unsubscribe();
+                        console.log('Unsubscribed from Apollo subscription');
+                    };
+                });
             },
             addressClient: {
                 getAddress: (input) =>

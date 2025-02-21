@@ -34,6 +34,10 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
             return { ...state, component: action.component };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
+        case DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER: {
+            const devicesWithoutTheDeviceToUpdate = state.devices.filter((device) => device.id !== action.device.id);
+            return { ...state, devices: [...devicesWithoutTheDeviceToUpdate, action.device] };
+        }
         default:
             return state;
     }

@@ -3,6 +3,7 @@ import {
     deviceApproved,
     deviceCreateRequest,
     deviceCreated,
+    deviceCreationSubscriptionRequest,
     deviceDeleteRequest,
     deviceDeleted,
     deviceListRequest,
@@ -71,14 +72,17 @@ describe('devices - create device', () => {
     it('should send action with the new device at selected marker location', async () => {
         const mapAppState = { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } };
         const sentAction = deviceCreateRequest();
-        const expectedAction = deviceCreated({
-            id: 'testId',
-            createdDate: '1796354896548',
-            creatorID: 'new creator',
-            location: { lat: 5, lon: 6 },
-        });
+        const expectedActions = [
+            deviceCreated({
+                id: 'testId',
+                createdDate: '1796354896548',
+                creatorID: 'new creator',
+                location: { lat: 5, lon: 6 },
+            }),
+            deviceCreationSubscriptionRequest('testId'),
+        ];
 
-        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, expectedActions);
     });
 
     it('should notify about the error', async () => {

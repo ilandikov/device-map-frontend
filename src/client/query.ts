@@ -70,6 +70,21 @@ export const approveDeviceMutation = gql`
     }
 `;
 
+export const onDeviceCreationSubscription = gql`
+    subscription ($id: ID!) {
+        T22OnDeviceCreation(id: $id) {
+            id
+            creatorID
+            location {
+                lat
+                lon
+            }
+            approvals
+            lastUpdate
+        }
+    }
+`;
+
 export const getUserQuery = gql`
     query {
         T22GetUser {
