@@ -1,7 +1,6 @@
 import { EMPTY, Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import {
-    Subscription,
     T22ApproveDeviceResponse,
     T22CreateDeviceResponse,
     T22DeleteDeviceResponse,
@@ -83,5 +82,3 @@ const devicesRequests: {
     DELETE_DEVICE: deleteDeviceRequest,
     APPROVE_DEVICE: approveDevice,
 };
-
-export type DeviceSubscription = Observable<Subscription>;

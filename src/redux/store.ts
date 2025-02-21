@@ -11,6 +11,7 @@ import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
+    Subscription,
     T22ApproveDeviceInput,
     T22ApproveDeviceResponse,
     T22CreateDeviceInput,
@@ -27,7 +28,7 @@ import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer'
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
 import { address } from '../components/website/mapApp/redux/Address';
-import { DeviceSubscription, devices } from '../components/website/mapApp/redux/devices';
+import { devices } from '../components/website/mapApp/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import {
@@ -75,6 +76,8 @@ export interface AddressClient {
 export interface UsersClient {
     getUser: () => Promise<T22GetUserResponse>;
 }
+
+export type DeviceSubscription = Observable<Subscription>;
 
 export interface RemoteClients {
     cognitoClient?: ClassToInterface<CognitoClient>;
