@@ -12,8 +12,9 @@ import {
     deviceRemoteError,
     devicesListed,
 } from '../DeviceAction';
-import { deviceSubscriptions, devices } from '../devices';
+import { devices } from '../devices';
 import { buildEpicTester } from '../../../../../redux/__test__/helpers';
+import { deviceSubscriptions } from '../deviceSubscriptions';
 import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
 
 const testDevicesEpic = buildEpicTester(devices);
