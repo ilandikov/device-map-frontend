@@ -26,7 +26,7 @@ import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer'
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
 import { address } from '../components/website/mapApp/redux/Address';
-import { devices } from '../components/website/mapApp/redux/devices';
+import { Project, devices } from '../components/website/mapApp/redux/devices';
 import { LoginModalAction } from '../components/website/login/redux/LoginModalAction';
 import { MapAppAction } from '../components/website/mapApp/redux/MapAppAction';
 import {
@@ -78,6 +78,7 @@ export interface RemoteClients {
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
+    project?: Project;
 }
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;

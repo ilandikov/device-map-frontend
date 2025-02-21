@@ -83,9 +83,9 @@ const devicesRequests: {
     APPROVE_DEVICE: approveDevice,
 };
 
-type Project = () => Observable<DeviceRemoteAnswer>;
+export type Project = () => Observable<DeviceRemoteAnswer>;
 
-const project: Project = () =>
+export const project: Project = () =>
     new Observable((subscriber) => {
         subscriber.next(
             deviceCreated2({
@@ -103,5 +103,5 @@ const project: Project = () =>
         };
     });
 
-export const deviceSubscriptions: RootEpic = (action$) =>
+export const deviceSubscriptions: RootEpic = (action$, _, { project }) =>
     action$.pipe(ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST), mergeMap(project));
