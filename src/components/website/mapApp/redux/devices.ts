@@ -16,6 +16,7 @@ import {
     DeviceCreateRequest,
     DeviceDeleteRequest,
     DeviceListRequest,
+    DeviceRemoteAnswer,
     DeviceRemoteRequest,
     DeviceRemoteRequestType,
     deviceApproved,
@@ -83,11 +84,10 @@ const devicesRequests: {
 };
 
 export const deviceSubscriptions: RootEpic = (action$) =>
-    // @ts-expect-error
     action$.pipe(
         ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST),
         mergeMap(() =>
-            new Observable((subscriber) => {
+            new Observable<DeviceRemoteAnswer>((subscriber) => {
                 subscriber.next(
                     deviceCreated2({
                         id: 'id-to-be-created',
