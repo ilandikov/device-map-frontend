@@ -5,8 +5,8 @@ import { deviceSubscriptions } from '../deviceSubscriptions';
 
 const testDeviceSubscriptionsEpic = buildEpicTester(deviceSubscriptions);
 
-describe('devices - response from subscription to device creation', () => {
-    it('should send action with the new device', async () => {
+describe('device subscription - creation', () => {
+    it('should receive new device after ', async () => {
         const sentAction = deviceCreationSubscriptionRequest('id-to-be-created');
         const expectedAction = deviceCreated2({
             id: 'id-to-be-created',
