@@ -78,7 +78,7 @@ export interface RemoteClients {
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
-    project?: () => DeviceSubscription;
+    project?: (id: string) => DeviceSubscription;
 }
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
