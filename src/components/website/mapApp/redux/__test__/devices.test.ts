@@ -11,7 +11,7 @@ import {
     deviceRemoteError,
     devicesListed,
 } from '../DeviceAction';
-import { deviceSubscriptions, devices, project } from '../devices';
+import { deviceSubscriptions, devices, subscription } from '../devices';
 import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
 
@@ -142,7 +142,9 @@ describe('devices - response from subscription to device creation', () => {
             location: { lat: 9, lon: 5 },
         });
 
-        await testDeviceSubscriptionsEpic({ project: project }, { mapAppState }, sentAction, [expectedAction]);
+        await testDeviceSubscriptionsEpic({ project: () => subscription() }, { mapAppState }, sentAction, [
+            expectedAction,
+        ]);
     });
 
     it.failing('should notify about the error', async () => {
