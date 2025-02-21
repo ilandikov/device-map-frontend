@@ -18,7 +18,7 @@ describe('device subscription - creation', () => {
 
         await testDeviceSubscriptionsEpic(
             {
-                project: (id) =>
+                deviceSubscriptionClient: (id) =>
                     new Observable((subscriber) => {
                         subscriber.next({
                             T22OnDeviceCreation: {
@@ -48,7 +48,7 @@ describe('device subscription - creation', () => {
 
         await testDeviceSubscriptionsEpic(
             {
-                project: () =>
+                deviceSubscriptionClient: () =>
                     new Observable((subscriber) => {
                         subscriber.error();
                         subscriber.complete();

@@ -84,7 +84,7 @@ export interface RemoteClients {
     devicesClient?: DevicesClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
-    project?: (id: string) => DeviceSubscription;
+    deviceSubscriptionClient?: (id: string) => DeviceSubscription;
 }
 
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
@@ -142,7 +142,7 @@ export function createStore() {
                         .then((response) => response.data.T22GetUser),
             },
             // TODO remove console.log()
-            project: (id) => {
+            deviceSubscriptionClient: (id) => {
                 console.log('SUBS: creating observable');
                 return new Observable((subscriber) => {
                     console.log('SUBS: trying to subscribe with id', id);
