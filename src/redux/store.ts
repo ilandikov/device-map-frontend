@@ -86,7 +86,7 @@ export interface RemoteClients {
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
-const rootEpic: RootEpic = combineEpics(cognito, address, devices, user);
+const rootEpic: RootEpic = combineEpics(cognito, address, devices, deviceSubscriptions, user);
 
 export function createStore() {
     const apolloClient = new ApolloClient({
