@@ -19,7 +19,7 @@ export function DeviceLocationMarkers() {
 
     const markerClickHandler = useMarkerClickHandler();
 
-    const devices = useMapAppState().devices;
+    const { devices } = useMapAppState();
 
     return devices.map((device, index) => {
         const devicePosition = new LatLng(device.location.lat, device.location.lon);
