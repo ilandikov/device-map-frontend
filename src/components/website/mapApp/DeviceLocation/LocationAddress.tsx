@@ -7,7 +7,7 @@ import { LocationAddressLoader } from './LocationAddressLoader';
 import './LocationAddress.scss';
 
 export function LocationAddress() {
-    const selectedMarker = useMapAppState().selectedMarker;
+    const { selectedMarker } = useMapAppState();
     const waitingForAddress = selectedMarker.address === null;
 
     const dispatch = useAppDispatch();

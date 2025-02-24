@@ -5,7 +5,8 @@ import { mapAppSetLocationCoordinates, mapAppShowComponent } from './redux/MapAp
 
 export function useMarkerClickHandler() {
     const dispatch = useAppDispatch();
-    const selectedMarkerLocation = useMapAppState().selectedMarker.location;
+    const { selectedMarker } = useMapAppState();
+    const selectedMarkerLocation = selectedMarker.location;
 
     return (event: LeafletMouseEvent) => {
         const alreadySelectedMarkerClicked =
