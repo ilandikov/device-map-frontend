@@ -15,7 +15,14 @@ describe('device list snapshot tests', () => {
         mockMapAppState({
             component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [
-                { id: '85378', createdDate: '0000000000000', creatorID: 'John Doe', location: { lat: 6.3, lon: 9.2 } },
+                {
+                    id: '85378',
+                    createdDate: '0000000000000',
+                    lastUpdate: '1111111111111',
+                    creatorID: 'John Doe',
+                    location: { lat: 6.3, lon: 9.2 },
+                    approvals: 0,
+                },
             ],
             selectedMarker: {
                 location: { lat: 6.3, lon: 9.2 },
@@ -34,14 +41,18 @@ describe('device list snapshot tests', () => {
                 {
                     id: 'Not matching selected marker',
                     createdDate: '0000000000001',
+                    lastUpdate: '0000000000002',
                     creatorID: 'someone',
                     location: { lat: 0, lon: 0 },
+                    approvals: 0,
                 },
                 {
                     id: 'Matching selected marker',
                     createdDate: '0000000000001',
+                    lastUpdate: '0000000000002',
                     creatorID: 'I created the second one!',
                     location: { lat: 26.3553423, lon: 19.23131 },
+                    approvals: 0,
                 },
             ],
             selectedMarker: {

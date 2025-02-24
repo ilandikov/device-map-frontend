@@ -44,15 +44,15 @@ describe('devices - list devices', () => {
         const sentAction = deviceListRequest();
         const expectedAction = devicesListed([
             {
-                __typename: 'T22Device',
                 id: 'dev1',
                 createdDate: '1754126457812',
+                lastUpdate: '1754126458923',
                 creatorID: 'fancy creator',
                 location: {
-                    __typename: 'T22Location',
                     lat: 42.85862508449081,
                     lon: 74.6085298061371,
                 },
+                approvals: 6,
             },
         ]);
 
@@ -76,8 +76,10 @@ describe('devices - create device', () => {
             deviceCreated({
                 id: 'testId',
                 createdDate: '1796354896548',
+                lastUpdate: '1796354897659',
                 creatorID: 'new creator',
                 location: { lat: 5, lon: 6 },
+                approvals: 0,
             }),
             deviceCreationSubscriptionRequest('testId'),
         ];

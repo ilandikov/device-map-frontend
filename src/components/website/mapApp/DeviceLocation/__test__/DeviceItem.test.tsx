@@ -13,8 +13,10 @@ jest.mock('react-redux', () => ({
 const testDevice: T22Device = {
     id: 'try to delete me',
     createdDate: '1704558741541',
+    lastUpdate: '1704558742652',
     creatorID: 'i created the device',
     location: { lat: 3, lon: 7 },
+    approvals: 0,
 };
 
 describe('DeviceItem snapshot tests - logged in user', () => {
