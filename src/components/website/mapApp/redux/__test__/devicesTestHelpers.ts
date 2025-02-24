@@ -6,15 +6,15 @@ export const resolvingDevicesClient: DevicesClient = {
             Promise.resolve({
                 devices: [
                     {
-                        __typename: 'T22Device',
                         id: 'dev1',
                         createdDate: '1754126457812',
+                        lastUpdate: '1754126458923',
                         creatorID: 'fancy creator',
                         location: {
-                            __typename: 'T22Location',
                             lat: 42.85862508449081,
                             lon: 74.6085298061371,
                         },
+                        approvals: 6,
                     },
                 ],
                 count: 1,
@@ -26,8 +26,10 @@ export const resolvingDevicesClient: DevicesClient = {
                 device: {
                     id: 'testId',
                     createdDate: '1796354896548',
+                    lastUpdate: '1796354897659',
                     creatorID: 'new creator',
                     location: createDeviceInput.location,
+                    approvals: 0,
                 },
             }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),

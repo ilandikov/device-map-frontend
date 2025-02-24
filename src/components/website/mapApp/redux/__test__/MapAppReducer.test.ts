@@ -136,14 +136,18 @@ describe('rename me', () => {
     const existingDevice = {
         id: 'existing',
         createdDate: '1796354896548',
+        lastUpdate: '1796354897659',
         creatorID: 'new creator',
         location: { lat: 0, lon: 1 },
+        approvals: 4,
     };
     const receivedDevice = {
         id: 'received',
         createdDate: '1701482094513',
+        lastUpdate: '1701482095624',
         creatorID: 'another creator',
         location: { lat: 10, lon: 11 },
+        approvals: 0,
     };
 
     it('should overwrite devices', () => {
