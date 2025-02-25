@@ -6,7 +6,7 @@ export function TerminalSearch(_props: { className: string }) {
     const { t } = useI18next();
 
     return (
-        <div className={'map-app-header-block terminal-search-header-block'}>
+        <div className="map-app-header-block terminal-search-header-block">
             <img src={Search} alt="terminal-search-image" />
             <input
                 className="terminal-search-input"
