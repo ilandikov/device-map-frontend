@@ -15,7 +15,7 @@ describe('UserPoints snapshot tests', () => {
             loggedInUser: { id: 'i am logged in but waiting for points', points: null },
         });
 
-        testSnapshot(<UserPoints className="map-app-header-block" />);
+        testSnapshot(<UserPoints />);
     });
 
     it('should match the snapshot after getting the user points', () => {
@@ -23,6 +23,6 @@ describe('UserPoints snapshot tests', () => {
             loggedInUser: { id: 'i am logged in but waiting for points', points: 320 },
         });
 
-        testSnapshot(<UserPoints className="map-app-header-block" />);
+        testSnapshot(<UserPoints />);
     });
 });
