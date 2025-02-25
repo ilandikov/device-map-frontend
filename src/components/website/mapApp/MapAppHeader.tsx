@@ -23,10 +23,10 @@ export function MapAppHeader() {
                     <img className="map-app-header-brand-logo" src={LogoGreen} alt="logo" />
                     <p className="map-app-header-brand-text">{t('map')}</p>
                 </div>
-                {loggedInUser && <TerminalSearch className="map-app-header-block" />}
+                {loggedInUser && <TerminalSearch />}
             </div>
             <div className="map-app-header-block-container">
-                {loggedInUser && <UserPoints className="map-app-header-block" />}
+                {loggedInUser && <UserPoints />}
                 <div className="map-app-header-block">
                     {loggedInUser ? <LogoutButton /> : <LoginButton />}
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />
