@@ -26,7 +26,7 @@ export function MapAppHeader() {
                 {loggedInUser && <TerminalSearch />}
             </div>
             <div className="map-app-header-block-container">
-                {loggedInUser && <UserPoints className="map-app-header-block" />}
+                {loggedInUser && <UserPoints />}
                 <div className="map-app-header-block">
                     {loggedInUser ? <LogoutButton /> : <LoginButton />}
                     <img src={GooglePlay} alt="map-app-header-apps-google-play" />

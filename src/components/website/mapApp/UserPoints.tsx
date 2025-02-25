@@ -3,7 +3,7 @@ import Points from '/src/assets/images/Points.svg';
 import { useMapAppState } from './redux/MapAppState';
 import { UserPointsLoader } from './UserPointsLoader';
 
-export function UserPoints(_props: { className: string }) {
+export function UserPoints() {
     const { loggedInUser } = useMapAppState();
     const currentUserPoints = loggedInUser?.points ?? null;
 
