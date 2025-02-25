@@ -1,18 +1,12 @@
 import { useSelector } from 'react-redux';
-import { T22Address, T22Device, T22Location } from '@mancho-school-t22/graphql-types';
+import { T22Address, T22Device, T22Location, T22User } from '@mancho-school-t22/graphql-types';
 import { RootState, StateBuilder } from '../../../../redux/store';
 
 export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state).mapAppState;
 }
 
-// TODO this has to be in the types package
-interface T22User {
-    id: string;
-    points: number;
-}
-
-export interface MapAppUser extends T22User {
+interface MapAppUser extends T22User {
     points: number | null;
 }
 

@@ -88,8 +88,10 @@ export const onDeviceCreationSubscription = gql`
 export const getUserQuery = gql`
     query {
         T22GetUser {
-            id
-            points
+            user {
+                id
+                points
+            }
         }
     }
 `;
