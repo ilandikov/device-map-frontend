@@ -3,12 +3,12 @@ import Points from '/src/assets/images/Points.svg';
 import { useMapAppState } from './redux/MapAppState';
 import { UserPointsLoader } from './UserPointsLoader';
 
-export function UserPoints(props: { className: string }) {
+export function UserPoints(_props: { className: string }) {
     const { loggedInUser } = useMapAppState();
     const currentUserPoints = loggedInUser?.points ?? null;
 
     return (
-        <div className={`${props.className} user-points-header-block`}>
+        <div className={'map-app-header-block user-points-header-block'}>
             <img src={Points} alt="user-points-image" />
             {currentUserPoints === null ? (
                 <UserPointsLoader />
