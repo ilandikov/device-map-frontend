@@ -8,7 +8,7 @@ export function UserPoints(_props: { className: string }) {
     const currentUserPoints = loggedInUser?.points ?? null;
 
     return (
-        <div className={'map-app-header-block user-points-header-block'}>
+        <div className="map-app-header-block user-points-header-block">
             <img src={Points} alt="user-points-image" />
             {currentUserPoints === null ? (
                 <UserPointsLoader />
