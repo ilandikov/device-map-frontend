@@ -2,7 +2,7 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import Search from '/src/assets/images/Search.svg';
 
-export function TerminalSearch(_props: { className: string }) {
+export function TerminalSearch() {
     const { t } = useI18next();
 
     return (
