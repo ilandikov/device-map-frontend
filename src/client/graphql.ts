@@ -51,12 +51,13 @@ export async function setAnonymousClient(): Promise<ApolloClient<NormalizedCache
 }
 
 function getCognitoIdentityCredentials(token: string) {
-    return new CognitoIdentityCredentials({
+    const identityCredentialParameters = {
         IdentityPoolId: process.env.GATSBY_COGNITO_IDENTITY_POOL_ID!,
         Logins: {
             [`cognito-idp.us-west-2.amazonaws.com/${process.env.GATSBY_COGNITO_USER_POOL_ID}`]: token,
         },
-    });
+    };
+    return new CognitoIdentityCredentials(identityCredentialParameters);
 }
 
 export async function setAuthenticatedClient() {
