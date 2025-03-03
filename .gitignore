@@ -16,3 +16,5 @@ steps.d.ts
 
 integration-tests/output/
 integration-tests/*.js
+
+.approval_tests_temp
