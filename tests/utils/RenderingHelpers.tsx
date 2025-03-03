@@ -16,7 +16,7 @@ export function getNonNumeric() {
     return characters[randomIndex];
 }
 
-function componentWithStoreProvider(component: React.JSX.Element) {
+export function componentWithStoreProvider(component: React.JSX.Element) {
     return <Provider store={configureTestStore()}>{component}</Provider>;
 }
 

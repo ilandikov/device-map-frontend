@@ -1,6 +1,10 @@
 import React from 'react';
+import { render } from '@testing-library/react';
+import * as prettier from 'prettier';
+import { Options } from 'approvals/lib/Core/Options';
+import { verify } from 'approvals/lib/Providers/Jest/JestApprovals';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import { testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
+import { componentWithStoreProvider, testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
 import { MapAppComponents } from '../../redux/MapAppState';
 import { DeviceLocation } from '../DeviceLocation';
 
@@ -10,8 +14,17 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
+export function prettifyHTML(html: string) {
+    return prettier.format(html, {
+        parser: 'html',
+        bracketSameLine: true,
+        htmlWhitespaceSensitivity: 'ignore',
+        printWidth: 120,
+    });
+}
+
 describe('device list snapshot tests', () => {
-    it('should show address loader and a list devices matching the selected marker without the create device item', () => {
+    it('should show address loader and a list devices matching the selected marker without the create device item', async () => {
         mockMapAppState({
             component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [
@@ -30,7 +43,10 @@ describe('device list snapshot tests', () => {
             },
         });
 
-        testSnapshot(<DeviceLocation />);
+        const { container } = render(componentWithStoreProvider(<DeviceLocation />));
+        const htmlOutput = prettifyHTML(container.innerHTML);
+        const options = new Options().forFile().withFileExtention('.html');
+        verify(htmlOutput, options);
     });
 
     it('should show the address and a list devices matching the selected marker with the create device item', () => {
