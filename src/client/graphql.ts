@@ -57,6 +57,12 @@ function getCognitoIdentityCredentials(token: string) {
             [`cognito-idp.us-west-2.amazonaws.com/${process.env.GATSBY_COGNITO_USER_POOL_ID}`]: token,
         },
     };
+    // This is a workaround for an issue with credentials not being reset after log out
+    // See https://github.com/aws/aws-sdk-js/issues/609
+    // And https://github.com/amazon-archives/amazon-cognito-identity-js/issues/378
+    // Probably need to migrate on https://github.com/aws-amplify/amplify-js/tree/main
+    const credentialsToClear = new CognitoIdentityCredentials(identityCredentialParameters);
+    credentialsToClear.clearCachedId();
     return new CognitoIdentityCredentials(identityCredentialParameters);
 }
 
