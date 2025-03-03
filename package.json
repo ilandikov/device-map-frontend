@@ -17,7 +17,7 @@
     "dev": "gatsby develop --host=0.0.0.0",
     "prepare-env": "node ./prepare-env.js",
     "test": "npm run clean:test && jest src/** --coverage",
-    "lint": "eslint --fix --ext .js,.ts,.jsx,.tsx,.html ./src && stylelint \"src/**/*.scss\" --fix"
+    "lint": "eslint --fix --ext .js,.ts,.jsx,.tsx ./src && stylelint \"src/**/*.scss\" --fix"
   },
   "engines": {
     "node": "~18",
