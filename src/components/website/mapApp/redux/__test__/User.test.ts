@@ -3,8 +3,8 @@ import { user } from '../User';
 import { EpicTest, testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
-function itShouldAnswerWithActions(scenario: EpicTest) {
-    it('should get user points', async () => {
+function itShouldAnswerWithActions(testName: string, scenario: EpicTest) {
+    it(testName, async () => {
         await testEpicAnswerToAction(scenario);
     });
 }
@@ -17,7 +17,7 @@ describe('user epic tests', () => {
         sentAction: mapAppAuthenticationCompleted('testUserId'),
         expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
     };
-    itShouldAnswerWithActions(scenario);
+    itShouldAnswerWithActions('should get user points', scenario);
 
     it('should report remote error', async () => {
         await testEpicAnswerToAction({
