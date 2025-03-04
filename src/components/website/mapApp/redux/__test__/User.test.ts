@@ -2,8 +2,8 @@ import { lastValueFrom, of, toArray } from 'rxjs';
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
 import { buildEpicTester } from '../../../../../redux/__test__/helpers';
-import { AllActions, RemoteClients, RootEpic } from '../../../../../redux/store';
-import { buildTestStateObservable } from '../../../../../redux/__mocks__/state';
+import { AllActions, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
+import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 async function testEpicAnswerToAction({
@@ -15,7 +15,7 @@ async function testEpicAnswerToAction({
 }: {
     epic: RootEpic;
     remoteClients: RemoteClients;
-    partialRootState: {};
+    partialRootState: ShallowPartial<RootState>;
     sentAction: AllActions;
     expectedActions: AllActions[];
 }) {
