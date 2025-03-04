@@ -8,13 +8,13 @@ import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 async function testEpicAnswerToAction({
     epic,
-    clients,
+    remoteClients,
     partialRootState,
     sentAction,
     expectedActions,
 }: {
     epic: RootEpic;
-    clients: RemoteClients;
+    remoteClients: RemoteClients;
     partialRootState: {};
     sentAction: AllActions;
     expectedActions: AllActions[];
@@ -30,14 +30,14 @@ async function testEpicAnswerToAction({
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 
         expect(receivedAction).toEqual(expectedActions);
-    })(clients, partialRootState, sentAction, expectedActions);
+    })(remoteClients, partialRootState, sentAction, expectedActions);
 }
 
 describe('user epic tests', () => {
     it('should get user points', async () => {
         await testEpicAnswerToAction({
             epic: user,
-            clients: { usersClient: userResolvingClient },
+            remoteClients: { usersClient: userResolvingClient },
             partialRootState: {},
             sentAction: mapAppAuthenticationCompleted('testUserId'),
             expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
