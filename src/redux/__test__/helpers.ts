@@ -46,16 +46,14 @@ interface EpicTest {
     expectedActions: AllActions[];
 }
 
-export async function testEpicAnswerToAction({
-    epic,
-    remoteClients,
-    partialRootState,
-    sentAction,
-    expectedActions,
-}: EpicTest) {
-    const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
+export async function testEpicAnswerToAction(scenario: EpicTest) {
+    const output$ = scenario.epic(
+        of(scenario.sentAction),
+        buildTestStateObservable(scenario.partialRootState),
+        scenario.remoteClients,
+    );
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 
-    expect(receivedAction).toEqual(expectedActions);
+    expect(receivedAction).toEqual(scenario.expectedActions);
 }
