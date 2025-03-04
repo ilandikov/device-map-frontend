@@ -38,19 +38,21 @@ export function buildEpicTester(epic: RootEpic) {
     };
 }
 
+interface EpicTest {
+    epic: RootEpic;
+    remoteClients: RemoteClients;
+    partialRootState: ShallowPartial<RootState>;
+    sentAction: AllActions;
+    expectedActions: AllActions[];
+}
+
 export async function testEpicAnswerToAction({
     epic,
     remoteClients,
     partialRootState,
     sentAction,
     expectedActions,
-}: {
-    epic: RootEpic;
-    remoteClients: RemoteClients;
-    partialRootState: ShallowPartial<RootState>;
-    sentAction: AllActions;
-    expectedActions: AllActions[];
-}) {
+}: EpicTest) {
     const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
 
     const receivedAction = await lastValueFrom(output$.pipe(toArray()));
