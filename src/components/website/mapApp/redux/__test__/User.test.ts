@@ -4,14 +4,14 @@ import { testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 describe('user epic tests', () => {
+    const scenario = {
+        epic: user,
+        remoteClients: { usersClient: userResolvingClient },
+        partialRootState: {},
+        sentAction: mapAppAuthenticationCompleted('testUserId'),
+        expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
+    };
     it('should get user points', async () => {
-        const scenario = {
-            epic: user,
-            remoteClients: { usersClient: userResolvingClient },
-            partialRootState: {},
-            sentAction: mapAppAuthenticationCompleted('testUserId'),
-            expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
-        };
         await testEpicAnswerToAction(scenario);
     });
 
