@@ -5,13 +5,14 @@ import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 describe('user epic tests', () => {
     it('should get user points', async () => {
-        await testEpicAnswerToAction({
+        const scenario = {
             epic: user,
             remoteClients: { usersClient: userResolvingClient },
             partialRootState: {},
             sentAction: mapAppAuthenticationCompleted('testUserId'),
             expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
-        });
+        };
+        await testEpicAnswerToAction(scenario);
     });
 
     it('should report remote error', async () => {
