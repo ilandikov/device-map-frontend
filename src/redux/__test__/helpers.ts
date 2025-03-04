@@ -37,3 +37,23 @@ export function buildEpicTester(epic: RootEpic) {
         expect(receivedAction).toEqual(expectedActions);
     };
 }
+
+export async function testEpicAnswerToAction({
+    epic,
+    remoteClients,
+    partialRootState,
+    sentAction,
+    expectedActions,
+}: {
+    epic: RootEpic;
+    remoteClients: RemoteClients;
+    partialRootState: ShallowPartial<RootState>;
+    sentAction: AllActions;
+    expectedActions: AllActions[];
+}) {
+    const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
+
+    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
+
+    expect(receivedAction).toEqual(expectedActions);
+}

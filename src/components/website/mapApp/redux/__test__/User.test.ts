@@ -1,29 +1,7 @@
-import { lastValueFrom, of, toArray } from 'rxjs';
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
-import { AllActions, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
-import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/__mocks__/state';
+import { testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
-
-async function testEpicAnswerToAction({
-    epic,
-    remoteClients,
-    partialRootState,
-    sentAction,
-    expectedActions,
-}: {
-    epic: RootEpic;
-    remoteClients: RemoteClients;
-    partialRootState: ShallowPartial<RootState>;
-    sentAction: AllActions;
-    expectedActions: AllActions[];
-}) {
-    const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
-
-    const receivedAction = await lastValueFrom(output$.pipe(toArray()));
-
-    expect(receivedAction).toEqual(expectedActions);
-}
 
 describe('user epic tests', () => {
     it('should get user points', async () => {
