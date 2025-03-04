@@ -3,14 +3,14 @@ import { user } from '../User';
 import { EpicTest, testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
-function itShouldAnswerWithActions(testName: string, scenario: EpicTest) {
+function itShouldAnswerBy(testName: string, scenario: EpicTest) {
     it(testName, async () => {
         await testEpicAnswerToAction(scenario);
     });
 }
 
 describe('user epic tests', () => {
-    itShouldAnswerWithActions('setting user points', {
+    itShouldAnswerBy('setting user points', {
         epic: user,
         remoteClients: { usersClient: userResolvingClient },
         partialRootState: {},
