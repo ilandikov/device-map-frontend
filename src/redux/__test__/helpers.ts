@@ -46,6 +46,12 @@ export interface EpicTest {
     expectedActions: AllActions[];
 }
 
+export function itShouldAnswerBy(testName: string, scenario: EpicTest) {
+    it(testName, async () => {
+        await testEpicAnswerToAction(scenario);
+    });
+}
+
 export async function testEpicAnswerToAction(scenario: EpicTest) {
     const output$ = scenario.epic(
         of(scenario.sentAction),

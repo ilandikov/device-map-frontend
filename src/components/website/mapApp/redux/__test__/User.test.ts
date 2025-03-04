@@ -1,13 +1,7 @@
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
-import { EpicTest, testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
+import { itShouldAnswerBy, testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
-
-function itShouldAnswerBy(testName: string, scenario: EpicTest) {
-    it(testName, async () => {
-        await testEpicAnswerToAction(scenario);
-    });
-}
 
 describe('user epic tests', () => {
     itShouldAnswerBy('setting user points', {
