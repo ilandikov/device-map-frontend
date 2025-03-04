@@ -10,14 +10,13 @@ function itShouldAnswerWithActions(testName: string, scenario: EpicTest) {
 }
 
 describe('user epic tests', () => {
-    const scenario = {
+    itShouldAnswerWithActions('setting user points', {
         epic: user,
         remoteClients: { usersClient: userResolvingClient },
         partialRootState: {},
         sentAction: mapAppAuthenticationCompleted('testUserId'),
         expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
-    };
-    itShouldAnswerWithActions('should get user points', scenario);
+    });
 
     it('should report remote error', async () => {
         await testEpicAnswerToAction({
