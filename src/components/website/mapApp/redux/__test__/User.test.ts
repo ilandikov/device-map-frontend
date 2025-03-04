@@ -1,7 +1,6 @@
 import { lastValueFrom, of, toArray } from 'rxjs';
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
-import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { AllActions, RemoteClients, RootEpic, RootState } from '../../../../../redux/store';
 import { ShallowPartial, buildTestStateObservable } from '../../../../../redux/__mocks__/state';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
@@ -38,9 +37,12 @@ describe('user epic tests', () => {
     });
 
     it('should report remote error', async () => {
-        const action = mapAppAuthenticationCompleted('testUserId');
-        const expectedAction = mapAppGetLoggedInUserError('could not get logged in user data');
-
-        await buildEpicTester(user)({ usersClient: userRejectingClient }, {}, action, [expectedAction]);
+        await testEpicAnswerToAction({
+            epic: user,
+            remoteClients: { usersClient: userRejectingClient },
+            partialRootState: {},
+            sentAction: mapAppAuthenticationCompleted('testUserId'),
+            expectedActions: [mapAppGetLoggedInUserError('could not get logged in user data')],
+        });
     });
 });
