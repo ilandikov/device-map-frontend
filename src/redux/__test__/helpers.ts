@@ -38,7 +38,7 @@ export function buildEpicTester(epic: RootEpic) {
     };
 }
 
-export interface EpicTest {
+interface EpicTest {
     epic: RootEpic;
     remoteClients: RemoteClients;
     partialRootState: ShallowPartial<RootState>;
@@ -52,7 +52,7 @@ export function itShouldAnswerBy(testName: string, scenario: EpicTest) {
     });
 }
 
-export async function testEpicAnswerToAction(scenario: EpicTest) {
+async function testEpicAnswerToAction(scenario: EpicTest) {
     const output$ = scenario.epic(
         of(scenario.sentAction),
         buildTestStateObservable(scenario.partialRootState),
