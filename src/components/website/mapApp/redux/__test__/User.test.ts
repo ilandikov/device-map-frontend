@@ -4,14 +4,20 @@ import { buildEpicTester } from '../../../../../redux/__test__/helpers';
 import { AllActions, RemoteClients, RootEpic } from '../../../../../redux/store';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
-async function testEpicAnswerToAction(
-    epic: RootEpic,
-    dependencies: RemoteClients,
-    partialRootState: {},
-    sentAction: AllActions,
-    expectedActions: AllActions[],
-) {
-    await buildEpicTester(epic)(dependencies, partialRootState, sentAction, expectedActions);
+async function testEpicAnswerToAction({
+    epic,
+    clients,
+    partialRootState,
+    sentAction,
+    expectedActions,
+}: {
+    epic: RootEpic;
+    clients: RemoteClients;
+    partialRootState: {};
+    sentAction: AllActions;
+    expectedActions: AllActions[];
+}) {
+    await buildEpicTester(epic)(clients, partialRootState, sentAction, expectedActions);
 }
 
 describe('user epic tests', () => {
@@ -19,7 +25,13 @@ describe('user epic tests', () => {
         const action = mapAppAuthenticationCompleted('testUserId');
         const expectedAction = mapAppSetLoggedInUser({ id: 'testUserId', points: 320 });
 
-        await testEpicAnswerToAction(user, { usersClient: userResolvingClient }, {}, action, [expectedAction]);
+        await testEpicAnswerToAction({
+            epic: user,
+            clients: { usersClient: userResolvingClient },
+            partialRootState: {},
+            sentAction: action,
+            expectedActions: [expectedAction],
+        });
     });
 
     it('should report remote error', async () => {
