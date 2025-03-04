@@ -1,7 +1,13 @@
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
-import { testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
+import { EpicTest, testEpicAnswerToAction } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
+
+function itShouldAnswerWithActions(scenario: EpicTest) {
+    it('should get user points', async () => {
+        await testEpicAnswerToAction(scenario);
+    });
+}
 
 describe('user epic tests', () => {
     const scenario = {
@@ -11,9 +17,7 @@ describe('user epic tests', () => {
         sentAction: mapAppAuthenticationCompleted('testUserId'),
         expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
     };
-    it('should get user points', async () => {
-        await testEpicAnswerToAction(scenario);
-    });
+    itShouldAnswerWithActions(scenario);
 
     it('should report remote error', async () => {
         await testEpicAnswerToAction({

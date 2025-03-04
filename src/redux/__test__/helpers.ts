@@ -38,7 +38,7 @@ export function buildEpicTester(epic: RootEpic) {
     };
 }
 
-interface EpicTest {
+export interface EpicTest {
     epic: RootEpic;
     remoteClients: RemoteClients;
     partialRootState: ShallowPartial<RootState>;
