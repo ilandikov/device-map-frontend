@@ -22,15 +22,12 @@ async function testEpicAnswerToAction({
 
 describe('user epic tests', () => {
     it('should get user points', async () => {
-        const action = mapAppAuthenticationCompleted('testUserId');
-        const expectedAction = mapAppSetLoggedInUser({ id: 'testUserId', points: 320 });
-
         await testEpicAnswerToAction({
             epic: user,
             clients: { usersClient: userResolvingClient },
             partialRootState: {},
-            sentAction: action,
-            expectedActions: [expectedAction],
+            sentAction: mapAppAuthenticationCompleted('testUserId'),
+            expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
         });
     });
 
