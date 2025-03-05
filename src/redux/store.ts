@@ -24,6 +24,7 @@ import {
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
 import { Observable } from 'rxjs';
+import { thunk } from 'redux-thunk';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
@@ -173,7 +174,7 @@ export function createStore() {
     });
 
     // @ts-expect-error
-    const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
+    const store = createReduxStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, epicMiddleware)));
 
     epicMiddleware.run(rootEpic);
 
