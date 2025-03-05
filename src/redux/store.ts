@@ -147,6 +147,9 @@ export function createStore() {
                                 console.log(error);
                                 subscriber.error(error);
                             },
+                            complete: () => {
+                                subscriber.complete();
+                            },
                         });
                     return () => {
                         subscription.unsubscribe();
