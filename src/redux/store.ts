@@ -140,7 +140,7 @@ export function createStore() {
                             next: (fetchResult) => {
                                 console.log('SUBS: got a result');
                                 console.log(fetchResult);
-                                subscriber.complete();
+                                subscriber.next(fetchResult.data);
                             },
                             error: (error) => {
                                 console.log('SUBS: got an error');
