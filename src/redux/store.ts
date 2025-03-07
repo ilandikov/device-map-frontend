@@ -23,7 +23,7 @@ import {
     T22GetUserResponse,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
-import { Observable } from 'rxjs';
+import { Subscriber } from 'rxjs';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
 import { authentication } from '../components/website/login/redux/Authentication';
 import { cognito } from '../components/website/login/redux/cognito';
@@ -69,7 +69,7 @@ export interface DevicesClient {
     };
 }
 
-export type DeviceSubscriptionClient = (id: string) => Observable<Subscription>;
+export type DeviceSubscriptionClient = (id: string) => (subscriber: Subscriber<Subscription>) => void;
 
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
@@ -129,17 +129,15 @@ export function createStore() {
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
-            deviceSubscriptionClient: (id) => {
-                return new Observable((subscriber) => {
-                    const subscription = anonymousClient
-                        .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
-                        .subscribe({
-                            next: (fetchResult) => subscriber.next(fetchResult.data),
-                            error: (error) => subscriber.error(error),
-                            complete: () => subscriber.complete(),
-                        });
-                    return () => subscription.unsubscribe();
-                });
+            deviceSubscriptionClient: (id) => (subscriber) => {
+                const subscription = anonymousClient
+                    .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
+                    .subscribe({
+                        next: (fetchResult) => subscriber.next(fetchResult.data),
+                        error: (error) => subscriber.error(error),
+                        complete: () => subscriber.complete(),
+                    });
+                return () => subscription.unsubscribe();
             },
             addressClient: {
                 getAddress: (input) =>
