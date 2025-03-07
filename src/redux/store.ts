@@ -134,19 +134,11 @@ export function createStore() {
                     const subscription = anonymousClient
                         .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
                         .subscribe({
-                            next: (fetchResult) => {
-                                subscriber.next(fetchResult.data);
-                            },
-                            error: (error) => {
-                                subscriber.error(error);
-                            },
-                            complete: () => {
-                                subscriber.complete();
-                            },
+                            next: (fetchResult) => subscriber.next(fetchResult.data),
+                            error: (error) => subscriber.error(error),
+                            complete: () => subscriber.complete(),
                         });
-                    return () => {
-                        subscription.unsubscribe();
-                    };
+                    return () => subscription.unsubscribe();
                 });
             },
             addressClient: {
