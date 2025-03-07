@@ -79,7 +79,7 @@ describe('devices - create device', () => {
                 lastUpdate: '1796354897659',
                 creatorID: 'new creator',
                 location: { lat: 5, lon: 6 },
-                approvals: 0,
+                approvals: -1,
             }),
             deviceCreationSubscriptionRequest('testId'),
         ];
