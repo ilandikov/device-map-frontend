@@ -1,7 +1,9 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { useMapAppState } from '../redux/MapAppState';
+import { setAnonymousClient } from '../../../../client/graphql';
+import { onDeviceCreationSubscription } from '../../../../client/query';
 import { DeviceItemContainer } from './DeviceItemContainer';
 import { DeleteButton } from './DeleteButton';
 import { ApproveButton } from './ApproveButton';
@@ -20,6 +22,8 @@ export function DeviceItem(props: { device: T22Device }) {
     const canReceiveApprovals = deviceItemType === 'created' || deviceItemType === 'approving';
     const canBeApproved = canReceiveApprovals && loggedInUser && !isDeviceCreatedByCurrentUser;
 
+    useSubscriptionToDeviceCreation(device.id);
+
     return (
         <DeviceItemContainer deviceItemType={deviceItemType}>
             <p>{device.id}</p>
@@ -28,4 +32,45 @@ export function DeviceItem(props: { device: T22Device }) {
             {canBeApproved && <ApproveButton id={device.id} />}
         </DeviceItemContainer>
     );
+}
+
+export function useSubscriptionToDeviceCreation(id: string) {
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const client = setAnonymousClient();
+    let subscription: any;
+
+    useEffect(() => {
+        console.log('HOOK: use effect for id', id);
+        client
+            .then((client) => {
+                console.log('HOOK: creating observer');
+                const observer = client.subscribe({
+                    query: onDeviceCreationSubscription,
+                    variables: { id },
+                });
+
+                console.log('HOOK: subscribing to observer');
+                subscription = observer.subscribe({
+                    next: (data: any) => {
+                        console.log('HOOK: received data', data);
+                        setData(data);
+                    },
+                    error: (error: Error) => {
+                        console.log('HOOK: received error', error);
+                        setError(error);
+                    },
+                });
+            })
+            .catch((error) => {
+                console.log('HOOK: could not subscribe', error);
+                setError(error);
+            });
+
+        return () => {
+            subscription?.unsubscribe();
+        };
+    }, [id]);
+
+    return { data, error };
 }
