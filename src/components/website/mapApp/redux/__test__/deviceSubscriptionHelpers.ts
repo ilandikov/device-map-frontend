@@ -15,9 +15,7 @@ export const resolvingDeviceSubscriptionClient: DeviceSubscriptionClient = (id) 
         });
         subscriber.complete();
 
-        return () => {
-            subscriber.unsubscribe();
-        };
+        return () => subscriber.unsubscribe();
     });
 
 export const rejectingDeviceSubscriptionClient: DeviceSubscriptionClient = () =>
@@ -25,7 +23,5 @@ export const rejectingDeviceSubscriptionClient: DeviceSubscriptionClient = () =>
         subscriber.error();
         subscriber.complete();
 
-        return () => {
-            subscriber.unsubscribe();
-        };
+        return () => subscriber.unsubscribe();
     });
