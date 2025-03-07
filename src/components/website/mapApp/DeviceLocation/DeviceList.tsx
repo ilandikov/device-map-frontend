@@ -3,6 +3,7 @@ import { useMapAppState } from '../redux/MapAppState';
 import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
+import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
 
 export function DeviceList() {
     const mapAppState = useMapAppState();
@@ -16,7 +17,7 @@ export function DeviceList() {
         )
         .map((device, index) =>
             device.approvals < 0 ? (
-                <DeviceItem device={device} key={index} />
+                <DeviceItemWaitingCreation key={index} device={device} />
             ) : (
                 <DeviceItem device={device} key={index} />
             ),
