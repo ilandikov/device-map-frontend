@@ -13,7 +13,7 @@ export function DeviceItemWaitingCreation(props: { device: T22Device }) {
     return (
         <DeviceItemContainer deviceItemType={deviceItemType}>
             <p>{device.id}</p>
-            <button className="device-list-item-opaque-text">{t('deviceReportBroken')}</button>
+            <p>{t('deviceWaitingForCreation')}</p>
         </DeviceItemContainer>
     );
 }
