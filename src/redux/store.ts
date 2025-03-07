@@ -69,7 +69,7 @@ export interface DevicesClient {
     };
 }
 
-export type DeviceSubscriptionClient = (id: string) => (subscriber: Subscriber<Subscription>) => void;
+export type DeviceSubscriptionClient = (creatorID: string) => (subscriber: Subscriber<Subscription>) => void;
 
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
@@ -129,9 +129,9 @@ export function createStore() {
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
-            deviceSubscriptionClient: (id) => (subscriber) => {
+            deviceSubscriptionClient: (creatorID) => (subscriber) => {
                 const subscription = anonymousClient
-                    .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
+                    .subscribe({ query: onDeviceCreationSubscription, variables: { id: creatorID } })
                     .subscribe({
                         next: (fetchResult) => subscriber.next(fetchResult.data),
                         error: (error) => subscriber.error(error),
