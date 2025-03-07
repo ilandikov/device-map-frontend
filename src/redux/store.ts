@@ -129,22 +129,15 @@ export function createStore() {
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
-            // TODO remove console.log()
             deviceSubscriptionClient: (id) => {
-                console.log('SUBS: creating observable');
                 return new Observable((subscriber) => {
-                    console.log('SUBS: trying to subscribe with id', id);
                     const subscription = anonymousClient
                         .subscribe({ query: onDeviceCreationSubscription, variables: { id } })
                         .subscribe({
                             next: (fetchResult) => {
-                                console.log('SUBS: got a result');
-                                console.log(fetchResult);
                                 subscriber.next(fetchResult.data);
                             },
                             error: (error) => {
-                                console.log('SUBS: got an error');
-                                console.log(error);
                                 subscriber.error(error);
                             },
                             complete: () => {
@@ -153,7 +146,6 @@ export function createStore() {
                         });
                     return () => {
                         subscription.unsubscribe();
-                        console.log('Unsubscribed from Apollo subscription');
                     };
                 });
             },
