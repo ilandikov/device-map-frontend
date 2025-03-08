@@ -18,6 +18,7 @@ describe('user sign up tests', () => {
         { stage: 'password reset', step: AuthenticationStep.PASSWORD_RESET_LOADING },
         { stage: 'sign up OTP', step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING },
         { stage: 'sign up OTP resend', step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING },
+        { stage: 'forgot password', step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING },
     ].forEach(({ stage, step }) => {
         itShouldAnswerBy(`confirming ${stage}`, {
             epic: cognito,
@@ -63,20 +64,6 @@ describe('password reset request tests', () => {
 
         await testCognitoEpic(
             {},
-            { authentication: initialState },
-            loginModalRemoteRequest(LoginModalCheck.NONE),
-            expectedAction,
-        );
-    });
-
-    it.each([
-        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should dispatch forgot password notification when remote answer is: %s', async (client, expectedAction) => {
-        const initialState = { step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING };
-
-        await testCognitoEpic(
-            { cognitoClient: client },
             { authentication: initialState },
             loginModalRemoteRequest(LoginModalCheck.NONE),
             expectedAction,
