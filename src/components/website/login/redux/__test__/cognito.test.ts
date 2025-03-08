@@ -16,6 +16,8 @@ describe('user sign up tests', () => {
     [
         { stage: 'sign up', step: AuthenticationStep.PASSWORD_CREATION_LOADING },
         { stage: 'password reset', step: AuthenticationStep.PASSWORD_RESET_LOADING },
+        { stage: 'sign up OTP', step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING },
+        { stage: 'sign up OTP resend', step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING },
     ].forEach(({ stage, step }) => {
         itShouldAnswerBy(`confirming ${stage}`, {
             epic: cognito,
@@ -32,22 +34,6 @@ describe('user sign up tests', () => {
             sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
             expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
         });
-    });
-});
-
-describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
-    it.each([
-        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should dispatch OTP notification when remote answer is: %s', async (client, expectedAction) => {
-        const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING };
-
-        await testCognitoEpic(
-            { cognitoClient: client },
-            { authentication: initialState },
-            loginModalRemoteRequest(LoginModalCheck.NONE),
-            expectedAction,
-        );
     });
 });
 
@@ -88,22 +74,6 @@ describe('password reset request tests', () => {
         [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
     ])('should dispatch forgot password notification when remote answer is: %s', async (client, expectedAction) => {
         const initialState = { step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING };
-
-        await testCognitoEpic(
-            { cognitoClient: client },
-            { authentication: initialState },
-            loginModalRemoteRequest(LoginModalCheck.NONE),
-            expectedAction,
-        );
-    });
-});
-
-describe('OTP code resend tests', () => {
-    it.each([
-        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should resign out user when remote answer is: %s', async (client, expectedAction) => {
-        const initialState = { step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING };
 
         await testCognitoEpic(
             { cognitoClient: client },
