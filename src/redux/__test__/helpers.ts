@@ -23,17 +23,24 @@ export function testInitialState<TState>(stateBuilder: StateBuilder<TState>, exp
     expect(stateBuilder({})).toMatchObject<TState>(expectedInitialState);
 }
 
-export function buildEpicTester(epic: RootEpic) {
-    return async function (
-        remoteClients: RemoteClients,
-        partialRootState: ShallowPartial<RootState>,
-        sentAction: AllActions,
-        expectedActions: AllActions[],
-    ) {
-        const output$ = epic(of(sentAction), buildTestStateObservable(partialRootState), remoteClients);
+interface EpicTest {
+    epic: RootEpic;
+    remoteClients?: RemoteClients;
+    partialRootState?: ShallowPartial<RootState>;
+    sentAction: AllActions;
+    expectedActions: AllActions[];
+}
+
+export function itShouldAnswerBy(testName: string, scenario: EpicTest) {
+    it(testName, async () => {
+        const output$ = scenario.epic(
+            of(scenario.sentAction),
+            buildTestStateObservable(scenario.partialRootState ?? {}),
+            scenario.remoteClients ?? {},
+        );
 
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
 
-        expect(receivedAction).toEqual(expectedActions);
-    };
+        expect(receivedAction).toEqual(scenario.expectedActions);
+    });
 }

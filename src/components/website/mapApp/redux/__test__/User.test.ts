@@ -1,22 +1,20 @@
 import { mapAppAuthenticationCompleted, mapAppGetLoggedInUserError, mapAppSetLoggedInUser } from '../MapAppAction';
 import { user } from '../User';
-import { buildEpicTester } from '../../../../../redux/__test__/helpers';
+import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
-const testUserEpic = buildEpicTester(user);
-
 describe('user epic tests', () => {
-    it('should get user points', async () => {
-        const action = mapAppAuthenticationCompleted('testUserId');
-        const expectedAction = mapAppSetLoggedInUser({ id: 'testUserId', points: 320 });
-
-        await testUserEpic({ usersClient: userResolvingClient }, {}, action, [expectedAction]);
+    itShouldAnswerBy('setting user points', {
+        epic: user,
+        remoteClients: { usersClient: userResolvingClient },
+        sentAction: mapAppAuthenticationCompleted('testUserId'),
+        expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
     });
 
-    it('should report remote error', async () => {
-        const action = mapAppAuthenticationCompleted('testUserId');
-        const expectedAction = mapAppGetLoggedInUserError('could not get logged in user data');
-
-        await testUserEpic({ usersClient: userRejectingClient }, {}, action, [expectedAction]);
+    itShouldAnswerBy('sending an error about a user login going wrong', {
+        epic: user,
+        remoteClients: { usersClient: userRejectingClient },
+        sentAction: mapAppAuthenticationCompleted('testUserId'),
+        expectedActions: [mapAppGetLoggedInUserError('could not get logged in user data')],
     });
 });
