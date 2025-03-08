@@ -73,16 +73,12 @@ describe('password reset request tests', () => {
 });
 
 describe('state tests', () => {
-    const allSteps = Object.values(AuthenticationStep);
-    it.each(allSteps)('should not process request at %s step when there is an error', async (step) => {
-        const initialState = { step, error: new Error('something is wrong') };
-        const expectedAction = [];
-
-        await testCognitoEpic(
-            {},
-            { authentication: initialState },
-            loginModalRemoteRequest(LoginModalCheck.NONE),
-            expectedAction,
-        );
+    Object.values(AuthenticationStep).forEach((step) => {
+        itShouldAnswerBy(`doing nothing at step ${step} when there is an error`, {
+            epic: cognito,
+            partialRootState: { authentication: { step, error: new Error('something is wrong') } },
+            sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
+            expectedActions: [],
+        });
     });
 });
