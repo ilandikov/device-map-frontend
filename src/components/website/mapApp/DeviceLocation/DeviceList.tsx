@@ -19,7 +19,7 @@ export function DeviceList() {
             device.approvals >= 0 ? (
                 <DeviceItem device={device} key={index} />
             ) : (
-                <DeviceItemWaitingCreation key={index} device={device} />
+                <DeviceItemWaitingCreation device={device} key={index} />
             ),
         );
 
