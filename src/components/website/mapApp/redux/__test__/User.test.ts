@@ -7,7 +7,6 @@ describe('user epic tests', () => {
     itShouldAnswerBy('setting user points', {
         epic: user,
         remoteClients: { usersClient: userResolvingClient },
-        partialRootState: {},
         sentAction: mapAppAuthenticationCompleted('testUserId'),
         expectedActions: [mapAppSetLoggedInUser({ id: 'testUserId', points: 320 })],
     });
@@ -15,7 +14,6 @@ describe('user epic tests', () => {
     itShouldAnswerBy('sending an error about a user login going wrong', {
         epic: user,
         remoteClients: { usersClient: userRejectingClient },
-        partialRootState: {},
         sentAction: mapAppAuthenticationCompleted('testUserId'),
         expectedActions: [mapAppGetLoggedInUserError('could not get logged in user data')],
     });
