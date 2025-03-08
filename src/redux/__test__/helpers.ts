@@ -40,7 +40,7 @@ export function buildEpicTester(epic: RootEpic) {
 
 interface EpicTest {
     epic: RootEpic;
-    remoteClients: RemoteClients;
+    remoteClients?: RemoteClients;
     partialRootState?: ShallowPartial<RootState>;
     sentAction: AllActions;
     expectedActions: AllActions[];
@@ -51,7 +51,7 @@ export function itShouldAnswerBy(testName: string, scenario: EpicTest) {
         const output$ = scenario.epic(
             of(scenario.sentAction),
             buildTestStateObservable(scenario.partialRootState ?? {}),
-            scenario.remoteClients,
+            scenario.remoteClients ?? {},
         );
 
         const receivedAction = await lastValueFrom(output$.pipe(toArray()));
