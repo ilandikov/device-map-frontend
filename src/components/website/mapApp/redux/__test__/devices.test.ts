@@ -63,6 +63,7 @@ describe('devices epic test - nominal cases', () => {
             expectedActions: [devicesListed(deviceListFromMock)],
         },
         {
+            // TODO deviceCreateRequest() should accept a location, the partialRootState can be removed
             sentAction: deviceCreateRequest(),
             expectedActions: [deviceCreated(deviceCreatedByTheMock), deviceCreationSubscriptionRequest('testId')],
         },
