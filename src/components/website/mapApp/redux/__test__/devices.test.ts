@@ -16,6 +16,28 @@ import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHel
 
 const deviceCreationTimeStampFromBackend = 1896916059204;
 
+const deviceListFromMock = [
+    {
+        id: 'dev1',
+        createdDate: '1754126457812',
+        lastUpdate: '1754126458923',
+        creatorID: 'fancy creator',
+        location: {
+            lat: 42.85862508449081,
+            lon: 74.6085298061371,
+        },
+        approvals: 6,
+    },
+];
+const deviceCreatedByTheMock = {
+    id: 'testId',
+    createdDate: '1796354896548',
+    lastUpdate: '1796354897659',
+    creatorID: 'new creator',
+    location: { lat: 5, lon: 6 },
+    approvals: -1,
+};
+
 beforeEach(() => {
     jest.useFakeTimers();
     jest.setSystemTime(new Date(deviceCreationTimeStampFromBackend));
@@ -38,35 +60,11 @@ describe('devices epic test - nominal cases', () => {
     [
         {
             sentAction: deviceListRequest(),
-            expectedActions: [
-                devicesListed([
-                    {
-                        id: 'dev1',
-                        createdDate: '1754126457812',
-                        lastUpdate: '1754126458923',
-                        creatorID: 'fancy creator',
-                        location: {
-                            lat: 42.85862508449081,
-                            lon: 74.6085298061371,
-                        },
-                        approvals: 6,
-                    },
-                ]),
-            ],
+            expectedActions: [devicesListed(deviceListFromMock)],
         },
         {
             sentAction: deviceCreateRequest(),
-            expectedActions: [
-                deviceCreated({
-                    id: 'testId',
-                    createdDate: '1796354896548',
-                    lastUpdate: '1796354897659',
-                    creatorID: 'new creator',
-                    location: { lat: 5, lon: 6 },
-                    approvals: -1,
-                }),
-                deviceCreationSubscriptionRequest('testId'),
-            ],
+            expectedActions: [deviceCreated(deviceCreatedByTheMock), deviceCreationSubscriptionRequest('testId')],
         },
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {
