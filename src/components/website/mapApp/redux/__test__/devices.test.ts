@@ -25,7 +25,7 @@ afterEach(() => {
     jest.useRealTimers();
 });
 
-describe('devices epic test', () => {
+describe('devices epic test - receiving irrelevant action', () => {
     itShouldAnswerBy('no action to a non-remote request action', {
         epic: devices,
         // @ts-expect-error
