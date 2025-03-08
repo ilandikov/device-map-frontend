@@ -10,7 +10,7 @@ import { cognito } from '../cognito';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
-describe('user sign up tests', () => {
+describe('cognito epic tests', () => {
     [
         { stage: 'sign up', step: AuthenticationStep.PASSWORD_CREATION_LOADING },
         { stage: 'password reset', step: AuthenticationStep.PASSWORD_RESET_LOADING },
@@ -35,9 +35,7 @@ describe('user sign up tests', () => {
             expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
         });
     });
-});
 
-describe('user sign in tests', () => {
     itShouldAnswerBy('confirming sign in and completing authentication', {
         epic: cognito,
         remoteClients: { cognitoClient: cognitoResolvingClient },
@@ -56,18 +54,14 @@ describe('user sign in tests', () => {
         sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
         expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
     });
-});
 
-describe('password reset request tests', () => {
     itShouldAnswerBy('doing nothing on mail input step', {
         epic: cognito,
         partialRootState: { authentication: { step: AuthenticationStep.MAIL_INPUT } },
         sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
         expectedActions: [],
     });
-});
 
-describe('state tests', () => {
     Object.values(AuthenticationStep).forEach((step) => {
         itShouldAnswerBy(`doing nothing at step ${step} when there is an error`, {
             epic: cognito,
