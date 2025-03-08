@@ -19,6 +19,7 @@ describe('user sign up tests', () => {
         { stage: 'sign up OTP', step: AuthenticationStep.PASSWORD_CREATION_OTP_LOADING },
         { stage: 'sign up OTP resend', step: AuthenticationStep.PASSWORD_CREATION_OTP_RESEND_LOADING },
         { stage: 'forgot password', step: AuthenticationStep.PASSWORD_RESET_REQUEST_LOADING },
+        { stage: 'sign out', step: AuthenticationStep.LOGGED_IN },
     ].forEach(({ stage, step }) => {
         itShouldAnswerBy(`confirming ${stage}`, {
             epic: cognito,
@@ -64,22 +65,6 @@ describe('password reset request tests', () => {
 
         await testCognitoEpic(
             {},
-            { authentication: initialState },
-            loginModalRemoteRequest(LoginModalCheck.NONE),
-            expectedAction,
-        );
-    });
-});
-
-describe('user sign out tests', () => {
-    it.each([
-        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should sign out user when remote answer is: %s', async (client, expectedAction) => {
-        const initialState = { step: AuthenticationStep.LOGGED_IN };
-
-        await testCognitoEpic(
-            { cognitoClient: client },
             { authentication: initialState },
             loginModalRemoteRequest(LoginModalCheck.NONE),
             expectedAction,
