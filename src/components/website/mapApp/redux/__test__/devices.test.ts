@@ -90,12 +90,16 @@ describe('devices epic test - nominal cases', () => {
 });
 
 describe('devices epic tests - error cases', () => {
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceListRequest(),
-        expectedActions: [deviceRemoteError('list devices went wrong')],
-    });
+    [{ sentAction: deviceListRequest(), expectedAction: deviceRemoteError('list devices went wrong') }].forEach(
+        ({ sentAction, expectedAction }) => {
+            itShouldAnswerBy(`sending an error for action ${sentAction.request}`, {
+                epic: devices,
+                remoteClients: { devicesClient: rejectingDevicesClient },
+                sentAction,
+                expectedActions: [expectedAction],
+            });
+        },
+    );
 
     itShouldAnswerBy('sending an error', {
         epic: devices,
