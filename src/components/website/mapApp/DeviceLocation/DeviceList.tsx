@@ -16,10 +16,10 @@ export function DeviceList() {
                 device.location.lon === selectedMarker.location.lon,
         )
         .map((device, index) =>
-            device.approvals < 0 ? (
-                <DeviceItemWaitingCreation key={index} device={device} />
-            ) : (
+            device.approvals >= 0 ? (
                 <DeviceItem device={device} key={index} />
+            ) : (
+                <DeviceItemWaitingCreation key={index} device={device} />
             ),
         );
 
