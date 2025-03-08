@@ -90,35 +90,23 @@ describe('devices epic test - nominal cases', () => {
 });
 
 describe('devices epic tests - error cases', () => {
-    [{ sentAction: deviceListRequest(), expectedAction: deviceRemoteError('list devices went wrong') }].forEach(
-        ({ sentAction, expectedAction }) => {
-            itShouldAnswerBy(`sending an error for action ${sentAction.request}`, {
-                epic: devices,
-                remoteClients: { devicesClient: rejectingDevicesClient },
-                sentAction,
-                expectedActions: [expectedAction],
-            });
+    [
+        { sentAction: deviceListRequest(), expectedAction: deviceRemoteError('list devices went wrong') },
+        { sentAction: deviceCreateRequest(), expectedAction: deviceRemoteError('create device went wrong') },
+        {
+            sentAction: deviceDeleteRequest('deleteThisOne'),
+            expectedAction: deviceRemoteError('delete device went wrong'),
         },
-    );
-
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceCreateRequest(),
-        expectedActions: [deviceRemoteError('create device went wrong')],
-    });
-
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceDeleteRequest('deleteThisOne'),
-        expectedActions: [deviceRemoteError('delete device went wrong')],
-    });
-
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceApproveRequest('approve me!'),
-        expectedActions: [deviceRemoteError('approve device went wrong')],
+        {
+            sentAction: deviceApproveRequest('approve me!'),
+            expectedAction: deviceRemoteError('approve device went wrong'),
+        },
+    ].forEach(({ sentAction, expectedAction }) => {
+        itShouldAnswerBy(`sending an error for action ${sentAction.request}`, {
+            epic: devices,
+            remoteClients: { devicesClient: rejectingDevicesClient },
+            sentAction,
+            expectedActions: [expectedAction],
+        });
     });
 });
