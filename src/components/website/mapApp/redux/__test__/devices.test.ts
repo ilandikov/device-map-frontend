@@ -35,57 +35,52 @@ describe('devices epic test - receiving irrelevant action', () => {
 });
 
 describe('devices epic test - nominal cases', () => {
-    itShouldAnswerBy('listing devices', {
-        epic: devices,
-        remoteClients: { devicesClient: resolvingDevicesClient },
-        sentAction: deviceListRequest(),
-        expectedActions: [
-            devicesListed([
-                {
-                    id: 'dev1',
-                    createdDate: '1754126457812',
-                    lastUpdate: '1754126458923',
-                    creatorID: 'fancy creator',
-                    location: {
-                        lat: 42.85862508449081,
-                        lon: 74.6085298061371,
+    [
+        {
+            sentAction: deviceListRequest(),
+            expectedActions: [
+                devicesListed([
+                    {
+                        id: 'dev1',
+                        createdDate: '1754126457812',
+                        lastUpdate: '1754126458923',
+                        creatorID: 'fancy creator',
+                        location: {
+                            lat: 42.85862508449081,
+                            lon: 74.6085298061371,
+                        },
+                        approvals: 6,
                     },
-                    approvals: 6,
-                },
-            ]),
-        ],
-    });
-
-    itShouldAnswerBy('creating device at selected marker location', {
-        epic: devices,
-        partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
-        remoteClients: { devicesClient: resolvingDevicesClient },
-        sentAction: deviceCreateRequest(),
-        expectedActions: [
-            deviceCreated({
-                id: 'testId',
-                createdDate: '1796354896548',
-                lastUpdate: '1796354897659',
-                creatorID: 'new creator',
-                location: { lat: 5, lon: 6 },
-                approvals: -1,
-            }),
-            deviceCreationSubscriptionRequest('testId'),
-        ],
-    });
-
-    itShouldAnswerBy('deleting device', {
-        epic: devices,
-        remoteClients: { devicesClient: resolvingDevicesClient },
-        sentAction: deviceDeleteRequest('deleteThisOne'),
-        expectedActions: [deviceDeleted('deleteThisOne')],
-    });
-
-    itShouldAnswerBy('approving device', {
-        epic: devices,
-        remoteClients: { devicesClient: resolvingDevicesClient },
-        sentAction: deviceApproveRequest('approve me!'),
-        expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+                ]),
+            ],
+        },
+        {
+            sentAction: deviceCreateRequest(),
+            expectedActions: [
+                deviceCreated({
+                    id: 'testId',
+                    createdDate: '1796354896548',
+                    lastUpdate: '1796354897659',
+                    creatorID: 'new creator',
+                    location: { lat: 5, lon: 6 },
+                    approvals: -1,
+                }),
+                deviceCreationSubscriptionRequest('testId'),
+            ],
+        },
+        { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
+        {
+            sentAction: deviceApproveRequest('approve me!'),
+            expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+        },
+    ].forEach(({ sentAction, expectedActions }) => {
+        itShouldAnswerBy(`sending ${sentAction.request}`, {
+            epic: devices,
+            partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
+            remoteClients: { devicesClient: resolvingDevicesClient },
+            sentAction,
+            expectedActions,
+        });
     });
 });
 
