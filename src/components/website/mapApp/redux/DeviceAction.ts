@@ -162,12 +162,14 @@ export function deviceCreationSubscriptionRequest(id: string): DeviceCreationSub
     };
 }
 
+// TODO names here have to be reworked
 interface DeviceCreationSubscriptionAnswer {
     type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER;
     request: DeviceRemoteRequestType.CREATE_DEVICE;
     device: T22Device;
 }
 
+// TODO names here have to be reworked
 export function updateDevice(device: T22Device): DeviceCreationSubscriptionAnswer {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER,

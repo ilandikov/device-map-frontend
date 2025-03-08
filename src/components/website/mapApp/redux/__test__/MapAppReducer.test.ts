@@ -187,9 +187,9 @@ describe('rename me', () => {
     });
 
     it('should update a device', () => {
-        const initialState = { devices: [existingDevice] };
+        const initialState = { devices: [{ ...existingDevice, approvals: -1 }] };
 
-        const updatedDevice = { ...existingDevice, location: { lat: 33, lon: 22 } };
+        const updatedDevice = { ...existingDevice, approvals: 0 };
         const action = updateDevice(updatedDevice);
 
         testMapAppReducer(initialState, action, {
