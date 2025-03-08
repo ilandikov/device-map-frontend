@@ -13,7 +13,10 @@ import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHel
 const testCognitoEpic = buildEpicTester(cognito);
 
 describe('user sign up tests', () => {
-    [{ stage: 'sign up', step: AuthenticationStep.PASSWORD_CREATION_LOADING }].forEach(({ stage, step }) => {
+    [
+        { stage: 'sign up', step: AuthenticationStep.PASSWORD_CREATION_LOADING },
+        { stage: 'password reset', step: AuthenticationStep.PASSWORD_RESET_LOADING },
+    ].forEach(({ stage, step }) => {
         itShouldAnswerBy(`confirming ${stage}`, {
             epic: cognito,
             remoteClients: { cognitoClient: cognitoResolvingClient },
@@ -29,24 +32,6 @@ describe('user sign up tests', () => {
             sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
             expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
         });
-    });
-});
-
-describe('user password reset tests', () => {
-    itShouldAnswerBy('confirming password reset', {
-        epic: cognito,
-        remoteClients: { cognitoClient: cognitoResolvingClient },
-        partialRootState: { authentication: { step: AuthenticationStep.PASSWORD_RESET_LOADING } },
-        sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
-        expectedActions: [loginModalRemoteAnswerSuccess()],
-    });
-
-    itShouldAnswerBy('sending error from sign up', {
-        epic: cognito,
-        remoteClients: { cognitoClient: cognitoRejectingClient },
-        partialRootState: { authentication: { step: AuthenticationStep.PASSWORD_RESET_LOADING } },
-        sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
-        expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
     });
 });
 
