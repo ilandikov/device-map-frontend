@@ -7,44 +7,45 @@ import {
 import { AuthenticationStep } from '../AuthenticationState';
 import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
 import { cognito } from '../cognito';
-import { buildEpicTester } from '../../../../../redux/__test__/helpers';
+import { buildEpicTester, itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
 const testCognitoEpic = buildEpicTester(cognito);
 
 describe('user sign up tests', () => {
-    it.each([
-        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])('should dispatch sign up notification when remote answer is: %s', async (client, expectedAction) => {
-        const initialState = { step: AuthenticationStep.PASSWORD_CREATION_LOADING };
+    itShouldAnswerBy('confirming sign up', {
+        epic: cognito,
+        remoteClients: { cognitoClient: cognitoResolvingClient },
+        partialRootState: { authentication: { step: AuthenticationStep.PASSWORD_CREATION_LOADING } },
+        sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
+        expectedActions: [loginModalRemoteAnswerSuccess()],
+    });
 
-        await testCognitoEpic(
-            { cognitoClient: client },
-            { authentication: initialState },
-            loginModalRemoteRequest(LoginModalCheck.NONE),
-            expectedAction,
-        );
+    itShouldAnswerBy('sending error from sign up', {
+        epic: cognito,
+        remoteClients: { cognitoClient: cognitoRejectingClient },
+        partialRootState: { authentication: { step: AuthenticationStep.PASSWORD_CREATION_LOADING } },
+        sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
+        expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
     });
 });
 
 describe('user password reset tests', () => {
-    it.each([
-        [cognitoResolvingClient, [loginModalRemoteAnswerSuccess()]],
-        [cognitoRejectingClient, [loginModalRemoteAnswerFailure('cognitoUnknownException')]],
-    ])(
-        'should dispatch password has been reset notification when remote answer is: %s',
-        async (client, expectedAction) => {
-            const initialState = { step: AuthenticationStep.PASSWORD_RESET_LOADING };
+    itShouldAnswerBy('confirming password reset', {
+        epic: cognito,
+        remoteClients: { cognitoClient: cognitoResolvingClient },
+        partialRootState: { authentication: { step: AuthenticationStep.PASSWORD_RESET_LOADING } },
+        sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
+        expectedActions: [loginModalRemoteAnswerSuccess()],
+    });
 
-            await testCognitoEpic(
-                { cognitoClient: client },
-                { authentication: initialState },
-                loginModalRemoteRequest(LoginModalCheck.NONE),
-                expectedAction,
-            );
-        },
-    );
+    itShouldAnswerBy('sending error from sign up', {
+        epic: cognito,
+        remoteClients: { cognitoClient: cognitoRejectingClient },
+        partialRootState: { authentication: { step: AuthenticationStep.PASSWORD_RESET_LOADING } },
+        sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
+        expectedActions: [loginModalRemoteAnswerFailure('cognitoUnknownException')],
+    });
 });
 
 describe('user sign up OTP code confirmation tests (from password creation loading step)', () => {
