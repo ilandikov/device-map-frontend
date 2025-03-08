@@ -13,9 +13,7 @@ import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHel
 const testCognitoEpic = buildEpicTester(cognito);
 
 describe('user sign up tests', () => {
-    const stage = 'sign up';
-    const step = AuthenticationStep.PASSWORD_CREATION_LOADING;
-    [{ stage, step }].forEach(({ stage, step }) => {
+    [{ stage: 'sign up', step: AuthenticationStep.PASSWORD_CREATION_LOADING }].forEach(({ stage, step }) => {
         itShouldAnswerBy(`confirming ${stage}`, {
             epic: cognito,
             remoteClients: { cognitoClient: cognitoResolvingClient },
