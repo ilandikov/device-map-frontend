@@ -11,10 +11,8 @@ import {
     devicesListed,
 } from '../DeviceAction';
 import { devices } from '../devices';
-import { buildEpicTester } from '../../../../../redux/__test__/helpers';
+import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
-
-const testDevicesEpic = buildEpicTester(devices);
 
 const deviceCreationTimeStampFromBackend = 1896916059204;
 
@@ -28,51 +26,51 @@ afterEach(() => {
 });
 
 describe('devices epic test', () => {
-    it('should return no action to a non-remote request action', async () => {
-        const mapAppState = {};
-        const sentAction = { type: 'notAMapAppAction' };
-        const expectedActions = [];
-
+    itShouldAnswerBy('no action to a non-remote request action', {
+        epic: devices,
         // @ts-expect-error
-        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, expectedActions);
+        sentAction: { type: 'notAMapAppAction' },
+        expectedActions: [],
     });
 });
 
 describe('devices - list devices', () => {
-    it('should process a resolved promise', async () => {
-        const mapAppState = {};
-        const sentAction = deviceListRequest();
-        const expectedAction = devicesListed([
-            {
-                id: 'dev1',
-                createdDate: '1754126457812',
-                lastUpdate: '1754126458923',
-                creatorID: 'fancy creator',
-                location: {
-                    lat: 42.85862508449081,
-                    lon: 74.6085298061371,
+    itShouldAnswerBy('listing devices', {
+        epic: devices,
+        remoteClients: { devicesClient: resolvingDevicesClient },
+        sentAction: deviceListRequest(),
+        expectedActions: [
+            devicesListed([
+                {
+                    id: 'dev1',
+                    createdDate: '1754126457812',
+                    lastUpdate: '1754126458923',
+                    creatorID: 'fancy creator',
+                    location: {
+                        lat: 42.85862508449081,
+                        lon: 74.6085298061371,
+                    },
+                    approvals: 6,
                 },
-                approvals: 6,
-            },
-        ]);
-
-        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+            ]),
+        ],
     });
 
-    it('should process a rejected promise', async () => {
-        const mapAppState = {};
-        const sentAction = deviceListRequest();
-        const expectedAction = deviceRemoteError('list devices went wrong');
-
-        await testDevicesEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceListRequest(),
+        expectedActions: [deviceRemoteError('list devices went wrong')],
     });
 });
 
 describe('devices - create device', () => {
-    it('should send action with the new device at selected marker location', async () => {
-        const mapAppState = { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } };
-        const sentAction = deviceCreateRequest();
-        const expectedActions = [
+    itShouldAnswerBy('creating device at selected marker location', {
+        epic: devices,
+        partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
+        remoteClients: { devicesClient: resolvingDevicesClient },
+        sentAction: deviceCreateRequest(),
+        expectedActions: [
             deviceCreated({
                 id: 'testId',
                 createdDate: '1796354896548',
@@ -82,52 +80,45 @@ describe('devices - create device', () => {
                 approvals: -1,
             }),
             deviceCreationSubscriptionRequest('testId'),
-        ];
-
-        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, expectedActions);
+        ],
     });
 
-    it('should notify about the error', async () => {
-        const mapAppState = {};
-        const sentAction = deviceCreateRequest();
-        const expectedAction = deviceRemoteError('create device went wrong');
-
-        await testDevicesEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceCreateRequest(),
+        expectedActions: [deviceRemoteError('create device went wrong')],
     });
 });
 
 describe('devices - delete device', () => {
-    it('should send action to delete device', async () => {
-        const mapAppState = {};
-        const sentAction = deviceDeleteRequest('deleteThisOne');
-        const expectedAction = deviceDeleted('deleteThisOne');
-
-        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    itShouldAnswerBy('deleting device', {
+        epic: devices,
+        remoteClients: { devicesClient: resolvingDevicesClient },
+        sentAction: deviceDeleteRequest('deleteThisOne'),
+        expectedActions: [deviceDeleted('deleteThisOne')],
     });
 
-    it('should notify about the error', async () => {
-        const mapAppState = {};
-        const sentAction = deviceDeleteRequest('deleteThisOne');
-        const expectedAction = deviceRemoteError('delete device went wrong');
-
-        await testDevicesEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceDeleteRequest('deleteThisOne'),
+        expectedActions: [deviceRemoteError('delete device went wrong')],
     });
 });
 
 describe('devices - approve device', () => {
-    it('should send action to approve device', async () => {
-        const mapAppState = {};
-        const sentAction = deviceApproveRequest('approve me!');
-        const expectedAction = deviceApproved('approve me!', deviceCreationTimeStampFromBackend);
-
-        await testDevicesEpic({ devicesClient: resolvingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    itShouldAnswerBy('approving device', {
+        epic: devices,
+        remoteClients: { devicesClient: resolvingDevicesClient },
+        sentAction: deviceApproveRequest('approve me!'),
+        expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
     });
 
-    it('should notify about the error', async () => {
-        const mapAppState = {};
-        const sentAction = deviceApproveRequest('approve me!');
-        const expectedAction = deviceRemoteError('approve device went wrong');
-
-        await testDevicesEpic({ devicesClient: rejectingDevicesClient }, { mapAppState }, sentAction, [expectedAction]);
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceApproveRequest('approve me!'),
+        expectedActions: [deviceRemoteError('approve device went wrong')],
     });
 });
