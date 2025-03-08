@@ -34,7 +34,7 @@ describe('devices epic test', () => {
     });
 });
 
-describe('devices - list devices', () => {
+describe('devices epic test - nominal cases', () => {
     itShouldAnswerBy('listing devices', {
         epic: devices,
         remoteClients: { devicesClient: resolvingDevicesClient },
@@ -56,15 +56,6 @@ describe('devices - list devices', () => {
         ],
     });
 
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceListRequest(),
-        expectedActions: [deviceRemoteError('list devices went wrong')],
-    });
-});
-
-describe('devices - create device', () => {
     itShouldAnswerBy('creating device at selected marker location', {
         epic: devices,
         partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
@@ -83,15 +74,6 @@ describe('devices - create device', () => {
         ],
     });
 
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceCreateRequest(),
-        expectedActions: [deviceRemoteError('create device went wrong')],
-    });
-});
-
-describe('devices - delete device', () => {
     itShouldAnswerBy('deleting device', {
         epic: devices,
         remoteClients: { devicesClient: resolvingDevicesClient },
@@ -99,20 +81,34 @@ describe('devices - delete device', () => {
         expectedActions: [deviceDeleted('deleteThisOne')],
     });
 
-    itShouldAnswerBy('sending an error', {
-        epic: devices,
-        remoteClients: { devicesClient: rejectingDevicesClient },
-        sentAction: deviceDeleteRequest('deleteThisOne'),
-        expectedActions: [deviceRemoteError('delete device went wrong')],
-    });
-});
-
-describe('devices - approve device', () => {
     itShouldAnswerBy('approving device', {
         epic: devices,
         remoteClients: { devicesClient: resolvingDevicesClient },
         sentAction: deviceApproveRequest('approve me!'),
         expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+    });
+});
+
+describe('devices epic tests - error cases', () => {
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceListRequest(),
+        expectedActions: [deviceRemoteError('list devices went wrong')],
+    });
+
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceCreateRequest(),
+        expectedActions: [deviceRemoteError('create device went wrong')],
+    });
+
+    itShouldAnswerBy('sending an error', {
+        epic: devices,
+        remoteClients: { devicesClient: rejectingDevicesClient },
+        sentAction: deviceDeleteRequest('deleteThisOne'),
+        expectedActions: [deviceRemoteError('delete device went wrong')],
     });
 
     itShouldAnswerBy('sending an error', {
