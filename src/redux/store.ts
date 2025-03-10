@@ -71,7 +71,9 @@ export interface DevicesClient {
     };
 }
 
-export type DeviceSubscriptionClient = (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
+export interface DeviceSubscriptionClient {
+    creation: (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
+}
 
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
@@ -131,18 +133,20 @@ export function createStore() {
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDevice'),
                 },
             },
-            deviceSubscriptionClient: (creatorID) => (subscriber) => {
-                const subscription = anonymousClient
-                    .subscribe<
-                        Subscription,
-                        SubscriptionT22OnDeviceCreation2Args
-                    >({ query: onDeviceCreationSubscription, variables: { creatorID } })
-                    .subscribe({
-                        next: (fetchResult) => subscriber.next(fetchResult.data.T22OnDeviceCreation2),
-                        error: (error) => subscriber.error(error),
-                        complete: () => subscriber.complete(),
-                    });
-                return () => subscription.unsubscribe();
+            deviceSubscriptionClient: {
+                creation: (creatorID) => (subscriber) => {
+                    const subscription = anonymousClient
+                        .subscribe<
+                            Subscription,
+                            SubscriptionT22OnDeviceCreation2Args
+                        >({ query: onDeviceCreationSubscription, variables: { creatorID } })
+                        .subscribe({
+                            next: (fetchResult) => subscriber.next(fetchResult.data.T22OnDeviceCreation2),
+                            error: (error) => subscriber.error(error),
+                            complete: () => subscriber.complete(),
+                        });
+                    return () => subscription.unsubscribe();
+                },
             },
             addressClient: {
                 getAddress: (input) =>
