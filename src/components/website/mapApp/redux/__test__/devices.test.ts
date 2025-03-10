@@ -3,7 +3,6 @@ import {
     deviceApproved,
     deviceCreateRequest,
     deviceCreated,
-    deviceCreationSubscriptionRequest,
     deviceDeleteRequest,
     deviceDeleted,
     deviceListRequest,
@@ -65,7 +64,7 @@ describe('devices epic test - nominal cases', () => {
         {
             // TODO deviceCreateRequest() should accept a location, the partialRootState can be removed
             sentAction: deviceCreateRequest(),
-            expectedActions: [deviceCreated(deviceCreatedByTheMock), deviceCreationSubscriptionRequest()],
+            expectedActions: [deviceCreated(deviceCreatedByTheMock)],
         },
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {
