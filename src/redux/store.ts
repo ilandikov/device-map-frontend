@@ -19,6 +19,7 @@ import {
     T22CreateDeviceResponse,
     T22DeleteDeviceInput,
     T22DeleteDeviceResponse,
+    T22Device,
     T22GetAddressInput,
     T22GetAddressResponse,
     T22GetUserResponse,
@@ -70,8 +71,7 @@ export interface DevicesClient {
     };
 }
 
-// TODO the subscriber type should be T22OnDevice... (Field of Subscription)
-export type DeviceSubscriptionClient = (creatorID: string) => (subscriber: Subscriber<Subscription>) => void;
+export type DeviceSubscriptionClient = (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
 
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
@@ -138,7 +138,7 @@ export function createStore() {
                         SubscriptionT22OnDeviceCreation2Args
                     >({ query: onDeviceCreationSubscription, variables: { creatorID } })
                     .subscribe({
-                        next: (fetchResult) => subscriber.next(fetchResult.data),
+                        next: (fetchResult) => subscriber.next(fetchResult.data.T22OnDeviceCreation2),
                         error: (error) => subscriber.error(error),
                         complete: () => subscriber.complete(),
                     });
