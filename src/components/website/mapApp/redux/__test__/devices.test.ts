@@ -59,18 +59,18 @@ describe('devices epic test - nominal cases', () => {
     [
         {
             sentAction: deviceListRequest(),
-            expectedActions: [devicesListed(deviceListFromMock)],
+            expectedAction: [devicesListed(deviceListFromMock)],
         },
         {
             sentAction: deviceCreateRequest(),
-            expectedActions: [deviceCreated(deviceCreatedByTheMock)],
+            expectedAction: [deviceCreated(deviceCreatedByTheMock)],
         },
-        { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
+        { sentAction: deviceDeleteRequest('deleteThisOne'), expectedAction: [deviceDeleted('deleteThisOne')] },
         {
             sentAction: deviceApproveRequest('approve me!'),
-            expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+            expectedAction: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
         },
-    ].forEach(({ sentAction, expectedActions: expectedAction }) => {
+    ].forEach(({ sentAction, expectedAction }) => {
         itShouldAnswerBy(`sending ${sentAction.request}`, {
             epic: devices,
             partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
