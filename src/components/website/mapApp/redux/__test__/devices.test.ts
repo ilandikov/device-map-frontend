@@ -76,7 +76,7 @@ describe('devices epic test - nominal cases', () => {
             partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
             remoteClients: { devicesClient: resolvingDevicesClient },
             sentAction,
-            expectedActions,
+            expectedActions: expectedActions,
         });
     });
 });
