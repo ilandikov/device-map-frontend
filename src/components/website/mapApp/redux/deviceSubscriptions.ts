@@ -7,7 +7,7 @@ export const deviceSubscriptions: RootEpic = (action$, state$, { deviceSubscript
     action$.pipe(
         ofType(DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST),
         mergeMap(() =>
-            new Observable(deviceSubscriptionClient(state$.value.mapAppState.loggedInUser.id)).pipe(
+            new Observable(deviceSubscriptionClient.creation(state$.value.mapAppState.loggedInUser.id)).pipe(
                 map((device) => updateDevice(device)),
                 catchError(() => of(deviceRemoteError('could not subscribe to device update'))),
             ),
