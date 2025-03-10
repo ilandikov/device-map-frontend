@@ -65,7 +65,10 @@ describe('devices epic test - nominal cases', () => {
             sentAction: deviceCreateRequest(),
             expectedAction: [deviceCreated(deviceCreatedByTheMock)],
         },
-        { sentAction: deviceDeleteRequest('deleteThisOne'), expectedAction: [deviceDeleted('deleteThisOne')] },
+        {
+            sentAction: deviceDeleteRequest('deleteThisOne'),
+            expectedAction: [deviceDeleted('deleteThisOne')],
+        },
         {
             sentAction: deviceApproveRequest('approve me!'),
             expectedAction: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
