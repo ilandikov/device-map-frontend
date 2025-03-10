@@ -47,6 +47,7 @@ export const createDeviceMutation = gql`
                     lon
                 }
                 approvals
+                createdDate
                 lastUpdate
             }
         }
@@ -80,6 +81,7 @@ export const onDeviceCreationSubscription = gql`
                 lon
             }
             approvals
+            createdDate
             lastUpdate
         }
     }
