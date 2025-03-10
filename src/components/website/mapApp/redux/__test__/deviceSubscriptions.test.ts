@@ -8,7 +8,7 @@ describe('device subscription - creation', () => {
         epic: deviceSubscriptions,
         partialRootState: { mapAppState: { loggedInUser: { id: 'i will create subscription', points: 0 } } },
         remoteClients: { deviceSubscriptionClient: resolvingDeviceSubscriptionClient },
-        sentAction: deviceCreationSubscriptionRequest('i will create subscription'),
+        sentAction: deviceCreationSubscriptionRequest(),
         expectedActions: [
             updateDevice({
                 id: 'device-created-by-subscription',
@@ -25,7 +25,7 @@ describe('device subscription - creation', () => {
         epic: deviceSubscriptions,
         partialRootState: { mapAppState: { loggedInUser: { id: 'i will create subscription', points: 0 } } },
         remoteClients: { deviceSubscriptionClient: rejectingDeviceSubscriptionClient },
-        sentAction: deviceCreationSubscriptionRequest('id-to-be-created'),
+        sentAction: deviceCreationSubscriptionRequest(),
         expectedActions: [deviceRemoteError('could not subscribe to device update')],
     });
 });

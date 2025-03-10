@@ -152,14 +152,11 @@ export function deviceRemoteError(error: string): DeviceRemoteError {
 
 interface DeviceCreationSubscriptionRequest {
     type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST;
-    id: string;
 }
 
-// TODO remove id since it is taken from the state now
-export function deviceCreationSubscriptionRequest(id: string): DeviceCreationSubscriptionRequest {
+export function deviceCreationSubscriptionRequest(): DeviceCreationSubscriptionRequest {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
-        id,
     };
 }
 

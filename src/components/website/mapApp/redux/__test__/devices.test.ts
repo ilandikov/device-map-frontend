@@ -65,7 +65,7 @@ describe('devices epic test - nominal cases', () => {
         {
             // TODO deviceCreateRequest() should accept a location, the partialRootState can be removed
             sentAction: deviceCreateRequest(),
-            expectedActions: [deviceCreated(deviceCreatedByTheMock), deviceCreationSubscriptionRequest('testId')],
+            expectedActions: [deviceCreated(deviceCreatedByTheMock), deviceCreationSubscriptionRequest()],
         },
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {

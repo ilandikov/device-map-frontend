@@ -55,10 +55,7 @@ const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, DeviceListReque
 const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse, DeviceCreateRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
     responseToAction: (response) =>
-        from([
-            deviceCreated({ ...response.device, approvals: -1 }),
-            deviceCreationSubscriptionRequest(response.device.id),
-        ]),
+        from([deviceCreated({ ...response.device, approvals: -1 }), deviceCreationSubscriptionRequest()]),
 };
 
 const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, DeviceDeleteRequest> = {
