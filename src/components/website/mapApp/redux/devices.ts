@@ -20,7 +20,6 @@ import {
     DeviceRemoteRequestType,
     deviceApproved,
     deviceCreated,
-    deviceCreationSubscriptionRequest,
     deviceDeleted,
     deviceRemoteError,
     devicesListed,
@@ -54,8 +53,7 @@ const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, DeviceListReque
 
 const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse, DeviceCreateRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
-    responseToAction: (response) =>
-        from([deviceCreated({ ...response.device, approvals: -1 }), deviceCreationSubscriptionRequest()]),
+    responseToAction: (response) => from([deviceCreated({ ...response.device, approvals: -1 })]),
 };
 
 const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, DeviceDeleteRequest> = {

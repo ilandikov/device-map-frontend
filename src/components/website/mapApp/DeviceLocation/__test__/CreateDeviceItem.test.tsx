@@ -1,9 +1,13 @@
 import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import { click, testDispatchedAction } from '../../../../../../tests/utils/RenderingHelpers';
+import {
+    click,
+    testDispatchedAction,
+    testDispatchedActionsInOrder,
+} from '../../../../../../tests/utils/RenderingHelpers';
 import { CreateDeviceItem } from '../CreateDeviceItem';
 import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
-import { deviceCreateRequest } from '../../redux/DeviceAction';
+import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -21,7 +25,7 @@ describe('Create Device Item action tests', () => {
 
         click(<CreateDeviceItem />, 'createDeviceButton');
 
-        testDispatchedAction(deviceCreateRequest());
+        testDispatchedActionsInOrder([deviceCreateRequest(), deviceCreationSubscriptionRequest()]);
     });
 
     it('should dispatch show login modal on create account or login button click', () => {
