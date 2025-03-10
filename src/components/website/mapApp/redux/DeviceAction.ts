@@ -155,6 +155,7 @@ interface DeviceCreationSubscriptionRequest {
     id: string;
 }
 
+// TODO remove id since it is taken from the state now
 export function deviceCreationSubscriptionRequest(id: string): DeviceCreationSubscriptionRequest {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
