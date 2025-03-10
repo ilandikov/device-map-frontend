@@ -70,13 +70,13 @@ describe('devices epic test - nominal cases', () => {
             sentAction: deviceApproveRequest('approve me!'),
             expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
         },
-    ].forEach(({ sentAction, expectedActions }) => {
+    ].forEach(({ sentAction, expectedActions: expectedAction }) => {
         itShouldAnswerBy(`sending ${sentAction.request}`, {
             epic: devices,
             partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
             remoteClients: { devicesClient: resolvingDevicesClient },
             sentAction,
-            expectedActions: expectedActions,
+            expectedActions: expectedAction,
         });
     });
 });
