@@ -69,6 +69,7 @@ export interface DevicesClient {
     };
 }
 
+// TODO the subscriber type should be T22OnDevice... (Field of Subscription)
 export type DeviceSubscriptionClient = (creatorID: string) => (subscriber: Subscriber<Subscription>) => void;
 
 export interface AddressClient {
