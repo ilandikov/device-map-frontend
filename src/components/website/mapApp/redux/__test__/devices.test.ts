@@ -59,19 +59,19 @@ describe('devices epic test - nominal cases', () => {
     [
         {
             sentAction: deviceListRequest(),
-            expectedAction: [devicesListed(deviceListFromMock)],
+            expectedAction: devicesListed(deviceListFromMock),
         },
         {
             sentAction: deviceCreateRequest(),
-            expectedAction: [deviceCreated(deviceCreatedByTheMock)],
+            expectedAction: deviceCreated(deviceCreatedByTheMock),
         },
         {
             sentAction: deviceDeleteRequest('deleteThisOne'),
-            expectedAction: [deviceDeleted('deleteThisOne')],
+            expectedAction: deviceDeleted('deleteThisOne'),
         },
         {
             sentAction: deviceApproveRequest('approve me!'),
-            expectedAction: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+            expectedAction: deviceApproved('approve me!', deviceCreationTimeStampFromBackend),
         },
     ].forEach(({ sentAction, expectedAction }) => {
         itShouldAnswerBy(`sending ${sentAction.request}`, {
@@ -79,7 +79,7 @@ describe('devices epic test - nominal cases', () => {
             partialRootState: { mapAppState: { selectedMarker: { location: { lat: 5, lon: 6 }, address: null } } },
             remoteClients: { devicesClient: resolvingDevicesClient },
             sentAction,
-            expectedActions: expectedAction,
+            expectedActions: [expectedAction],
         });
     });
 });
