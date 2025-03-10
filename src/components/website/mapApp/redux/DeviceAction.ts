@@ -154,8 +154,7 @@ interface DeviceCreationSubscriptionRequest {
     type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST;
 }
 
-// TODO remove id since it is taken from the state now
-export function deviceCreationSubscriptionRequest(_id: string): DeviceCreationSubscriptionRequest {
+export function deviceCreationSubscriptionRequest(): DeviceCreationSubscriptionRequest {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
     };
