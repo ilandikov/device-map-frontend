@@ -4,12 +4,12 @@ import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
+import { CreateAccountOrLoginItem } from './CreateAccountOrLoginItem';
 
 export function DeviceList() {
-    const mapAppState = useMapAppState();
-    const selectedMarker = mapAppState.selectedMarker;
+    const { selectedMarker, devices, loggedInUser } = useMapAppState();
 
-    const devicesAtSelectedMarkerLocation = mapAppState.devices
+    const devicesAtSelectedMarkerLocation = devices
         .filter(
             (device) =>
                 device.location.lat === selectedMarker.location.lat &&
@@ -28,7 +28,11 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            {loggedInUser ? (
+                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            ) : (
+                <CreateAccountOrLoginItem key={uniqueKeyForCreateDeviceItem} />
+            )}
         </div>
     );
 }
