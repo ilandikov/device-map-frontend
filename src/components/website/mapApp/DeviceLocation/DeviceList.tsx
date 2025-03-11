@@ -28,7 +28,11 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            {loggedInUser ? <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} /> : <CreateAccountOrLoginItem />}
+            {loggedInUser ? (
+                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            ) : (
+                <CreateAccountOrLoginItem key={uniqueKeyForCreateDeviceItem} />
+            )}
         </div>
     );
 }
