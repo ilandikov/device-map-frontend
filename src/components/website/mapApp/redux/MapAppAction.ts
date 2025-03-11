@@ -47,7 +47,7 @@ interface MapAppAuthCompleted {
     authenticatedUserId: string;
 }
 
-export function mapAppAuthenticationCompleted(authenticatedUserId: string): MapAppAuthCompleted {
+export function mapAppSetLoggedInUserID(authenticatedUserId: string): MapAppAuthCompleted {
     return { type: MapAppActionType.AUTHENTICATION_COMPLETED, authenticatedUserId };
 }
 

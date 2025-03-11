@@ -1,12 +1,12 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
-    mapAppAuthenticationCompleted,
     mapAppGetLocationAddress,
     mapAppLoginModalClose,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
     mapAppSetLoggedInUser,
+    mapAppSetLoggedInUserID,
     mapAppShowComponent,
 } from '../MapAppAction';
 import { MapAppComponents, buildMapAppState } from '../MapAppState';
@@ -57,7 +57,7 @@ describe('MapApp reducer tests', () => {
 
     it('should set logged in user id', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
-        const action = mapAppAuthenticationCompleted('set me in the state');
+        const action = mapAppSetLoggedInUserID('set me in the state');
 
         testMapAppReducer(initialState, action, {
             loggedInUser: { id: 'set me in the state', points: null },

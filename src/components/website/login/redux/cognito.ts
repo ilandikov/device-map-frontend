@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, ClassToInterface, RootEpic } from '../../../../redux/store';
-import { mapAppAuthenticationCompleted, mapAppShowComponent } from '../../mapApp/redux/MapAppAction';
+import { mapAppSetLoggedInUserID, mapAppShowComponent } from '../../mapApp/redux/MapAppAction';
 import { MapAppComponents } from '../../mapApp/redux/MapAppState';
 import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
@@ -38,7 +38,7 @@ function getSuccessActions(step: AuthenticationStep, response: any): AllActions[
         return [
             loginModalRemoteAnswerSuccess(),
             mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
-            mapAppAuthenticationCompleted(response.session.idToken.payload.sub),
+            mapAppSetLoggedInUserID(response.session.idToken.payload.sub),
         ];
     }
 
