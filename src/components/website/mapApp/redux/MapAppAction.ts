@@ -20,7 +20,7 @@ export type MapAppAction =
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
-    | MapAppAuthCompleted
+    | MapAppSetLoggedInUserID
     | MapAppSetLoggedInUser
     | MapAppGetLoggedInUserError
     | MapAppShowComponent
@@ -42,12 +42,12 @@ export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
     return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }
 
-interface MapAppAuthCompleted {
+interface MapAppSetLoggedInUserID {
     type: MapAppActionType.AUTHENTICATION_COMPLETED;
     id: string;
 }
 
-export function mapAppSetLoggedInUserID(id: string): MapAppAuthCompleted {
+export function mapAppSetLoggedInUserID(id: string): MapAppSetLoggedInUserID {
     return { type: MapAppActionType.AUTHENTICATION_COMPLETED, id };
 }
 
