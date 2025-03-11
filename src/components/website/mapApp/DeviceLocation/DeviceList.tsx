@@ -5,9 +5,8 @@ import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
-import { CreateDeviceButton } from './CreateDeviceButton';
-import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
 import { DeviceItemContainer } from './DeviceItemContainer';
+import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
 
 export function DeviceList() {
     const { t } = useI18next();
@@ -37,7 +36,7 @@ export function DeviceList() {
             ) : (
                 <DeviceItemContainer deviceItemType={'create'}>
                     <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-                    {loggedInUser ? <CreateDeviceButton /> : <CreateAccountOrLoginButton />}
+                    <CreateAccountOrLoginButton />
                 </DeviceItemContainer>
             )}
         </div>
