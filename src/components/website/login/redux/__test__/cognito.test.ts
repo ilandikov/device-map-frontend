@@ -5,9 +5,10 @@ import {
     loginModalRemoteRequest,
 } from '../LoginModalAction';
 import { AuthenticationStep } from '../AuthenticationState';
-import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
+import { mapAppSetLoggedInUserID, mapAppShowComponent } from '../../../mapApp/redux/MapAppAction';
 import { cognito } from '../cognito';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
+import { MapAppComponents } from '../../../mapApp/redux/MapAppState';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
 describe('cognito epic tests', () => {
@@ -36,14 +37,15 @@ describe('cognito epic tests', () => {
         });
     });
 
-    itShouldAnswerBy('confirming sign in and completing authentication', {
+    itShouldAnswerBy('confirming sign in, showing device location and setting the user id', {
         epic: cognito,
         remoteClients: { cognitoClient: cognitoResolvingClient },
         partialRootState: { authentication: { step: AuthenticationStep.LOGIN_LOADING } },
         sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
         expectedActions: [
             loginModalRemoteAnswerSuccess(),
-            mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57'),
+            mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
+            mapAppSetLoggedInUserID('0636d777-7355-4fc4-899c-5a7268434a57'),
         ],
     });
 

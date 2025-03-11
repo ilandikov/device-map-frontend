@@ -12,12 +12,10 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
                 ...state,
                 component: MapAppComponents.PRODUCT_DESCRIPTION,
             };
-        // TODO this action shall be removed towards SHOW_COMPONENT and the user data shall be taken with GET_USER_POINTS or similar
-        case MapAppActionType.AUTHENTICATION_COMPLETED:
+        case MapAppActionType.SET_LOGGED_IN_USER_ID:
             return {
                 ...state,
-                component: MapAppComponents.DEVICE_LOCATION,
-                loggedInUser: { id: action.authenticatedUserId, points: null },
+                loggedInUser: { id: action.id, points: null },
             };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
