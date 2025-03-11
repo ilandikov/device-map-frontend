@@ -1,7 +1,6 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
     mapAppGetLocationAddress,
-    mapAppLoginModalClose,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
@@ -46,13 +45,6 @@ describe('MapApp reducer tests', () => {
         const action = mapAppResetCurrentUser();
 
         testMapAppReducer(initialState, action, { loggedInUser: null });
-    });
-
-    it('should move to mainPage screen on navigation cancel action', () => {
-        const initialState = { component: MapAppComponents.LOGIN_MODAL };
-        const action = mapAppLoginModalClose();
-
-        testMapAppReducer(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
     it('should set logged in user id', () => {
