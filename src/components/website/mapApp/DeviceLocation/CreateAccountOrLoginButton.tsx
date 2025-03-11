@@ -4,23 +4,16 @@ import { useAppDispatch } from '../../../../redux/store';
 import { mapAppResetCurrentUser } from '../redux/MapAppAction';
 import { DeviceItemContainer } from './DeviceItemContainer';
 
-export function CreateAccountOrLoginButton() {
+export function CreateAccountOrLoginButton2() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
     return (
-        <button data-testid="createAccountOrLoginButton" onClick={() => dispatch(mapAppResetCurrentUser())}>
-            {t('deviceCreateAccountOrLogin')}
-        </button>
-    );
-}
-
-export function CreateAccountOrLoginButton2() {
-    const { t } = useI18next();
-    return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            <CreateAccountOrLoginButton />
+            <button data-testid="createAccountOrLoginButton" onClick={() => dispatch(mapAppResetCurrentUser())}>
+                {t('deviceCreateAccountOrLogin')}
+            </button>
         </DeviceItemContainer>
     );
 }
