@@ -55,12 +55,11 @@ describe('MapApp reducer tests', () => {
         testMapAppReducer(initialState, action, { component: MapAppComponents.PRODUCT_DESCRIPTION });
     });
 
-    it('should move to device management when authentication has been completed', () => {
+    it('should set logged in user id', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
         const action = mapAppAuthenticationCompleted('set me in the state');
 
         testMapAppReducer(initialState, action, {
-            component: MapAppComponents.DEVICE_LOCATION,
             loggedInUser: { id: 'set me in the state', points: null },
         });
     });
