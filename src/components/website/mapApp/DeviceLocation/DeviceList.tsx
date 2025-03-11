@@ -6,10 +6,9 @@ import './DeviceList.scss';
 import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
 
 export function DeviceList() {
-    const mapAppState = useMapAppState();
-    const selectedMarker = mapAppState.selectedMarker;
+    const { selectedMarker, devices } = useMapAppState();
 
-    const devicesAtSelectedMarkerLocation = mapAppState.devices
+    const devicesAtSelectedMarkerLocation = devices
         .filter(
             (device) =>
                 device.location.lat === selectedMarker.location.lat &&
