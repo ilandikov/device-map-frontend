@@ -12,7 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
     Subscription,
-    SubscriptionT22OnDeviceCreation2Args,
+    SubscriptionT22NotifyDeviceCreationArgs,
     T22ApproveDeviceInput,
     T22ApproveDeviceResponse,
     T22CreateDeviceInput,
@@ -41,7 +41,7 @@ import {
     getUserQuery,
     listDevicesQuery,
     mutateAsAuthUser,
-    onDeviceCreationSubscription,
+    notifyDeviceCreationSubscription,
 } from '../client/query';
 import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
@@ -138,10 +138,10 @@ export function createStore() {
                     const subscription = anonymousClient
                         .subscribe<
                             Subscription,
-                            SubscriptionT22OnDeviceCreation2Args
-                        >({ query: onDeviceCreationSubscription, variables: { creatorID } })
+                            SubscriptionT22NotifyDeviceCreationArgs
+                        >({ query: notifyDeviceCreationSubscription, variables: { creatorID } })
                         .subscribe({
-                            next: (fetchResult) => subscriber.next(fetchResult.data.T22OnDeviceCreation2),
+                            next: (fetchResult) => subscriber.next(fetchResult.data.T22NotifyDeviceCreation),
                             error: (error) => subscriber.error(error),
                             complete: () => subscriber.complete(),
                         });

@@ -71,9 +71,9 @@ export const approveDeviceMutation = gql`
     }
 `;
 
-export const onDeviceCreationSubscription = gql`
+export const notifyDeviceCreationSubscription = gql`
     subscription ($creatorID: ID!) {
-        T22OnDeviceCreation2(creatorID: $creatorID) {
+        T22NotifyDeviceCreation(creatorID: $creatorID) {
             id
             creatorID
             location {
