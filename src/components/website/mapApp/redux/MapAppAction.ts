@@ -15,7 +15,6 @@ export enum MapAppActionType {
 }
 
 export type MapAppAction =
-    | MapAppLoginModalCloseAction
     | MapAppResetCurrentUser
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
@@ -26,20 +25,12 @@ export type MapAppAction =
     | MapAppShowComponent
     | DeviceAction;
 
-export interface MapAppLoginModalCloseAction {
-    type: MapAppActionType.LOGIN_MODAL_CLOSE;
-}
-
 export interface MapAppResetCurrentUser {
     type: MapAppActionType.RESET_CURRENT_USER;
 }
 
 export function mapAppResetCurrentUser(): MapAppResetCurrentUser {
     return { type: MapAppActionType.RESET_CURRENT_USER };
-}
-
-export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
-    return { type: MapAppActionType.LOGIN_MODAL_CLOSE };
 }
 
 interface MapAppSetLoggedInUserID {
