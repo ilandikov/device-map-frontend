@@ -12,7 +12,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
                 ...state,
                 component: MapAppComponents.PRODUCT_DESCRIPTION,
             };
-        case MapAppActionType.AUTHENTICATION_COMPLETED:
+        case MapAppActionType.SET_LOGGED_IN_USER_ID:
             return {
                 ...state,
                 loggedInUser: { id: action.id, points: null },

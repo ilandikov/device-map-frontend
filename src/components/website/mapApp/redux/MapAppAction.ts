@@ -5,7 +5,7 @@ import { DeviceAction } from './DeviceAction';
 export enum MapAppActionType {
     RESET_CURRENT_USER = 'RESET_CURRENT_USER',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
-    AUTHENTICATION_COMPLETED = 'AUTHENTICATION_COMPLETED',
+    SET_LOGGED_IN_USER_ID = 'SET_LOGGED_IN_USER_ID',
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
@@ -43,12 +43,12 @@ export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
 }
 
 interface MapAppSetLoggedInUserID {
-    type: MapAppActionType.AUTHENTICATION_COMPLETED;
+    type: MapAppActionType.SET_LOGGED_IN_USER_ID;
     id: string;
 }
 
 export function mapAppSetLoggedInUserID(id: string): MapAppSetLoggedInUserID {
-    return { type: MapAppActionType.AUTHENTICATION_COMPLETED, id };
+    return { type: MapAppActionType.SET_LOGGED_IN_USER_ID, id };
 }
 
 export interface MapAppDeviceMarkerClick {
