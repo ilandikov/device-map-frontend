@@ -8,7 +8,8 @@ import {
     testDispatchedActionsInOrder,
     testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
-import { mapAppLoginModalClose } from '../../mapApp/redux/MapAppAction';
+import { mapAppShowComponent } from '../../mapApp/redux/MapAppAction';
+import { MapAppComponents } from '../../mapApp/redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -29,7 +30,10 @@ describe('Navigation buttons tests', () => {
     it('should go back to welcome stage on cancel button click', () => {
         click(<NavigationButtons />, 'cancelButton');
 
-        testDispatchedActionsInOrder([mapAppLoginModalClose(), loginModalButtonClick(LoginModalButton.CANCEL)]);
+        testDispatchedActionsInOrder([
+            mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
+            loginModalButtonClick(LoginModalButton.CANCEL),
+        ]);
     });
 
     it('should go back to a desired go back state on go back button click', () => {
