@@ -8,7 +8,7 @@ import {
 import { CreateDeviceItem } from '../CreateDeviceItem';
 import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
 import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
-import { CreateAccountOrLoginButton2 } from '../CreateAccountOrLoginButton';
+import { CreateAccountOrLoginButton } from '../CreateAccountOrLoginButton';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -30,7 +30,7 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch reset current user', () => {
-        click(<CreateAccountOrLoginButton2 />, 'createAccountOrLoginButton');
+        click(<CreateAccountOrLoginButton />, 'createAccountOrLoginButton');
 
         testDispatchedAction(mapAppResetCurrentUser());
     });
