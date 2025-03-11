@@ -1,11 +1,16 @@
 import React from 'react';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 import { useMapAppState } from '../redux/MapAppState';
 import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
+import { CreateDeviceButton } from './CreateDeviceButton';
+import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
+import { DeviceItemContainer } from './DeviceItemContainer';
 
 export function DeviceList() {
+    const { t } = useI18next();
     const { selectedMarker, devices, loggedInUser } = useMapAppState();
 
     const devicesAtSelectedMarkerLocation = devices
@@ -30,7 +35,10 @@ export function DeviceList() {
             {loggedInUser ? (
                 <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
             ) : (
-                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+                <DeviceItemContainer deviceItemType={'create'}>
+                    <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
+                    {loggedInUser ? <CreateDeviceButton /> : <CreateAccountOrLoginButton />}
+                </DeviceItemContainer>
             )}
         </div>
     );
