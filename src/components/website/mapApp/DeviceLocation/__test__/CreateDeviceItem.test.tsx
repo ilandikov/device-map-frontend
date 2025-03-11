@@ -29,14 +29,6 @@ describe('Create Device Item action tests', () => {
         testDispatchedActionsInOrder([deviceCreateRequest(), deviceCreationSubscriptionRequest()]);
     });
 
-    it('should dispatch show login modal on create account or login button click', () => {
-        mockMapAppState({ loggedInUser: null });
-
-        click(<CreateDeviceItem />, 'createAccountOrLoginButton');
-
-        testDispatchedAction(mapAppResetCurrentUser());
-    });
-
     it('should dispatch reset current user', () => {
         click(<CreateAccountOrLoginButton2 />, 'createAccountOrLoginButton');
 
