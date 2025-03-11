@@ -5,9 +5,10 @@ import {
     loginModalRemoteRequest,
 } from '../LoginModalAction';
 import { AuthenticationStep } from '../AuthenticationState';
-import { mapAppAuthenticationCompleted } from '../../../mapApp/redux/MapAppAction';
+import { mapAppAuthenticationCompleted, mapAppShowComponent } from '../../../mapApp/redux/MapAppAction';
 import { cognito } from '../cognito';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
+import { MapAppComponents } from '../../../mapApp/redux/MapAppState';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
 describe('cognito epic tests', () => {
@@ -43,6 +44,7 @@ describe('cognito epic tests', () => {
         sentAction: loginModalRemoteRequest(LoginModalCheck.NONE),
         expectedActions: [
             loginModalRemoteAnswerSuccess(),
+            mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
             mapAppAuthenticationCompleted('0636d777-7355-4fc4-899c-5a7268434a57'),
         ],
     });
