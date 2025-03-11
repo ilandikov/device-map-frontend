@@ -8,7 +8,7 @@ import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
 import { DeviceItemContainer } from './DeviceItemContainer';
 import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
 
-function CreateAccountOrLoginButton2() {
+export function CreateAccountOrLoginButton2() {
     const { t } = useI18next();
     return (
         <DeviceItemContainer deviceItemType={'create'}>
