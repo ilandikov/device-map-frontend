@@ -41,7 +41,7 @@ import {
     getUserQuery,
     listDevicesQuery,
     mutateAsAuthUser,
-    onDeviceCreationSubscription,
+    notifyDeviceCreationSubscription,
 } from '../client/query';
 import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
@@ -139,7 +139,7 @@ export function createStore() {
                         .subscribe<
                             Subscription,
                             SubscriptionT22OnDeviceCreation2Args
-                        >({ query: onDeviceCreationSubscription, variables: { creatorID } })
+                        >({ query: notifyDeviceCreationSubscription, variables: { creatorID } })
                         .subscribe({
                             next: (fetchResult) => subscriber.next(fetchResult.data.T22OnDeviceCreation2),
                             error: (error) => subscriber.error(error),
