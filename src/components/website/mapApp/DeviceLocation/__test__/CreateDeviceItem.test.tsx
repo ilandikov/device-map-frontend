@@ -1,14 +1,8 @@
 import React from 'react';
 import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import {
-    click,
-    testDispatchedAction,
-    testDispatchedActionsInOrder,
-} from '../../../../../../tests/utils/RenderingHelpers';
+import { click, testDispatchedActionsInOrder } from '../../../../../../tests/utils/RenderingHelpers';
 import { CreateDeviceItem } from '../CreateDeviceItem';
-import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
 import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
-import { CreateAccountOrLoginItem } from '../CreateAccountOrLoginItem';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -25,17 +19,5 @@ describe('Create Device Item action tests', () => {
         click(<CreateDeviceItem />, 'createDeviceButton');
 
         testDispatchedActionsInOrder([deviceCreateRequest(), deviceCreationSubscriptionRequest()]);
-    });
-});
-
-describe('Create Account Or Login Item action tests', () => {
-    beforeEach(() => {
-        mockDispatch.mockReset();
-    });
-
-    it('should dispatch reset current user', () => {
-        click(<CreateAccountOrLoginItem />, 'createAccountOrLoginButton');
-
-        testDispatchedAction(mapAppResetCurrentUser());
     });
 });
