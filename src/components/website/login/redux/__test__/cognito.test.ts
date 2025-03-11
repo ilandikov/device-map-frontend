@@ -37,7 +37,7 @@ describe('cognito epic tests', () => {
         });
     });
 
-    itShouldAnswerBy('confirming sign in and completing authentication', {
+    itShouldAnswerBy('confirming sign in, showing device location and setting the user id', {
         epic: cognito,
         remoteClients: { cognitoClient: cognitoResolvingClient },
         partialRootState: { authentication: { step: AuthenticationStep.LOGIN_LOADING } },
