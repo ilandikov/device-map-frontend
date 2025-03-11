@@ -152,11 +152,13 @@ export function deviceRemoteError(error: string): DeviceRemoteError {
 
 interface DeviceCreationSubscriptionRequest {
     type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST;
+    request: DeviceRemoteRequestType;
 }
 
 export function deviceCreationSubscriptionRequest(): DeviceCreationSubscriptionRequest {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
+        request: DeviceRemoteRequestType.CREATE_DEVICE,
     };
 }
 
