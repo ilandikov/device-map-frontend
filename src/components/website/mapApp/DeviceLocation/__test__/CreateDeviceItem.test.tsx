@@ -8,7 +8,7 @@ import {
 import { CreateDeviceItem } from '../CreateDeviceItem';
 import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
 import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
-import { CreateAccountOrLoginButton2 } from '../DeviceList';
+import { CreateAccountOrLoginButton2 } from '../CreateAccountOrLoginButton';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
