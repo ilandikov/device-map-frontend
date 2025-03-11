@@ -16,7 +16,7 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-describe('CreateDeviceItem action tests', () => {
+describe('Create Device Item action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
@@ -28,7 +28,7 @@ describe('CreateDeviceItem action tests', () => {
     });
 });
 
-describe('CreateAccountOrLoginItem action tests', () => {
+describe('Create Account Or Login Item action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
