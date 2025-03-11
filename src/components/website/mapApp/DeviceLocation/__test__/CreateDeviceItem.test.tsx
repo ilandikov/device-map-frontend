@@ -1,5 +1,5 @@
 import React from 'react';
-import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import {
     click,
     testDispatchedAction,
@@ -21,9 +21,7 @@ describe('Create Device Item action tests', () => {
         mockDispatch.mockReset();
     });
 
-    it('should dispatch create device action on create device button click', () => {
-        mockMapAppState({ loggedInUser: { id: 'i can create a device', points: 0 } });
-
+    it('should dispatch create device action', () => {
         click(<CreateDeviceItem />, 'createDeviceButton');
 
         testDispatchedActionsInOrder([deviceCreateRequest(), deviceCreationSubscriptionRequest()]);
