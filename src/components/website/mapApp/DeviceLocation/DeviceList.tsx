@@ -4,7 +4,7 @@ import { DeviceItem } from './DeviceItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
 import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
-import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
+import { CreateAccountOrLoginItem } from './CreateAccountOrLoginItem';
 
 export function DeviceList() {
     const { selectedMarker, devices, loggedInUser } = useMapAppState();
@@ -28,7 +28,7 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            {loggedInUser ? <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} /> : <CreateAccountOrLoginButton />}
+            {loggedInUser ? <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} /> : <CreateAccountOrLoginItem />}
         </div>
     );
 }

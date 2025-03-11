@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../../redux/store';
 import { mapAppResetCurrentUser } from '../redux/MapAppAction';
 import { DeviceItemContainer } from './DeviceItemContainer';
 
-export function CreateAccountOrLoginButton() {
+export function CreateAccountOrLoginItem() {
     const { t } = useI18next();
     const dispatch = useAppDispatch();
 
