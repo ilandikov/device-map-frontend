@@ -1,8 +1,8 @@
 import React from 'react';
-import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { click, testDispatchedAction } from '../../../../../../tests/utils/RenderingHelpers';
 import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
-import { CreateAccountOrLoginItem } from '../CreateAccountOrLoginItem';
+import { DeviceList } from '../DeviceList';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -16,7 +16,9 @@ describe('Create Account Or Login Item action tests', () => {
     });
 
     it('should dispatch reset current user', () => {
-        click(<CreateAccountOrLoginItem />, 'createAccountOrLoginButton');
+        mockMapAppState({ loggedInUser: null });
+
+        click(<DeviceList />, 'createAccountOrLoginButton');
 
         testDispatchedAction(mapAppResetCurrentUser());
     });

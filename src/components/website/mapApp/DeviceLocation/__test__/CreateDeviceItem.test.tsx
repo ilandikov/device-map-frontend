@@ -1,8 +1,8 @@
 import React from 'react';
-import { mockDispatch, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
+import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { click, testDispatchedActionsInOrder } from '../../../../../../tests/utils/RenderingHelpers';
-import { CreateDeviceItem } from '../CreateDeviceItem';
 import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
+import { DeviceList } from '../DeviceList';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -16,7 +16,9 @@ describe('Create Device Item action tests', () => {
     });
 
     it('should dispatch create device action', () => {
-        click(<CreateDeviceItem />, 'createDeviceButton');
+        mockMapAppState({ loggedInUser: { id: 'i can create a device', points: 0 } });
+
+        click(<DeviceList />, 'createDeviceButton');
 
         testDispatchedActionsInOrder([deviceCreateRequest(), deviceCreationSubscriptionRequest()]);
     });
