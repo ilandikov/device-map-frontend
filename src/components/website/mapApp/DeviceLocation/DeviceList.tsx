@@ -8,8 +8,17 @@ import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
 import { DeviceItemContainer } from './DeviceItemContainer';
 import { CreateAccountOrLoginButton } from './CreateAccountOrLoginButton';
 
-export function DeviceList() {
+function CreateAccountOrLoginButton2() {
     const { t } = useI18next();
+    return (
+        <DeviceItemContainer deviceItemType={'create'}>
+            <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
+            <CreateAccountOrLoginButton />
+        </DeviceItemContainer>
+    );
+}
+
+export function DeviceList() {
     const { selectedMarker, devices, loggedInUser } = useMapAppState();
 
     const devicesAtSelectedMarkerLocation = devices
@@ -31,14 +40,7 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            {loggedInUser ? (
-                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
-            ) : (
-                <DeviceItemContainer deviceItemType={'create'}>
-                    <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-                    <CreateAccountOrLoginButton />
-                </DeviceItemContainer>
-            )}
+            {loggedInUser ? <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} /> : <CreateAccountOrLoginButton2 />}
         </div>
     );
 }
