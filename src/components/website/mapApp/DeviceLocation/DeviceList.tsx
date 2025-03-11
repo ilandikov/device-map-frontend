@@ -6,7 +6,7 @@ import './DeviceList.scss';
 import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
 
 export function DeviceList() {
-    const { selectedMarker, devices } = useMapAppState();
+    const { selectedMarker, devices, loggedInUser } = useMapAppState();
 
     const devicesAtSelectedMarkerLocation = devices
         .filter(
@@ -27,7 +27,11 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            {loggedInUser ? (
+                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            ) : (
+                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+            )}
         </div>
     );
 }
