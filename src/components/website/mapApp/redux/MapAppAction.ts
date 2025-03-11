@@ -44,11 +44,11 @@ export function mapAppLoginModalClose(): MapAppLoginModalCloseAction {
 
 interface MapAppAuthCompleted {
     type: MapAppActionType.AUTHENTICATION_COMPLETED;
-    authenticatedUserId: string;
+    id: string;
 }
 
-export function mapAppSetLoggedInUserID(authenticatedUserId: string): MapAppAuthCompleted {
-    return { type: MapAppActionType.AUTHENTICATION_COMPLETED, authenticatedUserId };
+export function mapAppSetLoggedInUserID(id: string): MapAppAuthCompleted {
+    return { type: MapAppActionType.AUTHENTICATION_COMPLETED, id };
 }
 
 export interface MapAppDeviceMarkerClick {
