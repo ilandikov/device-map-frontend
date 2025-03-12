@@ -10,7 +10,7 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('device list snapshot tests', () => {
-    it('should show only the device matching the selected marker', () => {
+    it('should show only the create account or login button', () => {
         mockMapAppState({
             loggedInUser: null,
             isDeviceCreationOngoing: false,
