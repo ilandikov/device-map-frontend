@@ -33,7 +33,7 @@ describe('device list snapshot tests', () => {
         testSnapshot(<DeviceLocation />);
     });
 
-    it('should show the address and a list devices matching the selected marker with the create device item', () => {
+    it('should show the address and a list devices matching the selected marker with the create device item and the temporary item', () => {
         mockMapAppState({
             component: MapAppComponents.DEVICE_LOCATION,
             loggedInUser: { id: 'I created the second one!', points: 0 },
@@ -54,14 +54,6 @@ describe('device list snapshot tests', () => {
                     location: { lat: 26.3553423, lon: 19.23131 },
                     approvals: 0,
                 },
-                {
-                    id: 'Matching selected marker and waiting for creation',
-                    createdDate: '0000000000001',
-                    lastUpdate: '0000000000002',
-                    creatorID: 'I created the third one!',
-                    location: { lat: 26.3553423, lon: 19.23131 },
-                    approvals: -1,
-                },
             ],
             selectedMarker: {
                 location: { lat: 26.3553423, lon: 19.23131 },
@@ -70,6 +62,7 @@ describe('device list snapshot tests', () => {
                     line2: 'District and city',
                 },
             },
+            isDeviceCreationOngoing: true,
         });
 
         testSnapshot(<DeviceLocation />);

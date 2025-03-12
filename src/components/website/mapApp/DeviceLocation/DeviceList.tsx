@@ -7,7 +7,7 @@ import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
 import { CreateAccountOrLoginItem } from './CreateAccountOrLoginItem';
 
 export function DeviceList() {
-    const { selectedMarker, devices, loggedInUser } = useMapAppState();
+    const { selectedMarker, devices, loggedInUser, isDeviceCreationOngoing } = useMapAppState();
 
     const devicesAtSelectedMarkerLocation = devices
         .filter(
@@ -15,19 +15,14 @@ export function DeviceList() {
                 device.location.lat === selectedMarker.location.lat &&
                 device.location.lon === selectedMarker.location.lon,
         )
-        .map((device, index) =>
-            device.approvals >= 0 ? (
-                <DeviceItem device={device} key={index} />
-            ) : (
-                <DeviceItemWaitingCreation key={index} />
-            ),
-        );
+        .map((device, index) => <DeviceItem device={device} key={index} />);
 
     const uniqueKeyForCreateDeviceItem = devicesAtSelectedMarkerLocation.length + 1;
 
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
+            {isDeviceCreationOngoing && <DeviceItemWaitingCreation key={uniqueKeyForCreateDeviceItem + 1} />}
             {loggedInUser ? (
                 <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
             ) : (
