@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`location address snapshot tests should show address loader when there is no address 1`] = `
+<div
+  className="location-address-container"
+>
+  <img
+    alt="location-address-image"
+    className="location-address-image"
+    src="test-file-stub"
+  />
+  <div
+    className="location-address-loader-container"
+  >
+    <div
+      className="location-address-loader"
+    />
+  </div>
+</div>
+`;
+
+exports[`location address snapshot tests should show the address 1`] = `
+<div
+  className="location-address-container"
+>
+  <img
+    alt="location-address-image"
+    className="location-address-image"
+    src="test-file-stub"
+  />
+  <div
+    className="location-address"
+  >
+    <p>
+      Street and number
+    </p>
+    <span>
+      District and city
+    </span>
+  </div>
+</div>
+`;
