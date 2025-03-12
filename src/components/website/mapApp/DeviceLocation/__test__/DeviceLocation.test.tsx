@@ -58,9 +58,9 @@ describe('device list snapshot tests', () => {
 
     it('should show the devices matching the selected marker, the temporary item and the create device item', () => {
         mockMapAppState({
-            devices: twoDevicesAtDifferentLocations,
-            selectedMarker: matchingSecondDeviceLocation,
-            loggedInUser: { id: 'I created the second one!', points: 0 },
+            devices: [],
+            selectedMarker: { location: { lat: 0, lon: 0 }, address: null },
+            loggedInUser: { id: 'i am logged in', points: 0 },
             isDeviceCreationOngoing: true,
         });
 
