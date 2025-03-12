@@ -77,12 +77,7 @@ export function deviceApproveRequest(id: string): DeviceApproveRequest {
     };
 }
 
-export type DeviceRemoteAnswer =
-    | DevicesListed
-    | DeviceCreated
-    | DeviceDeleted
-    | DeviceApproved
-    | DeviceCreationSubscriptionAnswer;
+export type DeviceRemoteAnswer = DevicesListed | DeviceCreated | DeviceDeleted | DeviceApproved;
 
 export interface DevicesListed {
     type: DeviceActionType.DEVICE_REMOTE_ANSWER;
@@ -160,22 +155,6 @@ export function deviceCreationSubscriptionRequest(): DeviceCreationSubscriptionR
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
         request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
-    };
-}
-
-// TODO names here have to be reworked
-interface DeviceCreationSubscriptionAnswer {
-    type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER;
-    request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST;
-    device: T22Device;
-}
-
-// TODO names here have to be reworked
-export function updateDevice(device: T22Device): DeviceCreationSubscriptionAnswer {
-    return {
-        type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER,
-        request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
-        device,
     };
 }
 
