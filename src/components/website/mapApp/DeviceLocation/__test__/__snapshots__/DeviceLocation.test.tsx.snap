@@ -84,7 +84,7 @@ exports[`device list snapshot tests should show address loader and a list device
 </div>
 `;
 
-exports[`device list snapshot tests should show the address and a list devices matching the selected marker with the create device item 1`] = `
+exports[`device list snapshot tests should show the address and a list devices matching the selected marker with the create device item and the temporary item 1`] = `
 <div
   className="device-location-window"
 >

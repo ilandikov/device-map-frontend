@@ -13,6 +13,7 @@ import {
     deviceApproved,
     deviceCreateRequest,
     deviceCreated,
+    deviceCreation,
     deviceDeleted,
     deviceListRequest,
     devicesListed,
@@ -27,6 +28,7 @@ describe('MapApp reducer tests', () => {
         testInitialState(buildMapAppState, {
             component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [],
+            isDeviceCreationOngoing: false,
             selectedMarker: {
                 location: null,
                 address: null,
@@ -185,6 +187,28 @@ describe('rename me', () => {
 
         testMapAppReducer(initialState, action, {
             devices: [updatedDevice],
+        });
+    });
+});
+
+describe('MapApp reducer tests - device creation ongoing', () => {
+    it('should set device creation ongoing to true', () => {
+        const initialState = { isDeviceCreationOngoing: false };
+
+        const action = deviceCreation(true);
+
+        testMapAppReducer(initialState, action, {
+            isDeviceCreationOngoing: true,
+        });
+    });
+
+    it('should set device creation ongoing to false', () => {
+        const initialState = { isDeviceCreationOngoing: true };
+
+        const action = deviceCreation(false);
+
+        testMapAppReducer(initialState, action, {
+            isDeviceCreationOngoing: false,
         });
     });
 });

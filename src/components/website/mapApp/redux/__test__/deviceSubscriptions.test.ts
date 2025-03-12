@@ -1,4 +1,4 @@
-import { deviceCreationSubscriptionRequest, deviceRemoteError, updateDevice } from '../DeviceAction';
+import { deviceCreation, deviceCreationSubscriptionRequest, deviceRemoteError, updateDevice } from '../DeviceAction';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { deviceSubscriptions } from '../deviceSubscriptions';
 import { rejectingDeviceSubscriptionClient, resolvingDeviceSubscriptionClient } from './deviceSubscriptionHelpers';
@@ -18,6 +18,7 @@ describe('device subscription - creation', () => {
                 location: { lat: 9, lon: 5 },
                 approvals: 4,
             }),
+            deviceCreation(false),
         ],
     });
 
@@ -26,6 +27,6 @@ describe('device subscription - creation', () => {
         partialRootState: { mapAppState: { loggedInUser: { id: 'i will create subscription', points: 0 } } },
         remoteClients: { deviceSubscriptionClient: rejectingDeviceSubscriptionClient },
         sentAction: deviceCreationSubscriptionRequest(),
-        expectedActions: [deviceRemoteError('could not subscribe to device update')],
+        expectedActions: [deviceRemoteError('could not subscribe to device update'), deviceCreation(false)],
     });
 });

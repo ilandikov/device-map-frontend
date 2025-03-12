@@ -3,6 +3,7 @@ import {
     deviceApproved,
     deviceCreateRequest,
     deviceCreated,
+    deviceCreation,
     deviceDeleteRequest,
     deviceDeleted,
     deviceListRequest,
@@ -63,7 +64,7 @@ describe('devices epic test - nominal cases', () => {
         },
         {
             sentAction: deviceCreateRequest(),
-            expectedActions: [deviceCreated(deviceCreatedByTheMock)],
+            expectedActions: [deviceCreated(deviceCreatedByTheMock), deviceCreation(true)],
         },
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {

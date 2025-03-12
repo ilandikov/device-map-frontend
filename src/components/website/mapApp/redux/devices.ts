@@ -20,6 +20,7 @@ import {
     DeviceRemoteRequestType,
     deviceApproved,
     deviceCreated,
+    deviceCreation,
     deviceDeleted,
     deviceRemoteError,
     devicesListed,
@@ -63,6 +64,7 @@ const createDeviceRequest: DevicesRequest<T22CreateDeviceRequestResponse, Device
                 creatorID: 'someone',
                 location: { lat: 0, lon: 0 },
             }),
+            deviceCreation(true),
         ]),
 };
 

@@ -31,6 +31,8 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
             const devicesWithoutTheDeviceToUpdate = state.devices.filter((device) => device.id !== action.device.id);
             return { ...state, devices: [...devicesWithoutTheDeviceToUpdate, action.device] };
         }
+        case DeviceActionType.DEVICE_CREATION:
+            return { ...state, isDeviceCreationOngoing: action.isDeviceCreationOngoing };
         default:
             return state;
     }
