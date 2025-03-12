@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`device list snapshot tests should show only the create account or login button 1`] = `
+exports[`Extra Item snapshot tests should show only the create account or login button 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -33,7 +33,7 @@ exports[`device list snapshot tests should show only the create account or login
 </div>
 `;
 
-exports[`device list snapshot tests should show only the create device item 1`] = `
+exports[`Extra Item snapshot tests should show only the create device item 1`] = `
 <div
   className="device-list-item-container"
 >
@@ -66,7 +66,7 @@ exports[`device list snapshot tests should show only the create device item 1`] 
 </div>
 `;
 
-exports[`device list snapshot tests should show the temporary item and the create device item 1`] = `
+exports[`Extra Item snapshot tests should show the temporary item and the create device item 1`] = `
 <div
   className="device-list-item-container"
 >
