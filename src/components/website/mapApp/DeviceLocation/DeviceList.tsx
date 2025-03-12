@@ -1,13 +1,11 @@
 import React from 'react';
 import { useMapAppState } from '../redux/MapAppState';
 import { DeviceItem } from './DeviceItem';
-import { CreateDeviceItem } from './CreateDeviceItem';
 import './DeviceList.scss';
-import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
-import { CreateAccountOrLoginItem } from './CreateAccountOrLoginItem';
+import { ExtraItem } from './ExtraItem';
 
 export function DeviceList() {
-    const { selectedMarker, devices, loggedInUser, isDeviceCreationOngoing } = useMapAppState();
+    const { selectedMarker, devices } = useMapAppState();
 
     const devicesAtSelectedMarkerLocation = devices
         .filter(
@@ -22,15 +20,7 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            {loggedInUser ? (
-                isDeviceCreationOngoing ? (
-                    <DeviceItemWaitingCreation key={uniqueKeyForCreateDeviceItem + 1} />
-                ) : (
-                    <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
-                )
-            ) : (
-                <CreateAccountOrLoginItem key={uniqueKeyForCreateDeviceItem} />
-            )}
+            <ExtraItem key={uniqueKeyForCreateDeviceItem} />
         </div>
     );
 }
