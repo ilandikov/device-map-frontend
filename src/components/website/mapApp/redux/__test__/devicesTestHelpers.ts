@@ -21,17 +21,7 @@ export const resolvingDevicesClient: DevicesClient = {
             }),
     },
     forAuthenticatedUser: {
-        createDevice: (createDeviceInput) =>
-            Promise.resolve({
-                device: {
-                    id: 'testId',
-                    createdDate: '1796354896548',
-                    lastUpdate: '1796354897659',
-                    creatorID: 'new creator',
-                    location: createDeviceInput.location,
-                    approvals: 0,
-                },
-            }),
+        createDevice: () => Promise.resolve({ id: 'testId' }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
         approveDevice: (approveDeviceInput) => Promise.resolve({ id: approveDeviceInput.id, lastUpdate: Date.now() }),
     },

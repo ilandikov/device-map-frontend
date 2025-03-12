@@ -30,10 +30,10 @@ const deviceListFromMock = [
 ];
 const deviceCreatedByTheMock = {
     id: 'testId',
-    createdDate: '1796354896548',
-    lastUpdate: '1796354897659',
-    creatorID: 'new creator',
-    location: { lat: 5, lon: 6 },
+    createdDate: 0,
+    lastUpdate: 0,
+    creatorID: 'someone',
+    location: { lat: 0, lon: 0 },
     approvals: -1,
 };
 

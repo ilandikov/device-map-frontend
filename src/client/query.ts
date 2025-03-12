@@ -37,19 +37,9 @@ export const listDevicesQuery = {
 };
 
 export const createDeviceMutation = gql`
-    mutation ($input: T22CreateDeviceInput!) {
-        T22CreateDevice(input: $input) {
-            device {
-                id
-                creatorID
-                location {
-                    lat
-                    lon
-                }
-                approvals
-                createdDate
-                lastUpdate
-            }
+    mutation ($input: T22CreateDeviceRequestInput!) {
+        T22CreateDeviceRequest(input: $input) {
+            id
         }
     }
 `;

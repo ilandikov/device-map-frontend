@@ -2,7 +2,7 @@ import { EMPTY, Observable, catchError, from, mergeMap, of, switchMap } from 'rx
 import { ofType } from 'redux-observable';
 import {
     T22ApproveDeviceResponse,
-    T22CreateDeviceResponse,
+    T22CreateDeviceRequestResponse,
     T22DeleteDeviceResponse,
     T22ListDevicesResponse,
 } from '@mancho-school-t22/graphql-types';
@@ -51,9 +51,19 @@ const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, DeviceListReque
     responseToAction: (response) => of(devicesListed(response.devices)),
 };
 
-const createDeviceRequest: DevicesRequest<T22CreateDeviceResponse, DeviceCreateRequest> = {
+const createDeviceRequest: DevicesRequest<T22CreateDeviceRequestResponse, DeviceCreateRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
-    responseToAction: (response) => from([deviceCreated({ ...response.device, approvals: -1 })]),
+    responseToAction: (response) =>
+        from([
+            deviceCreated({
+                id: response.id,
+                approvals: -1,
+                createdDate: 0,
+                lastUpdate: 0,
+                creatorID: 'someone',
+                location: { lat: 0, lon: 0 },
+            }),
+        ]),
 };
 
 const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, DeviceDeleteRequest> = {
@@ -68,7 +78,7 @@ const approveDevice: DevicesRequest<T22ApproveDeviceResponse, DeviceApproveReque
 
 type DeviceRemoteResponse =
     | T22ListDevicesResponse
-    | T22CreateDeviceResponse
+    | T22CreateDeviceRequestResponse
     | T22DeleteDeviceResponse
     | T22ApproveDeviceResponse;
 
@@ -76,7 +86,7 @@ const devicesRequests: {
     [key in DeviceRemoteRequestType]: DevicesRequest<DeviceRemoteResponse, DeviceRemoteRequest>;
 } = {
     LIST_DEVICES: listDevicesRequest,
-    CREATE_DEVICE: createDeviceRequest,
+    CREATE_DEVICE_REQUEST: createDeviceRequest,
     DELETE_DEVICE: deleteDeviceRequest,
     APPROVE_DEVICE: approveDevice,
 };

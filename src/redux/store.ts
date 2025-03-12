@@ -15,8 +15,8 @@ import {
     SubscriptionT22NotifyDeviceCreationArgs,
     T22ApproveDeviceInput,
     T22ApproveDeviceResponse,
-    T22CreateDeviceInput,
-    T22CreateDeviceResponse,
+    T22CreateDeviceRequestInput,
+    T22CreateDeviceRequestResponse,
     T22DeleteDeviceInput,
     T22DeleteDeviceResponse,
     T22Device,
@@ -65,7 +65,7 @@ export interface DevicesClient {
         listDevices: () => Promise<T22ListDevicesResponse>;
     };
     forAuthenticatedUser: {
-        createDevice: (createDeviceInput: T22CreateDeviceInput) => Promise<T22CreateDeviceResponse>;
+        createDevice: (createDeviceInput: T22CreateDeviceRequestInput) => Promise<T22CreateDeviceRequestResponse>;
         deleteDevice: (deleteDeviceInput: T22DeleteDeviceInput) => Promise<T22DeleteDeviceResponse>;
         approveDevice: (approveDeviceInput: T22ApproveDeviceInput) => Promise<T22ApproveDeviceResponse>;
     };
@@ -126,7 +126,7 @@ export function createStore() {
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
-                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDevice'),
+                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDeviceRequest'),
                     deleteDevice: async (input) =>
                         await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDevice'),
                     approveDevice: async (input) =>
