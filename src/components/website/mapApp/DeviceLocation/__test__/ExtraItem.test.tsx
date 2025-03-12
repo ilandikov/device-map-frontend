@@ -1,7 +1,14 @@
 import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
-import { testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
+import {
+    click,
+    testDispatchedAction,
+    testDispatchedActionsInOrder,
+    testSnapshot,
+} from '../../../../../../tests/utils/RenderingHelpers';
 import { ExtraItem } from '../ExtraItem';
+import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
+import { deviceCreateRequest, deviceCreation, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -35,5 +42,31 @@ describe('Extra Item snapshot tests', () => {
         });
 
         testSnapshot(<ExtraItem />);
+    });
+});
+
+describe('Extra Item action tests', () => {
+    beforeEach(() => {
+        mockDispatch.mockReset();
+    });
+
+    it('should dispatch reset current user', () => {
+        mockMapAppState({ loggedInUser: null });
+
+        click(<ExtraItem />, 'createAccountOrLoginButton');
+
+        testDispatchedAction(mapAppResetCurrentUser());
+    });
+
+    it('should dispatch create device action', () => {
+        mockMapAppState({ loggedInUser: { id: 'i can create a device', points: 0 } });
+
+        click(<ExtraItem />, 'createDeviceButton');
+
+        testDispatchedActionsInOrder([
+            deviceCreateRequest(),
+            deviceCreationSubscriptionRequest(),
+            deviceCreation(true),
+        ]);
     });
 });
