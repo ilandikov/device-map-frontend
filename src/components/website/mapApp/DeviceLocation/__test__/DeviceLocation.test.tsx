@@ -1,7 +1,7 @@
 import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
-import { DeviceList } from '../DeviceList';
+import { ExtraItem } from '../ExtraItem';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -16,7 +16,7 @@ describe('device list snapshot tests', () => {
             isDeviceCreationOngoing: false,
         });
 
-        testSnapshot(<DeviceList />);
+        testSnapshot(<ExtraItem />);
     });
 
     it('should show only the create device item', () => {
@@ -25,7 +25,7 @@ describe('device list snapshot tests', () => {
             isDeviceCreationOngoing: false,
         });
 
-        testSnapshot(<DeviceList />);
+        testSnapshot(<ExtraItem />);
     });
 
     it('should show the temporary item and the create device item', () => {
@@ -34,6 +34,6 @@ describe('device list snapshot tests', () => {
             isDeviceCreationOngoing: true,
         });
 
-        testSnapshot(<DeviceList />);
+        testSnapshot(<ExtraItem />);
     });
 });
