@@ -33,18 +33,9 @@ const secondDeviceLocation = { lat: 26.3553423, lon: 19.23131 };
 describe('device list snapshot tests', () => {
     it('should show address loader and a list devices matching the selected marker without the create device item', () => {
         mockMapAppState({
-            devices: [
-                {
-                    id: '85378',
-                    createdDate: '0000000000000',
-                    lastUpdate: '1111111111111',
-                    creatorID: 'John Doe',
-                    location: { lat: 6.3, lon: 9.2 },
-                    approvals: 0,
-                },
-            ],
+            devices: twoDevicesAtDifferentLocation,
             selectedMarker: {
-                location: { lat: 6.3, lon: 9.2 },
+                location: secondDeviceLocation,
                 address: null,
             },
         });
