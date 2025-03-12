@@ -1,4 +1,4 @@
-import { EMPTY, Observable, catchError, from, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 import {
     T22ApproveDeviceResponse,
@@ -54,7 +54,7 @@ const listDevicesRequest: DevicesRequest<T22ListDevicesResponse, DeviceListReque
 const createDeviceRequest: DevicesRequest<T22CreateDeviceRequestResponse, DeviceCreateRequest> = {
     call: (client, state) => client.forAuthenticatedUser.createDevice({ location: state.selectedMarker.location }),
     responseToAction: (response) =>
-        from([
+        of(
             deviceCreated({
                 id: response.id,
                 approvals: -1,
@@ -63,7 +63,7 @@ const createDeviceRequest: DevicesRequest<T22CreateDeviceRequestResponse, Device
                 creatorID: 'someone',
                 location: { lat: 0, lon: 0 },
             }),
-        ]),
+        ),
 };
 
 const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, DeviceDeleteRequest> = {
