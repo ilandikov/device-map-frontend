@@ -44,7 +44,7 @@ function deviceReducer(devices: T22Device[], action: DeviceAction): T22Device[] 
     switch (action.request) {
         case DeviceRemoteRequestType.LIST_DEVICES:
             return action.devices;
-        case DeviceRemoteRequestType.CREATE_DEVICE: {
+        case DeviceRemoteRequestType.CREATE_DEVICE_REQUEST: {
             return [...devices, action.device];
         }
         case DeviceRemoteRequestType.DELETE_DEVICE:

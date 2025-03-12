@@ -19,7 +19,7 @@ export enum DeviceActionType {
 
 export enum DeviceRemoteRequestType {
     LIST_DEVICES = 'LIST_DEVICES',
-    CREATE_DEVICE = 'CREATE_DEVICE',
+    CREATE_DEVICE_REQUEST = 'CREATE_DEVICE_REQUEST',
     DELETE_DEVICE = 'DELETE_DEVICE',
     APPROVE_DEVICE = 'APPROVE_DEVICE',
 }
@@ -31,7 +31,7 @@ export interface DeviceListRequest {
 
 export interface DeviceCreateRequest {
     type: DeviceActionType.DEVICE_REMOTE_REQUEST;
-    request: DeviceRemoteRequestType.CREATE_DEVICE;
+    request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST;
 }
 
 export interface DeviceDeleteRequest {
@@ -56,7 +56,7 @@ export function deviceListRequest(): DeviceListRequest {
 export function deviceCreateRequest(): DeviceCreateRequest {
     return {
         type: DeviceActionType.DEVICE_REMOTE_REQUEST,
-        request: DeviceRemoteRequestType.CREATE_DEVICE,
+        request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
     };
 }
 
@@ -91,7 +91,7 @@ export interface DevicesListed {
 
 export interface DeviceCreated {
     type: DeviceActionType.DEVICE_REMOTE_ANSWER;
-    request: DeviceRemoteRequestType.CREATE_DEVICE;
+    request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST;
     device: T22Device;
 }
 
@@ -124,7 +124,7 @@ export function devicesListed(devices: T22Device[]): DevicesListed {
 export function deviceCreated(device: T22Device): DeviceCreated {
     return {
         type: DeviceActionType.DEVICE_REMOTE_ANSWER,
-        request: DeviceRemoteRequestType.CREATE_DEVICE,
+        request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
         device,
     };
 }
@@ -158,14 +158,14 @@ interface DeviceCreationSubscriptionRequest {
 export function deviceCreationSubscriptionRequest(): DeviceCreationSubscriptionRequest {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_REQUEST,
-        request: DeviceRemoteRequestType.CREATE_DEVICE,
+        request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
     };
 }
 
 // TODO names here have to be reworked
 interface DeviceCreationSubscriptionAnswer {
     type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER;
-    request: DeviceRemoteRequestType.CREATE_DEVICE;
+    request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST;
     device: T22Device;
 }
 
@@ -173,7 +173,7 @@ interface DeviceCreationSubscriptionAnswer {
 export function updateDevice(device: T22Device): DeviceCreationSubscriptionAnswer {
     return {
         type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER,
-        request: DeviceRemoteRequestType.CREATE_DEVICE,
+        request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
         device,
     };
 }
