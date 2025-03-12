@@ -7,8 +7,9 @@ import {
     testSnapshot,
 } from '../../../../../../tests/utils/RenderingHelpers';
 import { ExtraItem } from '../ExtraItem';
-import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
+import { mapAppShowComponent } from '../../redux/MapAppAction';
 import { deviceCreateRequest, deviceCreation, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
+import { MapAppComponents } from '../../redux/MapAppState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -50,12 +51,12 @@ describe('Extra Item action tests', () => {
         mockDispatch.mockReset();
     });
 
-    it('should dispatch reset current user', () => {
+    it('should dispatch action to open login modal', () => {
         mockMapAppState({ loggedInUser: null });
 
         click(<ExtraItem />, 'createAccountOrLoginButton');
 
-        testDispatchedAction(mapAppResetCurrentUser());
+        testDispatchedAction(mapAppShowComponent(MapAppComponents.LOGIN_MODAL));
     });
 
     it('should dispatch create device action', () => {

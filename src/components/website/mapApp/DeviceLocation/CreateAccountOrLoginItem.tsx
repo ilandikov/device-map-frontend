@@ -1,7 +1,8 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 import { useAppDispatch } from '../../../../redux/store';
-import { mapAppResetCurrentUser } from '../redux/MapAppAction';
+import { mapAppShowComponent } from '../redux/MapAppAction';
+import { MapAppComponents } from '../redux/MapAppState';
 import { DeviceItemContainer } from './DeviceItemContainer';
 
 export function CreateAccountOrLoginItem() {
@@ -11,10 +12,10 @@ export function CreateAccountOrLoginItem() {
     return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
-            {
-                // TODO fix the dispatched action
-            }
-            <button data-testid="createAccountOrLoginButton" onClick={() => dispatch(mapAppResetCurrentUser())}>
+            <button
+                data-testid="createAccountOrLoginButton"
+                onClick={() => dispatch(mapAppShowComponent(MapAppComponents.LOGIN_MODAL))}
+            >
                 {t('deviceCreateAccountOrLogin')}
             </button>
         </DeviceItemContainer>
