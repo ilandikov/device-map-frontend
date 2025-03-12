@@ -47,7 +47,7 @@ function deviceReducer(devices: T22Device[], action: DeviceRemoteAnswer): T22Dev
             const deviceToApprove = devices.find((device) => device.id === action.id);
             const approvedDevice: T22Device = {
                 ...deviceToApprove,
-                lastUpdate: action.lastUpdate,
+                lastUpdate: Date.now(),
                 approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
             };
             const withoutApprovedDevice = devices.filter((device) => device.id !== action.id);
