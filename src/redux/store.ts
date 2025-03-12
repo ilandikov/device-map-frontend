@@ -141,8 +141,14 @@ export function createStore() {
                             SubscriptionT22NotifyDeviceCreationArgs
                         >({ query: notifyDeviceCreationSubscription, variables: { creatorID } })
                         .subscribe({
-                            next: (fetchResult) => subscriber.next(fetchResult.data.T22NotifyDeviceCreation),
-                            error: (error) => subscriber.error(error),
+                            next: (fetchResult) => {
+                                subscriber.next(fetchResult.data.T22NotifyDeviceCreation);
+                                subscriber.complete();
+                            },
+                            error: (error) => {
+                                subscriber.error(error);
+                                subscriber.complete();
+                            },
                             complete: () => subscriber.complete(),
                         });
                     return () => subscription.unsubscribe();
