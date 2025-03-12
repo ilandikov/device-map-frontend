@@ -58,10 +58,7 @@ describe('device list snapshot tests', () => {
             devices: twoDevicesAtDifferentLocation,
             selectedMarker: {
                 location: secondDeviceLocation,
-                address: {
-                    line1: 'Street and number',
-                    line2: 'District and city',
-                },
+                address: null,
             },
             isDeviceCreationOngoing: true,
         });
