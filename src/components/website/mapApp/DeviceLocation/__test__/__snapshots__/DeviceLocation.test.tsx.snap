@@ -162,9 +162,6 @@ exports[`device list snapshot tests should show the address and a list devices m
         className="device-list-item"
       >
         <p>
-          Matching selected marker and waiting for creation
-        </p>
-        <p>
           deviceWaitingForCreation
         </p>
       </div>
