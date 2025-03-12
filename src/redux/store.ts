@@ -126,7 +126,7 @@ export function createStore() {
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
-                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDevice'),
+                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDeviceRequest'),
                     deleteDevice: async (input) =>
                         await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDevice'),
                     approveDevice: async (input) =>
