@@ -111,6 +111,14 @@ describe('MapApp reducer tests', () => {
 });
 
 describe('MapApp reducer test - devices', () => {
+    beforeAll(() => {
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date(1234567890));
+    });
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+
     it('should not change state on list devices remote request', () => {
         const initialState = {};
         const action = deviceListRequest();
