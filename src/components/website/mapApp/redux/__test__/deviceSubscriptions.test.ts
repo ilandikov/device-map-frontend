@@ -1,4 +1,4 @@
-import { deviceCreation, deviceCreationSubscriptionRequest, deviceRemoteError, updateDevice } from '../DeviceAction';
+import { deviceCreated, deviceCreation, deviceCreationSubscriptionRequest, deviceRemoteError } from '../DeviceAction';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { deviceSubscriptions } from '../deviceSubscriptions';
 import { rejectingDeviceSubscriptionClient, resolvingDeviceSubscriptionClient } from './deviceSubscriptionHelpers';
@@ -10,7 +10,7 @@ describe('device subscription - creation', () => {
         remoteClients: { deviceSubscriptionClient: resolvingDeviceSubscriptionClient },
         sentAction: deviceCreationSubscriptionRequest(),
         expectedActions: [
-            updateDevice({
+            deviceCreated({
                 id: 'device-created-by-subscription',
                 creatorID: 'i will create subscription',
                 createdDate: 12345678000,

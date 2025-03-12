@@ -2,7 +2,6 @@ import {
     deviceApproveRequest,
     deviceApproved,
     deviceCreateRequest,
-    deviceCreated,
     deviceDeleteRequest,
     deviceDeleted,
     deviceListRequest,
@@ -28,14 +27,6 @@ const deviceListFromMock = [
         approvals: 6,
     },
 ];
-const deviceCreatedByTheMock = {
-    id: 'testId',
-    createdDate: 0,
-    lastUpdate: 0,
-    creatorID: 'someone',
-    location: { lat: 0, lon: 0 },
-    approvals: -1,
-};
 
 beforeEach(() => {
     jest.useFakeTimers();
@@ -61,10 +52,7 @@ describe('devices epic test - nominal cases', () => {
             sentAction: deviceListRequest(),
             expectedActions: [devicesListed(deviceListFromMock)],
         },
-        {
-            sentAction: deviceCreateRequest(),
-            expectedActions: [deviceCreated(deviceCreatedByTheMock)],
-        },
+        { sentAction: deviceCreateRequest(), expectedActions: [] },
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {
             sentAction: deviceApproveRequest('approve me!'),
