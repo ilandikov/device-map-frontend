@@ -1,6 +1,6 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 
-export type DeviceAction = DeviceRemoteRequest | DeviceRemoteAnswer | DeviceRemoteError;
+export type DeviceAction = DeviceRemoteRequest | DeviceRemoteAnswer | DeviceRemoteError | DeviceCreationAction;
 
 export type DeviceRemoteRequest =
     | DeviceListRequest
@@ -15,6 +15,7 @@ export enum DeviceActionType {
     DEVICE_REQUEST_ERROR = 'DEVICE_REQUEST_ERROR',
     DEVICE_SUBSCRIPTION_REQUEST = 'DEVICE_SUBSCRIPTION_REQUEST',
     DEVICE_SUBSCRIPTION_ANSWER = 'DEVICE_SUBSCRIPTION_ANSWER',
+    DEVICE_CREATION = 'DEVICE_CREATION',
 }
 
 export enum DeviceRemoteRequestType {
@@ -175,5 +176,17 @@ export function updateDevice(device: T22Device): DeviceCreationSubscriptionAnswe
         type: DeviceActionType.DEVICE_SUBSCRIPTION_ANSWER,
         request: DeviceRemoteRequestType.CREATE_DEVICE_REQUEST,
         device,
+    };
+}
+
+interface DeviceCreationAction {
+    type: DeviceActionType.DEVICE_CREATION;
+    isDeviceCreationOngoing: boolean;
+}
+
+export function deviceCreation(isOngoing: boolean): DeviceCreationAction {
+    return {
+        type: DeviceActionType.DEVICE_CREATION,
+        isDeviceCreationOngoing: isOngoing,
     };
 }
