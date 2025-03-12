@@ -101,7 +101,7 @@ exports[`device list snapshot tests should show only the device matching the sel
 </div>
 `;
 
-exports[`device list snapshot tests should show the devices matching the selected marker, the temporary item and the create device item 1`] = `
+exports[`device list snapshot tests should show the temporary item and the create device item 1`] = `
 <div
   className="device-list-container"
 >
