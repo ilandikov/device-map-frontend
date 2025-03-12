@@ -132,7 +132,7 @@ export function deviceDeleted(id: string): DeviceDeleted {
     };
 }
 
-export function deviceApproved(id: string, _lastUpdate: number): DeviceApproved {
+export function deviceApproved(id: string): DeviceApproved {
     return {
         type: DeviceActionType.DEVICE_REMOTE_ANSWER,
         request: DeviceRemoteRequestType.APPROVE_DEVICE,

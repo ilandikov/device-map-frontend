@@ -179,7 +179,7 @@ describe('MapApp reducer test - devices', () => {
 
     it('should approve a device', () => {
         const initialState = { devices: [existingDevice, receivedDevice] };
-        const action = deviceApproved(receivedDevice.id, 1112222233333);
+        const action = deviceApproved(receivedDevice.id);
 
         testMapAppReducer(initialState, action, {
             devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }],

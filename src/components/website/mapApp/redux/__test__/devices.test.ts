@@ -56,7 +56,7 @@ describe('devices epic test - nominal cases', () => {
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {
             sentAction: deviceApproveRequest('approve me!'),
-            expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+            expectedActions: [deviceApproved('approve me!')],
         },
     ].forEach(({ sentAction, expectedActions }) => {
         itShouldAnswerBy(`sending ${sentAction.request}`, {
