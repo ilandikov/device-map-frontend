@@ -5,7 +5,7 @@ import {
     testDispatchedAction,
     testDispatchedActionsInOrder,
 } from '../../../../../../tests/utils/RenderingHelpers';
-import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
+import { deviceCreateRequest, deviceCreation, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
 import { DeviceList } from '../DeviceList';
 import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
 
@@ -33,6 +33,10 @@ describe('Create Device Item action tests', () => {
 
         click(<DeviceList />, 'createDeviceButton');
 
-        testDispatchedActionsInOrder([deviceCreateRequest(), deviceCreationSubscriptionRequest()]);
+        testDispatchedActionsInOrder([
+            deviceCreateRequest(),
+            deviceCreationSubscriptionRequest(),
+            deviceCreation(true),
+        ]);
     });
 });

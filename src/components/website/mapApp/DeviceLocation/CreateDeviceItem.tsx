@@ -1,6 +1,6 @@
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
-import { deviceCreateRequest, deviceCreationSubscriptionRequest } from '../redux/DeviceAction';
+import { deviceCreateRequest, deviceCreation, deviceCreationSubscriptionRequest } from '../redux/DeviceAction';
 import { useAppDispatch } from '../../../../redux/store';
 import { DeviceItemContainer } from './DeviceItemContainer';
 
@@ -16,6 +16,7 @@ export function CreateDeviceItem() {
                 onClick={() => {
                     dispatch(deviceCreateRequest());
                     dispatch(deviceCreationSubscriptionRequest());
+                    dispatch(deviceCreation(true));
                 }}
             >
                 {t('deviceAddDevice')}
