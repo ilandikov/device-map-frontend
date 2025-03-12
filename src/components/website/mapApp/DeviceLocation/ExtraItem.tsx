@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMapAppState } from '../redux/MapAppState';
-import { DeviceItemWaitingCreation } from './DeviceItemWaitingCreation';
+import { WaitingCreationItem } from './WaitingCreationItem';
 import { CreateDeviceItem } from './CreateDeviceItem';
 import { CreateAccountOrLoginItem } from './CreateAccountOrLoginItem';
 
@@ -12,7 +12,7 @@ export function ExtraItem() {
     }
 
     if (isDeviceCreationOngoing) {
-        return <DeviceItemWaitingCreation />;
+        return <WaitingCreationItem />;
     }
 
     return <CreateDeviceItem />;
