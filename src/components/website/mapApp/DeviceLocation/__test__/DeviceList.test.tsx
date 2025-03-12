@@ -9,6 +9,7 @@ import {
 import { deviceCreateRequest, deviceCreation, deviceCreationSubscriptionRequest } from '../../redux/DeviceAction';
 import { DeviceList } from '../DeviceList';
 import { mapAppResetCurrentUser } from '../../redux/MapAppAction';
+import { ExtraItem } from '../ExtraItem';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -49,7 +50,7 @@ describe('Device List snapshot tests', () => {
     });
 });
 
-describe('Create Device Item action tests', () => {
+describe('Extra Item action tests', () => {
     beforeEach(() => {
         mockDispatch.mockReset();
     });
@@ -57,7 +58,7 @@ describe('Create Device Item action tests', () => {
     it('should dispatch reset current user', () => {
         mockMapAppState({ loggedInUser: null });
 
-        click(<DeviceList />, 'createAccountOrLoginButton');
+        click(<ExtraItem />, 'createAccountOrLoginButton');
 
         testDispatchedAction(mapAppResetCurrentUser());
     });
@@ -65,7 +66,7 @@ describe('Create Device Item action tests', () => {
     it('should dispatch create device action', () => {
         mockMapAppState({ loggedInUser: { id: 'i can create a device', points: 0 } });
 
-        click(<DeviceList />, 'createDeviceButton');
+        click(<ExtraItem />, 'createDeviceButton');
 
         testDispatchedActionsInOrder([
             deviceCreateRequest(),
