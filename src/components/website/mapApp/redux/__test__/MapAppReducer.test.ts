@@ -110,7 +110,15 @@ describe('MapApp reducer tests', () => {
     });
 });
 
-describe('rename me', () => {
+describe('MapApp reducer test - devices', () => {
+    beforeAll(() => {
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date(1234567890));
+    });
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+
     it('should not change state on list devices remote request', () => {
         const initialState = {};
         const action = deviceListRequest();
@@ -171,10 +179,10 @@ describe('rename me', () => {
 
     it('should approve a device', () => {
         const initialState = { devices: [existingDevice, receivedDevice] };
-        const action = deviceApproved(receivedDevice.id, 1112222233333);
+        const action = deviceApproved(receivedDevice.id);
 
         testMapAppReducer(initialState, action, {
-            devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1112222233333 }],
+            devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }],
         });
     });
 });

@@ -101,7 +101,6 @@ export interface DeviceApproved {
     type: DeviceActionType.DEVICE_REMOTE_ANSWER;
     request: DeviceRemoteRequestType.APPROVE_DEVICE;
     id: string;
-    lastUpdate: number;
 }
 
 export interface DeviceRemoteError {
@@ -133,12 +132,11 @@ export function deviceDeleted(id: string): DeviceDeleted {
     };
 }
 
-export function deviceApproved(id: string, lastUpdate: number): DeviceApproved {
+export function deviceApproved(id: string): DeviceApproved {
     return {
         type: DeviceActionType.DEVICE_REMOTE_ANSWER,
         request: DeviceRemoteRequestType.APPROVE_DEVICE,
         id,
-        lastUpdate,
     };
 }
 

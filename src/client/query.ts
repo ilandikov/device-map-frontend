@@ -56,7 +56,6 @@ export const approveDeviceMutation = gql`
     mutation ($input: T22ApproveDeviceInput!) {
         T22ApproveDevice(input: $input) {
             id
-            lastUpdate
         }
     }
 `;

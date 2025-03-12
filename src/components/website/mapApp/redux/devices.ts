@@ -62,7 +62,7 @@ const deleteDeviceRequest: DevicesRequest<T22DeleteDeviceResponse, DeviceDeleteR
 
 const approveDevice: DevicesRequest<T22ApproveDeviceResponse, DeviceApproveRequest> = {
     call: (client, _, action) => client.forAuthenticatedUser.approveDevice({ id: action.id }),
-    responseToAction: (response) => of(deviceApproved(response.id, response.lastUpdate)),
+    responseToAction: (response) => of(deviceApproved(response.id)),
 };
 
 type DeviceRemoteResponse =

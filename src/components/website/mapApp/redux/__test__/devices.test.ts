@@ -12,8 +12,6 @@ import { devices } from '../devices';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { rejectingDevicesClient, resolvingDevicesClient } from './devicesTestHelpers';
 
-const deviceCreationTimeStampFromBackend = 1896916059204;
-
 const deviceListFromMock = [
     {
         id: 'dev1',
@@ -27,15 +25,6 @@ const deviceListFromMock = [
         approvals: 6,
     },
 ];
-
-beforeEach(() => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date(deviceCreationTimeStampFromBackend));
-});
-
-afterEach(() => {
-    jest.useRealTimers();
-});
 
 describe('devices epic test - receiving irrelevant action', () => {
     itShouldAnswerBy('no action to a non-remote request action', {
@@ -56,7 +45,7 @@ describe('devices epic test - nominal cases', () => {
         { sentAction: deviceDeleteRequest('deleteThisOne'), expectedActions: [deviceDeleted('deleteThisOne')] },
         {
             sentAction: deviceApproveRequest('approve me!'),
-            expectedActions: [deviceApproved('approve me!', deviceCreationTimeStampFromBackend)],
+            expectedActions: [deviceApproved('approve me!')],
         },
     ].forEach(({ sentAction, expectedActions }) => {
         itShouldAnswerBy(`sending ${sentAction.request}`, {
