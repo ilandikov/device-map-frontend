@@ -7,13 +7,13 @@ import { CreateAccountOrLoginItem } from './CreateAccountOrLoginItem';
 export function ExtraItem() {
     const { loggedInUser, isDeviceCreationOngoing } = useMapAppState();
 
-    return loggedInUser ? (
-        isDeviceCreationOngoing ? (
-            <DeviceItemWaitingCreation />
-        ) : (
-            <CreateDeviceItem />
-        )
-    ) : (
-        <CreateAccountOrLoginItem />
-    );
+    if (loggedInUser === null) {
+        return <CreateAccountOrLoginItem />;
+    }
+
+    if (isDeviceCreationOngoing) {
+        return <DeviceItemWaitingCreation />;
+    }
+
+    return <CreateDeviceItem />;
 }
