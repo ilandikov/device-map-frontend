@@ -2,7 +2,7 @@ import React from 'react';
 import { mockDispatch, mockMapAppState, mockPrepareSelector } from '../../../../../redux/__mocks__/mocks';
 import { testSnapshot } from '../../../../../../tests/utils/RenderingHelpers';
 import { MapAppComponents } from '../../redux/MapAppState';
-import { DeviceLocation } from '../DeviceLocation';
+import { DeviceList } from '../DeviceList';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -30,7 +30,7 @@ describe('device list snapshot tests', () => {
             },
         });
 
-        testSnapshot(<DeviceLocation />);
+        testSnapshot(<DeviceList />);
     });
 
     it('should show the address and a list devices matching the selected marker with the create device item and the temporary item', () => {
@@ -65,6 +65,6 @@ describe('device list snapshot tests', () => {
             isDeviceCreationOngoing: true,
         });
 
-        testSnapshot(<DeviceLocation />);
+        testSnapshot(<DeviceList />);
     });
 });
