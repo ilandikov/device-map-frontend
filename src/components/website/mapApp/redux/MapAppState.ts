@@ -17,6 +17,7 @@ export interface MapAppState {
         address: T22Address | null;
     };
     devices: T22Device[];
+    isDeviceCreationOngoing: boolean;
     loggedInUser: MapAppUser | null;
 }
 
@@ -29,6 +30,7 @@ export enum MapAppComponents {
 export const buildMapAppState: StateBuilder<MapAppState> = (partialState) => ({
     component: MapAppComponents.PRODUCT_DESCRIPTION,
     devices: [],
+    isDeviceCreationOngoing: false,
     selectedMarker: {
         location: null,
         address: null,

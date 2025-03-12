@@ -27,6 +27,7 @@ describe('MapApp reducer tests', () => {
         testInitialState(buildMapAppState, {
             component: MapAppComponents.PRODUCT_DESCRIPTION,
             devices: [],
+            isDeviceCreationOngoing: false,
             selectedMarker: {
                 location: null,
                 address: null,
