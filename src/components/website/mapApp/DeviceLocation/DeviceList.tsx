@@ -22,9 +22,12 @@ export function DeviceList() {
     return (
         <div className="device-list-container">
             {devicesAtSelectedMarkerLocation}
-            {isDeviceCreationOngoing && <DeviceItemWaitingCreation key={uniqueKeyForCreateDeviceItem + 1} />}
             {loggedInUser ? (
-                <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+                isDeviceCreationOngoing ? (
+                    <DeviceItemWaitingCreation key={uniqueKeyForCreateDeviceItem + 1} />
+                ) : (
+                    <CreateDeviceItem key={uniqueKeyForCreateDeviceItem} />
+                )
             ) : (
                 <CreateAccountOrLoginItem key={uniqueKeyForCreateDeviceItem} />
             )}
