@@ -9,7 +9,7 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
-const twoDevicesAtDifferentLocation = [
+const twoDevicesAtDifferentLocations = [
     {
         id: 'Not matching selected marker',
         createdDate: '0000000000001',
@@ -28,16 +28,16 @@ const twoDevicesAtDifferentLocation = [
     },
 ];
 
-const secondDeviceLocation = { lat: 26.3553423, lon: 19.23131 };
+const matchingSecondDeviceLocation = {
+    location: { lat: 26.3553423, lon: 19.23131 },
+    address: null,
+};
 
 describe('device list snapshot tests', () => {
     it('should show address loader and a list devices matching the selected marker without the create device item', () => {
         mockMapAppState({
-            devices: twoDevicesAtDifferentLocation,
-            selectedMarker: {
-                location: secondDeviceLocation,
-                address: null,
-            },
+            devices: twoDevicesAtDifferentLocations,
+            selectedMarker: matchingSecondDeviceLocation,
         });
 
         testSnapshot(<DeviceList />);
@@ -46,11 +46,8 @@ describe('device list snapshot tests', () => {
     it('should show the address and a list devices matching the selected marker with the create device item and the temporary item', () => {
         mockMapAppState({
             loggedInUser: { id: 'I created the second one!', points: 0 },
-            devices: twoDevicesAtDifferentLocation,
-            selectedMarker: {
-                location: secondDeviceLocation,
-                address: null,
-            },
+            devices: twoDevicesAtDifferentLocations,
+            selectedMarker: matchingSecondDeviceLocation,
             isDeviceCreationOngoing: true,
         });
 
