@@ -34,7 +34,7 @@ const matchingSecondDeviceLocation = {
 };
 
 describe('device list snapshot tests', () => {
-    it('should show address loader and a list devices matching the selected marker without the create device item', () => {
+    it('should show only the device matching the selected marker', () => {
         mockMapAppState({
             devices: twoDevicesAtDifferentLocations,
             selectedMarker: matchingSecondDeviceLocation,
@@ -45,7 +45,7 @@ describe('device list snapshot tests', () => {
         testSnapshot(<DeviceList />);
     });
 
-    it('should show the address and a list devices matching the selected marker with the create device item and the temporary item', () => {
+    it('should show the devices matching the selected marker, the temporary item and the create device item', () => {
         mockMapAppState({
             devices: twoDevicesAtDifferentLocations,
             selectedMarker: matchingSecondDeviceLocation,
