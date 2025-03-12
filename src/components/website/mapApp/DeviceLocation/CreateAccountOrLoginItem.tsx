@@ -11,6 +11,9 @@ export function CreateAccountOrLoginItem() {
     return (
         <DeviceItemContainer deviceItemType={'create'}>
             <p className="device-list-item-opaque-text">{t('deviceNoDeviceHere')}</p>
+            {
+                // TODO fix the dispatched action
+            }
             <button data-testid="createAccountOrLoginButton" onClick={() => dispatch(mapAppResetCurrentUser())}>
                 {t('deviceCreateAccountOrLogin')}
             </button>
