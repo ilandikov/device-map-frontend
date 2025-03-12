@@ -38,6 +38,8 @@ describe('device list snapshot tests', () => {
         mockMapAppState({
             devices: twoDevicesAtDifferentLocations,
             selectedMarker: matchingSecondDeviceLocation,
+            loggedInUser: null,
+            isDeviceCreationOngoing: false,
         });
 
         testSnapshot(<DeviceList />);
@@ -45,9 +47,9 @@ describe('device list snapshot tests', () => {
 
     it('should show the address and a list devices matching the selected marker with the create device item and the temporary item', () => {
         mockMapAppState({
-            loggedInUser: { id: 'I created the second one!', points: 0 },
             devices: twoDevicesAtDifferentLocations,
             selectedMarker: matchingSecondDeviceLocation,
+            loggedInUser: { id: 'I created the second one!', points: 0 },
             isDeviceCreationOngoing: true,
         });
 
