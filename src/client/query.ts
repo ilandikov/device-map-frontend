@@ -45,16 +45,16 @@ export const createDeviceMutation = gql`
 `;
 
 export const deleteDeviceMutation = gql`
-    mutation ($input: T22DeleteDeviceInput!) {
-        T22DeleteDevice(input: $input) {
+    mutation ($input: T22DeleteDeviceRequestInput!) {
+        T22DeleteDeviceRequest(input: $input) {
             id
         }
     }
 `;
 
 export const approveDeviceMutation = gql`
-    mutation ($input: T22ApproveDeviceInput!) {
-        T22ApproveDevice(input: $input) {
+    mutation ($input: T22ApproveDeviceRequestInput!) {
+        T22ApproveDeviceRequest(input: $input) {
             id
         }
     }
