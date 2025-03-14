@@ -13,6 +13,7 @@ import {
     Query,
     Subscription,
     SubscriptionT22NotifyDeviceCreationArgs,
+    SubscriptionT22NotifyUserUpdateArgs,
     T22ApproveDeviceRequestInput,
     T22ApproveDeviceRequestResponse,
     T22CreateDeviceRequestInput,
@@ -42,6 +43,7 @@ import {
     listDevicesQuery,
     mutateAsAuthUser,
     notifyDeviceCreationSubscription,
+    notifyUserUpdateSubscription,
 } from '../client/query';
 import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
@@ -154,7 +156,25 @@ export function createStore() {
                         });
                     return () => subscription.unsubscribe();
                 },
-                userUpdate: (_id) => (_subscriber) => {},
+                userUpdate: (id) => (subscriber) => {
+                    const subscription = anonymousClient
+                        .subscribe<
+                            Subscription,
+                            SubscriptionT22NotifyUserUpdateArgs
+                        >({ query: notifyUserUpdateSubscription, variables: { id } })
+                        .subscribe({
+                            next: (fetchResult) => {
+                                subscriber.next(fetchResult.data.T22NotifyUserUpdate);
+                                subscriber.complete();
+                            },
+                            error: (error) => {
+                                subscriber.error(error);
+                                subscriber.complete();
+                            },
+                            complete: () => subscriber.complete(),
+                        });
+                    return () => subscription.unsubscribe();
+                },
             },
             addressClient: {
                 getAddress: (input) =>

@@ -76,6 +76,15 @@ export const notifyDeviceCreationSubscription = gql`
     }
 `;
 
+export const notifyUserUpdateSubscription = gql`
+    subscription ($id: ID!) {
+        T22NotifyUserUpdate(id: $id) {
+            id
+            points
+        }
+    }
+`;
+
 export const getUserQuery = gql`
     query {
         T22GetUser {
