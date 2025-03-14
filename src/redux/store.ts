@@ -87,6 +87,7 @@ export interface AddressClient {
 
 export interface UsersClient {
     getUser: () => Promise<T22GetUserResponse>;
+    subscribeForUpdate: (userID: string) => (subscriber: Subscriber<T22User>) => void;
 }
 
 export interface RemoteClients {
@@ -178,6 +179,12 @@ export function createStore() {
                     (await setAuthenticatedClient())
                         .query<Query>({ query: getUserQuery })
                         .then((response) => response.data.T22GetUser),
+                subscribeForUpdate: (id) =>
+                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>(
+                        { id },
+                        notifyUserUpdateSubscription,
+                        'T22NotifyUserUpdate',
+                    ),
             },
         },
     });
