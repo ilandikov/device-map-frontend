@@ -20,7 +20,7 @@ export function subscribeAsAuthUser<TVariables>(variables: TVariables, query: Do
     return (subscriber: Subscriber<T22Device>) => {
         const subscription = anonymousClient.subscribe<Subscription, TVariables>({ query, variables }).subscribe({
             next: (fetchResult) => {
-                subscriber.next(fetchResult.data.T22NotifyDeviceCreation);
+                subscriber.next(fetchResult.data['T22NotifyDeviceCreation']);
                 subscriber.complete();
             },
             error: (error) => {
