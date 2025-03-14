@@ -72,6 +72,7 @@ export interface DevicesClient {
         createDevice: (createDeviceInput: T22CreateDeviceRequestInput) => Promise<T22CreateDeviceRequestResponse>;
         deleteDevice: (deleteDeviceInput: T22DeleteDeviceRequestInput) => Promise<T22DeleteDeviceRequestInput>;
         approveDevice: (approveDeviceInput: T22ApproveDeviceRequestInput) => Promise<T22ApproveDeviceRequestResponse>;
+        subscribeForCreation: (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
     };
 }
 
@@ -86,12 +87,12 @@ export interface AddressClient {
 
 export interface UsersClient {
     getUser: () => Promise<T22GetUserResponse>;
+    subscribeForUpdate: (userID: string) => (subscriber: Subscriber<T22User>) => void;
 }
 
 export interface RemoteClients {
     cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
-    deviceSubscriptionClient?: DeviceSubscriptionClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
 }
@@ -144,21 +145,13 @@ export function createStore() {
                         await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDeviceRequest'),
                     approveDevice: async (input) =>
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDeviceRequest'),
+                    subscribeForCreation: (creatorID) =>
+                        subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
+                            { creatorID },
+                            notifyDeviceCreationSubscription,
+                            'T22NotifyDeviceCreation',
+                        ),
                 },
-            },
-            deviceSubscriptionClient: {
-                creation: (creatorID) =>
-                    subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
-                        { creatorID },
-                        notifyDeviceCreationSubscription,
-                        'T22NotifyDeviceCreation',
-                    ),
-                userUpdate: (id) =>
-                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>(
-                        { id },
-                        notifyUserUpdateSubscription,
-                        'T22NotifyUserUpdate',
-                    ),
             },
             addressClient: {
                 getAddress: (input) =>
@@ -171,6 +164,12 @@ export function createStore() {
                     (await setAuthenticatedClient())
                         .query<Query>({ query: getUserQuery })
                         .then((response) => response.data.T22GetUser),
+                subscribeForUpdate: (id) =>
+                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>(
+                        { id },
+                        notifyUserUpdateSubscription,
+                        'T22NotifyUserUpdate',
+                    ),
             },
         },
     });

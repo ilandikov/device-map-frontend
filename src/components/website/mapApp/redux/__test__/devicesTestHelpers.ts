@@ -1,4 +1,5 @@
 import { DevicesClient } from '../../../../../redux/store';
+import { erroneousSubscriber } from './erroneousSubscriber';
 
 export const resolvingDevicesClient: DevicesClient = {
     forAnonymousUser: {
@@ -24,6 +25,19 @@ export const resolvingDevicesClient: DevicesClient = {
         createDevice: () => Promise.resolve({ id: 'testId' }),
         deleteDevice: (deleteDeviceInput) => Promise.resolve({ id: deleteDeviceInput.id }),
         approveDevice: (approveDeviceInput) => Promise.resolve({ id: approveDeviceInput.id, lastUpdate: Date.now() }),
+        subscribeForCreation: (creatorID) => (subscriber) => {
+            subscriber.next({
+                id: 'device-created-by-subscription',
+                creatorID: creatorID,
+                createdDate: 12345678000,
+                lastUpdate: 23456789000,
+                location: { lat: 9, lon: 5 },
+                approvals: 4,
+            });
+            subscriber.complete();
+
+            return () => subscriber.unsubscribe();
+        },
     },
 };
 
@@ -35,5 +49,6 @@ export const rejectingDevicesClient: DevicesClient = {
         createDevice: () => Promise.reject('create device went wrong'),
         deleteDevice: () => Promise.reject('delete device went wrong'),
         approveDevice: () => Promise.reject('approve device went wrong'),
+        subscribeForCreation: () => erroneousSubscriber,
     },
 };
