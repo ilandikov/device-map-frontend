@@ -93,7 +93,6 @@ export interface UsersClient {
 export interface RemoteClients {
     cognitoClient?: ClassToInterface<CognitoClient>;
     devicesClient?: DevicesClient;
-    deviceSubscriptionClient?: DeviceSubscriptionClient;
     addressClient?: AddressClient;
     usersClient?: UsersClient;
 }
@@ -153,20 +152,6 @@ export function createStore() {
                             'T22NotifyDeviceCreation',
                         ),
                 },
-            },
-            deviceSubscriptionClient: {
-                creation: (creatorID) =>
-                    subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
-                        { creatorID },
-                        notifyDeviceCreationSubscription,
-                        'T22NotifyDeviceCreation',
-                    ),
-                userUpdate: (id) =>
-                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>(
-                        { id },
-                        notifyUserUpdateSubscription,
-                        'T22NotifyUserUpdate',
-                    ),
             },
             addressClient: {
                 getAddress: (input) =>
