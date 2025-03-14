@@ -12,6 +12,7 @@ import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
     Subscription,
+    SubscriptionT22NotifyDeviceCreationArgs,
     SubscriptionT22NotifyUserUpdateArgs,
     T22ApproveDeviceRequestInput,
     T22ApproveDeviceRequestResponse,
@@ -147,7 +148,11 @@ export function createStore() {
                 },
             },
             deviceSubscriptionClient: {
-                creation: (creatorID) => subscribeAsAuthUser({ creatorID }, notifyDeviceCreationSubscription),
+                creation: (creatorID) =>
+                    subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
+                        { creatorID },
+                        notifyDeviceCreationSubscription,
+                    ),
                 userUpdate: (id) => (subscriber) => {
                     const subscription = anonymousClient
                         .subscribe<
