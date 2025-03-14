@@ -11,7 +11,6 @@ import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
-    Subscription,
     SubscriptionT22NotifyDeviceCreationArgs,
     SubscriptionT22NotifyUserUpdateArgs,
     T22ApproveDeviceRequestInput,
@@ -46,7 +45,7 @@ import {
     notifyUserUpdateSubscription,
     subscribeAsAuthUser,
 } from '../client/query';
-import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
+import { setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
 import { deviceSubscriptions } from '../components/website/mapApp/redux/deviceSubscriptions';
 import { userSubscriptionSender } from '../components/website/login/redux/userSubscriptionSender';
@@ -154,25 +153,12 @@ export function createStore() {
                         notifyDeviceCreationSubscription,
                         'T22NotifyDeviceCreation',
                     ),
-                userUpdate: (id) => (subscriber) => {
-                    const subscription = anonymousClient
-                        .subscribe<
-                            Subscription,
-                            SubscriptionT22NotifyUserUpdateArgs
-                        >({ query: notifyUserUpdateSubscription, variables: { id } })
-                        .subscribe({
-                            next: (fetchResult) => {
-                                subscriber.next(fetchResult.data.T22NotifyUserUpdate);
-                                subscriber.complete();
-                            },
-                            error: (error) => {
-                                subscriber.error(error);
-                                subscriber.complete();
-                            },
-                            complete: () => subscriber.complete(),
-                        });
-                    return () => subscription.unsubscribe();
-                },
+                userUpdate: (id) =>
+                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>(
+                        { id },
+                        notifyUserUpdateSubscription,
+                        'T22NotifyUserUpdate',
+                    ),
             },
             addressClient: {
                 getAddress: (input) =>
