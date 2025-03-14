@@ -12,7 +12,6 @@ import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
     Subscription,
-    SubscriptionT22NotifyDeviceCreationArgs,
     SubscriptionT22NotifyUserUpdateArgs,
     T22ApproveDeviceRequestInput,
     T22ApproveDeviceRequestResponse,
@@ -42,8 +41,8 @@ import {
     getUserQuery,
     listDevicesQuery,
     mutateAsAuthUser,
-    notifyDeviceCreationSubscription,
     notifyUserUpdateSubscription,
+    subscribeAsAuthUser,
 } from '../client/query';
 import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
@@ -147,25 +146,7 @@ export function createStore() {
                 },
             },
             deviceSubscriptionClient: {
-                creation: (creatorID) => (subscriber) => {
-                    const subscription = anonymousClient
-                        .subscribe<
-                            Subscription,
-                            SubscriptionT22NotifyDeviceCreationArgs
-                        >({ query: notifyDeviceCreationSubscription, variables: { creatorID } })
-                        .subscribe({
-                            next: (fetchResult) => {
-                                subscriber.next(fetchResult.data.T22NotifyDeviceCreation);
-                                subscriber.complete();
-                            },
-                            error: (error) => {
-                                subscriber.error(error);
-                                subscriber.complete();
-                            },
-                            complete: () => subscriber.complete(),
-                        });
-                    return () => subscription.unsubscribe();
-                },
+                creation: (creatorID) => subscribeAsAuthUser({ creatorID }),
                 userUpdate: (id) => (subscriber) => {
                     const subscription = anonymousClient
                         .subscribe<
