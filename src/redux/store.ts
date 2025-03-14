@@ -49,6 +49,7 @@ import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
 import { deviceSubscriptions } from '../components/website/mapApp/redux/deviceSubscriptions';
 import { userSubscriptionSender } from '../components/website/login/redux/userSubscriptionSender';
+import { userSubscriptions } from '../components/website/mapApp/redux/userSubscriptions';
 
 const rootReducer = combineReducers({
     mapAppState: MapAppReducer,
@@ -98,7 +99,15 @@ export interface RemoteClients {
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
-const rootEpic: RootEpic = combineEpics(cognito, address, devices, deviceSubscriptions, user, userSubscriptionSender);
+const rootEpic: RootEpic = combineEpics(
+    cognito,
+    address,
+    devices,
+    deviceSubscriptions,
+    user,
+    userSubscriptions,
+    userSubscriptionSender,
+);
 
 export function createStore() {
     const apolloClient = new ApolloClient({
