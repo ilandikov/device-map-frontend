@@ -6,12 +6,16 @@ import {
     mapAppUserUpdateSubscriptionRequest,
 } from '../MapAppAction';
 import { rejectingDeviceSubscriptionClient, resolvingDeviceSubscriptionClient } from './deviceSubscriptionHelpers';
+import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 describe('user subscription', () => {
     itShouldAnswerBy('providing user data', {
         epic: userSubscriptions,
         partialRootState: { mapAppState: { loggedInUser: { id: 'i am waiting to receive points', points: 0 } } },
-        remoteClients: { deviceSubscriptionClient: resolvingDeviceSubscriptionClient },
+        remoteClients: {
+            deviceSubscriptionClient: resolvingDeviceSubscriptionClient,
+            usersClient: userResolvingClient,
+        },
         sentAction: mapAppUserUpdateSubscriptionRequest(),
         expectedActions: [mapAppUpdateLoggedInUser({ id: 'i am waiting to receive points', points: 100 })],
     });
@@ -19,7 +23,10 @@ describe('user subscription', () => {
     itShouldAnswerBy('sending error', {
         epic: userSubscriptions,
         partialRootState: { mapAppState: { loggedInUser: { id: 'i will create subscription', points: 0 } } },
-        remoteClients: { deviceSubscriptionClient: rejectingDeviceSubscriptionClient },
+        remoteClients: {
+            deviceSubscriptionClient: rejectingDeviceSubscriptionClient,
+            usersClient: userRejectingClient,
+        },
         sentAction: mapAppUserUpdateSubscriptionRequest(),
         expectedActions: [mapAppSubscriptionError('could not subscribe to user update')],
     });
