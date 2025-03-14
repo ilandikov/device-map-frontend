@@ -72,6 +72,7 @@ export interface DevicesClient {
         createDevice: (createDeviceInput: T22CreateDeviceRequestInput) => Promise<T22CreateDeviceRequestResponse>;
         deleteDevice: (deleteDeviceInput: T22DeleteDeviceRequestInput) => Promise<T22DeleteDeviceRequestInput>;
         approveDevice: (approveDeviceInput: T22ApproveDeviceRequestInput) => Promise<T22ApproveDeviceRequestResponse>;
+        subscribeForCreation: (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
     };
 }
 
@@ -144,6 +145,12 @@ export function createStore() {
                         await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDeviceRequest'),
                     approveDevice: async (input) =>
                         await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDeviceRequest'),
+                    subscribeForCreation: (creatorID) =>
+                        subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
+                            { creatorID },
+                            notifyDeviceCreationSubscription,
+                            'T22NotifyDeviceCreation',
+                        ),
                 },
             },
             deviceSubscriptionClient: {
