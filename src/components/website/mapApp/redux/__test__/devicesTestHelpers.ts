@@ -1,4 +1,5 @@
 import { DevicesClient } from '../../../../../redux/store';
+import { erroneousSubscriber } from './erroneousSubscriber';
 
 export const resolvingDevicesClient: DevicesClient = {
     forAnonymousUser: {
@@ -48,11 +49,6 @@ export const rejectingDevicesClient: DevicesClient = {
         createDevice: () => Promise.reject('create device went wrong'),
         deleteDevice: () => Promise.reject('delete device went wrong'),
         approveDevice: () => Promise.reject('approve device went wrong'),
-        subscribeForCreation: () => (subscriber) => {
-            subscriber.error();
-            subscriber.complete();
-
-            return () => subscriber.unsubscribe();
-        },
+        subscribeForCreation: () => erroneousSubscriber,
     },
 };
