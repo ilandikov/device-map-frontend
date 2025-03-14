@@ -1,5 +1,11 @@
 import { DocumentNode, gql } from '@apollo/client';
-import { Mutation, Subscription, SubscriptionT22NotifyDeviceCreationArgs } from '@mancho-school-t22/graphql-types';
+import {
+    Mutation,
+    Subscription,
+    SubscriptionT22NotifyDeviceCreationArgs,
+    T22Device,
+} from '@mancho-school-t22/graphql-types';
+import { Subscriber } from 'rxjs';
 import { anonymousClient, setAuthenticatedClient } from './graphql';
 
 export async function mutateAsAuthUser<TInput, TResponse>(
@@ -16,7 +22,7 @@ export async function mutateAsAuthUser<TInput, TResponse>(
 }
 
 export function subscribeAsAuthUser(variables: { creatorID: string }) {
-    return (subscriber) => {
+    return (subscriber: Subscriber<T22Device>) => {
         const subscription = anonymousClient
             .subscribe<
                 Subscription,
