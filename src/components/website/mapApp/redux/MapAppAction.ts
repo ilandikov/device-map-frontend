@@ -11,7 +11,10 @@ export enum MapAppActionType {
     SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
     SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER',
     GET_LOGGED_IN_USER_ERROR = 'GET_LOGGED_IN_USER_ERROR',
+    UPDATE_LOGGED_IN_USER = 'UPDATE_LOGGED_IN_USER',
     SHOW_COMPONENT = 'SHOW_COMPONENT',
+    USER_UPDATE_SUBSCRIPTION_REQUEST = 'USER_UPDATE_SUBSCRIPTION_REQUEST',
+    SUBSCRIPTION_ERROR = 'SUBSCRIPTION_ERROR',
 }
 
 export type MapAppAction =
@@ -23,6 +26,9 @@ export type MapAppAction =
     | MapAppSetLoggedInUser
     | MapAppGetLoggedInUserError
     | MapAppShowComponent
+    | MapAppUserUpdateSubscriptionRequest
+    | MapAppUpdateLoggedInUser
+    | MapAppSubscriptionError
     | DeviceAction;
 
 export interface MapAppResetCurrentUser {
@@ -94,4 +100,30 @@ interface MapAppShowComponent {
 
 export function mapAppShowComponent(step: MapAppComponents): MapAppShowComponent {
     return { type: MapAppActionType.SHOW_COMPONENT, component: step };
+}
+
+interface MapAppUserUpdateSubscriptionRequest {
+    type: MapAppActionType.USER_UPDATE_SUBSCRIPTION_REQUEST;
+}
+
+export function mapAppUserUpdateSubscriptionRequest(): MapAppUserUpdateSubscriptionRequest {
+    return { type: MapAppActionType.USER_UPDATE_SUBSCRIPTION_REQUEST };
+}
+
+interface MapAppUpdateLoggedInUser {
+    type: MapAppActionType.UPDATE_LOGGED_IN_USER;
+    user: T22User;
+}
+
+export function mapAppUpdateLoggedInUser(user: T22User): MapAppUpdateLoggedInUser {
+    return { type: MapAppActionType.UPDATE_LOGGED_IN_USER, user };
+}
+
+interface MapAppSubscriptionError {
+    type: MapAppActionType.SUBSCRIPTION_ERROR;
+    error: string;
+}
+
+export function mapAppSubscriptionError(error: string): MapAppSubscriptionError {
+    return { type: MapAppActionType.SUBSCRIPTION_ERROR, error };
 }

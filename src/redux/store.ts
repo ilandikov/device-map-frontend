@@ -13,6 +13,7 @@ import {
     Query,
     Subscription,
     SubscriptionT22NotifyDeviceCreationArgs,
+    SubscriptionT22NotifyUserUpdateArgs,
     T22ApproveDeviceRequestInput,
     T22ApproveDeviceRequestResponse,
     T22CreateDeviceRequestInput,
@@ -23,6 +24,7 @@ import {
     T22GetAddressResponse,
     T22GetUserResponse,
     T22ListDevicesResponse,
+    T22User,
 } from '@mancho-school-t22/graphql-types';
 import { Subscriber } from 'rxjs';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
@@ -41,10 +43,13 @@ import {
     listDevicesQuery,
     mutateAsAuthUser,
     notifyDeviceCreationSubscription,
+    notifyUserUpdateSubscription,
 } from '../client/query';
 import { anonymousClient, setAuthenticatedClient } from '../client/graphql';
 import { user } from '../components/website/mapApp/redux/User';
 import { deviceSubscriptions } from '../components/website/mapApp/redux/deviceSubscriptions';
+import { userSubscriptionSender } from '../components/website/login/redux/userSubscriptionSender';
+import { userSubscriptions } from '../components/website/mapApp/redux/userSubscriptions';
 
 const rootReducer = combineReducers({
     mapAppState: MapAppReducer,
@@ -72,6 +77,7 @@ export interface DevicesClient {
 
 export interface DeviceSubscriptionClient {
     creation: (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
+    userUpdate: (userID: string) => (subscriber: Subscriber<T22User>) => void;
 }
 
 export interface AddressClient {
@@ -93,7 +99,15 @@ export interface RemoteClients {
 type RootMiddleWare = EpicMiddleware<AllActions, AllActions, RootState, RemoteClients>;
 export type RootEpic = Epic<AllActions, AllActions, RootState, RemoteClients>;
 
-const rootEpic: RootEpic = combineEpics(cognito, address, devices, deviceSubscriptions, user);
+const rootEpic: RootEpic = combineEpics(
+    cognito,
+    address,
+    devices,
+    deviceSubscriptions,
+    user,
+    userSubscriptions,
+    userSubscriptionSender,
+);
 
 export function createStore() {
     const apolloClient = new ApolloClient({
@@ -142,6 +156,25 @@ export function createStore() {
                         .subscribe({
                             next: (fetchResult) => {
                                 subscriber.next(fetchResult.data.T22NotifyDeviceCreation);
+                                subscriber.complete();
+                            },
+                            error: (error) => {
+                                subscriber.error(error);
+                                subscriber.complete();
+                            },
+                            complete: () => subscriber.complete(),
+                        });
+                    return () => subscription.unsubscribe();
+                },
+                userUpdate: (id) => (subscriber) => {
+                    const subscription = anonymousClient
+                        .subscribe<
+                            Subscription,
+                            SubscriptionT22NotifyUserUpdateArgs
+                        >({ query: notifyUserUpdateSubscription, variables: { id } })
+                        .subscribe({
+                            next: (fetchResult) => {
+                                subscriber.next(fetchResult.data.T22NotifyUserUpdate);
                                 subscriber.complete();
                             },
                             error: (error) => {

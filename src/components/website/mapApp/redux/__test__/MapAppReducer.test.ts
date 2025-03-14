@@ -7,6 +7,7 @@ import {
     mapAppSetLoggedInUser,
     mapAppSetLoggedInUserID,
     mapAppShowComponent,
+    mapAppUpdateLoggedInUser,
 } from '../MapAppAction';
 import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
@@ -55,6 +56,22 @@ describe('MapApp reducer tests', () => {
         testMapAppReducer(initialState, action, {
             loggedInUser: { id: 'set me in the state', points: null },
         });
+    });
+
+    it('should update logged in user if the ids match', () => {
+        const initialState = { loggedInUser: { id: 'i should get more points', points: 0 } };
+        const action = mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 });
+
+        testMapAppReducer(initialState, action, {
+            loggedInUser: { id: 'i should get more points', points: 30 },
+        });
+    });
+
+    it('should not update logged in user if the ids dont match', () => {
+        const initialState = { loggedInUser: { id: 'my points should not change', points: 53 } };
+        const action = mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 });
+
+        testMapAppReducer(initialState, action, {});
     });
 
     it('should set coordinates', () => {
