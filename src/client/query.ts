@@ -16,11 +16,15 @@ export async function mutateAsAuthUser<TInput, TResponse>(
         .then((response) => response.data[resolver] as TResponse);
 }
 
-export function subscribeAsAuthUser<TVariables, TResponse>(variables: TVariables, query: DocumentNode) {
+export function subscribeAsAuthUser<TVariables, TResponse>(
+    variables: TVariables,
+    query: DocumentNode,
+    resolver: keyof Subscription,
+) {
     return (subscriber: Subscriber<TResponse>) => {
         const subscription = anonymousClient.subscribe<Subscription, TVariables>({ query, variables }).subscribe({
             next: (fetchResult) => {
-                subscriber.next(fetchResult.data['T22NotifyDeviceCreation'] as TResponse);
+                subscriber.next(fetchResult.data[resolver] as TResponse);
                 subscriber.complete();
             },
             error: (error) => {

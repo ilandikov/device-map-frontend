@@ -152,6 +152,7 @@ export function createStore() {
                     subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
                         { creatorID },
                         notifyDeviceCreationSubscription,
+                        'T22NotifyDeviceCreation',
                     ),
                 userUpdate: (id) => (subscriber) => {
                     const subscription = anonymousClient
