@@ -14,10 +14,25 @@ export const resolvingDeviceSubscriptionClient: DeviceSubscriptionClient = {
 
         return () => subscriber.unsubscribe();
     },
+    userUpdate: (id) => (subscriber) => {
+        subscriber.next({
+            id,
+            points: 100,
+        });
+        subscriber.complete();
+
+        return () => subscriber.unsubscribe();
+    },
 };
 
 export const rejectingDeviceSubscriptionClient: DeviceSubscriptionClient = {
     creation: () => (subscriber) => {
+        subscriber.error();
+        subscriber.complete();
+
+        return () => subscriber.unsubscribe();
+    },
+    userUpdate: () => (subscriber) => {
         subscriber.error();
         subscriber.complete();
 

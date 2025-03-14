@@ -23,6 +23,7 @@ import {
     T22GetAddressResponse,
     T22GetUserResponse,
     T22ListDevicesResponse,
+    T22User,
 } from '@mancho-school-t22/graphql-types';
 import { Subscriber } from 'rxjs';
 import { MapAppReducer } from '../components/website/mapApp/redux/MapAppReducer';
@@ -72,6 +73,7 @@ export interface DevicesClient {
 
 export interface DeviceSubscriptionClient {
     creation: (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
+    userUpdate: (userID: string) => (subscriber: Subscriber<T22User>) => void;
 }
 
 export interface AddressClient {
@@ -152,6 +154,7 @@ export function createStore() {
                         });
                     return () => subscription.unsubscribe();
                 },
+                userUpdate: (_id) => (_subscriber) => {},
             },
             addressClient: {
                 getAddress: (input) =>
