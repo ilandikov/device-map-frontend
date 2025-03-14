@@ -67,6 +67,13 @@ describe('MapApp reducer tests', () => {
         });
     });
 
+    it('should not update logged in user if the ids dont match', () => {
+        const initialState = { loggedInUser: { id: 'my points should not change', points: 53 } };
+        const action = mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 });
+
+        testMapAppReducer(initialState, action, {});
+    });
+
     it('should set coordinates', () => {
         const initialState = {};
         const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 });

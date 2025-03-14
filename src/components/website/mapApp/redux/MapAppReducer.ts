@@ -13,7 +13,11 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
                 loggedInUser: { id: action.id, points: null },
             };
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
-            return { ...state, loggedInUser: action.user };
+            if (state.loggedInUser.id === action.user.id) {
+                return { ...state, loggedInUser: action.user };
+            }
+
+            return state;
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
         case MapAppActionType.SET_LOCATION_ADDRESS: {
