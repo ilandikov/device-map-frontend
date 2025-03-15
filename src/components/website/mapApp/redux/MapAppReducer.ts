@@ -60,7 +60,7 @@ function deviceReducer(devices: T22Device[], action: DeviceRemoteAnswer): T22Dev
     }
 }
 
-function approveDevice(deviceToApprove: T22Device) {
+function approveDevice(deviceToApprove: T22Device): T22Device {
     const approvedDevice: T22Device = {
         ...deviceToApprove,
         lastUpdate: Date.now(),
