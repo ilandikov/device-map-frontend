@@ -52,8 +52,8 @@ function deviceReducer(devices: T22Device[], action: DeviceRemoteAnswer): T22Dev
         case DeviceRemoteRequestType.APPROVE_DEVICE: {
             const deviceToApprove = devices.find((device) => device.id === action.id);
             const approvedDevice = approveDevice(deviceToApprove);
-            const withoutApprovedDevice = devices.filter((device) => (device.id !== action.id ? true : false));
-            return [...withoutApprovedDevice, approvedDevice];
+            const withoutApprovedDevice = devices.map((device) => (device.id !== action.id ? device : approvedDevice));
+            return [...withoutApprovedDevice];
         }
         default:
             return devices;

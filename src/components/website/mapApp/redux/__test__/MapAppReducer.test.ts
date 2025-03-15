@@ -194,12 +194,12 @@ describe('MapApp reducer test - devices', () => {
         });
     });
 
-    it('should approve a device', () => {
-        const initialState = { devices: [existingDevice, receivedDevice] };
+    it('should approve a device and maintain previous device order', () => {
+        const initialState = { devices: [receivedDevice, existingDevice] };
         const action = deviceApproved(receivedDevice.id);
 
         testMapAppReducer(initialState, action, {
-            devices: [existingDevice, { ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }],
+            devices: [{ ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }, existingDevice],
         });
     });
 });
