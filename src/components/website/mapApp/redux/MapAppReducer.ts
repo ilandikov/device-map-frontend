@@ -50,7 +50,7 @@ function deviceReducer(devices: T22Device[], action: DeviceRemoteAnswer): T22Dev
         case DeviceRemoteRequestType.DELETE_DEVICE:
             return devices.filter((device) => device.id !== action.id);
         case DeviceRemoteRequestType.APPROVE_DEVICE: {
-            return [...devices.map((device) => (device.id !== action.id ? device : approveDevice(device)))];
+            return devices.map((device) => (device.id !== action.id ? device : approveDevice(device)));
         }
         default:
             return devices;
