@@ -51,15 +51,20 @@ function deviceReducer(devices: T22Device[], action: DeviceRemoteAnswer): T22Dev
             return devices.filter((device) => device.id !== action.id);
         case DeviceRemoteRequestType.APPROVE_DEVICE: {
             const deviceToApprove = devices.find((device) => device.id === action.id);
-            const approvedDevice: T22Device = {
-                ...deviceToApprove,
-                lastUpdate: Date.now(),
-                approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
-            };
+            const approvedDevice = approveDevice(deviceToApprove);
             const withoutApprovedDevice = devices.filter((device) => device.id !== action.id);
             return [...withoutApprovedDevice, approvedDevice];
         }
         default:
             return devices;
     }
+}
+
+function approveDevice(deviceToApprove: T22Device) {
+    const approvedDevice: T22Device = {
+        ...deviceToApprove,
+        lastUpdate: Date.now(),
+        approvals: deviceToApprove.approvals ? deviceToApprove.approvals + 1 : 1,
+    };
+    return approvedDevice;
 }
