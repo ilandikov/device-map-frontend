@@ -34,14 +34,15 @@ interface ReducerTest<TState, TAction> {
 }
 
 function itShouldReduceBy(name: string, scenario: ReducerTest<MapAppState, MapAppAction>) {
+    const { reducer, stateBuilder, partialState, action, stateChange } = scenario;
     it(name, () => {
-        const initialState = scenario.stateBuilder(scenario.partialState);
+        const initialState = stateBuilder(partialState);
 
-        const resultingState = scenario.reducer(initialState, scenario.action);
+        const resultingState = reducer(initialState, action);
 
         expect(resultingState).toEqual({
             ...initialState,
-            ...scenario.stateChange,
+            ...stateChange,
         });
     });
 }
