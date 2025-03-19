@@ -32,8 +32,14 @@ interface ReducerTest<TState, TAction> {
 
 function itShouldReduceBy(name: string, scenario: ReducerTest<MapAppState, MapAppAction>) {
     it(name, () => {
-        const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
-        testMapAppReducer(scenario.initialState, scenario.action, scenario.stateChange);
+        const initialState = buildMapAppState(scenario.initialState);
+
+        const resultingState = MapAppReducer(initialState, scenario.action);
+
+        expect(resultingState).toEqual({
+            ...initialState,
+            ...scenario.stateChange,
+        });
     });
 }
 
