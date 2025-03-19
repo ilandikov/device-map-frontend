@@ -38,14 +38,18 @@ function prettifyHTML(html: string) {
     });
 }
 
+function verifyComponent(component: React.JSX.Element) {
+    const { container } = render(componentWithStoreProvider(component));
+    const htmlOutput = prettifyHTML(container.innerHTML);
+    const options = new Options().forFile().withFileExtention('.html');
+    verify(htmlOutput, options);
+}
+
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
         mockAuthenticationState({ email: 'verify@me.uk', password: 'password1' });
 
-        const { container } = render(componentWithStoreProvider(<LogInForm />));
-        const htmlOutput = prettifyHTML(container.innerHTML);
-        const options = new Options().forFile().withFileExtention('.html');
-        verify(htmlOutput, options);
+        verifyComponent(<LogInForm />);
     });
 
     it('should match snapshot with error', () => {
