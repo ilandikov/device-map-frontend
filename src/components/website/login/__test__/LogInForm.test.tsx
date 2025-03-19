@@ -46,30 +46,30 @@ describe('LogInForm action tests', () => {
     it.each([
         {
             name: 'should update the user email on input on password input stage',
-            state: { step: AuthenticationStep.LOGIN },
+            authenticationState: { step: AuthenticationStep.LOGIN },
             userAction: () => type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com'),
             dispatched: loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'),
         },
         {
             name: 'should update user password when typed',
-            state: {},
+            authenticationState: {},
             userAction: () => type(<LogInForm />, 'passwordInput', 'strongPassword'),
             dispatched: loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'),
         },
         {
             name: 'should call user authentication when next button is pressed',
-            state: {},
+            authenticationState: {},
             userAction: () => click(<LogInForm />, 'nextButton'),
             dispatched: loginModalRemoteRequest(LoginModalCheck.NONE),
         },
         {
             name: 'should update user password when typed',
-            state: {},
+            authenticationState: {},
             userAction: () => click(<LogInForm />, 'resetPasswordButton'),
             dispatched: loginModalButtonClick(LoginModalButton.RESET_PASSWORD),
         },
-    ])('$name', ({ state, userAction, dispatched }) => {
-        mockAuthenticationState(state);
+    ])('$name', ({ authenticationState, userAction, dispatched }) => {
+        mockAuthenticationState(authenticationState);
 
         userAction();
 
