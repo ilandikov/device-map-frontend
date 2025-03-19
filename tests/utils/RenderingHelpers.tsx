@@ -80,9 +80,3 @@ export function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
 export function testDispatchedAction(expectedAction: AllActions) {
     testDispatchedActionsInOrder([expectedAction]);
 }
-
-export function testValueInInput(component: React.JSX.Element, input: string, value: string) {
-    const container = renderForActionDispatchTest(component);
-    const emailInput = getByTestId(container, input) as HTMLInputElement;
-    expect(emailInput.value).toEqual(value);
-}
