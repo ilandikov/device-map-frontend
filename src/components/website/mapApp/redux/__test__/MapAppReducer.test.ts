@@ -28,7 +28,7 @@ function itShouldReduceBy(name: string) {
         const initialState = { loggedInUser: { id: 'reset me!', points: 0 } };
         const action = mapAppResetCurrentUser();
 
-        testMapAppReducer(initialState, action, { loggedInUser: null });
+        buildReducerTester(MapAppReducer, buildMapAppState)(initialState, action, { loggedInUser: null });
     });
 }
 
