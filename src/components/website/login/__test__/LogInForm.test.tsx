@@ -25,7 +25,7 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('LogInForm snapshot test', () => {
-    it('should match snapshot without error', () => {
+    it.each([{ name: 'should match snapshot without error' }])('$name', () => {
         mockAuthenticationState({ email: 'verify@me.uk', password: 'password1' });
 
         verifyComponent(<LogInForm />);
