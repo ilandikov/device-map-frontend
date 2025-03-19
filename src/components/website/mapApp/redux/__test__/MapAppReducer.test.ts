@@ -56,7 +56,7 @@ describe('MapApp reducer tests', () => {
         testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
     });
 
-    itShouldReduceBy('should reset current user id', {
+    itShouldReduceBy('resetting current user id', {
         initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
         action: mapAppResetCurrentUser(),
         stateChange: { loggedInUser: null },
