@@ -6,7 +6,8 @@ import * as prettier from 'prettier';
 import { Options } from 'approvals/lib/Core/Options';
 import { verify } from 'approvals/lib/Providers/Jest/JestApprovals';
 import { AllActions } from '../../src/redux/store';
-import { mockDispatch } from '../../src/redux/__mocks__/mocks';
+import { mockAuthenticationState, mockDispatch } from '../../src/redux/__mocks__/mocks';
+import { AuthenticationState } from '../../src/components/website/login/redux/AuthenticationState';
 import { configureTestStore } from './index';
 
 export function createEvent(value: any) {
@@ -47,6 +48,14 @@ export function verifyComponent(component: React.JSX.Element) {
     const htmlOutput = prettifyHTML(container.innerHTML);
     const options = new Options().forFile().withFileExtention('.html');
     verify(htmlOutput, options);
+}
+
+export function verifyComponentAtAuthenticationState(
+    partialAuthenticationState: Partial<AuthenticationState>,
+    component: React.JSX.Element,
+) {
+    mockAuthenticationState(partialAuthenticationState);
+    verifyComponent(component);
 }
 
 export function click(component: React.JSX.Element, buttonTestId: string) {

@@ -5,6 +5,7 @@ import {
     testValueInInput,
     type,
     verifyComponent,
+    verifyComponentAtAuthenticationState,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { LogInForm } from '../LogInForm';
 import {
@@ -16,21 +17,13 @@ import {
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { AuthenticationState, AuthenticationStep } from '../redux/AuthenticationState';
+import { AuthenticationStep } from '../redux/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
-
-function verifyComponentAtAuthenticationState(
-    partialAuthenticationState: Partial<AuthenticationState>,
-    component: React.JSX.Element,
-) {
-    mockAuthenticationState(partialAuthenticationState);
-    verifyComponent(component);
-}
 
 describe('LogInForm snapshot test', () => {
     it.each([
