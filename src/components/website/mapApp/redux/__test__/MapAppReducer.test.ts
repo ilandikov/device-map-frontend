@@ -1,5 +1,6 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
+    MapAppAction,
     mapAppGetLocationAddress,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
@@ -9,7 +10,7 @@ import {
     mapAppShowComponent,
     mapAppUpdateLoggedInUser,
 } from '../MapAppAction';
-import { MapAppComponents, buildMapAppState } from '../MapAppState';
+import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
     deviceCreateRequest,
@@ -23,12 +24,19 @@ import { buildReducerTester, testInitialState } from '../../../../../redux/__tes
 
 const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
-function itShouldReduceBy(name: string) {
+function itShouldReduceBy(
+    name: string,
+    {
+        initialState,
+        action,
+        stateChange,
+    }: {
+        initialState: Partial<MapAppState>;
+        action: MapAppAction;
+        stateChange: Partial<MapAppState>;
+    },
+) {
     it(name, () => {
-        const initialState = { loggedInUser: { id: 'reset me!', points: 0 } };
-        const action = mapAppResetCurrentUser();
-        const stateChange = { loggedInUser: null };
-
         const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
         testMapAppReducer(initialState, action, stateChange);
     });
@@ -53,7 +61,11 @@ describe('MapApp reducer tests', () => {
         testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
     });
 
-    itShouldReduceBy('should reset current user id');
+    itShouldReduceBy('should reset current user id', {
+        initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
+        action: mapAppResetCurrentUser(),
+        stateChange: { loggedInUser: null },
+    });
 
     it('should set logged in user id', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
