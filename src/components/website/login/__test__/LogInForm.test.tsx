@@ -76,9 +76,10 @@ describe('LogInForm action tests', () => {
         testDispatchedAction(dispatched);
     });
 
-    it('should show the already input email on password input stage', () => {
-        mockAuthenticationState({ email: 'here_is_my@email.com' });
+    it('should render email and password', () => {
+        mockAuthenticationState({ email: 'here_is_my@email.com', password: 'hereIsMyPassword' });
 
         testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
+        testValueInInput(<LogInForm />, 'passwordInput', 'hereIsMyPassword');
     });
 });
