@@ -64,13 +64,14 @@ describe('MapApp reducer tests', () => {
         // @ts-expect-error
         testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
     });
-
-    itShouldReduceBy('resetting current user id', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: { loggedInUser: { id: 'reset me!', points: 0 } },
-        action: mapAppResetCurrentUser(),
-        stateChange: { loggedInUser: null },
+    [{ name: 'resetting current user id' }].forEach(({ name }) => {
+        itShouldReduceBy(name, {
+            reducer: MapAppReducer,
+            stateBuilder: buildMapAppState,
+            partialState: { loggedInUser: { id: 'reset me!', points: 0 } },
+            action: mapAppResetCurrentUser(),
+            stateChange: { loggedInUser: null },
+        });
     });
 
     it('should set logged in user id', () => {
