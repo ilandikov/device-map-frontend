@@ -75,7 +75,9 @@ describe('LogInForm action tests', () => {
 
         testDispatchedAction(dispatched);
     });
+});
 
+describe('LogInForm state connection tests', () => {
     it('should render email and password', () => {
         mockAuthenticationState({ email: 'here_is_my@email.com', password: 'hereIsMyPassword' });
 
