@@ -1,6 +1,5 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
-    MapAppAction,
     mapAppGetLocationAddress,
     mapAppResetCurrentUser,
     mapAppSetLocationAddress,
@@ -10,7 +9,7 @@ import {
     mapAppShowComponent,
     mapAppUpdateLoggedInUser,
 } from '../MapAppAction';
-import { MapAppComponents, MapAppState, buildMapAppState } from '../MapAppState';
+import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
     deviceCreateRequest,
@@ -33,7 +32,7 @@ interface ReducerTest<TState, TAction> {
     stateChange: Partial<TState>;
 }
 
-function itShouldReduceBy(name: string, scenario: ReducerTest<MapAppState, MapAppAction>) {
+function itShouldReduceBy<TState, TAction>(name: string, scenario: ReducerTest<TState, TAction>) {
     const { reducer, stateBuilder, partialState, action, stateChange } = scenario;
     it(name, () => {
         const initialState = stateBuilder(partialState);
