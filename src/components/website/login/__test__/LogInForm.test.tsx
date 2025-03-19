@@ -16,7 +16,7 @@ import {
     loginModalRemoteRequest,
 } from '../redux/LoginModalAction';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { AuthenticationStep } from '../redux/AuthenticationState';
+import { AuthenticationState, AuthenticationStep } from '../redux/AuthenticationState';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -24,16 +24,22 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
+function verifyComponentAtAuthenticationState(
+    partialAuthenticationState: Partial<AuthenticationState>,
+    component: React.JSX.Element,
+) {
+    mockAuthenticationState(partialAuthenticationState);
+    verifyComponent(component);
+}
+
 describe('LogInForm snapshot test', () => {
     it.each([
         {
             name: 'should match snapshot without error',
-            authState: { email: 'verify@me.uk', password: 'password1' },
+            authenticationState: { email: 'verify@me.uk', password: 'password1' },
         },
-    ])('$name', ({ authState }) => {
-        mockAuthenticationState(authState);
-
-        verifyComponent(<LogInForm />);
+    ])('$name', ({ authenticationState }) => {
+        verifyComponentAtAuthenticationState(authenticationState, <LogInForm />);
     });
 
     it('should match snapshot with error', () => {
