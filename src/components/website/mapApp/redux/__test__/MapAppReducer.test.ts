@@ -23,8 +23,8 @@ import { buildReducerTester, testInitialState } from '../../../../../redux/__tes
 
 const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
-function itShouldReduceBy() {
-    it('should reset current user id', () => {
+function itShouldReduceBy(name: string) {
+    it(name, () => {
         const initialState = { loggedInUser: { id: 'reset me!', points: 0 } };
         const action = mapAppResetCurrentUser();
 
@@ -51,7 +51,7 @@ describe('MapApp reducer tests', () => {
         testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
     });
 
-    itShouldReduceBy();
+    itShouldReduceBy('should reset current user id');
 
     it('should set logged in user id', () => {
         const initialState = { component: MapAppComponents.LOGIN_MODAL };
