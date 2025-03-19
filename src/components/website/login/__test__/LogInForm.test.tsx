@@ -50,6 +50,12 @@ describe('LogInForm action tests', () => {
             userAction: () => type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com'),
             dispatched: loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'),
         },
+        {
+            name: 'should update user password when typed',
+            state: {},
+            userAction: () => type(<LogInForm />, 'passwordInput', 'strongPassword'),
+            dispatched: loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'),
+        },
     ])('$name', ({ state, userAction, dispatched }) => {
         mockAuthenticationState(state);
 
@@ -62,12 +68,6 @@ describe('LogInForm action tests', () => {
         mockAuthenticationState({ email: 'here_is_my@email.com' });
 
         testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
-    });
-
-    it('should update user password when typed', () => {
-        type(<LogInForm />, 'passwordInput', 'strongPassword');
-
-        testDispatchedAction(loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'));
     });
 
     it('should call user authentication when next button is pressed', () => {
