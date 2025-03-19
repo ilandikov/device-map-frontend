@@ -1,12 +1,11 @@
 import React from 'react';
-import { LogInForm } from '../LogInForm';
 import {
     click,
     testDispatchedAction,
-    testSnapshot,
-    testValueInInput,
     type,
+    verifyComponentAtAuthenticationState,
 } from '../../../../../tests/utils/RenderingHelpers';
+import { LogInForm } from '../LogInForm';
 import {
     LoginModalButton,
     LoginModalCheck,
@@ -25,16 +24,17 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('LogInForm snapshot test', () => {
-    it('should match snapshot without error', () => {
-        mockAuthenticationState({ email: 'verify@me.uk', password: 'password1' });
-
-        testSnapshot(<LogInForm />);
-    });
-
-    it('should match snapshot with error', () => {
-        mockAuthenticationState({ error: new Error('somethingIsWrong') });
-
-        testSnapshot(<LogInForm />);
+    it.each([
+        {
+            name: 'should be verified without error',
+            authenticationState: { email: 'verify@me.uk', password: 'password1' },
+        },
+        {
+            name: 'should be verified when error is present',
+            authenticationState: { error: new Error('somethingIsWrong') },
+        },
+    ])('$name', ({ authenticationState }) => {
+        verifyComponentAtAuthenticationState(authenticationState, <LogInForm />);
     });
 });
 
@@ -43,35 +43,36 @@ describe('LogInForm action tests', () => {
         mockDispatch.mockReset();
     });
 
-    it('should update the user email on input on password input stage', () => {
-        mockAuthenticationState({ step: AuthenticationStep.LOGIN });
+    it.each([
+        {
+            name: 'should update the user email on input on password input stage',
+            authenticationState: { step: AuthenticationStep.LOGIN },
+            userAction: () => type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com'),
+            dispatched: loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'),
+        },
+        {
+            name: 'should update user password when typed',
+            authenticationState: {},
+            userAction: () => type(<LogInForm />, 'passwordInput', 'strongPassword'),
+            dispatched: loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'),
+        },
+        {
+            name: 'should call user authentication when next button is pressed',
+            authenticationState: {},
+            userAction: () => click(<LogInForm />, 'nextButton'),
+            dispatched: loginModalRemoteRequest(LoginModalCheck.NONE),
+        },
+        {
+            name: 'should update user password when typed',
+            authenticationState: {},
+            userAction: () => click(<LogInForm />, 'resetPasswordButton'),
+            dispatched: loginModalButtonClick(LoginModalButton.RESET_PASSWORD),
+        },
+    ])('$name', ({ authenticationState, userAction, dispatched }) => {
+        mockAuthenticationState(authenticationState);
 
-        type(<LogInForm />, 'emailInput', 'hereIsMyMail@server.com');
+        userAction();
 
-        testDispatchedAction(loginModalInput(LoginModalInputType.EMAIL, 'hereIsMyMail@server.com'));
-    });
-
-    it('should show the already input email on password input stage', () => {
-        mockAuthenticationState({ email: 'here_is_my@email.com' });
-
-        testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
-    });
-
-    it('should update user password when typed', () => {
-        type(<LogInForm />, 'passwordInput', 'strongPassword');
-
-        testDispatchedAction(loginModalInput(LoginModalInputType.PASSWORD, 'strongPassword'));
-    });
-
-    it('should call user authentication when next button is pressed', () => {
-        click(<LogInForm />, 'nextButton');
-
-        testDispatchedAction(loginModalRemoteRequest(LoginModalCheck.NONE));
-    });
-
-    it('should transition to password reset state when reset button was clicked', () => {
-        click(<LogInForm />, 'resetPasswordButton');
-
-        testDispatchedAction(loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
+        testDispatchedAction(dispatched);
     });
 });

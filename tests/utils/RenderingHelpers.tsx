@@ -2,8 +2,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
+import * as prettier from 'prettier';
+import { Options } from 'approvals/lib/Core/Options';
+import { verify } from 'approvals/lib/Providers/Jest/JestApprovals';
 import { AllActions } from '../../src/redux/store';
-import { mockDispatch } from '../../src/redux/__mocks__/mocks';
+import { mockAuthenticationState, mockDispatch } from '../../src/redux/__mocks__/mocks';
+import { AuthenticationState } from '../../src/components/website/login/redux/AuthenticationState';
 import { configureTestStore } from './index';
 
 export function createEvent(value: any) {
@@ -30,6 +34,30 @@ export function renderForActionDispatchTest(component: React.JSX.Element) {
     return container;
 }
 
+function prettifyHTML(html: string) {
+    return prettier.format(html, {
+        parser: 'html',
+        bracketSameLine: true,
+        htmlWhitespaceSensitivity: 'ignore',
+        printWidth: 120,
+    });
+}
+
+export function verifyComponent(component: React.JSX.Element) {
+    const { container } = render(componentWithStoreProvider(component));
+    const htmlOutput = prettifyHTML(container.innerHTML);
+    const options = new Options().forFile().withFileExtention('.html');
+    verify(htmlOutput, options);
+}
+
+export function verifyComponentAtAuthenticationState(
+    partialAuthenticationState: Partial<AuthenticationState>,
+    component: React.JSX.Element,
+) {
+    mockAuthenticationState(partialAuthenticationState);
+    verifyComponent(component);
+}
+
 export function click(component: React.JSX.Element, buttonTestId: string) {
     const container = renderForActionDispatchTest(component);
     const button = getByTestId(container, buttonTestId);
@@ -51,10 +79,4 @@ export function testDispatchedActionsInOrder(expectedActions: AllActions[]) {
 
 export function testDispatchedAction(expectedAction: AllActions) {
     testDispatchedActionsInOrder([expectedAction]);
-}
-
-export function testValueInInput(component: React.JSX.Element, input: string, value: string) {
-    const container = renderForActionDispatchTest(component);
-    const emailInput = getByTestId(container, input) as HTMLInputElement;
-    expect(emailInput.value).toEqual(value);
 }
