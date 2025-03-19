@@ -62,6 +62,12 @@ describe('LogInForm action tests', () => {
             userAction: () => click(<LogInForm />, 'nextButton'),
             dispatched: loginModalRemoteRequest(LoginModalCheck.NONE),
         },
+        {
+            name: 'should update user password when typed',
+            state: {},
+            userAction: () => click(<LogInForm />, 'resetPasswordButton'),
+            dispatched: loginModalButtonClick(LoginModalButton.RESET_PASSWORD),
+        },
     ])('$name', ({ state, userAction, dispatched }) => {
         mockAuthenticationState(state);
 
@@ -74,11 +80,5 @@ describe('LogInForm action tests', () => {
         mockAuthenticationState({ email: 'here_is_my@email.com' });
 
         testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
-    });
-
-    it('should transition to password reset state when reset button was clicked', () => {
-        click(<LogInForm />, 'resetPasswordButton');
-
-        testDispatchedAction(loginModalButtonClick(LoginModalButton.RESET_PASSWORD));
     });
 });
