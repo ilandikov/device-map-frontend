@@ -4,7 +4,6 @@ import {
     testDispatchedAction,
     testValueInInput,
     type,
-    verifyComponent,
     verifyComponentAtAuthenticationState,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { LogInForm } from '../LogInForm';
@@ -31,14 +30,12 @@ describe('LogInForm snapshot test', () => {
             name: 'should match snapshot without error',
             authenticationState: { email: 'verify@me.uk', password: 'password1' },
         },
+        {
+            name: 'should match snapshot with error',
+            authenticationState: { error: new Error('somethingIsWrong') },
+        },
     ])('$name', ({ authenticationState }) => {
         verifyComponentAtAuthenticationState(authenticationState, <LogInForm />);
-    });
-
-    it('should match snapshot with error', () => {
-        mockAuthenticationState({ error: new Error('somethingIsWrong') });
-
-        verifyComponent(<LogInForm />);
     });
 });
 
