@@ -26,11 +26,7 @@ const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
 function itShouldReduceBy(
     name: string,
-    {
-        initialState,
-        action,
-        stateChange,
-    }: {
+    scenario: {
         initialState: Partial<MapAppState>;
         action: MapAppAction;
         stateChange: Partial<MapAppState>;
@@ -38,7 +34,7 @@ function itShouldReduceBy(
 ) {
     it(name, () => {
         const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
-        testMapAppReducer(initialState, action, stateChange);
+        testMapAppReducer(scenario.initialState, scenario.action, scenario.stateChange);
     });
 }
 
