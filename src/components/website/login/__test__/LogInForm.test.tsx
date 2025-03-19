@@ -2,7 +2,6 @@ import React from 'react';
 import {
     click,
     testDispatchedAction,
-    testSnapshot,
     testValueInInput,
     type,
     verifyComponent,
@@ -35,7 +34,7 @@ describe('LogInForm snapshot test', () => {
     it('should match snapshot with error', () => {
         mockAuthenticationState({ error: new Error('somethingIsWrong') });
 
-        testSnapshot(<LogInForm />);
+        verifyComponent(<LogInForm />);
     });
 });
 
