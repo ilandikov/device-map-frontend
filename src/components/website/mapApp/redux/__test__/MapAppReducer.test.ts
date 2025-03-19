@@ -24,13 +24,13 @@ import { buildReducerTester, testInitialState } from '../../../../../redux/__tes
 
 const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
-interface MapAppReducerTest {
-    initialState: Partial<MapAppState>;
+interface MapAppReducerTest<TState> {
+    initialState: Partial<TState>;
     action: MapAppAction;
-    stateChange: Partial<MapAppState>;
+    stateChange: Partial<TState>;
 }
 
-function itShouldReduceBy(name: string, scenario: MapAppReducerTest) {
+function itShouldReduceBy(name: string, scenario: MapAppReducerTest<MapAppState>) {
     it(name, () => {
         const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
         testMapAppReducer(scenario.initialState, scenario.action, scenario.stateChange);
