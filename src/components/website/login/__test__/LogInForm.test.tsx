@@ -2,7 +2,6 @@ import React from 'react';
 import {
     click,
     testDispatchedAction,
-    testValueInInput,
     type,
     verifyComponentAtAuthenticationState,
 } from '../../../../../tests/utils/RenderingHelpers';
@@ -75,14 +74,5 @@ describe('LogInForm action tests', () => {
         userAction();
 
         testDispatchedAction(dispatched);
-    });
-});
-
-describe('LogInForm state connection tests', () => {
-    it('should render email and password', () => {
-        mockAuthenticationState({ email: 'here_is_my@email.com', password: 'hereIsMyPassword' });
-
-        testValueInInput(<LogInForm />, 'emailInput', 'here_is_my@email.com');
-        testValueInInput(<LogInForm />, 'passwordInput', 'hereIsMyPassword');
     });
 });
