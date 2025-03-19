@@ -28,7 +28,6 @@ const esModules = [
 ].join('|');
 
 module.exports = {
-    // globalSetup: './tests/JestGlobalSetup.ts',
     verbose: true,
     reporters: [
         'default',
