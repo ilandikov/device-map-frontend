@@ -26,6 +26,7 @@ import { StateBuilder } from '../../../../../redux/store';
 const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
 interface ReducerTest<TState, TAction> {
+    reducer: (state: TState, action: TAction) => TState;
     stateBuilder: StateBuilder<TState>;
     initialState: Partial<TState>;
     action: TAction;
@@ -36,7 +37,7 @@ function itShouldReduceBy(name: string, scenario: ReducerTest<MapAppState, MapAp
     it(name, () => {
         const initialState = scenario.stateBuilder(scenario.initialState);
 
-        const resultingState = MapAppReducer(initialState, scenario.action);
+        const resultingState = scenario.reducer(initialState, scenario.action);
 
         expect(resultingState).toEqual({
             ...initialState,
@@ -65,6 +66,7 @@ describe('MapApp reducer tests', () => {
     });
 
     itShouldReduceBy('resetting current user id', {
+        reducer: MapAppReducer,
         stateBuilder: buildMapAppState,
         initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
         action: mapAppResetCurrentUser(),
