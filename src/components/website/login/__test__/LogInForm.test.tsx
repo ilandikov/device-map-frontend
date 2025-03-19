@@ -1,12 +1,17 @@
 import React from 'react';
-import { LogInForm } from '../LogInForm';
+import { render } from '@testing-library/react';
+import * as prettier from 'prettier';
+import { Options } from 'approvals/lib/Core/Options';
+import { verify } from 'approvals/lib/Providers/Jest/JestApprovals';
 import {
     click,
+    componentWithStoreProvider,
     testDispatchedAction,
     testSnapshot,
     testValueInInput,
     type,
 } from '../../../../../tests/utils/RenderingHelpers';
+import { LogInForm } from '../LogInForm';
 import {
     LoginModalButton,
     LoginModalCheck,
@@ -24,11 +29,23 @@ jest.mock('react-redux', () => ({
     useSelector: () => mockPrepareSelector(),
 }));
 
+function prettifyHTML(html: string) {
+    return prettier.format(html, {
+        parser: 'html',
+        bracketSameLine: true,
+        htmlWhitespaceSensitivity: 'ignore',
+        printWidth: 120,
+    });
+}
+
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
         mockAuthenticationState({ email: 'verify@me.uk', password: 'password1' });
 
-        testSnapshot(<LogInForm />);
+        const { container } = render(componentWithStoreProvider(<LogInForm />));
+        const htmlOutput = prettifyHTML(container.innerHTML);
+        const options = new Options().forFile().withFileExtention('.html');
+        verify(htmlOutput, options);
     });
 
     it('should match snapshot with error', () => {
