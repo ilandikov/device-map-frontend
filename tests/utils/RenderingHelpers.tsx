@@ -2,6 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
+import * as prettier from 'prettier';
+import { Options } from 'approvals/lib/Core/Options';
+import { verify } from 'approvals/lib/Providers/Jest/JestApprovals';
 import { AllActions } from '../../src/redux/store';
 import { mockDispatch } from '../../src/redux/__mocks__/mocks';
 import { configureTestStore } from './index';
@@ -16,7 +19,7 @@ export function getNonNumeric() {
     return characters[randomIndex];
 }
 
-export function componentWithStoreProvider(component: React.JSX.Element) {
+function componentWithStoreProvider(component: React.JSX.Element) {
     return <Provider store={configureTestStore()}>{component}</Provider>;
 }
 
@@ -28,6 +31,22 @@ export function testSnapshot(component: React.JSX.Element) {
 export function renderForActionDispatchTest(component: React.JSX.Element) {
     const { container } = render(componentWithStoreProvider(component));
     return container;
+}
+
+function prettifyHTML(html: string) {
+    return prettier.format(html, {
+        parser: 'html',
+        bracketSameLine: true,
+        htmlWhitespaceSensitivity: 'ignore',
+        printWidth: 120,
+    });
+}
+
+export function verifyComponent(component: React.JSX.Element) {
+    const { container } = render(componentWithStoreProvider(component));
+    const htmlOutput = prettifyHTML(container.innerHTML);
+    const options = new Options().forFile().withFileExtention('.html');
+    verify(htmlOutput, options);
 }
 
 export function click(component: React.JSX.Element, buttonTestId: string) {

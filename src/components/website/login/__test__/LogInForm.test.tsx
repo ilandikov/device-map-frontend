@@ -1,15 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import * as prettier from 'prettier';
-import { Options } from 'approvals/lib/Core/Options';
-import { verify } from 'approvals/lib/Providers/Jest/JestApprovals';
 import {
     click,
-    componentWithStoreProvider,
     testDispatchedAction,
     testSnapshot,
     testValueInInput,
     type,
+    verifyComponent,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { LogInForm } from '../LogInForm';
 import {
@@ -28,22 +24,6 @@ jest.mock('react-redux', () => ({
     useDispatch: () => mockDispatch,
     useSelector: () => mockPrepareSelector(),
 }));
-
-function prettifyHTML(html: string) {
-    return prettier.format(html, {
-        parser: 'html',
-        bracketSameLine: true,
-        htmlWhitespaceSensitivity: 'ignore',
-        printWidth: 120,
-    });
-}
-
-function verifyComponent(component: React.JSX.Element) {
-    const { container } = render(componentWithStoreProvider(component));
-    const htmlOutput = prettifyHTML(container.innerHTML);
-    const options = new Options().forFile().withFileExtention('.html');
-    verify(htmlOutput, options);
-}
 
 describe('LogInForm snapshot test', () => {
     it('should match snapshot without error', () => {
