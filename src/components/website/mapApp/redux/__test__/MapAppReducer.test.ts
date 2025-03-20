@@ -19,28 +19,7 @@ import {
     deviceListRequest,
     devicesListed,
 } from '../DeviceAction';
-import { testInitialState } from '../../../../../redux/__test__/helpers';
-import { StateBuilder } from '../../../../../redux/store';
-
-interface ReducerTest<TState, TAction> {
-    reducer: (state: TState, action: TAction) => TState;
-    stateBuilder: StateBuilder<TState>;
-    initialState: Partial<TState>;
-    action: TAction;
-    stateChange: Partial<TState>;
-}
-
-function itShouldReduceBy<TState, TAction>(name: string, scenario: ReducerTest<TState, TAction>) {
-    const { reducer, stateBuilder, initialState, action, stateChange } = scenario;
-    it(name, () => {
-        const resultingState = reducer(stateBuilder(initialState), action);
-
-        expect(resultingState).toEqual({
-            ...stateBuilder(initialState),
-            ...stateChange,
-        });
-    });
-}
+import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
