@@ -72,6 +72,75 @@ describe('MapApp reducer tests', () => {
             action: mapAppResetCurrentUser(),
             stateChange: { loggedInUser: null },
         },
+        {
+            name: 'should set logged in user id',
+            partialState: { component: MapAppComponents.LOGIN_MODAL },
+            action: mapAppSetLoggedInUserID('set me in the state'),
+            stateChange: {
+                loggedInUser: { id: 'set me in the state', points: null },
+            },
+        },
+        {
+            name: 'should update logged in user if the ids match',
+            partialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
+            action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
+            stateChange: {
+                loggedInUser: { id: 'i should get more points', points: 30 },
+            },
+        },
+        {
+            name: 'should not update logged in user if the ids dont match',
+            partialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
+            action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
+            stateChange: {},
+        },
+        {
+            name: 'should set coordinates',
+            partialState: {},
+            action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            stateChange: {
+                selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
+            },
+        },
+        {
+            name: 'should do nothing when getting an address',
+            partialState: {},
+            action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            stateChange: {},
+        },
+        {
+            name: 'should set location address',
+            partialState: {
+                selectedMarker: {
+                    location: { lat: 0, lon: 1 },
+                    address: null,
+                },
+            },
+            action: mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' }),
+            stateChange: {
+                selectedMarker: {
+                    location: { lat: 0, lon: 1 },
+                    address: {
+                        line1: 'line1',
+                        line2: 'line2',
+                    },
+                },
+            },
+        },
+        {
+            name: 'should set current user points',
+            partialState: {},
+            action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
+            stateChange: {
+                loggedInUser: { id: 'i have to be set', points: 10 },
+            },
+        },
+        {
+            name: 'should change the map app state',
+            partialState: { component: MapAppComponents.LOGIN_MODAL },
+            action: mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
+            stateChange: { component: MapAppComponents.DEVICE_LOCATION },
+        },
     ].forEach(({ name, partialState, action, stateChange }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
@@ -80,92 +149,6 @@ describe('MapApp reducer tests', () => {
             action,
             stateChange,
         });
-    });
-
-    itShouldReduceBy('should set logged in user id', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: { component: MapAppComponents.LOGIN_MODAL },
-        action: mapAppSetLoggedInUserID('set me in the state'),
-        stateChange: {
-            loggedInUser: { id: 'set me in the state', points: null },
-        },
-    });
-
-    itShouldReduceBy('should update logged in user if the ids match', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
-        action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
-        stateChange: {
-            loggedInUser: { id: 'i should get more points', points: 30 },
-        },
-    });
-
-    itShouldReduceBy('should not update logged in user if the ids dont match', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
-        action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
-
-        stateChange: {},
-    });
-
-    itShouldReduceBy('should set coordinates', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: {},
-        action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
-        stateChange: {
-            selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
-        },
-    });
-
-    itShouldReduceBy('should do nothing when getting an address', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: {},
-        action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
-        stateChange: {},
-    });
-
-    itShouldReduceBy('should set location address', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: {
-            selectedMarker: {
-                location: { lat: 0, lon: 1 },
-                address: null,
-            },
-        },
-        action: mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' }),
-        stateChange: {
-            selectedMarker: {
-                location: { lat: 0, lon: 1 },
-                address: {
-                    line1: 'line1',
-                    line2: 'line2',
-                },
-            },
-        },
-    });
-
-    itShouldReduceBy('should set current user points', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: {},
-        action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
-        stateChange: {
-            loggedInUser: { id: 'i have to be set', points: 10 },
-        },
-    });
-
-    itShouldReduceBy('should change the map app state', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        partialState: { component: MapAppComponents.LOGIN_MODAL },
-        action: mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
-        stateChange: { component: MapAppComponents.DEVICE_LOCATION },
     });
 });
 
