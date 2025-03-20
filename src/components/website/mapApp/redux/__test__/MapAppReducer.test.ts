@@ -191,6 +191,33 @@ describe('MapApp reducer test - devices', () => {
             action: deviceCreateRequest(),
             resultingDevices: [],
         },
+        {
+            name: 'should overwrite devices',
+            initialDevices: [existingDevice],
+            action: devicesListed([receivedDevice]),
+            resultingDevices: [receivedDevice],
+        },
+
+        {
+            name: 'should add device',
+            initialDevices: [existingDevice],
+            action: deviceCreated(receivedDevice),
+            resultingDevices: [existingDevice, receivedDevice],
+        },
+
+        {
+            name: 'should delete a device',
+            initialDevices: [existingDevice, receivedDevice],
+            action: deviceDeleted('existing'),
+            resultingDevices: [receivedDevice],
+        },
+
+        {
+            name: 'should approve a device and maintain previous device order',
+            initialDevices: [receivedDevice, existingDevice],
+            action: deviceApproved(receivedDevice.id),
+            resultingDevices: [{ ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }, existingDevice],
+        },
     ].forEach(({ name, initialDevices, action, resultingDevices }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
@@ -198,42 +225,6 @@ describe('MapApp reducer test - devices', () => {
             partialState: { devices: initialDevices },
             action,
             stateChange: { devices: resultingDevices },
-        });
-    });
-
-    it('should overwrite devices', () => {
-        const initialState = { devices: [existingDevice] };
-        const action = devicesListed([receivedDevice]);
-
-        testMapAppReducer(initialState, action, {
-            devices: [receivedDevice],
-        });
-    });
-
-    it('should add device', () => {
-        const initialState = { devices: [existingDevice] };
-        const action = deviceCreated(receivedDevice);
-
-        testMapAppReducer(initialState, action, {
-            devices: [existingDevice, receivedDevice],
-        });
-    });
-
-    it('should delete a device', () => {
-        const initialState = { devices: [existingDevice, receivedDevice] };
-        const action = deviceDeleted('existing');
-
-        testMapAppReducer(initialState, action, {
-            devices: [receivedDevice],
-        });
-    });
-
-    it('should approve a device and maintain previous device order', () => {
-        const initialState = { devices: [receivedDevice, existingDevice] };
-        const action = deviceApproved(receivedDevice.id);
-
-        testMapAppReducer(initialState, action, {
-            devices: [{ ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }, existingDevice],
         });
     });
 });
