@@ -161,18 +161,27 @@ describe('MapApp reducer test - devices', () => {
         jest.useRealTimers();
     });
 
-    it('should not change state on list devices remote request', () => {
-        const initialState = {};
-        const action = deviceListRequest();
-
-        testMapAppReducer(initialState, action, {});
-    });
-
-    it('should not change state on create device remote request', () => {
-        const initialState = {};
-        const action = deviceCreateRequest();
-
-        testMapAppReducer(initialState, action, {});
+    [
+        {
+            name: 'should not change state on list devices remote request',
+            initialDevices: {},
+            action: deviceListRequest(),
+            resultingDevices: {},
+        },
+        {
+            name: 'should not change state on create device remote request',
+            initialDevices: {},
+            action: deviceCreateRequest(),
+            resultingDevices: {},
+        },
+    ].forEach(({ name, initialDevices, action, resultingDevices }) => {
+        itShouldReduceBy(name, {
+            reducer: MapAppReducer,
+            stateBuilder: buildMapAppState,
+            partialState: initialDevices,
+            action,
+            stateChange: resultingDevices,
+        });
     });
 
     const existingDevice = {
