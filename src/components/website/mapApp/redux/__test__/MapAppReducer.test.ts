@@ -58,7 +58,7 @@ describe('MapApp reducer tests', () => {
 
     [
         {
-            name: 'should not change the initial state on a dummy action',
+            name: 'not changing the initial state on a dummy action',
             initialState: {},
             action: { type: 'DUMMY_ACTION' },
             stateChange: {},
@@ -70,7 +70,7 @@ describe('MapApp reducer tests', () => {
             stateChange: { loggedInUser: null },
         },
         {
-            name: 'should set logged in user id',
+            name: 'setting logged in user id',
             initialState: { component: MapAppComponents.LOGIN_MODAL },
             action: mapAppSetLoggedInUserID('set me in the state'),
             stateChange: {
@@ -78,7 +78,7 @@ describe('MapApp reducer tests', () => {
             },
         },
         {
-            name: 'should update logged in user if the ids match',
+            name: 'updating logged in user if the ids match',
             initialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
             action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
             stateChange: {
@@ -86,13 +86,13 @@ describe('MapApp reducer tests', () => {
             },
         },
         {
-            name: 'should not update logged in user if the ids dont match',
+            name: 'not updating logged in user if the ids dont match',
             initialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
             action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
             stateChange: {},
         },
         {
-            name: 'should set coordinates',
+            name: 'setting coordinates',
             initialState: {},
             action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {
@@ -100,13 +100,13 @@ describe('MapApp reducer tests', () => {
             },
         },
         {
-            name: 'should do nothing when getting an address',
+            name: 'doing nothing when getting an address',
             initialState: {},
             action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {},
         },
         {
-            name: 'should set location address',
+            name: 'setting location address',
             initialState: {
                 selectedMarker: {
                     location: { lat: 0, lon: 1 },
@@ -125,7 +125,7 @@ describe('MapApp reducer tests', () => {
             },
         },
         {
-            name: 'should set current user points',
+            name: 'setting current user points',
             initialState: {},
             action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
             stateChange: {
@@ -133,7 +133,7 @@ describe('MapApp reducer tests', () => {
             },
         },
         {
-            name: 'should change the map app state',
+            name: 'changing the map app state',
             initialState: { component: MapAppComponents.LOGIN_MODAL },
             action: mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
             stateChange: { component: MapAppComponents.DEVICE_LOCATION },
@@ -189,28 +189,28 @@ describe('MapApp reducer test - devices', () => {
             resultingDevices: [],
         },
         {
-            name: 'should overwrite devices',
+            name: 'overwriting devices on list devices',
             initialDevices: [existingDevice],
             action: devicesListed([receivedDevice]),
             resultingDevices: [receivedDevice],
         },
 
         {
-            name: 'should add device',
+            name: 'adding device',
             initialDevices: [existingDevice],
             action: deviceCreated(receivedDevice),
             resultingDevices: [existingDevice, receivedDevice],
         },
 
         {
-            name: 'should delete a device',
+            name: 'deleting a device',
             initialDevices: [existingDevice, receivedDevice],
             action: deviceDeleted('existing'),
             resultingDevices: [receivedDevice],
         },
 
         {
-            name: 'should approve a device and maintain previous device order',
+            name: 'approving a device and maintaining device order',
             initialDevices: [receivedDevice, existingDevice],
             action: deviceApproved(receivedDevice.id),
             resultingDevices: [{ ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }, existingDevice],
@@ -229,13 +229,13 @@ describe('MapApp reducer test - devices', () => {
 describe('MapApp reducer tests - device creation ongoing', () => {
     [
         {
-            name: 'should set device creation ongoing to true',
+            name: 'setting device creation ongoing to true',
             initialState: { isDeviceCreationOngoing: false },
             action: deviceCreation(true),
             stateChange: { isDeviceCreationOngoing: true },
         },
         {
-            name: 'should set device creation ongoing to false',
+            name: 'setting device creation ongoing to false',
             initialState: { isDeviceCreationOngoing: true },
             action: deviceCreation(false),
             stateChange: { isDeviceCreationOngoing: false },
