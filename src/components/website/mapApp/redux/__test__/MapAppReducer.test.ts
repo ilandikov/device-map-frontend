@@ -19,10 +19,8 @@ import {
     deviceListRequest,
     devicesListed,
 } from '../DeviceAction';
-import { buildReducerTester, testInitialState } from '../../../../../redux/__test__/helpers';
+import { testInitialState } from '../../../../../redux/__test__/helpers';
 import { StateBuilder } from '../../../../../redux/store';
-
-const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 
 interface ReducerTest<TState, TAction> {
     reducer: (state: TState, action: TAction) => TState;
@@ -58,9 +56,13 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should not change the initial state on a dummy action', () => {
+    itShouldReduceBy('should not change the initial state on a dummy action', {
+        reducer: MapAppReducer,
+        stateBuilder: buildMapAppState,
+        initialState: {},
         // @ts-expect-error
-        testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
+        action: { type: 'DUMMY_ACTION' },
+        stateChange: {},
     });
 
     [
