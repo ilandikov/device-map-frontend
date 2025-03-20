@@ -19,9 +19,7 @@ import {
     deviceListRequest,
     devicesListed,
 } from '../DeviceAction';
-import { buildReducerTester, testInitialState } from '../../../../../redux/__test__/helpers';
-
-const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
+import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
@@ -37,93 +35,96 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    it('should not change the initial state on a dummy action', () => {
-        // @ts-expect-error
-        testMapAppReducer({}, { type: 'DUMMY_ACTION' }, {});
-    });
-
-    it('should reset current user id', () => {
-        const initialState = { loggedInUser: { id: 'reset me!', points: 0 } };
-        const action = mapAppResetCurrentUser();
-
-        testMapAppReducer(initialState, action, { loggedInUser: null });
-    });
-
-    it('should set logged in user id', () => {
-        const initialState = { component: MapAppComponents.LOGIN_MODAL };
-        const action = mapAppSetLoggedInUserID('set me in the state');
-
-        testMapAppReducer(initialState, action, {
-            loggedInUser: { id: 'set me in the state', points: null },
-        });
-    });
-
-    it('should update logged in user if the ids match', () => {
-        const initialState = { loggedInUser: { id: 'i should get more points', points: 0 } };
-        const action = mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 });
-
-        testMapAppReducer(initialState, action, {
-            loggedInUser: { id: 'i should get more points', points: 30 },
-        });
-    });
-
-    it('should not update logged in user if the ids dont match', () => {
-        const initialState = { loggedInUser: { id: 'my points should not change', points: 53 } };
-        const action = mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 });
-
-        testMapAppReducer(initialState, action, {});
-    });
-
-    it('should set coordinates', () => {
-        const initialState = {};
-        const action = mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 });
-
-        testMapAppReducer(initialState, action, {
-            selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
-        });
-    });
-
-    it('should do nothing when getting an address', () => {
-        const initialState = {};
-        const action = mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 });
-
-        testMapAppReducer(initialState, action, {});
-    });
-
-    it('should set location address', () => {
-        const initialState = {
-            selectedMarker: {
-                location: { lat: 0, lon: 1 },
-                address: null,
+    [
+        {
+            name: 'not changing the initial state on a dummy action',
+            initialState: {},
+            action: { type: 'DUMMY_ACTION' },
+            stateChange: {},
+        },
+        {
+            name: 'resetting current user id',
+            initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
+            action: mapAppResetCurrentUser(),
+            stateChange: { loggedInUser: null },
+        },
+        {
+            name: 'setting logged in user id',
+            initialState: { component: MapAppComponents.LOGIN_MODAL },
+            action: mapAppSetLoggedInUserID('set me in the state'),
+            stateChange: {
+                loggedInUser: { id: 'set me in the state', points: null },
             },
-        };
-        const action = mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' });
-
-        testMapAppReducer(initialState, action, {
-            selectedMarker: {
-                location: { lat: 0, lon: 1 },
-                address: {
-                    line1: 'line1',
-                    line2: 'line2',
+        },
+        {
+            name: 'updating logged in user if the ids match',
+            initialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
+            action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
+            stateChange: {
+                loggedInUser: { id: 'i should get more points', points: 30 },
+            },
+        },
+        {
+            name: 'not updating logged in user if the ids dont match',
+            initialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
+            action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
+            stateChange: {},
+        },
+        {
+            name: 'setting coordinates',
+            initialState: {},
+            action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            stateChange: {
+                selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
+            },
+        },
+        {
+            name: 'doing nothing when getting an address',
+            initialState: {},
+            action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            stateChange: {},
+        },
+        {
+            name: 'setting location address',
+            initialState: {
+                selectedMarker: {
+                    location: { lat: 0, lon: 1 },
+                    address: null,
                 },
             },
+            action: mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' }),
+            stateChange: {
+                selectedMarker: {
+                    location: { lat: 0, lon: 1 },
+                    address: {
+                        line1: 'line1',
+                        line2: 'line2',
+                    },
+                },
+            },
+        },
+        {
+            name: 'setting current user points',
+            initialState: {},
+            action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
+            stateChange: {
+                loggedInUser: { id: 'i have to be set', points: 10 },
+            },
+        },
+        {
+            name: 'changing the map app state',
+            initialState: { component: MapAppComponents.LOGIN_MODAL },
+            action: mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
+            stateChange: { component: MapAppComponents.DEVICE_LOCATION },
+        },
+    ].forEach(({ name, initialState, action, stateChange }) => {
+        itShouldReduceBy(name, {
+            reducer: MapAppReducer,
+            stateBuilder: buildMapAppState,
+            initialState,
+            action,
+            stateChange,
         });
-    });
-
-    it('should set current user points', () => {
-        const initialState = {};
-        const action = mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 });
-
-        testMapAppReducer(initialState, action, {
-            loggedInUser: { id: 'i have to be set', points: 10 },
-        });
-    });
-
-    it('should change the map app state', () => {
-        const initialState = { component: MapAppComponents.LOGIN_MODAL };
-        const action = mapAppShowComponent(MapAppComponents.DEVICE_LOCATION);
-
-        testMapAppReducer(initialState, action, { component: MapAppComponents.DEVICE_LOCATION });
     });
 });
 
@@ -134,20 +135,6 @@ describe('MapApp reducer test - devices', () => {
     });
     afterAll(() => {
         jest.useRealTimers();
-    });
-
-    it('should not change state on list devices remote request', () => {
-        const initialState = {};
-        const action = deviceListRequest();
-
-        testMapAppReducer(initialState, action, {});
-    });
-
-    it('should not change state on create device remote request', () => {
-        const initialState = {};
-        const action = deviceCreateRequest();
-
-        testMapAppReducer(initialState, action, {});
     });
 
     const existingDevice = {
@@ -167,61 +154,78 @@ describe('MapApp reducer test - devices', () => {
         approvals: 0,
     };
 
-    it('should overwrite devices', () => {
-        const initialState = { devices: [existingDevice] };
-        const action = devicesListed([receivedDevice]);
+    [
+        {
+            name: 'not changing state on list devices remote request',
+            initialDevices: [],
+            action: deviceListRequest(),
+            resultingDevices: [],
+        },
+        {
+            name: 'not changing state on create device remote request',
+            initialDevices: [],
+            action: deviceCreateRequest(),
+            resultingDevices: [],
+        },
+        {
+            name: 'overwriting devices on list devices',
+            initialDevices: [existingDevice],
+            action: devicesListed([receivedDevice]),
+            resultingDevices: [receivedDevice],
+        },
 
-        testMapAppReducer(initialState, action, {
-            devices: [receivedDevice],
-        });
-    });
+        {
+            name: 'adding device',
+            initialDevices: [existingDevice],
+            action: deviceCreated(receivedDevice),
+            resultingDevices: [existingDevice, receivedDevice],
+        },
 
-    it('should add device', () => {
-        const initialState = { devices: [existingDevice] };
-        const action = deviceCreated(receivedDevice);
+        {
+            name: 'deleting a device',
+            initialDevices: [existingDevice, receivedDevice],
+            action: deviceDeleted('existing'),
+            resultingDevices: [receivedDevice],
+        },
 
-        testMapAppReducer(initialState, action, {
-            devices: [existingDevice, receivedDevice],
-        });
-    });
-
-    it('should delete a device', () => {
-        const initialState = { devices: [existingDevice, receivedDevice] };
-        const action = deviceDeleted('existing');
-
-        testMapAppReducer(initialState, action, {
-            devices: [receivedDevice],
-        });
-    });
-
-    it('should approve a device and maintain previous device order', () => {
-        const initialState = { devices: [receivedDevice, existingDevice] };
-        const action = deviceApproved(receivedDevice.id);
-
-        testMapAppReducer(initialState, action, {
-            devices: [{ ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }, existingDevice],
+        {
+            name: 'approving a device and maintaining device order',
+            initialDevices: [receivedDevice, existingDevice],
+            action: deviceApproved(receivedDevice.id),
+            resultingDevices: [{ ...receivedDevice, approvals: 1, lastUpdate: 1234567890 }, existingDevice],
+        },
+    ].forEach(({ name, initialDevices, action, resultingDevices }) => {
+        itShouldReduceBy(name, {
+            reducer: MapAppReducer,
+            stateBuilder: buildMapAppState,
+            initialState: { devices: initialDevices },
+            action,
+            stateChange: { devices: resultingDevices },
         });
     });
 });
 
 describe('MapApp reducer tests - device creation ongoing', () => {
-    it('should set device creation ongoing to true', () => {
-        const initialState = { isDeviceCreationOngoing: false };
-
-        const action = deviceCreation(true);
-
-        testMapAppReducer(initialState, action, {
-            isDeviceCreationOngoing: true,
-        });
-    });
-
-    it('should set device creation ongoing to false', () => {
-        const initialState = { isDeviceCreationOngoing: true };
-
-        const action = deviceCreation(false);
-
-        testMapAppReducer(initialState, action, {
-            isDeviceCreationOngoing: false,
+    [
+        {
+            name: 'setting device creation ongoing to true',
+            initialState: { isDeviceCreationOngoing: false },
+            action: deviceCreation(true),
+            stateChange: { isDeviceCreationOngoing: true },
+        },
+        {
+            name: 'setting device creation ongoing to false',
+            initialState: { isDeviceCreationOngoing: true },
+            action: deviceCreation(false),
+            stateChange: { isDeviceCreationOngoing: false },
+        },
+    ].forEach(({ name, initialState, action, stateChange }) => {
+        itShouldReduceBy(name, {
+            reducer: MapAppReducer,
+            stateBuilder: buildMapAppState,
+            initialState,
+            action,
+            stateChange,
         });
     });
 });

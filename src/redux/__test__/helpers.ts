@@ -44,3 +44,23 @@ export function itShouldAnswerBy(testName: string, scenario: EpicTest) {
         expect(receivedAction).toEqual(scenario.expectedActions);
     });
 }
+
+interface ReducerTest<TState, TAction> {
+    reducer: (state: TState, action: TAction) => TState;
+    stateBuilder: StateBuilder<TState>;
+    initialState: Partial<TState>;
+    action: TAction;
+    stateChange: Partial<TState>;
+}
+
+export function itShouldReduceBy<TState, TAction>(name: string, scenario: ReducerTest<TState, TAction>) {
+    const { reducer, stateBuilder, initialState, action, stateChange } = scenario;
+    it(name, () => {
+        const resultingState = reducer(stateBuilder(initialState), action);
+
+        expect(resultingState).toEqual({
+            ...stateBuilder(initialState),
+            ...stateChange,
+        });
+    });
+}
