@@ -164,23 +164,23 @@ describe('MapApp reducer test - devices', () => {
     [
         {
             name: 'should not change state on list devices remote request',
-            initialDevices: {},
+            initialDevices: [],
             action: deviceListRequest(),
-            resultingDevices: {},
+            resultingDevices: [],
         },
         {
             name: 'should not change state on create device remote request',
-            initialDevices: {},
+            initialDevices: [],
             action: deviceCreateRequest(),
-            resultingDevices: {},
+            resultingDevices: [],
         },
     ].forEach(({ name, initialDevices, action, resultingDevices }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
-            partialState: initialDevices,
+            partialState: { devices: initialDevices },
             action,
-            stateChange: resultingDevices,
+            stateChange: { devices: resultingDevices },
         });
     });
 
