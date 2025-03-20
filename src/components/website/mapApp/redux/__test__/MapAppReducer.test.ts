@@ -180,13 +180,13 @@ describe('MapApp reducer test - devices', () => {
 
     [
         {
-            name: 'should not change state on list devices remote request',
+            name: 'not changing state on list devices remote request',
             initialDevices: [],
             action: deviceListRequest(),
             resultingDevices: [],
         },
         {
-            name: 'should not change state on create device remote request',
+            name: 'not changing state on create device remote request',
             initialDevices: [],
             action: deviceCreateRequest(),
             resultingDevices: [],
