@@ -27,18 +27,18 @@ const testMapAppReducer = buildReducerTester(MapAppReducer, buildMapAppState);
 interface ReducerTest<TState, TAction> {
     reducer: (state: TState, action: TAction) => TState;
     stateBuilder: StateBuilder<TState>;
-    partialState: Partial<TState>;
+    initialState: Partial<TState>;
     action: TAction;
     stateChange: Partial<TState>;
 }
 
 function itShouldReduceBy<TState, TAction>(name: string, scenario: ReducerTest<TState, TAction>) {
-    const { reducer, stateBuilder, partialState, action, stateChange } = scenario;
+    const { reducer, stateBuilder, initialState, action, stateChange } = scenario;
     it(name, () => {
-        const resultingState = reducer(stateBuilder(partialState), action);
+        const resultingState = reducer(stateBuilder(initialState), action);
 
         expect(resultingState).toEqual({
-            ...stateBuilder(partialState),
+            ...stateBuilder(initialState),
             ...stateChange,
         });
     });
@@ -143,7 +143,7 @@ describe('MapApp reducer tests', () => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
-            partialState,
+            initialState: partialState,
             action,
             stateChange,
         });
@@ -220,7 +220,7 @@ describe('MapApp reducer test - devices', () => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
-            partialState: { devices: initialDevices },
+            initialState: { devices: initialDevices },
             action,
             stateChange: { devices: resultingDevices },
         });
@@ -245,7 +245,7 @@ describe('MapApp reducer tests - device creation ongoing', () => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
-            partialState,
+            initialState: partialState,
             action,
             stateChange,
         });
