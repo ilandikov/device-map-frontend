@@ -66,13 +66,13 @@ describe('MapApp reducer tests', () => {
     [
         {
             name: 'resetting current user id',
-            partialState: { loggedInUser: { id: 'reset me!', points: 0 } },
+            initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
             action: mapAppResetCurrentUser(),
             stateChange: { loggedInUser: null },
         },
         {
             name: 'should set logged in user id',
-            partialState: { component: MapAppComponents.LOGIN_MODAL },
+            initialState: { component: MapAppComponents.LOGIN_MODAL },
             action: mapAppSetLoggedInUserID('set me in the state'),
             stateChange: {
                 loggedInUser: { id: 'set me in the state', points: null },
@@ -80,7 +80,7 @@ describe('MapApp reducer tests', () => {
         },
         {
             name: 'should update logged in user if the ids match',
-            partialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
+            initialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
             action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
             stateChange: {
                 loggedInUser: { id: 'i should get more points', points: 30 },
@@ -88,13 +88,13 @@ describe('MapApp reducer tests', () => {
         },
         {
             name: 'should not update logged in user if the ids dont match',
-            partialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
+            initialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
             action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
             stateChange: {},
         },
         {
             name: 'should set coordinates',
-            partialState: {},
+            initialState: {},
             action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {
                 selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
@@ -102,13 +102,13 @@ describe('MapApp reducer tests', () => {
         },
         {
             name: 'should do nothing when getting an address',
-            partialState: {},
+            initialState: {},
             action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {},
         },
         {
             name: 'should set location address',
-            partialState: {
+            initialState: {
                 selectedMarker: {
                     location: { lat: 0, lon: 1 },
                     address: null,
@@ -127,7 +127,7 @@ describe('MapApp reducer tests', () => {
         },
         {
             name: 'should set current user points',
-            partialState: {},
+            initialState: {},
             action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
             stateChange: {
                 loggedInUser: { id: 'i have to be set', points: 10 },
@@ -135,11 +135,11 @@ describe('MapApp reducer tests', () => {
         },
         {
             name: 'should change the map app state',
-            partialState: { component: MapAppComponents.LOGIN_MODAL },
+            initialState: { component: MapAppComponents.LOGIN_MODAL },
             action: mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
             stateChange: { component: MapAppComponents.DEVICE_LOCATION },
         },
-    ].forEach(({ name, partialState: initialState, action, stateChange }) => {
+    ].forEach(({ name, initialState, action, stateChange }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
@@ -231,17 +231,17 @@ describe('MapApp reducer tests - device creation ongoing', () => {
     [
         {
             name: 'should set device creation ongoing to true',
-            partialState: { isDeviceCreationOngoing: false },
+            initialState: { isDeviceCreationOngoing: false },
             action: deviceCreation(true),
             stateChange: { isDeviceCreationOngoing: true },
         },
         {
             name: 'should set device creation ongoing to false',
-            partialState: { isDeviceCreationOngoing: true },
+            initialState: { isDeviceCreationOngoing: true },
             action: deviceCreation(false),
             stateChange: { isDeviceCreationOngoing: false },
         },
-    ].forEach(({ name, partialState: initialState, action, stateChange }) => {
+    ].forEach(({ name, initialState, action, stateChange }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
