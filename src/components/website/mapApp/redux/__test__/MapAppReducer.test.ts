@@ -56,16 +56,13 @@ describe('MapApp reducer tests', () => {
         });
     });
 
-    itShouldReduceBy('should not change the initial state on a dummy action', {
-        reducer: MapAppReducer,
-        stateBuilder: buildMapAppState,
-        initialState: {},
-        // @ts-expect-error
-        action: { type: 'DUMMY_ACTION' },
-        stateChange: {},
-    });
-
     [
+        {
+            name: 'should not change the initial state on a dummy action',
+            initialState: {},
+            action: { type: 'DUMMY_ACTION' },
+            stateChange: {},
+        },
         {
             name: 'resetting current user id',
             initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
