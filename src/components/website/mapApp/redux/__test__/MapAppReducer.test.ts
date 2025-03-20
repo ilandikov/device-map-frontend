@@ -230,23 +230,19 @@ describe('MapApp reducer test - devices', () => {
 });
 
 describe('MapApp reducer tests - device creation ongoing', () => {
-    it('should set device creation ongoing to true', () => {
-        const initialState = { isDeviceCreationOngoing: false };
-
-        const action = deviceCreation(true);
-
-        testMapAppReducer(initialState, action, {
-            isDeviceCreationOngoing: true,
-        });
+    itShouldReduceBy('should set device creation ongoing to true', {
+        reducer: MapAppReducer,
+        stateBuilder: buildMapAppState,
+        partialState: { isDeviceCreationOngoing: false },
+        action: deviceCreation(true),
+        stateChange: { isDeviceCreationOngoing: true },
     });
 
-    it('should set device creation ongoing to false', () => {
-        const initialState = { isDeviceCreationOngoing: true };
-
-        const action = deviceCreation(false);
-
-        testMapAppReducer(initialState, action, {
-            isDeviceCreationOngoing: false,
-        });
+    itShouldReduceBy('should set device creation ongoing to false', {
+        reducer: MapAppReducer,
+        stateBuilder: buildMapAppState,
+        partialState: { isDeviceCreationOngoing: true },
+        action: deviceCreation(false),
+        stateChange: { isDeviceCreationOngoing: false },
     });
 });
