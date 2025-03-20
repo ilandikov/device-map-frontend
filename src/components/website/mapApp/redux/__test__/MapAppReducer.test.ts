@@ -139,11 +139,11 @@ describe('MapApp reducer tests', () => {
             action: mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
             stateChange: { component: MapAppComponents.DEVICE_LOCATION },
         },
-    ].forEach(({ name, partialState, action, stateChange }) => {
+    ].forEach(({ name, partialState: initialState, action, stateChange }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
-            initialState: partialState,
+            initialState,
             action,
             stateChange,
         });
@@ -241,11 +241,11 @@ describe('MapApp reducer tests - device creation ongoing', () => {
             action: deviceCreation(false),
             stateChange: { isDeviceCreationOngoing: false },
         },
-    ].forEach(({ name, partialState, action, stateChange }) => {
+    ].forEach(({ name, partialState: initialState, action, stateChange }) => {
         itShouldReduceBy(name, {
             reducer: MapAppReducer,
             stateBuilder: buildMapAppState,
-            initialState: partialState,
+            initialState,
             action,
             stateChange,
         });
