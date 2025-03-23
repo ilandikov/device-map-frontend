@@ -76,11 +76,6 @@ export interface DevicesClient {
     };
 }
 
-export interface DeviceSubscriptionClient {
-    creation: (creatorID: string) => (subscriber: Subscriber<T22Device>) => void;
-    userUpdate: (userID: string) => (subscriber: Subscriber<T22User>) => void;
-}
-
 export interface AddressClient {
     getAddress: (input: T22GetAddressInput) => Promise<T22GetAddressResponse>;
 }
