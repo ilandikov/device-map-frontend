@@ -106,7 +106,7 @@ const rootEpic: RootEpic = combineEpics(
 );
 
 export function createStore() {
-    const apolloClient = new ApolloClient({
+    const anonymousUserClient = new ApolloClient({
         link: ApolloLink.from([
             createAuthLink({
                 url: process.env.GATSBY_APPSYNC_ENDPOINT,
@@ -131,7 +131,9 @@ export function createStore() {
             devicesClient: {
                 forAnonymousUser: {
                     listDevices: () =>
-                        apolloClient.query<Query>(listDevicesQuery).then((response) => response.data.T22ListDevices),
+                        anonymousUserClient
+                            .query<Query>(listDevicesQuery)
+                            .then((response) => response.data.T22ListDevices),
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
@@ -163,7 +165,7 @@ export function createStore() {
             },
             addressClient: {
                 getAddress: (input) =>
-                    apolloClient
+                    anonymousUserClient
                         .query<Query>({ query: getAddressQuery, variables: { input } })
                         .then((response) => response.data.T22GetAddress),
             },
