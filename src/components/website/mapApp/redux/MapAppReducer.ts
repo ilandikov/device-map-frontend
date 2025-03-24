@@ -1,6 +1,6 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
-import { MapAppState, buildMapAppState } from './MapAppState';
+import { MapAppState, MapAppUser, buildMapAppState } from './MapAppState';
 import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from './DeviceAction';
 
 export function MapAppReducer(state: MapAppState = buildMapAppState({}), action: MapAppAction): MapAppState {
@@ -11,7 +11,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
         case MapAppActionType.SET_LOGGED_IN_USER:
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
         case MapAppActionType.LOGGED_IN_USER_RESET:
-            return { ...state, ...loggedInUserReducer(state, action) };
+            return { ...state, loggedInUser: loggedInUserReducer(state, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
         case MapAppActionType.SET_LOCATION_ADDRESS: {
@@ -30,19 +30,19 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     }
 }
 
-function loggedInUserReducer(state: MapAppState, action: MapAppAction): Partial<MapAppState> {
+function loggedInUserReducer(state: MapAppState, action: MapAppAction): MapAppUser | null {
     switch (action.type) {
         case MapAppActionType.SET_LOGGED_IN_USER_ID:
-            return { loggedInUser: { id: action.id, points: null } };
+            return { id: action.id, points: null };
         case MapAppActionType.SET_LOGGED_IN_USER:
-            return { loggedInUser: action.user };
+            return action.user;
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
             if (state.loggedInUser.id === action.user.id) {
-                return { loggedInUser: action.user };
+                return action.user;
             }
-            return {};
+            return state.loggedInUser;
         case MapAppActionType.LOGGED_IN_USER_RESET:
-            return { loggedInUser: null };
+            return null;
     }
 }
 

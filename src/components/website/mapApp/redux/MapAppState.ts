@@ -6,7 +6,7 @@ export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state).mapAppState;
 }
 
-interface MapAppUser extends T22User {
+export interface MapAppUser extends T22User {
     points: number | null;
 }
 
