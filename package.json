@@ -96,7 +96,7 @@
     "@types/react-helmet": "6.1.11",
     "@types/react-test-renderer": "18.3.0",
     "ajv": "^7.2.4",
-    "approvals": "^7.2.1",
+    "approvals": "^7.2.2",
     "babel-jest": "29.7.0",
     "babel-preset-gatsby": "3.13.2",
     "cheerio": "1.0.0",
