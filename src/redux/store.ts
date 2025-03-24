@@ -105,10 +105,7 @@ const rootEpic: RootEpic = combineEpics(
     userSubscriptionSender,
 );
 
-async function queryAsAnonymousUser(
-    anonymousUserClient: ApolloClient<NormalizedCacheObject>,
-    input: T22GetAddressInput,
-) {
+async function queryAsAnonymousUser<TInput>(anonymousUserClient: ApolloClient<NormalizedCacheObject>, input: TInput) {
     const response = await anonymousUserClient.query<Query>({ query: getAddressQuery, variables: { input } });
     return response.data.T22GetAddress;
 }
