@@ -7,7 +7,7 @@ import { SelectedMarkerGetAddress, SelectedMarkerSauce, selectedMarkerSetAddress
 
 export const address: RootEpic = (action$, _, { addressClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.SELECTED_MARKER_GET_ADDRESS),
+        ofType(MapAppActionType.SELECTED_MARKER),
         filter((action) => action.sauce === SelectedMarkerSauce.GET_ADDRESS),
         mergeMap((action) => processGetAddressResponse(addressClient, action)),
     );

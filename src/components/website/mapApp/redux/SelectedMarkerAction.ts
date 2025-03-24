@@ -24,13 +24,13 @@ export function selectedMarkerSetLocation(location: T22Location): SelectedMarker
 }
 
 export interface SelectedMarkerGetAddress {
-    type: MapAppActionType.SELECTED_MARKER_GET_ADDRESS;
+    type: MapAppActionType.SELECTED_MARKER;
     sauce: SelectedMarkerSauce.GET_ADDRESS;
     location: T22Location;
 }
 
 export function selectedMarkerGetAddress(location: T22Location): SelectedMarkerGetAddress {
-    return { type: MapAppActionType.SELECTED_MARKER_GET_ADDRESS, sauce: SelectedMarkerSauce.GET_ADDRESS, location };
+    return { type: MapAppActionType.SELECTED_MARKER, sauce: SelectedMarkerSauce.GET_ADDRESS, location };
 }
 
 export interface SelectedMarkerSetAddress {
