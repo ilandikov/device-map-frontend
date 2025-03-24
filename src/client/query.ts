@@ -3,11 +3,15 @@ import { Mutation, Subscription } from '@mancho-school-t22/graphql-types';
 import { Subscriber } from 'rxjs';
 import { anonymousClient, setAuthenticatedClient } from './graphql';
 
-export async function mutateAsAuthUser<TInput, TResponse>(
-    input: TInput,
-    mutation: DocumentNode,
-    resolver: keyof Mutation,
-) {
+export async function mutateAsAuthUser<TInput, TResponse>({
+    input,
+    mutation,
+    resolver,
+}: {
+    input: TInput;
+    mutation: DocumentNode;
+    resolver: keyof Mutation;
+}) {
     return (await setAuthenticatedClient())
         .mutate<Mutation>({
             mutation,
@@ -16,16 +20,24 @@ export async function mutateAsAuthUser<TInput, TResponse>(
         .then((response) => response.data[resolver] as TResponse);
 }
 
-export function subscribeAsAuthUser<TVariables, TResponse>(
-    variables: TVariables,
-    query: DocumentNode,
-    resolver: keyof Subscription,
-) {
+export function subscribeAsAuthUser<TVariables, TResponse>({
+    variables,
+    query,
+    resolver,
+    closeAfterFirstAnswer,
+}: {
+    variables: TVariables;
+    query: DocumentNode;
+    resolver: keyof Subscription;
+    closeAfterFirstAnswer: boolean;
+}) {
     return (subscriber: Subscriber<TResponse>) => {
         const subscription = anonymousClient.subscribe<Subscription, TVariables>({ query, variables }).subscribe({
             next: (fetchResult) => {
                 subscriber.next(fetchResult.data[resolver] as TResponse);
-                subscriber.complete();
+                if (closeAfterFirstAnswer) {
+                    subscriber.complete();
+                }
             },
             error: (error) => {
                 subscriber.error(error);
