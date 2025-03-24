@@ -1,4 +1,4 @@
-import { selectedMarkerGetAddress, selectedMarkerSetAddress } from '../MapAppAction';
+import { selectedMarkerGetAddress, selectedMarkerSetAddress } from '../SelectedMarkerAction';
 import { rejectingAddressClient, resolvingAddressClient, testAddressEpic } from './AddressTestHelpers';
 
 describe('Address epic tests', () => {

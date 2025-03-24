@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../../../redux/store';
 import home from '../../../../assets/images/Home.png';
 import { useMapAppState } from '../redux/MapAppState';
-import { selectedMarkerGetAddress } from '../redux/MapAppAction';
+import { selectedMarkerGetAddress } from '../redux/SelectedMarkerAction';
 import { LocationAddressLoader } from './LocationAddressLoader';
 import './LocationAddress.scss';
 

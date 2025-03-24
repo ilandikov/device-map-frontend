@@ -1,10 +1,5 @@
 import { MapAppReducer } from '../MapAppReducer';
-import {
-    mapAppShowComponent,
-    selectedMarkerGetAddress,
-    selectedMarkerSetAddress,
-    selectedMarkerSetCoordinates,
-} from '../MapAppAction';
+import { mapAppShowComponent } from '../MapAppAction';
 import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
@@ -17,6 +12,11 @@ import {
 } from '../DeviceAction';
 import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
 import { loggedInUserReset, loggedInUserSet, loggedInUserSetID, loggedInUserUpdate } from '../LoggedInUserAction';
+import {
+    selectedMarkerGetAddress,
+    selectedMarkerSetAddress,
+    selectedMarkerSetCoordinates,
+} from '../SelectedMarkerAction';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {

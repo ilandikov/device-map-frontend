@@ -2,7 +2,8 @@ import { ofType } from 'redux-observable';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AddressClient, RootEpic } from '../../../../redux/store';
-import { MapAppActionType, SelectedMarkerGetAddress, selectedMarkerSetAddress } from './MapAppAction';
+import { MapAppActionType } from './MapAppAction';
+import { SelectedMarkerGetAddress, selectedMarkerSetAddress } from './SelectedMarkerAction';
 
 export const address: RootEpic = (action$, _, { addressClient }) =>
     action$.pipe(

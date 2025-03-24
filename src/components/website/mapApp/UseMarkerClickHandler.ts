@@ -1,7 +1,8 @@
 import { LeafletMouseEvent } from 'leaflet';
 import { useAppDispatch } from '../../../redux/store';
 import { MapAppComponents, useMapAppState } from './redux/MapAppState';
-import { mapAppShowComponent, selectedMarkerSetCoordinates } from './redux/MapAppAction';
+import { mapAppShowComponent } from './redux/MapAppAction';
+import { selectedMarkerSetCoordinates } from './redux/SelectedMarkerAction';
 
 export function useMarkerClickHandler() {
     const dispatch = useAppDispatch();
