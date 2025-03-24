@@ -2,23 +2,23 @@ import { T22Address, T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppActionType } from './MapAppAction';
 
 export enum SelectedMarkerSauce {
-    SET_COORDINATES = 'SET_COORDINATES',
+    SET_LOCATION = 'SET_LOCATION',
     GET_ADDRESS = 'GET_ADDRESS',
     SET_ADDRESS = 'SET_ADDRESS',
 }
 
-export type SelectedMarkerAction = SelectedMarkerSetCoordinates | SelectedMarkerSetAddress | SelectedMarkerGetAddress;
+export type SelectedMarkerAction = SelectedMarkerSetLocation | SelectedMarkerSetAddress | SelectedMarkerGetAddress;
 
-export interface SelectedMarkerSetCoordinates {
-    type: MapAppActionType.SELECTED_MARKER_SET_COORDINATES;
-    sauce: SelectedMarkerSauce.SET_COORDINATES;
+export interface SelectedMarkerSetLocation {
+    type: MapAppActionType.SELECTED_MARKER_SET_LOCATION;
+    sauce: SelectedMarkerSauce.SET_LOCATION;
     markerLocation: T22Location;
 }
 
-export function selectedMarkerSetCoordinates(markerLocation: T22Location): SelectedMarkerSetCoordinates {
+export function selectedMarkerSetLocation(markerLocation: T22Location): SelectedMarkerSetLocation {
     return {
-        type: MapAppActionType.SELECTED_MARKER_SET_COORDINATES,
-        sauce: SelectedMarkerSauce.SET_COORDINATES,
+        type: MapAppActionType.SELECTED_MARKER_SET_LOCATION,
+        sauce: SelectedMarkerSauce.SET_LOCATION,
         markerLocation,
     };
 }

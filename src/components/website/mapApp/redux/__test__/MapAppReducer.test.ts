@@ -12,11 +12,7 @@ import {
 } from '../DeviceAction';
 import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
 import { loggedInUserReset, loggedInUserSet, loggedInUserSetID, loggedInUserUpdate } from '../LoggedInUserAction';
-import {
-    selectedMarkerGetAddress,
-    selectedMarkerSetAddress,
-    selectedMarkerSetCoordinates,
-} from '../SelectedMarkerAction';
+import { selectedMarkerGetAddress, selectedMarkerSetAddress, selectedMarkerSetLocation } from '../SelectedMarkerAction';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
@@ -70,7 +66,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'setting coordinates',
             initialState: {},
-            action: selectedMarkerSetCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            action: selectedMarkerSetLocation({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {
                 selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
             },
