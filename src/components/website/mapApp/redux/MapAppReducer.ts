@@ -1,6 +1,6 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
-import { LoggedInUser, MapAppState, buildMapAppState } from './MapAppState';
+import { LoggedInUser, MapAppState, SelectedMarker, buildMapAppState } from './MapAppState';
 import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from './DeviceAction';
 import { LoggedInUserAction } from './LoggedInUserAction';
 
@@ -15,7 +15,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
         case MapAppActionType.SET_LOCATION_ADDRESS:
-            return selectedMarkerReducer(state, action);
+            return { ...state, selectedMarker: selectedMarkerReducer(state, action) };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
         case DeviceActionType.DEVICE_CREATION:
@@ -25,30 +25,19 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     }
 }
 
-function selectedMarkerReducer(state: MapAppState, action: MapAppAction): MapAppState {
+function selectedMarkerReducer(state: MapAppState, action: MapAppAction): SelectedMarker {
     switch (action.type) {
-        case MapAppActionType.SHOW_COMPONENT:
-            return { ...state, component: action.component };
-        case MapAppActionType.LOGGED_IN_USER_SET_ID:
-        case MapAppActionType.LOGGED_IN_USER_SET:
-        case MapAppActionType.LOGGED_IN_USER_UPDATE:
-        case MapAppActionType.LOGGED_IN_USER_RESET:
-            return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
-            return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
+            return { location: action.markerLocation, address: null };
         case MapAppActionType.SET_LOCATION_ADDRESS: {
             const selectedMarkerWithAddress = {
                 ...state.selectedMarker,
                 address: action.address,
             };
-            return { ...state, selectedMarker: selectedMarkerWithAddress };
+            return selectedMarkerWithAddress;
         }
-        case DeviceActionType.DEVICE_REMOTE_ANSWER:
-            return { ...state, devices: deviceReducer(state.devices, action) };
-        case DeviceActionType.DEVICE_CREATION:
-            return { ...state, isDeviceCreationOngoing: action.isDeviceCreationOngoing };
         default:
-            return state;
+            return state.selectedMarker;
     }
 }
 

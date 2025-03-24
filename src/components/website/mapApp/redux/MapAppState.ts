@@ -12,7 +12,7 @@ export interface MapAppUser extends T22User {
 
 export type LoggedInUser = MapAppUser | null;
 
-interface SelectedMarker {
+export interface SelectedMarker {
     location: T22Location | null;
     address: T22Address | null;
 }
