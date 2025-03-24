@@ -1,7 +1,7 @@
 import { T22User } from '@mancho-school-t22/graphql-types';
 import { MapAppActionType } from './MapAppAction';
 
-enum LoggedInUserActionType {
+export enum LoggedInUserActionType {
     SET_USER = 'SET_USER',
     SET_ID = 'SET_ID',
     UPDATE_USER = 'UPDATE_USER',
