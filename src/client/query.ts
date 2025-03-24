@@ -1,7 +1,17 @@
-import { DocumentNode, gql } from '@apollo/client';
-import { Mutation, Subscription } from '@mancho-school-t22/graphql-types';
+import { ApolloClient, DocumentNode, NormalizedCacheObject, gql } from '@apollo/client';
+import { Mutation, Query, Subscription } from '@mancho-school-t22/graphql-types';
 import { Subscriber } from 'rxjs';
 import { anonymousClient, setAuthenticatedClient } from './graphql';
+
+export async function queryAsAnonymousUser<TInput, TResponse>(
+    anonymousUserClient: ApolloClient<NormalizedCacheObject>,
+    input: TInput,
+    query: DocumentNode,
+    resolver: keyof Query,
+) {
+    const response = await anonymousUserClient.query<Query>({ query, variables: { input } });
+    return response.data[resolver] as TResponse;
+}
 
 export async function mutateAsAuthUser<TInput, TResponse>({
     input,

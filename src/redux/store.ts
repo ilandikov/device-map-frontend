@@ -6,7 +6,7 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, ApolloLink, DocumentNode, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
@@ -43,6 +43,7 @@ import {
     mutateAsAuthUser,
     notifyDeviceCreationSubscription,
     notifyUserUpdateSubscription,
+    queryAsAnonymousUser,
     subscribeAsAuthUser,
 } from '../client/query';
 import { setAuthenticatedClient } from '../client/graphql';
@@ -104,16 +105,6 @@ const rootEpic: RootEpic = combineEpics(
     userSubscriptions,
     userSubscriptionSender,
 );
-
-async function queryAsAnonymousUser<TInput, TResponse>(
-    anonymousUserClient: ApolloClient<NormalizedCacheObject>,
-    input: TInput,
-    query: DocumentNode,
-    resolver: keyof Query,
-) {
-    const response = await anonymousUserClient.query<Query>({ query, variables: { input } });
-    return response.data[resolver] as TResponse;
-}
 
 export function createStore() {
     const anonymousUserClient = new ApolloClient({
