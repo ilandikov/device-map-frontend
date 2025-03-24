@@ -22,11 +22,11 @@ export type LoggedInUserAction =
 
 export interface LoggedInUserReset {
     type: MapAppActionType.LOGGED_IN_USER_RESET;
-    sybType: LoggedInUserActionType.RESET_USER;
+    subType: LoggedInUserActionType.RESET_USER;
 }
 
 export function loggedInUserReset(): LoggedInUserReset {
-    return { type: MapAppActionType.LOGGED_IN_USER_RESET, sybType: LoggedInUserActionType.RESET_USER };
+    return { type: MapAppActionType.LOGGED_IN_USER_RESET, subType: LoggedInUserActionType.RESET_USER };
 }
 
 interface LoggedInUserSetID {
