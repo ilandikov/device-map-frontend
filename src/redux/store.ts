@@ -109,9 +109,10 @@ async function queryAsAnonymousUser<TInput, TResponse>(
     anonymousUserClient: ApolloClient<NormalizedCacheObject>,
     input: TInput,
     query: DocumentNode,
+    resolver: keyof Query,
 ) {
     const response = await anonymousUserClient.query<Query>({ query, variables: { input } });
-    return response.data['T22GetAddress'] as TResponse;
+    return response.data[resolver] as TResponse;
 }
 
 export function createStore() {
@@ -173,7 +174,8 @@ export function createStore() {
                 },
             },
             addressClient: {
-                getAddress: async (input) => await queryAsAnonymousUser(anonymousUserClient, input, getAddressQuery),
+                getAddress: async (input) =>
+                    await queryAsAnonymousUser(anonymousUserClient, input, getAddressQuery, 'T22GetAddress'),
             },
             usersClient: {
                 getUser: async () =>
