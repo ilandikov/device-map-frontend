@@ -6,7 +6,7 @@ import {
     testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { mapAppLoggedInUserReset, mapAppShowComponent } from '../redux/MapAppAction';
+import { mapAppShowComponent } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
     LoginModalButton,
@@ -15,6 +15,7 @@ import {
     loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
 import { MapAppComponents } from '../redux/MapAppState';
+import { mapAppLoggedInUserReset } from '../redux/LoggedInUserAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

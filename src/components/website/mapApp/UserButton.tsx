@@ -8,9 +8,10 @@ import {
     loginModalButtonClick,
     loginModalRemoteRequest,
 } from '../login/redux/LoginModalAction';
-import { mapAppLoggedInUserReset, mapAppShowComponent } from './redux/MapAppAction';
+import { mapAppShowComponent } from './redux/MapAppAction';
 import Account from '/src/assets/images/Account.svg';
 import { MapAppComponents } from './redux/MapAppState';
+import { mapAppLoggedInUserReset } from './redux/LoggedInUserAction';
 
 function UserButton(props: { caption: string; onClick: () => void }) {
     return (

@@ -4,7 +4,7 @@ import {
     mapAppSubscriptionError,
     mapAppUpdateLoggedInUser,
     mapAppUserUpdateSubscriptionRequest,
-} from '../MapAppAction';
+} from '../LoggedInUserAction';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 describe('user subscription', () => {

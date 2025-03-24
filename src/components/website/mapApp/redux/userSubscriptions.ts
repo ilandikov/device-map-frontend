@@ -1,7 +1,8 @@
 import { ofType } from 'redux-observable';
 import { Observable, catchError, map, mergeMap, of } from 'rxjs';
 import { RootEpic } from '../../../../redux/store';
-import { MapAppActionType, mapAppSubscriptionError, mapAppUpdateLoggedInUser } from './MapAppAction';
+import { MapAppActionType } from './MapAppAction';
+import { mapAppSubscriptionError, mapAppUpdateLoggedInUser } from './LoggedInUserAction';
 
 export const userSubscriptions: RootEpic = (action$, state$, { usersClient }) =>
     action$.pipe(

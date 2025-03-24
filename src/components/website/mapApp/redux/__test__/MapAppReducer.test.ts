@@ -1,13 +1,9 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
     mapAppGetLocationAddress,
-    mapAppLoggedInUserReset,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
-    mapAppSetLoggedInUser,
-    mapAppSetLoggedInUserID,
     mapAppShowComponent,
-    mapAppUpdateLoggedInUser,
 } from '../MapAppAction';
 import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
@@ -20,6 +16,12 @@ import {
     devicesListed,
 } from '../DeviceAction';
 import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
+import {
+    mapAppLoggedInUserReset,
+    mapAppSetLoggedInUser,
+    mapAppSetLoggedInUserID,
+    mapAppUpdateLoggedInUser,
+} from '../LoggedInUserAction';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {

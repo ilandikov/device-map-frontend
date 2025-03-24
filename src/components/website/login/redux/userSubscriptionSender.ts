@@ -2,8 +2,9 @@ import { ofType } from 'redux-observable';
 import { EMPTY, catchError, map, switchMap } from 'rxjs';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { RootEpic } from '../../../../redux/store';
-import { MapAppActionType, mapAppUserUpdateSubscriptionRequest } from '../../mapApp/redux/MapAppAction';
+import { MapAppActionType } from '../../mapApp/redux/MapAppAction';
 import { setAuthenticatedClient } from '../../../../client/graphql';
+import { mapAppUserUpdateSubscriptionRequest } from '../../mapApp/redux/LoggedInUserAction';
 
 export const userSubscriptionSender: RootEpic = (action$) => {
     return action$.pipe(

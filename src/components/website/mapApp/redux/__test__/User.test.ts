@@ -1,6 +1,6 @@
-import { mapAppGetLoggedInUserError, mapAppSetLoggedInUser, mapAppSetLoggedInUserID } from '../MapAppAction';
 import { user } from '../User';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
+import { mapAppGetLoggedInUserError, mapAppSetLoggedInUser, mapAppSetLoggedInUserID } from '../LoggedInUserAction';
 import { userRejectingClient, userResolvingClient } from './UserTestHelpers';
 
 describe('user epic tests', () => {
