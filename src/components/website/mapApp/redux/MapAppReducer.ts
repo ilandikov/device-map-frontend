@@ -2,20 +2,16 @@ import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { LoggedInUser, MapAppState, SelectedMarker, buildMapAppState } from './MapAppState';
 import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from './DeviceAction';
-import { LoggedInUserAction } from './LoggedInUserAction';
-import { SelectedMarkerAction } from './SelectedMarkerAction';
+import { LoggedInUserAction, LoggedInUserActionType } from './LoggedInUserAction';
+import { SelectedMarkerAction, SelectedMarkerActionType } from './SelectedMarkerAction';
 
 export function MapAppReducer(state: MapAppState = buildMapAppState({}), action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
-        case MapAppActionType.LOGGED_IN_USER_SET_ID:
-        case MapAppActionType.LOGGED_IN_USER_SET:
-        case MapAppActionType.LOGGED_IN_USER_UPDATE:
-        case MapAppActionType.LOGGED_IN_USER_RESET:
+        case MapAppActionType.LOGGED_IN_USER:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
-        case MapAppActionType.SELECTED_MARKER_SET_COORDINATES:
-        case MapAppActionType.SELECTED_MARKER_SET_ADDRESS:
+        case MapAppActionType.SELECTED_MARKER:
             return { ...state, selectedMarker: selectedMarkerReducer(state.selectedMarker, action) };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
@@ -27,10 +23,10 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
 }
 
 function selectedMarkerReducer(selectedMarker: SelectedMarker, action: SelectedMarkerAction): SelectedMarker {
-    switch (action.type) {
-        case MapAppActionType.SELECTED_MARKER_SET_COORDINATES:
-            return { location: action.markerLocation, address: null };
-        case MapAppActionType.SELECTED_MARKER_SET_ADDRESS:
+    switch (action.subType) {
+        case SelectedMarkerActionType.SET_LOCATION:
+            return { location: action.location, address: null };
+        case SelectedMarkerActionType.SET_ADDRESS:
             return { ...selectedMarker, address: action.address };
         default:
             return selectedMarker;
@@ -38,17 +34,17 @@ function selectedMarkerReducer(selectedMarker: SelectedMarker, action: SelectedM
 }
 
 function loggedInUserReducer(loggedInUser: LoggedInUser, action: LoggedInUserAction): LoggedInUser {
-    switch (action.type) {
-        case MapAppActionType.LOGGED_IN_USER_SET_ID:
+    switch (action.subType) {
+        case LoggedInUserActionType.SET_ID:
             return { id: action.id, points: null };
-        case MapAppActionType.LOGGED_IN_USER_SET:
+        case LoggedInUserActionType.SET_USER:
             return action.user;
-        case MapAppActionType.LOGGED_IN_USER_UPDATE:
+        case LoggedInUserActionType.UPDATE_USER:
             if (loggedInUser.id === action.user.id) {
                 return action.user;
             }
             return loggedInUser;
-        case MapAppActionType.LOGGED_IN_USER_RESET:
+        case LoggedInUserActionType.RESET_USER:
             return null;
         default:
             return loggedInUser;
