@@ -10,6 +10,8 @@ export interface MapAppUser extends T22User {
     points: number | null;
 }
 
+export type LoggedInUser = MapAppUser | null;
+
 export interface MapAppState {
     component: MapAppComponents;
     selectedMarker: {
@@ -18,7 +20,7 @@ export interface MapAppState {
     };
     devices: T22Device[];
     isDeviceCreationOngoing: boolean;
-    loggedInUser: MapAppUser | null;
+    loggedInUser: LoggedInUser;
 }
 
 export enum MapAppComponents {

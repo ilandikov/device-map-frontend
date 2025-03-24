@@ -1,6 +1,6 @@
 import { T22Device } from '@mancho-school-t22/graphql-types';
 import { MapAppAction, MapAppActionType } from './MapAppAction';
-import { MapAppState, MapAppUser, buildMapAppState } from './MapAppState';
+import { LoggedInUser, MapAppState, buildMapAppState } from './MapAppState';
 import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from './DeviceAction';
 import { LoggedInUserAction } from './LoggedInUserAction';
 
@@ -31,7 +31,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     }
 }
 
-function loggedInUserReducer(loggedInUser: MapAppUser | null, action: LoggedInUserAction): MapAppUser | null {
+function loggedInUserReducer(loggedInUser: LoggedInUser, action: LoggedInUserAction): LoggedInUser {
     switch (action.type) {
         case MapAppActionType.LOGGED_IN_USER_SET_ID:
             return { id: action.id, points: null };
