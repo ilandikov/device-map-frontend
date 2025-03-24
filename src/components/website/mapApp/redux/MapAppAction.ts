@@ -18,17 +18,17 @@ export enum MapAppActionType {
 }
 
 export type MapAppAction =
-    | MapAppLoggedInUserReset
-    | MapAppDeviceMarkerClick
-    | MapAppGetLocationAddress
-    | MapAppSetLocationAddress
+    | MapAppShowComponent
     | MapAppSetLoggedInUserID
     | MapAppSetLoggedInUser
-    | MapAppGetLoggedInUserError
-    | MapAppShowComponent
-    | MapAppUserUpdateSubscriptionRequest
     | MapAppUpdateLoggedInUser
+    | MapAppLoggedInUserReset
+    | MapAppGetLoggedInUserError
+    | MapAppUserUpdateSubscriptionRequest
     | MapAppSubscriptionError
+    | MapAppDeviceMarkerClick
+    | MapAppSetLocationAddress
+    | MapAppGetLocationAddress
     | DeviceAction;
 
 export interface MapAppLoggedInUserReset {
