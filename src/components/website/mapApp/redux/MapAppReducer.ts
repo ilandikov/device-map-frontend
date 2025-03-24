@@ -33,19 +33,16 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
 function loggedInUserReducer(state: MapAppState, action: MapAppAction): Partial<MapAppState> {
     switch (action.type) {
         case MapAppActionType.SET_LOGGED_IN_USER_ID:
-            return {
-                ...state,
-                loggedInUser: { id: action.id, points: null },
-            };
+            return { loggedInUser: { id: action.id, points: null } };
         case MapAppActionType.SET_LOGGED_IN_USER:
-            return { ...state, loggedInUser: action.user };
+            return { loggedInUser: action.user };
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
             if (state.loggedInUser.id === action.user.id) {
-                return { ...state, loggedInUser: action.user };
+                return { loggedInUser: action.user };
             }
-            return state;
+            return {};
         case MapAppActionType.LOGGED_IN_USER_RESET:
-            return { ...state, loggedInUser: null };
+            return { loggedInUser: null };
     }
 }
 
