@@ -140,10 +140,8 @@ export function createStore() {
             }),
             devicesClient: {
                 forAnonymousUser: {
-                    listDevices: () =>
-                        anonymousUserClient
-                            .query<Query>(listDevicesQuery)
-                            .then((response) => response.data.T22ListDevices),
+                    listDevices: async () =>
+                        await queryAsAnonymousUser(anonymousUserClient, {}, listDevicesQuery.query, 'T22ListDevices'),
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
