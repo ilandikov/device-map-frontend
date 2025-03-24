@@ -5,19 +5,22 @@ import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from '.
 
 export function MapAppReducer(state: MapAppState = buildMapAppState({}), action: MapAppAction): MapAppState {
     switch (action.type) {
-        case MapAppActionType.LOGGED_IN_USER_RESET:
-            return { ...state, loggedInUser: null };
+        case MapAppActionType.SHOW_COMPONENT:
+            return { ...state, component: action.component };
         case MapAppActionType.SET_LOGGED_IN_USER_ID:
             return {
                 ...state,
                 loggedInUser: { id: action.id, points: null },
             };
+        case MapAppActionType.SET_LOGGED_IN_USER:
+            return { ...state, loggedInUser: action.user };
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
             if (state.loggedInUser.id === action.user.id) {
                 return { ...state, loggedInUser: action.user };
             }
-
             return state;
+        case MapAppActionType.LOGGED_IN_USER_RESET:
+            return { ...state, loggedInUser: null };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
         case MapAppActionType.SET_LOCATION_ADDRESS: {
@@ -27,10 +30,6 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
             };
             return { ...state, selectedMarker: selectedMarkerWithAddress };
         }
-        case MapAppActionType.SET_LOGGED_IN_USER:
-            return { ...state, loggedInUser: action.user };
-        case MapAppActionType.SHOW_COMPONENT:
-            return { ...state, component: action.component };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
         case DeviceActionType.DEVICE_CREATION:
