@@ -1,4 +1,4 @@
-import { EMPTY, Observable, catchError, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, mergeMap, of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import {
     T22ApproveDeviceRequestResponse,
@@ -27,7 +27,7 @@ import {
 export const devices: RootEpic = (action$, $state, { devicesClient }) =>
     action$.pipe(
         ofType(DeviceActionType.DEVICE_REMOTE_REQUEST),
-        switchMap((action) => {
+        mergeMap((action) => {
             const request = devicesRequests[action.request];
             if (!request) {
                 return EMPTY;
