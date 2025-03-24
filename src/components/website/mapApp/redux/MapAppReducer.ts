@@ -30,10 +30,7 @@ function selectedMarkerReducer(selectedMarker: SelectedMarker, action: MapAppAct
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { location: action.markerLocation, address: null };
         case MapAppActionType.SET_LOCATION_ADDRESS:
-            return {
-                ...selectedMarker,
-                address: action.address,
-            };
+            return { ...selectedMarker, address: action.address };
         default:
             return selectedMarker;
     }
