@@ -25,7 +25,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     }
 }
 
-function selectedMarkerReducer(state, action) {
+function selectedMarkerReducer(state: MapAppState, action: MapAppAction): MapAppState {
     switch (action.type) {
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
