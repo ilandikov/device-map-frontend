@@ -111,7 +111,7 @@ async function queryAsAnonymousUser<TInput>(
     query: DocumentNode,
 ) {
     const response = await anonymousUserClient.query<Query>({ query, variables: { input } });
-    return response.data.T22GetAddress;
+    return response.data['T22GetAddress'];
 }
 
 export function createStore() {
