@@ -8,11 +8,8 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
         case MapAppActionType.SET_LOGGED_IN_USER_ID:
-            return loggedInUserReducer(state, action);
         case MapAppActionType.SET_LOGGED_IN_USER:
-            return loggedInUserReducer(state, action);
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
-            return loggedInUserReducer(state, action);
         case MapAppActionType.LOGGED_IN_USER_RESET:
             return loggedInUserReducer(state, action);
         case MapAppActionType.SET_LOCATION_COORDINATES:
