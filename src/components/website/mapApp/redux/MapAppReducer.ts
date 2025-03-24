@@ -54,6 +54,8 @@ function loggedInUserReducer(loggedInUser: LoggedInUser, action: LoggedInUserAct
             return loggedInUser;
         case MapAppActionType.LOGGED_IN_USER_RESET:
             return null;
+        default:
+            return loggedInUser;
     }
 }
 
