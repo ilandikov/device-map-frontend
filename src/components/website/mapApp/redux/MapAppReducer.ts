@@ -11,7 +11,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
         case MapAppActionType.SET_LOGGED_IN_USER:
         case MapAppActionType.UPDATE_LOGGED_IN_USER:
         case MapAppActionType.LOGGED_IN_USER_RESET:
-            return loggedInUserReducer(state, action);
+            return { ...state, ...loggedInUserReducer(state, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { ...state, selectedMarker: { location: action.markerLocation, address: null } };
         case MapAppActionType.SET_LOCATION_ADDRESS: {
@@ -30,7 +30,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     }
 }
 
-function loggedInUserReducer(state: MapAppState, action: MapAppAction): MapAppState {
+function loggedInUserReducer(state: MapAppState, action: MapAppAction): Partial<MapAppState> {
     switch (action.type) {
         case MapAppActionType.SET_LOGGED_IN_USER_ID:
             return {
