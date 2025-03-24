@@ -6,7 +6,7 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloLink, DocumentNode, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import {
@@ -105,8 +105,12 @@ const rootEpic: RootEpic = combineEpics(
     userSubscriptionSender,
 );
 
-async function queryAsAnonymousUser<TInput>(anonymousUserClient: ApolloClient<NormalizedCacheObject>, input: TInput) {
-    const response = await anonymousUserClient.query<Query>({ query: getAddressQuery, variables: { input } });
+async function queryAsAnonymousUser<TInput>(
+    anonymousUserClient: ApolloClient<NormalizedCacheObject>,
+    input: TInput,
+    query: DocumentNode,
+) {
+    const response = await anonymousUserClient.query<Query>({ query, variables: { input } });
     return response.data.T22GetAddress;
 }
 
@@ -169,7 +173,7 @@ export function createStore() {
                 },
             },
             addressClient: {
-                getAddress: async (input) => await queryAsAnonymousUser(anonymousUserClient, input),
+                getAddress: async (input) => await queryAsAnonymousUser(anonymousUserClient, input, getAddressQuery),
             },
             usersClient: {
                 getUser: async () =>
