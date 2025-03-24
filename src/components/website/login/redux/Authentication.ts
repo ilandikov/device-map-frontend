@@ -10,13 +10,13 @@ export function authentication(
     action: LoginModalAction,
 ): AuthenticationState {
     switch (action.type) {
-        case LoginModalActionType.INPUT:
+        case LoginModalActionType.LOGIN_MODAL_INPUT:
             return { ...state, ...withPayload(action) };
-        case LoginModalActionType.BUTTON_CLICKED:
+        case LoginModalActionType.LOGIN_MODAL_BUTTON_CLICKED:
             return { ...state, ...afterButtonClick(action, state) };
-        case LoginModalActionType.REMOTE_REQUEST:
+        case LoginModalActionType.LOGIN_MODAL_REMOTE_REQUEST:
             return { ...state, ...beforeRemoteRequest(action, state) };
-        case LoginModalActionType.REMOTE_ANSWER:
+        case LoginModalActionType.LOGIN_MODAL_REMOTE_ANSWER:
             return { ...state, ...afterRemoteAnswer(action, state) };
         default:
             return state;

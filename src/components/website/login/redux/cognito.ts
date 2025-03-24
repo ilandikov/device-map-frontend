@@ -12,7 +12,7 @@ import { reasonFromCognitoError } from './cognitoHelpers';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
-        ofType(LoginModalActionType.REMOTE_REQUEST),
+        ofType(LoginModalActionType.LOGIN_MODAL_REMOTE_REQUEST),
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
