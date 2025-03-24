@@ -24,16 +24,20 @@ export function subscribeAsAuthUser<TVariables, TResponse>({
     variables,
     query,
     resolver,
+    closeAfterFirstAnswer,
 }: {
     variables: TVariables;
     query: DocumentNode;
     resolver: keyof Subscription;
+    closeAfterFirstAnswer: boolean;
 }) {
     return (subscriber: Subscriber<TResponse>) => {
         const subscription = anonymousClient.subscribe<Subscription, TVariables>({ query, variables }).subscribe({
             next: (fetchResult) => {
                 subscriber.next(fetchResult.data[resolver] as TResponse);
-                subscriber.complete();
+                if (closeAfterFirstAnswer) {
+                    subscriber.complete();
+                }
             },
             error: (error) => {
                 subscriber.error(error);
