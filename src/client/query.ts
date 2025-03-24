@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloLink, DocumentNode, InMemoryCache, NormalizedCacheObject, gql } from '@apollo/client';
+import { ApolloClient, ApolloLink, DocumentNode, InMemoryCache, gql } from '@apollo/client';
 import { Mutation, Query, Subscription } from '@mancho-school-t22/graphql-types';
 import { Subscriber } from 'rxjs';
 import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
@@ -23,7 +23,6 @@ const anonymousUserClient1 = new ApolloClient({
 });
 
 export async function queryAsAnonymousUser<TInput, TResponse>(
-    _anonymousUserClient: ApolloClient<NormalizedCacheObject>,
     input: TInput,
     query: DocumentNode,
     resolver: keyof Query,

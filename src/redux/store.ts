@@ -6,9 +6,6 @@ import { Epic, EpicMiddleware, combineEpics, createEpicMiddleware } from 'redux-
 /* Local dependencies */
 import { useDispatch } from 'react-redux';
 import CognitoClient from '@mancho.devs/cognito';
-import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
-import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
-import { createHttpLink } from '@apollo/client/core';
 import {
     Query,
     SubscriptionT22NotifyDeviceCreationArgs,
@@ -107,22 +104,6 @@ const rootEpic: RootEpic = combineEpics(
 );
 
 export function createStore() {
-    const anonymousUserClient = new ApolloClient({
-        link: ApolloLink.from([
-            createAuthLink({
-                url: process.env.GATSBY_APPSYNC_ENDPOINT,
-                region: process.env.GATSBY_REGION,
-                auth: {
-                    type: AUTH_TYPE.API_KEY,
-                    apiKey: process.env.GATSBY_X_API_KEY,
-                },
-            }),
-            createHttpLink({
-                uri: process.env.GATSBY_APPSYNC_ENDPOINT,
-            }),
-        ]),
-        cache: new InMemoryCache({ addTypename: false }),
-    });
     const epicMiddleware: RootMiddleWare = createEpicMiddleware({
         dependencies: {
             cognitoClient: new CognitoClient({
@@ -131,8 +112,7 @@ export function createStore() {
             }),
             devicesClient: {
                 forAnonymousUser: {
-                    listDevices: async () =>
-                        await queryAsAnonymousUser(anonymousUserClient, {}, listDevicesQuery.query, 'T22ListDevices'),
+                    listDevices: async () => await queryAsAnonymousUser({}, listDevicesQuery.query, 'T22ListDevices'),
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
@@ -163,8 +143,7 @@ export function createStore() {
                 },
             },
             addressClient: {
-                getAddress: async (input) =>
-                    await queryAsAnonymousUser(anonymousUserClient, input, getAddressQuery, 'T22GetAddress'),
+                getAddress: async (input) => await queryAsAnonymousUser(input, getAddressQuery, 'T22GetAddress'),
             },
             usersClient: {
                 getUser: async () =>
