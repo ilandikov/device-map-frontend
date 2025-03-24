@@ -36,7 +36,7 @@ export interface SelectedMarkerGetAddress {
     location: T22Location;
 }
 
-export function selectedMarkerGetAddress(location: T22Location): MapAppAction {
+export function selectedMarkerGetAddress(location: T22Location): SelectedMarkerGetAddress {
     return { type: MapAppActionType.SELECTED_MARKER_GET_ADDRESS, location };
 }
 
