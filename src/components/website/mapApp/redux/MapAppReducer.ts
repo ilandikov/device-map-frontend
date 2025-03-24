@@ -14,7 +14,6 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
         case MapAppActionType.LOGGED_IN_USER_RESET:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
-            return selectedMarkerReducer(state, action);
         case MapAppActionType.SET_LOCATION_ADDRESS: {
             return selectedMarkerReducer(state, action);
         }
