@@ -22,11 +22,15 @@ const anonymousUserClient1 = new ApolloClient({
     cache: new InMemoryCache({ addTypename: false }),
 });
 
-export async function queryAsAnonymousUser<TInput, TResponse>(
-    input: TInput,
-    query: DocumentNode,
-    resolver: keyof Query,
-) {
+export async function queryAsAnonymousUser<TInput, TResponse>({
+    input,
+    query,
+    resolver,
+}: {
+    input: TInput;
+    query: DocumentNode;
+    resolver: keyof Query;
+}) {
     const response = await anonymousUserClient1.query<Query>({ query, variables: { input } });
     return response.data[resolver] as TResponse;
 }

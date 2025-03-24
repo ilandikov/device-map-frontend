@@ -112,7 +112,12 @@ export function createStore() {
             }),
             devicesClient: {
                 forAnonymousUser: {
-                    listDevices: async () => await queryAsAnonymousUser({}, listDevicesQuery.query, 'T22ListDevices'),
+                    listDevices: async () =>
+                        await queryAsAnonymousUser({
+                            input: {},
+                            query: listDevicesQuery.query,
+                            resolver: 'T22ListDevices',
+                        }),
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
@@ -143,7 +148,12 @@ export function createStore() {
                 },
             },
             addressClient: {
-                getAddress: async (input) => await queryAsAnonymousUser(input, getAddressQuery, 'T22GetAddress'),
+                getAddress: async (input) =>
+                    await queryAsAnonymousUser({
+                        input: input,
+                        query: getAddressQuery,
+                        resolver: 'T22GetAddress',
+                    }),
             },
             usersClient: {
                 getUser: async () =>
