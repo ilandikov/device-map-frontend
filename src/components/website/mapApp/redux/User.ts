@@ -7,7 +7,7 @@ import { LoggedInUserAction, LoggedInUserActionType, loggedInUserError, loggedIn
 
 export const user: RootEpic = (action$, _, { usersClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.LOGGED_IN_USER_SET_ID),
+        ofType(MapAppActionType.LOGGED_IN_USER),
         filter((action: LoggedInUserAction) => action.subType === LoggedInUserActionType.SET_ID),
         switchMap(() =>
             fromPromise(usersClient.getUser()).pipe(

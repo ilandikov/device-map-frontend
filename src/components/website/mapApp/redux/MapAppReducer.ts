@@ -9,10 +9,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     switch (action.type) {
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
-        case MapAppActionType.LOGGED_IN_USER_SET_ID:
-        case MapAppActionType.LOGGED_IN_USER_SET:
-        case MapAppActionType.LOGGED_IN_USER_UPDATE:
-        case MapAppActionType.LOGGED_IN_USER_RESET:
+        case MapAppActionType.LOGGED_IN_USER:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
         case MapAppActionType.SELECTED_MARKER:
             return { ...state, selectedMarker: selectedMarkerReducer(state.selectedMarker, action) };

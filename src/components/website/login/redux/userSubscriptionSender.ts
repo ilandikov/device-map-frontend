@@ -12,7 +12,7 @@ import {
 
 export const userSubscriptionSender: RootEpic = (action$) => {
     return action$.pipe(
-        ofType(MapAppActionType.LOGGED_IN_USER_SET_ID),
+        ofType(MapAppActionType.LOGGED_IN_USER),
         filter((action: LoggedInUserAction) => action.subType === LoggedInUserActionType.SET_ID),
         switchMap(() =>
             fromPromise(setAuthenticatedClient()).pipe(
