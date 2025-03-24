@@ -1,7 +1,7 @@
 import { T22Address, T22Location } from '@mancho-school-t22/graphql-types';
 import { MapAppActionType } from './MapAppAction';
 
-enum SelectedMarkerSauce {
+export enum SelectedMarkerSauce {
     SET_COORDINATES = 'SET_COORDINATES',
     GET_ADDRESS = 'GET_ADDRESS',
     SET_ADDRESS = 'SET_ADDRESS',

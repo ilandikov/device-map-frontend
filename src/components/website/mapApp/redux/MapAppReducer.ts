@@ -3,7 +3,7 @@ import { MapAppAction, MapAppActionType } from './MapAppAction';
 import { LoggedInUser, MapAppState, SelectedMarker, buildMapAppState } from './MapAppState';
 import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from './DeviceAction';
 import { LoggedInUserAction } from './LoggedInUserAction';
-import { SelectedMarkerAction } from './SelectedMarkerAction';
+import { SelectedMarkerAction, SelectedMarkerSauce } from './SelectedMarkerAction';
 
 export function MapAppReducer(state: MapAppState = buildMapAppState({}), action: MapAppAction): MapAppState {
     switch (action.type) {
@@ -27,10 +27,10 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
 }
 
 function selectedMarkerReducer(selectedMarker: SelectedMarker, action: SelectedMarkerAction): SelectedMarker {
-    switch (action.type) {
-        case MapAppActionType.SELECTED_MARKER_SET_COORDINATES:
+    switch (action.sauce) {
+        case SelectedMarkerSauce.SET_COORDINATES:
             return { location: action.markerLocation, address: null };
-        case MapAppActionType.SELECTED_MARKER_SET_ADDRESS:
+        case SelectedMarkerSauce.SET_ADDRESS:
             return { ...selectedMarker, address: action.address };
         default:
             return selectedMarker;
