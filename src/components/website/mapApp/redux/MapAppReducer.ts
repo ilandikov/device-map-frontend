@@ -29,7 +29,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
 function selectedMarkerReducer(selectedMarker: SelectedMarker, action: SelectedMarkerAction): SelectedMarker {
     switch (action.sauce) {
         case SelectedMarkerSauce.SET_LOCATION:
-            return { location: action.markerLocation, address: null };
+            return { location: action.location, address: null };
         case SelectedMarkerSauce.SET_ADDRESS:
             return { ...selectedMarker, address: action.address };
         default:

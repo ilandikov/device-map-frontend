@@ -12,14 +12,14 @@ export type SelectedMarkerAction = SelectedMarkerSetLocation | SelectedMarkerSet
 export interface SelectedMarkerSetLocation {
     type: MapAppActionType.SELECTED_MARKER_SET_LOCATION;
     sauce: SelectedMarkerSauce.SET_LOCATION;
-    markerLocation: T22Location;
+    location: T22Location;
 }
 
-export function selectedMarkerSetLocation(markerLocation: T22Location): SelectedMarkerSetLocation {
+export function selectedMarkerSetLocation(location: T22Location): SelectedMarkerSetLocation {
     return {
         type: MapAppActionType.SELECTED_MARKER_SET_LOCATION,
         sauce: SelectedMarkerSauce.SET_LOCATION,
-        markerLocation,
+        location,
     };
 }
 
