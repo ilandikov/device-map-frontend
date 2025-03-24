@@ -7,9 +7,9 @@ export enum MapAppActionType {
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
     LOGGED_IN_USER_RESET = 'LOGGED_IN_USER_RESET',
     LOGGED_IN_USER_SET_ID = 'LOGGED_IN_USER_SET_ID',
-    SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
-    GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
-    SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
+    SELECTED_MARKER_SET_COORDINATES = 'SELECTED_MARKER_SET_COORDINATES',
+    SELECTED_MARKER_GET_ADDRESS = 'SELECTED_MARKER_GET_ADDRESS',
+    SELECTED_MARKER_SET_ADDRESS = 'SELECTED_MARKER_SET_ADDRESS',
     LOGGED_IN_USER_SET = 'LOGGED_IN_USER_SET',
     LOGGED_IN_USER_ERROR = 'LOGGED_IN_USER_ERROR',
     LOGGED_IN_USER_UPDATE = 'LOGGED_IN_USER_UPDATE',
@@ -21,36 +21,36 @@ export enum MapAppActionType {
 export type MapAppAction =
     | MapAppShowComponent
     | LoggedInUserAction
-    | MapAppDeviceMarkerClick
-    | MapAppSetLocationAddress
-    | MapAppGetLocationAddress
+    | SelectedMarkerSetCoordinates
+    | SelectedMarkerSetAddress
+    | SelectedMarkerGetAddress
     | DeviceAction;
 
-export interface MapAppDeviceMarkerClick {
-    type: MapAppActionType.SET_LOCATION_COORDINATES;
+export interface SelectedMarkerSetCoordinates {
+    type: MapAppActionType.SELECTED_MARKER_SET_COORDINATES;
     markerLocation: T22Location;
 }
 
-export function mapAppSetLocationCoordinates(markerLocation: T22Location): MapAppDeviceMarkerClick {
-    return { type: MapAppActionType.SET_LOCATION_COORDINATES, markerLocation };
+export function selectedMarkerSetCoordinates(markerLocation: T22Location): SelectedMarkerSetCoordinates {
+    return { type: MapAppActionType.SELECTED_MARKER_SET_COORDINATES, markerLocation };
 }
 
-export interface MapAppGetLocationAddress {
-    type: MapAppActionType.GET_LOCATION_ADDRESS;
+export interface SelectedMarkerGetAddress {
+    type: MapAppActionType.SELECTED_MARKER_GET_ADDRESS;
     location: T22Location;
 }
 
-export function mapAppGetLocationAddress(location: T22Location): MapAppAction {
-    return { type: MapAppActionType.GET_LOCATION_ADDRESS, location };
+export function selectedMarkerGetAddress(location: T22Location): MapAppAction {
+    return { type: MapAppActionType.SELECTED_MARKER_GET_ADDRESS, location };
 }
 
-export interface MapAppSetLocationAddress {
-    type: MapAppActionType.SET_LOCATION_ADDRESS;
+export interface SelectedMarkerSetAddress {
+    type: MapAppActionType.SELECTED_MARKER_SET_ADDRESS;
     address: T22Address;
 }
 
-export function mapAppSetLocationAddress(address: T22Address): MapAppSetLocationAddress {
-    return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
+export function selectedMarkerSetAddress(address: T22Address): SelectedMarkerSetAddress {
+    return { type: MapAppActionType.SELECTED_MARKER_SET_ADDRESS, address };
 }
 
 interface MapAppShowComponent {

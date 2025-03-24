@@ -1,9 +1,9 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
-    mapAppGetLocationAddress,
-    mapAppSetLocationAddress,
-    mapAppSetLocationCoordinates,
     mapAppShowComponent,
+    selectedMarkerGetAddress,
+    selectedMarkerSetAddress,
+    selectedMarkerSetCoordinates,
 } from '../MapAppAction';
 import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
@@ -70,7 +70,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'setting coordinates',
             initialState: {},
-            action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            action: selectedMarkerSetCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {
                 selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
             },
@@ -78,7 +78,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'doing nothing when getting an address',
             initialState: {},
-            action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            action: selectedMarkerGetAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {},
         },
         {
@@ -89,7 +89,7 @@ describe('MapApp reducer tests', () => {
                     address: null,
                 },
             },
-            action: mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' }),
+            action: selectedMarkerSetAddress({ line1: 'line1', line2: 'line2' }),
             stateChange: {
                 selectedMarker: {
                     location: { lat: 0, lon: 1 },
