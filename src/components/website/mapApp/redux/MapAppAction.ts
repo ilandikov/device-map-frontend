@@ -3,8 +3,8 @@ import { MapAppComponents } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
-    LOGGED_IN_USER_RESET = 'LOGGED_IN_USER_RESET',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
+    LOGGED_IN_USER_RESET = 'LOGGED_IN_USER_RESET',
     SET_LOGGED_IN_USER_ID = 'SET_LOGGED_IN_USER_ID',
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
     GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
