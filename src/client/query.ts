@@ -81,26 +81,23 @@ export function subscribeAsAuthUser<TVariables, TResponse>({
     };
 }
 
-export const listDevicesQuery = {
-    query: gql`
-        query {
-            T22ListDevices {
-                devices {
-                    id
-                    creatorID
-                    location {
-                        lat
-                        lon
-                    }
-                    approvals
-                    lastUpdate
+export const listDevicesQuery = gql`
+    query {
+        T22ListDevices {
+            devices {
+                id
+                creatorID
+                location {
+                    lat
+                    lon
                 }
-                count
+                approvals
+                lastUpdate
             }
+            count
         }
-    `,
-    variables: {},
-};
+    }
+`;
 
 export const createDeviceMutation = gql`
     mutation ($input: T22CreateDeviceRequestInput!) {

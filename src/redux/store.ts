@@ -115,7 +115,7 @@ export function createStore() {
                     listDevices: async () =>
                         await queryAsAnonymousUser({
                             input: {},
-                            query: listDevicesQuery.query,
+                            query: listDevicesQuery,
                             resolver: 'T22ListDevices',
                         }),
                 },
