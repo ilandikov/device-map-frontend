@@ -10,14 +10,14 @@ export enum SelectedMarkerSauce {
 export type SelectedMarkerAction = SelectedMarkerSetLocation | SelectedMarkerSetAddress | SelectedMarkerGetAddress;
 
 export interface SelectedMarkerSetLocation {
-    type: MapAppActionType.SELECTED_MARKER_SET_LOCATION;
+    type: MapAppActionType.SELECTED_MARKER;
     sauce: SelectedMarkerSauce.SET_LOCATION;
     location: T22Location;
 }
 
 export function selectedMarkerSetLocation(location: T22Location): SelectedMarkerSetLocation {
     return {
-        type: MapAppActionType.SELECTED_MARKER_SET_LOCATION,
+        type: MapAppActionType.SELECTED_MARKER,
         sauce: SelectedMarkerSauce.SET_LOCATION,
         location,
     };
@@ -34,11 +34,11 @@ export function selectedMarkerGetAddress(location: T22Location): SelectedMarkerG
 }
 
 export interface SelectedMarkerSetAddress {
-    type: MapAppActionType.SELECTED_MARKER_SET_ADDRESS;
+    type: MapAppActionType.SELECTED_MARKER;
     sauce: SelectedMarkerSauce.SET_ADDRESS;
     address: T22Address;
 }
 
 export function selectedMarkerSetAddress(address: T22Address): SelectedMarkerSetAddress {
-    return { type: MapAppActionType.SELECTED_MARKER_SET_ADDRESS, sauce: SelectedMarkerSauce.SET_ADDRESS, address };
+    return { type: MapAppActionType.SELECTED_MARKER, sauce: SelectedMarkerSauce.SET_ADDRESS, address };
 }

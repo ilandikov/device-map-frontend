@@ -14,8 +14,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
         case MapAppActionType.LOGGED_IN_USER_UPDATE:
         case MapAppActionType.LOGGED_IN_USER_RESET:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
-        case MapAppActionType.SELECTED_MARKER_SET_LOCATION:
-        case MapAppActionType.SELECTED_MARKER_SET_ADDRESS:
+        case MapAppActionType.SELECTED_MARKER:
             return { ...state, selectedMarker: selectedMarkerReducer(state.selectedMarker, action) };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
