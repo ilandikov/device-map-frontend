@@ -18,13 +18,9 @@ export enum MapAppActionType {
     LOGGED_IN_USER_SUBSCRIPTION_ERROR = 'LOGGED_IN_USER_SUBSCRIPTION_ERROR',
 }
 
-export type MapAppAction =
-    | MapAppShowComponent
-    | LoggedInUserAction
-    | SelectedMarkerSetCoordinates
-    | SelectedMarkerSetAddress
-    | SelectedMarkerGetAddress
-    | DeviceAction;
+export type MapAppAction = MapAppShowComponent | LoggedInUserAction | SelectedMarkerAction | DeviceAction;
+
+export type SelectedMarkerAction = SelectedMarkerSetCoordinates | SelectedMarkerSetAddress | SelectedMarkerGetAddress;
 
 export interface SelectedMarkerSetCoordinates {
     type: MapAppActionType.SELECTED_MARKER_SET_COORDINATES;
