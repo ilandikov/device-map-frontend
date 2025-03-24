@@ -12,12 +12,14 @@ export interface MapAppUser extends T22User {
 
 export type LoggedInUser = MapAppUser | null;
 
+interface SelectedMarker {
+    location: T22Location | null;
+    address: T22Address | null;
+}
+
 export interface MapAppState {
     component: MapAppComponents;
-    selectedMarker: {
-        location: T22Location | null;
-        address: T22Address | null;
-    };
+    selectedMarker: SelectedMarker;
     devices: T22Device[];
     isDeviceCreationOngoing: boolean;
     loggedInUser: LoggedInUser;
