@@ -11,7 +11,7 @@ import {
 
 export const userSubscriptions: RootEpic = (action$, state$, { usersClient }) =>
     action$.pipe(
-        ofType(MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_REQUEST),
+        ofType(MapAppActionType.LOGGED_IN_USER),
         filter((action: LoggedInUserAction) => action.subType === LoggedInUserActionType.SUBSCRIPTION_REQUEST),
         mergeMap(() =>
             new Observable(usersClient.subscribeForUpdate(state$.value.mapAppState.loggedInUser.id)).pipe(

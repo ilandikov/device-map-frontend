@@ -60,13 +60,13 @@ export function loggedInUserError(error: string): LoggedInUserError {
 }
 
 interface LoggedInUserSubscriptionRequest {
-    type: MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_REQUEST;
+    type: MapAppActionType.LOGGED_IN_USER;
     subType: LoggedInUserActionType.SUBSCRIPTION_REQUEST;
 }
 
 export function loggedInUserSubscriptionRequest(): LoggedInUserSubscriptionRequest {
     return {
-        type: MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_REQUEST,
+        type: MapAppActionType.LOGGED_IN_USER,
         subType: LoggedInUserActionType.SUBSCRIPTION_REQUEST,
     };
 }
