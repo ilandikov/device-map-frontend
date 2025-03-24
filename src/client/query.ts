@@ -5,7 +5,7 @@ import { AUTH_TYPE, createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from '@apollo/client/core';
 import { anonymousClient, setAuthenticatedClient } from './graphql';
 
-const anonymousUserClient1 = new ApolloClient({
+const anonymousUserClient = new ApolloClient({
     link: ApolloLink.from([
         createAuthLink({
             url: process.env.GATSBY_APPSYNC_ENDPOINT,
@@ -31,7 +31,7 @@ export async function queryAsAnonymousUser<TInput, TResponse>({
     query: DocumentNode;
     resolver: keyof Query;
 }) {
-    const response = await anonymousUserClient1.query<Query>({ query, variables: { input } });
+    const response = await anonymousUserClient.query<Query>({ query, variables: { input } });
     return response.data[resolver] as TResponse;
 }
 
