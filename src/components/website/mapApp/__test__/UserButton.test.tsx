@@ -15,7 +15,7 @@ import {
     loginModalRemoteRequest,
 } from '../../login/redux/LoginModalAction';
 import { MapAppComponents } from '../redux/MapAppState';
-import { mapAppLoggedInUserReset } from '../redux/LoggedInUserAction';
+import { loggedInUserReset } from '../redux/LoggedInUserAction';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -51,7 +51,7 @@ describe('UserButton action tests', () => {
 
         testDispatchedActionsInOrder([
             mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
-            mapAppLoggedInUserReset(),
+            loggedInUserReset(),
             loginModalButtonClick(LoginModalButton.USER_BUTTON),
             loginModalRemoteRequest(LoginModalCheck.NONE),
         ]);

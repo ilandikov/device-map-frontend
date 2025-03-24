@@ -8,9 +8,9 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     switch (action.type) {
         case MapAppActionType.SHOW_COMPONENT:
             return { ...state, component: action.component };
-        case MapAppActionType.SET_LOGGED_IN_USER_ID:
-        case MapAppActionType.SET_LOGGED_IN_USER:
-        case MapAppActionType.UPDATE_LOGGED_IN_USER:
+        case MapAppActionType.LOGGED_IN_USER_SET_ID:
+        case MapAppActionType.LOGGED_IN_USER_SET:
+        case MapAppActionType.LOGGED_IN_USER_UPDATE:
         case MapAppActionType.LOGGED_IN_USER_RESET:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
@@ -33,11 +33,11 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
 
 function loggedInUserReducer(loggedInUser: MapAppUser | null, action: LoggedInUserAction): MapAppUser | null {
     switch (action.type) {
-        case MapAppActionType.SET_LOGGED_IN_USER_ID:
+        case MapAppActionType.LOGGED_IN_USER_SET_ID:
             return { id: action.id, points: null };
-        case MapAppActionType.SET_LOGGED_IN_USER:
+        case MapAppActionType.LOGGED_IN_USER_SET:
             return action.user;
-        case MapAppActionType.UPDATE_LOGGED_IN_USER:
+        case MapAppActionType.LOGGED_IN_USER_UPDATE:
             if (loggedInUser.id === action.user.id) {
                 return action.user;
             }

@@ -5,7 +5,7 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, ClassToInterface, RootEpic } from '../../../../redux/store';
 import { mapAppShowComponent } from '../../mapApp/redux/MapAppAction';
 import { MapAppComponents } from '../../mapApp/redux/MapAppState';
-import { mapAppSetLoggedInUserID } from '../../mapApp/redux/LoggedInUserAction';
+import { loggedInUserSetID } from '../../mapApp/redux/LoggedInUserAction';
 import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
@@ -39,7 +39,7 @@ function getSuccessActions(step: AuthenticationStep, response: any): AllActions[
         return [
             loginModalRemoteAnswerSuccess(),
             mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
-            mapAppSetLoggedInUserID(response.session.idToken.payload.sub),
+            loggedInUserSetID(response.session.idToken.payload.sub),
         ];
     }
 

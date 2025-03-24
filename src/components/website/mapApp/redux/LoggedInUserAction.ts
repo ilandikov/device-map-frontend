@@ -2,71 +2,71 @@ import { T22User } from '@mancho-school-t22/graphql-types';
 import { MapAppActionType } from './MapAppAction';
 
 export type LoggedInUserAction =
-    | MapAppSetLoggedInUserID
-    | MapAppSetLoggedInUser
-    | MapAppUpdateLoggedInUser
-    | MapAppLoggedInUserReset
-    | MapAppGetLoggedInUserError
-    | MapAppUserUpdateSubscriptionRequest
-    | MapAppSubscriptionError;
+    | LoggedInUserSetID
+    | LoggedInUserSet
+    | LoggedInUserUpdate
+    | LoggedInUserReset
+    | LoggedInUserError
+    | LoggedInUserSubscriptionRequest
+    | LoggedInUserSubscriptionError;
 
-export interface MapAppLoggedInUserReset {
+export interface LoggedInUserReset {
     type: MapAppActionType.LOGGED_IN_USER_RESET;
 }
 
-export function mapAppLoggedInUserReset(): MapAppLoggedInUserReset {
+export function loggedInUserReset(): LoggedInUserReset {
     return { type: MapAppActionType.LOGGED_IN_USER_RESET };
 }
 
-interface MapAppSetLoggedInUserID {
-    type: MapAppActionType.SET_LOGGED_IN_USER_ID;
+interface LoggedInUserSetID {
+    type: MapAppActionType.LOGGED_IN_USER_SET_ID;
     id: string;
 }
 
-export function mapAppSetLoggedInUserID(id: string): MapAppSetLoggedInUserID {
-    return { type: MapAppActionType.SET_LOGGED_IN_USER_ID, id };
+export function loggedInUserSetID(id: string): LoggedInUserSetID {
+    return { type: MapAppActionType.LOGGED_IN_USER_SET_ID, id };
 }
 
-interface MapAppSetLoggedInUser {
-    type: MapAppActionType.SET_LOGGED_IN_USER;
+interface LoggedInUserSet {
+    type: MapAppActionType.LOGGED_IN_USER_SET;
     user: T22User;
 }
 
-export function mapAppSetLoggedInUser(user: T22User): MapAppSetLoggedInUser {
-    return { type: MapAppActionType.SET_LOGGED_IN_USER, user };
+export function loggedInUserSet(user: T22User): LoggedInUserSet {
+    return { type: MapAppActionType.LOGGED_IN_USER_SET, user };
 }
 
-interface MapAppGetLoggedInUserError {
-    type: MapAppActionType.GET_LOGGED_IN_USER_ERROR;
+interface LoggedInUserError {
+    type: MapAppActionType.LOGGED_IN_USER_ERROR;
     error: string;
 }
 
-export function mapAppGetLoggedInUserError(error: string): MapAppGetLoggedInUserError {
-    return { type: MapAppActionType.GET_LOGGED_IN_USER_ERROR, error };
+export function loggedInUserError(error: string): LoggedInUserError {
+    return { type: MapAppActionType.LOGGED_IN_USER_ERROR, error };
 }
 
-interface MapAppUserUpdateSubscriptionRequest {
-    type: MapAppActionType.USER_UPDATE_SUBSCRIPTION_REQUEST;
+interface LoggedInUserSubscriptionRequest {
+    type: MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_REQUEST;
 }
 
-export function mapAppUserUpdateSubscriptionRequest(): MapAppUserUpdateSubscriptionRequest {
-    return { type: MapAppActionType.USER_UPDATE_SUBSCRIPTION_REQUEST };
+export function loggedInUserSubscriptionRequest(): LoggedInUserSubscriptionRequest {
+    return { type: MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_REQUEST };
 }
 
-interface MapAppUpdateLoggedInUser {
-    type: MapAppActionType.UPDATE_LOGGED_IN_USER;
+interface LoggedInUserUpdate {
+    type: MapAppActionType.LOGGED_IN_USER_UPDATE;
     user: T22User;
 }
 
-export function mapAppUpdateLoggedInUser(user: T22User): MapAppUpdateLoggedInUser {
-    return { type: MapAppActionType.UPDATE_LOGGED_IN_USER, user };
+export function loggedInUserUpdate(user: T22User): LoggedInUserUpdate {
+    return { type: MapAppActionType.LOGGED_IN_USER_UPDATE, user };
 }
 
-interface MapAppSubscriptionError {
-    type: MapAppActionType.SUBSCRIPTION_ERROR;
+interface LoggedInUserSubscriptionError {
+    type: MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_ERROR;
     error: string;
 }
 
-export function mapAppSubscriptionError(error: string): MapAppSubscriptionError {
-    return { type: MapAppActionType.SUBSCRIPTION_ERROR, error };
+export function loggedInUserSubscriptionError(error: string): LoggedInUserSubscriptionError {
+    return { type: MapAppActionType.LOGGED_IN_USER_SUBSCRIPTION_ERROR, error };
 }

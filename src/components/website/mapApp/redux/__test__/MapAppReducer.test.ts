@@ -16,12 +16,7 @@ import {
     devicesListed,
 } from '../DeviceAction';
 import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
-import {
-    mapAppLoggedInUserReset,
-    mapAppSetLoggedInUser,
-    mapAppSetLoggedInUserID,
-    mapAppUpdateLoggedInUser,
-} from '../LoggedInUserAction';
+import { loggedInUserReset, loggedInUserSet, loggedInUserSetID, loggedInUserUpdate } from '../LoggedInUserAction';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
@@ -47,13 +42,13 @@ describe('MapApp reducer tests', () => {
         {
             name: 'resetting current user id',
             initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
-            action: mapAppLoggedInUserReset(),
+            action: loggedInUserReset(),
             stateChange: { loggedInUser: null },
         },
         {
             name: 'setting logged in user id',
             initialState: { component: MapAppComponents.LOGIN_MODAL },
-            action: mapAppSetLoggedInUserID('set me in the state'),
+            action: loggedInUserSetID('set me in the state'),
             stateChange: {
                 loggedInUser: { id: 'set me in the state', points: null },
             },
@@ -61,7 +56,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'updating logged in user if the ids match',
             initialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
-            action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
+            action: loggedInUserUpdate({ id: 'i should get more points', points: 30 }),
             stateChange: {
                 loggedInUser: { id: 'i should get more points', points: 30 },
             },
@@ -69,7 +64,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'not updating logged in user if the ids dont match',
             initialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
-            action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
+            action: loggedInUserUpdate({ id: 'because ids dont match', points: 71 }),
             stateChange: {},
         },
         {
@@ -108,7 +103,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'setting current user points',
             initialState: {},
-            action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
+            action: loggedInUserSet({ id: 'i have to be set', points: 10 }),
             stateChange: {
                 loggedInUser: { id: 'i have to be set', points: 10 },
             },
