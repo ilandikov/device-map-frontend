@@ -15,7 +15,7 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
             return { ...state, loggedInUser: loggedInUserReducer(state.loggedInUser, action) };
         case MapAppActionType.SET_LOCATION_COORDINATES:
         case MapAppActionType.SET_LOCATION_ADDRESS:
-            return { ...state, selectedMarker: selectedMarkerReducer(state, action) };
+            return { ...state, selectedMarker: selectedMarkerReducer(state.selectedMarker, action) };
         case DeviceActionType.DEVICE_REMOTE_ANSWER:
             return { ...state, devices: deviceReducer(state.devices, action) };
         case DeviceActionType.DEVICE_CREATION:
@@ -25,18 +25,17 @@ export function MapAppReducer(state: MapAppState = buildMapAppState({}), action:
     }
 }
 
-function selectedMarkerReducer(state: MapAppState, action: MapAppAction): SelectedMarker {
+function selectedMarkerReducer(selectedMarker: SelectedMarker, action: MapAppAction): SelectedMarker {
     switch (action.type) {
         case MapAppActionType.SET_LOCATION_COORDINATES:
             return { location: action.markerLocation, address: null };
-        case MapAppActionType.SET_LOCATION_ADDRESS: {
+        case MapAppActionType.SET_LOCATION_ADDRESS:
             return {
-                ...state.selectedMarker,
+                ...selectedMarker,
                 address: action.address,
             };
-        }
         default:
-            return state.selectedMarker;
+            return selectedMarker;
     }
 }
 
