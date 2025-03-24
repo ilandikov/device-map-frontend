@@ -3,12 +3,17 @@ import { catchError, filter, map, mergeMap, of } from 'rxjs';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AddressClient, RootEpic } from '../../../../redux/store';
 import { MapAppActionType } from './MapAppAction';
-import { SelectedMarkerGetAddress, SelectedMarkerSauce, selectedMarkerSetAddress } from './SelectedMarkerAction';
+import {
+    SelectedMarkerAction,
+    SelectedMarkerGetAddress,
+    SelectedMarkerSauce,
+    selectedMarkerSetAddress,
+} from './SelectedMarkerAction';
 
 export const address: RootEpic = (action$, _, { addressClient }) =>
     action$.pipe(
         ofType(MapAppActionType.SELECTED_MARKER),
-        filter((action) => action.sauce === SelectedMarkerSauce.GET_ADDRESS),
+        filter((action: SelectedMarkerAction) => action.sauce === SelectedMarkerSauce.GET_ADDRESS),
         mergeMap((action) => processGetAddressResponse(addressClient, action)),
     );
 
