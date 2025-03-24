@@ -1,97 +1,24 @@
-import { T22Address, T22Location, T22User } from '@mancho-school-t22/graphql-types';
 import { MapAppComponents } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
+import { LoggedInUserAction } from './LoggedInUserAction';
+import { SelectedMarkerAction } from './SelectedMarkerAction';
 
 export enum MapAppActionType {
-    RESET_CURRENT_USER = 'RESET_CURRENT_USER',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
-    SET_LOGGED_IN_USER_ID = 'SET_LOGGED_IN_USER_ID',
-    SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
-    GET_LOCATION_ADDRESS = 'GET_LOCATION_ADDRESS',
-    SET_LOCATION_ADDRESS = 'SET_LOCATION_ADDRESS',
-    SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER',
-    GET_LOGGED_IN_USER_ERROR = 'GET_LOGGED_IN_USER_ERROR',
-    UPDATE_LOGGED_IN_USER = 'UPDATE_LOGGED_IN_USER',
+    LOGGED_IN_USER_RESET = 'LOGGED_IN_USER_RESET',
+    LOGGED_IN_USER_SET_ID = 'LOGGED_IN_USER_SET_ID',
+    SELECTED_MARKER_SET_COORDINATES = 'SELECTED_MARKER_SET_COORDINATES',
+    SELECTED_MARKER_GET_ADDRESS = 'SELECTED_MARKER_GET_ADDRESS',
+    SELECTED_MARKER_SET_ADDRESS = 'SELECTED_MARKER_SET_ADDRESS',
+    LOGGED_IN_USER_SET = 'LOGGED_IN_USER_SET',
+    LOGGED_IN_USER_ERROR = 'LOGGED_IN_USER_ERROR',
+    LOGGED_IN_USER_UPDATE = 'LOGGED_IN_USER_UPDATE',
     SHOW_COMPONENT = 'SHOW_COMPONENT',
-    USER_UPDATE_SUBSCRIPTION_REQUEST = 'USER_UPDATE_SUBSCRIPTION_REQUEST',
-    SUBSCRIPTION_ERROR = 'SUBSCRIPTION_ERROR',
+    LOGGED_IN_USER_SUBSCRIPTION_REQUEST = 'LOGGED_IN_USER_SUBSCRIPTION_REQUEST',
+    LOGGED_IN_USER_SUBSCRIPTION_ERROR = 'LOGGED_IN_USER_SUBSCRIPTION_ERROR',
 }
 
-export type MapAppAction =
-    | MapAppResetCurrentUser
-    | MapAppDeviceMarkerClick
-    | MapAppGetLocationAddress
-    | MapAppSetLocationAddress
-    | MapAppSetLoggedInUserID
-    | MapAppSetLoggedInUser
-    | MapAppGetLoggedInUserError
-    | MapAppShowComponent
-    | MapAppUserUpdateSubscriptionRequest
-    | MapAppUpdateLoggedInUser
-    | MapAppSubscriptionError
-    | DeviceAction;
-
-export interface MapAppResetCurrentUser {
-    type: MapAppActionType.RESET_CURRENT_USER;
-}
-
-export function mapAppResetCurrentUser(): MapAppResetCurrentUser {
-    return { type: MapAppActionType.RESET_CURRENT_USER };
-}
-
-interface MapAppSetLoggedInUserID {
-    type: MapAppActionType.SET_LOGGED_IN_USER_ID;
-    id: string;
-}
-
-export function mapAppSetLoggedInUserID(id: string): MapAppSetLoggedInUserID {
-    return { type: MapAppActionType.SET_LOGGED_IN_USER_ID, id };
-}
-
-export interface MapAppDeviceMarkerClick {
-    type: MapAppActionType.SET_LOCATION_COORDINATES;
-    markerLocation: T22Location;
-}
-
-export function mapAppSetLocationCoordinates(markerLocation: T22Location): MapAppDeviceMarkerClick {
-    return { type: MapAppActionType.SET_LOCATION_COORDINATES, markerLocation };
-}
-
-export interface MapAppGetLocationAddress {
-    type: MapAppActionType.GET_LOCATION_ADDRESS;
-    location: T22Location;
-}
-
-export function mapAppGetLocationAddress(location: T22Location): MapAppAction {
-    return { type: MapAppActionType.GET_LOCATION_ADDRESS, location };
-}
-
-export interface MapAppSetLocationAddress {
-    type: MapAppActionType.SET_LOCATION_ADDRESS;
-    address: T22Address;
-}
-
-export function mapAppSetLocationAddress(address: T22Address): MapAppSetLocationAddress {
-    return { type: MapAppActionType.SET_LOCATION_ADDRESS, address };
-}
-
-interface MapAppSetLoggedInUser {
-    type: MapAppActionType.SET_LOGGED_IN_USER;
-    user: T22User;
-}
-
-export function mapAppSetLoggedInUser(user: T22User): MapAppSetLoggedInUser {
-    return { type: MapAppActionType.SET_LOGGED_IN_USER, user };
-}
-
-interface MapAppGetLoggedInUserError {
-    type: MapAppActionType.GET_LOGGED_IN_USER_ERROR;
-    error: string;
-}
-
-export function mapAppGetLoggedInUserError(error: string): MapAppGetLoggedInUserError {
-    return { type: MapAppActionType.GET_LOGGED_IN_USER_ERROR, error };
-}
+export type MapAppAction = MapAppShowComponent | LoggedInUserAction | SelectedMarkerAction | DeviceAction;
 
 interface MapAppShowComponent {
     type: MapAppActionType.SHOW_COMPONENT;
@@ -100,30 +27,4 @@ interface MapAppShowComponent {
 
 export function mapAppShowComponent(step: MapAppComponents): MapAppShowComponent {
     return { type: MapAppActionType.SHOW_COMPONENT, component: step };
-}
-
-interface MapAppUserUpdateSubscriptionRequest {
-    type: MapAppActionType.USER_UPDATE_SUBSCRIPTION_REQUEST;
-}
-
-export function mapAppUserUpdateSubscriptionRequest(): MapAppUserUpdateSubscriptionRequest {
-    return { type: MapAppActionType.USER_UPDATE_SUBSCRIPTION_REQUEST };
-}
-
-interface MapAppUpdateLoggedInUser {
-    type: MapAppActionType.UPDATE_LOGGED_IN_USER;
-    user: T22User;
-}
-
-export function mapAppUpdateLoggedInUser(user: T22User): MapAppUpdateLoggedInUser {
-    return { type: MapAppActionType.UPDATE_LOGGED_IN_USER, user };
-}
-
-interface MapAppSubscriptionError {
-    type: MapAppActionType.SUBSCRIPTION_ERROR;
-    error: string;
-}
-
-export function mapAppSubscriptionError(error: string): MapAppSubscriptionError {
-    return { type: MapAppActionType.SUBSCRIPTION_ERROR, error };
 }

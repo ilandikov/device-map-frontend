@@ -5,10 +5,10 @@ export type LoginModalAction =
     | LoginModalRemoteAnswer;
 
 export enum LoginModalActionType {
-    BUTTON_CLICKED = 'BUTTON_CLICKED',
-    INPUT = 'INPUT',
-    REMOTE_REQUEST = 'REMOTE_REQUEST',
-    REMOTE_ANSWER = 'REMOTE_ANSWER',
+    LOGIN_MODAL_BUTTON_CLICKED = 'LOGIN_MODAL_BUTTON_CLICKED',
+    LOGIN_MODAL_INPUT = 'LOGIN_MODAL_INPUT',
+    LOGIN_MODAL_REMOTE_REQUEST = 'LOGIN_MODAL_REMOTE_REQUEST',
+    LOGIN_MODAL_REMOTE_ANSWER = 'LOGIN_MODAL_REMOTE_ANSWER',
 }
 
 export enum LoginModalButton {
@@ -21,16 +21,16 @@ export enum LoginModalButton {
 }
 
 export interface LoginModalButtonClick {
-    type: LoginModalActionType.BUTTON_CLICKED;
+    type: LoginModalActionType.LOGIN_MODAL_BUTTON_CLICKED;
     button: LoginModalButton;
 }
 
 export function loginModalButtonClick(button: LoginModalButton): LoginModalButtonClick {
-    return { type: LoginModalActionType.BUTTON_CLICKED, button: button };
+    return { type: LoginModalActionType.LOGIN_MODAL_BUTTON_CLICKED, button: button };
 }
 
 export interface LoginModalRemoteRequest {
-    type: LoginModalActionType.REMOTE_REQUEST;
+    type: LoginModalActionType.LOGIN_MODAL_REMOTE_REQUEST;
     check: LoginModalCheck;
 }
 
@@ -43,13 +43,13 @@ export enum LoginModalCheck {
 
 export function loginModalRemoteRequest(verify: LoginModalCheck): LoginModalRemoteRequest {
     return {
-        type: LoginModalActionType.REMOTE_REQUEST,
+        type: LoginModalActionType.LOGIN_MODAL_REMOTE_REQUEST,
         check: verify,
     };
 }
 
 export interface LoginModalInput {
-    type: LoginModalActionType.INPUT;
+    type: LoginModalActionType.LOGIN_MODAL_INPUT;
     input: {
         type: LoginModalInputType;
         payload: string;
@@ -65,7 +65,7 @@ export enum LoginModalInputType {
 
 export function loginModalInput(inputType: LoginModalInputType, inputPayload: string): LoginModalInput {
     return {
-        type: LoginModalActionType.INPUT,
+        type: LoginModalActionType.LOGIN_MODAL_INPUT,
         input: {
             type: inputType,
             payload: inputPayload,
@@ -74,7 +74,7 @@ export function loginModalInput(inputType: LoginModalInputType, inputPayload: st
 }
 
 export interface LoginModalRemoteAnswer {
-    type: LoginModalActionType.REMOTE_ANSWER;
+    type: LoginModalActionType.LOGIN_MODAL_REMOTE_ANSWER;
     result: LoginModalRemoteAnswerResult;
     reason?: string;
 }
@@ -86,14 +86,14 @@ export enum LoginModalRemoteAnswerResult {
 
 export function loginModalRemoteAnswerSuccess(): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionType.REMOTE_ANSWER,
+        type: LoginModalActionType.LOGIN_MODAL_REMOTE_ANSWER,
         result: LoginModalRemoteAnswerResult.SUCCESS,
     };
 }
 
 export function loginModalRemoteAnswerFailure(reason: string): LoginModalRemoteAnswer {
     return {
-        type: LoginModalActionType.REMOTE_ANSWER,
+        type: LoginModalActionType.LOGIN_MODAL_REMOTE_ANSWER,
         result: LoginModalRemoteAnswerResult.FAILURE,
         reason: reason,
     };

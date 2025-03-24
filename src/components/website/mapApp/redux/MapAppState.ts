@@ -6,19 +6,23 @@ export function useMapAppState(): MapAppState {
     return useSelector((state: RootState) => state).mapAppState;
 }
 
-interface MapAppUser extends T22User {
+export interface MapAppUser extends T22User {
     points: number | null;
+}
+
+export type LoggedInUser = MapAppUser | null;
+
+export interface SelectedMarker {
+    location: T22Location | null;
+    address: T22Address | null;
 }
 
 export interface MapAppState {
     component: MapAppComponents;
-    selectedMarker: {
-        location: T22Location | null;
-        address: T22Address | null;
-    };
+    selectedMarker: SelectedMarker;
     devices: T22Device[];
     isDeviceCreationOngoing: boolean;
-    loggedInUser: MapAppUser | null;
+    loggedInUser: LoggedInUser;
 }
 
 export enum MapAppComponents {

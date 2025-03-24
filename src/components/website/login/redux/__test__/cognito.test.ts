@@ -5,10 +5,11 @@ import {
     loginModalRemoteRequest,
 } from '../LoginModalAction';
 import { AuthenticationStep } from '../AuthenticationState';
-import { mapAppSetLoggedInUserID, mapAppShowComponent } from '../../../mapApp/redux/MapAppAction';
+import { mapAppShowComponent } from '../../../mapApp/redux/MapAppAction';
 import { cognito } from '../cognito';
 import { itShouldAnswerBy } from '../../../../../redux/__test__/helpers';
 import { MapAppComponents } from '../../../mapApp/redux/MapAppState';
+import { loggedInUserSetID } from '../../../mapApp/redux/LoggedInUserAction';
 import { cognitoRejectingClient, cognitoResolvingClient } from './cognitoTestHelpers';
 
 describe('cognito epic tests', () => {
@@ -45,7 +46,7 @@ describe('cognito epic tests', () => {
         expectedActions: [
             loginModalRemoteAnswerSuccess(),
             mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
-            mapAppSetLoggedInUserID('0636d777-7355-4fc4-899c-5a7268434a57'),
+            loggedInUserSetID('0636d777-7355-4fc4-899c-5a7268434a57'),
         ],
     });
 

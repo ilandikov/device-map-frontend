@@ -3,15 +3,16 @@ import { ofType } from 'redux-observable';
 import CognitoClient from '@mancho.devs/cognito';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AllActions, ClassToInterface, RootEpic } from '../../../../redux/store';
-import { mapAppSetLoggedInUserID, mapAppShowComponent } from '../../mapApp/redux/MapAppAction';
+import { mapAppShowComponent } from '../../mapApp/redux/MapAppAction';
 import { MapAppComponents } from '../../mapApp/redux/MapAppState';
+import { loggedInUserSetID } from '../../mapApp/redux/LoggedInUserAction';
 import { LoginModalActionType, loginModalRemoteAnswerFailure, loginModalRemoteAnswerSuccess } from './LoginModalAction';
 import { AuthenticationState, AuthenticationStep } from './AuthenticationState';
 import { reasonFromCognitoError } from './cognitoHelpers';
 
 export const cognito: RootEpic = (action$, state$, { cognitoClient }) =>
     action$.pipe(
-        ofType(LoginModalActionType.REMOTE_REQUEST),
+        ofType(LoginModalActionType.LOGIN_MODAL_REMOTE_REQUEST),
         switchMap(() => processAuthMethod(state$.value.authentication, cognitoClient)),
     );
 
@@ -38,7 +39,7 @@ function getSuccessActions(step: AuthenticationStep, response: any): AllActions[
         return [
             loginModalRemoteAnswerSuccess(),
             mapAppShowComponent(MapAppComponents.DEVICE_LOCATION),
-            mapAppSetLoggedInUserID(response.session.idToken.payload.sub),
+            loggedInUserSetID(response.session.idToken.payload.sub),
         ];
     }
 

@@ -1,14 +1,5 @@
 import { MapAppReducer } from '../MapAppReducer';
-import {
-    mapAppGetLocationAddress,
-    mapAppResetCurrentUser,
-    mapAppSetLocationAddress,
-    mapAppSetLocationCoordinates,
-    mapAppSetLoggedInUser,
-    mapAppSetLoggedInUserID,
-    mapAppShowComponent,
-    mapAppUpdateLoggedInUser,
-} from '../MapAppAction';
+import { mapAppShowComponent } from '../MapAppAction';
 import { MapAppComponents, buildMapAppState } from '../MapAppState';
 import {
     deviceApproved,
@@ -20,6 +11,12 @@ import {
     devicesListed,
 } from '../DeviceAction';
 import { itShouldReduceBy, testInitialState } from '../../../../../redux/__test__/helpers';
+import { loggedInUserReset, loggedInUserSet, loggedInUserSetID, loggedInUserUpdate } from '../LoggedInUserAction';
+import {
+    selectedMarkerGetAddress,
+    selectedMarkerSetAddress,
+    selectedMarkerSetCoordinates,
+} from '../SelectedMarkerAction';
 
 describe('MapApp reducer tests', () => {
     it('should match the initial state', () => {
@@ -45,13 +42,13 @@ describe('MapApp reducer tests', () => {
         {
             name: 'resetting current user id',
             initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
-            action: mapAppResetCurrentUser(),
+            action: loggedInUserReset(),
             stateChange: { loggedInUser: null },
         },
         {
             name: 'setting logged in user id',
             initialState: { component: MapAppComponents.LOGIN_MODAL },
-            action: mapAppSetLoggedInUserID('set me in the state'),
+            action: loggedInUserSetID('set me in the state'),
             stateChange: {
                 loggedInUser: { id: 'set me in the state', points: null },
             },
@@ -59,7 +56,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'updating logged in user if the ids match',
             initialState: { loggedInUser: { id: 'i should get more points', points: 0 } },
-            action: mapAppUpdateLoggedInUser({ id: 'i should get more points', points: 30 }),
+            action: loggedInUserUpdate({ id: 'i should get more points', points: 30 }),
             stateChange: {
                 loggedInUser: { id: 'i should get more points', points: 30 },
             },
@@ -67,13 +64,13 @@ describe('MapApp reducer tests', () => {
         {
             name: 'not updating logged in user if the ids dont match',
             initialState: { loggedInUser: { id: 'my points should not change', points: 53 } },
-            action: mapAppUpdateLoggedInUser({ id: 'because ids dont match', points: 71 }),
+            action: loggedInUserUpdate({ id: 'because ids dont match', points: 71 }),
             stateChange: {},
         },
         {
             name: 'setting coordinates',
             initialState: {},
-            action: mapAppSetLocationCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            action: selectedMarkerSetCoordinates({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {
                 selectedMarker: { location: { lat: 42.85862508449081, lon: 74.6085298061371 }, address: null },
             },
@@ -81,7 +78,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'doing nothing when getting an address',
             initialState: {},
-            action: mapAppGetLocationAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
+            action: selectedMarkerGetAddress({ lat: 42.85862508449081, lon: 74.6085298061371 }),
             stateChange: {},
         },
         {
@@ -92,7 +89,7 @@ describe('MapApp reducer tests', () => {
                     address: null,
                 },
             },
-            action: mapAppSetLocationAddress({ line1: 'line1', line2: 'line2' }),
+            action: selectedMarkerSetAddress({ line1: 'line1', line2: 'line2' }),
             stateChange: {
                 selectedMarker: {
                     location: { lat: 0, lon: 1 },
@@ -106,7 +103,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'setting current user points',
             initialState: {},
-            action: mapAppSetLoggedInUser({ id: 'i have to be set', points: 10 }),
+            action: loggedInUserSet({ id: 'i have to be set', points: 10 }),
             stateChange: {
                 loggedInUser: { id: 'i have to be set', points: 10 },
             },
