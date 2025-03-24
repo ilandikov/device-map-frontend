@@ -140,17 +140,29 @@ export function createStore() {
                 },
                 forAuthenticatedUser: {
                     createDevice: async (input) =>
-                        await mutateAsAuthUser(input, createDeviceMutation, 'T22CreateDeviceRequest'),
+                        await mutateAsAuthUser({
+                            input: input,
+                            mutation: createDeviceMutation,
+                            resolver: 'T22CreateDeviceRequest',
+                        }),
                     deleteDevice: async (input) =>
-                        await mutateAsAuthUser(input, deleteDeviceMutation, 'T22DeleteDeviceRequest'),
+                        await mutateAsAuthUser({
+                            input: input,
+                            mutation: deleteDeviceMutation,
+                            resolver: 'T22DeleteDeviceRequest',
+                        }),
                     approveDevice: async (input) =>
-                        await mutateAsAuthUser(input, approveDeviceMutation, 'T22ApproveDeviceRequest'),
+                        await mutateAsAuthUser({
+                            input: input,
+                            mutation: approveDeviceMutation,
+                            resolver: 'T22ApproveDeviceRequest',
+                        }),
                     subscribeForCreation: (creatorID) =>
-                        subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>(
-                            { creatorID },
-                            notifyDeviceCreationSubscription,
-                            'T22NotifyDeviceCreation',
-                        ),
+                        subscribeAsAuthUser<SubscriptionT22NotifyDeviceCreationArgs, T22Device>({
+                            variables: { creatorID },
+                            query: notifyDeviceCreationSubscription,
+                            resolver: 'T22NotifyDeviceCreation',
+                        }),
                 },
             },
             addressClient: {
@@ -165,11 +177,11 @@ export function createStore() {
                         .query<Query>({ query: getUserQuery })
                         .then((response) => response.data.T22GetUser),
                 subscribeForUpdate: (id) =>
-                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>(
-                        { id },
-                        notifyUserUpdateSubscription,
-                        'T22NotifyUserUpdate',
-                    ),
+                    subscribeAsAuthUser<SubscriptionT22NotifyUserUpdateArgs, T22User>({
+                        variables: { id },
+                        query: notifyUserUpdateSubscription,
+                        resolver: 'T22NotifyUserUpdate',
+                    }),
             },
         },
     });
