@@ -1,7 +1,7 @@
 import { MapAppReducer } from '../MapAppReducer';
 import {
     mapAppGetLocationAddress,
-    mapAppResetCurrentUser,
+    mapAppLoggedInUserReset,
     mapAppSetLocationAddress,
     mapAppSetLocationCoordinates,
     mapAppSetLoggedInUser,
@@ -45,7 +45,7 @@ describe('MapApp reducer tests', () => {
         {
             name: 'resetting current user id',
             initialState: { loggedInUser: { id: 'reset me!', points: 0 } },
-            action: mapAppResetCurrentUser(),
+            action: mapAppLoggedInUserReset(),
             stateChange: { loggedInUser: null },
         },
         {

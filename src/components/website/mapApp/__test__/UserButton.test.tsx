@@ -6,7 +6,7 @@ import {
     testSnapshot,
 } from '../../../../../tests/utils/RenderingHelpers';
 import { mockAuthenticationState, mockDispatch, mockPrepareSelector } from '../../../../redux/__mocks__/mocks';
-import { mapAppResetCurrentUser, mapAppShowComponent } from '../redux/MapAppAction';
+import { mapAppLoggedInUserReset, mapAppShowComponent } from '../redux/MapAppAction';
 import { LoginButton, LogoutButton } from '../UserButton';
 import {
     LoginModalButton,
@@ -50,7 +50,7 @@ describe('UserButton action tests', () => {
 
         testDispatchedActionsInOrder([
             mapAppShowComponent(MapAppComponents.PRODUCT_DESCRIPTION),
-            mapAppResetCurrentUser(),
+            mapAppLoggedInUserReset(),
             loginModalButtonClick(LoginModalButton.USER_BUTTON),
             loginModalRemoteRequest(LoginModalCheck.NONE),
         ]);

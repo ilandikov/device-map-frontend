@@ -5,7 +5,7 @@ import { DeviceActionType, DeviceRemoteAnswer, DeviceRemoteRequestType } from '.
 
 export function MapAppReducer(state: MapAppState = buildMapAppState({}), action: MapAppAction): MapAppState {
     switch (action.type) {
-        case MapAppActionType.RESET_CURRENT_USER:
+        case MapAppActionType.LOGGED_IN_USER_RESET:
             return { ...state, loggedInUser: null };
         case MapAppActionType.SET_LOGGED_IN_USER_ID:
             return {

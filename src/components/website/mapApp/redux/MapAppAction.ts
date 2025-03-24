@@ -3,7 +3,7 @@ import { MapAppComponents } from './MapAppState';
 import { DeviceAction } from './DeviceAction';
 
 export enum MapAppActionType {
-    RESET_CURRENT_USER = 'RESET_CURRENT_USER',
+    LOGGED_IN_USER_RESET = 'LOGGED_IN_USER_RESET',
     LOGIN_MODAL_CLOSE = 'LOGIN_MODAL_CLOSE',
     SET_LOGGED_IN_USER_ID = 'SET_LOGGED_IN_USER_ID',
     SET_LOCATION_COORDINATES = 'SET_LOCATION_COORDINATES',
@@ -18,7 +18,7 @@ export enum MapAppActionType {
 }
 
 export type MapAppAction =
-    | MapAppResetCurrentUser
+    | MapAppLoggedInUserReset
     | MapAppDeviceMarkerClick
     | MapAppGetLocationAddress
     | MapAppSetLocationAddress
@@ -31,12 +31,12 @@ export type MapAppAction =
     | MapAppSubscriptionError
     | DeviceAction;
 
-export interface MapAppResetCurrentUser {
-    type: MapAppActionType.RESET_CURRENT_USER;
+export interface MapAppLoggedInUserReset {
+    type: MapAppActionType.LOGGED_IN_USER_RESET;
 }
 
-export function mapAppResetCurrentUser(): MapAppResetCurrentUser {
-    return { type: MapAppActionType.RESET_CURRENT_USER };
+export function mapAppLoggedInUserReset(): MapAppLoggedInUserReset {
+    return { type: MapAppActionType.LOGGED_IN_USER_RESET };
 }
 
 interface MapAppSetLoggedInUserID {
